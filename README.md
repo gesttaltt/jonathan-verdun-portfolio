@@ -1,45 +1,44 @@
-# Jonathan Verdun Portfolio
+# Jonathan Verdun Portfolio (Gestalt)
 
-A modern, web3-inspired glassmorphism portfolio for Jonathan Verdun (Gestalt), focusing on QA Automation, TDD, and Bioinformatics research.
+A high-fidelity, glassmorphism portfolio centered on QA Automation, TDD, and Bioinformatics.
 
-## Features
-- **Glassmorphism UI**: Modern aesthetic with blur effects and dark mode.
-- **Terminal Animations**: Interactive terminal component with typing effects.
-- **Bioinformatics Visuals**: Animated DNA/Codon graphics representing research focus.
-- **TDD from Start**: Robust test suite using Jest and React Testing Library.
-- **Responsive Design**: Optimized for all screen sizes.
+## Core Mandates
+- **TDD First**: Every domain logic change is preceded by a failing test.
+- **Deterministic**: Logic is abstracted into "Bootstrap Contracts" for reproducibility.
+- **Auditable**: Automated documentation and system verification scripts.
 
-## Tech Stack
-- **Framework**: Next.js 15+ (App Router)
-- **Styling**: Tailwind CSS 4
-- **Animations**: Framer Motion
-- **Icons**: Lucide React
-- **Testing**: Jest & React Testing Library
-- **Font**: JetBrains Mono
+## System Architecture
 
-## Getting Started
+### 1. Bootstrap Contracts (`src/lib/contracts`)
+- **BioinformaticsContract**: Formalizes epitope discovery and research focus invariants (HIV/Arthritis).
+- **QAContract**: Defines the layered testing strategy (Unit, Property-based, Integration).
 
-### Installation
-```bash
-npm install
-```
+### 2. Testing Suite
+- **Unit & Integration**: Jest + React Testing Library.
+- **Property-Based**: `fast-check` used for fuzzing domain logic invariants.
 
-### Running the Development Server
-```bash
-npm run dev
-```
+### 3. Documentation
+Automated documentation generation via TypeDoc:
+\`\`\`bash
+npm run docs
+\`\`\`
+View generated docs in the \`/docs\` directory.
 
-### Running Tests
-```bash
-npm test
-```
+## Automation & Practicality
 
-### Building for Production
-```bash
-npm run build
-```
+### Local Development
+\`\`\`bash
+docker-compose up
+# Or manually:
+npm install && npm run dev
+\`\`\`
 
-## Professional Focus
-- **QA Engineering**: TDD, automated specifications, resilient pipelines.
-- **Bioinformatics**: Epitope discovery, p-adic VAEs, HIV/Arthritis research, PTM-aware representation learning.
-- **AI/LLM**: Local LLM orchestration, automated AI workflows.
+### System Verification
+Run the full verification pipeline (Tests -> Build -> Docs):
+\`\`\`bash
+./scripts/verify-system.sh
+\`\`\`
+
+## Deployment Status
+- **Current**: Production build running on port 3000.
+- **Repository**: [github.com/gesttaltt/jonathan-verdun-portfolio](https://github.com/gesttaltt/jonathan-verdun-portfolio)
