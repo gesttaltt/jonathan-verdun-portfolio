@@ -16,13 +16,13 @@ import { BioinformaticsGraphic } from '@/components/BioinformaticsGraphic'
 import { motion } from 'framer-motion'
 
 // Importing Bootstrap Contracts
-import { BioinformaticsService } from '@/lib/contracts/BioinformaticsContract'
+import { DataEngineeringService } from '@/lib/contracts/DataEngineeringContract'
 import { QA_PHILOSOPHY } from '@/lib/contracts/QAContract'
 import { TOP_SECRET_TERMINAL_DATA } from '@/lib/contracts/TerminalContract'
 import { InteractiveTopology } from '@/components/InteractiveTopology'
 
 export default function Home() {
-  const researchSpecs = BioinformaticsService.getResearchSpecs()
+  const systemSpecs = DataEngineeringService.getSystemSpecs()
 
   // Updated Terminal Commands for "High-Assurance" Persona
   const terminalCommands = TOP_SECRET_TERMINAL_DATA.commands
@@ -94,19 +94,19 @@ export default function Home() {
               <div className="flex items-center gap-4">
                 <h2 className="flex items-center gap-2 text-2xl font-bold text-white">
                   <Database className="h-6 w-6 text-blue-500" />
-                  High-Dimensional Data Engineering
+                  High-Throughput Data Architecture
                 </h2>
                 <div className="h-px flex-grow bg-white/10"></div>
               </div>
 
               <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-                {researchSpecs.map((spec) => (
+                {systemSpecs.map((spec) => (
                   <div
                     key={spec.id}
                     className="glass space-y-4 rounded-xl p-6 transition-colors duration-300 hover:border-blue-500/30"
                   >
                     <h3 className="flex items-center gap-2 text-sm font-bold tracking-wide text-cyan-400 uppercase">
-                      <FlaskConical className="h-4 w-4" /> {spec.focus} Pipeline
+                      <FlaskConical className="h-4 w-4" /> {spec.focus}
                     </h3>
                     <p className="text-sm leading-relaxed text-zinc-400">
                       Processing chaotic datasets with{' '}
@@ -129,7 +129,7 @@ export default function Home() {
               <div className="flex items-center gap-4">
                 <h2 className="flex items-center gap-2 text-2xl font-bold text-white">
                   <ShieldCheck className="h-6 w-6 text-blue-500" />
-                  Invariant-Based Verification
+                  Risk-First Architecture Verification
                 </h2>
                 <div className="h-px flex-grow bg-white/10"></div>
               </div>
