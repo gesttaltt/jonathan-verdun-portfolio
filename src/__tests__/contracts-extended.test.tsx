@@ -1,4 +1,4 @@
-import { BioinformaticsService, ResearchSpec } from '@/lib/contracts/BioinformaticsContract'
+import { BioinformaticsService } from '@/lib/contracts/BioinformaticsContract'
 import * as fc from 'fast-check'
 
 describe('BioinformaticsService - High-Dimensional Modeling', () => {
@@ -9,20 +9,35 @@ describe('BioinformaticsService - High-Dimensional Modeling', () => {
   })
 
   it('should have PTM-aware invariants for Arthritis research', () => {
-    const arthritisSpec = BioinformaticsService.getResearchSpecs().find(s => s.focus === 'Arthritis')
+    const arthritisSpec = BioinformaticsService.getResearchSpecs().find(
+      (s) => s.focus === 'Arthritis'
+    )
     expect(arthritisSpec?.invariants).toContain('PTM-Awareness')
   })
 
   it('should validate epitopes for a variety of valid start sequences', () => {
-    const validStarts = ['ATG', 'ATG-CODON', 'ATGCGA', 'ATG-REPRESENTATION']
-    validStarts.forEach(seq => {
-      expect(BioinformaticsService.validateEpitope(seq)).toBe(true)
-    })
+    fc.assert(
+      fc.property(fc.string(), (suffix) => {
+        const seq = 'ATG' + suffix
+        return BioinformaticsService.validateEpitope(seq) === true
+      })
+    )
   })
 
   it('should fail validation for empty or null-like sequences', () => {
     expect(BioinformaticsService.validateEpitope('')).toBe(false)
     expect(BioinformaticsService.validateEpitope('A')).toBe(false)
     expect(BioinformaticsService.validateEpitope('AT')).toBe(false)
+  })
+
+  it('should verify invariants for all research specs', () => {
+    const specs = BioinformaticsService.getResearchSpecs()
+    specs.forEach((spec) => {
+      expect(spec.invariants.length).toBeGreaterThan(0)
+      spec.invariants.forEach((invariant) => {
+        expect(typeof invariant).toBe('string')
+        expect(invariant.length).toBeGreaterThan(0)
+      })
+    })
   })
 })
