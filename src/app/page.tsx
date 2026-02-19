@@ -35,19 +35,19 @@ export default function Home() {
         <motion.header
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-16 flex flex-col items-start justify-between gap-8 md:flex-row md:items-end"
+          className="mb-12 flex flex-col items-start gap-8 md:mb-16 md:flex-row md:items-end md:justify-between"
         >
           <div>
             <div className="mb-4 flex items-center gap-3 text-blue-500">
               <span className="h-px w-8 bg-blue-500"></span>
-              <span className="text-xs font-bold tracking-[0.3em] uppercase">
+              <span className="text-[10px] font-bold tracking-[0.2em] uppercase md:text-xs md:tracking-[0.3em]">
                 High-Assurance Architect
               </span>
             </div>
-            <h1 className="mb-4 bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-5xl font-bold tracking-tighter text-transparent md:text-7xl">
+            <h1 className="mb-4 bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-4xl font-bold tracking-tighter text-transparent md:text-5xl lg:text-7xl">
               Jonathan Verdun
             </h1>
-            <div className="flex gap-6">
+            <div className="flex flex-wrap gap-4 md:gap-6">
               <Link
                 href="https://github.com/gesttaltt"
                 target="_blank"

@@ -10,7 +10,7 @@ interface Command {
 }
 
 interface TerminalProps {
-  commands: Command[]
+  commands: Command[] | readonly Command[]
   className?: string
 }
 
@@ -28,7 +28,7 @@ export const Terminal: React.FC<TerminalProps> = ({ commands, className = '' }) 
 
   return (
     <div
-      className={`glass-dark overflow-hidden rounded-xl font-mono text-sm shadow-2xl md:text-base ${className}`}
+      className={`glass-dark w-full max-w-full overflow-hidden rounded-xl font-mono text-xs shadow-2xl md:text-sm lg:text-base ${className}`}
     >
       {/* Terminal Header */}
       <div className="flex items-center justify-between border-b border-white/10 bg-white/5 px-4 py-2">
@@ -44,7 +44,7 @@ export const Terminal: React.FC<TerminalProps> = ({ commands, className = '' }) 
       </div>
 
       {/* Terminal Body */}
-      <div className="custom-scrollbar crt relative max-h-[500px] space-y-4 overflow-y-auto p-6">
+      <div className="custom-scrollbar crt relative max-h-[500px] w-full space-y-4 overflow-x-auto overflow-y-auto p-4 md:p-6">
         <div className="scanline"></div>
 
         <AnimatePresence>
