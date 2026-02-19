@@ -18,28 +18,14 @@ import { motion } from 'framer-motion'
 // Importing Bootstrap Contracts
 import { BioinformaticsService } from '@/lib/contracts/BioinformaticsContract'
 import { QA_PHILOSOPHY } from '@/lib/contracts/QAContract'
+import { TOP_SECRET_TERMINAL_DATA } from '@/lib/contracts/TerminalContract'
 import { InteractiveTopology } from '@/components/InteractiveTopology'
 
 export default function Home() {
   const researchSpecs = BioinformaticsService.getResearchSpecs()
 
   // Updated Terminal Commands for "High-Assurance" Persona
-  const terminalCommands = [
-    {
-      text: './audit_infrastructure.sh --safety=max',
-      output: `[AUDIT COMPLETE] Architecture verified for high-throughput compliance. 0 critical vulnerabilities found.`,
-    },
-    {
-      text: 'grep -r "risk_mitigation" ./strategies',
-      output:
-        'Invariants: Deterministic Latent Spaces, Property-Based Fuzzing, Zero-Trust Validation.',
-    },
-    {
-      text: 'cat engineering_principles.txt',
-      output:
-        'Correctness is a first-class citizen. Reproducibility > Speed. Failure-mode analysis is mandatory.',
-    },
-  ]
+  const terminalCommands = TOP_SECRET_TERMINAL_DATA.commands
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] font-mono text-zinc-300 selection:bg-blue-500/30">
@@ -65,6 +51,7 @@ export default function Home() {
               <Link
                 href="https://github.com/gesttaltt"
                 target="_blank"
+                aria-label="GitHub Profile"
                 className="flex items-center gap-2 border-b border-white/5 pb-1 text-sm transition-all hover:border-blue-500/50 hover:text-cyan-400"
               >
                 <Github className="h-4 w-4" /> gesttaltt
@@ -72,6 +59,7 @@ export default function Home() {
               <Link
                 href="https://www.linkedin.com/in/jonathan-verdun/"
                 target="_blank"
+                aria-label="LinkedIn Profile"
                 className="flex items-center gap-2 border-b border-white/5 pb-1 text-sm transition-all hover:border-blue-500/50 hover:text-cyan-400"
               >
                 <Linkedin className="h-4 w-4" /> LinkedIn
@@ -88,6 +76,7 @@ export default function Home() {
             </div>
             <Link
               href="https://github.com/Ai-Whisperers"
+              aria-label="Ai-Whisperers Organization"
               className="flex items-center gap-2 text-white transition-colors hover:text-cyan-400"
             >
               Ai-Whisperers <ExternalLinkIcon className="h-3 w-3" />

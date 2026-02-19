@@ -23,6 +23,12 @@
   /* cyan-400 at 0.3 */
   --particle: #22d3ee;
   /* cyan-400 */
+
+  /* Topology Colors */
+  --node-color: #3b82f6;
+  /* blue-500 */
+  --interaction-glow: #8b5cf6;
+  /* violet-500 */
 }
 
 body {
