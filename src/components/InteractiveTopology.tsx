@@ -224,7 +224,7 @@ export const InteractiveTopology: React.FC = () => {
             luminanceThreshold={0.2}
             luminanceSmoothing={0.9}
             height={300}
-            intensity={1.5}
+            intensity={1.0}
             mipmapBlur
           />
           <Vignette eskil={false} offset={0.1} darkness={1.1} />
@@ -233,7 +233,7 @@ export const InteractiveTopology: React.FC = () => {
         <TopologyMesh quality={performanceQuality} />
       </Canvas>
       <div
-        className="pointer-events-none absolute inset-0 opacity-10"
+        className="pointer-events-none absolute inset-0 opacity-5"
         style={{
           backgroundImage:
             'linear-gradient(var(--grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line) 1px, transparent 1px)',
