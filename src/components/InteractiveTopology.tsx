@@ -1,7 +1,6 @@
 import React, { useRef, useMemo, useEffect, useState } from 'react'
-import { Canvas, useFrame, useThree } from '@react-three/fiber'
+import { Canvas, useFrame } from '@react-three/fiber'
 import { EffectComposer, Bloom, Vignette } from '@react-three/postprocessing'
-import { PerformanceMonitor } from '@react-three/drei'
 import * as THREE from 'three'
 
 // vertexShader: Calculates P-adic valuation and displacement
@@ -207,18 +206,20 @@ const TopologyMesh: React.FC<{ quality: number }> = ({ quality }) => {
 }
 
 export const InteractiveTopology: React.FC = () => {
-  const [dpr, setDpr] = useState(1)
-  const [performanceQuality, setPerformanceQuality] = useState(1)
-
   return (
     <div className="fixed inset-0 z-0 bg-[#050510]">
-      <Canvas camera={{ position: [0, 0, 8], fov: 60 }} dpr={dpr} performance={{ min: 0.5 }}>
-        <PerformanceMonitor
-          onIncline={() => setDpr(Math.min(2, window.devicePixelRatio))}
-          onDecline={() => setDpr(1)}
-          onFallback={() => setPerformanceQuality(0.5)}
-        />
-
+      <Canvas
+        camera={{ position: [0, 0, 8], fov: 60 }}
+        dpr={[1, 2]}
+        gl={{
+          preserveDrawingBuffer: true,
+          powerPreference: 'high-performance',
+          alpha: false,
+          antialias: false,
+          stencil: false,
+          depth: false,
+        }}
+      >
         <EffectComposer multisampling={0}>
           <Bloom
             luminanceThreshold={0.2}
@@ -230,7 +231,7 @@ export const InteractiveTopology: React.FC = () => {
           <Vignette eskil={false} offset={0.1} darkness={1.1} />
         </EffectComposer>
 
-        <TopologyMesh quality={performanceQuality} />
+        <TopologyMesh quality={1} />
       </Canvas>
       <div
         className="pointer-events-none absolute inset-0 opacity-5"
