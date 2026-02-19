@@ -138,8 +138,8 @@ const fragmentShader = `
         // Pulse Effect
         vec3 finalColor = mix(resonanceColor, vec3(1.0, 1.0, 1.0), vPulse * 0.8);
         
-        // Alpha/Brightness boost from resonance
-        float finalAlpha = glow * (0.8 + vPulse + vPadicResonance * 1.5);
+        // Alpha/Brightness boost from resonance - REDUCED BASE OPACITY FURTHER
+        float finalAlpha = glow * (0.15 + vPulse * 0.8 + vPadicResonance * 1.0);
 
         gl_FragColor = vec4(finalColor, finalAlpha);
     }
