@@ -7,7 +7,7 @@ import { TopologyMesh } from './TopologyMesh'
 
 export const InteractiveTopology: React.FC = () => {
   return (
-    <div className="bg-bg-deep fixed inset-0 z-[-1]">
+    <div className="bg-bg-deep fixed inset-0 z-0">
       <Canvas
         camera={{ position: [0, 0, 8], fov: 60 }}
         dpr={[1, 2]}

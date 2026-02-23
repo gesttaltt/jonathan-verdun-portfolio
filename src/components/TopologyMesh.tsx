@@ -8,19 +8,19 @@ import { vertexShader, fragmentShader } from '@/lib/shaders/TopologyShaders'
 export const TopologyMesh: React.FC<{ quality: number }> = ({ quality }) => {
   const meshRef = useRef<THREE.Points>(null)
 
-  const [nodeColor] = useState(() => {
-    if (typeof window === 'undefined') return new THREE.Color('#3b82f6')
-    const style = getComputedStyle(document.documentElement)
-    const color = style.getPropertyValue('--node-color').trim()
-    return new THREE.Color(color || '#3b82f6')
-  })
+  const [nodeColor, setNodeColor] = useState(() => new THREE.Color('#3b82f6'))
+  const [hoverColor, setHoverColor] = useState(() => new THREE.Color('#8b5cf6'))
 
-  const [hoverColor] = useState(() => {
-    if (typeof window === 'undefined') return new THREE.Color('#8b5cf6')
+  useEffect(() => {
     const style = getComputedStyle(document.documentElement)
-    const color = style.getPropertyValue('--interaction-glow').trim()
-    return new THREE.Color(color || '#8b5cf6')
-  })
+    const nColor = style.getPropertyValue('--node-color').trim()
+    const hColor = style.getPropertyValue('--interaction-glow').trim()
+
+    requestAnimationFrame(() => {
+      if (nColor && nColor !== '') setNodeColor(new THREE.Color(nColor))
+      if (hColor && hColor !== '') setHoverColor(new THREE.Color(hColor))
+    })
+  }, [])
 
   const uniforms = useMemo(
     () => ({
