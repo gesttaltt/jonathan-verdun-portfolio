@@ -1,10 +1,9 @@
 export const vertexShader = `
     uniform float time;
-    uniform vec2 mouse; 
-    varying vec2 vUv;
+    uniform vec2 mouse;
     varying float vDisplacement;
     varying float vPulse;
-    varying float vPadicResonance;
+    varying float vHover;
 
     vec3 mod289(vec3 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
     vec4 mod289(vec4 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
@@ -57,50 +56,54 @@ export const vertexShader = `
                                         dot(p2,x2), dot(p3,x3) ) );
     }
 
-    float padicValuation(vec3 pos) {
-        float h = fract(sin(dot(pos.xy, vec2(12.9898, 78.233))) * 43758.5453);
-        float level = floor(h * 4.0) / 4.0; 
-        return level;
-    }
-
     void main() {
-        vUv = uv;
+        // Ambient noise displacement
         float noise = snoise(vec3(position.x * 0.5, position.y * 0.5, time * 0.2));
         vDisplacement = noise;
+
+        // Sparse sparkle
         float pulseNoise = snoise(vec3(position.x * 2.0, position.y * 2.0, time * 2.0));
         vPulse = step(0.8, pulseNoise);
-        float dist = distance(uv, mouse);
-        float padicLevel = padicValuation(position);
-        float hoverStrength = smoothstep(0.4, 0.0, dist);
-        float primeModulator = sin(time * 2.0 + padicLevel * 10.0); 
-        vPadicResonance = hoverStrength * step(0.5, primeModulator); 
-        vec3 interactionDir = normalize(position); 
-        float steppedRepulsion = floor(hoverStrength * 5.0) / 5.0; 
-        vec3 newPos = position + normal * (noise * 0.5 + steppedRepulsion * 2.0);
-        vec4 mvPosition = modelViewMatrix * vec4(newPos, 1.0);
+
+        // Project to screen space for hover detection
+        vec3 ambientPos = position + normal * noise * 0.5;
+        vec4 mvPosition = modelViewMatrix * vec4(ambientPos, 1.0);
+        vec4 clipPos = projectionMatrix * mvPosition;
+        vec2 screenPos = clipPos.xy / clipPos.w;
+
+        // Smooth radial hover in screen space
+        float screenDist = length(screenPos - mouse);
+        vHover = smoothstep(0.5, 0.0, screenDist);
+
+        // Hover pushes vertices outward along normal
+        vec3 finalPos = ambientPos + normal * vHover * 0.6;
+        mvPosition = modelViewMatrix * vec4(finalPos, 1.0);
         gl_Position = projectionMatrix * mvPosition;
-        gl_PointSize = (8.0 + noise * 4.0 + vPulse * 15.0 + vPadicResonance * 10.0) * (1.0 / -mvPosition.z);
+
+        gl_PointSize = (6.0 + noise * 3.0 + vPulse * 12.0 + vHover * 10.0) * (1.0 / -mvPosition.z);
     }
 `
 
 export const fragmentShader = `
-    uniform float time;
     uniform vec3 color;
     uniform vec3 hoverColor;
     varying float vDisplacement;
     varying float vPulse;
-    varying float vPadicResonance;
-    varying vec2 vUv;
+    varying float vHover;
 
     void main() {
         float r = distance(gl_PointCoord, vec2(0.5));
         if (r > 0.5) discard;
-        float glow = 1.0 - (r * 2.0);
-        glow = pow(glow, 1.5);
+        float glow = pow(1.0 - r * 2.0, 1.5);
+
+        // Base: blend between node color and hover color via noise
         vec3 baseColor = mix(color, hoverColor, vDisplacement * 0.5 + 0.5);
-        vec3 resonanceColor = mix(baseColor, vec3(0.8, 1.0, 1.0), vPadicResonance);
-        vec3 finalColor = mix(resonanceColor, vec3(1.0, 1.0, 1.0), vPulse * 0.8);
-        float finalAlpha = glow * (0.15 + vPulse * 0.8 + vPadicResonance * 1.0);
+        // Hover: shift toward bright cyan-white
+        vec3 litColor = mix(baseColor, vec3(0.85, 1.0, 1.0), vHover);
+        // Pulse: push toward white
+        vec3 finalColor = mix(litColor, vec3(1.0), vPulse * 0.8);
+
+        float finalAlpha = glow * (0.15 + vPulse * 0.8 + vHover * 0.85);
         gl_FragColor = vec4(finalColor, finalAlpha);
     }
 `

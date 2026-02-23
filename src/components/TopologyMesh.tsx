@@ -37,8 +37,7 @@ export const TopologyMesh: React.FC<{ quality: number }> = ({ quality }) => {
       const material = meshRef.current.material as THREE.ShaderMaterial
       material.uniforms.time.value = state.clock.getElapsedTime()
 
-      const uvMouse = new THREE.Vector2((state.mouse.x + 1) / 2, (state.mouse.y + 1) / 2)
-      material.uniforms.mouse.value.lerp(uvMouse, 0.1)
+      material.uniforms.mouse.value.lerp(state.mouse, 0.15)
 
       meshRef.current.rotation.y = state.clock.getElapsedTime() * 0.05
       meshRef.current.rotation.x = Math.sin(state.clock.getElapsedTime() * 0.1) * 0.1
