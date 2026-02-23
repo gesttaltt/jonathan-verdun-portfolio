@@ -30,7 +30,7 @@ export default function Home() {
   const terminalCommands = TOP_SECRET_TERMINAL_DATA.commands
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] font-mono text-zinc-300 selection:bg-blue-500/30">
+    <div className="bg-background min-h-screen font-mono text-zinc-300 selection:bg-blue-500/30">
       {/* Background stays at bottom of stack via z-[-1] inside the component */}
       <InteractiveTopology />
 

@@ -16,7 +16,7 @@ export const BioinformaticsGraphic: React.FC = () => {
           <motion.path
             d="M 0 100 Q 100 0 200 100 T 400 100 T 600 100 T 800 100"
             fill="transparent"
-            stroke="#3b82f6"
+            stroke="var(--accent)"
             strokeWidth="2"
             strokeDasharray="4 4" // Dashed line for "data stream" look
             animate={{
@@ -32,7 +32,7 @@ export const BioinformaticsGraphic: React.FC = () => {
           <motion.path
             d="M 0 100 Q 100 200 200 100 T 400 100 T 600 100 T 800 100"
             fill="transparent"
-            stroke="#3b82f6"
+            stroke="var(--accent)"
             strokeWidth="2"
             strokeOpacity={0.5}
             animate={{
@@ -52,7 +52,7 @@ export const BioinformaticsGraphic: React.FC = () => {
               cx={cx}
               cy={100}
               r={4}
-              fill="#22d3ee"
+              fill="var(--particle)"
               animate={{
                 r: [4, 6, 4],
                 opacity: [0.5, 1, 0.5],
@@ -70,7 +70,7 @@ export const BioinformaticsGraphic: React.FC = () => {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: i * 0.1, duration: 0.5 }}
-            whileHover={{ scale: 1.1, color: '#3b82f6' }}
+            whileHover={{ scale: 1.1, color: 'var(--accent)' }}
             className="relative cursor-default overflow-hidden rounded border border-white/10 bg-white/5 px-3 py-1 font-mono text-xs text-zinc-400"
           >
             <span className="relative z-10">{codon}</span>
