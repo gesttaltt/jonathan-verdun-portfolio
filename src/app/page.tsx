@@ -31,6 +31,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] font-mono text-zinc-300 selection:bg-blue-500/30">
+      {/* Background stays at bottom of stack via z-[-1] inside the component */}
       <InteractiveTopology />
 
       <main className="relative z-10 mx-auto max-w-7xl px-6 py-16">
@@ -229,8 +230,8 @@ export default function Home() {
         </div>
       </main>
 
-      {/* Background Gradient */}
-      <div className="pointer-events-none fixed inset-0 z-0 bg-gradient-to-tr from-blue-900/5 via-transparent to-purple-900/5"></div>
+      {/* Subtle overlay gradient to blend with InteractiveTopology */}
+      <div className="pointer-events-none fixed inset-0 z-[1] bg-gradient-to-tr from-blue-900/10 via-transparent to-purple-900/10"></div>
     </div>
   )
 }

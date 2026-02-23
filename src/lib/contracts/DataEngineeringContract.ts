@@ -4,19 +4,7 @@
  * Focuses on scalability, latency, and fault tolerance.
  */
 
-export interface SpecAnalysis {
-  id: string
-  sequence: string
-  reliabilityScore: number
-  isAnomaly: boolean
-}
-
-export interface SystemSpec {
-  id: string
-  focus: 'Distributed Event Processing' | 'Predictive Modeling Engine'
-  methodology: 'Generative AI' | 'Anomaly Detection' | 'ResNet'
-  invariants: string[]
-}
+import { SystemSpec } from './DataEngineeringContract.types'
 
 export class DataEngineeringService {
   /**
@@ -33,14 +21,14 @@ export class DataEngineeringService {
     return [
       {
         id: 'spec-01',
-        focus: 'Distributed Event Processing', // Formerly HIV Pipeline
-        methodology: 'Anomaly Detection', // Formerly p-adic
-        invariants: ['Numerical Stability', 'Zero-Copy Data Transfer'], // Technical invariants
+        focus: 'Distributed Event Processing',
+        methodology: 'Anomaly Detection',
+        invariants: ['Numerical Stability', 'Zero-Copy Data Transfer'],
       },
       {
         id: 'spec-02',
-        focus: 'Predictive Modeling Engine', // Formerly Arthritis Pipeline
-        methodology: 'Generative AI', // Formerly VAE
+        focus: 'Predictive Modeling Engine',
+        methodology: 'Generative AI',
         invariants: ['Deterministic Latent Space', 'Model-Aware Pruning'],
       },
     ]

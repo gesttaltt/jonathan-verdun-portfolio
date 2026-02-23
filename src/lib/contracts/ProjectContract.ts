@@ -1,15 +1,4 @@
-export interface ProjectSpec {
-  id: string
-  title: string
-  description: string
-  techStack: string[]
-  link?: string
-  status: 'Deployed' | 'Prototype' | 'Research' | 'Archived'
-  stats?: {
-    label: string
-    value: string
-  }[]
-}
+import { ProjectSpec } from './ProjectContract.types'
 
 export const PROJECT_DATA: ProjectSpec[] = [
   {

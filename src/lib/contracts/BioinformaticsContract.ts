@@ -4,18 +4,7 @@
  * Grounded in TDD and correctness.
  */
 
-export interface CodonAnalysis {
-  sequence: string;
-  translation: string[];
-  isAntigenic: boolean;
-}
-
-export interface ResearchSpec {
-  id: string;
-  focus: 'HIV' | 'Arthritis';
-  methodology: 'VAE' | 'p-adic' | 'ResNet';
-  invariants: string[];
-}
+import { ResearchSpec } from './BioinformaticsContract.types'
 
 export class BioinformaticsService {
   /**
@@ -24,8 +13,8 @@ export class BioinformaticsService {
    */
   static validateEpitope(sequence: string): boolean {
     // Deterministic validation logic
-    if (!sequence || sequence.length < 3) return false;
-    return sequence.includes('ATG'); // Placeholder for complex discovery logic
+    if (!sequence || sequence.length < 3) return false
+    return sequence.includes('ATG') // Placeholder for complex discovery logic
   }
 
   static getResearchSpecs(): ResearchSpec[] {
@@ -34,14 +23,14 @@ export class BioinformaticsService {
         id: 'spec-01',
         focus: 'HIV',
         methodology: 'p-adic',
-        invariants: ['Numerical Stability', 'Representation Leakage Prevention']
+        invariants: ['Numerical Stability', 'Representation Leakage Prevention'],
       },
       {
         id: 'spec-02',
         focus: 'Arthritis',
         methodology: 'VAE',
-        invariants: ['Deterministic Latent Space', 'PTM-Awareness']
-      }
-    ];
+        invariants: ['Deterministic Latent Space', 'PTM-Awareness'],
+      },
+    ]
   }
 }
