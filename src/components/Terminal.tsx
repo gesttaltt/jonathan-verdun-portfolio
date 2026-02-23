@@ -52,6 +52,9 @@ export const Terminal: React.FC<TerminalProps> = ({
 
       <div
         ref={scrollRef}
+        role="log"
+        aria-label="Terminal output"
+        aria-live="polite"
         className="custom-scrollbar crt relative h-[400px] w-full overflow-x-hidden overflow-y-auto p-4 md:p-6"
       >
         <div className="scanline pointer-events-none absolute inset-0 z-50"></div>
@@ -83,6 +86,7 @@ export const Terminal: React.FC<TerminalProps> = ({
                 onChange={(e) => setInputVal(e.target.value)}
                 onKeyDown={handleKeyDown}
                 className="w-full bg-transparent text-zinc-100 outline-none placeholder:text-zinc-700"
+                aria-label="Terminal command input"
                 autoFocus
                 spellCheck={false}
                 autoComplete="off"
