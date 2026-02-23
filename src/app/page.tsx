@@ -19,6 +19,7 @@ import { BioinformaticsGraphic } from '@/components/BioinformaticsGraphic'
 import { ProjectGallery } from '@/components/ProjectGallery'
 import { InteractiveTopology } from '@/components/InteractiveTopology'
 import { motion } from 'framer-motion'
+import { siteConfig } from '@/lib/siteConfig'
 
 // Importing Bootstrap Contracts
 import { DataEngineeringService } from '@/lib/contracts/DataEngineeringContract'
@@ -46,7 +47,7 @@ export default function Home() {
             <div className="mb-4 flex items-center gap-3 text-blue-500">
               <span className="h-px w-12 bg-blue-500"></span>
               <span className="text-[10px] font-bold tracking-[0.25em] uppercase md:text-xs md:tracking-[0.4em]">
-                High-Assurance Architect
+                {siteConfig.tagline}
               </span>
             </div>
             <h1 className="mb-6 bg-gradient-to-r from-white via-zinc-200 to-zinc-500 bg-clip-text text-5xl font-extrabold tracking-tighter text-transparent md:text-6xl lg:text-8xl">
@@ -54,20 +55,20 @@ export default function Home() {
             </h1>
             <div className="flex flex-wrap gap-6 text-sm font-medium">
               <Link
-                href="https://github.com/gesttaltt"
+                href={siteConfig.socialLinks.github.url}
                 target="_blank"
                 className="group flex items-center gap-2 text-zinc-400 transition-colors hover:text-white"
               >
                 <Github className="h-5 w-5 transition-transform group-hover:-translate-y-0.5" />
-                <span>github.com/gesttaltt</span>
+                <span>{siteConfig.socialLinks.github.label}</span>
               </Link>
               <Link
-                href="https://www.linkedin.com/in/jonathan-verdun/"
+                href={siteConfig.socialLinks.linkedin.url}
                 target="_blank"
                 className="group flex items-center gap-2 text-zinc-400 transition-colors hover:text-white"
               >
                 <Linkedin className="h-5 w-5 transition-transform group-hover:-translate-y-0.5" />
-                <span>linkedin.com/in/jonathan-verdun</span>
+                <span>{siteConfig.socialLinks.linkedin.label}</span>
               </Link>
             </div>
           </div>
@@ -83,10 +84,10 @@ export default function Home() {
               </span>
             </div>
             <Link
-              href="https://github.com/Ai-Whisperers"
+              href={siteConfig.socialLinks.organization.url}
               className="flex items-center gap-2 text-lg font-bold text-white transition-colors hover:text-cyan-400"
             >
-              Ai-Whisperers <ExternalLinkIcon className="h-4 w-4" />
+              {siteConfig.socialLinks.organization.label} <ExternalLinkIcon className="h-4 w-4" />
             </Link>
           </div>
         </motion.header>
@@ -219,10 +220,10 @@ export default function Home() {
                   contracts.
                 </p>
                 <Link
-                  href="mailto:contact@jonathanverdun.com"
+                  href={`mailto:${siteConfig.contact.email}`}
                   className="flex w-full items-center justify-center gap-2 rounded-lg bg-white/10 py-2 text-sm font-bold text-white transition-all hover:bg-white/20 hover:shadow-lg"
                 >
-                  Initiate Handshake
+                  {siteConfig.contact.ctaLabel}
                 </Link>
               </div>
             </div>
