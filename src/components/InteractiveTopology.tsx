@@ -14,10 +14,8 @@ export const InteractiveTopology: React.FC = () => {
         gl={{
           preserveDrawingBuffer: true,
           powerPreference: 'high-performance',
-          alpha: true, // Fix: Enable alpha for background transparency
+          alpha: true,
           antialias: false,
-          stencil: false,
-          depth: false,
         }}
       >
         <EffectComposer multisampling={0}>

@@ -77,8 +77,9 @@ export const vertexShader = `
         vec3 interactionDir = normalize(position); 
         float steppedRepulsion = floor(hoverStrength * 5.0) / 5.0; 
         vec3 newPos = position + normal * (noise * 0.5 + steppedRepulsion * 2.0);
-        gl_Position = projectionMatrix * modelViewMatrix * vec4(newPos, 1.0);
-        gl_PointSize = (8.0 + noise * 4.0 + vPulse * 15.0 + vPadicResonance * 10.0) * (1.0 / -gl_Position.z);
+        vec4 mvPosition = modelViewMatrix * vec4(newPos, 1.0);
+        gl_Position = projectionMatrix * mvPosition;
+        gl_PointSize = (8.0 + noise * 4.0 + vPulse * 15.0 + vPadicResonance * 10.0) * (1.0 / -mvPosition.z);
     }
 `
 
