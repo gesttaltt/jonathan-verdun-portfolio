@@ -32,4 +32,25 @@ export const siteConfig = {
   },
 
   tagline: 'High-Assurance Architect',
+
+  sections: {
+    terminal: {
+      title: 'System Interface',
+    },
+    projects: {
+      title: 'Deployment Gallery',
+    },
+    architecture: {
+      title: 'Data Architecture',
+    },
+    qa: {
+      title: 'Verification Protocols',
+      contactTitle: 'Open for Research',
+      contactDescription:
+        'Currently accepting inquiries for high-assurance architecture and bioinformatics contracts.',
+    },
+    sidebar: {
+      constraintsTitle: 'System Constraints',
+    },
+  },
 } as const

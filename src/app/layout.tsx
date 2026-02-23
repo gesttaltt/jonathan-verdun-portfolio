@@ -13,6 +13,8 @@ export const metadata: Metadata = {
   description: siteConfig.description,
 }
 
+import { ProjectProvider } from '@/components/hooks/useProjects'
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -20,7 +22,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${jetbrainsMono.variable} font-mono antialiased`}>{children}</body>
+      <body className={`${jetbrainsMono.variable} font-mono antialiased`}>
+        <ProjectProvider>{children}</ProjectProvider>
+      </body>
     </html>
   )
 }

@@ -1,53 +1,85 @@
-# Jonathan Verdun Portfolio (Gestalt) ![CI Status](https://github.com/gesttaltt/jonathan-verdun-portfolio/actions/workflows/ci.yml/badge.svg)
+# Jonathan Verdun Portfolio
 
-A high-fidelity, glassmorphism portfolio centered on QA Automation, TDD, and Bioinformatics.
+[![CI Status](https://github.com/gesttaltt/jonathan-verdun-portfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/gesttaltt/jonathan-verdun-portfolio/actions)
 
-## Core Mandates
+A glassmorphism portfolio showcasing QA Automation, Bioinformatics, and Data Engineering. Built with Next.js 16, Three.js, and a strict TDD/SOLID architecture.
 
-- **TDD First**: Every domain logic change is preceded by a failing test.
-- **Deterministic**: Logic is abstracted into "Bootstrap Contracts" for reproducibility.
-- **Auditable**: Automated documentation and system verification scripts.
+## Quick Start
 
-## System Architecture
+```bash
+# Install dependencies
+npm install
 
-### 1. Bootstrap Contracts (`src/lib/contracts`)
+# Start development server at http://localhost:3000
+npm run dev
+```
 
-- **BioinformaticsContract**: Formalizes epitope discovery and research focus invariants (HIV/Arthritis).
-- **QAContract**: Defines the layered testing strategy (Unit, Property-based, Integration).
+### LAN Access (Mobile Testing)
 
-### 2. Testing Suite
+```bash
+npm run dev -- -H 0.0.0.0
+# Open http://<your-ip>:3000 on your device
+```
 
-- **Unit & Integration**: Jest + React Testing Library.
-- **Property-Based**: `fast-check` used for fuzzing domain logic invariants.
+### Docker
 
-### 3. Documentation
+```bash
+docker compose up --build
+```
 
-Automated documentation generation via TypeDoc:
-\`\`\`bash
-npm run docs
-\`\`\`
-View generated docs in the \`/docs\` directory.
+### Production Build
 
-## Automation & Practicality
+```bash
+npm run build && npm start
+```
 
-### Local Development
+## Available Scripts
 
-\`\`\`bash
-docker-compose up
+| Script                | Description                       |
+| :-------------------- | :-------------------------------- |
+| `npm run dev`         | Start development server with HMR |
+| `npm run build`       | Production build                  |
+| `npm start`           | Serve production build            |
+| `npm run lint`        | Run ESLint                        |
+| `npm test`            | Run Jest test suite               |
+| `npm run test:watch`  | Run tests in watch mode           |
+| `npm run check-types` | TypeScript type checking          |
+| `npm run format`      | Format with Prettier              |
+| `npm run docs`        | Generate TypeDoc documentation    |
 
-# Or manually:
+## Tech Stack
 
-npm install && npm run dev
-\`\`\`
+- **Next.js 16** (App Router, React 19)
+- **TypeScript 5** (strict mode)
+- **Tailwind CSS v4** (CSS-variable driven themes)
+- **Framer Motion 12** (centralized animation variants)
+- **Three.js / React Three Fiber** (custom GLSL shaders)
+- **Jest 30 + fast-check** (unit, integration, property-based testing)
 
-### System Verification
+## Architecture
 
-Run the full verification pipeline (Tests -> Build -> Docs):
-\`\`\`bash
-./scripts/verify-system.sh
-\`\`\`
+The project follows SOLID principles with a service-oriented architecture:
 
-## Deployment Status
+- **Contracts** (`src/lib/contracts/`) - Domain data models with separated `.types.ts` interfaces
+- **Services** (`src/lib/services/`) - Business logic (command processing, data repositories)
+- **Hooks** (`src/components/hooks/`) - State management with dependency injection
+- **Components** - Thin UI layer consuming hooks and services
+- **Shaders** (`src/lib/shaders/`) - Modularized GLSL code
 
-- **Current**: Production build running on port 3000.
-- **Repository**: [github.com/gesttaltt/jonathan-verdun-portfolio](https://github.com/gesttaltt/jonathan-verdun-portfolio)
+## Documentation
+
+Detailed specs live in [`docs/specs/`](./docs/specs/):
+
+| Document                                        | Contents                                                           |
+| ----------------------------------------------- | ------------------------------------------------------------------ |
+| [ARCHITECTURE.md](./docs/specs/ARCHITECTURE.md) | Stack overview, SOLID compliance, project structure, audit history |
+| [COMPONENTS.md](./docs/specs/COMPONENTS.md)     | Every React component: props, patterns, behavior                   |
+| [CONTRACTS.md](./docs/specs/CONTRACTS.md)       | Domain data layer, types, services, repository pattern             |
+| [STYLING.md](./docs/specs/STYLING.md)           | CSS tokens, Tailwind v4 theme, glassmorphism, animation registry   |
+| [TESTING.md](./docs/specs/TESTING.md)           | Jest config, testing strategies, mocking patterns                  |
+| [DEVOPS.md](./docs/specs/DEVOPS.md)             | CI pipeline, Docker, linting, TypeScript config                    |
+| [SHADERS.md](./docs/specs/SHADERS.md)           | GLSL vertex/fragment shaders, uniforms, p-adic valuation           |
+
+## Repository
+
+[github.com/gesttaltt/jonathan-verdun-portfolio](https://github.com/gesttaltt/jonathan-verdun-portfolio)

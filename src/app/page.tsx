@@ -4,14 +4,12 @@ import {
   Github,
   Linkedin,
   ShieldCheck,
-  FlaskConical,
   CheckCircle2,
   ExternalLink as ExternalLinkIcon,
   Server,
   Database,
   Terminal as TerminalIcon,
   Code2,
-  Cpu,
 } from 'lucide-react'
 import Link from 'next/link'
 import { Terminal } from '@/components/Terminal'
@@ -19,7 +17,10 @@ import { BioinformaticsGraphic } from '@/components/BioinformaticsGraphic'
 import { ProjectGallery } from '@/components/ProjectGallery'
 import { InteractiveTopology } from '@/components/InteractiveTopology'
 import { ErrorBoundary } from '@/components/ErrorBoundary'
+import { SectionHeader } from '@/components/SectionHeader'
+import { SystemSpecCard } from '@/components/SystemSpecCard'
 import { motion } from 'framer-motion'
+import { slideDownVariants } from '@/lib/animations'
 import { siteConfig } from '@/lib/siteConfig'
 
 // Importing Bootstrap Contracts
@@ -41,9 +42,9 @@ export default function Home() {
       <main className="relative z-10 mx-auto max-w-7xl px-6 py-16">
         {/* Header Section */}
         <motion.header
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          variants={slideDownVariants}
+          initial="hidden"
+          animate="visible"
           className="mb-16 flex flex-col items-start gap-8 md:mb-24 md:flex-row md:items-end md:justify-between"
         >
           <div>
@@ -100,60 +101,38 @@ export default function Home() {
           <div className="space-y-24 lg:col-span-8">
             {/* Terminal Section */}
             <section className="relative">
-              <div className="absolute top-0 -left-12 hidden h-full w-px bg-gradient-to-b from-transparent via-blue-500/20 to-transparent lg:block"></div>
-              <div className="mb-6 flex items-center gap-4">
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-500/10 text-blue-500">
-                  <TerminalIcon className="h-5 w-5" />
-                </div>
-                <h2 className="text-2xl font-bold text-white">System Interface</h2>
-              </div>
+              <SectionHeader
+                icon={TerminalIcon}
+                title={siteConfig.sections.terminal.title}
+                color="blue"
+                showAccentLine
+              />
               <Terminal commands={terminalCommands} />
             </section>
 
             {/* Projects Section */}
             <section className="relative">
-              <div className="absolute top-0 -left-12 hidden h-full w-px bg-gradient-to-b from-transparent via-purple-500/20 to-transparent lg:block"></div>
-              <div className="mb-8 flex items-center gap-4">
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-purple-500/10 text-purple-500">
-                  <Code2 className="h-5 w-5" />
-                </div>
-                <h2 className="text-2xl font-bold text-white">Deployment Gallery</h2>
-              </div>
+              <SectionHeader
+                icon={Code2}
+                title={siteConfig.sections.projects.title}
+                color="purple"
+                showAccentLine
+              />
               <ProjectGallery />
             </section>
 
             {/* Architecture Section */}
             <section className="space-y-8">
-              <div className="flex items-center gap-4 border-b border-white/10 pb-4">
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-cyan-500/10 text-cyan-500">
-                  <Database className="h-5 w-5" />
-                </div>
-                <h2 className="text-2xl font-bold text-white">Data Architecture</h2>
-              </div>
+              <SectionHeader
+                icon={Database}
+                title={siteConfig.sections.architecture.title}
+                color="cyan"
+                showBorderBottom
+              />
 
               <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                 {systemSpecs.map((spec) => (
-                  <div
-                    key={spec.id}
-                    className="group relative overflow-hidden rounded-xl border border-white/5 bg-white/5 p-6 transition-all duration-300 hover:border-cyan-500/30 hover:bg-white/10"
-                  >
-                    <div className="mb-4 flex items-center justify-between">
-                      <h3 className="flex items-center gap-2 text-sm font-bold tracking-wide text-cyan-400 uppercase">
-                        <FlaskConical className="h-4 w-4" /> {spec.focus}
-                      </h3>
-                      <Cpu className="h-4 w-4 text-zinc-600 transition-colors group-hover:text-cyan-500" />
-                    </div>
-                    <p className="text-sm leading-relaxed text-zinc-400">
-                      Processing chaotic datasets with{' '}
-                      <span className="font-semibold text-white">{spec.methodology}</span>{' '}
-                      architectures.
-                      <br />
-                      <span className="mt-3 block text-[10px] font-bold text-zinc-500 uppercase">
-                        Invariant Target:
-                      </span>
-                      <span className="text-xs text-zinc-300">{spec.invariants.join(' + ')}</span>
-                    </p>
-                  </div>
+                  <SystemSpecCard key={spec.id} spec={spec} />
                 ))}
               </div>
 
@@ -162,12 +141,12 @@ export default function Home() {
 
             {/* QA Philosophy Section */}
             <section className="space-y-8">
-              <div className="flex items-center gap-4 border-b border-white/10 pb-4">
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-green-500/10 text-green-500">
-                  <ShieldCheck className="h-5 w-5" />
-                </div>
-                <h2 className="text-2xl font-bold text-white">Verification Protocols</h2>
-              </div>
+              <SectionHeader
+                icon={ShieldCheck}
+                title={siteConfig.sections.qa.title}
+                color="green"
+                showBorderBottom
+              />
 
               <div className="rounded-2xl border border-white/5 bg-black/40 p-8 backdrop-blur-sm">
                 <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
@@ -200,7 +179,7 @@ export default function Home() {
 
                 <h3 className="mb-6 flex items-center gap-3 text-lg font-bold text-white">
                   <Server className="h-5 w-5 text-blue-400" />
-                  System Constraints
+                  {siteConfig.sections.sidebar.constraintsTitle}
                 </h3>
 
                 <div className="space-y-5">
@@ -216,11 +195,10 @@ export default function Home() {
               {/* Contact Callout */}
               <div className="rounded-2xl border border-white/5 bg-gradient-to-br from-blue-500/10 to-purple-500/5 p-6 backdrop-blur-sm">
                 <h3 className="mb-2 text-sm font-bold tracking-wider text-white uppercase">
-                  Open for Research
+                  {siteConfig.sections.qa.contactTitle}
                 </h3>
                 <p className="mb-4 text-xs text-zinc-400">
-                  Currently accepting inquiries for high-assurance architecture and bioinformatics
-                  contracts.
+                  {siteConfig.sections.qa.contactDescription}
                 </p>
                 <Link
                   href={`mailto:${siteConfig.contact.email}`}
