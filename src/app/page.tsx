@@ -18,6 +18,7 @@ import { Terminal } from '@/components/Terminal'
 import { BioinformaticsGraphic } from '@/components/BioinformaticsGraphic'
 import { ProjectGallery } from '@/components/ProjectGallery'
 import { InteractiveTopology } from '@/components/InteractiveTopology'
+import { ErrorBoundary } from '@/components/ErrorBoundary'
 import { motion } from 'framer-motion'
 import { siteConfig } from '@/lib/siteConfig'
 
@@ -33,7 +34,9 @@ export default function Home() {
   return (
     <div className="bg-background min-h-screen font-mono text-zinc-300 selection:bg-blue-500/30">
       {/* Background stays at bottom of stack via z-[-1] inside the component */}
-      <InteractiveTopology />
+      <ErrorBoundary>
+        <InteractiveTopology />
+      </ErrorBoundary>
 
       <main className="relative z-10 mx-auto max-w-7xl px-6 py-16">
         {/* Header Section */}
