@@ -29,7 +29,7 @@ export const siteConfig = {
 
   contact: {
     email: 'contact@jonathanverdun.com',
-    ctaLabel: 'Initiate Handshake',
+    ctaLabel: 'Get in Touch',
   },
 
   tagline: 'High-Assurance Architect',

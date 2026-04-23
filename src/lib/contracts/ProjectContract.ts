@@ -6,7 +6,7 @@ export const PROJECT_DATA: ProjectSpec[] = [
     title: 'Ai-Whisperers',
     description:
       'Orchestration layer for multi-agent LLM systems. Focuses on consensus mechanisms and hallucination reduction via cross-model verification.',
-    techStack: ['Next.js', 'Python', 'LangChain', 'VectorDB'],
+    techStack: ['Next.js', 'TypeScript', 'Python', 'Supabase'],
     link: 'https://github.com/Ai-Whisperers',
     status: 'Deployed',
     stats: [

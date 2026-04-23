@@ -7,9 +7,9 @@ import { QAPhilosophy } from './QAContract.types'
 
 export const QA_PHILOSOPHY: QAPhilosophy = {
   constraints: [
-    'Correctness as a Competitive Advantage',
-    'Zero-Downtime Reproducibility',
-    'Automated Failure-Mode Analysis',
+    'Test suites gate every merge — coverage thresholds enforced in CI',
+    'Property-based fuzzing on all domain invariants',
+    'Zero-trust validation at all system boundaries',
   ],
   specifications: [
     {
@@ -19,7 +19,12 @@ export const QA_PHILOSOPHY: QAPhilosophy = {
     },
     {
       layer: 'property-based',
-      objective: 'Fuzzing architectural boundaries to identify unknown unknowns',
+      objective: 'Fuzz domain contracts with fast-check to surface unknown failure modes',
+      status: 'evolving',
+    },
+    {
+      layer: 'component',
+      objective: 'Verify rendered behaviour and user interactions via React Testing Library',
       status: 'evolving',
     },
   ],
