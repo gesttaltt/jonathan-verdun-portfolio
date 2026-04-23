@@ -8,11 +8,11 @@ describe('BioinformaticsService - High-Dimensional Modeling', () => {
     expect(specs1).toEqual(specs2)
   })
 
-  it('should have PTM-aware invariants for Arthritis research', () => {
-    const arthritisSpec = BioinformaticsService.getResearchSpecs().find(
-      (s) => s.focus === 'Arthritis'
+  it('should have determinism invariants for Codon Encoding research', () => {
+    const codonSpec = BioinformaticsService.getResearchSpecs().find(
+      (s) => s.focus === 'Codon Encoding'
     )
-    expect(arthritisSpec?.invariants).toContain('PTM-Awareness')
+    expect(codonSpec?.invariants).toContain('Embedding Determinism')
   })
 
   it('should verify invariants for all research specs', () => {

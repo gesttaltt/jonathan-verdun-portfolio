@@ -1,12 +1,7 @@
-export interface CodonAnalysis {
-  sequence: string
-  translation: string[]
-  isAntigenic: boolean
-}
-
 export interface ResearchSpec {
   id: string
-  focus: 'HIV' | 'Arthritis'
-  methodology: 'VAE' | 'p-adic' | 'ResNet'
+  focus: 'HIV' | 'Codon Encoding'
+  methodology: 'p-adic' | 'Hyperbolic VAE'
   invariants: string[]
+  link?: string
 }

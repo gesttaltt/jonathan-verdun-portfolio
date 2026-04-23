@@ -11,15 +11,17 @@ export class DataEngineeringService {
     return [
       {
         id: 'spec-01',
-        focus: 'Distributed Event Processing',
-        methodology: 'Anomaly Detection',
-        invariants: ['Numerical Stability', 'Zero-Copy Data Transfer'],
+        focus: 'Automated Reporting',
+        methodology: 'ETL',
+        invariants: ['Idempotent Execution', 'Schema Validation'],
+        link: 'https://github.com/Ai-Whisperers/work-hours-automated-reports',
       },
       {
         id: 'spec-02',
-        focus: 'Predictive Modeling Engine',
-        methodology: 'Generative AI',
-        invariants: ['Deterministic Latent Space', 'Model-Aware Pruning'],
+        focus: 'Predictive Capacity Control',
+        methodology: 'Additive Modeling',
+        invariants: ['Monotonic Constraints', 'Bounded Predictions'],
+        link: 'https://github.com/Ai-Whisperers/predictive-additive-capacity-control-library',
       },
     ]
   }
