@@ -8,7 +8,15 @@ import { TopologyMesh } from './TopologyMesh'
 export const InteractiveTopology: React.FC = () => {
   return (
     <div className="bg-bg-deep fixed inset-0 z-0">
+      {/*
+        touch-action: none prevents the browser from intercepting touch events
+        for scrolling before r3f can normalize them into NDC pointer coordinates.
+        Without it, state.mouse never updates on mobile touch devices.
+      */}
       <Canvas
+        role="img"
+        aria-label="Interactive 3D point-cloud visualization of algorithmic topology structures"
+        style={{ touchAction: 'none' }}
         camera={{ position: [0, 0, 8], fov: 60 }}
         dpr={[1, 2]}
         gl={{

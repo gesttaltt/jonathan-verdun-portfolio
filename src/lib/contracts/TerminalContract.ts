@@ -3,16 +3,19 @@ export const TOP_SECRET_TERMINAL_DATA = {
     {
       text: './audit_infrastructure.sh --safety=max',
       output: `[AUDIT COMPLETE] Architecture verified for high-throughput compliance. 0 critical vulnerabilities found.`,
+      delay: 300,
     },
     {
       text: 'grep -r "risk_mitigation" ./strategies',
       output:
         'Invariants: Deterministic Latent Spaces, Property-Based Fuzzing, Zero-Trust Validation.',
+      delay: 300,
     },
     {
       text: 'cat engineering_principles.txt',
       output:
         'Correctness is a first-class citizen. Reproducibility > Speed. Failure-mode analysis is mandatory.',
+      delay: 300,
     },
   ],
 } as const

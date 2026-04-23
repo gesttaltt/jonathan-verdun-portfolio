@@ -1,11 +1,6 @@
-'use client'
-
 import {
-  Github,
-  Linkedin,
   ShieldCheck,
   CheckCircle2,
-  ExternalLink as ExternalLinkIcon,
   Server,
   Database,
   Terminal as TerminalIcon,
@@ -15,15 +10,13 @@ import Link from 'next/link'
 import { Terminal } from '@/components/Terminal'
 import { BioinformaticsGraphic } from '@/components/BioinformaticsGraphic'
 import { ProjectGallery } from '@/components/ProjectGallery'
-import { InteractiveTopology } from '@/components/InteractiveTopology'
 import { ErrorBoundary } from '@/components/ErrorBoundary'
+import { HeroHeader } from '@/components/HeroHeader'
 import { SectionHeader } from '@/components/SectionHeader'
 import { SystemSpecCard } from '@/components/SystemSpecCard'
-import { motion } from 'framer-motion'
-import { slideDownVariants } from '@/lib/animations'
+import { TopologyLoader } from '@/components/TopologyLoader'
 import { siteConfig } from '@/lib/siteConfig'
 
-// Importing Bootstrap Contracts
 import { DataEngineeringService } from '@/lib/contracts/DataEngineeringContract'
 import { QA_PHILOSOPHY } from '@/lib/contracts/QAContract'
 import { TOP_SECRET_TERMINAL_DATA } from '@/lib/contracts/TerminalContract'
@@ -34,82 +27,20 @@ export default function Home() {
 
   return (
     <div className="bg-background min-h-screen font-mono text-zinc-300 selection:bg-blue-500/30">
-      {/* Background stays at bottom of stack via z-[-1] inside the component */}
       <ErrorBoundary>
-        <InteractiveTopology />
+        <TopologyLoader />
       </ErrorBoundary>
 
-      <main className="relative z-10 mx-auto max-w-7xl px-6 py-16">
-        {/* Header Section */}
-        <motion.header
-          variants={slideDownVariants}
-          initial="hidden"
-          animate="visible"
-          className="mb-16 flex flex-col items-start gap-8 md:mb-24 md:flex-row md:items-end md:justify-between"
-        >
-          <div>
-            <div className="mb-4 flex items-center gap-3 text-blue-500">
-              <span className="h-px w-12 bg-blue-500"></span>
-              <span className="text-[10px] font-bold tracking-[0.25em] uppercase md:text-xs md:tracking-[0.4em]">
-                {siteConfig.tagline}
-              </span>
-            </div>
-            <h1 className="mb-6 bg-gradient-to-r from-white via-zinc-200 to-zinc-500 bg-clip-text text-5xl font-extrabold tracking-tighter text-transparent md:text-6xl lg:text-8xl">
-              Jonathan Verdun
-            </h1>
-            <div className="flex flex-wrap gap-6 text-sm font-medium">
-              <Link
-                href={siteConfig.socialLinks.github.url}
-                target="_blank"
-                className="group flex items-center gap-2 text-zinc-400 transition-colors hover:text-white"
-              >
-                <Github className="h-5 w-5 transition-transform group-hover:-translate-y-0.5" />
-                <span>{siteConfig.socialLinks.github.label}</span>
-              </Link>
-              <Link
-                href={siteConfig.socialLinks.linkedin.url}
-                target="_blank"
-                className="group flex items-center gap-2 text-zinc-400 transition-colors hover:text-white"
-              >
-                <Linkedin className="h-5 w-5 transition-transform group-hover:-translate-y-0.5" />
-                <span>{siteConfig.socialLinks.linkedin.label}</span>
-              </Link>
-            </div>
-          </div>
-
-          <div className="glass flex flex-col gap-3 rounded-xl border border-white/5 bg-white/5 p-5 backdrop-blur-md">
-            <div className="flex items-center gap-3 text-xs">
-              <span className="relative flex h-2.5 w-2.5">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-400 opacity-75"></span>
-                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-blue-500"></span>
-              </span>
-              <span className="font-bold tracking-widest text-zinc-500 uppercase">
-                Active Context
-              </span>
-            </div>
-            <Link
-              href={siteConfig.socialLinks.organization.url}
-              className="flex items-center gap-2 text-lg font-bold text-white transition-colors hover:text-cyan-400"
-            >
-              {siteConfig.socialLinks.organization.label} <ExternalLinkIcon className="h-4 w-4" />
-            </Link>
-          </div>
-        </motion.header>
+      <main
+        id="main-content"
+        className="relative z-10 mx-auto max-w-7xl px-6 py-16 2xl:max-w-[1440px] 2xl:px-12"
+      >
+        {/* HeroHeader is a client island — uses Framer Motion */}
+        <HeroHeader />
 
         <div className="grid grid-cols-1 gap-16 lg:grid-cols-12">
           {/* Main Content Column */}
           <div className="space-y-24 lg:col-span-8">
-            {/* Terminal Section */}
-            <section className="relative">
-              <SectionHeader
-                icon={TerminalIcon}
-                title={siteConfig.sections.terminal.title}
-                color="blue"
-                showAccentLine
-              />
-              <Terminal commands={terminalCommands} />
-            </section>
-
             {/* Projects Section */}
             <section className="relative">
               <SectionHeader
@@ -119,6 +50,17 @@ export default function Home() {
                 showAccentLine
               />
               <ProjectGallery />
+            </section>
+
+            {/* Terminal Section */}
+            <section className="relative">
+              <SectionHeader
+                icon={TerminalIcon}
+                title={siteConfig.sections.terminal.title}
+                color="blue"
+                showAccentLine
+              />
+              <Terminal commands={terminalCommands} />
             </section>
 
             {/* Architecture Section */}
@@ -212,7 +154,7 @@ export default function Home() {
         </div>
       </main>
 
-      {/* Subtle overlay gradient to blend with InteractiveTopology */}
+      {/* Overlay gradient to blend with InteractiveTopology */}
       <div className="pointer-events-none fixed inset-0 z-[1] bg-gradient-to-tr from-blue-900/10 via-transparent to-purple-900/10"></div>
     </div>
   )

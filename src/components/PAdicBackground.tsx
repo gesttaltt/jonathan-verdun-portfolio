@@ -1,9 +1,19 @@
 'use client'
 
 import React from 'react'
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 
 export const PAdicBackground: React.FC = () => {
+  const [isMobile, setIsMobile] = React.useState(false)
+
+  React.useEffect(() => {
+    const mq = window.matchMedia('(max-width: 768px)')
+    setIsMobile(mq.matches)
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches)
+    mq.addEventListener('change', handler)
+    return () => mq.removeEventListener('change', handler)
+  }, [])
+
   return (
     <div className="bg-bg-deep pointer-events-none fixed inset-0 z-0 overflow-hidden">
       {/* Mesh Gradients */}
@@ -37,14 +47,16 @@ export const PAdicBackground: React.FC = () => {
         />
       </div>
 
-      {/* Topograph Layer (Flowing Lattice) */}
-      <div className="absolute inset-0 flex items-center justify-center opacity-40">
-        <TopographFlow />
-      </div>
+      {/* Topograph Layer — skipped on mobile (2000×2000 SVG is too expensive) */}
+      {!isMobile && (
+        <div className="absolute inset-0 flex items-center justify-center opacity-40">
+          <TopographFlow />
+        </div>
+      )}
 
-      {/* Shapeshifting Embeddings Layer */}
+      {/* Shapeshifting Embeddings Layer — reduced count on mobile */}
       <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-        <ShapeshiftingEmbeddings count={60} />
+        <ShapeshiftingEmbeddings count={isMobile ? 12 : 60} />
       </div>
 
       {/* Grid Overlay */}
@@ -117,9 +129,11 @@ const TopographFlow: React.FC = () => {
 }
 
 const ShapeshiftingEmbeddings: React.FC<{ count: number }> = ({ count }) => {
+  const reducedMotion = useReducedMotion()
   const [shape, setShape] = React.useState<'random' | 'circle' | 'line' | 'clusters'>('random')
 
   React.useEffect(() => {
+    if (reducedMotion) return
     const shapes: ('random' | 'circle' | 'line' | 'clusters')[] = [
       'random',
       'circle',
@@ -132,7 +146,7 @@ const ShapeshiftingEmbeddings: React.FC<{ count: number }> = ({ count }) => {
       setShape(shapes[i])
     }, 8000) // Change shape every 8 seconds
     return () => clearInterval(interval)
-  }, [])
+  }, [reducedMotion])
 
   const points = React.useMemo(() => {
     return Array.from({ length: count }).map((_, i) => ({ id: i }))

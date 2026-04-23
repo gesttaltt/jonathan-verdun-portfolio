@@ -1,0 +1,64 @@
+'use client'
+
+import { Github, Linkedin, ExternalLink as ExternalLinkIcon } from 'lucide-react'
+import Link from 'next/link'
+import { motion } from 'framer-motion'
+import { slideDownVariants } from '@/lib/animations'
+import { siteConfig } from '@/lib/siteConfig'
+
+export function HeroHeader() {
+  return (
+    <motion.header
+      variants={slideDownVariants}
+      initial="hidden"
+      animate="visible"
+      className="mb-16 flex flex-col items-start gap-8 md:mb-24 md:flex-row md:items-end md:justify-between"
+    >
+      <div>
+        <div className="mb-4 flex items-center gap-3 text-blue-500">
+          <span className="h-px w-12 bg-blue-500"></span>
+          <span className="text-[10px] font-bold tracking-[0.25em] uppercase md:text-xs md:tracking-[0.4em]">
+            {siteConfig.tagline}
+          </span>
+        </div>
+        <h1 className="mb-6 bg-gradient-to-r from-white via-zinc-200 to-zinc-500 bg-clip-text text-5xl font-extrabold tracking-tighter text-transparent md:text-6xl lg:text-8xl 2xl:text-9xl">
+          Jonathan Verdun
+        </h1>
+        <div className="flex flex-wrap gap-6 text-sm font-medium">
+          <Link
+            href={siteConfig.socialLinks.github.url}
+            target="_blank"
+            className="group flex items-center gap-2 text-zinc-400 transition-colors hover:text-white"
+          >
+            <Github className="h-5 w-5 transition-transform group-hover:-translate-y-0.5" />
+            <span>{siteConfig.socialLinks.github.label}</span>
+          </Link>
+          <Link
+            href={siteConfig.socialLinks.linkedin.url}
+            target="_blank"
+            className="group flex items-center gap-2 text-zinc-400 transition-colors hover:text-white"
+          >
+            <Linkedin className="h-5 w-5 transition-transform group-hover:-translate-y-0.5" />
+            <span>{siteConfig.socialLinks.linkedin.label}</span>
+          </Link>
+        </div>
+      </div>
+
+      <div className="glass flex flex-col gap-3 rounded-xl border border-white/5 bg-white/5 p-5 backdrop-blur-md">
+        <div className="flex items-center gap-3 text-xs">
+          <span className="relative flex h-2.5 w-2.5">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-400 opacity-75"></span>
+            <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-blue-500"></span>
+          </span>
+          <span className="font-bold tracking-widest text-zinc-500 uppercase">Work History</span>
+        </div>
+        <Link
+          href={siteConfig.socialLinks.organization.url}
+          className="flex items-center gap-2 text-lg font-bold text-white transition-colors hover:text-cyan-400"
+        >
+          {siteConfig.socialLinks.organization.label} <ExternalLinkIcon className="h-4 w-4" />
+        </Link>
+      </div>
+    </motion.header>
+  )
+}

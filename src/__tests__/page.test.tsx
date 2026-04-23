@@ -1,17 +1,48 @@
+import React from 'react'
 import { render, screen } from '@testing-library/react'
 import Home from '@/app/page'
+import { ProjectProvider } from '@/components/hooks/useProjects'
+import { siteConfig } from '@/lib/siteConfig'
 
-// Mock the InteractiveTopology component to avoid Three.js/ESM issues in Jest
-jest.mock('@/components/InteractiveTopology', () => ({
-  InteractiveTopology: () => (
-    <div data-testid="interactive-topology-mock">Interactive Topology</div>
-  ),
+jest.mock('@/components/TopologyLoader', () => ({
+  TopologyLoader: () => <div data-testid="topology-loader-mock" />,
 }))
+
+const renderHome = () =>
+  render(
+    <ProjectProvider>
+      <Home />
+    </ProjectProvider>
+  )
 
 describe('Home', () => {
   it('renders the name Jonathan Verdun in a heading', () => {
-    render(<Home />)
-    const heading = screen.getByRole('heading', { name: /Jonathan Verdun/i })
-    expect(heading).toBeInTheDocument()
+    renderHome()
+    expect(screen.getByRole('heading', { name: /Jonathan Verdun/i })).toBeInTheDocument()
+  })
+
+  it('has the skip-nav target id on the main landmark', () => {
+    renderHome()
+    expect(document.getElementById('main-content')).not.toBeNull()
+  })
+
+  it('renders all four section headings', () => {
+    renderHome()
+    expect(
+      screen.getByRole('heading', { name: siteConfig.sections.terminal.title })
+    ).toBeInTheDocument()
+    expect(
+      screen.getByRole('heading', { name: siteConfig.sections.projects.title })
+    ).toBeInTheDocument()
+    expect(
+      screen.getByRole('heading', { name: siteConfig.sections.architecture.title })
+    ).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: siteConfig.sections.qa.title })).toBeInTheDocument()
+  })
+
+  it('renders the contact CTA link with the correct mailto href', () => {
+    renderHome()
+    const link = screen.getByRole('link', { name: siteConfig.contact.ctaLabel })
+    expect(link).toHaveAttribute('href', `mailto:${siteConfig.contact.email}`)
   })
 })

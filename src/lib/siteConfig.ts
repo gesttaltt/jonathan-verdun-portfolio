@@ -9,6 +9,7 @@ export const siteConfig = {
   title: 'Jonathan Verdun | QA Automation & Bioinformatics',
   description:
     'Portfolio of Jonathan Verdun (Gestalt) - QA Automation Engineer and Bioinformatics Researcher focused on Deep Learning and TDD.',
+  url: 'https://jonathanverdun.com',
   locale: 'en',
 
   socialLinks: {
@@ -35,22 +36,22 @@ export const siteConfig = {
 
   sections: {
     terminal: {
-      title: 'System Interface',
+      title: 'Terminal',
     },
     projects: {
-      title: 'Deployment Gallery',
+      title: 'Projects',
     },
     architecture: {
-      title: 'Data Architecture',
+      title: 'Architecture',
     },
     qa: {
-      title: 'Verification Protocols',
-      contactTitle: 'Open for Research',
+      title: 'QA Philosophy',
+      contactTitle: 'Open to Opportunities',
       contactDescription:
         'Currently accepting inquiries for high-assurance architecture and bioinformatics contracts.',
     },
     sidebar: {
-      constraintsTitle: 'System Constraints',
+      constraintsTitle: 'Engineering Constraints',
     },
   },
 } as const

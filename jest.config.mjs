@@ -1,11 +1,9 @@
 import nextJest from 'next/jest.js'
 
 const createJestConfig = nextJest({
-  // Provide the path to your Next.js app to load next.config.js and .env files in your test environment
   dir: './',
 })
 
-// Add any custom config to be passed to Jest
 /** @type {import('jest').Config} */
 const config = {
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
@@ -13,7 +11,22 @@ const config = {
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
   },
+  collectCoverageFrom: [
+    'src/**/*.{ts,tsx}',
+    '!src/**/*.d.ts',
+    '!src/**/__tests__/**',
+    '!src/app/opengraph-image.tsx',
+    '!src/app/sitemap.ts',
+    '!src/lib/shaders/**',
+  ],
+  coverageThreshold: {
+    global: {
+      lines: 30,
+      functions: 25,
+      branches: 20,
+      statements: 30,
+    },
+  },
 }
 
-// createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
 export default createJestConfig(config)

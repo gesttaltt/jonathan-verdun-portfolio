@@ -7,37 +7,40 @@ describe('DefaultCommandProcessor', () => {
     processor = new DefaultCommandProcessor()
   })
 
-  it('should return help text for the "help" command', () => {
-    const result = processor.process('help')
-    expect(result).toContain('Available commands')
+  it('returns help text for the "help" command', () => {
+    expect(processor.process('help')).toContain('Available commands')
   })
 
-  it('should be case-insensitive', () => {
-    const result = processor.process('HELP')
-    expect(result).toContain('Available commands')
+  it('is case-insensitive', () => {
+    expect(processor.process('HELP')).toContain('Available commands')
   })
 
-  it('should trim whitespace from input', () => {
-    const result = processor.process('  help  ')
-    expect(result).toContain('Available commands')
+  it('trims leading and trailing whitespace', () => {
+    expect(processor.process('  help  ')).toContain('Available commands')
   })
 
-  it('should return "command not found" for unknown commands', () => {
+  it('returns a "command not found" message containing the unknown command name', () => {
     const result = processor.process('unknown_xyz')
     expect(result).toContain('command not found')
     expect(result).toContain('unknown_xyz')
   })
 
-  it('should accept custom commands via constructor injection', () => {
-    const custom: Record<string, string> = {
-      ping: 'pong',
-    }
+  it('handles multi-word commands like "ls projects"', () => {
+    expect(processor.process('ls projects')).toContain('Ai-Whisperers')
+  })
+
+  it('returns correct responses for all built-in INTERACTIVE_COMMANDS', () => {
+    expect(processor.process('about')).toContain('Jonathan Verdun')
+    expect(processor.process('status')).toContain('System Operational')
+    expect(processor.process('sudo')).toContain('sudoers')
+    expect(processor.process('contact')).toContain('LinkedIn')
+    expect(processor.process('projects')).toContain('Active Deployment')
+  })
+
+  it('replaces all defaults when custom commands are injected via constructor', () => {
+    const custom: Record<string, string> = { ping: 'pong' }
     const customProcessor = new DefaultCommandProcessor(custom)
     expect(customProcessor.process('ping')).toBe('pong')
     expect(customProcessor.process('help')).toContain('command not found')
-  })
-
-  it('should implement the ICommandProcessor interface', () => {
-    expect(typeof processor.process).toBe('function')
   })
 })
