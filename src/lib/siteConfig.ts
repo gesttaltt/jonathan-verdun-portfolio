@@ -43,8 +43,8 @@ export const siteConfig = {
     },
     qa: {
       title: 'QA Philosophy',
-      contactTitle: 'Open to Opportunities',
-      contactDescription: 'Open to high-assurance architecture and bioinformatics contracts.',
+      contactTitle: 'Open to work',
+      contactDescription: 'Open to QA and Research opportunities.',
     },
     sidebar: {
       constraintsTitle: 'Engineering Constraints',

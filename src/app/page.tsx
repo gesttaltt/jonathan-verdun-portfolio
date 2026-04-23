@@ -56,8 +56,6 @@ export default function Home() {
                   <SystemSpecCard key={spec.id} spec={spec} />
                 ))}
               </div>
-
-              <BioinformaticsGraphic />
             </section>
 
             {/* QA Philosophy Section */}
@@ -130,6 +128,10 @@ export default function Home() {
               </div>
             </div>
           </aside>
+        </div>
+
+        <div className="mt-16">
+          <BioinformaticsGraphic />
         </div>
       </main>
 
