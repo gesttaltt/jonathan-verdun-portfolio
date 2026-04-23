@@ -205,3 +205,113 @@ This is a coined term, not a standard job title. It may be intentional personal 
 | `src/lib/contracts/DataEngineeringContract.ts` | #2, #8                  |
 | `src/lib/contracts/TerminalContract.ts`        | #12, #13, #14           |
 | `src/lib/siteConfig.ts`                        | #10, #15                |
+
+---
+
+## Real Data Investigation — GitHub Findings
+
+Verified against `github.com/Ai-Whisperers` (org) and `github.com/gesttaltt` (personal profile) on 2026-04-23.
+
+---
+
+### Project: Epitope-Scanner
+
+**Status: name does not exist as a repo — the underlying work does, split across two repos.**
+
+| Repo                | Description                                                                                                                                                                  | Link                                               |
+| ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
+| `hiv-antigen-ai`    | p-adic geometry + hyperbolic manifolds for HIV sequence analysis. MAFFT integration, Shannon entropy conservation scoring, Ternary VAE, full CLI pipeline. Python 3.8+, MIT. | https://github.com/Ai-Whisperers/hiv-antigen-ai    |
+| `codon-encoder-api` | FastAPI service for DNA sequence encoding using 16-dimensional hyperbolic embeddings. PCA/UMAP/t-SNE 3D visualization, synonymous variant generation, Docker-ready.          | https://github.com/Ai-Whisperers/codon-encoder-api |
+
+**Action needed:**
+
+- Replace the fictional "Epitope-Scanner" project card with one or both of these real repos.
+- The current tech stack (`PyTorch, FastAPI, React, Three.js`) is partially wrong — the actual stack is Python, FastAPI, Docker. No React or Three.js.
+- No accuracy stats exist in either repo — do not re-add the `98.2%` number without a benchmark.
+
+---
+
+### Project: Chaos-Kube
+
+**Status: does not exist — no chaos engineering repo found anywhere in the org or personal profile.**
+
+The only Kubernetes-related repo in the org is `cluster-template` ("Kubernetes cluster configuration template for deployments"), which is a deployment template, not a chaos operator.
+
+**Action needed (pick one):**
+
+- Remove Chaos-Kube from the portfolio entirely.
+- Replace it with a real project that exists. Strong candidates from the org:
+  - `work-hours-automated-reports` — Python automation connecting Clockify + Azure DevOps. Real, shipped, topics: automation, devops, reporting.
+  - `agentic-schemas` — 20 agentic design patterns with interactive D3.js graph visualization. Real, public.
+  - `Vete` — Multi-tenant veterinary clinic SaaS. Next.js 15, Supabase, TypeScript. Active (last push April 2026).
+
+---
+
+### Project: Ai-Whisperers
+
+**Status: org is real and active. Stats need grounding.**
+
+The "12+ agents" stat is loosely supported by:
+
+- `agentic-schemas` — documents 20 foundational agentic design patterns as a graph.
+- `work-coordination` — AI agent swarm for task tracking and multi-device distribution.
+
+However "12+ agents" suggests deployed running agents, not documented patterns. Clarify or change the stat label.
+
+The `<200ms latency` stat has no evidence in any repo. No benchmark, no test results, no deployment logs found. **This stat should be removed or replaced** until a real measurement exists.
+
+The description "Focuses on consensus mechanisms and hallucination reduction via cross-model verification" has no supporting code or results in any public repo. The actual documented work is pattern architecture and agent coordination, not cross-model verification.
+
+---
+
+### BioinformaticsContract — spec-01 (HIV / p-adic)
+
+**Status: REAL. Repo exists and is active.**
+
+- Repo: `hiv-antigen-ai` — https://github.com/Ai-Whisperers/hiv-antigen-ai
+- Methodology confirmed: p-adic geometry + hyperbolic manifolds (matches spec exactly)
+- Has a working CI pipeline (GitHub Actions badge present)
+- **Action:** Add the repo link to the spec in `BioinformaticsContract.ts`.
+
+---
+
+### BioinformaticsContract — spec-02 (Arthritis / VAE)
+
+**Status: no Arthritis-specific repo found.**
+
+The closest related work is `ternary-vaes-analysis` ("Analysis of the architecture for the several versions of this deep learning system"), but it is not Arthritis-focused. There is also `tnas-ternary-toolkit` (differentiable encoder/decoder for ternary neural networks).
+
+**Action needed:** Either note this spec as "in progress — unpublished" or replace the disease focus with one that has evidence (e.g., HIV, which has a real repo).
+
+---
+
+### DataEngineeringContract — spec-01 (Distributed Event Processing / Anomaly Detection)
+
+**Status: no direct match, but adjacent real work exists.**
+
+- `work-hours-automated-reports` — Python automation connecting Clockify (time entries) and Azure DevOps (Work Items). Real ETL pipeline. Topics: automation, devops, reporting, time-tracking.
+- `manifold-based-simulation` (personal) — Pareto-optimal throughput-vs-error simulation across streaming pipelines, network QoS, and ML hyperparameters. Python.
+
+**Action needed:** Replace the abstract spec with one of these real projects, or reframe the section as "areas of expertise" rather than project specifications.
+
+---
+
+### DataEngineeringContract — spec-02 (Predictive Modeling Engine / Generative AI)
+
+**Status: vague but adjacent real work exists.**
+
+- `predictive-additive-capacity-control-library` — Python library, no public description. Likely relevant given the name.
+- `LangAi` — "AI language processing toolkit with LangChain integration." Python, topics: ai, langchain, nlp.
+
+**Action needed:** Either add a description and link for `predictive-additive-capacity-control-library`, or replace the spec with `LangAi` which has a clear description.
+
+---
+
+### Additional Real Projects Not in Portfolio (candidates to consider)
+
+| Repo                           | Description                                                                                                  | Why it fits                                                           |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------- |
+| `Vete`                         | Multi-tenant veterinary SaaS — Next.js 15, Supabase, TypeScript. Active April 2026.                          | Strongest full-stack TypeScript project in the org. Production-grade. |
+| `agentic-schemas`              | 20 agentic design patterns, D3.js interactive graph, published at `ai-whisperers.github.io/agentic-schemas`. | Public, linkable, demonstrates architectural thinking.                |
+| `work-hours-automated-reports` | Clockify + Azure DevOps ETL automation. Python.                                                              | Real shipped tool with a clear purpose.                               |
+| `qa-arxiv-mobile` (personal)   | Manual functional testing QA overlay for arxiv-papers-mobile with ADO traceability.                          | Directly demonstrates QA Automation domain.                           |
