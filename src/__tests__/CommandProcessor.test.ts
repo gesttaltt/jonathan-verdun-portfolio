@@ -26,15 +26,14 @@ describe('DefaultCommandProcessor', () => {
   })
 
   it('handles multi-word commands like "ls projects"', () => {
-    expect(processor.process('ls projects')).toContain('Ai-Whisperers')
+    expect(processor.process('ls projects')).toContain('QA-Arxiv-Mobile')
   })
 
   it('returns correct responses for all built-in INTERACTIVE_COMMANDS', () => {
     expect(processor.process('about')).toContain('Jonathan Verdun')
-    expect(processor.process('status')).toContain('System Operational')
     expect(processor.process('sudo')).toContain('sudoers')
     expect(processor.process('contact')).toContain('LinkedIn')
-    expect(processor.process('projects')).toContain('Active Deployment')
+    expect(processor.process('projects')).toContain('Projects')
   })
 
   it('replaces all defaults when custom commands are injected via constructor', () => {

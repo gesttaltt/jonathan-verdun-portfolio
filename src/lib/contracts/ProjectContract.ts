@@ -3,35 +3,42 @@ import { ProjectSpec } from './ProjectContract.types'
 export const PROJECT_DATA: ProjectSpec[] = [
   {
     id: 'proj-01',
-    title: 'Ai-Whisperers',
+    title: 'QA Arxiv Mobile',
     description:
-      'Open research organization building AI tooling and infrastructure. Publishes agentic design patterns, local model serving (GGUF/ONNX), and bioinformatics pipelines.',
-    techStack: ['Next.js', 'TypeScript', 'Python', 'Supabase'],
-    link: 'https://github.com/Ai-Whisperers',
-    status: 'Deployed',
+      'Enterprise QA overlay for the open-source arxiv-papers-mobile React Native app. Manual test cases with full ADO-style user story traceability, cross-platform coverage (iOS/Android), and aligned automation suite.',
+    techStack: ['Python', 'pytest', 'Azure DevOps'],
+    link: 'https://github.com/gesttaltt/qa-arxiv-mobile',
+    status: 'Research',
     stats: [
-      { label: 'Patterns', value: '20' },
-      { label: 'Repos', value: '20+' },
+      { label: 'Test Suites', value: '3' },
+      { label: 'Platform', value: 'iOS · Android' },
     ],
   },
   {
     id: 'proj-02',
-    title: 'HIV Antigen AI',
+    title: 'Functionome Atlas',
     description:
-      'Open-source bioinformatics package for HIV sequence analysis using p-adic geometry and hyperbolic manifolds. Multiple alignment pipeline with conservation scoring and MAFFT integration.',
-    techStack: ['Python', 'NumPy', 'Biopython', 'MAFFT'],
-    link: 'https://github.com/Ai-Whisperers/hiv-antigen-ai',
+      'High-performance pipeline computing Functionome Perturbation Scores to map functional fragility across the human genome. Integrates VCF variant density, evolutionary constraint (LOEUF), and Gene Ontology annotations.',
+    techStack: ['Python', 'NumPy', 'Pandas', 'gnomAD'],
+    link: 'https://github.com/gesttaltt/Functionome-Atlas',
     status: 'Research',
+    stats: [
+      { label: 'VCF Speed', value: '120×' },
+      { label: 'Functionomes', value: '1,622' },
+    ],
   },
   {
     id: 'proj-03',
-    title: 'Paragu-AI',
+    title: 'Gene Functional Pipeline',
     description:
-      'Multi-tenant SaaS platform powering websites for service businesses in Paraguay. Single Next.js 15 + Supabase codebase with per-tenant CMS, custom domain routing, and row-level security.',
-    techStack: ['Next.js', 'TypeScript', 'Supabase', 'React'],
-    link: 'https://github.com/Ai-Whisperers/Vete',
-    status: 'Deployed',
-    stats: [{ label: 'Tenants', value: '6' }],
+      'Production-ready GO annotation pipeline for human genome functional analysis. Three implementations: C++ DAG engine for local throughput, Apache Spark for cloud scale, and Python for development workflows.',
+    techStack: ['Python', 'C++', 'Apache Spark', 'Gene Ontology'],
+    link: 'https://github.com/gesttaltt/gene-ontology-functionomes',
+    status: 'Research',
+    stats: [
+      { label: 'C++ vs Python', value: '5-25×' },
+      { label: 'Scale', value: '10M+ genes' },
+    ],
   },
 ]
 

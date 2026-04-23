@@ -9,6 +9,6 @@ export const INTERACTIVE_COMMANDS: Record<string, string> = {
   projects: 'Check out the Projects section above, or type "ls projects" to see a list.',
   contact: 'Reach out via LinkedIn or GitHub linked above.',
   'ls projects':
-    'drwx------ 1 gestalt staff  Ai-Whisperers\n-rw-r--r-- 1 gestalt staff  HIV-Antigen-AI\n-rwxr-xr-x 1 gestalt staff  Paragu-AI',
+    'drwx------ 1 gestalt staff  QA-Arxiv-Mobile\n-rw-r--r-- 1 gestalt staff  Functionome-Atlas\n-rwxr-xr-x 1 gestalt staff  Gene-Functional-Pipeline',
   sudo: 'User is not in the sudoers file. This incident will be reported.',
 }
