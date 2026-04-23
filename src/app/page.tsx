@@ -1,13 +1,5 @@
-import {
-  ShieldCheck,
-  CheckCircle2,
-  Server,
-  Database,
-  Terminal as TerminalIcon,
-  Code2,
-} from 'lucide-react'
+import { ShieldCheck, CheckCircle2, Server, Database, Code2 } from 'lucide-react'
 import Link from 'next/link'
-import { Terminal } from '@/components/Terminal'
 import { BioinformaticsGraphic } from '@/components/BioinformaticsGraphic'
 import { ProjectGallery } from '@/components/ProjectGallery'
 import { ErrorBoundary } from '@/components/ErrorBoundary'
@@ -19,11 +11,9 @@ import { siteConfig } from '@/lib/siteConfig'
 
 import { DataEngineeringService } from '@/lib/contracts/DataEngineeringContract'
 import { QA_PHILOSOPHY } from '@/lib/contracts/QAContract'
-import { TOP_SECRET_TERMINAL_DATA } from '@/lib/contracts/TerminalContract'
 
 export default function Home() {
   const systemSpecs = DataEngineeringService.getSystemSpecs()
-  const terminalCommands = TOP_SECRET_TERMINAL_DATA.commands
 
   return (
     <div className="bg-background min-h-screen font-mono text-zinc-300 selection:bg-blue-500/30">
@@ -50,17 +40,6 @@ export default function Home() {
                 showAccentLine
               />
               <ProjectGallery />
-            </section>
-
-            {/* Terminal Section */}
-            <section className="relative">
-              <SectionHeader
-                icon={TerminalIcon}
-                title={siteConfig.sections.terminal.title}
-                color="blue"
-                showAccentLine
-              />
-              <Terminal commands={terminalCommands} />
             </section>
 
             {/* Architecture Section */}

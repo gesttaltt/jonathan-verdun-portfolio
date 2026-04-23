@@ -26,11 +26,8 @@ describe('Home', () => {
     expect(document.getElementById('main-content')).not.toBeNull()
   })
 
-  it('renders all four section headings', () => {
+  it('renders all three section headings', () => {
     renderHome()
-    expect(
-      screen.getByRole('heading', { name: siteConfig.sections.terminal.title })
-    ).toBeInTheDocument()
     expect(
       screen.getByRole('heading', { name: siteConfig.sections.projects.title })
     ).toBeInTheDocument()

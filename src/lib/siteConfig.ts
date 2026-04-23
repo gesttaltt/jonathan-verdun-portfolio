@@ -35,9 +35,6 @@ export const siteConfig = {
   tagline: 'High-Assurance Architect',
 
   sections: {
-    terminal: {
-      title: 'Terminal',
-    },
     projects: {
       title: 'Projects',
     },
