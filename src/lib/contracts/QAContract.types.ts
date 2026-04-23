@@ -1,5 +1,5 @@
 export interface TestSuiteSpecification {
-  layer: 'unit' | 'integration' | 'property-based' | 'regression'
+  layer: 'unit' | 'integration' | 'property-based' | 'regression' | 'component'
   objective: string
   status: 'locked' | 'evolving'
 }

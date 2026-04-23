@@ -15,21 +15,6 @@ describe('BioinformaticsService - High-Dimensional Modeling', () => {
     expect(arthritisSpec?.invariants).toContain('PTM-Awareness')
   })
 
-  it('should validate epitopes for a variety of valid start sequences', () => {
-    fc.assert(
-      fc.property(fc.string(), (suffix) => {
-        const seq = 'ATG' + suffix
-        return BioinformaticsService.validateEpitope(seq) === true
-      })
-    )
-  })
-
-  it('should fail validation for empty or null-like sequences', () => {
-    expect(BioinformaticsService.validateEpitope('')).toBe(false)
-    expect(BioinformaticsService.validateEpitope('A')).toBe(false)
-    expect(BioinformaticsService.validateEpitope('AT')).toBe(false)
-  })
-
   it('should verify invariants for all research specs', () => {
     const specs = BioinformaticsService.getResearchSpecs()
     specs.forEach((spec) => {

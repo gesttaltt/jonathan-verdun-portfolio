@@ -21,10 +21,6 @@ export const PROJECT_DATA: ProjectSpec[] = [
       'High-throughput sequence analyzer for detecting antigenic regions in viral proteins using variational autoencoders.',
     techStack: ['PyTorch', 'FastAPI', 'React', 'Three.js'],
     status: 'Research',
-    stats: [
-      { label: 'Accuracy', value: '98.2%' },
-      { label: 'Sequences', value: '10k+' },
-    ],
   },
   {
     id: 'proj-03',
@@ -33,10 +29,6 @@ export const PROJECT_DATA: ProjectSpec[] = [
       'Kubernetes operator that introduces controlled failure states to verify system resilience and recovery protocols.',
     techStack: ['Go', 'Kubernetes', 'Prometheus', 'Grafana'],
     status: 'Prototype',
-    stats: [
-      { label: 'Recovery', value: 'Auto' },
-      { label: 'Coverage', value: '100%' },
-    ],
   },
 ]
 
