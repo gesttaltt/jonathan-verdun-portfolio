@@ -25,60 +25,24 @@ export default function Home() {
 
       <main
         id="main-content"
-        className="relative z-10 mx-auto max-w-7xl px-6 py-16 2xl:max-w-[1440px] 2xl:px-12"
+        className="relative z-10 mx-auto max-w-7xl px-6 py-16 lg:py-24 2xl:max-w-[1440px] 2xl:px-12"
       >
-        {/* HeroHeader is a client island — uses Framer Motion */}
         <HeroHeader />
 
-        <div className="grid grid-cols-1 gap-16 lg:grid-cols-12">
-          {/* Main Content Column */}
-          <div className="space-y-24 lg:col-span-8">
-            {/* Projects Section */}
-            <section className="relative">
-              <SectionHeader
-                icon={Code2}
-                title={siteConfig.sections.projects.title}
-                color="purple"
-                showAccentLine
-              />
-              <ProjectGallery />
-            </section>
+        <div className="grid grid-cols-1 gap-x-16 gap-y-24 lg:grid-cols-12">
+          {/* Projects — row 1, cols 1–8 */}
+          <section className="relative lg:col-span-8 lg:col-start-1 lg:row-start-1">
+            <SectionHeader
+              icon={Code2}
+              title={siteConfig.sections.projects.title}
+              color="purple"
+              showAccentLine
+            />
+            <ProjectGallery />
+          </section>
 
-            {/* Architecture Section */}
-            <FadeInSection>
-              <section className="space-y-8">
-                <SectionHeader
-                  icon={Database}
-                  title={siteConfig.sections.architecture.title}
-                  color="cyan"
-                  showBorderBottom
-                />
-
-                <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-                  {systemSpecs.map((spec) => (
-                    <SystemSpecCard key={spec.id} spec={spec} />
-                  ))}
-                </div>
-              </section>
-            </FadeInSection>
-
-            {/* QA Philosophy Section */}
-            <FadeInSection>
-              <section className="space-y-8">
-                <SectionHeader
-                  icon={ShieldCheck}
-                  title={siteConfig.sections.qa.title}
-                  color="green"
-                  showBorderBottom
-                />
-
-                <QAPhilosophyGrid />
-              </section>
-            </FadeInSection>
-          </div>
-
-          {/* Sidebar */}
-          <aside className="lg:col-span-4 lg:pl-8">
+          {/* Sidebar — desktop: cols 9–12, spans both rows; mobile: sits between Projects and rest */}
+          <aside className="lg:col-span-4 lg:col-start-9 lg:row-span-2 lg:row-start-1 lg:pl-8">
             <div className="space-y-8">
               <FadeInSection delay={0.1}>
                 <div className="glass group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-8 transition-all hover:border-blue-500/20">
@@ -100,7 +64,6 @@ export default function Home() {
                 </div>
               </FadeInSection>
 
-              {/* Contact Callout */}
               <FadeInSection delay={0.2}>
                 <div className="rounded-2xl border border-white/5 bg-gradient-to-br from-blue-500/10 to-purple-500/5 p-6 backdrop-blur-sm">
                   <h3 className="mb-2 text-sm font-bold tracking-wider text-white uppercase">
@@ -119,14 +82,47 @@ export default function Home() {
               </FadeInSection>
             </div>
           </aside>
+
+          {/* Architecture + QA — row 2, cols 1–8 */}
+          <div className="space-y-24 lg:col-span-8 lg:col-start-1 lg:row-start-2">
+            <FadeInSection>
+              <section className="space-y-8">
+                <SectionHeader
+                  icon={Database}
+                  title={siteConfig.sections.architecture.title}
+                  color="cyan"
+                  showBorderBottom
+                />
+                <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                  {systemSpecs.map((spec) => (
+                    <SystemSpecCard key={spec.id} spec={spec} />
+                  ))}
+                </div>
+              </section>
+            </FadeInSection>
+
+            <FadeInSection>
+              <section className="space-y-8">
+                <SectionHeader
+                  icon={ShieldCheck}
+                  title={siteConfig.sections.qa.title}
+                  color="green"
+                  showBorderBottom
+                />
+                <QAPhilosophyGrid />
+              </section>
+            </FadeInSection>
+          </div>
         </div>
 
-        <FadeInSection className="mt-16">
-          <BioinformaticsGraphic />
-        </FadeInSection>
+        {/* Decorative footer — separated with a rule */}
+        <div className="mt-24 border-t border-white/5 pt-16">
+          <FadeInSection>
+            <BioinformaticsGraphic />
+          </FadeInSection>
+        </div>
       </main>
 
-      {/* Overlay gradient to blend with InteractiveTopology */}
       <div className="pointer-events-none fixed inset-0 z-[1] bg-gradient-to-tr from-blue-900/10 via-transparent to-purple-900/10"></div>
     </div>
   )
