@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   description: siteConfig.description,
   authors: [{ name: siteConfig.name }],
   creator: siteConfig.name,
-  alternates: { canonical: '/' },
+  alternates: { canonical: siteConfig.url },
   openGraph: {
     type: 'website',
     url: siteConfig.url,

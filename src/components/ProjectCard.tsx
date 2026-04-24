@@ -40,6 +40,8 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
             <Link
               href={project.link}
               target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`View ${project.title} on GitHub (opens in new tab)`}
               className="rounded-full bg-white/5 p-1.5 text-zinc-400 transition-colors hover:bg-blue-500/20 hover:text-white"
             >
               <ExternalLink className="h-4 w-4" />

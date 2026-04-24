@@ -28,6 +28,8 @@ export function HeroHeader() {
           <Link
             href={siteConfig.socialLinks.github.url}
             target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub profile (opens in new tab)"
             className="group flex items-center gap-2 text-zinc-400 transition-colors hover:text-white"
           >
             <Github className="h-5 w-5 transition-transform group-hover:-translate-y-0.5" />
@@ -36,6 +38,8 @@ export function HeroHeader() {
           <Link
             href={siteConfig.socialLinks.linkedin.url}
             target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn profile (opens in new tab)"
             className="group flex items-center gap-2 text-zinc-400 transition-colors hover:text-white"
           >
             <Linkedin className="h-5 w-5 transition-transform group-hover:-translate-y-0.5" />
@@ -57,6 +61,8 @@ export function HeroHeader() {
             <Link
               href={entry.url}
               target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${entry.organization} (opens in new tab)`}
               className="flex items-center gap-2 text-lg font-bold text-white transition-colors hover:text-cyan-400"
             >
               {entry.organization} <ExternalLinkIcon className="h-4 w-4" />

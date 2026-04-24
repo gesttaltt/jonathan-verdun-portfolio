@@ -3,7 +3,7 @@ import { ICommandProcessor } from '@/lib/services/CommandProcessor'
 
 export interface CommandEntry {
   text: string
-  output: string | React.ReactNode
+  output: string
   delay?: number
   isUser?: boolean
 }
