@@ -351,3 +351,236 @@ The closest related work is `ternary-vaes-analysis` ("Analysis of the architectu
 | #14 (Stale Labels)     | **RESOLVED** | Terminal commands updated to match current UI section titles.                          |
 
 **Final Verification:** All content now aligns with the `github.com/Ai-Whisperers` and `github.com/gesttaltt` verified footprints. The portfolio is no longer speculative but an empirical demonstration of technical output.
+
+---
+
+## DEEP TECHNICAL AUDIT — 2026-04-24
+
+Scope expanded beyond content to cover accessibility, SEO, performance, security, test coverage, dead code, type safety, architecture, configuration, and missing standard files.
+
+---
+
+### ACCESSIBILITY
+
+#### A1. External links missing `rel="noopener noreferrer"` — `HeroHeader.tsx:30,38,59` · `ProjectCard.tsx:42`
+
+GitHub, LinkedIn, and work history links open in a new tab without the `rel` attribute. `SystemSpecCard.tsx` already sets it correctly — the rest do not.
+**Risk:** Reverse tabnabbing — the opened window can access `window.opener` and redirect the parent tab. OWASP A05.
+**Fix:** Add `rel="noopener noreferrer"` to every `target="_blank"` link.
+
+#### A2. External links missing `aria-label` — `HeroHeader.tsx:30,38,59`
+
+Social links and the work history org link have no accessible name beyond visible text. Screen readers announce only the label text with no destination context.
+**Risk:** WCAG 2.1 Level A failure (1.1.1, 4.1.2).
+**Fix:** Add `aria-label="GitHub profile"`, `aria-label="LinkedIn profile"`, `aria-label="Ai-Whisperers on GitHub"`.
+
+#### A3. No visible keyboard focus indicators on interactive elements
+
+Project cards, section headers, and the contact CTA have no `:focus-visible` styles. The skip-nav link is the only element with explicit focus styling.
+**Risk:** WCAG 2.1 Level AA failure (2.4.7). Keyboard-only users cannot track focus.
+**Fix:** Add `focus-visible:ring-2 focus-visible:ring-offset-2` to all interactive elements via Tailwind.
+
+#### A4. Framer Motion animations do not respect `prefers-reduced-motion`
+
+`src/lib/animations.ts` defines variants with 500ms+ transitions. CSS respects the media query (`globals.css:88-96`) but JS-driven Framer Motion animations bypass it.
+**Risk:** WCAG 2.1 Level AA failure (2.3.3). Users with vestibular disorders still receive animated transitions.
+**Fix:** Use `useReducedMotion()` from Framer Motion and conditionally zero out `duration` and `transition` values in variants.
+
+#### A5. `InteractiveTopology` canvas has no keyboard alternative
+
+`src/components/InteractiveTopology.tsx` captures pointer and touch events but no keyboard events. The 3D background is decorative but the interaction model excludes keyboard users entirely.
+**Risk:** Not blocking since the canvas is presentational, but `aria-hidden="true"` should be added explicitly so screen readers skip it.
+**Fix:** Add `aria-hidden="true"` and `tabIndex={-1}` to the canvas element.
+
+#### A6. `aria-live="polite"` in Terminal may miss rapid output
+
+`src/components/Terminal.tsx:57` marks output with `aria-live="polite"`. Boot commands firing at 500-700ms intervals may cause screen reader announcement queues to overlap.
+**Risk:** Screen reader users may miss terminal output lines. Low severity but worth QA verification.
+**Fix:** Consider `aria-live="assertive"` for boot output, or introduce delays between announcements.
+
+---
+
+### SEO
+
+#### S1. `og:image` not declared explicitly in metadata — `layout.tsx:24-38`
+
+Next.js auto-detects `opengraph-image.tsx` but some crawlers and link-preview services require an explicit `og:image` field in the metadata export.
+**Fix:** Add `openGraph: { images: [{ url: '/opengraph-image', width: 1200, height: 630 }] }` to the metadata object.
+
+#### S2. JSON-LD only declares `Person` schema — `layout.tsx:40-58`
+
+The structured data describes the person but not the work. No `WebSite`, `ProfilePage`, or `CreativeWork` schemas for projects.
+**Fix:** Add `WebSite` schema with `url` and `name`. Optionally add `ItemList` linking to the three projects.
+
+#### S3. Canonical URL is relative — `layout.tsx:23`
+
+`alternates: { canonical: '/' }` is relative. Some crawlers resolve this incorrectly in non-root-domain deployments (Vercel preview URLs, custom domains).
+**Fix:** Use absolute URL: `alternates: { canonical: siteConfig.url }`.
+
+#### S4. `robots.txt` hardcodes production URL — `public/robots.txt:4`
+
+`Sitemap: https://jonathanverdun.com/sitemap.xml` is static. On Vercel preview deployments this still points to production, polluting the production sitemap's authority.
+**Fix:** Generate `robots.txt` dynamically via `src/app/robots.ts` using `siteConfig.url` so preview deploys get a noindex rule automatically.
+
+#### S5. `sitemap.ts` only includes root — `src/app/sitemap.ts`
+
+Single entry for `/`. If project detail pages are added later, the sitemap will not update automatically.
+**Note:** Not a bug today, but the file should be structured for easy extension.
+
+---
+
+### PERFORMANCE
+
+#### P1. `TopologyMesh` geometry has no LOD — `src/components/TopologyMesh.tsx:48-51`
+
+`IcosahedronGeometry(4, detail)` with `detail` up to 16 generates 42,000+ vertices. No level-of-detail reduction for low-end or mobile devices.
+**Fix:** Detect device capability (`renderer.capabilities.maxTextureSize` or `navigator.hardwareConcurrency`) and cap `detail` at 2-4 on low-end devices.
+
+#### P2. `PAdicBackground` SVG rerenders on each resize without memoization — `src/components/PAdicBackground.tsx:82-115`
+
+The `TopographFlow()` function generates a nested SVG loop on every render cycle. No `useMemo` around the path/circle generation.
+**Fix:** Wrap `TopographFlow()` output in `useMemo` keyed to the viewport dimensions.
+
+#### P3. `TopologyLoader` loading state is a blank div — `src/components/TopologyLoader.tsx:7`
+
+Users on slow 3G see a blank `bg-background` fill for 2-3 seconds with no loading feedback.
+**Fix:** Replace with a lightweight skeleton (pulsing lines or a spinner matching the 3D topology's colour palette).
+
+#### P4. Framer Motion not tree-shaken for unused features
+
+`framer-motion` is imported in `HeroHeader.tsx` and `FadeInSection.tsx`. The full bundle is ~60kb gzip. Only `motion` and `useReducedMotion` are used.
+**Fix:** Import from `framer-motion/react` (v11+) or use the `m` component alias with `LazyMotion` to load only the features used.
+
+#### P5. No `Cache-Control` headers configured — `next.config.ts`
+
+`next.config.ts` sets security headers but no `Cache-Control`, `Vary`, or `Surrogate-Control`. Static assets rely only on Next.js defaults.
+**Fix:** Add `Cache-Control: public, max-age=31536000, immutable` for hashed static assets in the headers config.
+
+---
+
+### SECURITY
+
+#### SEC1. `rel="noopener noreferrer"` missing (duplicated from A1 — priority escalated)
+
+Described under Accessibility A1. Also a direct security issue.
+
+#### SEC2. `unsafe-eval` in CSP required by Three.js — `next.config.ts:8`
+
+Three.js compiles GLSL shaders at runtime using `eval`-equivalent mechanisms, forcing `'unsafe-eval'` in the CSP `script-src` directive.
+**Risk:** Any XSS injection can escalate to arbitrary code execution. Low immediate risk (no user input accepted) but worth documenting.
+**Note:** No clean fix without replacing Three.js or pre-compiling shaders to WASM. Document as accepted risk.
+
+#### SEC3. `dangerouslySetInnerHTML` for JSON-LD — `layout.tsx:66`
+
+`JSON.stringify()` is safe in this context (no user data), but the pattern is flagged by automated security scanners and could confuse code reviewers.
+**Fix:** Next.js 13.2+ supports `<script type="application/ld+json" dangerouslySetInnerHTML={...} />` natively — confirm the current approach matches this pattern.
+
+---
+
+### TEST COVERAGE GAPS
+
+#### T1. 11 components have zero test files
+
+Currently untested: `FadeInSection`, `HeroHeader`, `InteractiveTopology`, `TopologyLoader`, `TopologyMesh`, `ProjectGallery`, `QAPhilosophyGrid`, `SectionHeader`, `SystemSpecCard`, `MotionProvider`, `PAdicBackground`.
+Tested: `Terminal`, `ErrorBoundary`, `BioinformaticsGraphic` + hooks and contracts.
+**Coverage rate:** ~31% of components (5 of 16).
+
+#### T2. `HeroHeader` social links not tested for security attributes
+
+No test verifies that `rel="noopener noreferrer"` is present on external links. Easy to regress silently.
+**Fix:** Add a test that queries all `[target="_blank"]` links and asserts `rel` contains `noopener`.
+
+#### T3. Jest coverage thresholds are lower than actual coverage — `jest.config.mjs:22-28`
+
+Thresholds: 30% lines / 25% functions / 20% branches. Actual tested coverage is higher for the modules that are tested, but the threshold permits adding completely untested components.
+**Fix:** Raise thresholds to 60/55/50 to prevent backsliding.
+
+#### T4. No tests for `useReducedMotion` behaviour
+
+No test verifies the animation system degrades correctly for users with `prefers-reduced-motion: reduce`.
+
+#### T5. No tests for WebGL unavailability fallback
+
+`TopologyLoader` loads Three.js dynamically but has no test for the case where WebGL is not available (older browsers, privacy-focused browsers).
+
+---
+
+### DEAD CODE
+
+#### D1. Three unused animation variants — `src/lib/animations.ts:25-43`
+
+`staggerContainerVariants`, `staggerChildVariants`, and `floatVariants` are exported but not imported anywhere in the codebase.
+**Fix:** Remove all three, or integrate them if the stagger animation is planned for the project gallery.
+
+#### D2. `TerminalContract.ts` still exports `INTERACTIVE_COMMANDS` with no UI consumer
+
+The Terminal section was removed from the page. `INTERACTIVE_COMMANDS` and `BOOT_COMMANDS` remain in `TerminalContract.ts` and are only consumed by tests and `CommandProcessor.ts`. No UI renders them.
+**Note:** If the Terminal is not planned to return, the contract and service can be archived. If it may return, leave as-is.
+
+---
+
+### TYPE SAFETY
+
+#### TS1. `useTerminal.ts` output field typed as `string | React.ReactNode` but only string is handled
+
+`src/components/hooks/useTerminal.ts:6` — `output: string | React.ReactNode`. The terminal rendering logic treats output as a string. Passing JSX would produce `[object Object]` in the output.
+**Fix:** Restrict type to `string` to match the actual implementation, or implement ReactNode rendering properly.
+
+#### TS2. `floatVariants` missing explicit return type — `src/lib/animations.ts:37`
+
+Inferred as `object` rather than `Variants` from Framer Motion. Breaks IDE autocomplete and type-narrowing for animation variants.
+**Fix:** Annotate as `Variants` from `framer-motion`.
+
+---
+
+### MISSING STANDARD FILES
+
+#### M1. No `not-found.tsx` — `/src/app/not-found.tsx`
+
+404 responses serve Next.js's generic page. Any mistyped URL shows unbranded content.
+**Fix:** Create `not-found.tsx` with the portfolio's design system and a link back to `/`.
+
+#### M2. No `error.tsx` — `/src/app/error.tsx`
+
+Runtime errors in RSC or client components fall through to Next.js's default error UI.
+**Fix:** Create `error.tsx` as a client component with a styled fallback and a reload button.
+
+#### M3. No `loading.tsx` — `/src/app/loading.tsx`
+
+No global loading skeleton for the initial page load or Suspense boundaries.
+**Fix:** Create `loading.tsx` with a minimal pulse skeleton matching the page's grid layout.
+
+#### M4. No `manifest.json` — `/public/manifest.json`
+
+Portfolio is not installable as a PWA. Not a hard requirement, but standard for modern web apps.
+**Fix:** Create `manifest.json` with `name`, `short_name`, `start_url`, `theme_color`, and icons.
+
+---
+
+### PRIORITY MATRIX
+
+| Priority           | Item                                                         | Effort    |
+| ------------------ | ------------------------------------------------------------ | --------- |
+| P1 — fix now       | A1 `rel="noopener noreferrer"` on all external links         | Low       |
+| P1 — fix now       | A2 `aria-label` on social/work history links                 | Low       |
+| P1 — fix now       | S3 Absolute canonical URL                                    | Low       |
+| P1 — fix now       | D1 Remove 3 unused animation variants                        | Low       |
+| P1 — fix now       | TS1 Restrict `useTerminal` output to `string`                | Low       |
+| P2 — next sprint   | A3 Focus indicator styles on interactive elements            | Medium    |
+| P2 — next sprint   | A4 `useReducedMotion()` in animation variants                | Medium    |
+| P2 — next sprint   | A5 `aria-hidden` on canvas                                   | Low       |
+| P2 — next sprint   | S1 Explicit `og:image` in metadata                           | Low       |
+| P2 — next sprint   | S2 `WebSite` JSON-LD schema                                  | Low       |
+| P2 — next sprint   | S4 Dynamic `robots.ts`                                       | Medium    |
+| P2 — next sprint   | M1 `not-found.tsx`                                           | Low       |
+| P2 — next sprint   | M2 `error.tsx`                                               | Low       |
+| P2 — next sprint   | T1 Tests for `HeroHeader`, `SystemSpecCard`, `SectionHeader` | Medium    |
+| P2 — next sprint   | T2 Test `rel` attribute on all external links                | Low       |
+| P3 — backlog       | P1 TopologyMesh LOD system                                   | High      |
+| P3 — backlog       | P2 Memoize PAdicBackground SVG                               | Medium    |
+| P3 — backlog       | P3 TopologyLoader skeleton                                   | Low       |
+| P3 — backlog       | P4 LazyMotion for Framer bundle                              | Medium    |
+| P3 — backlog       | T3 Raise jest coverage thresholds                            | Low       |
+| P3 — backlog       | M3 `loading.tsx`                                             | Low       |
+| P3 — backlog       | M4 `manifest.json`                                           | Low       |
+| P4 — accepted risk | SEC2 `unsafe-eval` in CSP for Three.js                       | Very High |
