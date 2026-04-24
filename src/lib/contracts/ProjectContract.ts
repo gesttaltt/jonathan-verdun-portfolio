@@ -5,7 +5,7 @@ export const PROJECT_DATA: ProjectSpec[] = [
     id: 'proj-01',
     title: 'QA Arxiv Mobile',
     description:
-      'Enterprise QA overlay for the open-source arxiv-papers-mobile React Native app. Manual test cases with full ADO-style user story traceability, cross-platform coverage (iOS/Android), and aligned automation suite.',
+      'Personal test exercise to demonstrate QA skills. Manual test cases with user story traceability, cross-platform coverage (iOS/Android), and a Python/pytest automation suite against the open-source arxiv-papers-mobile app.',
     techStack: ['Python', 'pytest', 'Azure DevOps'],
     link: 'https://github.com/gesttaltt/qa-arxiv-mobile',
     status: 'Research',
