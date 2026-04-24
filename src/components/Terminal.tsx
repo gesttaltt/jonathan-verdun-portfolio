@@ -55,7 +55,7 @@ export const Terminal: React.FC<TerminalProps> = ({
         role="log"
         aria-label="Terminal output"
         aria-live="polite"
-        className="custom-scrollbar relative h-[400px] w-full overflow-x-hidden overflow-y-auto p-4 md:p-6"
+        className="custom-scrollbar relative h-[280px] w-full overflow-x-hidden overflow-y-auto p-4 md:h-[400px] md:p-6"
       >
         <div className="space-y-4 pb-2">
           {history.map((entry, index) => (
