@@ -21,11 +21,16 @@ export const siteConfig = {
       url: 'https://www.linkedin.com/in/jonathan-verdun/',
       label: 'linkedin.com/in/jonathan-verdun',
     },
-    organization: {
-      url: 'https://github.com/Ai-Whisperers',
-      label: 'Ai-Whisperers',
-    },
   },
+
+  workHistory: [
+    {
+      organization: 'Ai-Whisperers',
+      url: 'https://github.com/Ai-Whisperers',
+      role: '',
+      period: '',
+    },
+  ],
 
   contact: {
     email: 'contact@jonathanverdun.com',

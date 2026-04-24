@@ -52,12 +52,22 @@ export function HeroHeader() {
           </span>
           <span className="font-bold tracking-widest text-zinc-500 uppercase">Work History</span>
         </div>
-        <Link
-          href={siteConfig.socialLinks.organization.url}
-          className="flex items-center gap-2 text-lg font-bold text-white transition-colors hover:text-cyan-400"
-        >
-          {siteConfig.socialLinks.organization.label} <ExternalLinkIcon className="h-4 w-4" />
-        </Link>
+        {siteConfig.workHistory.map((entry) => (
+          <div key={entry.organization} className="flex flex-col gap-0.5">
+            <Link
+              href={entry.url}
+              target="_blank"
+              className="flex items-center gap-2 text-lg font-bold text-white transition-colors hover:text-cyan-400"
+            >
+              {entry.organization} <ExternalLinkIcon className="h-4 w-4" />
+            </Link>
+            {(entry.role || entry.period) && (
+              <p className="text-xs text-zinc-500">
+                {[entry.role, entry.period].filter(Boolean).join(' · ')}
+              </p>
+            )}
+          </div>
+        ))}
       </div>
     </motion.header>
   )
