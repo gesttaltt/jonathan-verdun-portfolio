@@ -4,7 +4,13 @@ import { motion } from 'framer-motion'
 import React from 'react'
 import { Activity } from 'lucide-react'
 
-export const BioinformaticsGraphic: React.FC = () => {
+interface BioinformaticsGraphicProps {
+  label?: string
+}
+
+export const BioinformaticsGraphic: React.FC<BioinformaticsGraphicProps> = ({
+  label = 'Data Analysis: [Epitope Discovery Pipeline]',
+}) => {
   const codons = ['ATG', 'GCT', 'TTA', 'CCG', 'GAT', 'TTC', 'AGC', 'GTA']
 
   return (
@@ -87,7 +93,7 @@ export const BioinformaticsGraphic: React.FC = () => {
 
       <div className="absolute bottom-4 left-6 flex items-center gap-2 text-[10px] font-bold tracking-widest text-blue-500/60 uppercase">
         <Activity className="h-3 w-3" />
-        Data Analysis: [Epitope Discovery Pipeline]
+        {label}
       </div>
     </div>
   )

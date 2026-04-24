@@ -4,6 +4,7 @@ import { BioinformaticsGraphic } from '@/components/BioinformaticsGraphic'
 import { FadeInSection } from '@/components/FadeInSection'
 import { ProjectGallery } from '@/components/ProjectGallery'
 import { QAPhilosophyGrid } from '@/components/QAPhilosophyGrid'
+import { Terminal } from '@/components/Terminal'
 import { ErrorBoundary } from '@/components/ErrorBoundary'
 import { HeroHeader } from '@/components/HeroHeader'
 import { SectionHeader } from '@/components/SectionHeader'
@@ -13,6 +14,7 @@ import { siteConfig } from '@/lib/siteConfig'
 
 import { DataEngineeringService } from '@/lib/contracts/DataEngineeringContract'
 import { QA_PHILOSOPHY } from '@/lib/contracts/QAContract'
+import { BOOT_COMMANDS } from '@/lib/contracts/TerminalContract'
 
 export default function Home() {
   const systemSpecs = DataEngineeringService.getSystemSpecs()
@@ -28,6 +30,10 @@ export default function Home() {
         className="relative z-10 mx-auto max-w-7xl px-6 py-16 lg:py-24 2xl:max-w-[1440px] 2xl:px-12"
       >
         <HeroHeader />
+
+        <FadeInSection className="mb-16">
+          <Terminal commands={BOOT_COMMANDS} />
+        </FadeInSection>
 
         <div className="grid grid-cols-1 gap-x-16 gap-y-24 lg:grid-cols-12">
           {/* Projects — row 1, cols 1–8 */}
