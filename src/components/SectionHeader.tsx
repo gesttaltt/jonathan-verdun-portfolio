@@ -2,10 +2,9 @@
 
 import { motion } from 'framer-motion'
 import React from 'react'
-import type { LucideIcon } from 'lucide-react'
 
 interface SectionHeaderProps {
-  icon: LucideIcon
+  icon: React.ReactNode
   title: string
   color?: 'blue' | 'purple' | 'cyan' | 'green'
   showAccentLine?: boolean
@@ -32,7 +31,7 @@ const COLOR_MAP = {
 }
 
 export const SectionHeader: React.FC<SectionHeaderProps> = ({
-  icon: Icon,
+  icon,
   title,
   color = 'blue',
   showAccentLine = false,
@@ -55,7 +54,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
         className={`mb-6 flex items-center gap-4 ${showBorderBottom ? 'border-b border-white/10 pb-4' : ''}`}
       >
         <div className={`flex h-10 w-10 items-center justify-center rounded-lg ${colors.badge}`}>
-          <Icon className="h-5 w-5" />
+          {icon}
         </div>
         <h2 className="text-2xl font-bold text-white">{title}</h2>
       </motion.div>

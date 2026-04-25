@@ -39,7 +39,7 @@ export default function Home() {
           {/* Projects — row 1, cols 1–8 */}
           <section className="relative lg:col-span-8 lg:col-start-1 lg:row-start-1">
             <SectionHeader
-              icon={Code2}
+              icon={<Code2 className="h-5 w-5" />}
               title={siteConfig.sections.projects.title}
               color="purple"
               showAccentLine
@@ -94,7 +94,7 @@ export default function Home() {
             <FadeInSection>
               <section className="space-y-8">
                 <SectionHeader
-                  icon={Database}
+                  icon={<Database className="h-5 w-5" />}
                   title={siteConfig.sections.architecture.title}
                   color="cyan"
                   showBorderBottom
@@ -110,7 +110,7 @@ export default function Home() {
             <FadeInSection>
               <section className="space-y-8">
                 <SectionHeader
-                  icon={ShieldCheck}
+                  icon={<ShieldCheck className="h-5 w-5" />}
                   title={siteConfig.sections.qa.title}
                   color="green"
                   showBorderBottom

@@ -1,5 +1,4 @@
 import { BioinformaticsService } from '@/lib/contracts/BioinformaticsContract'
-import * as fc from 'fast-check'
 
 describe('BioinformaticsService - High-Dimensional Modeling', () => {
   it('should maintain deterministic output for research specs', () => {
