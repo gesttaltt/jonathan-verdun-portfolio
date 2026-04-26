@@ -1,14 +1,7 @@
 import Link from 'next/link'
 import React from 'react'
 import { FlaskConical, Cpu, ExternalLink } from 'lucide-react'
-
-interface SystemSpec {
-  id: string
-  focus: string
-  methodology: string
-  invariants: string[]
-  link?: string
-}
+import type { SystemSpec } from '@/lib/contracts/DataEngineeringContract.types'
 
 interface SystemSpecCardProps {
   spec: SystemSpec

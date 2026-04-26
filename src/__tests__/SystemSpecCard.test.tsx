@@ -1,8 +1,9 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
 import { SystemSpecCard } from '@/components/SystemSpecCard'
+import type { SystemSpec } from '@/lib/contracts/DataEngineeringContract.types'
 
-const baseSpec = {
+const baseSpec: SystemSpec = {
   id: 'spec-01',
   focus: 'Automated Reporting',
   methodology: 'ETL',
