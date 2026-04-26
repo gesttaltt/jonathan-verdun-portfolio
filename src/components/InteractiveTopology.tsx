@@ -14,8 +14,8 @@ export const InteractiveTopology: React.FC = () => {
         Without it, state.mouse never updates on mobile touch devices.
       */}
       <Canvas
-        role="img"
-        aria-label="Interactive 3D point-cloud visualization of algorithmic topology structures"
+        aria-hidden="true"
+        tabIndex={-1}
         style={{ touchAction: 'none' }}
         camera={{ position: [0, 0, 8], fov: 60 }}
         dpr={[1, 2]}
