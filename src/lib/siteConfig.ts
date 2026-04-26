@@ -8,7 +8,7 @@ export const siteConfig = {
   name: 'Jonathan Verdun',
   title: 'Jonathan Verdun | QA Automation & Bioinformatics',
   description:
-    'Portfolio of Jonathan Verdun (Gestalt) - QA Automation Engineer and Bioinformatics Researcher focused on Deep Learning and TDD.',
+    'Portfolio of Jonathan Verdun — QA Automation Engineer and Bioinformatics Researcher, focused on test-driven development and computational biology.',
   url: 'https://jonathanverdun.com',
   locale: 'en',
 
@@ -37,7 +37,7 @@ export const siteConfig = {
     ctaLabel: 'Get in Touch',
   },
 
-  tagline: 'High-Assurance Architect',
+  tagline: 'QA Engineer · Bioinformatics Researcher',
 
   sections: {
     projects: {

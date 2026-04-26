@@ -8,8 +8,8 @@ import { QAPhilosophy } from './QAContract.types'
 export const QA_PHILOSOPHY: QAPhilosophy = {
   constraints: [
     'Test suites gate every merge — coverage thresholds enforced in CI',
-    'Property-based fuzzing on all domain invariants',
-    'Zero-trust validation at all system boundaries',
+    'Property-based fuzzing applied to core domain invariants via fast-check',
+    'Strict input validation enforced at all system boundaries',
   ],
   specifications: [
     {

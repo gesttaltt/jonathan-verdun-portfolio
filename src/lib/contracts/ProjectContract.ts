@@ -18,7 +18,7 @@ export const PROJECT_DATA: ProjectSpec[] = [
     id: 'proj-02',
     title: 'Functionome Atlas',
     description:
-      'High-performance pipeline computing Functionome Perturbation Scores to map functional fragility across the human genome. Integrates VCF variant density, evolutionary constraint (LOEUF), and Gene Ontology annotations.',
+      'Pipeline computing Functionome Perturbation Scores to map functional fragility across the human genome. Integrates VCF variant density, evolutionary constraint (LOEUF), and Gene Ontology annotations.',
     techStack: ['Python', 'NumPy', 'Pandas', 'gnomAD'],
     link: 'https://github.com/gesttaltt/Functionome-Atlas',
     status: 'Research',
@@ -31,7 +31,7 @@ export const PROJECT_DATA: ProjectSpec[] = [
     id: 'proj-03',
     title: 'Gene Functional Pipeline',
     description:
-      'Production-ready GO annotation pipeline for human genome functional analysis. Three implementations: C++ DAG engine for local throughput, Apache Spark for cloud scale, and Python for development workflows.',
+      'GO annotation pipeline for human genome functional analysis. Three implementations: C++ DAG engine for local throughput, Apache Spark for cloud scale, and Python for development workflows.',
     techStack: ['Python', 'C++', 'Apache Spark', 'Gene Ontology'],
     link: 'https://github.com/gesttaltt/gene-ontology-functionomes',
     status: 'Research',

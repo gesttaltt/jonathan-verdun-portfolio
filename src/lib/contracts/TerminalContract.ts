@@ -1,7 +1,7 @@
 export const INTERACTIVE_COMMANDS: Record<string, string> = {
   help: 'Available commands: help, about, projects, contact, clear',
   about:
-    'Jonathan Verdun. QA Automation Engineer and Bioinformatics Researcher. Specializing in TDD, resilient systems, and deep learning.',
+    'Jonathan Verdun. QA Automation Engineer and Bioinformatics Researcher. Specializing in TDD, test automation, and computational biology.',
   projects: 'Check out the Projects section below, or type "ls projects" to see a list.',
   contact: 'Reach out via LinkedIn or GitHub linked above.',
   'ls projects':
