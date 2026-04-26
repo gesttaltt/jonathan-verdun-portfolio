@@ -25,7 +25,7 @@
 | #6 Ai-Whisperers stats unverifiable         | ✅ Resolved | Card replaced with QA Arxiv Mobile                             |
 | #7 Recovery: Auto stat                      | ✅ Removed  | Chaos-Kube card replaced                                       |
 | #8 DataEngineering generic buzzwords        | ✅ Replaced | Automated Reporting + Predictive Capacity Control (real repos) |
-| #9 BioinformaticsContract no links          | ✅ Updated  | Codon Encoding / HIV specs with real repo links                |
+| #9 BioinformaticsContract no links          | ✅ Updated  | hiv-antigen-ai + codon-encoder-api links added (2026-04-26)    |
 | #10 "Currently accepting inquiries" stale   | ✅ Fixed    | Changed to time-invariant phrasing                             |
 | #11 Ai-Whisperers description aspirational  | ✅ Resolved | Card replaced entirely with personal project                   |
 | #12 Fake terminal boot commands             | ✅ Removed  | Boot sequence cleared; terminal section removed from page      |
@@ -34,9 +34,11 @@
 | #15 Tagline alignment                       | ⏳ Deferred | Branding decision — low severity                               |
 | — All 3 project cards pointed to org repos  | ✅ Resolved | Replaced with personal repos (gesttaltt)                       |
 | — Terminal section removed from page        | ✅ Done     | No real-world value at this stage; TerminalContract retained   |
-| A — Architecture specs link to org repos    | ⏳ Deferred | Links to be removed or replaced when work history is addressed |
-| B — Ai-Whisperers social link in HeroHeader | ⏳ Deferred | Depends on work history section (item C)                       |
-| C — Work history section for Ai-Whisperers  | ⏳ Deferred | Requires new UI component                                      |
+| A — Architecture specs link to org repos    | ⏳ Pending  | DataEngineering links pending repo visibility confirmation     |
+| B — Ai-Whisperers social link in HeroHeader | ✅ Resolved | Work history card added to HeroHeader with org link            |
+| C — Work history role + period              | ⏳ Pending  | Author to provide role title and employment period             |
+| D — Contact email placeholder               | ✅ Resolved | Changed to jonathan.verdun@gmail.com (2026-04-26)              |
+| E — Tagline / title alignment               | ⏳ Pending  | Author branding decision required                              |
 
 ---
 
