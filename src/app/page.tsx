@@ -80,7 +80,7 @@ export default function Home() {
                   </p>
                   <Link
                     href={`mailto:${siteConfig.contact.email}`}
-                    className="flex w-full items-center justify-center gap-2 rounded-lg bg-white/10 py-2 text-sm font-bold text-white transition-all hover:bg-white/20 hover:shadow-lg"
+                    className="flex w-full items-center justify-center gap-2 rounded-lg bg-white/10 py-2 text-sm font-bold text-white transition-all hover:bg-white/20 hover:shadow-lg focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a] focus-visible:outline-none"
                   >
                     {siteConfig.contact.ctaLabel}
                   </Link>

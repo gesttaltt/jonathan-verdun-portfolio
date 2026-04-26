@@ -35,7 +35,7 @@ export const SystemSpecCard: React.FC<SystemSpecCardProps> = ({ spec }) => (
           href={spec.link}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-1 text-[10px] text-zinc-500 transition-colors hover:text-cyan-400"
+          className="inline-flex items-center gap-1 rounded text-[10px] text-zinc-500 transition-colors hover:text-cyan-400 focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a] focus-visible:outline-none"
         >
           <ExternalLink className="h-3 w-3" />
           {spec.link.replace('https://github.com/', '')}
