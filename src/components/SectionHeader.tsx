@@ -1,6 +1,6 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import React from 'react'
 
 interface SectionHeaderProps {
@@ -46,7 +46,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
           className={`absolute top-0 -left-12 hidden h-full w-px bg-gradient-to-b from-transparent ${colors.line} to-transparent lg:block`}
         />
       )}
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-60px' }}
@@ -57,7 +57,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
           {icon}
         </div>
         <h2 className="text-2xl font-bold text-white">{title}</h2>
-      </motion.div>
+      </m.div>
     </>
   )
 }

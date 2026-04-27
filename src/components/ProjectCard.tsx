@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import { ExternalLink, Terminal } from 'lucide-react'
 import Link from 'next/link'
 import { ProjectSpec } from '@/lib/contracts/ProjectContract.types'
@@ -15,7 +15,7 @@ interface ProjectCardProps {
 
 export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
   return (
-    <motion.div
+    <m.div
       custom={index}
       initial="hidden"
       whileInView="visible"
@@ -78,6 +78,6 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
           ))}
         </div>
       </div>
-    </motion.div>
+    </m.div>
   )
 }

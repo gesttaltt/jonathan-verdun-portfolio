@@ -1,14 +1,16 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
-import { MotionConfig } from 'framer-motion'
+import { domAnimation, LazyMotion, MotionConfig } from 'framer-motion'
 import { HeroHeader } from '@/components/HeroHeader'
 import { siteConfig } from '@/lib/siteConfig'
 
 const wrap = () =>
   render(
-    <MotionConfig reducedMotion="always">
-      <HeroHeader />
-    </MotionConfig>
+    <LazyMotion features={domAnimation}>
+      <MotionConfig reducedMotion="always">
+        <HeroHeader />
+      </MotionConfig>
+    </LazyMotion>
   )
 
 describe('HeroHeader', () => {

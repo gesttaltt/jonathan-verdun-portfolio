@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
-import { MotionConfig } from 'framer-motion'
+import { domAnimation, LazyMotion, MotionConfig } from 'framer-motion'
 import { ProjectCard } from '@/components/ProjectCard'
 import type { ProjectSpec } from '@/lib/contracts/ProjectContract.types'
 
@@ -14,9 +14,11 @@ const baseProject: ProjectSpec = {
 
 const wrap = (project: ProjectSpec, index = 0) =>
   render(
-    <MotionConfig reducedMotion="always">
-      <ProjectCard project={project} index={index} />
-    </MotionConfig>
+    <LazyMotion features={domAnimation}>
+      <MotionConfig reducedMotion="always">
+        <ProjectCard project={project} index={index} />
+      </MotionConfig>
+    </LazyMotion>
   )
 
 describe('ProjectCard', () => {

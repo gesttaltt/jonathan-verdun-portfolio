@@ -1,6 +1,6 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import { CheckCircle2 } from 'lucide-react'
 import React from 'react'
 import { QA_PHILOSOPHY } from '@/lib/contracts/QAContract'
@@ -9,7 +9,7 @@ export const QAPhilosophyGrid: React.FC = () => (
   <div className="rounded-2xl border border-white/5 bg-black/40 p-8 backdrop-blur-sm">
     <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
       {QA_PHILOSOPHY.specifications.map((spec, i) => (
-        <motion.div
+        <m.div
           key={i}
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -29,7 +29,7 @@ export const QAPhilosophyGrid: React.FC = () => (
             </span>
           </div>
           <p className="pl-9 text-xs leading-relaxed text-zinc-400">{spec.objective}</p>
-        </motion.div>
+        </m.div>
       ))}
     </div>
   </div>

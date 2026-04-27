@@ -1,11 +1,15 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
-import { MotionConfig } from 'framer-motion'
+import { domAnimation, LazyMotion, MotionConfig } from 'framer-motion'
 import { Code2, Database, ShieldCheck } from 'lucide-react'
 import { SectionHeader } from '@/components/SectionHeader'
 
 const wrap = (ui: React.ReactElement) =>
-  render(<MotionConfig reducedMotion="always">{ui}</MotionConfig>)
+  render(
+    <LazyMotion features={domAnimation}>
+      <MotionConfig reducedMotion="always">{ui}</MotionConfig>
+    </LazyMotion>
+  )
 
 describe('SectionHeader', () => {
   it('renders the title as an h2', () => {

@@ -2,13 +2,13 @@
 
 import { Github, Linkedin, ExternalLink as ExternalLinkIcon } from 'lucide-react'
 import Link from 'next/link'
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import { slideDownVariants } from '@/lib/animations'
 import { siteConfig } from '@/lib/siteConfig'
 
 export function HeroHeader() {
   return (
-    <motion.header
+    <m.header
       variants={slideDownVariants}
       initial="hidden"
       animate="visible"
@@ -75,6 +75,6 @@ export function HeroHeader() {
           </div>
         ))}
       </div>
-    </motion.header>
+    </m.header>
   )
 }
