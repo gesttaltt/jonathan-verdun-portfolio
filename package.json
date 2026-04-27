@@ -9,7 +9,7 @@
     "lint": "eslint",
     "test": "jest",
     "test:watch": "jest --watch",
-    "docs": "typedoc --out docs/api src/lib",
+    "docs": "typedoc --out docs/api --entryPointStrategy expand src/lib",
     "check-types": "tsc --noEmit",
     "format": "prettier --write .",
     "prepare": "husky"
