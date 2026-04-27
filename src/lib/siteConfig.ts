@@ -41,6 +41,7 @@ export const siteConfig = {
   },
 
   tagline: 'QA Engineer · Bioinformatics Researcher',
+  jobTitle: 'QA Automation Engineer & Bioinformatics Researcher',
 
   sections: {
     projects: {

@@ -60,8 +60,8 @@ export default function Home() {
                   </h3>
 
                   <div className="space-y-5">
-                    {QA_PHILOSOPHY.constraints.map((c, i) => (
-                      <div key={i} className="flex items-start gap-4">
+                    {QA_PHILOSOPHY.constraints.map((c) => (
+                      <div key={c} className="flex items-start gap-4">
                         <div className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.6)]"></div>
                         <p className="text-xs leading-relaxed font-medium text-zinc-400">{c}</p>
                       </div>
@@ -121,12 +121,14 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Decorative footer — separated with a rule */}
-        <div className="mt-24 border-t border-white/5 pt-16">
+        <footer
+          aria-label="Bioinformatics showcase"
+          className="mt-24 border-t border-white/5 pt-16"
+        >
           <FadeInSection>
             <BioinformaticsGraphic />
           </FadeInSection>
-        </div>
+        </footer>
       </main>
 
       <div className="pointer-events-none fixed inset-0 z-[1] bg-gradient-to-tr from-blue-900/10 via-transparent to-purple-900/10"></div>

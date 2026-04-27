@@ -54,7 +54,7 @@ export const BioinformaticsGraphic: React.FC<BioinformaticsGraphicProps> = ({
           {/* Data Points on the Helix */}
           {[100, 300, 500, 700].map((cx, i) => (
             <m.circle
-              key={i}
+              key={cx}
               cx={cx}
               cy={100}
               r={4}
@@ -72,21 +72,13 @@ export const BioinformaticsGraphic: React.FC<BioinformaticsGraphicProps> = ({
       <div className="relative z-10 flex flex-wrap justify-center gap-4 rounded-full border border-white/5 bg-black/20 p-4 px-4 backdrop-blur-sm">
         {codons.map((codon, i) => (
           <m.div
-            key={i}
+            key={codon}
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: i * 0.1, duration: 0.5 }}
-            whileHover={{ scale: 1.1, color: 'var(--accent)' }}
-            className="relative cursor-default overflow-hidden rounded border border-white/10 bg-white/5 px-3 py-1 font-mono text-xs text-zinc-400"
+            className="rounded border border-white/10 bg-white/5 px-3 py-1 font-mono text-xs text-zinc-400"
           >
-            <span className="relative z-10">{codon}</span>
-            {/* Scanning effect behind text on hover */}
-            <m.div
-              className="absolute inset-0 bg-blue-500/20"
-              initial={{ x: '-100%' }}
-              whileHover={{ x: '100%' }}
-              transition={{ duration: 0.5 }}
-            />
+            {codon}
           </m.div>
         ))}
       </div>

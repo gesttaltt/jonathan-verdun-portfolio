@@ -48,33 +48,35 @@ export function HeroHeader() {
         </div>
       </div>
 
-      <div className="glass flex flex-col gap-3 rounded-xl border border-white/5 bg-white/5 p-5 backdrop-blur-md">
-        <div className="flex items-center gap-3 text-xs">
-          <span className="relative flex h-2.5 w-2.5">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-400 opacity-75"></span>
-            <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-blue-500"></span>
-          </span>
-          <span className="font-bold tracking-widest text-zinc-500 uppercase">Work History</span>
-        </div>
-        {siteConfig.workHistory.map((entry) => (
-          <div key={entry.organization} className="flex flex-col gap-0.5">
-            <Link
-              href={entry.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`${entry.organization} (opens in new tab)`}
-              className="flex items-center gap-2 rounded text-lg font-bold text-white transition-colors hover:text-cyan-400 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a] focus-visible:outline-none"
-            >
-              {entry.organization} <ExternalLinkIcon className="h-4 w-4" />
-            </Link>
-            {(entry.role || entry.period) && (
-              <p className="text-xs text-zinc-500">
-                {[entry.role, entry.period].filter(Boolean).join(' · ')}
-              </p>
-            )}
+      {siteConfig.workHistory.length > 0 && (
+        <div className="glass flex flex-col gap-3 rounded-xl border border-white/5 bg-white/5 p-5 backdrop-blur-md">
+          <div className="flex items-center gap-3 text-xs">
+            <span className="relative flex h-2.5 w-2.5">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-400 opacity-75"></span>
+              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-blue-500"></span>
+            </span>
+            <span className="font-bold tracking-widest text-zinc-500 uppercase">Work History</span>
           </div>
-        ))}
-      </div>
+          {siteConfig.workHistory.map((entry) => (
+            <div key={entry.organization} className="flex flex-col gap-0.5">
+              <Link
+                href={entry.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${entry.organization} (opens in new tab)`}
+                className="flex items-center gap-2 rounded text-lg font-bold text-white transition-colors hover:text-cyan-400 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a] focus-visible:outline-none"
+              >
+                {entry.organization} <ExternalLinkIcon className="h-4 w-4" />
+              </Link>
+              {(entry.role || entry.period) && (
+                <p className="text-xs text-zinc-500">
+                  {[entry.role, entry.period].filter(Boolean).join(' · ')}
+                </p>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
     </m.header>
   )
 }

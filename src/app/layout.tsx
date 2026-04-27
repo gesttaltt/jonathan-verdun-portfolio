@@ -41,7 +41,7 @@ const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: siteConfig.name,
-  jobTitle: 'QA Automation Engineer & Bioinformatics Researcher',
+  jobTitle: siteConfig.jobTitle,
   url: siteConfig.url,
   email: siteConfig.contact.email,
   sameAs: [siteConfig.socialLinks.github.url, siteConfig.socialLinks.linkedin.url],

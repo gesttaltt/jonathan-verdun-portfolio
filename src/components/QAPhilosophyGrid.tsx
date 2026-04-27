@@ -10,7 +10,7 @@ export const QAPhilosophyGrid: React.FC = () => (
     <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
       {QA_PHILOSOPHY.specifications.map((spec, i) => (
         <m.div
-          key={i}
+          key={spec.layer}
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-40px' }}

@@ -2,16 +2,30 @@
 > portfolio-website-jonathan-verdun@0.1.0 dev
 > next dev
 
-⚠ Port 3000 is in use by an unknown process, using available port 3001 instead.
 ▲ Next.js 16.1.6 (Turbopack)
-- Local:         http://localhost:3001
-- Network:       http://192.168.100.125:3001
+- Local:         http://localhost:3000
+- Network:       http://192.168.0.11:3000
 
 ✓ Starting...
-✓ Ready in 858ms
- GET / 200 in 2.3s (compile: 1978ms, render: 346ms)
- GET / 200 in 55ms (compile: 4ms, render: 51ms)
-✓ Compiled in 237ms
-✓ Compiled in 202ms
-✓ Compiled in 80ms
- GET / 200 in 292ms (compile: 54ms, render: 239ms)
+✓ Ready in 1411ms
+○ Compiling / ...
+ GET / 200 in 7.5s (compile: 6.6s, render: 871ms)
+✓ Compiled in 398ms
+✓ Compiled in 334ms
+✓ Compiled in 370ms
+✓ Compiled in 206ms
+ GET / 200 in 488ms (compile: 238ms, render: 250ms)
+ GET / 200 in 298ms (compile: 119ms, render: 178ms)
+✓ Compiled in 67ms
+✓ Compiled in 0ms
+ GET / 200 in 772ms (compile: 556ms, render: 216ms)
+ GET / 200 in 110ms (compile: 15ms, render: 95ms)
+ GET / 200 in 221ms (compile: 107ms, render: 114ms)
+✓ Compiled in 87ms
+ GET / 200 in 341ms (compile: 17ms, render: 324ms)
+✓ Compiled in 33ms
+✓ Compiled in 30ms
+✓ Compiled in 25ms
+✓ Compiled in 34ms
+✓ Compiled in 47ms
+[?25h

@@ -19,7 +19,7 @@ export const useTerminal = (
     const timeouts: NodeJS.Timeout[] = []
     let currentDelay = 0
 
-    const boot = async () => {
+    const boot = () => {
       for (const cmd of initialCommands) {
         const delay = cmd.delay || 800
         currentDelay += delay

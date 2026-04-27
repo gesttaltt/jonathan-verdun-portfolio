@@ -3,8 +3,9 @@ import type { NextConfig } from 'next'
 // next/font/google self-hosts fonts at build time — no external font domains needed
 const csp = [
   "default-src 'self'",
-  // 'unsafe-inline' required for Next.js hydration + JSON-LD inline script
-  // 'unsafe-eval' required for Three.js shader compilation path in some browsers
+  // 'unsafe-inline': required by Next.js hydration and the JSON-LD inline script.
+  // 'unsafe-eval': required by Three.js GLSL shader compilation in Firefox.
+  //   To remove: pre-compile shaders or migrate to WebGPU/WGSL.
   "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
   "style-src 'self' 'unsafe-inline'",
   "font-src 'self'",

@@ -85,7 +85,6 @@ export const Terminal: React.FC<TerminalProps> = ({
                 onKeyDown={handleKeyDown}
                 className="w-full bg-transparent text-zinc-100 outline-none placeholder:text-zinc-700"
                 aria-label="Terminal command input"
-                autoFocus
                 spellCheck={false}
                 autoComplete="off"
               />

@@ -2,6 +2,7 @@
 
 import { m } from 'framer-motion'
 import React from 'react'
+import { fadeInVariants } from '@/lib/animations'
 
 interface FadeInSectionProps {
   children: React.ReactNode
@@ -11,10 +12,10 @@ interface FadeInSectionProps {
 
 export const FadeInSection: React.FC<FadeInSectionProps> = ({ children, delay = 0, className }) => (
   <m.div
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
+    variants={fadeInVariants(delay)}
+    initial="hidden"
+    whileInView="visible"
     viewport={{ once: true, margin: '-80px' }}
-    transition={{ duration: 0.45, ease: 'easeOut', delay }}
     className={className}
   >
     {children}

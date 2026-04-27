@@ -9,7 +9,7 @@
     "lint": "eslint",
     "test": "jest",
     "test:watch": "jest --watch",
-    "docs": "typedoc --out docs src/lib/contracts/BioinformaticsContract.ts src/lib/contracts/QAContract.ts",
+    "docs": "typedoc --out docs/api src/lib",
     "check-types": "tsc --noEmit",
     "format": "prettier --write .",
     "prepare": "husky"

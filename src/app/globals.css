@@ -20,15 +20,11 @@
   /* P-adic Theme Tokens */
   --bg-deep: #050510;
   --grid-line: rgba(34, 211, 238, 0.3);
-  /* cyan-400 at 0.3 */
   --particle: #22d3ee;
-  /* cyan-400 */
 
   /* Topology Colors */
   --node-color: #3b82f6;
-  /* blue-500 */
   --interaction-glow: #8b5cf6;
-  /* violet-500 */
 
   /* Card hover glow tokens */
   --glow-blue: rgba(59, 130, 246, 0.15);
