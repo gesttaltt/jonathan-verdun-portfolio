@@ -14,6 +14,7 @@ export class DataEngineeringService {
         focus: 'Automated Reporting',
         methodology: 'ETL',
         invariants: ['Idempotent Execution', 'Schema Validation'],
+        link: 'https://github.com/Ai-Whisperers/work-hours-automated-reports',
       },
       {
         id: 'spec-02',

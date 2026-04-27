@@ -30,8 +30,8 @@ export const siteConfig = {
     {
       organization: 'Ai-Whisperers',
       url: 'https://github.com/Ai-Whisperers',
-      role: '',
-      period: '',
+      role: 'Co-Founder',
+      period: 'Sep 2025 – Apr 2026',
     },
   ],
 
