@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: siteConfig.title,
     description: siteConfig.description,
-    creator: '@gesttaltt',
+    creator: siteConfig.socialLinks.twitter.handle,
   },
 }
 

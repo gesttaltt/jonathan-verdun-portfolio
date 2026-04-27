@@ -21,6 +21,9 @@ export const siteConfig = {
       url: 'https://www.linkedin.com/in/jonathan-verdun/',
       label: 'linkedin.com/in/jonathan-verdun',
     },
+    twitter: {
+      handle: '@gesttaltt',
+    },
   },
 
   workHistory: [
