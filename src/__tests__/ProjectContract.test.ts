@@ -23,7 +23,7 @@ describe('ProjectService', () => {
       expect(typeof project.description).toBe('string')
       expect(Array.isArray(project.techStack)).toBe(true)
       expect(project.techStack.length).toBeGreaterThan(0)
-      expect(['Deployed', 'Prototype', 'Research', 'Archived']).toContain(project.status)
+      expect(['Deployed', 'QA', 'Prototype', 'Research', 'Archived']).toContain(project.status)
     })
   })
 

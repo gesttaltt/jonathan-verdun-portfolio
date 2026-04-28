@@ -79,7 +79,7 @@ describe('ProjectService — property-based', () => {
           expect(typeof tech).toBe('string')
           expect(tech.length).toBeGreaterThan(0)
         })
-        expect(['Deployed', 'Prototype', 'Research', 'Archived']).toContain(project.status)
+        expect(['Deployed', 'QA', 'Prototype', 'Research', 'Archived']).toContain(project.status)
       })
     )
   })

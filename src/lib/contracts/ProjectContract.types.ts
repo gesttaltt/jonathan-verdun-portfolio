@@ -4,7 +4,7 @@ export interface ProjectSpec {
   description: string
   techStack: string[]
   link?: string
-  status: 'Deployed' | 'Prototype' | 'Research' | 'Archived'
+  status: 'Deployed' | 'QA' | 'Prototype' | 'Research' | 'Archived'
   stats?: {
     label: string
     value: string

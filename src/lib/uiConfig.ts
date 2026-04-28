@@ -7,6 +7,7 @@
 export const uiConfig = {
   projectStatusStyles: {
     Deployed: 'bg-green-500/20 text-green-400',
+    QA: 'bg-blue-500/20 text-blue-400',
     Research: 'bg-purple-500/20 text-purple-400',
     Prototype: 'bg-amber-500/20 text-amber-400',
     Archived: 'bg-zinc-500/20 text-zinc-400',

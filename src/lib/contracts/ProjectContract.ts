@@ -5,10 +5,10 @@ export const PROJECT_DATA: ProjectSpec[] = [
     id: 'proj-01',
     title: 'QA Arxiv Mobile',
     description:
-      'Personal test exercise to demonstrate QA skills. Manual test cases with user story traceability, cross-platform coverage (iOS/Android), and a Python/pytest automation suite against the open-source arxiv-papers-mobile app.',
+      'Manual test cases with user story traceability, cross-platform coverage (iOS/Android), and a Python/pytest automation suite against the open-source arxiv-papers-mobile app.',
     techStack: ['Python', 'pytest', 'Azure DevOps'],
     link: 'https://github.com/gesttaltt/qa-arxiv-mobile',
-    status: 'Research',
+    status: 'QA',
     stats: [
       { label: 'Test Suites', value: '3' },
       { label: 'Platform', value: 'iOS · Android' },
@@ -25,6 +25,19 @@ export const PROJECT_DATA: ProjectSpec[] = [
     stats: [
       { label: 'VCF Speed', value: '120×' },
       { label: 'Functionomes', value: '1,622' },
+    ],
+  },
+  {
+    id: 'proj-04',
+    title: '3-Adic ML',
+    description:
+      'Deep learning pipelines for p-adic variational autoencoders. Dual VAEs whose latent spaces live in a Poincaré ball — radial position determined by 3-adic valuation, direction by digit prefix structure. Hierarchy emerges from geometry, not memorization.',
+    techStack: ['Python', 'PyTorch'],
+    link: 'https://github.com/gesttaltt/3-adic-ml',
+    status: 'Research',
+    stats: [
+      { label: 'Tests', value: '280' },
+      { label: 'ARI', value: '0.844' },
     ],
   },
   {
