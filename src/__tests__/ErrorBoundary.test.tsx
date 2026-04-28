@@ -1,5 +1,6 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import { ErrorBoundary } from '@/components/ErrorBoundary'
 
 // Suppress React's expected console.error output for thrown errors in tests
@@ -28,7 +29,34 @@ describe('ErrorBoundary', () => {
       </ErrorBoundary>
     )
     expect(screen.getByText('Component Error')).toBeInTheDocument()
-    expect(screen.getByText(/try refreshing/i)).toBeInTheDocument()
+    expect(screen.getByText(/A rendering error occurred/i)).toBeInTheDocument()
+  })
+
+  it('renders a Retry button in the default fallback', () => {
+    render(
+      <ErrorBoundary>
+        <Bomb shouldThrow={true} />
+      </ErrorBoundary>
+    )
+    expect(screen.getByRole('button', { name: /retry/i })).toBeInTheDocument()
+  })
+
+  it('clicking Retry re-renders children when the error resolves', async () => {
+    let shouldThrow = true
+    const ToggleBomb = () => {
+      if (shouldThrow) throw new Error('toggle error')
+      return <span>recovered</span>
+    }
+    render(
+      <ErrorBoundary>
+        <ToggleBomb />
+      </ErrorBoundary>
+    )
+    expect(screen.getByText('Component Error')).toBeInTheDocument()
+    shouldThrow = false
+    await userEvent.click(screen.getByRole('button', { name: /retry/i }))
+    expect(screen.getByText('recovered')).toBeInTheDocument()
+    expect(screen.queryByText('Component Error')).not.toBeInTheDocument()
   })
 
   it('renders custom fallback prop when provided and child throws', () => {

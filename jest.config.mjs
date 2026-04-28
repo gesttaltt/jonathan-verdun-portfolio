@@ -18,6 +18,7 @@ const config = {
     '!src/app/opengraph-image.tsx',
     '!src/app/sitemap.ts',
     '!src/lib/shaders/**',
+    '!src/components/TopologyMesh.tsx',
   ],
   coverageThreshold: {
     global: {

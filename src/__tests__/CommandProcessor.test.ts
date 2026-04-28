@@ -36,6 +36,14 @@ describe('DefaultCommandProcessor', () => {
     expect(processor.process('projects')).toContain('Projects')
   })
 
+  it('returns bioinformatics info for the "research" command', () => {
+    expect(processor.process('research')).toContain('Bioinformatics')
+  })
+
+  it('help output lists the research command', () => {
+    expect(processor.process('help')).toContain('research')
+  })
+
   it('replaces all defaults when custom commands are injected via constructor', () => {
     const custom: Record<string, string> = { ping: 'pong' }
     const customProcessor = new DefaultCommandProcessor(custom)

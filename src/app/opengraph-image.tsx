@@ -1,3 +1,5 @@
+import { readFile } from 'fs/promises'
+import { join } from 'path'
 import { ImageResponse } from 'next/og'
 import { siteConfig } from '@/lib/siteConfig'
 
@@ -5,7 +7,9 @@ export const alt = siteConfig.title
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 
-export default function OGImage() {
+export default async function OGImage() {
+  const fontData = await readFile(join(process.cwd(), 'public/fonts/JetBrainsMono-Bold.ttf'))
+
   return new ImageResponse(
     <div
       style={{
@@ -17,7 +21,7 @@ export default function OGImage() {
         alignItems: 'flex-start',
         justifyContent: 'flex-end',
         padding: '80px',
-        fontFamily: 'monospace',
+        fontFamily: 'JetBrains Mono',
         position: 'relative',
         overflow: 'hidden',
       }}
@@ -100,6 +104,9 @@ export default function OGImage() {
         </span>
       </div>
     </div>,
-    { ...size }
+    {
+      ...size,
+      fonts: [{ name: 'JetBrains Mono', data: fontData, weight: 700, style: 'normal' }],
+    }
   )
 }
