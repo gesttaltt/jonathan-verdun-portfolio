@@ -1,6 +1,7 @@
-import { ShieldCheck, Server, Database, Code2 } from 'lucide-react'
+import { ShieldCheck, Server, Database, Code2, Dna } from 'lucide-react'
 import Link from 'next/link'
 import { BioinformaticsGraphic } from '@/components/BioinformaticsGraphic'
+import { BioinformaticsResearchCard } from '@/components/BioinformaticsResearchCard'
 import { FadeInSection } from '@/components/FadeInSection'
 import { ProjectGallery } from '@/components/ProjectGallery'
 import { QAPhilosophyGrid } from '@/components/QAPhilosophyGrid'
@@ -12,12 +13,14 @@ import { SystemSpecCard } from '@/components/SystemSpecCard'
 import { TopologyLoader } from '@/components/TopologyLoader'
 import { siteConfig } from '@/lib/siteConfig'
 
+import { BioinformaticsService } from '@/lib/contracts/BioinformaticsContract'
 import { DataEngineeringService } from '@/lib/contracts/DataEngineeringContract'
 import { QA_PHILOSOPHY } from '@/lib/contracts/QAContract'
 import { BOOT_COMMANDS } from '@/lib/contracts/TerminalContract'
 
 export default function Home() {
   const systemSpecs = DataEngineeringService.getSystemSpecs()
+  const researchSpecs = BioinformaticsService.getResearchSpecs()
 
   return (
     <div className="bg-background min-h-screen font-mono text-zinc-300 selection:bg-blue-500/30">
@@ -116,6 +119,22 @@ export default function Home() {
                   showBorderBottom
                 />
                 <QAPhilosophyGrid />
+              </section>
+            </FadeInSection>
+
+            <FadeInSection>
+              <section className="space-y-8">
+                <SectionHeader
+                  icon={<Dna className="h-5 w-5" />}
+                  title={siteConfig.sections.bioinformatics.title}
+                  color="purple"
+                  showBorderBottom
+                />
+                <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                  {researchSpecs.map((spec) => (
+                    <BioinformaticsResearchCard key={spec.id} spec={spec} />
+                  ))}
+                </div>
               </section>
             </FadeInSection>
           </div>

@@ -58,5 +58,8 @@ export const siteConfig = {
     sidebar: {
       constraintsTitle: 'Engineering Constraints',
     },
+    bioinformatics: {
+      title: 'Bioinformatics Research',
+    },
   },
 } as const

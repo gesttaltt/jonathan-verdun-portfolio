@@ -29,6 +29,7 @@
   /* Card hover glow tokens */
   --glow-blue: rgba(59, 130, 246, 0.15);
   --glow-cyan: rgba(6, 182, 212, 0.12);
+  --glow-purple: rgba(139, 92, 246, 0.12);
 }
 
 body {
