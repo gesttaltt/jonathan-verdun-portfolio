@@ -1,7 +1,7 @@
-import { defineConfig, globalIgnores } from "eslint/config";
-import nextVitals from "eslint-config-next/core-web-vitals";
-import nextTs from "eslint-config-next/typescript";
-import prettier from "eslint-config-prettier";
+import { defineConfig, globalIgnores } from 'eslint/config'
+import nextVitals from 'eslint-config-next/core-web-vitals'
+import nextTs from 'eslint-config-next/typescript'
+import prettier from 'eslint-config-prettier'
 
 const eslintConfig = defineConfig([
   ...nextVitals,
@@ -9,21 +9,21 @@ const eslintConfig = defineConfig([
   // Override default ignores of eslint-config-next.
   globalIgnores([
     // Default ignores of eslint-config-next:
-    ".next/**",
-    "out/**",
-    "build/**",
-    "next-env.d.ts",
-    "**/node_modules/**",
-    "coverage/**",
-    "docs/**"
+    '.next/**',
+    'out/**',
+    'build/**',
+    'next-env.d.ts',
+    '**/node_modules/**',
+    'coverage/**',
+    'docs/**',
   ]),
   prettier,
   {
     // Disable rules that conflict with Prettier
     rules: {
-      "prettier/prettier": "off", // Let Prettier handle formatting via extension or CLI
+      'prettier/prettier': 'off', // Let Prettier handle formatting via extension or CLI
     },
   },
-]);
+])
 
-export default eslintConfig;
+export default eslintConfig
