@@ -73,7 +73,16 @@ export const SiteFooter: React.FC = () => {
           {/* Bottom row: copyright + stack */}
           <div className="flex flex-col items-start gap-2 pt-6 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-[11px] text-zinc-600">
-              &copy; {year} {siteConfig.name}. All rights reserved.
+              {year} {siteConfig.name}{' '}
+              <a
+                href={siteConfig.socialLinks.github.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-zinc-500 transition-colors hover:text-white focus-visible:ring-1 focus-visible:ring-blue-500 focus-visible:outline-none"
+              >
+                @gesttaltt
+              </a>{' '}
+              on GitHub.
             </p>
             <p className="text-[11px] text-zinc-700">
               Next.js &middot; TypeScript &middot; Tailwind CSS &middot; Three.js
