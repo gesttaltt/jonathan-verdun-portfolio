@@ -3,8 +3,8 @@
 import React from 'react'
 import { ShieldCheck, Server, Database, Code2, Dna } from 'lucide-react'
 import Link from 'next/link'
-import { BioinformaticsGraphic } from '@/components/BioinformaticsGraphic'
 import { BioinformaticsResearchCard } from '@/components/BioinformaticsResearchCard'
+import { SiteFooter } from '@/components/SiteFooter'
 import { FadeInSection } from '@/components/FadeInSection'
 import { ProjectGallery } from '@/components/ProjectGallery'
 import { QAPhilosophyGrid } from '@/components/QAPhilosophyGrid'
@@ -140,14 +140,7 @@ export const PortfolioPage: React.FC = () => {
             </div>
           </div>
 
-          <footer
-            aria-label="Bioinformatics showcase"
-            className="mt-14 border-t border-white/5 pt-10 sm:mt-24 sm:pt-16"
-          >
-            <FadeInSection>
-              <BioinformaticsGraphic />
-            </FadeInSection>
-          </footer>
+          <SiteFooter />
         </main>
 
         <div className="pointer-events-none fixed inset-0 z-[1] bg-gradient-to-tr from-blue-900/10 via-transparent to-purple-900/10"></div>
