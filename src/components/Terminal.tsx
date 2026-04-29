@@ -55,14 +55,16 @@ export const Terminal: React.FC<TerminalProps> = ({
         role="log"
         aria-label="Terminal output"
         aria-live="polite"
-        className="custom-scrollbar relative h-[280px] w-full overflow-x-hidden overflow-y-auto p-4 md:h-[400px] md:p-6"
+        className="custom-scrollbar relative h-[240px] w-full overflow-x-hidden overflow-y-auto p-4 sm:h-[280px] md:h-[400px] md:p-6"
       >
         <div className="space-y-4 pb-2">
           {history.map((entry, index) => (
             <div key={index} className="space-y-2 break-words">
               <div className="flex gap-2">
-                <span className="shrink-0 font-bold text-blue-500">gestalt@portfolio:~$</span>
-                <span className="text-zinc-100">{entry.text}</span>
+                <span className="shrink-0 font-bold text-blue-500">
+                  <span className="hidden sm:inline">gestalt@portfolio:</span>~$
+                </span>
+                <span className="min-w-0 text-zinc-100">{entry.text}</span>
               </div>
               {entry.output && (
                 <div className="border-l-2 border-blue-500/20 py-1 pl-4 whitespace-pre-wrap text-zinc-400">
@@ -75,16 +77,20 @@ export const Terminal: React.FC<TerminalProps> = ({
 
         {!isBooting && (
           <div className="flex items-center gap-2 pt-2">
-            <span className="shrink-0 font-bold text-blue-500">gestalt@portfolio:~$</span>
-            <div className="relative flex-grow">
+            <span className="shrink-0 font-bold text-blue-500">
+              <span className="hidden sm:inline">gestalt@portfolio:</span>~$
+            </span>
+            <div className="relative min-w-0 flex-grow">
               <input
                 ref={inputRef}
                 type="text"
                 value={inputVal}
                 onChange={(e) => setInputVal(e.target.value)}
                 onKeyDown={handleKeyDown}
-                className="w-full bg-transparent text-zinc-100 outline-none placeholder:text-zinc-700"
+                /* font-size ≥ 16px on mobile prevents iOS Safari from zooming the viewport on focus */
+                className="w-full bg-transparent text-base text-zinc-100 outline-none placeholder:text-zinc-700 sm:text-xs md:text-sm lg:text-base"
                 aria-label="Terminal command input"
+                inputMode="text"
                 spellCheck={false}
                 autoComplete="off"
               />

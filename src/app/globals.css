@@ -36,6 +36,10 @@ body {
   background: var(--background);
   color: var(--foreground);
   overflow-x: hidden;
+  /* Smooth scroll for in-page anchors */
+  scroll-behavior: smooth;
+  /* Remove tap flash on iOS/Android */
+  -webkit-tap-highlight-color: transparent;
 }
 
 ::selection {

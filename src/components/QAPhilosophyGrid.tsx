@@ -6,7 +6,7 @@ import React from 'react'
 import { QA_PHILOSOPHY } from '@/lib/contracts/QAContract'
 
 export const QAPhilosophyGrid: React.FC = () => (
-  <div className="rounded-2xl border border-white/5 bg-black/40 p-8 backdrop-blur-sm">
+  <div className="rounded-2xl border border-white/5 bg-black/40 p-5 backdrop-blur-sm sm:p-8">
     <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
       {QA_PHILOSOPHY.specifications.map((spec, i) => (
         <m.div

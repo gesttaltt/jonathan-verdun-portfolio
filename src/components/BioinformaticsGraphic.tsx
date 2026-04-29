@@ -14,7 +14,7 @@ export const BioinformaticsGraphic: React.FC<BioinformaticsGraphicProps> = ({
   const codons = ['ATG', 'GCT', 'TTA', 'CCG', 'GAT', 'TTC', 'AGC', 'GTA']
 
   return (
-    <div className="group relative flex h-64 w-full items-center justify-center overflow-hidden rounded-xl border border-blue-500/10 bg-blue-500/5">
+    <div className="group relative flex h-48 w-full items-center justify-center overflow-hidden rounded-xl border border-blue-500/10 bg-blue-500/5 sm:h-64">
       <div className="absolute inset-0 opacity-20">
         {/* Synthetic DNA: Interleaving Data Streams */}
         <svg width="100%" height="100%" viewBox="0 0 800 200">
@@ -83,9 +83,9 @@ export const BioinformaticsGraphic: React.FC<BioinformaticsGraphicProps> = ({
         ))}
       </div>
 
-      <div className="absolute bottom-4 left-6 flex items-center gap-2 text-[10px] font-bold tracking-widest text-blue-500/60 uppercase">
-        <Activity className="h-3 w-3" />
-        {label}
+      <div className="absolute right-4 bottom-3 left-4 flex items-center gap-2 overflow-hidden text-[10px] font-bold tracking-widest text-blue-500/60 uppercase sm:right-auto sm:bottom-4 sm:left-6">
+        <Activity className="h-3 w-3 shrink-0" />
+        <span className="truncate">{label}</span>
       </div>
     </div>
   )

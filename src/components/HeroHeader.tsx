@@ -21,29 +21,29 @@ export function HeroHeader() {
             {siteConfig.tagline}
           </span>
         </div>
-        <h1 className="mb-6 bg-gradient-to-r from-white via-zinc-200 to-zinc-500 bg-clip-text text-5xl font-extrabold tracking-tighter text-transparent md:text-6xl lg:text-8xl 2xl:text-9xl">
+        <h1 className="mb-6 bg-gradient-to-r from-white via-zinc-200 to-zinc-500 bg-clip-text text-4xl font-extrabold tracking-tighter text-transparent sm:text-5xl md:text-6xl lg:text-8xl 2xl:text-9xl">
           Jonathan Verdun
         </h1>
-        <div className="flex flex-wrap gap-6 text-sm font-medium">
+        <div className="flex flex-wrap gap-4 text-sm font-medium sm:gap-6">
           <Link
             href={siteConfig.socialLinks.github.url}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="GitHub profile (opens in new tab)"
-            className="group flex items-center gap-2 rounded text-zinc-400 transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a] focus-visible:outline-none"
+            className="group flex min-h-[44px] items-center gap-2 rounded text-zinc-400 transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a] focus-visible:outline-none"
           >
-            <Github className="h-5 w-5 transition-transform group-hover:-translate-y-0.5" />
-            <span>{siteConfig.socialLinks.github.label}</span>
+            <Github className="h-5 w-5 shrink-0 transition-transform group-hover:-translate-y-0.5" />
+            <span className="truncate">{siteConfig.socialLinks.github.label}</span>
           </Link>
           <Link
             href={siteConfig.socialLinks.linkedin.url}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn profile (opens in new tab)"
-            className="group flex items-center gap-2 rounded text-zinc-400 transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a] focus-visible:outline-none"
+            className="group flex min-h-[44px] items-center gap-2 rounded text-zinc-400 transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a] focus-visible:outline-none"
           >
-            <Linkedin className="h-5 w-5 transition-transform group-hover:-translate-y-0.5" />
-            <span>{siteConfig.socialLinks.linkedin.label}</span>
+            <Linkedin className="h-5 w-5 shrink-0 transition-transform group-hover:-translate-y-0.5" />
+            <span className="truncate">{siteConfig.socialLinks.linkedin.label}</span>
           </Link>
         </div>
       </div>
