@@ -3,14 +3,10 @@
 import { m } from 'framer-motion'
 import React from 'react'
 import { Activity } from 'lucide-react'
+import { useTranslation } from '@/lib/i18n/context'
 
-interface BioinformaticsGraphicProps {
-  label?: string
-}
-
-export const BioinformaticsGraphic: React.FC<BioinformaticsGraphicProps> = ({
-  label = 'Data Analysis: [Epitope Discovery Pipeline]',
-}) => {
+export const BioinformaticsGraphic: React.FC = () => {
+  const t = useTranslation()
   const codons = ['ATG', 'GCT', 'TTA', 'CCG', 'GAT', 'TTC', 'AGC', 'GTA']
 
   return (
@@ -24,7 +20,7 @@ export const BioinformaticsGraphic: React.FC<BioinformaticsGraphicProps> = ({
             fill="transparent"
             stroke="var(--accent)"
             strokeWidth="2"
-            strokeDasharray="4 4" // Dashed line for "data stream" look
+            strokeDasharray="4 4"
             animate={{
               d: [
                 'M 0 100 Q 100 0 200 100 T 400 100 T 600 100 T 800 100',
@@ -85,7 +81,7 @@ export const BioinformaticsGraphic: React.FC<BioinformaticsGraphicProps> = ({
 
       <div className="absolute right-4 bottom-3 left-4 flex items-center gap-2 overflow-hidden text-[10px] font-bold tracking-widest text-blue-500/60 uppercase sm:right-auto sm:bottom-4 sm:left-6">
         <Activity className="h-3 w-3 shrink-0" />
-        <span className="truncate">{label}</span>
+        <span className="truncate">{t.bioinformatics.graphicLabel}</span>
       </div>
     </div>
   )

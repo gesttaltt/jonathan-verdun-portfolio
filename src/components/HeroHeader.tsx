@@ -5,8 +5,12 @@ import Link from 'next/link'
 import { m } from 'framer-motion'
 import { slideDownVariants } from '@/lib/animations'
 import { siteConfig } from '@/lib/siteConfig'
+import { useTranslation } from '@/lib/i18n/context'
+import { LanguageSelector } from '@/components/LanguageSelector'
 
 export function HeroHeader() {
+  const t = useTranslation()
+
   return (
     <m.header
       variants={slideDownVariants}
@@ -18,13 +22,13 @@ export function HeroHeader() {
         <div className="mb-4 flex items-center gap-3 text-blue-500">
           <span className="h-px w-12 bg-blue-500"></span>
           <span className="text-[10px] font-bold tracking-[0.25em] uppercase md:text-xs md:tracking-[0.4em]">
-            {siteConfig.tagline}
+            {t.tagline}
           </span>
         </div>
         <h1 className="mb-6 bg-gradient-to-r from-white via-zinc-200 to-zinc-500 bg-clip-text text-4xl font-extrabold tracking-tighter text-transparent sm:text-5xl md:text-6xl lg:text-8xl 2xl:text-9xl">
           Jonathan Verdun
         </h1>
-        <div className="flex flex-wrap gap-4 text-sm font-medium sm:gap-6">
+        <div className="flex flex-wrap items-center gap-4 text-sm font-medium sm:gap-6">
           <Link
             href={siteConfig.socialLinks.github.url}
             target="_blank"
@@ -45,6 +49,7 @@ export function HeroHeader() {
             <Linkedin className="h-5 w-5 shrink-0 transition-transform group-hover:-translate-y-0.5" />
             <span className="truncate">{siteConfig.socialLinks.linkedin.label}</span>
           </Link>
+          <LanguageSelector />
         </div>
       </div>
 
@@ -55,7 +60,9 @@ export function HeroHeader() {
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-400 opacity-75"></span>
               <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-blue-500"></span>
             </span>
-            <span className="font-bold tracking-widest text-zinc-500 uppercase">Work History</span>
+            <span className="font-bold tracking-widest text-zinc-500 uppercase">
+              {t.workHistoryLabel}
+            </span>
           </div>
           {siteConfig.workHistory.map((entry) => (
             <div key={entry.organization} className="flex flex-col gap-0.5">

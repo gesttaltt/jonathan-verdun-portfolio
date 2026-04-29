@@ -2,8 +2,8 @@ import type { Metadata, Viewport } from 'next'
 import { JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 import { siteConfig } from '@/lib/siteConfig'
-import { ProjectProvider } from '@/components/hooks/useProjects'
 import { MotionProvider } from '@/components/MotionProvider'
+import { I18nProvider } from '@/lib/i18n/context'
 
 const jetbrainsMono = JetBrains_Mono({
   variable: '--font-jetbrains-mono',
@@ -22,7 +22,13 @@ export const metadata: Metadata = {
   description: siteConfig.description,
   authors: [{ name: siteConfig.name }],
   creator: siteConfig.name,
-  alternates: { canonical: siteConfig.url },
+  alternates: {
+    canonical: siteConfig.url,
+    languages: {
+      en: siteConfig.url,
+      es: `${siteConfig.url}/es/`,
+    },
+  },
   openGraph: {
     type: 'website',
     url: siteConfig.url,
@@ -68,7 +74,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <MotionProvider>
-          <ProjectProvider>{children}</ProjectProvider>
+          <I18nProvider>{children}</I18nProvider>
         </MotionProvider>
       </body>
     </html>
