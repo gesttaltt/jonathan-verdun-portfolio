@@ -13,7 +13,8 @@ export class DefaultCommandProcessor implements ICommandProcessor {
 
   process(cmd: string): string {
     const lowerCmd = cmd.toLowerCase().trim()
-    if (this.commands[lowerCmd]) {
+    // Object.hasOwn guards against prototype keys like __proto__ being treated as commands.
+    if (Object.hasOwn(this.commands, lowerCmd)) {
       return this.commands[lowerCmd]
     }
     return `bash: ${cmd}: command not found. Type 'help' for available commands.`

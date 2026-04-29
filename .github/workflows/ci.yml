@@ -16,6 +16,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
@@ -37,9 +39,13 @@ jobs:
 
       - name: Run Tests
         run: npm test -- --ci --coverage
+        env:
+          NEXT_TELEMETRY_DISABLED: 1
 
       - name: Generate Documentation
         run: npm run docs
 
       - name: Build
         run: npm run build
+        env:
+          NEXT_TELEMETRY_DISABLED: 1
