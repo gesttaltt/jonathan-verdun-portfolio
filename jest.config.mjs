@@ -19,6 +19,8 @@ const config = {
     '!src/app/(en)/opengraph-image.tsx',
     '!src/app/(es)/es/opengraph-image.tsx',
     '!src/app/sitemap.ts',
+    // Next.js metadata route — server-only, identical pattern to sitemap.ts
+    '!src/app/robots.ts',
     // GLSL shader source — no jsdom equivalent for GPU compilation
     '!src/lib/shaders/**',
     // Three.js mesh with useFrame — requires a real WebGL context, untestable in jsdom

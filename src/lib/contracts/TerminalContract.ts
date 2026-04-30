@@ -32,7 +32,7 @@ export const BOOT_COMMANDS: readonly BootCommand[] = [
   },
   {
     text: 'help',
-    output: 'Available commands: help, about, projects, contact, clear',
+    output: INTERACTIVE_COMMANDS.help,
     delay: 600,
   },
 ]

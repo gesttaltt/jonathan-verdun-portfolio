@@ -10,17 +10,36 @@ export const viewport: Viewport = {
   initialScale: 1,
 }
 
+const ES_TITLE = 'Jonathan Verdun | Automatización QA e Bioinformática'
+const ES_DESCRIPTION =
+  'Portafolio de Jonathan Verdun — Ingeniero de Automatización QA e Investigador en Bioinformática, enfocado en desarrollo guiado por pruebas y biología computacional.'
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
-  title: 'Jonathan Verdun | Automatización QA e Bioinformática',
-  description:
-    'Portafolio de Jonathan Verdun — Ingeniero de Automatización QA e Investigador en Bioinformática, enfocado en desarrollo guiado por pruebas y biología computacional.',
+  title: ES_TITLE,
+  description: ES_DESCRIPTION,
   authors: [{ name: siteConfig.name }],
   creator: siteConfig.name,
+  alternates: {
+    canonical: `${siteConfig.url}/es/`,
+    languages: {
+      en: siteConfig.url,
+      es: `${siteConfig.url}/es/`,
+    },
+  },
   openGraph: {
     type: 'website',
+    url: `${siteConfig.url}/es/`,
+    title: ES_TITLE,
+    description: ES_DESCRIPTION,
     siteName: siteConfig.name,
-    locale: 'es',
+    locale: 'es_ES',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: ES_TITLE,
+    description: ES_DESCRIPTION,
+    creator: siteConfig.socialLinks.twitter.handle,
   },
 }
 

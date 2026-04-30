@@ -165,7 +165,8 @@ export const es: Translations = {
       },
       {
         text: 'ayuda',
-        output: 'Comandos disponibles: ayuda, sobre, proyectos, contacto, limpiar',
+        output:
+          'Comandos disponibles: ayuda, sobre, proyectos, investigacion, ls proyectos, contacto, limpiar',
         delay: 600,
       },
     ],
