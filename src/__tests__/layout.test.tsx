@@ -13,10 +13,10 @@ jest.mock('@/components/hooks/useProjects', () => ({
   ProjectProvider: ({ children }: { children: React.ReactNode }) => <>{children}</>,
 }))
 
-import RootLayout, { metadata, viewport } from '@/app/layout'
+import EnLayout, { metadata, viewport } from '@/app/(en)/layout'
 import { siteConfig } from '@/lib/siteConfig'
 
-describe('RootLayout — metadata exports', () => {
+describe('EnLayout — metadata exports', () => {
   it('title matches siteConfig', () => {
     expect(metadata.title).toBe(siteConfig.title)
   })
@@ -42,21 +42,21 @@ describe('RootLayout — metadata exports', () => {
   })
 })
 
-describe('RootLayout — rendered output', () => {
+describe('EnLayout — rendered output', () => {
   it('renders children', () => {
-    render(<RootLayout>child content</RootLayout>)
+    render(<EnLayout>child content</EnLayout>)
     expect(screen.getByText('child content')).toBeInTheDocument()
   })
 
   it('renders the skip-nav link pointing to #main-content', () => {
-    render(<RootLayout>child</RootLayout>)
+    render(<EnLayout>child</EnLayout>)
     const skip = screen.getByText('Skip to content')
     expect(skip).toBeInTheDocument()
     expect(skip).toHaveAttribute('href', '#main-content')
   })
 
   it('injects a JSON-LD script with Person schema', () => {
-    render(<RootLayout>child</RootLayout>)
+    render(<EnLayout>child</EnLayout>)
     const script = document.querySelector('script[type="application/ld+json"]')
     expect(script).not.toBeNull()
     const data = JSON.parse(script!.textContent ?? '{}')

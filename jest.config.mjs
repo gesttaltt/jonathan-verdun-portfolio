@@ -15,7 +15,9 @@ const config = {
     'src/**/*.{ts,tsx}',
     '!src/**/*.d.ts',
     '!src/**/__tests__/**',
-    '!src/app/opengraph-image.tsx',
+    // Server-side OG image generation — uses fs/ImageResponse, incompatible with jsdom
+    '!src/app/(en)/opengraph-image.tsx',
+    '!src/app/(es)/es/opengraph-image.tsx',
     '!src/app/sitemap.ts',
     // GLSL shader source — no jsdom equivalent for GPU compilation
     '!src/lib/shaders/**',
@@ -25,10 +27,8 @@ const config = {
     '!src/components/InteractiveTopology.tsx',
     // next/dynamic wrapper — dynamic import resolution untestable in jsdom without heavy mocking
     '!src/components/TopologyLoader.tsx',
-    // Server-side OG image generation — uses fs/ImageResponse, incompatible with jsdom
-    '!src/app/es/opengraph-image.tsx',
-    // Static metadata export — no renderable JSX, covered by es/page metadata tests
-    '!src/app/es/page.tsx',
+    // Static metadata export — no renderable JSX, covered by (es)/es/page metadata tests
+    '!src/app/(es)/es/page.tsx',
   ],
   coverageThreshold: {
     global: {
