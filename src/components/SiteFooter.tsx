@@ -7,6 +7,8 @@ import { m } from 'framer-motion'
 import { siteConfig } from '@/lib/siteConfig'
 import { useTranslation } from '@/lib/i18n/context'
 
+const CURRENT_YEAR = new Date().getFullYear()
+
 const SOCIAL = [
   {
     href: siteConfig.socialLinks.github.url,
@@ -27,7 +29,7 @@ const SOCIAL = [
 
 export const SiteFooter: React.FC = () => {
   const t = useTranslation()
-  const year = new Date().getFullYear()
+  const year = CURRENT_YEAR
 
   return (
     <m.footer

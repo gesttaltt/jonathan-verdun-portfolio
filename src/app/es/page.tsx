@@ -1,4 +1,5 @@
 import { PortfolioPage } from '@/components/PortfolioPage'
+import { siteConfig } from '@/lib/siteConfig'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -6,10 +7,10 @@ export const metadata: Metadata = {
   description:
     'Portafolio de Jonathan Verdun — Ingeniero de Automatización QA e Investigador en Bioinformática, enfocado en desarrollo guiado por pruebas y biología computacional.',
   alternates: {
-    canonical: 'https://jonathanverdun.com/es/',
+    canonical: `${siteConfig.url}/es/`,
     languages: {
-      en: 'https://jonathanverdun.com',
-      es: 'https://jonathanverdun.com/es/',
+      en: siteConfig.url,
+      es: `${siteConfig.url}/es/`,
     },
   },
   openGraph: {
@@ -17,6 +18,7 @@ export const metadata: Metadata = {
     title: 'Jonathan Verdun | Automatización QA e Bioinformática',
     description:
       'Portafolio de Jonathan Verdun — Ingeniero de Automatización QA e Investigador en Bioinformática.',
+    siteName: siteConfig.name,
     locale: 'es',
   },
 }

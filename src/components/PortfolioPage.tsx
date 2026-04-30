@@ -22,8 +22,8 @@ import { siteConfig } from '@/lib/siteConfig'
 export const PortfolioPage: React.FC = () => {
   const t = useTranslation()
   const processor = useMemo(
-    () => new DefaultCommandProcessor(t.terminal.interactive),
-    [t.terminal.interactive]
+    () => new DefaultCommandProcessor(t.terminal.interactive, t.terminal.helpCmd),
+    [t.terminal.interactive, t.terminal.helpCmd]
   )
 
   return (

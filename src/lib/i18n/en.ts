@@ -1,7 +1,5 @@
 import { Translations } from './types'
-
-const LS_PROJECTS_OUTPUT =
-  'drwx------ 1 gestalt staff  QA-Arxiv-Mobile\n-rw-r--r-- 1 gestalt staff  Functionome-Atlas\n-rwxr-xr-x 1 gestalt staff  Gene-Functional-Pipeline'
+import { LS_PROJECTS_OUTPUT } from '@/lib/contracts/TerminalContract'
 
 export const en: Translations = {
   lang: 'en',
@@ -148,6 +146,7 @@ export const en: Translations = {
   ],
   terminal: {
     title: 'bash — interactive',
+    helpCmd: 'help',
     boot: [
       {
         text: 'whoami',

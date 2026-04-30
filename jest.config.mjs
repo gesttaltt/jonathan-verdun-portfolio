@@ -17,7 +17,9 @@ const config = {
     '!src/**/__tests__/**',
     '!src/app/opengraph-image.tsx',
     '!src/app/sitemap.ts',
+    // GLSL shader source — no jsdom equivalent for GPU compilation
     '!src/lib/shaders/**',
+    // Three.js mesh with useFrame — requires a real WebGL context, untestable in jsdom
     '!src/components/TopologyMesh.tsx',
   ],
   coverageThreshold: {

@@ -1,4 +1,4 @@
-const LS_PROJECTS_OUTPUT =
+export const LS_PROJECTS_OUTPUT =
   'drwx------ 1 gestalt staff  QA-Arxiv-Mobile\n-rw-r--r-- 1 gestalt staff  Functionome-Atlas\n-rwxr-xr-x 1 gestalt staff  Gene-Functional-Pipeline'
 
 export const INTERACTIVE_COMMANDS: Record<string, string> = {

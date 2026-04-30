@@ -6,9 +6,11 @@ export interface ICommandProcessor {
 
 export class DefaultCommandProcessor implements ICommandProcessor {
   private readonly commands: Record<string, string>
+  private readonly helpCmd: string
 
-  constructor(customCommands?: Record<string, string>) {
-    this.commands = customCommands || INTERACTIVE_COMMANDS
+  constructor(customCommands?: Record<string, string>, helpCmd?: string) {
+    this.commands = customCommands ?? INTERACTIVE_COMMANDS
+    this.helpCmd = helpCmd ?? 'help'
   }
 
   process(cmd: string): string {
@@ -17,6 +19,6 @@ export class DefaultCommandProcessor implements ICommandProcessor {
     if (Object.hasOwn(this.commands, lowerCmd)) {
       return this.commands[lowerCmd]
     }
-    return `bash: ${cmd}: command not found. Type 'help' for available commands.`
+    return `bash: ${cmd}: command not found. Type '${this.helpCmd}' for available commands.`
   }
 }
