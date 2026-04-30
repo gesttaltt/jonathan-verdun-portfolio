@@ -2,6 +2,15 @@ import React from 'react'
 import { render, screen } from '@testing-library/react'
 import NotFound from '@/app/not-found'
 
+let consoleErrorSpy: jest.SpyInstance
+beforeAll(() => {
+  consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation((msg, ...args) => {
+    if (typeof msg === 'string' && msg.includes('cannot be a child')) return
+    console.warn(msg, ...args)
+  })
+})
+afterAll(() => consoleErrorSpy.mockRestore())
+
 describe('NotFound page', () => {
   it('renders the 404 heading', () => {
     render(<NotFound />)

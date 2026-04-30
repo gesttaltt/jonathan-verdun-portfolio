@@ -9,7 +9,12 @@ export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 
 export default async function OGImage() {
-  const fontData = await readFile(join(process.cwd(), 'public/fonts/JetBrainsMono-Bold.ttf'))
+  let fontData: Buffer | undefined
+  try {
+    fontData = await readFile(join(process.cwd(), 'public/fonts/JetBrainsMono-Bold.ttf'))
+  } catch {
+    // render without custom font if file is unavailable
+  }
 
   return new ImageResponse(
     <div
@@ -107,7 +112,9 @@ export default async function OGImage() {
     </div>,
     {
       ...size,
-      fonts: [{ name: 'JetBrains Mono', data: fontData, weight: 700, style: 'normal' }],
+      fonts: fontData
+        ? [{ name: 'JetBrains Mono', data: fontData, weight: 700, style: 'normal' }]
+        : [],
     }
   )
 }

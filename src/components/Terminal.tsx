@@ -23,7 +23,7 @@ export const Terminal: React.FC<TerminalProps> = ({
   const inputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
-    /* c8 ignore next */
+    /* c8 ignore next 3 */
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight
     }

@@ -71,4 +71,13 @@ describe('LanguageSelector', () => {
     // Next.js Link may normalise /es/ → /es in jsdom; accept either form
     expect(href).toMatch(/^\/es\/?$/)
   })
+
+  it('treats null pathname as root — EN link gets aria-current="page"', () => {
+    mockPathname.mockReturnValue(null)
+    render(<LanguageSelector />)
+    expect(screen.getByRole('link', { name: /switch to english/i })).toHaveAttribute(
+      'aria-current',
+      'page'
+    )
+  })
 })

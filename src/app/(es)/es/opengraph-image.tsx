@@ -2,6 +2,7 @@ import { readFile } from 'fs/promises'
 import { join } from 'path'
 import { ImageResponse } from 'next/og'
 import { siteConfig } from '@/lib/siteConfig'
+import { es } from '@/lib/i18n/es'
 
 export const dynamic = 'force-static'
 export const alt = 'Jonathan Verdun | Automatización QA e Bioinformática'
@@ -9,7 +10,12 @@ export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 
 export default async function OGImageEs() {
-  const fontData = await readFile(join(process.cwd(), 'public/fonts/JetBrainsMono-Bold.ttf'))
+  let fontData: Buffer | undefined
+  try {
+    fontData = await readFile(join(process.cwd(), 'public/fonts/JetBrainsMono-Bold.ttf'))
+  } catch {
+    // render without custom font if file is unavailable
+  }
 
   return new ImageResponse(
     <div
@@ -63,7 +69,7 @@ export default async function OGImageEs() {
             fontWeight: 700,
           }}
         >
-          Ingeniero QA · Investigador en Bioinformática
+          {es.tagline}
         </span>
       </div>
 
@@ -108,7 +114,9 @@ export default async function OGImageEs() {
     </div>,
     {
       ...size,
-      fonts: [{ name: 'JetBrains Mono', data: fontData, weight: 700, style: 'normal' }],
+      fonts: fontData
+        ? [{ name: 'JetBrains Mono', data: fontData, weight: 700, style: 'normal' }]
+        : [],
     }
   )
 }

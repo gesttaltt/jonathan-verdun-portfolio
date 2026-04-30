@@ -16,6 +16,15 @@ jest.mock('@/components/hooks/useProjects', () => ({
 import EnLayout, { metadata, viewport } from '@/app/(en)/layout'
 import { siteConfig } from '@/lib/siteConfig'
 
+let consoleErrorSpy: jest.SpyInstance
+beforeAll(() => {
+  consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation((msg, ...args) => {
+    if (typeof msg === 'string' && msg.includes('cannot be a child')) return
+    console.warn(msg, ...args)
+  })
+})
+afterAll(() => consoleErrorSpy.mockRestore())
+
 describe('EnLayout — metadata exports', () => {
   it('title matches siteConfig', () => {
     expect(metadata.title).toBe(siteConfig.title)

@@ -71,3 +71,15 @@ describe('useTranslation (fallback)', () => {
     expect(Object.keys(en)).toEqual(Object.keys(es))
   })
 })
+
+describe('I18nProvider — null pathname fallback', () => {
+  it('falls back to English when usePathname returns null', () => {
+    mockPathname.mockReturnValue(null)
+    render(
+      <I18nProvider>
+        <TranslationProbe />
+      </I18nProvider>
+    )
+    expect(screen.getByTestId('lang')).toHaveTextContent('en')
+  })
+})

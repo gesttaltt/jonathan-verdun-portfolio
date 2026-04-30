@@ -1,4 +1,9 @@
-import { fadeUpVariants, fadeInVariants, slideDownVariants } from '@/lib/animations'
+import {
+  fadeUpVariants,
+  fadeInVariants,
+  slideDownVariants,
+  staggerItemVariants,
+} from '@/lib/animations'
 
 describe('animations', () => {
   describe('fadeUpVariants', () => {
@@ -32,6 +37,23 @@ describe('animations', () => {
     it('uses the provided delay', () => {
       const v = fadeInVariants(0.2)
       expect((v.visible as { transition: { delay: number } }).transition.delay).toBe(0.2)
+    })
+  })
+
+  describe('staggerItemVariants', () => {
+    it('returns correct hidden state', () => {
+      const v = staggerItemVariants()
+      expect(v.hidden).toEqual({ opacity: 0, y: 12 })
+    })
+
+    it('uses delay=0 by default', () => {
+      const v = staggerItemVariants()
+      expect((v.visible as { transition: { delay: number } }).transition.delay).toBe(0)
+    })
+
+    it('uses the provided delay', () => {
+      const v = staggerItemVariants(0.5)
+      expect((v.visible as { transition: { delay: number } }).transition.delay).toBe(0.5)
     })
   })
 
