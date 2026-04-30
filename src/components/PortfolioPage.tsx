@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useMemo } from 'react'
 import { ShieldCheck, Server, Database, Code2, Dna } from 'lucide-react'
 import Link from 'next/link'
 import { BioinformaticsResearchCard } from '@/components/BioinformaticsResearchCard'
@@ -21,7 +21,10 @@ import { siteConfig } from '@/lib/siteConfig'
 
 export const PortfolioPage: React.FC = () => {
   const t = useTranslation()
-  const processor = new DefaultCommandProcessor(t.terminal.interactive)
+  const processor = useMemo(
+    () => new DefaultCommandProcessor(t.terminal.interactive),
+    [t.terminal.interactive]
+  )
 
   return (
     <ProjectProvider adapter={{ getProjects: () => t.projects }}>
