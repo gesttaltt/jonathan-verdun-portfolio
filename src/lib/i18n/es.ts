@@ -1,5 +1,8 @@
 import { Translations } from './types'
 
+const ES_HELP_OUTPUT =
+  'Comandos disponibles: ayuda, sobre, proyectos, investigacion, contacto, limpiar'
+
 const LS_PROYECTOS_OUTPUT =
   'drwx------ 1 gestalt staff  QA-Arxiv-Mobile\n-rw-r--r-- 1 gestalt staff  Functionome-Atlas\n-rwxr-xr-x 1 gestalt staff  Gene-Functional-Pipeline'
 
@@ -165,13 +168,12 @@ export const es: Translations = {
       },
       {
         text: 'ayuda',
-        output:
-          'Comandos disponibles: ayuda, sobre, proyectos, investigacion, ls proyectos, contacto, limpiar',
+        output: ES_HELP_OUTPUT,
         delay: 600,
       },
     ],
     interactive: {
-      ayuda: 'Comandos disponibles: ayuda, sobre, proyectos, investigacion, contacto, limpiar',
+      ayuda: ES_HELP_OUTPUT,
       sobre:
         'Jonathan Verdun. Ingeniero de Automatización QA e Investigador en Bioinformática. Especializado en TDD, automatización de pruebas y biología computacional.',
       proyectos: 'Ver la sección de Proyectos abajo, o escribe "ls proyectos" para ver la lista.',
