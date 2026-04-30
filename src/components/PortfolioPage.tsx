@@ -37,7 +37,7 @@ export const PortfolioPage: React.FC = () => {
           <HeroHeader />
 
           <FadeInSection className="mb-10 sm:mb-16">
-            <Terminal commands={t.terminal.boot} processor={processor} />
+            <Terminal commands={t.terminal.boot} processor={processor} title={t.terminal.title} />
           </FadeInSection>
 
           <div className="grid grid-cols-1 gap-x-16 gap-y-14 lg:grid-cols-12 lg:gap-y-24">

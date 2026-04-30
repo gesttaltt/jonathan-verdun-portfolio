@@ -8,12 +8,14 @@ interface TerminalProps {
   commands: CommandEntry[] | readonly CommandEntry[]
   className?: string
   processor?: ICommandProcessor
+  title?: string
 }
 
 export const Terminal: React.FC<TerminalProps> = ({
   commands,
   className = '',
   processor = new DefaultCommandProcessor(),
+  title = 'bash — interactive',
 }) => {
   const { history, isBooting, execute } = useTerminal(commands, processor)
   const [inputVal, setInputVal] = useState('')
@@ -44,9 +46,7 @@ export const Terminal: React.FC<TerminalProps> = ({
           <div className="h-3 w-3 rounded-full bg-amber-500/50"></div>
           <div className="h-3 w-3 rounded-full bg-cyan-500/50"></div>
         </div>
-        <div className="text-[10px] font-bold tracking-widest text-zinc-500 uppercase">
-          bash — interactive
-        </div>
+        <div className="text-[10px] font-bold tracking-widest text-zinc-500 uppercase">{title}</div>
         <div className="w-12"></div>
       </div>
 

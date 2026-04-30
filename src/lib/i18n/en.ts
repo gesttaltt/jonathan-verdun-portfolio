@@ -147,6 +147,7 @@ export const en: Translations = {
     },
   ],
   terminal: {
+    title: 'bash — interactive',
     boot: [
       {
         text: 'whoami',

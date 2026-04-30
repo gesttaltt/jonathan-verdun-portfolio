@@ -5,7 +5,13 @@ export const metadata: Metadata = {
   title: 'Jonathan Verdun | Automatización QA e Bioinformática',
   description:
     'Portafolio de Jonathan Verdun — Ingeniero de Automatización QA e Investigador en Bioinformática, enfocado en desarrollo guiado por pruebas y biología computacional.',
-  alternates: { canonical: 'https://jonathanverdun.com/es/' },
+  alternates: {
+    canonical: 'https://jonathanverdun.com/es/',
+    languages: {
+      en: 'https://jonathanverdun.com',
+      es: 'https://jonathanverdun.com/es/',
+    },
+  },
   openGraph: {
     type: 'website',
     title: 'Jonathan Verdun | Automatización QA e Bioinformática',

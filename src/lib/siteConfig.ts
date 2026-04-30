@@ -36,7 +36,7 @@ export const siteConfig = {
   ],
 
   contact: {
-    email: 'jonathan.verdun@gmail.com',
+    email: 'jonathan.verdun707@gmail.com',
     ctaLabel: 'Get in Touch',
   },
 

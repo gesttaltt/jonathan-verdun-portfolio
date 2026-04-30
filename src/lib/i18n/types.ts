@@ -55,6 +55,7 @@ export interface Translations {
   }
   projects: ProjectSpec[]
   terminal: {
+    title: string
     boot: readonly { text: string; output: string; delay?: number }[]
     interactive: Record<string, string>
   }
