@@ -1,7 +1,8 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { ICommandProcessor } from '@/lib/services/CommandProcessor'
 
 export interface CommandEntry {
+  id?: string
   text: string
   output: string
   delay?: number
@@ -14,17 +15,23 @@ export const useTerminal = (
 ) => {
   const [history, setHistory] = useState<CommandEntry[]>([])
   const [isBooting, setIsBooting] = useState(true)
+  // Capture commands once at mount so the boot sequence never re-runs on re-renders.
+  const initialRef = useRef(initialCommands)
+  const idCounter = useRef(0)
+  const nextId = () => String(idCounter.current++)
 
   useEffect(() => {
+    const commands = initialRef.current
     const timeouts: NodeJS.Timeout[] = []
     let currentDelay = 0
 
     const boot = () => {
-      for (const cmd of initialCommands) {
+      for (const cmd of commands) {
         const delay = cmd.delay || 800
         currentDelay += delay
+        const id = nextId()
         const timeout = setTimeout(() => {
-          setHistory((prev) => [...prev, { ...cmd, isUser: false }])
+          setHistory((prev) => [...prev, { ...cmd, id, isUser: false }])
         }, currentDelay)
         timeouts.push(timeout)
       }
@@ -37,7 +44,7 @@ export const useTerminal = (
 
     boot()
     return () => timeouts.forEach(clearTimeout)
-  }, [initialCommands])
+  }, [])
 
   const execute = useCallback(
     (input: string) => {
@@ -50,6 +57,7 @@ export const useTerminal = (
       }
 
       const newEntry: CommandEntry = {
+        id: nextId(),
         text: cmd,
         output: processor.process(cmd),
         isUser: true,

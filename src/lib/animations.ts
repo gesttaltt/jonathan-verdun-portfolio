@@ -22,3 +22,12 @@ export const slideDownVariants: Variants = {
   hidden: { opacity: 0, y: -20 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
 }
+
+export const staggerItemVariants = (delay = 0): Variants => ({
+  hidden: { opacity: 0, y: 12 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { delay, duration: 0.35, ease: 'easeOut' },
+  },
+})

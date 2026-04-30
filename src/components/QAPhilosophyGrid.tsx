@@ -3,6 +3,7 @@
 import { m } from 'framer-motion'
 import { CheckCircle2 } from 'lucide-react'
 import React from 'react'
+import { staggerItemVariants } from '@/lib/animations'
 import { useTranslation } from '@/lib/i18n/context'
 
 export const QAPhilosophyGrid: React.FC = () => {
@@ -10,14 +11,15 @@ export const QAPhilosophyGrid: React.FC = () => {
 
   return (
     <div className="rounded-2xl border border-white/5 bg-black/40 p-5 backdrop-blur-sm sm:p-8">
-      <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+      <div role="list" className="grid grid-cols-1 gap-8 md:grid-cols-2">
         {t.qa.specifications.map((spec, i) => (
           <m.div
             key={spec.layer}
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            role="listitem"
+            initial="hidden"
+            whileInView="visible"
             viewport={{ once: true, margin: '-40px' }}
-            transition={{ duration: 0.35, ease: 'easeOut', delay: i * 0.12 }}
+            variants={staggerItemVariants(i * 0.12)}
             className="group space-y-3"
           >
             <div className="flex items-center justify-between">

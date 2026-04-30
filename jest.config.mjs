@@ -21,6 +21,14 @@ const config = {
     '!src/lib/shaders/**',
     // Three.js mesh with useFrame — requires a real WebGL context, untestable in jsdom
     '!src/components/TopologyMesh.tsx',
+    // Three.js Canvas wrapper — WebGL context required; aria/layout tested via TopologyLoader
+    '!src/components/InteractiveTopology.tsx',
+    // next/dynamic wrapper — dynamic import resolution untestable in jsdom without heavy mocking
+    '!src/components/TopologyLoader.tsx',
+    // Server-side OG image generation — uses fs/ImageResponse, incompatible with jsdom
+    '!src/app/es/opengraph-image.tsx',
+    // Static metadata export — no renderable JSX, covered by es/page metadata tests
+    '!src/app/es/page.tsx',
   ],
   coverageThreshold: {
     global: {

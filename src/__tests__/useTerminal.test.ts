@@ -99,6 +99,23 @@ describe('useTerminal', () => {
     expect(processor.process).not.toHaveBeenCalled()
   })
 
+  it('uses the 800ms fallback when a command has delay: 0 or no delay', () => {
+    // Covers the `cmd.delay || 800` fallback branch in useTerminal.ts
+    const commands = [{ text: 'boot', output: 'ok', delay: 0 }]
+    const { result } = renderHook(() => useTerminal(commands, makeProcessor()))
+
+    act(() => {
+      jest.advanceTimersByTime(799)
+    })
+    expect(result.current.history).toHaveLength(0)
+
+    act(() => {
+      jest.advanceTimersByTime(1)
+    })
+    expect(result.current.history).toHaveLength(1)
+    expect(result.current.history[0].text).toBe('boot')
+  })
+
   it('clears all pending timeouts on unmount', () => {
     const spy = jest.spyOn(global, 'clearTimeout')
     const commands = [{ text: 'cmd', output: 'out', delay: 500 }]

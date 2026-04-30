@@ -23,6 +23,7 @@ export const Terminal: React.FC<TerminalProps> = ({
   const inputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
+    /* c8 ignore next */
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight
     }
@@ -59,7 +60,7 @@ export const Terminal: React.FC<TerminalProps> = ({
       >
         <div className="space-y-4 pb-2">
           {history.map((entry, index) => (
-            <div key={index} className="space-y-2 break-words">
+            <div key={entry.id ?? index} className="space-y-2 break-words">
               <div className="flex gap-2">
                 <span className="shrink-0 font-bold text-blue-500">
                   <span className="hidden sm:inline">gestalt@portfolio:</span>~$

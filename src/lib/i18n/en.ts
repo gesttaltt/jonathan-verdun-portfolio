@@ -1,5 +1,5 @@
 import { Translations } from './types'
-import { LS_PROJECTS_OUTPUT } from '@/lib/contracts/TerminalContract'
+import { INTERACTIVE_COMMANDS, BOOT_COMMANDS } from '@/lib/contracts/TerminalContract'
 
 export const en: Translations = {
   lang: 'en',
@@ -147,33 +147,7 @@ export const en: Translations = {
   terminal: {
     title: 'bash — interactive',
     helpCmd: 'help',
-    boot: [
-      {
-        text: 'whoami',
-        output: 'jonathan.verdun — QA Automation · Bioinformatics Research',
-        delay: 500,
-      },
-      {
-        text: 'ls projects',
-        output: LS_PROJECTS_OUTPUT,
-        delay: 700,
-      },
-      {
-        text: 'help',
-        output: 'Available commands: help, about, projects, contact, clear',
-        delay: 600,
-      },
-    ],
-    interactive: {
-      help: 'Available commands: help, about, projects, research, contact, clear',
-      about:
-        'Jonathan Verdun. QA Automation Engineer and Bioinformatics Researcher. Specializing in TDD, test automation, and computational biology.',
-      projects: 'Check out the Projects section below, or type "ls projects" to see a list.',
-      contact: 'Reach out via LinkedIn or GitHub linked above.',
-      'ls projects': LS_PROJECTS_OUTPUT,
-      research:
-        'Bioinformatics Research section below — HIV antigen AI (p-adic) and Codon Encoder API (Hyperbolic VAE).',
-      sudo: 'User is not in the sudoers file. This incident will be reported.',
-    },
+    boot: BOOT_COMMANDS,
+    interactive: INTERACTIVE_COMMANDS,
   },
 }

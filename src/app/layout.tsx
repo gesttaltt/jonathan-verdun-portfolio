@@ -53,6 +53,17 @@ const jsonLd = {
   url: siteConfig.url,
   email: siteConfig.contact.email,
   sameAs: [siteConfig.socialLinks.github.url, siteConfig.socialLinks.linkedin.url],
+  knowsAbout: [
+    'QA Automation',
+    'Bioinformatics',
+    'Computational Biology',
+    'Test-Driven Development',
+  ],
+  worksFor: {
+    '@type': 'Organization',
+    name: siteConfig.workHistory[0].organization,
+    url: siteConfig.workHistory[0].url,
+  },
 }
 
 export default function RootLayout({
