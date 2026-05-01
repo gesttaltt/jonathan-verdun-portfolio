@@ -16,8 +16,8 @@ const config = {
     '!src/**/*.d.ts',
     '!src/**/__tests__/**',
     // Server-side OG image generation — uses fs/ImageResponse, incompatible with jsdom
-    '!src/app/(en)/opengraph-image.tsx',
-    '!src/app/(es)/es/opengraph-image.tsx',
+    '!src/app/\\(en\\)/opengraph-image.tsx',
+    '!src/app/\\(es\\)/es/opengraph-image.tsx',
     '!src/app/sitemap.ts',
     // Next.js metadata route — server-only, identical pattern to sitemap.ts
     '!src/app/robots.ts',
@@ -30,7 +30,7 @@ const config = {
     // next/dynamic wrapper — dynamic import resolution untestable in jsdom without heavy mocking
     '!src/components/TopologyLoader.tsx',
     // Static metadata export — no renderable JSX, covered by (es)/es/page metadata tests
-    '!src/app/(es)/es/page.tsx',
+    '!src/app/\\(es\\)/es/page.tsx',
   ],
   coverageThreshold: {
     global: {
