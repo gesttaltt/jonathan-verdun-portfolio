@@ -23,7 +23,7 @@ export const Terminal: React.FC<TerminalProps> = ({
   const inputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
-    /* c8 ignore next 3 */
+    /* istanbul ignore next -- scrollTop is a no-op in jsdom; null ref unreachable in practice */
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight
     }
