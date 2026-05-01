@@ -32,7 +32,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
           <div className="flex items-center gap-2">
             <Terminal className="h-5 w-5 text-blue-500" />
             <span
-              className={`rounded px-1.5 py-0.5 text-[10px] font-bold tracking-wider uppercase ${uiConfig.projectStatusStyles[project.status] ?? 'bg-zinc-500/20 text-zinc-400'}`}
+              className={`rounded px-1.5 py-0.5 text-[10px] font-bold tracking-wider uppercase sm:text-xs ${uiConfig.projectStatusStyles[project.status] ?? 'bg-zinc-500/20 text-zinc-400'}`}
             >
               {project.status}
             </span>
@@ -43,7 +43,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`View ${project.title} on GitHub (opens in new tab)`}
-              className="flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full bg-white/5 p-2.5 text-zinc-400 transition-colors hover:bg-blue-500/20 hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a] focus-visible:outline-none"
+              className="focus-visible:ring-offset-background flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full bg-white/5 p-2.5 text-zinc-400 transition-colors hover:bg-blue-500/20 hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none"
             >
               <ExternalLink className="h-4 w-4" />
             </Link>
@@ -61,7 +61,9 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
           <div className="flex gap-4 border-t border-white/5 pt-4">
             {project.stats.map((stat) => (
               <div key={stat.label}>
-                <div className="text-[10px] font-bold text-zinc-500 uppercase">{stat.label}</div>
+                <div className="text-[10px] font-bold text-zinc-500 uppercase sm:text-xs">
+                  {stat.label}
+                </div>
                 <div className="font-mono text-xs font-semibold text-white">{stat.value}</div>
               </div>
             ))}
@@ -72,7 +74,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
           {project.techStack.map((tech) => (
             <span
               key={tech}
-              className="rounded border border-white/5 bg-black/20 px-2 py-1 text-[10px] text-zinc-400 transition-colors group-hover:border-blue-500/20 group-hover:text-blue-200"
+              className="rounded border border-white/5 bg-black/20 px-2 py-1 text-[10px] text-zinc-400 transition-colors group-hover:border-blue-500/20 group-hover:text-blue-200 sm:text-xs"
             >
               {tech}
             </span>

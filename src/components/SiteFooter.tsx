@@ -40,7 +40,7 @@ export const SiteFooter: React.FC = () => {
       aria-label="Site footer"
       className="mt-14 sm:mt-24"
     >
-      <div className="glass relative overflow-hidden rounded-2xl border border-white/10">
+      <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/8 backdrop-blur-md">
         {/* Ambient glow */}
         <div className="pointer-events-none absolute -top-24 left-1/2 h-48 w-96 -translate-x-1/2 rounded-full bg-blue-500/8 blur-3xl" />
         <div className="pointer-events-none absolute right-0 -bottom-16 h-32 w-64 rounded-full bg-purple-500/6 blur-3xl" />
@@ -74,19 +74,19 @@ export const SiteFooter: React.FC = () => {
 
           {/* Bottom row: copyright + stack */}
           <div className="flex flex-col items-start gap-2 pt-6 sm:flex-row sm:items-center sm:justify-between">
-            <p className="text-[11px] text-zinc-600">
+            <p className="text-xs text-zinc-500">
               {year} {siteConfig.name}{' '}
               <a
                 href={siteConfig.socialLinks.github.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-zinc-500 transition-colors hover:text-white focus-visible:ring-1 focus-visible:ring-blue-500 focus-visible:outline-none"
+                className="text-zinc-500 transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none"
               >
                 @gesttaltt
               </a>{' '}
               on GitHub.
             </p>
-            <p className="text-[11px] text-zinc-700">
+            <p className="text-xs text-zinc-500">
               Next.js &middot; TypeScript &middot; Tailwind CSS &middot; Three.js
             </p>
           </div>

@@ -29,7 +29,7 @@ export const QAPhilosophyGrid: React.FC = () => {
                 </div>
                 <h4 className="text-sm font-bold text-white uppercase">{spec.layer}</h4>
               </div>
-              <span className="rounded bg-white/5 px-2 py-0.5 text-[10px] font-medium text-zinc-500 group-hover:text-zinc-300">
+              <span className="rounded bg-white/5 px-2 py-0.5 text-[10px] font-medium text-zinc-500 group-hover:text-zinc-300 sm:text-xs">
                 {spec.status}
               </span>
             </div>

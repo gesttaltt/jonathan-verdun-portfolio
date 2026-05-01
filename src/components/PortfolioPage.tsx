@@ -59,7 +59,7 @@ export const PortfolioPage: React.FC = () => {
             <aside className="lg:col-span-4 lg:col-start-9 lg:row-span-2 lg:row-start-1 lg:pl-8">
               <div className="space-y-8">
                 <FadeInSection delay={0.1}>
-                  <div className="glass group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-5 transition-all hover:border-blue-500/20 sm:p-8">
+                  <div className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/8 p-5 backdrop-blur-md transition-all hover:border-blue-500/20 sm:p-8">
                     <div className="absolute -top-10 -right-10 h-40 w-40 rounded-full bg-blue-500/10 blur-3xl transition-opacity group-hover:opacity-75"></div>
 
                     <h3 className="mb-6 flex items-center gap-3 text-lg font-bold text-white">
@@ -86,7 +86,7 @@ export const PortfolioPage: React.FC = () => {
                     <p className="mb-4 text-xs text-zinc-400">{t.sections.qaContact.description}</p>
                     <Link
                       href={`mailto:${siteConfig.contact.email}`}
-                      className="flex w-full items-center justify-center gap-2 rounded-lg bg-white/10 py-3 text-sm font-bold text-white transition-all hover:bg-white/20 hover:shadow-lg focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a] focus-visible:outline-none"
+                      className="focus-visible:ring-offset-background flex w-full items-center justify-center gap-2 rounded-lg bg-white/10 py-3 text-sm font-bold text-white transition-all hover:bg-white/20 hover:shadow-lg focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none"
                     >
                       {t.sections.qaContact.ctaLabel}
                     </Link>

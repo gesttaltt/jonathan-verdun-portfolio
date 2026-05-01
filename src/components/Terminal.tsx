@@ -38,7 +38,7 @@ export const Terminal: React.FC<TerminalProps> = ({
 
   return (
     <div
-      className={`glass-dark flex w-full max-w-full flex-col overflow-hidden rounded-xl font-mono text-xs shadow-2xl md:text-sm lg:text-base ${className}`}
+      className={`flex w-full max-w-full flex-col overflow-hidden rounded-xl border border-white/5 bg-black/80 font-mono text-xs shadow-2xl backdrop-blur-lg md:text-sm lg:text-base ${className}`}
       onClick={() => !isBooting && inputRef.current?.focus()}
     >
       <div className="flex shrink-0 items-center justify-between border-b border-white/10 bg-white/5 px-4 py-2">
@@ -47,7 +47,9 @@ export const Terminal: React.FC<TerminalProps> = ({
           <div className="h-3 w-3 rounded-full bg-amber-500/50"></div>
           <div className="h-3 w-3 rounded-full bg-cyan-500/50"></div>
         </div>
-        <div className="text-[10px] font-bold tracking-widest text-zinc-500 uppercase">{title}</div>
+        <div className="text-[10px] font-bold tracking-widest text-zinc-500 uppercase sm:text-xs">
+          {title}
+        </div>
         <div className="w-12"></div>
       </div>
 

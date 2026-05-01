@@ -21,7 +21,7 @@ export function HeroHeader() {
       <div>
         <div className="mb-4 flex items-center gap-3 text-blue-500">
           <span className="h-px w-12 bg-blue-500"></span>
-          <span className="text-[10px] font-bold tracking-[0.25em] uppercase md:text-xs md:tracking-[0.4em]">
+          <span className="text-[10px] font-bold tracking-[0.25em] uppercase sm:text-xs md:tracking-[0.4em]">
             {t.tagline}
           </span>
         </div>
@@ -34,7 +34,7 @@ export function HeroHeader() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="GitHub profile (opens in new tab)"
-            className="group flex min-h-[44px] items-center gap-2 rounded text-zinc-400 transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a] focus-visible:outline-none"
+            className="group focus-visible:ring-offset-background flex min-h-[44px] items-center gap-2 rounded text-zinc-400 transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none"
           >
             <Github className="h-5 w-5 shrink-0 transition-transform group-hover:-translate-y-0.5" />
             <span className="truncate">{siteConfig.socialLinks.github.label}</span>
@@ -44,7 +44,7 @@ export function HeroHeader() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn profile (opens in new tab)"
-            className="group flex min-h-[44px] items-center gap-2 rounded text-zinc-400 transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a] focus-visible:outline-none"
+            className="group focus-visible:ring-offset-background flex min-h-[44px] items-center gap-2 rounded text-zinc-400 transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none"
           >
             <Linkedin className="h-5 w-5 shrink-0 transition-transform group-hover:-translate-y-0.5" />
             <span className="truncate">{siteConfig.socialLinks.linkedin.label}</span>
@@ -54,7 +54,7 @@ export function HeroHeader() {
       </div>
 
       {siteConfig.workHistory.length > 0 && (
-        <div className="glass flex flex-col gap-3 rounded-xl border border-white/5 bg-white/5 p-5 backdrop-blur-md">
+        <div className="flex flex-col gap-3 rounded-xl border border-white/8 bg-white/8 p-5 backdrop-blur-md">
           <div className="flex items-center gap-3 text-xs">
             <span className="relative flex h-2.5 w-2.5">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-400 opacity-75"></span>
@@ -71,7 +71,7 @@ export function HeroHeader() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`${entry.organization} (opens in new tab)`}
-                className="flex items-center gap-2 rounded text-lg font-bold text-white transition-colors hover:text-cyan-400 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a] focus-visible:outline-none"
+                className="focus-visible:ring-offset-background flex items-center gap-2 rounded text-lg font-bold text-white transition-colors hover:text-cyan-400 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none"
               >
                 {entry.organization} <ExternalLinkIcon className="h-4 w-4" />
               </Link>
