@@ -79,28 +79,28 @@ export const Terminal: React.FC<TerminalProps> = ({
           ))}
         </div>
 
-        {!isBooting && (
-          <div className="flex items-center gap-2 pt-2">
-            <span className="shrink-0 font-bold text-blue-500">
-              <span className="hidden sm:inline">gestalt@portfolio:</span>~$
-            </span>
-            <div className="relative min-w-0 flex-grow">
-              <input
-                ref={inputRef}
-                type="text"
-                value={inputVal}
-                onChange={(e) => setInputVal(e.target.value)}
-                onKeyDown={handleKeyDown}
-                /* font-size ≥ 16px on mobile prevents iOS Safari from zooming the viewport on focus */
-                className="w-full bg-transparent text-base text-zinc-100 outline-none placeholder:text-zinc-700 sm:text-xs md:text-sm lg:text-base"
-                aria-label="Terminal command input"
-                inputMode="text"
-                spellCheck={false}
-                autoComplete="off"
-              />
-            </div>
+        <div
+          className={`flex items-center gap-2 pt-2 transition-opacity duration-300 ${isBooting ? 'pointer-events-none opacity-0' : 'opacity-100'}`}
+        >
+          <span className="shrink-0 font-bold text-blue-500">
+            <span className="hidden sm:inline">gestalt@portfolio:</span>~$
+          </span>
+          <div className="relative min-w-0 flex-grow">
+            <input
+              ref={inputRef}
+              type="text"
+              value={inputVal}
+              onChange={(e) => setInputVal(e.target.value)}
+              onKeyDown={handleKeyDown}
+              /* font-size ≥ 16px on mobile prevents iOS Safari from zooming the viewport on focus */
+              className="w-full bg-transparent text-base text-zinc-100 outline-none placeholder:text-zinc-700 sm:text-xs md:text-sm lg:text-base"
+              aria-label="Terminal command input"
+              inputMode="text"
+              spellCheck={false}
+              autoComplete="off"
+            />
           </div>
-        )}
+        </div>
       </div>
     </div>
   )

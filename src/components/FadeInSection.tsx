@@ -15,7 +15,7 @@ export const FadeInSection: React.FC<FadeInSectionProps> = ({ children, delay = 
     variants={fadeInVariants(delay)}
     initial="hidden"
     whileInView="visible"
-    viewport={{ once: true, margin: '-80px' }}
+    viewport={{ once: true, margin: '-40px' }}
     className={className}
   >
     {children}

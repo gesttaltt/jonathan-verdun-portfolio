@@ -49,7 +49,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
       <m.div
         initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: '-60px' }}
+        viewport={{ once: true, margin: '-40px' }}
         transition={{ duration: 0.35, ease: 'easeOut' }}
         className={`mb-6 flex items-center gap-4 ${showBorderBottom ? 'border-b border-white/10 pb-4' : ''}`}
       >
