@@ -26,7 +26,7 @@
   --node-color: #3b82f6;
   --interaction-glow: #8b5cf6;
 
-  /* Card hover glow tokens */
+  /* Card hover glow tokens — ProjectCard · SystemSpecCard · BioinformaticsResearchCard */
   --glow-blue: rgba(59, 130, 246, 0.15);
   --glow-cyan: rgba(6, 182, 212, 0.12);
   --glow-purple: rgba(139, 92, 246, 0.12);
