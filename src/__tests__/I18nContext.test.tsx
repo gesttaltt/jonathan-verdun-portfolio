@@ -60,11 +60,11 @@ describe('useTranslation (fallback)', () => {
   })
 
   it('en translations match expected tagline', () => {
-    expect(en.tagline).toBe('QA Automation Engineer')
+    expect(en.tagline).toBe('Test Architecture · Automation Engineering')
   })
 
   it('es translations match expected tagline', () => {
-    expect(es.tagline).toBe('Ingeniero de Automatización QA')
+    expect(es.tagline).toBe('Arquitectura de Pruebas · Ingeniería de Automatización')
   })
 
   it('en and es have the same top-level keys', () => {

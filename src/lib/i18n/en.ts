@@ -3,41 +3,53 @@ import { INTERACTIVE_COMMANDS, BOOT_COMMANDS } from '@/lib/contracts/TerminalCon
 
 export const en: Translations = {
   lang: 'en',
-  tagline: 'QA Automation Engineer',
+  tagline: 'Test Architecture · Automation Engineering',
   workHistoryLabel: 'Work History',
   sections: {
     projects: 'Projects',
     architecture: 'Architecture',
     qa: 'QA Philosophy',
-    bioinformatics: 'Technical Background',
+    bioinformatics: 'Prior Research & Engineering',
     sidebar: { constraintsTitle: 'Engineering Constraints' },
     qaContact: {
       title: 'Open to work',
-      description: 'Open to QA opportunities.',
+      description: 'Available for QA engineering and automation architecture roles.',
       ctaLabel: 'Get in Touch',
     },
   },
   qa: {
     constraints: [
-      'Test suites gate every merge — coverage thresholds enforced in CI',
-      'Property-based fuzzing applied to core domain invariants via fast-check',
-      'Strict input validation enforced at all system boundaries',
+      '≥80% unit coverage enforced in CI — merge blocked below threshold',
+      'Property-based fuzzing via fast-check applied to all domain contracts and boundary conditions',
+      'All system boundary inputs validated against strict schemas; invalid inputs rejected at ingestion',
+      'Tests written before feature code — test-first discipline enforced at every layer',
     ],
     specifications: [
       {
         layer: 'unit',
         objective: 'Enforce isolated domain logic correctness to prevent regression',
-        status: 'locked',
+        status: 'stable',
       },
       {
         layer: 'property-based',
         objective: 'Fuzz domain contracts with fast-check to surface unknown failure modes',
-        status: 'evolving',
+        status: 'stable',
       },
       {
         layer: 'component',
         objective: 'Verify rendered behaviour and user interactions via React Testing Library',
-        status: 'evolving',
+        status: 'maturing',
+      },
+      {
+        layer: 'integration',
+        objective: 'Verify service boundaries, data flow, and cross-module contracts in CI',
+        status: 'maturing',
+      },
+      {
+        layer: 'E2E',
+        objective:
+          'Cover critical user paths end-to-end via automated browser and mobile automation',
+        status: 'maturing',
       },
     ],
   },
@@ -95,8 +107,8 @@ export const en: Translations = {
       id: 'proj-01',
       title: 'QA Arxiv Mobile',
       description:
-        'Manual test cases with user story traceability, cross-platform coverage (iOS/Android), and a Python/pytest automation suite against the open-source arxiv-papers-mobile app.',
-      techStack: ['Python', 'pytest', 'Azure DevOps'],
+        'Test plan and automation suite for the open-source arxiv-papers-mobile app (iOS/Android). Manual test cases with Azure DevOps traceability covering critical user stories. Python/pytest automation targeting login, article fetch, search, and navigation flows.',
+      techStack: ['Python', 'pytest', 'Azure DevOps', 'Appium'],
       link: 'https://github.com/gesttaltt/qa-arxiv-mobile',
       status: 'QA',
       stats: [

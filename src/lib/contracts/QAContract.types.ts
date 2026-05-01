@@ -1,7 +1,6 @@
 export interface TestSuiteSpecification {
-  layer: 'unit' | 'integration' | 'property-based' | 'regression' | 'component'
-  objective: string
-  status: 'locked' | 'evolving'
+  layer: 'unit' | 'integration' | 'property-based' | 'regression' | 'component' | 'E2E' | 'api'
+  status: 'stable' | 'maturing'
 }
 
 export interface QAPhilosophy {

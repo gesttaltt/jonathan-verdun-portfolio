@@ -26,15 +26,12 @@ describe('Home', () => {
     expect(document.getElementById('main-content')).not.toBeNull()
   })
 
-  it('renders all three section headings', () => {
+  it('renders primary section headings', () => {
     renderHome()
+    expect(screen.getByRole('heading', { name: siteConfig.sections.qa.title })).toBeInTheDocument()
     expect(
       screen.getByRole('heading', { name: siteConfig.sections.projects.title })
     ).toBeInTheDocument()
-    expect(
-      screen.getByRole('heading', { name: siteConfig.sections.architecture.title })
-    ).toBeInTheDocument()
-    expect(screen.getByRole('heading', { name: siteConfig.sections.qa.title })).toBeInTheDocument()
   })
 
   it('renders the contact CTA link with the correct mailto href', () => {

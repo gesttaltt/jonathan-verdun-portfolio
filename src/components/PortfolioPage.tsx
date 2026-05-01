@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useMemo } from 'react'
-import { ShieldCheck, Server, Database, Code2 } from 'lucide-react'
+import { ShieldCheck, Server, Code2 } from 'lucide-react'
 import Link from 'next/link'
 import { BioinformaticsResearchCard } from '@/components/BioinformaticsResearchCard'
 import { SiteFooter } from '@/components/SiteFooter'
@@ -44,18 +44,18 @@ export const PortfolioPage: React.FC = () => {
           </FadeInSection>
 
           <div className="grid grid-cols-1 gap-x-16 gap-y-14 lg:grid-cols-12 lg:gap-y-24">
-            {/* Projects — row 1, cols 1–8 */}
+            {/* QA Philosophy — row 1, cols 1–8 */}
             <section className="relative lg:col-span-8 lg:col-start-1 lg:row-start-1">
               <SectionHeader
-                icon={<Code2 className="h-5 w-5" />}
-                title={t.sections.projects}
-                color="purple"
+                icon={<ShieldCheck className="h-5 w-5" />}
+                title={t.sections.qa}
+                color="green"
                 showAccentLine
               />
-              <ProjectGallery />
+              <QAPhilosophyGrid />
             </section>
 
-            {/* Sidebar — desktop: cols 9–12, spans both rows; mobile: sits between Projects and rest */}
+            {/* Sidebar — desktop: cols 9–12, spans both rows; mobile: sits between QA and Projects */}
             <aside className="lg:col-span-4 lg:col-start-9 lg:row-span-2 lg:row-start-1 lg:pl-8">
               <div className="space-y-8">
                 <FadeInSection delay={0.1}>
@@ -95,33 +95,17 @@ export const PortfolioPage: React.FC = () => {
               </div>
             </aside>
 
-            {/* Architecture + QA — row 2, cols 1–8 */}
+            {/* Projects + Prior Research — row 2, cols 1–8 */}
             <div className="space-y-14 lg:col-span-8 lg:col-start-1 lg:row-start-2 lg:space-y-24">
               <FadeInSection>
-                <section className="space-y-8">
+                <section className="relative space-y-8">
                   <SectionHeader
-                    icon={<Database className="h-5 w-5" />}
-                    title={t.sections.architecture}
-                    color="cyan"
+                    icon={<Code2 className="h-5 w-5" />}
+                    title={t.sections.projects}
+                    color="blue"
                     showBorderBottom
                   />
-                  <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-                    {t.architecture.specs.map((spec) => (
-                      <SystemSpecCard key={spec.id} spec={spec} />
-                    ))}
-                  </div>
-                </section>
-              </FadeInSection>
-
-              <FadeInSection>
-                <section className="space-y-8">
-                  <SectionHeader
-                    icon={<ShieldCheck className="h-5 w-5" />}
-                    title={t.sections.qa}
-                    color="green"
-                    showBorderBottom
-                  />
-                  <QAPhilosophyGrid />
+                  <ProjectGallery />
                 </section>
               </FadeInSection>
 
@@ -130,6 +114,9 @@ export const PortfolioPage: React.FC = () => {
                   {t.sections.bioinformatics}
                 </p>
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                  {t.architecture.specs.map((spec) => (
+                    <SystemSpecCard key={spec.id} spec={spec} />
+                  ))}
                   {t.bioinformatics.specs.map((spec) => (
                     <BioinformaticsResearchCard key={spec.id} spec={spec} />
                   ))}

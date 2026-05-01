@@ -5,44 +5,57 @@ const ES_HELP_OUTPUT = 'Comandos disponibles: ayuda, sobre, proyectos, contacto,
 
 export const es: Translations = {
   lang: 'es',
-  tagline: 'Ingeniero de Automatización QA',
+  tagline: 'Arquitectura de Pruebas · Ingeniería de Automatización',
   workHistoryLabel: 'Experiencia',
   sections: {
     projects: 'Proyectos',
     architecture: 'Arquitectura',
     qa: 'Filosofía QA',
-    bioinformatics: 'Antecedentes Técnicos',
+    bioinformatics: 'Investigación y Trabajo Técnico Previo',
     sidebar: { constraintsTitle: 'Restricciones de Ingeniería' },
     qaContact: {
       title: 'Disponible',
-      description: 'Abierto a oportunidades en QA.',
+      description: 'Disponible para roles de ingeniería QA y arquitectura de automatización.',
       ctaLabel: 'Contáctame',
     },
   },
   qa: {
     constraints: [
-      'Los conjuntos de pruebas aprueban cada integración — umbrales de cobertura aplicados en CI',
-      'Fuzzing basado en propiedades aplicado a invariantes del dominio central con fast-check',
-      'Validación estricta de entradas en todos los límites del sistema',
+      '≥80% de cobertura unitaria aplicada en CI — integración bloqueada por debajo del umbral',
+      'Fuzzing basado en propiedades via fast-check aplicado a todos los contratos de dominio y condiciones de frontera',
+      'Todas las entradas en fronteras del sistema validadas contra esquemas estrictos; entradas inválidas rechazadas en ingesta',
+      'Pruebas escritas antes del código de funcionalidad — disciplina test-first aplicada en cada capa',
     ],
     specifications: [
       {
-        layer: 'unitaria',
+        layer: 'unit',
         objective:
           'Verificar la corrección aislada de la lógica de dominio para evitar regresiones',
-        status: 'bloqueado',
+        status: 'stable',
       },
       {
-        layer: 'basada en propiedades',
+        layer: 'property-based',
         objective:
           'Fuzzear contratos de dominio con fast-check para descubrir modos de fallo desconocidos',
-        status: 'evolucionando',
+        status: 'stable',
       },
       {
-        layer: 'componente',
+        layer: 'component',
         objective:
           'Verificar el comportamiento renderizado e interacciones del usuario con React Testing Library',
-        status: 'evolucionando',
+        status: 'maturing',
+      },
+      {
+        layer: 'integration',
+        objective:
+          'Verificar fronteras de servicio, flujo de datos y contratos entre módulos en CI',
+        status: 'maturing',
+      },
+      {
+        layer: 'E2E',
+        objective:
+          'Cubrir rutas críticas de usuario de extremo a extremo mediante automatización de navegador y móvil',
+        status: 'maturing',
       },
     ],
   },
@@ -100,8 +113,8 @@ export const es: Translations = {
       id: 'proj-01',
       title: 'QA Arxiv Mobile',
       description:
-        'Casos de prueba manuales con trazabilidad de historias de usuario, cobertura multiplataforma (iOS/Android) y suite de automatización Python/pytest para la app de código abierto arxiv-papers-mobile.',
-      techStack: ['Python', 'pytest', 'Azure DevOps'],
+        'Plan de pruebas y suite de automatización para la app de código abierto arxiv-papers-mobile (iOS/Android). Casos de prueba manuales con trazabilidad en Azure DevOps cubriendo historias de usuario críticas. Automatización Python/pytest orientada a flujos de login, carga de artículos, búsqueda y navegación.',
+      techStack: ['Python', 'pytest', 'Azure DevOps', 'Appium'],
       link: 'https://github.com/gesttaltt/qa-arxiv-mobile',
       status: 'QA',
       stats: [
@@ -172,7 +185,7 @@ export const es: Translations = {
     interactive: {
       ayuda: ES_HELP_OUTPUT,
       sobre:
-        'Jonathan Verdun. Ingeniero de Automatización QA. Especializado en TDD, automatización de pruebas y calidad de ingeniería.',
+        'Jonathan Verdun. Ingeniero QA y arquitecto de pruebas. Testing basado en propiedades, pipelines de automatización y quality gates que atrapan regresiones antes que los humanos.',
       proyectos: 'Ver la sección de Proyectos abajo, o escribe "ls proyectos" para ver la lista.',
       contacto: 'Contáctame por LinkedIn o GitHub enlazados arriba.',
       'ls proyectos': LS_PROJECTS_OUTPUT,

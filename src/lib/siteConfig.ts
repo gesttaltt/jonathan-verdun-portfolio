@@ -40,7 +40,7 @@ export const siteConfig = {
     ctaLabel: 'Get in Touch',
   },
 
-  tagline: 'QA Automation Engineer',
+  tagline: 'Test Architecture · Automation Engineering',
   jobTitle: 'QA Automation Engineer',
 
   sections: {
@@ -53,13 +53,13 @@ export const siteConfig = {
     qa: {
       title: 'QA Philosophy',
       contactTitle: 'Open to work',
-      contactDescription: 'Open to QA opportunities.',
+      contactDescription: 'Available for QA engineering and automation architecture roles.',
     },
     sidebar: {
       constraintsTitle: 'Engineering Constraints',
     },
     bioinformatics: {
-      title: 'Technical Background',
+      title: 'Prior Research & Engineering',
     },
   },
 } as const

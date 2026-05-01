@@ -1,9 +1,9 @@
 import { QA_PHILOSOPHY } from '@/lib/contracts/QAContract'
 
 describe('QA Contract Invariants', () => {
-  it('should maintain locked status for unit test layer', () => {
+  it('should maintain stable status for unit test layer', () => {
     const unitLayer = QA_PHILOSOPHY.specifications.find((s) => s.layer === 'unit')
-    expect(unitLayer?.status).toBe('locked')
+    expect(unitLayer?.status).toBe('stable')
   })
 
   it('should have non-empty constraints for system integrity', () => {

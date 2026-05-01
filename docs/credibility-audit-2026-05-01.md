@@ -249,3 +249,130 @@ QA Automation Engineer. All findings are from a hiring-manager perspective.
 | L3  | Low      | en.ts                    | Link QA Philosophy constraints to QA Arxiv project   |
 | L4  | Low      | siteConfig.ts            | Rename "Technical Background" to be more specific    |
 | L5  | Low      | All                      | Add a11y / security testing if applicable            |
+
+---
+
+## Appendix: Fix Roadmap
+
+### Notation
+
+- ✅ Can be implemented immediately
+- ⚠️ Requires real data from the actual repo / your history — placeholder values used until filled
+
+---
+
+### Phase 1 — Critical Fixes (Implement now)
+
+#### H3 — Strengthen QA constraints ✅
+
+**Files:** `QAContract.ts`, `en.ts`, `es.ts`
+
+Replace 3 generic constraints with metric-bearing versions + add shift-left (merges L2):
+
+1. `"≥80% unit coverage enforced in CI — merge blocked below threshold"`
+2. `"Property-based fuzzing via fast-check applied to all domain contracts and boundary conditions"`
+3. `"All system boundary inputs validated against strict schemas; invalid inputs rejected at ingestion"`
+4. `"Tests written before feature code — test-first discipline enforced at every layer"`
+
+#### H2 — Add integration + E2E test layers ✅
+
+**Files:** `QAContract.types.ts`, `QAContract.ts`, `en.ts`, `es.ts`
+
+Expand `layer` union: add `'E2E'` and `'api'`. Add 2 new specs after the existing 3:
+
+- `{ layer: 'integration', objective: 'Verify service boundaries, data flow, and cross-module contracts in CI', status: 'stable' }`
+- `{ layer: 'E2E', objective: 'Cover critical user paths end-to-end via automated browser and mobile automation', status: 'maturing' }`
+
+Also rename status labels (M1 merged): `'locked'` → `'stable'`, `'evolving'` → `'maturing'`.
+Update status union in types: `'stable' | 'maturing'`.
+
+#### H5 — Differentiate tagline ✅
+
+**Files:** `siteConfig.ts`, `en.ts`, `es.ts`
+
+- EN: `"Test Architecture · Automation Engineering"`
+- ES: `"Arquitectura de Pruebas · Ingeniería de Automatización"`
+
+#### H7 — Rewrite QA Arxiv description ✅ (stats need real values ⚠️)
+
+**Files:** `en.ts`, `es.ts`
+
+Strategy-led, tool-named rewrite:
+
+```
+'Test plan and automation suite for the open-source arxiv-papers-mobile app (iOS/Android).
+Manual test cases with Azure DevOps traceability covering critical user stories.
+Python/pytest automation targeting login, article fetch, search, and navigation flows.'
+```
+
+Stats: replace `Test Suites: 3` with `Test Cases: ??` and `Automation %: ??` once real repo numbers confirmed.
+
+#### H8 — Reorder sections: QA Philosophy before Projects ✅
+
+**File:** `PortfolioPage.tsx`
+
+New grid layout:
+
+- Row 1, cols 1–8: QA Philosophy (moved from row 2) with `showAccentLine`
+- Row 1–2, cols 9–12: Sidebar (unchanged)
+- Row 2, cols 1–8: Projects (moved from row 1), `color="blue"`
+- Technical Background folded below Projects (no separate row)
+
+#### H9 — Fold Architecture into Technical Background ✅
+
+**File:** `PortfolioPage.tsx`
+
+Remove the dedicated Architecture `FadeInSection`. Render `t.architecture.specs` via `SystemSpecCard` inside the Technical Background section alongside bioinformatics specs. Remove `Database` lucide import.
+
+#### M3 — Rewrite terminal `about` ✅
+
+**File:** `TerminalContract.ts`, `es.ts`
+
+- EN: `"Jonathan Verdun. QA engineer and test architect. Property-based testing, automation pipelines, and quality gates that catch regressions before humans do."`
+- ES: updated accordingly
+
+#### M4 — Strengthen contact CTA ✅
+
+**Files:** `siteConfig.ts`, `en.ts`, `es.ts`
+
+- EN: `"Available for QA engineering and automation architecture roles."`
+- ES: `"Disponible para roles de ingeniería QA y arquitectura de automatización."`
+
+#### L4 — Rename Technical Background ✅
+
+**Files:** `siteConfig.ts`, `en.ts`, `es.ts`
+
+- EN: `"Prior Research & Engineering"`
+- ES: `"Investigación y Trabajo Técnico Previo"`
+
+---
+
+### Phase 2 — Needs Real Data ⚠️
+
+#### H4 — Real QA Arxiv stats
+
+Open `gesttaltt/qa-arxiv-mobile` repo and count: total manual test cases, total automated scripts, coverage % if measured, CI platform used. Replace placeholder stats.
+
+#### H6 — Clarify Co-Founder role / add prior QA history
+
+If QA work was done at Ai-Whisperers, change role to `"Co-Founder & QA Lead"`. If prior QA roles exist (any employer), add them to `workHistory`. Only you can supply correct values.
+
+#### H10 — Expand CI/CD breadth
+
+If GitHub Actions is used in the portfolio or qa-arxiv-mobile, add it to the tech stack. Don't fabricate.
+
+#### H1 — Add QA project(s)
+
+The portfolio needs ≥2 QA-status projects. Any additional QA work (API testing, Playwright, test infrastructure, CI pipeline ownership) qualifies. A small but well-documented project is enough.
+
+---
+
+### Phase 3 — Polish (When time allows)
+
+| ID  | Change                                                                                                         |
+| --- | -------------------------------------------------------------------------------------------------------------- |
+| L3  | Add closing line to QA Arxiv: "Demonstrates the property-based fuzzing and coverage-gating constraints above." |
+| M6  | Add manual testing tool/storage details once real numbers confirmed                                            |
+| M2  | Add QA leadership evidence to work history role description                                                    |
+| L1  | Add certifications section if ISTQB or equivalent held                                                         |
+| L5  | Add a11y constraint if WCAG compliance is tested                                                               |
