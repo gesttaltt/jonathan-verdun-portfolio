@@ -1,4 +1,4 @@
-import { ProjectService } from '@/lib/contracts/ProjectContract'
+import { ProjectService, PROJECT_DATA } from '@/lib/contracts/ProjectContract'
 import { ProjectSpec } from '@/lib/contracts/ProjectContract.types'
 
 describe('ProjectService', () => {
@@ -51,5 +51,9 @@ describe('ProjectService', () => {
         })
       }
     })
+  })
+
+  it('getProjects returns the same reference as PROJECT_DATA', () => {
+    expect(ProjectService.getProjects()).toBe(PROJECT_DATA)
   })
 })

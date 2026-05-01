@@ -1,10 +1,8 @@
 import { Translations } from './types'
+import { LS_PROJECTS_OUTPUT } from '@/lib/contracts/TerminalContract'
 
 const ES_HELP_OUTPUT =
   'Comandos disponibles: ayuda, sobre, proyectos, investigacion, contacto, limpiar'
-
-const LS_PROYECTOS_OUTPUT =
-  'drwx------ 1 gestalt staff  QA-Arxiv-Mobile\n-rw-r--r-- 1 gestalt staff  Functionome-Atlas\n-rwxr-xr-x 1 gestalt staff  Gene-Functional-Pipeline'
 
 export const es: Translations = {
   lang: 'es',
@@ -163,7 +161,7 @@ export const es: Translations = {
       },
       {
         text: 'ls proyectos',
-        output: LS_PROYECTOS_OUTPUT,
+        output: LS_PROJECTS_OUTPUT,
         delay: 700,
       },
       {
@@ -178,7 +176,7 @@ export const es: Translations = {
         'Jonathan Verdun. Ingeniero de Automatización QA e Investigador en Bioinformática. Especializado en TDD, automatización de pruebas y biología computacional.',
       proyectos: 'Ver la sección de Proyectos abajo, o escribe "ls proyectos" para ver la lista.',
       contacto: 'Contáctame por LinkedIn o GitHub enlazados arriba.',
-      'ls proyectos': LS_PROYECTOS_OUTPUT,
+      'ls proyectos': LS_PROJECTS_OUTPUT,
       investigacion:
         'Sección de Investigación en Bioinformática abajo — IA para antígenos VIH (p-ádico) y API de Codificación de Codones (VAE Hiperbólico).',
       sudo: 'El usuario no está en el archivo sudoers. Este incidente será reportado.',

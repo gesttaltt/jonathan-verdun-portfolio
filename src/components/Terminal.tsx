@@ -56,6 +56,7 @@ export const Terminal: React.FC<TerminalProps> = ({
         role="log"
         aria-label="Terminal output"
         aria-live="polite"
+        aria-busy={isBooting}
         className="custom-scrollbar relative h-[240px] w-full overflow-x-hidden overflow-y-auto p-4 sm:h-[280px] md:h-[400px] md:p-6"
       >
         <div className="space-y-4 pb-2">
