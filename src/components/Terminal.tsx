@@ -38,7 +38,7 @@ export const Terminal: React.FC<TerminalProps> = ({
 
   return (
     <div
-      className={`flex w-full max-w-full flex-col overflow-hidden rounded-xl border border-white/5 bg-black/80 font-mono text-xs shadow-2xl backdrop-blur-lg md:text-sm lg:text-base ${className}`}
+      className={`flex w-full max-w-full flex-col overflow-hidden rounded-2xl border border-white/5 bg-black/80 font-mono text-xs shadow-2xl backdrop-blur-lg md:text-sm lg:text-base ${className}`}
       onClick={() => !isBooting && inputRef.current?.focus()}
     >
       <div className="flex shrink-0 items-center justify-between border-b border-white/10 bg-white/5 px-4 py-2">

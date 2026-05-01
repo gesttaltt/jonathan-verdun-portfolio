@@ -54,7 +54,7 @@ export function HeroHeader() {
       </div>
 
       {siteConfig.workHistory.length > 0 && (
-        <div className="flex flex-col gap-3 rounded-xl border border-white/8 bg-white/8 p-5 backdrop-blur-md">
+        <div className="flex flex-col gap-3 rounded-2xl border border-white/8 bg-white/8 p-5 backdrop-blur-md">
           <div className="flex items-center gap-3 text-xs">
             <span className="relative flex h-2.5 w-2.5">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-400 opacity-75"></span>

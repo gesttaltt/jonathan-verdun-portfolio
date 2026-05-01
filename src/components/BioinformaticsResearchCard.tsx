@@ -16,7 +16,7 @@ export const BioinformaticsResearchCard: React.FC<BioinformaticsResearchCardProp
   const description = t.bioinformatics.focusDescriptions[spec.focus] ?? ''
 
   return (
-    <div className="group relative overflow-hidden rounded-xl border border-white/10 bg-white/5 p-6 transition-all duration-300 hover:border-purple-500/30 hover:bg-white/10 hover:shadow-[0_0_24px_var(--glow-purple)]">
+    <div className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-6 transition-all duration-300 hover:border-purple-500/30 hover:bg-white/10 hover:shadow-[0_0_24px_var(--glow-purple)]">
       <div className="mb-4 flex items-center gap-2">
         <h3 className="flex items-center gap-2 text-sm font-bold tracking-wide text-purple-400 uppercase">
           <Dna className="h-4 w-4" /> {label}

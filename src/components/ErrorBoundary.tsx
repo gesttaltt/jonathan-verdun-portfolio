@@ -42,7 +42,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
       }
 
       return (
-        <div className="flex min-h-[200px] items-center justify-center rounded-xl border border-red-500/20 bg-red-500/5 p-8">
+        <div className="flex min-h-[200px] items-center justify-center rounded-2xl border border-red-500/20 bg-red-500/5 p-8">
           <div className="text-center">
             <p className="mb-2 text-sm font-bold text-red-400">Component Error</p>
             <p className="mb-4 text-xs text-zinc-500">A rendering error occurred.</p>

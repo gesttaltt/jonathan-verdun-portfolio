@@ -22,7 +22,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
       viewport={{ once: true, margin: '-50px' }}
       variants={fadeUpVariants(index * 0.1)}
       role="listitem"
-      className="group relative flex h-full flex-col justify-between overflow-hidden rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-md transition-all duration-300 hover:border-blue-500/50 hover:bg-white/10 hover:shadow-[0_0_20px_var(--glow-blue)]"
+      className="group relative flex h-full flex-col justify-between overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-md transition-all duration-300 hover:border-blue-500/50 hover:bg-white/10 hover:shadow-[0_0_20px_var(--glow-blue)]"
     >
       {/* Glowing Corner */}
       <div className="absolute top-0 right-0 h-16 w-16 translate-x-8 -translate-y-8 rotate-45 bg-blue-500/10 blur-xl transition-all duration-500 group-hover:bg-blue-500/20" />
