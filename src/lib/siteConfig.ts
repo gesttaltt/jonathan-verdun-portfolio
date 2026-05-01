@@ -6,9 +6,9 @@
 
 export const siteConfig = {
   name: 'Jonathan Verdun',
-  title: 'Jonathan Verdun | QA Automation & Bioinformatics',
+  title: 'Jonathan Verdun | QA Automation Engineer',
   description:
-    'Portfolio of Jonathan Verdun — QA Automation Engineer and Bioinformatics Researcher, focused on test-driven development and computational biology.',
+    'Portfolio of Jonathan Verdun — QA Automation Engineer focused on test-driven development, automation pipelines, and engineering quality.',
   url: 'https://jonathanverdun.com',
   locale: 'en',
 
@@ -40,8 +40,8 @@ export const siteConfig = {
     ctaLabel: 'Get in Touch',
   },
 
-  tagline: 'QA Engineer · Bioinformatics Researcher',
-  jobTitle: 'QA Automation Engineer & Bioinformatics Researcher',
+  tagline: 'QA Automation Engineer',
+  jobTitle: 'QA Automation Engineer',
 
   sections: {
     projects: {
@@ -53,13 +53,13 @@ export const siteConfig = {
     qa: {
       title: 'QA Philosophy',
       contactTitle: 'Open to work',
-      contactDescription: 'Open to QA and Research opportunities.',
+      contactDescription: 'Open to QA opportunities.',
     },
     sidebar: {
       constraintsTitle: 'Engineering Constraints',
     },
     bioinformatics: {
-      title: 'Bioinformatics Research',
+      title: 'Technical Background',
     },
   },
 } as const

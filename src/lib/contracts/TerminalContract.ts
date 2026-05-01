@@ -3,14 +3,13 @@ export const LS_PROJECTS_OUTPUT =
   'drwx------ 1 gestalt staff  QA-Arxiv-Mobile\n-rw-r--r-- 1 gestalt staff  Functionome-Atlas\n-rwxr-xr-x 1 gestalt staff  Gene-Functional-Pipeline'
 
 export const INTERACTIVE_COMMANDS: Record<string, string> = {
-  help: 'Available commands: help, about, projects, research, contact, clear',
+  help: 'Available commands: help, about, projects, contact, clear',
   about:
-    'Jonathan Verdun. QA Automation Engineer and Bioinformatics Researcher. Specializing in TDD, test automation, and computational biology.',
+    'Jonathan Verdun. QA Automation Engineer. Specializing in TDD, test automation, and engineering quality.',
   projects: 'Check out the Projects section below, or type "ls projects" to see a list.',
   contact: 'Reach out via LinkedIn or GitHub linked above.',
   'ls projects': LS_PROJECTS_OUTPUT,
-  research:
-    'Bioinformatics Research section below — HIV antigen AI (p-adic) and Codon Encoder API (Hyperbolic VAE).',
+  research: 'See the Technical Background section below for research work.',
   sudo: 'User is not in the sudoers file. This incident will be reported.',
 }
 
@@ -23,7 +22,7 @@ export interface BootCommand {
 export const BOOT_COMMANDS: readonly BootCommand[] = [
   {
     text: 'whoami',
-    output: 'jonathan.verdun — QA Automation · Bioinformatics Research',
+    output: 'jonathan.verdun — QA Automation Engineer',
     delay: 500,
   },
   {

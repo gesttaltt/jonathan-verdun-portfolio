@@ -1,22 +1,21 @@
 import { Translations } from './types'
 import { LS_PROJECTS_OUTPUT } from '@/lib/contracts/TerminalContract'
 
-const ES_HELP_OUTPUT =
-  'Comandos disponibles: ayuda, sobre, proyectos, investigacion, contacto, limpiar'
+const ES_HELP_OUTPUT = 'Comandos disponibles: ayuda, sobre, proyectos, contacto, limpiar'
 
 export const es: Translations = {
   lang: 'es',
-  tagline: 'Ingeniero QA · Investigador en Bioinformática',
+  tagline: 'Ingeniero de Automatización QA',
   workHistoryLabel: 'Experiencia',
   sections: {
     projects: 'Proyectos',
     architecture: 'Arquitectura',
     qa: 'Filosofía QA',
-    bioinformatics: 'Investigación en Bioinformática',
+    bioinformatics: 'Antecedentes Técnicos',
     sidebar: { constraintsTitle: 'Restricciones de Ingeniería' },
     qaContact: {
       title: 'Disponible',
-      description: 'Abierto a oportunidades en QA e Investigación.',
+      description: 'Abierto a oportunidades en QA.',
       ctaLabel: 'Contáctame',
     },
   },
@@ -114,7 +113,7 @@ export const es: Translations = {
       id: 'proj-02',
       title: 'Functionome Atlas',
       description:
-        'Pipeline que calcula Puntuaciones de Perturbación del Funccionoma para mapear la fragilidad funcional del genoma humano. Integra densidad de variantes VCF, restricción evolutiva (LOEUF) y anotaciones de Gene Ontology.',
+        'Ingeniería de pipeline de datos para análisis de variantes genómicas — rendimiento VCF 120× vía vectorización NumPy. Integra restricciones evolutivas LOEUF y anotaciones Gene Ontology contra gnomAD a escala.',
       techStack: ['Python', 'NumPy', 'Pandas', 'gnomAD'],
       link: 'https://github.com/gesttaltt/Functionome-Atlas',
       status: 'Research',
@@ -127,7 +126,7 @@ export const es: Translations = {
       id: 'proj-04',
       title: '3-Adic ML',
       description:
-        'Pipelines de aprendizaje profundo para autoencoders variacionales p-ádicos. VAEs duales cuyos espacios latentes viven en una bola de Poincaré — posición radial determinada por la valuación 3-ádica, dirección por la estructura de prefijos de dígitos. La jerarquía emerge de la geometría, no de la memorización.',
+        'Ingeniería de pipeline ML con suite de 280 pruebas que cubre correctitud del VAE, invariantes geométricos y estabilidad de clustering (ARI 0.844). VAEs duales en geometría de bola de Poincaré — jerarquía enforced por valuación 3-ádica, no memorización.',
       techStack: ['Python', 'PyTorch'],
       link: 'https://github.com/gesttaltt/3-adic-ml',
       status: 'Research',
@@ -140,7 +139,7 @@ export const es: Translations = {
       id: 'proj-03',
       title: 'Gene Functional Pipeline',
       description:
-        'Pipeline de anotación GO para el análisis funcional del genoma humano. Tres implementaciones: motor DAG en C++ para rendimiento local, Apache Spark para escala en la nube y Python para flujos de desarrollo.',
+        'Ingeniería de pipeline multi-implementación: motor DAG en C++ (5–25× sobre Python base), Apache Spark para ejecución a escala en la nube y Python para flujos de desarrollo. Procesa 10M+ anotaciones génicas.',
       techStack: ['Python', 'C++', 'Apache Spark', 'Gene Ontology'],
       link: 'https://github.com/gesttaltt/gene-ontology-functionomes',
       status: 'Research',
@@ -156,7 +155,7 @@ export const es: Translations = {
     boot: [
       {
         text: 'whoami',
-        output: 'jonathan.verdun — Automatización QA · Investigación en Bioinformática',
+        output: 'jonathan.verdun — Ingeniero de Automatización QA',
         delay: 500,
       },
       {
@@ -173,12 +172,12 @@ export const es: Translations = {
     interactive: {
       ayuda: ES_HELP_OUTPUT,
       sobre:
-        'Jonathan Verdun. Ingeniero de Automatización QA e Investigador en Bioinformática. Especializado en TDD, automatización de pruebas y biología computacional.',
+        'Jonathan Verdun. Ingeniero de Automatización QA. Especializado en TDD, automatización de pruebas y calidad de ingeniería.',
       proyectos: 'Ver la sección de Proyectos abajo, o escribe "ls proyectos" para ver la lista.',
       contacto: 'Contáctame por LinkedIn o GitHub enlazados arriba.',
       'ls proyectos': LS_PROJECTS_OUTPUT,
       investigacion:
-        'Sección de Investigación en Bioinformática abajo — IA para antígenos VIH (p-ádico) y API de Codificación de Codones (VAE Hiperbólico).',
+        'Consulta la sección de Antecedentes Técnicos abajo para ver el trabajo de investigación.',
       sudo: 'El usuario no está en el archivo sudoers. Este incidente será reportado.',
     },
   },

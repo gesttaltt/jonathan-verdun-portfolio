@@ -36,12 +36,14 @@ describe('DefaultCommandProcessor', () => {
     expect(processor.process('projects')).toContain('Projects')
   })
 
-  it('returns bioinformatics info for the "research" command', () => {
-    expect(processor.process('research')).toContain('Bioinformatics')
+  it('returns technical background redirect for the "research" command', () => {
+    expect(processor.process('research')).toContain('Technical Background')
   })
 
-  it('help output lists the research command', () => {
-    expect(processor.process('help')).toContain('research')
+  it('help output lists core commands but not research', () => {
+    const help = processor.process('help')
+    expect(help).toContain('projects')
+    expect(help).not.toContain('research')
   })
 
   it('replaces all defaults when custom commands are injected via constructor', () => {

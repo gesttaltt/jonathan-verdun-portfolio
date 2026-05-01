@@ -57,7 +57,7 @@ describe('PortfolioPage', () => {
       const input = screen.getByRole('textbox', { name: /terminal command input/i })
       await user.type(input, 'about{Enter}')
       // "about" output is unique — not part of the boot sequence
-      expect(screen.getByText(/QA Automation Engineer/i)).toBeInTheDocument()
+      expect(screen.getByText(/Specializing in TDD/i)).toBeInTheDocument()
     })
 
     it('unknown command suggests "help"', async () => {
@@ -83,7 +83,7 @@ describe('PortfolioPage', () => {
       const input = screen.getByRole('textbox', { name: /terminal command input/i })
       await user.type(input, 'sobre{Enter}')
       // "sobre" output is unique — not part of the boot sequence
-      expect(screen.getByText(/Ingeniero de Automatización QA/i)).toBeInTheDocument()
+      expect(screen.getByText(/Especializado en TDD/i)).toBeInTheDocument()
     })
 
     it('unknown command suggests "ayuda"', async () => {

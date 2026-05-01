@@ -3,17 +3,17 @@ import { INTERACTIVE_COMMANDS, BOOT_COMMANDS } from '@/lib/contracts/TerminalCon
 
 export const en: Translations = {
   lang: 'en',
-  tagline: 'QA Engineer · Bioinformatics Researcher',
+  tagline: 'QA Automation Engineer',
   workHistoryLabel: 'Work History',
   sections: {
     projects: 'Projects',
     architecture: 'Architecture',
     qa: 'QA Philosophy',
-    bioinformatics: 'Bioinformatics Research',
+    bioinformatics: 'Technical Background',
     sidebar: { constraintsTitle: 'Engineering Constraints' },
     qaContact: {
       title: 'Open to work',
-      description: 'Open to QA and Research opportunities.',
+      description: 'Open to QA opportunities.',
       ctaLabel: 'Get in Touch',
     },
   },
@@ -108,7 +108,7 @@ export const en: Translations = {
       id: 'proj-02',
       title: 'Functionome Atlas',
       description:
-        'Pipeline computing Functionome Perturbation Scores to map functional fragility across the human genome. Integrates VCF variant density, evolutionary constraint (LOEUF), and Gene Ontology annotations.',
+        'Data pipeline engineering for genomic variant analysis — 120× VCF throughput via NumPy vectorization. Integrates LOEUF evolutionary constraints and Gene Ontology annotations against gnomAD at scale.',
       techStack: ['Python', 'NumPy', 'Pandas', 'gnomAD'],
       link: 'https://github.com/gesttaltt/Functionome-Atlas',
       status: 'Research',
@@ -121,7 +121,7 @@ export const en: Translations = {
       id: 'proj-04',
       title: '3-Adic ML',
       description:
-        'Deep learning pipelines for p-adic variational autoencoders. Dual VAEs whose latent spaces live in a Poincaré ball — radial position determined by 3-adic valuation, direction by digit prefix structure. Hierarchy emerges from geometry, not memorization.',
+        'ML pipeline engineering with 280-test suite covering VAE correctness, geometric invariants, and clustering stability (ARI 0.844). Dual VAEs in Poincaré ball geometry — hierarchy enforced by 3-adic valuation, not memorization.',
       techStack: ['Python', 'PyTorch'],
       link: 'https://github.com/gesttaltt/3-adic-ml',
       status: 'Research',
@@ -134,7 +134,7 @@ export const en: Translations = {
       id: 'proj-03',
       title: 'Gene Functional Pipeline',
       description:
-        'GO annotation pipeline for human genome functional analysis. Three implementations: C++ DAG engine for local throughput, Apache Spark for cloud scale, and Python for development workflows.',
+        'Multi-implementation pipeline engineering: C++ DAG engine (5–25× over Python baseline), Apache Spark for cloud-scale execution, and Python for development workflows. Processes 10M+ gene annotations.',
       techStack: ['Python', 'C++', 'Apache Spark', 'Gene Ontology'],
       link: 'https://github.com/gesttaltt/gene-ontology-functionomes',
       status: 'Research',

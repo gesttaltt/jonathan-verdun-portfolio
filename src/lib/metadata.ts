@@ -3,9 +3,9 @@ import { siteConfig } from './siteConfig'
 
 const EN_TITLE = siteConfig.title
 const EN_DESCRIPTION = siteConfig.description
-const ES_TITLE = 'Jonathan Verdun | Automatización QA e Bioinformática'
+const ES_TITLE = 'Jonathan Verdun | Ingeniero de Automatización QA'
 const ES_DESCRIPTION =
-  'Portafolio de Jonathan Verdun — Ingeniero de Automatización QA e Investigador en Bioinformática, enfocado en desarrollo guiado por pruebas y biología computacional.'
+  'Portafolio de Jonathan Verdun — Ingeniero de Automatización QA enfocado en desarrollo guiado por pruebas, pipelines de automatización y calidad de ingeniería.'
 
 export const SHARED_VIEWPORT: Viewport = {
   themeColor: '#0a0a0a',

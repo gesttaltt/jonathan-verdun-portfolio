@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useMemo } from 'react'
-import { ShieldCheck, Server, Database, Code2, Dna } from 'lucide-react'
+import { ShieldCheck, Server, Database, Code2 } from 'lucide-react'
 import Link from 'next/link'
 import { BioinformaticsResearchCard } from '@/components/BioinformaticsResearchCard'
 import { SiteFooter } from '@/components/SiteFooter'
@@ -125,21 +125,16 @@ export const PortfolioPage: React.FC = () => {
                 </section>
               </FadeInSection>
 
-              <FadeInSection>
-                <section className="space-y-8">
-                  <SectionHeader
-                    icon={<Dna className="h-5 w-5" />}
-                    title={t.sections.bioinformatics}
-                    color="purple"
-                    showBorderBottom
-                  />
-                  <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-                    {t.bioinformatics.specs.map((spec) => (
-                      <BioinformaticsResearchCard key={spec.id} spec={spec} />
-                    ))}
-                  </div>
-                </section>
-              </FadeInSection>
+              <section className="space-y-4 border-t border-white/5 pt-8 opacity-60">
+                <p className="text-[10px] font-bold tracking-widest text-zinc-600 uppercase sm:text-xs">
+                  {t.sections.bioinformatics}
+                </p>
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                  {t.bioinformatics.specs.map((spec) => (
+                    <BioinformaticsResearchCard key={spec.id} spec={spec} />
+                  ))}
+                </div>
+              </section>
             </div>
           </div>
 
