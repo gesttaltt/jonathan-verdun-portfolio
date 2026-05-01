@@ -16,7 +16,7 @@ export const SystemSpecCard: React.FC<SystemSpecCardProps> = ({ spec }) => {
   return (
     <div className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-6 transition-all duration-300 hover:border-cyan-500/30 hover:bg-white/10 hover:shadow-[0_0_24px_var(--glow-cyan)]">
       <div className="mb-4 flex items-center justify-between">
-        <h3 className="flex items-center gap-2 text-sm font-bold tracking-wide text-cyan-400 uppercase">
+        <h3 className="flex items-center gap-2 text-base font-bold tracking-wide text-cyan-400 uppercase">
           <FlaskConical className="h-4 w-4" /> {spec.focus}
         </h3>
         <Cpu className="h-4 w-4 text-zinc-600 transition-colors group-hover:text-cyan-500" />
