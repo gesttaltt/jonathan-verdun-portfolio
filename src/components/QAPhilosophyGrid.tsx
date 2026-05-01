@@ -27,7 +27,7 @@ export const QAPhilosophyGrid: React.FC = () => {
                 <div className="flex h-6 w-6 items-center justify-center rounded-full bg-green-500/10 text-green-500">
                   <CheckCircle2 className="h-3.5 w-3.5" />
                 </div>
-                <h4 className="text-sm font-bold text-white uppercase">{spec.layer}</h4>
+                <h3 className="text-sm font-bold text-white uppercase">{spec.layer}</h3>
               </div>
               <span className="rounded bg-white/5 px-2 py-0.5 text-[10px] font-medium text-zinc-500 transition-colors group-hover:text-zinc-300 sm:text-xs">
                 {spec.status}

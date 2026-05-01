@@ -159,6 +159,7 @@ export const en: Translations = {
   terminal: {
     title: 'bash — interactive',
     helpCmd: 'help',
+    prompt: 'gestalt@portfolio:',
     boot: BOOT_COMMANDS,
     interactive: INTERACTIVE_COMMANDS,
   },

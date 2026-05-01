@@ -53,7 +53,10 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
         transition={{ duration: 0.35, ease: 'easeOut' }}
         className={`mb-6 flex items-center gap-4 ${showBorderBottom ? 'border-b border-white/10 pb-4' : ''}`}
       >
-        <div className={`flex h-10 w-10 items-center justify-center rounded-lg ${colors.badge}`}>
+        <div
+          aria-hidden="true"
+          className={`flex h-10 w-10 items-center justify-center rounded-lg ${colors.badge}`}
+        >
           {icon}
         </div>
         <h2 className="text-2xl font-bold text-white">{title}</h2>

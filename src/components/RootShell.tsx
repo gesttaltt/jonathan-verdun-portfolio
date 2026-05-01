@@ -10,6 +10,8 @@ const jsonLd = {
   jobTitle: siteConfig.jobTitle,
   url: siteConfig.url,
   email: siteConfig.contact.email,
+  image: `${siteConfig.url}/opengraph-image`,
+  description: siteConfig.description,
   sameAs: [siteConfig.socialLinks.github.url, siteConfig.socialLinks.linkedin.url],
   knowsAbout: [
     'QA Automation',
@@ -17,11 +19,13 @@ const jsonLd = {
     'Computational Biology',
     'Test-Driven Development',
   ],
-  worksFor: {
-    '@type': 'Organization',
-    name: siteConfig.workHistory[0].organization,
-    url: siteConfig.workHistory[0].url,
-  },
+  ...(siteConfig.workHistory.length > 0 && {
+    worksFor: {
+      '@type': 'Organization',
+      name: siteConfig.workHistory[0].organization,
+      url: siteConfig.workHistory[0].url,
+    },
+  }),
 }
 
 export function RootShell({ children }: { children: ReactNode }) {

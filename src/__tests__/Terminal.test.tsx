@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, screen } from '@testing-library/react'
+import { render, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { Terminal } from '@/components/Terminal'
 
@@ -27,8 +27,9 @@ describe('Terminal', () => {
     render(<Terminal commands={[]} />)
     const input = await screen.findByRole('textbox', { name: /terminal command input/i })
     await user.type(input, 'help{Enter}')
-    expect(screen.getByText('help')).toBeInTheDocument()
-    expect(screen.getByText(/available commands/i)).toBeInTheDocument()
+    const log = screen.getByRole('log')
+    expect(within(log).getByText('help')).toBeInTheDocument()
+    expect(within(log).getByText(/available commands/i)).toBeInTheDocument()
   })
 
   it('typing "clear" resets history — prior boot output disappears', async () => {

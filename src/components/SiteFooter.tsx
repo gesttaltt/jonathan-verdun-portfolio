@@ -80,7 +80,7 @@ export const SiteFooter: React.FC = () => {
                 href={siteConfig.socialLinks.github.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-zinc-500 transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none"
+                className="rounded text-zinc-500 transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none"
               >
                 @gesttaltt
               </a>{' '}

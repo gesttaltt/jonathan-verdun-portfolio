@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, screen, act } from '@testing-library/react'
+import { render, screen, act, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { usePathname } from 'next/navigation'
 import { I18nProvider } from '@/lib/i18n/context'
@@ -66,7 +66,9 @@ describe('PortfolioPage', () => {
       await flushBoot()
       const input = screen.getByRole('textbox', { name: /terminal command input/i })
       await user.type(input, 'xyz{Enter}')
-      expect(screen.getByText(/type 'help' for available commands/i)).toBeInTheDocument()
+      expect(
+        within(screen.getByRole('log')).getByText(/type 'help' for available commands/i)
+      ).toBeInTheDocument()
     })
   })
 
@@ -92,7 +94,9 @@ describe('PortfolioPage', () => {
       await flushBoot()
       const input = screen.getByRole('textbox', { name: /terminal command input/i })
       await user.type(input, 'xyz{Enter}')
-      expect(screen.getByText(/type 'ayuda' for available commands/i)).toBeInTheDocument()
+      expect(
+        within(screen.getByRole('log')).getByText(/type 'ayuda' for available commands/i)
+      ).toBeInTheDocument()
     })
   })
 })

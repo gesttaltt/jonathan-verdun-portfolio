@@ -9,6 +9,8 @@ interface TerminalProps {
   className?: string
   processor?: ICommandProcessor
   title?: string
+  prompt?: string
+  hintCmd?: string
 }
 
 export const Terminal: React.FC<TerminalProps> = ({
@@ -16,6 +18,8 @@ export const Terminal: React.FC<TerminalProps> = ({
   className = '',
   processor = new DefaultCommandProcessor(),
   title = 'bash — interactive',
+  prompt = 'gestalt@portfolio:',
+  hintCmd = 'help',
 }) => {
   const { history, isBooting, execute } = useTerminal(commands, processor)
   const [inputVal, setInputVal] = useState('')
@@ -38,6 +42,7 @@ export const Terminal: React.FC<TerminalProps> = ({
 
   return (
     <div
+      role="group"
       className={`flex w-full max-w-full flex-col overflow-hidden rounded-2xl border border-white/5 bg-black/80 font-mono text-xs shadow-2xl backdrop-blur-lg md:text-sm lg:text-base ${className}`}
       onClick={() => !isBooting && inputRef.current?.focus()}
     >
@@ -53,6 +58,10 @@ export const Terminal: React.FC<TerminalProps> = ({
         <div className="w-12"></div>
       </div>
 
+      <p id="terminal-hint" className="sr-only">
+        Type &apos;{hintCmd}&apos; for available commands
+      </p>
+
       <div
         ref={scrollRef}
         role="log"
@@ -66,7 +75,7 @@ export const Terminal: React.FC<TerminalProps> = ({
             <div key={entry.id ?? index} className="space-y-2 break-words">
               <div className="flex gap-2">
                 <span className="shrink-0 font-bold text-blue-500">
-                  <span className="hidden sm:inline">gestalt@portfolio:</span>~$
+                  <span className="hidden sm:inline">{prompt}</span>~$
                 </span>
                 <span className="min-w-0 text-zinc-100">{entry.text}</span>
               </div>
@@ -83,7 +92,7 @@ export const Terminal: React.FC<TerminalProps> = ({
           className={`flex items-center gap-2 pt-2 transition-opacity duration-300 ${isBooting ? 'pointer-events-none opacity-0' : 'opacity-100'}`}
         >
           <span className="shrink-0 font-bold text-blue-500">
-            <span className="hidden sm:inline">gestalt@portfolio:</span>~$
+            <span className="hidden sm:inline">{prompt}</span>~$
           </span>
           <div className="relative min-w-0 flex-grow">
             <input
@@ -95,6 +104,7 @@ export const Terminal: React.FC<TerminalProps> = ({
               /* font-size ≥ 16px on mobile prevents iOS Safari from zooming the viewport on focus */
               className="w-full bg-transparent text-base text-zinc-100 outline-none placeholder:text-zinc-700 sm:text-xs md:text-sm lg:text-base"
               aria-label="Terminal command input"
+              aria-describedby="terminal-hint"
               inputMode="text"
               spellCheck={false}
               autoComplete="off"

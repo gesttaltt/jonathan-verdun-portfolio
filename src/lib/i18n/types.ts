@@ -57,6 +57,7 @@ export interface Translations {
   terminal: {
     title: string
     helpCmd: string
+    prompt: string
     boot: readonly { text: string; output: string; delay?: number }[]
     interactive: Record<string, string>
   }

@@ -40,12 +40,14 @@ export function buildMetadata(lang: 'en' | 'es'): Metadata {
       description,
       siteName: siteConfig.name,
       locale,
+      images: [{ url: `${canonical}/opengraph-image`, width: 1200, height: 630, alt: description }],
     },
     twitter: {
       card: 'summary_large_image',
       title,
       description,
       creator: siteConfig.socialLinks.twitter.handle,
+      images: [`${canonical}/opengraph-image`],
     },
   }
 }

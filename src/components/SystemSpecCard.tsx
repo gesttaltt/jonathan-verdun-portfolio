@@ -33,15 +33,17 @@ export const SystemSpecCard: React.FC<SystemSpecCardProps> = ({ spec }) => {
           <p className="mt-1 text-xs text-zinc-300">{spec.invariants.join(' · ')}</p>
         </div>
         {spec.link && (
-          <Link
-            href={spec.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="focus-visible:ring-offset-background inline-flex items-center gap-1 rounded text-[10px] text-zinc-500 transition-colors hover:text-cyan-400 focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 focus-visible:outline-none sm:text-xs"
-          >
-            <ExternalLink className="h-3 w-3" />
-            {spec.link.replace('https://github.com/', '')}
-          </Link>
+          <div className="flex min-h-[44px] items-center">
+            <Link
+              href={spec.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="focus-visible:ring-offset-background inline-flex items-center gap-1 rounded text-[10px] text-zinc-500 transition-colors hover:text-cyan-400 focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 focus-visible:outline-none sm:text-xs"
+            >
+              <ExternalLink className="h-3 w-3" />
+              {spec.link.replace('https://github.com/', '')}
+            </Link>
+          </div>
         )}
       </div>
     </div>
