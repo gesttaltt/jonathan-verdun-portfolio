@@ -5,7 +5,7 @@ export const LS_PROJECTS_OUTPUT =
 export const INTERACTIVE_COMMANDS: Record<string, string> = {
   help: 'Available commands: help, about, projects, contact, clear',
   about:
-    'Jonathan Verdun. QA engineer and test architect. Property-based testing, automation pipelines, and quality gates that catch regressions before humans do.',
+    'Jonathan Verdun. QA engineer and test architect. Property-based testing, automation pipelines, and quality gates — pre-commit hooks, GitHub Actions CI, coverage enforcement — that catch regressions before humans do.',
   projects: 'Check out the Projects section below, or type "ls projects" to see a list.',
   contact: 'Reach out via LinkedIn or GitHub linked above.',
   'ls projects': LS_PROJECTS_OUTPUT,

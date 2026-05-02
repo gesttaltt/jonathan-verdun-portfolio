@@ -113,13 +113,13 @@ export const es: Translations = {
       id: 'proj-01',
       title: 'QA Arxiv Mobile',
       description:
-        'Plan de pruebas y suite de automatización para la app de código abierto arxiv-papers-mobile (iOS/Android). Casos de prueba manuales con trazabilidad en Azure DevOps cubriendo historias de usuario críticas. Automatización Python/pytest orientada a flujos de login, carga de artículos, búsqueda y navegación. Valida las restricciones de test-first y quality-gate descritas en la sección de Filosofía QA.',
-      techStack: ['Python', 'pytest', 'Azure DevOps', 'Appium'],
+        '26 tests automatizados con pytest + Appium y 10 casos de prueba manuales con trazabilidad completa ADO en 4 historias de usuario (búsqueda, favoritos, PDF, red). Validación de API, flujos de smoke móvil y verificación de integridad de datos — todo gestionado vía GitHub Actions CI. Valida las restricciones de test-first y quality-gate descritas en la sección de Filosofía QA.',
+      techStack: ['Python', 'pytest', 'Appium', 'Azure DevOps', 'Docker', 'Postman'],
       link: 'https://github.com/gesttaltt/qa-arxiv-mobile',
       status: 'QA',
       stats: [
-        { label: 'Conjuntos de Pruebas', value: '3' },
-        { label: 'Plataforma', value: 'iOS · Android' },
+        { label: 'Automatizados', value: '26' },
+        { label: 'Casos Manuales', value: '10' },
       ],
     },
     {
