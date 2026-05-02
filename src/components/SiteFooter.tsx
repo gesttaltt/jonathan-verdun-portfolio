@@ -7,8 +7,6 @@ import { m } from 'framer-motion'
 import { siteConfig } from '@/lib/siteConfig'
 import { useTranslation } from '@/lib/i18n/context'
 
-const CURRENT_YEAR = new Date().getFullYear()
-
 const SOCIAL = [
   {
     href: siteConfig.socialLinks.github.url,
@@ -29,7 +27,7 @@ const SOCIAL = [
 
 export const SiteFooter: React.FC = () => {
   const t = useTranslation()
-  const year = CURRENT_YEAR
+  const year = new Date().getFullYear()
 
   return (
     <m.footer
@@ -75,7 +73,7 @@ export const SiteFooter: React.FC = () => {
           {/* Bottom row: copyright + stack */}
           <div className="flex flex-col items-start gap-2 pt-6 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-xs text-zinc-500">
-              {year} {siteConfig.name}{' '}
+              &copy; {year} {siteConfig.name}{' '}
               <a
                 href={siteConfig.socialLinks.github.url}
                 target="_blank"

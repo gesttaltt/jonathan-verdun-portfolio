@@ -13,4 +13,12 @@ describe('QA Contract Invariants', () => {
       expect(c.length).toBeGreaterThan(5)
     })
   })
+
+  it('every specification has a non-empty objective', () => {
+    expect(QA_PHILOSOPHY.specifications.length).toBeGreaterThan(0)
+    QA_PHILOSOPHY.specifications.forEach((spec) => {
+      expect(typeof spec.objective).toBe('string')
+      expect(spec.objective.length).toBeGreaterThan(0)
+    })
+  })
 })

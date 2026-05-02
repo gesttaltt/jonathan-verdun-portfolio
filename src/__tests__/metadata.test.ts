@@ -24,6 +24,18 @@ describe('buildMetadata', () => {
     it('twitter card is summary_large_image', () => {
       expect((m.twitter as { card: string }).card).toBe('summary_large_image')
     })
+
+    it('openGraph includes images array with correct URL', () => {
+      const images = (m.openGraph as { images: Array<{ url: string }> }).images
+      expect(images).toHaveLength(1)
+      expect(images[0].url).toContain('/opengraph-image')
+    })
+
+    it('twitter includes images array', () => {
+      const images = (m.twitter as { images: string[] }).images
+      expect(images).toHaveLength(1)
+      expect(images[0]).toContain('/opengraph-image')
+    })
   })
 
   describe('ES', () => {

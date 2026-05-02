@@ -6,7 +6,14 @@ import { ExternalLink, Terminal } from 'lucide-react'
 import Link from 'next/link'
 import { ProjectSpec } from '@/lib/contracts/ProjectContract.types'
 import { fadeUpVariants } from '@/lib/animations'
-import { uiConfig } from '@/lib/uiConfig'
+
+const PROJECT_STATUS_STYLES: Record<string, string> = {
+  Deployed: 'bg-green-500/20 text-green-400',
+  QA: 'bg-blue-500/20 text-blue-400',
+  Research: 'bg-purple-500/20 text-purple-400',
+  Prototype: 'bg-amber-500/20 text-amber-400',
+  Archived: 'bg-zinc-500/20 text-zinc-400',
+}
 
 interface ProjectCardProps {
   project: ProjectSpec
@@ -32,7 +39,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
           <div className="flex items-center gap-2">
             <Terminal className="h-5 w-5 text-blue-500" />
             <span
-              className={`rounded px-1.5 py-0.5 text-[10px] font-bold tracking-wider uppercase sm:text-xs ${uiConfig.projectStatusStyles[project.status] ?? 'bg-zinc-500/20 text-zinc-400'}`}
+              className={`rounded px-1.5 py-0.5 text-[10px] font-bold tracking-wider uppercase sm:text-xs ${PROJECT_STATUS_STYLES[project.status] ?? 'bg-zinc-500/20 text-zinc-400'}`}
             >
               {project.status}
             </span>

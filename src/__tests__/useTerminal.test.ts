@@ -84,6 +84,23 @@ describe('useTerminal', () => {
     expect(result.current.history).toHaveLength(0)
   })
 
+  it('execute("limpiar") also resets history (ES alias for clear)', () => {
+    const { result } = renderHook(() => useTerminal([], makeProcessor()))
+
+    act(() => {
+      jest.runAllTimers()
+    })
+    act(() => {
+      result.current.execute('help')
+    })
+    expect(result.current.history).toHaveLength(1)
+
+    act(() => {
+      result.current.execute('limpiar')
+    })
+    expect(result.current.history).toHaveLength(0)
+  })
+
   it('execute() is a no-op for blank/whitespace input', () => {
     const processor = makeProcessor()
     const { result } = renderHook(() => useTerminal([], processor))

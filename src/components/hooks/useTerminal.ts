@@ -51,7 +51,7 @@ export const useTerminal = (
       const cmd = input.trim()
       if (!cmd) return
 
-      if (cmd.toLowerCase() === 'clear') {
+      if (['clear', 'limpiar'].includes(cmd.toLowerCase())) {
         setHistory([])
         return
       }

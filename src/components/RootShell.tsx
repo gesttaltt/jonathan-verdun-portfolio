@@ -15,9 +15,10 @@ const jsonLd = {
   sameAs: [siteConfig.socialLinks.github.url, siteConfig.socialLinks.linkedin.url],
   knowsAbout: [
     'QA Automation',
-    'Bioinformatics',
-    'Computational Biology',
     'Test-Driven Development',
+    'Automation Engineering',
+    'Property-Based Testing',
+    'Bioinformatics',
   ],
   ...(siteConfig.workHistory.length > 0 && {
     worksFor: {

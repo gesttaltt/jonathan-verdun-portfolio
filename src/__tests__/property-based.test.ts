@@ -19,7 +19,16 @@ describe('CommandProcessor — property-based', () => {
   })
 
   it('unknown commands always echo the original input back in the error message', () => {
-    const knownCommands = new Set(['help', 'about', 'projects', 'contact', 'ls projects', 'sudo'])
+    const knownCommands = new Set([
+      'help',
+      'about',
+      'projects',
+      'contact',
+      'ls projects',
+      'sudo',
+      'clear',
+      'limpiar',
+    ])
     fc.assert(
       fc.property(
         fc.string({ minLength: 1 }).filter((s) => !knownCommands.has(s.toLowerCase().trim())),

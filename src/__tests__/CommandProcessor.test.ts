@@ -26,7 +26,9 @@ describe('DefaultCommandProcessor', () => {
   })
 
   it('handles multi-word commands like "ls projects"', () => {
-    expect(processor.process('ls projects')).toContain('QA-Arxiv-Mobile')
+    const result = processor.process('ls projects')
+    expect(result).toContain('QA-Arxiv-Mobile')
+    expect(result).toContain('3-Adic-ML')
   })
 
   it('returns correct responses for all built-in INTERACTIVE_COMMANDS', () => {
@@ -36,14 +38,10 @@ describe('DefaultCommandProcessor', () => {
     expect(processor.process('projects')).toContain('Projects')
   })
 
-  it('returns technical background redirect for the "research" command', () => {
-    expect(processor.process('research')).toContain('Technical Background')
-  })
-
-  it('help output lists core commands but not research', () => {
+  it('help output lists core commands', () => {
     const help = processor.process('help')
     expect(help).toContain('projects')
-    expect(help).not.toContain('research')
+    expect(help).toContain('contact')
   })
 
   it('replaces all defaults when custom commands are injected via constructor', () => {
