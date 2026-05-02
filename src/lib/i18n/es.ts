@@ -165,7 +165,6 @@ export const es: Translations = {
   terminal: {
     title: 'bash — interactivo',
     helpCmd: 'ayuda',
-    prompt: 'gestalt@portfolio:',
     boot: [
       {
         text: 'whoami',

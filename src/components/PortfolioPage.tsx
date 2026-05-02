@@ -44,7 +44,6 @@ export const PortfolioPage: React.FC = () => {
               commands={t.terminal.boot}
               processor={processor}
               title={t.terminal.title}
-              prompt={t.terminal.prompt}
               hintCmd={t.terminal.helpCmd}
             />
           </FadeInSection>

@@ -5,8 +5,8 @@ export const PROJECT_DATA: ProjectSpec[] = [
     id: 'proj-01',
     title: 'QA Arxiv Mobile',
     description:
-      'Manual test cases with user story traceability, cross-platform coverage (iOS/Android), and a Python/pytest automation suite against the open-source arxiv-papers-mobile app.',
-    techStack: ['Python', 'pytest', 'Azure DevOps'],
+      'Test plan and automation suite for the open-source arxiv-papers-mobile app (iOS/Android). Manual test cases with Azure DevOps traceability covering critical user stories. Python/pytest automation targeting login, article fetch, search, and navigation flows.',
+    techStack: ['Python', 'pytest', 'Azure DevOps', 'Appium'],
     link: 'https://github.com/gesttaltt/qa-arxiv-mobile',
     status: 'QA',
     stats: [
@@ -18,7 +18,7 @@ export const PROJECT_DATA: ProjectSpec[] = [
     id: 'proj-02',
     title: 'Functionome Atlas',
     description:
-      'Pipeline computing Functionome Perturbation Scores to map functional fragility across the human genome. Integrates VCF variant density, evolutionary constraint (LOEUF), and Gene Ontology annotations.',
+      'Data pipeline engineering for genomic variant analysis — 120× VCF throughput via NumPy vectorization. Integrates LOEUF evolutionary constraints and Gene Ontology annotations against gnomAD at scale.',
     techStack: ['Python', 'NumPy', 'Pandas', 'gnomAD'],
     link: 'https://github.com/gesttaltt/Functionome-Atlas',
     status: 'Research',
@@ -31,7 +31,7 @@ export const PROJECT_DATA: ProjectSpec[] = [
     id: 'proj-04',
     title: '3-Adic ML',
     description:
-      'Deep learning pipelines for p-adic variational autoencoders. Dual VAEs whose latent spaces live in a Poincaré ball — radial position determined by 3-adic valuation, direction by digit prefix structure. Hierarchy emerges from geometry, not memorization.',
+      'ML pipeline engineering with 280-test suite covering VAE correctness, geometric invariants, and clustering stability (ARI 0.844). Dual VAEs in Poincaré ball geometry — hierarchy enforced by 3-adic valuation, not memorization.',
     techStack: ['Python', 'PyTorch'],
     link: 'https://github.com/gesttaltt/3-adic-ml',
     status: 'Research',
@@ -44,7 +44,7 @@ export const PROJECT_DATA: ProjectSpec[] = [
     id: 'proj-03',
     title: 'Gene Functional Pipeline',
     description:
-      'GO annotation pipeline for human genome functional analysis. Three implementations: C++ DAG engine for local throughput, Apache Spark for cloud scale, and Python for development workflows.',
+      'Multi-implementation pipeline engineering: C++ DAG engine (5–25× over Python baseline), Apache Spark for cloud-scale execution, and Python for development workflows. Processes 10M+ gene annotations.',
     techStack: ['Python', 'C++', 'Apache Spark', 'Gene Ontology'],
     link: 'https://github.com/gesttaltt/gene-ontology-functionomes',
     status: 'Research',
