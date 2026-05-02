@@ -5,7 +5,7 @@ export const PROJECT_DATA: ProjectSpec[] = [
     id: 'proj-01',
     title: 'QA Arxiv Mobile',
     description:
-      'Test plan and automation suite for the open-source arxiv-papers-mobile app (iOS/Android). Manual test cases with Azure DevOps traceability covering critical user stories. Python/pytest automation targeting login, article fetch, search, and navigation flows.',
+      'Test plan and automation suite for the open-source arxiv-papers-mobile app (iOS/Android). Manual test cases with Azure DevOps traceability covering critical user stories. Python/pytest automation targeting login, article fetch, search, and navigation flows. Validates the test-first and coverage-gate constraints shown in the QA Philosophy section.',
     techStack: ['Python', 'pytest', 'Azure DevOps', 'Appium'],
     link: 'https://github.com/gesttaltt/qa-arxiv-mobile',
     status: 'QA',

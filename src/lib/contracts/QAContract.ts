@@ -7,7 +7,7 @@ import { QAPhilosophy } from './QAContract.types'
 
 export const QA_PHILOSOPHY: QAPhilosophy = {
   constraints: [
-    '≥80% unit coverage enforced in CI — merge blocked below threshold',
+    '≥80% unit coverage enforced in CI via GitHub Actions — merge blocked below threshold',
     'Property-based fuzzing via fast-check applied to all domain contracts and boundary conditions',
     'All system boundary inputs validated against strict schemas; invalid inputs rejected at ingestion',
     'Tests written before feature code — test-first discipline enforced at every layer',

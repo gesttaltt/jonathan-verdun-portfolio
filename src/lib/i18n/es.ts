@@ -21,7 +21,7 @@ export const es: Translations = {
   },
   qa: {
     constraints: [
-      '≥80% de cobertura unitaria aplicada en CI — integración bloqueada por debajo del umbral',
+      '≥80% de cobertura unitaria aplicada en CI via GitHub Actions — integración bloqueada por debajo del umbral',
       'Fuzzing basado en propiedades via fast-check aplicado a todos los contratos de dominio y condiciones de frontera',
       'Todas las entradas en fronteras del sistema validadas contra esquemas estrictos; entradas inválidas rechazadas en ingesta',
       'Pruebas escritas antes del código de funcionalidad — disciplina test-first aplicada en cada capa',
@@ -113,7 +113,7 @@ export const es: Translations = {
       id: 'proj-01',
       title: 'QA Arxiv Mobile',
       description:
-        'Plan de pruebas y suite de automatización para la app de código abierto arxiv-papers-mobile (iOS/Android). Casos de prueba manuales con trazabilidad en Azure DevOps cubriendo historias de usuario críticas. Automatización Python/pytest orientada a flujos de login, carga de artículos, búsqueda y navegación.',
+        'Plan de pruebas y suite de automatización para la app de código abierto arxiv-papers-mobile (iOS/Android). Casos de prueba manuales con trazabilidad en Azure DevOps cubriendo historias de usuario críticas. Automatización Python/pytest orientada a flujos de login, carga de artículos, búsqueda y navegación. Valida las restricciones de test-first y quality-gate descritas en la sección de Filosofía QA.',
       techStack: ['Python', 'pytest', 'Azure DevOps', 'Appium'],
       link: 'https://github.com/gesttaltt/qa-arxiv-mobile',
       status: 'QA',
