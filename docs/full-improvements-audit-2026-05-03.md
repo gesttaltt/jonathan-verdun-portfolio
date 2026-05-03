@@ -144,8 +144,8 @@
 
 **File:** `tsconfig.json`
 **Problem:** TypeScript strict mode does not include `noUnusedLocals` or `noUnusedParameters`. Dead code (unused imports, declared-but-unused variables) can accumulate without compiler feedback.
-**Fix (deferred):** Adding these flags is straightforward but requires a clean `tsc --noEmit` pass to confirm no existing violations before enabling. Defer to next CI-verified iteration.
-**Status:** Deferred
+**Fix:** Stripped stale `import React from 'react'` from 18 test files and `ErrorBoundary.tsx` (vestigial from React 16; `react-jsx` transform makes it unnecessary). Flags then enabled in tsconfig — dead code is now a compile error.
+**Status:** Implemented
 
 ---
 
@@ -159,4 +159,4 @@
 | D4  | External card links missing `aria-label`           | MEDIUM   | Implemented |
 | D5  | `PROJECT_STATUS_STYLES` loose `Record<string>`     | LOW      | Implemented |
 | D6  | No accessibility test suite                        | MEDIUM   | Implemented |
-| D7  | `noUnusedLocals`/`noUnusedParameters` not enabled  | LOW      | Deferred    |
+| D7  | `noUnusedLocals`/`noUnusedParameters` not enabled  | LOW      | Implemented |

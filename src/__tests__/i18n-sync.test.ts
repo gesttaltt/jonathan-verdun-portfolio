@@ -1,6 +1,8 @@
 import { ProjectService } from '@/lib/contracts/ProjectContract'
 import { DataEngineeringService } from '@/lib/contracts/DataEngineeringContract'
 import { BioinformaticsService } from '@/lib/contracts/BioinformaticsContract'
+import { siteConfig } from '@/lib/siteConfig'
+import { en } from '@/lib/i18n/en'
 import { es } from '@/lib/i18n/es'
 
 describe('i18n ↔ contract sync — projects', () => {
@@ -52,5 +54,17 @@ describe('i18n ↔ contract sync — bioinformatics specs', () => {
   it('ES locale bioinformatics spec IDs exactly match contract IDs', () => {
     const esIds = es.bioinformatics.specs.map((s) => s.id).sort()
     expect(esIds).toEqual(contractIds)
+  })
+})
+
+describe('i18n ↔ siteConfig sync — workHistoryDescriptions', () => {
+  const workHistoryLength = siteConfig.workHistory.length
+
+  it('EN workHistoryDescriptions length matches siteConfig.workHistory length', () => {
+    expect(en.workHistoryDescriptions.length).toBe(workHistoryLength)
+  })
+
+  it('ES workHistoryDescriptions length matches siteConfig.workHistory length', () => {
+    expect(es.workHistoryDescriptions.length).toBe(workHistoryLength)
   })
 })
