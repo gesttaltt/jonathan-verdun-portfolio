@@ -78,6 +78,85 @@
 | H3  | Work history description text contrast  | HIGH     | Implemented |
 | M1  | siteConfig meta description too generic | MEDIUM   | Implemented |
 | M2  | No QA project count assertion           | MEDIUM   | Implemented |
-| M3  | siteConfig.sections test coupling       | MEDIUM   | Deferred    |
+| M3  | siteConfig.sections test coupling       | MEDIUM   | Implemented |
 | L1  | CI badge no explicit width              | LOW      | Implemented |
-| L2  | No ES property-based test               | LOW      | Deferred    |
+| L2  | No ES property-based test               | LOW      | Implemented |
+
+---
+
+## Deep Iteration — 2026-05-03
+
+### D1 — ES_DESCRIPTION in metadata.ts not updated to match EN (HIGH)
+
+**File:** `src/lib/metadata.ts:7`
+**Problem:** Spanish meta description still used the old generic text ("enfocado en desarrollo guiado por pruebas, pipelines de automatización y calidad de ingeniería") after EN was updated to mention pytest, Playwright, Appium, and property-based testing. Spanish SEO was less specific than English.
+**Fix:** Updated to mirror EN specificity — mentions pytest, Playwright, Appium, and property-based testing with GitHub Actions CI.
+**Status:** Implemented
+
+---
+
+### D2 — `worksFor` in Schema.org JSON-LD implies current employer (HIGH)
+
+**File:** `src/components/RootShell.tsx:23`
+**Problem:** JSON-LD `worksFor` property implies a current employment relationship. The Ai-Whisperers role ended April 2026. Including it sends incorrect structured data to search engines.
+**Fix:** Removed the `worksFor` spread entirely. The work history is still visible in the UI via HeroHeader; Schema.org structured data no longer implies a current role that ended.
+**Status:** Implemented
+
+---
+
+### D3 — `knowsAbout` in Schema.org JSON-LD missing key tooling (MEDIUM)
+
+**File:** `src/components/RootShell.tsx:16`
+**Problem:** `knowsAbout` listed generic terms ('QA Automation', 'Test-Driven Development') but omitted the specific tools now featured in the meta description and project cards (Playwright, pytest, Appium, GitHub Actions CI).
+**Fix:** Added 'Playwright', 'pytest', 'Appium', 'GitHub Actions CI' to the array.
+**Status:** Implemented
+
+---
+
+### D4 — External links in card components missing `aria-label` (MEDIUM)
+
+**Files:** `src/components/BioinformaticsResearchCard.tsx:38`, `src/components/SystemSpecCard.tsx:37`
+**Problem:** Both cards render external GitHub links whose visible text is the repo path (e.g. `gesttaltt/codon-encoder`). The `ExternalLink` icon has no alt text and the link has no `aria-label`, making the accessible name terse and context-free for screen readers.
+**Fix:** Added `aria-label={`View ${repo} on GitHub (opens in new tab)`}` to both link elements.
+**Status:** Implemented
+
+---
+
+### D5 — `PROJECT_STATUS_STYLES` uses loose `Record<string, string>` type (LOW)
+
+**File:** `src/components/ProjectCard.tsx:10`
+**Problem:** The status-to-className map used `Record<string, string>`, allowing any string key. TypeScript provided no exhaustiveness checking — adding a new status value to `ProjectSpec['status']` would silently fall through to the `?? 'bg-zinc-500/20 text-zinc-400'` fallback with no compile-time warning.
+**Fix:** Changed to `Record<ProjectSpec['status'], string>` — TypeScript now requires all five status values to be present and rejects unknown keys.
+**Status:** Implemented
+
+---
+
+### D6 — No accessibility test suite (MEDIUM)
+
+**File:** `src/__tests__/accessibility.test.tsx` (new)
+**Problem:** No test file asserted core a11y invariants: single `<main>` landmark, skip-nav target `#main-content`, single `<h1>`, external links having `rel="noopener"`, images having `alt` text. These guarantees existed by construction but were unguarded.
+**Fix:** Created `src/__tests__/accessibility.test.tsx` with four describe blocks covering landmarks, heading hierarchy, external link safety, and image alt text.
+**Status:** Implemented
+
+---
+
+### D7 — `noUnusedLocals` / `noUnusedParameters` not enabled in tsconfig (LOW)
+
+**File:** `tsconfig.json`
+**Problem:** TypeScript strict mode does not include `noUnusedLocals` or `noUnusedParameters`. Dead code (unused imports, declared-but-unused variables) can accumulate without compiler feedback.
+**Fix (deferred):** Adding these flags is straightforward but requires a clean `tsc --noEmit` pass to confirm no existing violations before enabling. Defer to next CI-verified iteration.
+**Status:** Deferred
+
+---
+
+## Deep Iteration Summary
+
+| ID  | Issue                                              | Priority | Status      |
+| --- | -------------------------------------------------- | -------- | ----------- |
+| D1  | ES_DESCRIPTION generic text                        | HIGH     | Implemented |
+| D2  | `worksFor` implies active role that ended Apr 2026 | HIGH     | Implemented |
+| D3  | `knowsAbout` missing Playwright/pytest/Appium      | MEDIUM   | Implemented |
+| D4  | External card links missing `aria-label`           | MEDIUM   | Implemented |
+| D5  | `PROJECT_STATUS_STYLES` loose `Record<string>`     | LOW      | Implemented |
+| D6  | No accessibility test suite                        | MEDIUM   | Implemented |
+| D7  | `noUnusedLocals`/`noUnusedParameters` not enabled  | LOW      | Deferred    |

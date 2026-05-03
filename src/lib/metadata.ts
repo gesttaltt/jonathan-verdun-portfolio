@@ -5,7 +5,7 @@ const EN_TITLE = siteConfig.title
 const EN_DESCRIPTION = siteConfig.description
 const ES_TITLE = 'Jonathan Verdun | Ingeniero de Automatización QA'
 const ES_DESCRIPTION =
-  'Portafolio de Jonathan Verdun — Ingeniero de Automatización QA enfocado en desarrollo guiado por pruebas, pipelines de automatización y calidad de ingeniería.'
+  'Portafolio de Jonathan Verdun — Ingeniero de Automatización QA especializado en pytest, Playwright, Appium y pruebas basadas en propiedades con GitHub Actions CI.'
 
 export const SHARED_VIEWPORT: Viewport = {
   themeColor: '#0a0a0a',

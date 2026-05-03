@@ -7,7 +7,7 @@ import Link from 'next/link'
 import { ProjectSpec } from '@/lib/contracts/ProjectContract.types'
 import { fadeUpVariants } from '@/lib/animations'
 
-const PROJECT_STATUS_STYLES: Record<string, string> = {
+const PROJECT_STATUS_STYLES: Record<ProjectSpec['status'], string> = {
   Deployed: 'bg-green-500/20 text-green-400',
   QA: 'bg-blue-500/20 text-blue-400',
   Research: 'bg-purple-500/20 text-purple-400',

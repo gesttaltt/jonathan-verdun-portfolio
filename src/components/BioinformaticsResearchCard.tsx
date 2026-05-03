@@ -39,6 +39,7 @@ export const BioinformaticsResearchCard: React.FC<BioinformaticsResearchCardProp
             href={spec.link}
             target="_blank"
             rel="noopener noreferrer"
+            aria-label={`View ${spec.link.replace('https://github.com/', '')} on GitHub (opens in new tab)`}
             className="focus-visible:ring-offset-background inline-flex items-center gap-1 rounded text-[10px] text-zinc-500 transition-colors hover:text-purple-400 focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2 focus-visible:outline-none sm:text-xs"
           >
             <ExternalLink className="h-3 w-3" />

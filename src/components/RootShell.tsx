@@ -18,15 +18,12 @@ const jsonLd = {
     'Test-Driven Development',
     'Automation Engineering',
     'Property-Based Testing',
+    'Playwright',
+    'pytest',
+    'Appium',
+    'GitHub Actions CI',
     'Bioinformatics',
   ],
-  ...(siteConfig.workHistory.length > 0 && {
-    worksFor: {
-      '@type': 'Organization',
-      name: siteConfig.workHistory[0].organization,
-      url: siteConfig.workHistory[0].url,
-    },
-  }),
 }
 
 export function RootShell({ children }: { children: ReactNode }) {
