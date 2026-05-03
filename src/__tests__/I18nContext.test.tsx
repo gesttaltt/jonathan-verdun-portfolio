@@ -1,4 +1,3 @@
-import React from 'react'
 import { render, screen } from '@testing-library/react'
 import { usePathname } from 'next/navigation'
 import { I18nProvider, useTranslation } from '@/lib/i18n/context'

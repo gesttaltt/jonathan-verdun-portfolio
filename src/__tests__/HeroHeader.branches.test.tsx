@@ -1,4 +1,3 @@
-import React from 'react'
 import { render, screen } from '@testing-library/react'
 import { domAnimation, LazyMotion, MotionConfig } from 'framer-motion'
 import { HeroHeader } from '@/components/HeroHeader'

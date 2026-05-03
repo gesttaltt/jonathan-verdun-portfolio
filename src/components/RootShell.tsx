@@ -1,30 +1,7 @@
 import type { ReactNode } from 'react'
-import { siteConfig } from '@/lib/siteConfig'
+import { personJsonLd } from '@/lib/jsonLd'
 import { MotionProvider } from '@/components/MotionProvider'
 import { I18nProvider } from '@/lib/i18n/context'
-
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'Person',
-  name: siteConfig.name,
-  jobTitle: siteConfig.jobTitle,
-  url: siteConfig.url,
-  email: siteConfig.contact.email,
-  image: `${siteConfig.url}/opengraph-image`,
-  description: siteConfig.description,
-  sameAs: [siteConfig.socialLinks.github.url, siteConfig.socialLinks.linkedin.url],
-  knowsAbout: [
-    'QA Automation',
-    'Test-Driven Development',
-    'Automation Engineering',
-    'Property-Based Testing',
-    'Playwright',
-    'pytest',
-    'Appium',
-    'GitHub Actions CI',
-    'Bioinformatics',
-  ],
-}
 
 export function RootShell({ children }: { children: ReactNode }) {
   return (
@@ -37,7 +14,7 @@ export function RootShell({ children }: { children: ReactNode }) {
       </a>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
       />
       <MotionProvider>
         <I18nProvider>{children}</I18nProvider>

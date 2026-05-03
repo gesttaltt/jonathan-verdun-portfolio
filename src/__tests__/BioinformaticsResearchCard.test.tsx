@@ -1,4 +1,3 @@
-import React from 'react'
 import { render, screen } from '@testing-library/react'
 import { I18nProvider } from '@/lib/i18n/context'
 import { BioinformaticsResearchCard } from '@/components/BioinformaticsResearchCard'
