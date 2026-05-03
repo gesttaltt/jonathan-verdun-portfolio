@@ -1,11 +1,11 @@
 /* c8 ignore next 2 */
 export const LS_PROJECTS_OUTPUT =
-  'drwx------ 1 gestalt staff  QA-Arxiv-Mobile\n-rw-r--r-- 1 gestalt staff  Functionome-Atlas\n-rwxr-xr-x 1 gestalt staff  Gene-Functional-Pipeline\n-rw-r--r-- 1 gestalt staff  3-Adic-ML'
+  'drwx------ 1 gestalt staff  QA-Arxiv-Mobile\n-rw-r--r-- 1 gestalt staff  YT-Transcriptor\n-rw-r--r-- 1 gestalt staff  Functionome-Atlas\n-rwxr-xr-x 1 gestalt staff  Gene-Functional-Pipeline\n-rw-r--r-- 1 gestalt staff  3-Adic-ML'
 
 export const INTERACTIVE_COMMANDS: Record<string, string> = {
   help: 'Available commands: help, about, projects, contact, clear',
   about:
-    'Jonathan Verdun. QA engineer and test architect. Property-based testing, automation pipelines, and quality gates — pre-commit hooks, GitHub Actions CI, coverage enforcement — that catch regressions before humans do.',
+    'Jonathan Verdun. QA engineer and test architect. Test plans, traceability matrices, property-based testing, and automation pipelines — quality gates enforced via pre-commit hooks, GitHub Actions CI, and coverage thresholds.',
   projects: 'Check out the Projects section below, or type "ls projects" to see a list.',
   contact: 'Reach out via LinkedIn or GitHub linked above.',
   'ls projects': LS_PROJECTS_OUTPUT,

@@ -13,7 +13,7 @@ export class DataEngineeringService {
         id: 'spec-01',
         focus: 'Automated Reporting',
         methodology: 'ETL',
-        invariants: ['Idempotent Execution', 'Schema Validation'],
+        invariants: ['Idempotent Execution', 'Schema Validation', 'CI-Gated Releases'],
         link: 'https://github.com/Ai-Whisperers/work-hours-automated-reports',
       },
       {
@@ -21,6 +21,13 @@ export class DataEngineeringService {
         focus: 'Predictive Capacity Control',
         methodology: 'Additive Modeling',
         invariants: ['Monotonic Constraints', 'Bounded Predictions'],
+      },
+      {
+        id: 'spec-03',
+        focus: 'AI Site Builder',
+        methodology: 'Progressive Delivery',
+        invariants: ['Lighthouse CI Gate', 'Preview Deployments', 'Nightly Regression'],
+        link: 'https://github.com/Ai-Whisperers/paragu-ai-builder',
       },
     ]
   }
