@@ -42,24 +42,4 @@ export const siteConfig = {
 
   tagline: 'Test Architecture · Automation Engineering',
   jobTitle: 'QA Automation Engineer',
-
-  sections: {
-    projects: {
-      title: 'Projects',
-    },
-    architecture: {
-      title: 'Architecture',
-    },
-    qa: {
-      title: 'QA Philosophy',
-      contactTitle: 'Open to work',
-      contactDescription: 'Available for QA engineering and automation architecture roles.',
-    },
-    sidebar: {
-      constraintsTitle: 'Engineering Constraints',
-    },
-    bioinformatics: {
-      title: 'Prior Research & Engineering',
-    },
-  },
 } as const

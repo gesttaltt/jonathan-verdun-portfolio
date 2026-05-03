@@ -2,8 +2,9 @@ import * as fc from 'fast-check'
 import { DefaultCommandProcessor } from '@/lib/services/CommandProcessor'
 import { ProjectService } from '@/lib/contracts/ProjectContract'
 import { DataEngineeringService } from '@/lib/contracts/DataEngineeringContract'
+import { es } from '@/lib/i18n/es'
 
-// ─── CommandProcessor ──────────────────────────────────────────────────────────
+// ─── CommandProcessor (EN) ─────────────────────────────────────────────────────
 
 describe('CommandProcessor — property-based', () => {
   const processor = new DefaultCommandProcessor()
@@ -55,6 +56,46 @@ describe('CommandProcessor — property-based', () => {
     fc.assert(
       fc.property(fc.stringMatching(/^\s*$/), (input) => {
         expect(() => processor.process(input)).not.toThrow()
+      })
+    )
+  })
+})
+
+// ─── CommandProcessor (ES) ─────────────────────────────────────────────────────
+
+describe('ES CommandProcessor — property-based', () => {
+  const esProcessor = new DefaultCommandProcessor(es.terminal.interactive, es.terminal.helpCmd)
+  const esKnownCommands = new Set(Object.keys(es.terminal.interactive))
+
+  it('always returns a string for any ES input', () => {
+    fc.assert(
+      fc.property(fc.string(), (input) => {
+        const result = esProcessor.process(input)
+        expect(typeof result).toBe('string')
+        expect(result.length).toBeGreaterThan(0)
+      })
+    )
+  })
+
+  it('unknown ES commands echo the original input back in the error message', () => {
+    fc.assert(
+      fc.property(
+        fc.string({ minLength: 1 }).filter((s) => !esKnownCommands.has(s.toLowerCase().trim())),
+        (input) => {
+          const result = esProcessor.process(input)
+          expect(result).toContain(input.trim())
+        }
+      )
+    )
+  })
+
+  it('ES process is case-insensitive for known commands', () => {
+    const cases = ['ayuda', 'sobre', 'proyectos', 'contacto', 'sudo']
+    fc.assert(
+      fc.property(fc.constantFrom(...cases), (cmd) => {
+        const lower = esProcessor.process(cmd.toLowerCase())
+        const upper = esProcessor.process(cmd.toUpperCase())
+        expect(lower).toBe(upper)
       })
     )
   })
