@@ -32,6 +32,8 @@ export const siteConfig = {
       url: 'https://github.com/Ai-Whisperers',
       role: 'Co-Founder & QA Lead',
       period: 'Sep 2025 – Apr 2026',
+      description:
+        'Owned QA across 3 production repos — 153+ automated tests, 7 CI workflows, ADO defect tracking.',
     },
   ],
 

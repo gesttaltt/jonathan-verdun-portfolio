@@ -222,8 +222,6 @@ export const es: Translations = {
       proyectos: 'Ver la sección de Proyectos abajo, o escribe "ls proyectos" para ver la lista.',
       contacto: 'Contáctame por LinkedIn o GitHub enlazados arriba.',
       'ls proyectos': LS_PROJECTS_OUTPUT,
-      investigacion:
-        'Consulta la sección de Antecedentes Técnicos abajo para ver el trabajo de investigación.',
       sudo: 'El usuario no está en el archivo sudoers. Este incidente será reportado.',
     },
   },

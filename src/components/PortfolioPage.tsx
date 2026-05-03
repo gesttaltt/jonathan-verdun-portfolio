@@ -80,6 +80,22 @@ export const PortfolioPage: React.FC = () => {
                         </div>
                       ))}
                     </div>
+
+                    <div className="mt-6 border-t border-white/5 pt-5">
+                      <a
+                        href="https://github.com/gesttaltt/jonathan-verdun-portfolio/actions/workflows/ci.yml"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 opacity-60 transition-opacity hover:opacity-100"
+                        aria-label="CI pipeline status (opens in new tab)"
+                      >
+                        <img
+                          src="https://github.com/gesttaltt/jonathan-verdun-portfolio/workflows/CI/badge.svg"
+                          alt="CI passing"
+                          className="h-5"
+                        />
+                      </a>
+                    </div>
                   </div>
                 </FadeInSection>
 

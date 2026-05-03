@@ -77,6 +77,7 @@ export function HeroHeader() {
                   {[entry.role, entry.period].filter(Boolean).join(' · ')}
                 </p>
               )}
+              {entry.description && <p className="text-xs text-zinc-600">{entry.description}</p>}
             </div>
           ))}
         </div>
