@@ -7,6 +7,9 @@ export const es: Translations = {
   lang: 'es',
   tagline: 'Arquitectura de Pruebas · Ingeniería de Automatización',
   workHistoryLabel: 'Experiencia',
+  workHistoryDescriptions: [
+    'Responsable de QA en 3 repos de producción — 153+ pruebas automatizadas, 7 flujos CI, seguimiento de defectos con ADO.',
+  ],
   sections: {
     projects: 'Proyectos',
     architecture: 'Arquitectura',

@@ -8,7 +8,7 @@ export const siteConfig = {
   name: 'Jonathan Verdun',
   title: 'Jonathan Verdun | QA Automation Engineer',
   description:
-    'Portfolio of Jonathan Verdun — QA Automation Engineer focused on test-driven development, automation pipelines, and engineering quality.',
+    'Portfolio of Jonathan Verdun — QA Automation Engineer specializing in pytest, Playwright, Appium, and property-based testing with GitHub Actions CI.',
   url: 'https://jonathanverdun.com',
   locale: 'en',
 
@@ -32,8 +32,6 @@ export const siteConfig = {
       url: 'https://github.com/Ai-Whisperers',
       role: 'Co-Founder & QA Lead',
       period: 'Sep 2025 – Apr 2026',
-      description:
-        'Owned QA across 3 production repos — 153+ automated tests, 7 CI workflows, ADO defect tracking.',
     },
   ],
 

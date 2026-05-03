@@ -61,7 +61,7 @@ export function HeroHeader() {
               {t.workHistoryLabel}
             </span>
           </div>
-          {siteConfig.workHistory.map((entry) => (
+          {siteConfig.workHistory.map((entry, i) => (
             <div key={entry.organization} className="flex flex-col gap-0.5">
               <Link
                 href={entry.url}
@@ -73,11 +73,13 @@ export function HeroHeader() {
                 {entry.organization} <ExternalLinkIcon className="h-4 w-4" />
               </Link>
               {(entry.role || entry.period) && (
-                <p className="text-xs text-zinc-500">
+                <p className="text-xs text-zinc-500" data-testid="work-role-period">
                   {[entry.role, entry.period].filter(Boolean).join(' · ')}
                 </p>
               )}
-              {entry.description && <p className="text-xs text-zinc-600">{entry.description}</p>}
+              {t.workHistoryDescriptions[i] && (
+                <p className="text-xs text-zinc-500">{t.workHistoryDescriptions[i]}</p>
+              )}
             </div>
           ))}
         </div>

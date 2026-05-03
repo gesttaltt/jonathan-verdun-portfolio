@@ -89,10 +89,11 @@ export const PortfolioPage: React.FC = () => {
                         className="inline-flex items-center gap-2 opacity-60 transition-opacity hover:opacity-100"
                         aria-label="CI pipeline status (opens in new tab)"
                       >
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
                           src="https://github.com/gesttaltt/jonathan-verdun-portfolio/workflows/CI/badge.svg"
                           alt="CI passing"
-                          className="h-5"
+                          className="h-5 w-auto"
                         />
                       </a>
                     </div>

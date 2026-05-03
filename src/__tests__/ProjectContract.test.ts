@@ -56,4 +56,17 @@ describe('ProjectService', () => {
   it('getProjects returns the same reference as PROJECT_DATA', () => {
     expect(ProjectService.getProjects()).toBe(PROJECT_DATA)
   })
+
+  it('should have at least 3 QA-status projects', () => {
+    const qaProjects = projects.filter((p) => p.status === 'QA')
+    expect(qaProjects.length).toBeGreaterThanOrEqual(3)
+  })
+
+  it('all QA projects should have stats with at least one entry', () => {
+    const qaProjects = projects.filter((p) => p.status === 'QA')
+    qaProjects.forEach((p) => {
+      expect(p.stats).toBeDefined()
+      expect(p.stats!.length).toBeGreaterThanOrEqual(1)
+    })
+  })
 })

@@ -57,11 +57,10 @@ describe('HeroHeader — workHistory guard (L1)', () => {
 })
 
 describe('HeroHeader — role/period subtext branch (L4)', () => {
-  it('does not render subtext when entry has no role or period', () => {
+  it('does not render role/period subtext when entry has no role or period', () => {
     mockWorkHistory.push({ organization: 'Acme', url: 'https://acme.com' })
     const { container } = wrap()
-    // The subtext <p> has class text-zinc-500 and only renders when role || period is truthy
-    expect(container.querySelector('p.text-zinc-500')).toBeNull()
+    expect(container.querySelector('[data-testid="work-role-period"]')).toBeNull()
   })
 
   it('renders subtext with role only', () => {
