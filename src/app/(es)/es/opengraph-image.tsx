@@ -1,5 +1,4 @@
 import { buildOgImage, size, contentType } from '@/lib/og/buildOgImage'
-import { siteConfig } from '@/lib/siteConfig'
 import { es } from '@/lib/i18n/es'
 
 export const dynamic = 'force-static'
