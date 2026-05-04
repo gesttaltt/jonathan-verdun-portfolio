@@ -27,7 +27,7 @@ export const useTerminal = (
 
     const boot = () => {
       for (const cmd of commands) {
-        const delay = cmd.delay || 800
+        const delay = cmd.delay ?? 800
         currentDelay += delay
         const id = nextId()
         const timeout = setTimeout(() => {
