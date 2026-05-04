@@ -18,6 +18,7 @@ const config = {
     // Server-side OG image generation — uses fs/ImageResponse, incompatible with jsdom
     '!src/app/\\(en\\)/opengraph-image.tsx',
     '!src/app/\\(es\\)/es/opengraph-image.tsx',
+    '!src/lib/og/**',
     '!src/app/sitemap.ts',
     // Next.js metadata route — server-only, identical pattern to sitemap.ts
     '!src/app/robots.ts',

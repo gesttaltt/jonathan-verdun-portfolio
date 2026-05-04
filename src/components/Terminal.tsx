@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { useTerminal, CommandEntry } from './hooks/useTerminal'
 import { ICommandProcessor, DefaultCommandProcessor } from '@/lib/services/CommandProcessor'
+import { TERMINAL_PROMPT } from '@/lib/contracts/TerminalContract'
 
 interface TerminalProps {
   commands: CommandEntry[] | readonly CommandEntry[]
@@ -18,7 +19,7 @@ export const Terminal: React.FC<TerminalProps> = ({
   className = '',
   processor = new DefaultCommandProcessor(),
   title = 'bash — interactive',
-  prompt = 'gestalt@portfolio:',
+  prompt = TERMINAL_PROMPT,
   hintCmd = 'help',
 }) => {
   const { history, isBooting, execute } = useTerminal(commands, processor)

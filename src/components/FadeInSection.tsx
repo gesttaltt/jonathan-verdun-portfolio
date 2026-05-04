@@ -2,7 +2,7 @@
 
 import { m } from 'framer-motion'
 import React from 'react'
-import { fadeInVariants } from '@/lib/animations'
+import { fadeInVariants, SCROLL_VIEWPORT } from '@/lib/animations'
 
 interface FadeInSectionProps {
   children: React.ReactNode
@@ -15,7 +15,7 @@ export const FadeInSection: React.FC<FadeInSectionProps> = ({ children, delay = 
     variants={fadeInVariants(delay)}
     initial="hidden"
     whileInView="visible"
-    viewport={{ once: true, margin: '-40px' }}
+    viewport={SCROLL_VIEWPORT}
     className={className}
   >
     {children}

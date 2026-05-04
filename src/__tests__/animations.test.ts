@@ -3,7 +3,6 @@ import {
   fadeInVariants,
   slideDownVariants,
   staggerItemVariants,
-  containerVariants,
   SCROLL_VIEWPORT,
 } from '@/lib/animations'
 
@@ -25,15 +24,14 @@ describe('animations', () => {
     })
   })
 
-  describe('fadeInVariants', () => {
+  describe('fadeInVariants (alias of fadeUpVariants)', () => {
+    it('is the same function reference as fadeUpVariants', () => {
+      expect(fadeInVariants).toBe(fadeUpVariants)
+    })
+
     it('returns correct hidden state', () => {
       const v = fadeInVariants()
       expect(v.hidden).toEqual({ opacity: 0, y: 20 })
-    })
-
-    it('uses delay=0 by default', () => {
-      const v = fadeInVariants()
-      expect((v.visible as { transition: { delay: number } }).transition.delay).toBe(0)
     })
 
     it('uses the provided delay', () => {
@@ -66,23 +64,6 @@ describe('animations', () => {
 
     it('returns correct visible state', () => {
       expect((slideDownVariants.visible as { opacity: number }).opacity).toBe(1)
-    })
-  })
-
-  describe('containerVariants', () => {
-    it('has empty hidden state', () => {
-      expect(containerVariants.hidden).toEqual({})
-    })
-
-    it('staggers children by 0.1s', () => {
-      const t = (containerVariants.visible as { transition: { staggerChildren: number } })
-        .transition
-      expect(t.staggerChildren).toBe(0.1)
-    })
-
-    it('delays children by 0.05s', () => {
-      const t = (containerVariants.visible as { transition: { delayChildren: number } }).transition
-      expect(t.delayChildren).toBe(0.05)
     })
   })
 

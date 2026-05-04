@@ -5,7 +5,7 @@ import { m } from 'framer-motion'
 import { ExternalLink, Terminal } from 'lucide-react'
 import Link from 'next/link'
 import { ProjectSpec } from '@/lib/contracts/ProjectContract.types'
-import { fadeUpVariants } from '@/lib/animations'
+import { fadeUpVariants, SCROLL_VIEWPORT } from '@/lib/animations'
 
 const PROJECT_STATUS_STYLES: Record<ProjectSpec['status'], string> = {
   Deployed: 'bg-green-500/20 text-green-400',
@@ -26,7 +26,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
       custom={index}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: '-40px' }}
+      viewport={SCROLL_VIEWPORT}
       variants={fadeUpVariants(index * 0.1)}
       role="listitem"
       className="group relative flex h-full flex-col justify-between overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-md transition-all duration-300 hover:border-blue-500/50 hover:bg-white/10 hover:shadow-[0_0_20px_var(--glow-blue)]"

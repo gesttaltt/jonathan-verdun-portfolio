@@ -6,6 +6,7 @@ import { Github, Linkedin, Mail } from 'lucide-react'
 import { m } from 'framer-motion'
 import { siteConfig } from '@/lib/siteConfig'
 import { useTranslation } from '@/lib/i18n/context'
+import { fadeUpVariants, SCROLL_VIEWPORT } from '@/lib/animations'
 
 const SOCIAL = [
   {
@@ -31,10 +32,10 @@ export const SiteFooter: React.FC = () => {
 
   return (
     <m.footer
-      initial={{ opacity: 0, y: 16 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-40px' }}
-      transition={{ duration: 0.45, ease: 'easeOut' }}
+      variants={fadeUpVariants()}
+      initial="hidden"
+      whileInView="visible"
+      viewport={SCROLL_VIEWPORT}
       aria-label="Site footer"
       className="mt-14 sm:mt-24"
     >
@@ -84,9 +85,7 @@ export const SiteFooter: React.FC = () => {
               </a>{' '}
               on GitHub.
             </p>
-            <p className="text-xs text-zinc-500">
-              Next.js &middot; TypeScript &middot; Tailwind CSS &middot; Three.js
-            </p>
+            <p className="text-xs text-zinc-500">{siteConfig.techStack.join(' · ')}</p>
           </div>
         </div>
       </div>

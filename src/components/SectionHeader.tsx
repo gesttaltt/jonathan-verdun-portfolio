@@ -2,6 +2,7 @@
 
 import { m } from 'framer-motion'
 import React from 'react'
+import { fadeUpVariants, SCROLL_VIEWPORT } from '@/lib/animations'
 
 interface SectionHeaderProps {
   icon: React.ReactNode
@@ -47,10 +48,10 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
         />
       )}
       <m.div
-        initial={{ opacity: 0, y: 10 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: '-40px' }}
-        transition={{ duration: 0.35, ease: 'easeOut' }}
+        variants={fadeUpVariants()}
+        initial="hidden"
+        whileInView="visible"
+        viewport={SCROLL_VIEWPORT}
         className={`mb-6 flex items-center gap-4 ${showBorderBottom ? 'border-b border-white/10 pb-4' : ''}`}
       >
         <div

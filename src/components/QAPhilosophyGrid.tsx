@@ -3,7 +3,7 @@
 import { m } from 'framer-motion'
 import { CheckCircle2 } from 'lucide-react'
 import React from 'react'
-import { staggerItemVariants } from '@/lib/animations'
+import { staggerItemVariants, SCROLL_VIEWPORT } from '@/lib/animations'
 import { useTranslation } from '@/lib/i18n/context'
 
 export const QAPhilosophyGrid: React.FC = () => {
@@ -18,7 +18,7 @@ export const QAPhilosophyGrid: React.FC = () => {
             role="listitem"
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: '-40px' }}
+            viewport={SCROLL_VIEWPORT}
             variants={staggerItemVariants(i * 0.12)}
             className="group space-y-3"
           >

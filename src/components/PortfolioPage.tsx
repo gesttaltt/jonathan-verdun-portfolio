@@ -83,7 +83,7 @@ export const PortfolioPage: React.FC = () => {
 
                     <div className="mt-6 border-t border-white/5 pt-5">
                       <a
-                        href="https://github.com/gesttaltt/jonathan-verdun-portfolio/actions/workflows/ci.yml"
+                        href={siteConfig.repo.ciWorkflowUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-2 opacity-60 transition-opacity hover:opacity-100"
@@ -91,7 +91,7 @@ export const PortfolioPage: React.FC = () => {
                       >
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
-                          src="https://github.com/gesttaltt/jonathan-verdun-portfolio/workflows/CI/badge.svg"
+                          src={siteConfig.repo.ciBadgeUrl}
                           alt="CI passing"
                           className="h-5 w-auto"
                         />

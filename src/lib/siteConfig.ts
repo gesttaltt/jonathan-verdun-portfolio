@@ -1,9 +1,3 @@
-/**
- * @file siteConfig.ts
- * Centralized site metadata and navigation configuration.
- * Single source of truth for SEO, social links, and contact info.
- */
-
 export const siteConfig = {
   name: 'Jonathan Verdun',
   title: 'Jonathan Verdun | QA Automation Engineer',
@@ -26,6 +20,13 @@ export const siteConfig = {
     },
   },
 
+  repo: {
+    url: 'https://github.com/gesttaltt/jonathan-verdun-portfolio',
+    ciWorkflowUrl:
+      'https://github.com/gesttaltt/jonathan-verdun-portfolio/actions/workflows/ci.yml',
+    ciBadgeUrl: 'https://github.com/gesttaltt/jonathan-verdun-portfolio/workflows/CI/badge.svg',
+  },
+
   workHistory: [
     {
       organization: 'Ai-Whisperers',
@@ -42,4 +43,5 @@ export const siteConfig = {
 
   tagline: 'Test Architecture · Automation Engineering',
   jobTitle: 'QA Automation Engineer',
+  techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Three.js'],
 } as const

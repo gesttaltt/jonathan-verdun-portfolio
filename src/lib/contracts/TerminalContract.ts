@@ -1,6 +1,12 @@
-/* c8 ignore next 2 */
-export const LS_PROJECTS_OUTPUT =
-  'drwx------ 1 gestalt staff  QA-Arxiv-Mobile\n-rw-r--r-- 1 gestalt staff  YT-Transcriptor\n-rw-r--r-- 1 gestalt staff  Functionome-Atlas\n-rwxr-xr-x 1 gestalt staff  Gene-Functional-Pipeline\n-rw-r--r-- 1 gestalt staff  3-Adic-ML'
+import { PROJECT_DATA } from '@/lib/contracts/ProjectContract'
+
+export const TERMINAL_PROMPT = 'gestalt@portfolio:'
+
+export const LS_PROJECTS_OUTPUT = PROJECT_DATA.map((p) => {
+  const name = p.title.replace(/\s+/g, '-')
+  const perms = p.status === 'QA' ? 'drwxr-xr-x' : '-rw-r--r--'
+  return `${perms} 1 gestalt staff  ${name}`
+}).join('\n')
 
 export const INTERACTIVE_COMMANDS: Record<string, string> = {
   help: 'Available commands: help, about, projects, contact, clear',
