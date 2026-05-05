@@ -31,10 +31,10 @@ describe('buildMetadata', () => {
       expect(images[0].url).toContain('/opengraph-image')
     })
 
-    it('twitter includes images array', () => {
-      const images = (m.twitter as { images: string[] }).images
+    it('twitter includes images array with correct URL', () => {
+      const images = (m.twitter as { images: Array<{ url: string }> }).images
       expect(images).toHaveLength(1)
-      expect(images[0]).toContain('/opengraph-image')
+      expect(images[0].url).toContain('/opengraph-image')
     })
   })
 

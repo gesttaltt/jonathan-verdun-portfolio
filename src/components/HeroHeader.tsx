@@ -26,7 +26,7 @@ export function HeroHeader() {
           </span>
         </div>
         <h1 className="mb-6 bg-gradient-to-r from-white via-zinc-200 to-zinc-500 bg-clip-text text-4xl font-extrabold tracking-tighter text-transparent sm:text-5xl md:text-6xl lg:text-8xl 2xl:text-9xl">
-          Jonathan Verdun
+          {siteConfig.name}
         </h1>
         <div className="flex flex-wrap items-center gap-4 text-sm font-medium sm:gap-6">
           <Link

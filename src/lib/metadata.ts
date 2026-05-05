@@ -19,6 +19,7 @@ export function buildMetadata(lang: 'en' | 'es'): Metadata {
   const description = isEs ? ES_DESCRIPTION : EN_DESCRIPTION
   const canonical = isEs ? `${siteConfig.url}/es/` : siteConfig.url
   const locale = isEs ? 'es_ES' : siteConfig.locale
+  const ogImageUrl = `${canonical.replace(/\/$/, '')}/opengraph-image`
 
   return {
     metadataBase: new URL(siteConfig.url),
@@ -26,6 +27,7 @@ export function buildMetadata(lang: 'en' | 'es'): Metadata {
     description,
     authors: [{ name: siteConfig.name }],
     creator: siteConfig.name,
+    robots: { index: true, follow: true },
     alternates: {
       canonical,
       languages: {
@@ -40,14 +42,14 @@ export function buildMetadata(lang: 'en' | 'es'): Metadata {
       description,
       siteName: siteConfig.name,
       locale,
-      images: [{ url: `${canonical}/opengraph-image`, width: 1200, height: 630, alt: description }],
+      images: [{ url: ogImageUrl, width: 1200, height: 630, alt: description }],
     },
     twitter: {
       card: 'summary_large_image',
       title,
       description,
       creator: siteConfig.socialLinks.twitter.handle,
-      images: [`${canonical}/opengraph-image`],
+      images: [{ url: ogImageUrl, alt: description }],
     },
   }
 }

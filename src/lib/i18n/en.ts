@@ -10,7 +10,7 @@ export const en: Translations = {
   tagline: 'Test Architecture · Automation Engineering',
   workHistoryLabel: 'Work History',
   workHistoryDescriptions: [
-    'Owned QA across 3 production repos — 153+ automated tests, 7 CI workflows, ADO defect tracking.',
+    'Owned QA across 3 production repos — 352+ automated tests, 7 CI workflows, ADO defect tracking.',
   ],
   sections: {
     projects: 'Projects',

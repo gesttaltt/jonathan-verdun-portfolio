@@ -3,6 +3,7 @@ import { siteConfig } from './siteConfig'
 export const personJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
+  '@id': siteConfig.url,
   name: siteConfig.name,
   jobTitle: siteConfig.jobTitle,
   url: siteConfig.url,
@@ -19,6 +20,12 @@ export const personJsonLd = {
     'pytest',
     'Appium',
     'GitHub Actions CI',
+    'TypeScript',
+    'FastAPI',
+    'Docker',
+    'NumPy',
+    'Apache Spark',
+    'C++',
     'Bioinformatics',
   ],
 } as const

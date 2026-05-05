@@ -42,7 +42,7 @@ const ES_PROJECT_TRANSLATIONS: Record<string, EsProjectTranslation> = {
       'Ingeniería de pipeline de datos para análisis de variantes genómicas — rendimiento VCF 120× vía vectorización NumPy. Integra restricciones evolutivas LOEUF y anotaciones Gene Ontology contra gnomAD a escala. Salidas del pipeline validadas contra conjuntos de referencia gnomAD conocidos mediante pruebas de regresión parametrizadas.',
     stats: [
       { label: 'Velocidad VCF', value: '120×' },
-      { label: 'Funccionomas', value: '1,622' },
+      { label: 'Funcionomas', value: '1,622' },
     ],
   },
   'proj-04': {
@@ -104,7 +104,7 @@ export const es: Translations = {
   tagline: 'Arquitectura de Pruebas · Ingeniería de Automatización',
   workHistoryLabel: 'Experiencia',
   workHistoryDescriptions: [
-    'Responsable de QA en 3 repos de producción — 153+ pruebas automatizadas, 7 flujos CI, seguimiento de defectos con ADO.',
+    'Responsable de QA en 3 repos de producción — 352+ pruebas automatizadas, 7 flujos CI, seguimiento de defectos con ADO.',
   ],
   sections: {
     projects: 'Proyectos',
@@ -120,7 +120,7 @@ export const es: Translations = {
   },
   qa: {
     constraints: [
-      '≥80% de cobertura unitaria aplicada en CI via GitHub Actions — integración bloqueada por debajo del umbral',
+      '100% de cobertura unitaria aplicada en CI via GitHub Actions — integración bloqueada por debajo del umbral',
       'Fuzzing basado en propiedades via fast-check aplicado a todos los contratos de dominio y condiciones de frontera',
       'Todas las entradas en fronteras del sistema validadas contra esquemas estrictos; entradas inválidas rechazadas en ingesta',
       'Pruebas escritas antes del código de funcionalidad — disciplina test-first aplicada en cada capa',
