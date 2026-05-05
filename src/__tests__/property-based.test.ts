@@ -2,7 +2,9 @@ import * as fc from 'fast-check'
 import { DefaultCommandProcessor } from '@/lib/services/CommandProcessor'
 import { ProjectService } from '@/lib/contracts/ProjectContract'
 import { DataEngineeringService } from '@/lib/contracts/DataEngineeringContract'
+import { en } from '@/lib/i18n/en'
 import { es } from '@/lib/i18n/es'
+import { buildMetadata } from '@/lib/metadata'
 
 // ─── CommandProcessor (EN) ─────────────────────────────────────────────────────
 
@@ -190,6 +192,124 @@ describe('DataEngineeringService — property-based', () => {
       fc.property(fc.integer({ min: 1, max: 5 }), () => {
         const ids = DataEngineeringService.getSystemSpecs().map((s) => s.id)
         expect(new Set(ids).size).toBe(ids.length)
+      })
+    )
+  })
+})
+
+// ─── i18n completeness ────────────────────────────────────────────────────────
+
+describe('i18n completeness — property-based', () => {
+  it('every EN terminal command entry has a non-empty key and response', () => {
+    const entries = Object.entries(en.terminal.interactive) as [string, string][]
+    fc.assert(
+      fc.property(fc.constantFrom(...entries), ([cmd, response]) => {
+        expect(cmd.length).toBeGreaterThan(0)
+        expect(response.length).toBeGreaterThan(0)
+      })
+    )
+  })
+
+  it('every ES terminal command entry has a non-empty key and response', () => {
+    const entries = Object.entries(es.terminal.interactive) as [string, string][]
+    fc.assert(
+      fc.property(fc.constantFrom(...entries), ([cmd, response]) => {
+        expect(cmd.length).toBeGreaterThan(0)
+        expect(response.length).toBeGreaterThan(0)
+      })
+    )
+  })
+
+  it('ES has at least as many terminal commands as EN', () => {
+    fc.assert(
+      fc.property(fc.integer({ min: 1, max: 5 }), () => {
+        expect(Object.keys(es.terminal.interactive).length).toBeGreaterThanOrEqual(
+          Object.keys(en.terminal.interactive).length
+        )
+      })
+    )
+  })
+
+  it('all EN section labels are non-empty strings', () => {
+    const labels = [
+      en.sections.projects,
+      en.sections.architecture,
+      en.sections.qa,
+      en.sections.bioinformatics,
+      en.sections.sidebar.constraintsTitle,
+      en.sections.qaContact.title,
+      en.sections.qaContact.description,
+      en.sections.qaContact.ctaLabel,
+    ]
+    fc.assert(
+      fc.property(fc.constantFrom(...labels), (label) => {
+        expect(typeof label).toBe('string')
+        expect(label.length).toBeGreaterThan(0)
+      })
+    )
+  })
+
+  it('all ES section labels are non-empty strings', () => {
+    const labels = [
+      es.sections.projects,
+      es.sections.architecture,
+      es.sections.qa,
+      es.sections.bioinformatics,
+      es.sections.sidebar.constraintsTitle,
+      es.sections.qaContact.title,
+      es.sections.qaContact.description,
+      es.sections.qaContact.ctaLabel,
+    ]
+    fc.assert(
+      fc.property(fc.constantFrom(...labels), (label) => {
+        expect(typeof label).toBe('string')
+        expect(label.length).toBeGreaterThan(0)
+      })
+    )
+  })
+})
+
+// ─── buildMetadata URL invariants ─────────────────────────────────────────────
+
+describe('buildMetadata — property-based URL invariants', () => {
+  it('canonical URL never contains a double-slash for any locale', () => {
+    fc.assert(
+      fc.property(fc.constantFrom('en' as const, 'es' as const), (lang) => {
+        const m = buildMetadata(lang)
+        const canonical = (m.alternates as { canonical: string }).canonical
+        expect(canonical.replace(/^https?:\/\//, '')).not.toContain('//')
+      })
+    )
+  })
+
+  it('OG image URL never contains a double-slash for any locale', () => {
+    fc.assert(
+      fc.property(fc.constantFrom('en' as const, 'es' as const), (lang) => {
+        const m = buildMetadata(lang)
+        const ogUrl = (m.openGraph as { images: Array<{ url: string }> }).images[0].url
+        expect(ogUrl.replace(/^https?:\/\//, '')).not.toContain('//')
+      })
+    )
+  })
+
+  it('Twitter image URL never contains a double-slash for any locale', () => {
+    fc.assert(
+      fc.property(fc.constantFrom('en' as const, 'es' as const), (lang) => {
+        const m = buildMetadata(lang)
+        const twUrl = (m.twitter as { images: Array<{ url: string }> }).images[0].url
+        expect(twUrl.replace(/^https?:\/\//, '')).not.toContain('//')
+      })
+    )
+  })
+
+  it('title and description are always non-empty for any locale', () => {
+    fc.assert(
+      fc.property(fc.constantFrom('en' as const, 'es' as const), (lang) => {
+        const m = buildMetadata(lang)
+        expect(typeof m.title).toBe('string')
+        expect((m.title as string).length).toBeGreaterThan(0)
+        expect(typeof m.description).toBe('string')
+        expect((m.description as string).length).toBeGreaterThan(0)
       })
     )
   })
