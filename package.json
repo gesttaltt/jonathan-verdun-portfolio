@@ -12,6 +12,8 @@
     "docs": "typedoc --out docs/api --entryPointStrategy expand src/lib",
     "check-types": "tsc --noEmit",
     "format": "prettier --write .",
+    "e2e": "playwright test",
+    "e2e:ui": "playwright test --ui",
     "prepare": "husky"
   },
   "lint-staged": {
@@ -35,6 +37,7 @@
     "three": "^0.183.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.59.1",
     "@tailwindcss/postcss": "^4",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",

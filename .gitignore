@@ -43,3 +43,7 @@ next-env.d.ts
 
 # generated docs (run `npm run docs` locally to view)
 /docs/api/
+
+# Playwright
+/playwright-report/
+/test-results/
