@@ -11,7 +11,7 @@ export const LS_PROJECTS_OUTPUT = PROJECT_DATA.map((p) => {
 export const INTERACTIVE_COMMANDS: Record<string, string> = {
   help: 'Available commands: help, about, projects, contact, clear',
   about:
-    'Jonathan Verdun. QA engineer and test architect. Test plans, traceability matrices, property-based testing, and automation pipelines — quality gates enforced via pre-commit hooks, GitHub Actions CI, and coverage thresholds.',
+    'Jonathan Verdun. QA engineer and test architect. Test plans, traceability matrices, property-based testing, and automation pipelines — quality gates enforced via pre-commit hooks, GitHub Actions CI, and coverage thresholds. Pursuing ISTQB Foundation certification.',
   projects: 'Check out the Projects section below, or type "ls projects" to see a list.',
   contact: 'Reach out via LinkedIn or GitHub linked above.',
   'ls projects': LS_PROJECTS_OUTPUT,

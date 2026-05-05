@@ -37,6 +37,14 @@ const ES_PROJECT_TRANSLATIONS: Record<string, EsProjectTranslation> = {
       { label: 'Capas', value: '3' },
     ],
   },
+  'proj-07': {
+    description:
+      'Implementación de referencia QA: 239 pruebas Jest con 100% de cobertura (unit, integración, basadas en propiedades via fast-check), 12 pruebas E2E con Playwright en rutas EN y ES, y un Lighthouse CI gate que exige a11y ≥95, SEO ≥90. Cada afirmación de calidad en la sección de Filosofía QA está respaldada por un gate ejecutándose en CI.',
+    stats: [
+      { label: 'Pruebas', value: '251' },
+      { label: 'Cobertura', value: '100%' },
+    ],
+  },
   'proj-02': {
     description:
       'Ingeniería de pipeline de datos para análisis de variantes genómicas — rendimiento VCF 120× vía vectorización NumPy. Integra restricciones evolutivas LOEUF y anotaciones Gene Ontology contra gnomAD a escala. Salidas del pipeline validadas contra conjuntos de referencia gnomAD conocidos mediante pruebas de regresión parametrizadas.',
@@ -199,7 +207,7 @@ export const es: Translations = {
     interactive: {
       ayuda: ES_HELP_OUTPUT,
       sobre:
-        'Jonathan Verdun. Ingeniero QA y arquitecto de pruebas. Planes de prueba, matrices de trazabilidad, testing basado en propiedades y pipelines de automatización — quality gates aplicados via pre-commit hooks, GitHub Actions CI y umbrales de cobertura.',
+        'Jonathan Verdun. Ingeniero QA y arquitecto de pruebas. Planes de prueba, matrices de trazabilidad, testing basado en propiedades y pipelines de automatización — quality gates aplicados via pre-commit hooks, GitHub Actions CI y umbrales de cobertura. En proceso de certificación ISTQB Foundation.',
       proyectos: 'Ver la sección de Proyectos abajo, o escribe "ls proyectos" para ver la lista.',
       contacto: 'Contáctame por LinkedIn o GitHub enlazados arriba.',
       'ls proyectos': LS_PROJECTS_OUTPUT,
