@@ -17,7 +17,7 @@ export const I18nProvider: React.FC<{ children: React.ReactNode }> = ({ children
 export const useTranslation = (): Translations => {
   const ctx = useContext(I18nContext)
   if (ctx === null) {
-    console.warn('[useTranslation] called outside I18nProvider — falling back to English')
+    console.error('[useTranslation] called outside I18nProvider — falling back to English')
   }
   return ctx ?? en
 }

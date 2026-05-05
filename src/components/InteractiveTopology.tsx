@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useState, useCallback } from 'react'
+import React, { useEffect, useState, useCallback, useRef } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { EffectComposer, Bloom, Vignette } from '@react-three/postprocessing'
 import * as THREE from 'three'
@@ -16,6 +16,16 @@ export const InteractiveTopology: React.FC = () => {
   // Incrementing this key forces a full Canvas remount after context restoration,
   // which re-initialises the R3F renderer against the fresh GL context.
   const [canvasKey, setCanvasKey] = useState(0)
+  // Holds the explicit cleanup for whichever canvas is currently mounted.
+  const cleanupRef = useRef<(() => void) | null>(null)
+
+  // Remove listeners from the previous canvas before R3F mounts the new one.
+  useEffect(() => {
+    return () => {
+      cleanupRef.current?.()
+      cleanupRef.current = null
+    }
+  }, [canvasKey])
 
   useEffect(() => {
     const mq = window.matchMedia('(max-width: 768px)')
@@ -43,8 +53,10 @@ export const InteractiveTopology: React.FC = () => {
 
     canvas.addEventListener('webglcontextlost', onLost)
     canvas.addEventListener('webglcontextrestored', onRestored)
-    // Listeners are tied to the canvas DOM element and are released when
-    // the element is GC'd on unmount — no explicit removeEventListener needed.
+    cleanupRef.current = () => {
+      canvas.removeEventListener('webglcontextlost', onLost)
+      canvas.removeEventListener('webglcontextrestored', onRestored)
+    }
   }, [])
 
   return (

@@ -18,8 +18,11 @@ export async function buildOgImage({
   let fontData: Buffer | undefined
   try {
     fontData = await readFile(join(process.cwd(), 'public/fonts/JetBrainsMono-Bold.ttf'))
-  } catch {
-    // render without custom font if file is unavailable
+  } catch (err) {
+    console.error(
+      '[buildOgImage] failed to load JetBrainsMono font — rendering without custom font',
+      err
+    )
   }
 
   return new ImageResponse(
