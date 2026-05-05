@@ -1,8 +1,9 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { EffectComposer, Bloom, Vignette } from '@react-three/postprocessing'
+import * as THREE from 'three'
 import { TopologyMesh } from './TopologyMesh'
 
 export const InteractiveTopology: React.FC = () => {
@@ -11,6 +12,10 @@ export const InteractiveTopology: React.FC = () => {
   const [isMobile, setIsMobile] = useState(
     () => typeof window !== 'undefined' && window.matchMedia('(max-width: 768px)').matches
   )
+  const [ctxLost, setCtxLost] = useState(false)
+  // Incrementing this key forces a full Canvas remount after context restoration,
+  // which re-initialises the R3F renderer against the fresh GL context.
+  const [canvasKey, setCanvasKey] = useState(0)
 
   useEffect(() => {
     const mq = window.matchMedia('(max-width: 768px)')
@@ -19,9 +24,33 @@ export const InteractiveTopology: React.FC = () => {
     return () => mq.removeEventListener('change', handler)
   }, [])
 
+  const handleCreated = useCallback(({ gl }: { gl: THREE.WebGLRenderer }) => {
+    const canvas = gl.domElement
+
+    const onLost = (e: Event) => {
+      // preventDefault signals the browser that we intend to restore the context;
+      // without it webglcontextrestored never fires.
+      e.preventDefault()
+      setCtxLost(true)
+    }
+
+    const onRestored = () => {
+      // Force a full remount so R3F reinitialises its renderer against the new
+      // GL context rather than continuing with the now-stale internal state.
+      setCanvasKey((k) => k + 1)
+      setCtxLost(false)
+    }
+
+    canvas.addEventListener('webglcontextlost', onLost)
+    canvas.addEventListener('webglcontextrestored', onRestored)
+    // Listeners are tied to the canvas DOM element and are released when
+    // the element is GC'd on unmount — no explicit removeEventListener needed.
+  }, [])
+
   return (
     <div className="bg-bg-deep fixed inset-0 z-0">
       <Canvas
+        key={canvasKey}
         aria-hidden="true"
         tabIndex={-1}
         // pan-y lets the browser handle vertical scroll while still firing pointer
@@ -37,6 +66,7 @@ export const InteractiveTopology: React.FC = () => {
           alpha: true,
           antialias: false,
         }}
+        onCreated={handleCreated}
       >
         <EffectComposer multisampling={0}>
           <Bloom
@@ -52,6 +82,10 @@ export const InteractiveTopology: React.FC = () => {
         {/* Half the icosahedron subdivision detail on mobile (8 vs 16 segments). */}
         <TopologyMesh quality={isMobile ? 0.5 : 1} />
       </Canvas>
+
+      {/* Shown only while the GL context is lost — covers the blank canvas. */}
+      {ctxLost && <div className="scanline absolute inset-0" aria-hidden="true" />}
+
       <div
         className="pointer-events-none absolute inset-0 opacity-5"
         style={{
@@ -59,7 +93,7 @@ export const InteractiveTopology: React.FC = () => {
             'linear-gradient(var(--grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line) 1px, transparent 1px)',
           backgroundSize: '100px 100px',
         }}
-      ></div>
+      />
     </div>
   )
 }
