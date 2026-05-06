@@ -1,84 +1,112 @@
-# Jonathan Verdun Portfolio
+# Jonathan Verdun — Portfolio
 
-[![CI Status](https://github.com/gesttaltt/jonathan-verdun-portfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/gesttaltt/jonathan-verdun-portfolio/actions)
+[![CI](https://github.com/gesttaltt/jonathan-verdun-portfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/gesttaltt/jonathan-verdun-portfolio/actions/workflows/ci.yml)
 
-A glassmorphism portfolio showcasing QA Automation, Bioinformatics, and Data Engineering. Built with Next.js 16, Three.js, and a strict TDD/SOLID architecture.
+QA Automation Engineer portfolio. Built with Next.js 16 static export, Three.js, and a strict TDD architecture. Every quality claim on the site is backed by a gate running in CI.
 
-## Quick Start
+**Live:** [jonathanverdun.com](https://jonathanverdun.com) · **API Docs:** [jonathanverdun.com/docs/api](https://jonathanverdun.com/docs/api/)
+
+---
+
+## Quick start
 
 ```bash
-# Install dependencies
 npm install
-
-# Start development server at http://localhost:3000
-npm run dev
+npm run dev        # http://localhost:3000
 ```
 
-### LAN Access (Mobile Testing)
+### LAN / mobile testing
 
 ```bash
 npm run dev -- -H 0.0.0.0
-# Open http://<your-ip>:3000 on your device
+# Open http://<your-ip>:3000
 ```
 
-### Docker
+---
+
+## Scripts
+
+| Script                | Description                                    |
+| :-------------------- | :--------------------------------------------- |
+| `npm run dev`         | Dev server with HMR                            |
+| `npm run build`       | Static export → `out/`                         |
+| `npm run lint`        | ESLint                                         |
+| `npm run check-types` | TypeScript type check                          |
+| `npm run format`      | Prettier                                       |
+| `npm test`            | Jest (unit · integration · property-based)     |
+| `npm run test:watch`  | Jest in watch mode                             |
+| `npm run e2e`         | Playwright E2E + WCAG axe scans                |
+| `npm run lhci`        | Lighthouse CI against `out/` (build first)     |
+| `npm run docs`        | TypeDoc → `docs/api/` (gitignored, local only) |
+
+---
+
+## Docker
+
+### Development
 
 ```bash
-docker compose up --build
+docker compose up --build          # dev service, http://localhost:3000
 ```
 
-### Production Build
+### Production simulation
 
 ```bash
-npm run build && npm start
+docker compose --profile prod up --build runner   # nginx serving out/, http://localhost:8080
 ```
 
-## Available Scripts
+The runner stage is `nginx:alpine` serving the static export. `nginx.conf` sets 1-year immutable cache on `_next/static/` chunks and enables gzip.
 
-| Script                | Description                       |
-| :-------------------- | :-------------------------------- |
-| `npm run dev`         | Start development server with HMR |
-| `npm run build`       | Production build                  |
-| `npm start`           | Serve production build            |
-| `npm run lint`        | Run ESLint                        |
-| `npm test`            | Run Jest test suite               |
-| `npm run test:watch`  | Run tests in watch mode           |
-| `npm run check-types` | TypeScript type checking          |
-| `npm run format`      | Format with Prettier              |
-| `npm run docs`        | Generate TypeDoc documentation    |
+---
 
-## Tech Stack
+## CI pipeline
 
-- **Next.js 16** (App Router, React 19)
-- **TypeScript 5** (strict mode)
-- **Tailwind CSS v4** (CSS-variable driven themes)
-- **Framer Motion 12** (centralized animation variants)
-- **Three.js / React Three Fiber** (custom GLSL shaders)
-- **Jest 30 + fast-check** (unit, integration, property-based testing)
+Three jobs run on every push to `main` / PR:
+
+| Job     | What it does                                                                          |
+| :------ | :------------------------------------------------------------------------------------ |
+| `build` | Format · lint · types · Jest (239 tests, 100% coverage) · build — matrix Node 22 & 24 |
+| `e2e`   | Playwright smoke suite (12 tests) + WCAG 2.1 AA axe scans (2 tests)                   |
+| `lhci`  | Lighthouse CI gate: a11y ≥ 95, best-practices ≥ 90, SEO ≥ 90                          |
+
+The `out/` artifact produced by the `build (22.x)` run is shared with `lhci` to avoid a duplicate build.
+
+Deployments to GitHub Pages are triggered separately via `deploy.yml`, which also generates TypeDoc into `out/docs/api/`.
+
+---
+
+## Tech stack
+
+- **Next.js 16** — App Router, static export (`output: 'export'`)
+- **React 19 / TypeScript 5** — strict mode, zero `any`
+- **Tailwind CSS v4** — OKLCH colour space, CSS-variable tokens
+- **Framer Motion 12** — centralised animation variants
+- **Three.js / React Three Fiber** — WebGL topology visualisation
+- **Jest 30 + fast-check** — unit, integration, property-based testing
+- **Playwright + @axe-core/playwright** — E2E + WCAG 2.1 AA
+- **Lighthouse CI** — automated performance/a11y/SEO gating
+- **TypeDoc** — API docs auto-generated on every deploy
+
+---
 
 ## Architecture
 
-The project follows SOLID principles with a service-oriented architecture:
+```
+src/
+  app/             Next.js App Router routes ((en)/ and (es)/es/)
+  components/      Thin UI layer; hooks/ for state + DI
+  lib/
+    contracts/     Domain data models (.types.ts separated)
+    services/      Business logic (CommandProcessor, ProjectRepository)
+    i18n/          EN/ES translations keyed to contracts
+    animations.ts  Centralised Framer Motion variants
+    metadata.ts    buildMetadata() shared by both locales
+    siteConfig.ts  Single source of truth for all site-wide values
+```
 
-- **Contracts** (`src/lib/contracts/`) - Domain data models with separated `.types.ts` interfaces
-- **Services** (`src/lib/services/`) - Business logic (command processing, data repositories)
-- **Hooks** (`src/components/hooks/`) - State management with dependency injection
-- **Components** - Thin UI layer consuming hooks and services
-- **Shaders** (`src/lib/shaders/`) - Modularized GLSL code
+SOLID principles throughout: contracts own data shapes, services own logic, components own presentation. No business logic in components.
 
-## Documentation
-
-Detailed specs live in [`docs/specs/`](./docs/specs/):
-
-| Document                                        | Contents                                                           |
-| ----------------------------------------------- | ------------------------------------------------------------------ |
-| [ARCHITECTURE.md](./docs/specs/ARCHITECTURE.md) | Stack overview, SOLID compliance, project structure, audit history |
-| [COMPONENTS.md](./docs/specs/COMPONENTS.md)     | Every React component: props, patterns, behavior                   |
-| [CONTRACTS.md](./docs/specs/CONTRACTS.md)       | Domain data layer, types, services, repository pattern             |
-| [STYLING.md](./docs/specs/STYLING.md)           | CSS tokens, Tailwind v4 theme, glassmorphism, animation registry   |
-| [TESTING.md](./docs/specs/TESTING.md)           | Jest config, testing strategies, mocking patterns                  |
-| [DEVOPS.md](./docs/specs/DEVOPS.md)             | CI pipeline, Docker, linting, TypeScript config                    |
-| [SHADERS.md](./docs/specs/SHADERS.md)           | GLSL vertex/fragment shaders, uniforms, p-adic valuation           |
+---
 
 ## Repository
 

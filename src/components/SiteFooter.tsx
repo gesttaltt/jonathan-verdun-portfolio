@@ -71,6 +71,25 @@ export const SiteFooter: React.FC = () => {
             </div>
           </div>
 
+          {/* Middle row: quick links */}
+          <div className="flex items-center gap-4 border-b border-white/5 py-5">
+            <a
+              href="/docs/api/"
+              className="rounded text-xs text-zinc-300 transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none"
+            >
+              API Docs
+            </a>
+            <span className="text-white/20">·</span>
+            <a
+              href={siteConfig.repo.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded text-xs text-zinc-300 transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none"
+            >
+              Source
+            </a>
+          </div>
+
           {/* Bottom row: copyright + stack */}
           <div className="flex flex-col items-start gap-2 pt-6 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-xs text-zinc-300">
