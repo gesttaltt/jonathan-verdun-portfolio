@@ -1,5 +1,5 @@
 services:
-  web:
+  dev:
     build:
       context: .
       target: builder
@@ -13,3 +13,12 @@ services:
       - NODE_ENV=development
       - HOSTNAME=0.0.0.0
     command: npm run dev
+
+  runner:
+    build:
+      context: .
+      target: runner
+    ports:
+      - '8080:80'
+    profiles:
+      - prod

@@ -42,6 +42,9 @@ jobs:
           # Suppress Next.js telemetry in CI.
           NEXT_TELEMETRY_DISABLED: 1
 
+      - name: Generate API docs
+        run: npx typedoc --out out/docs/api --entryPointStrategy expand src/lib
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
