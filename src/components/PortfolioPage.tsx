@@ -132,7 +132,7 @@ export const PortfolioPage: React.FC = () => {
               </FadeInSection>
 
               <section className="space-y-4 border-t border-white/5 pt-8 opacity-60">
-                <p className="text-[10px] font-bold tracking-widest text-zinc-600 uppercase sm:text-xs">
+                <p className="text-[10px] font-bold tracking-widest text-zinc-200 uppercase sm:text-xs">
                   {t.sections.bioinformatics}
                 </p>
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-2">

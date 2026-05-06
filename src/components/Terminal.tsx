@@ -53,7 +53,7 @@ export const Terminal: React.FC<TerminalProps> = ({
           <div className="h-3 w-3 rounded-full bg-amber-500/50"></div>
           <div className="h-3 w-3 rounded-full bg-cyan-500/50"></div>
         </div>
-        <div className="text-[10px] font-bold tracking-widest text-zinc-500 uppercase sm:text-xs">
+        <div className="text-[10px] font-bold tracking-widest text-zinc-300 uppercase sm:text-xs">
           {title}
         </div>
         <div className="w-12"></div>
@@ -81,7 +81,7 @@ export const Terminal: React.FC<TerminalProps> = ({
                 <span className="min-w-0 text-zinc-100">{entry.text}</span>
               </div>
               {entry.output && (
-                <div className="border-l-2 border-blue-500/20 py-1 pl-4 whitespace-pre-wrap text-zinc-400">
+                <div className="border-l-2 border-blue-500/20 py-1 pl-4 whitespace-pre-wrap text-zinc-300">
                   {entry.output}
                 </div>
               )}

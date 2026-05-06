@@ -52,7 +52,7 @@ export const SiteFooter: React.FC = () => {
               <p className="text-base font-extrabold tracking-tight text-white">
                 {siteConfig.name}
               </p>
-              <p className="text-xs font-medium text-zinc-500">{t.tagline}</p>
+              <p className="text-xs font-medium text-zinc-300">{t.tagline}</p>
             </div>
 
             <div className="flex items-center gap-2">
@@ -63,7 +63,7 @@ export const SiteFooter: React.FC = () => {
                   target={href.startsWith('mailto') ? undefined : '_blank'}
                   rel={href.startsWith('mailto') ? undefined : 'noopener noreferrer'}
                   aria-label={label}
-                  className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/5 bg-white/5 text-zinc-400 transition-all hover:border-blue-500/30 hover:bg-blue-500/10 hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none"
+                  className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/5 bg-white/5 text-zinc-300 transition-all hover:border-blue-500/30 hover:bg-blue-500/10 hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none"
                 >
                   <Icon className="h-4 w-4" />
                 </Link>
@@ -73,19 +73,19 @@ export const SiteFooter: React.FC = () => {
 
           {/* Bottom row: copyright + stack */}
           <div className="flex flex-col items-start gap-2 pt-6 sm:flex-row sm:items-center sm:justify-between">
-            <p className="text-xs text-zinc-500">
+            <p className="text-xs text-zinc-300">
               &copy; {year} {siteConfig.name}{' '}
               <a
                 href={siteConfig.socialLinks.github.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded text-zinc-500 transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none"
+                className="rounded text-zinc-300 transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none"
               >
                 @gesttaltt
               </a>{' '}
               on GitHub.
             </p>
-            <p className="text-xs text-zinc-500">{siteConfig.techStack.join(' · ')}</p>
+            <p className="text-xs text-zinc-300">{siteConfig.techStack.join(' · ')}</p>
           </div>
         </div>
       </div>

@@ -34,7 +34,7 @@ export function HeroHeader() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="GitHub profile (opens in new tab)"
-            className="group focus-visible:ring-offset-background flex min-h-[44px] items-center gap-2 rounded text-zinc-400 transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none"
+            className="group focus-visible:ring-offset-background flex min-h-[44px] items-center gap-2 rounded text-zinc-300 transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none"
           >
             <Github className="h-5 w-5 shrink-0 transition-transform group-hover:-translate-y-0.5" />
             <span className="truncate">{siteConfig.socialLinks.github.label}</span>
@@ -44,7 +44,7 @@ export function HeroHeader() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn profile (opens in new tab)"
-            className="group focus-visible:ring-offset-background flex min-h-[44px] items-center gap-2 rounded text-zinc-400 transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none"
+            className="group focus-visible:ring-offset-background flex min-h-[44px] items-center gap-2 rounded text-zinc-300 transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none"
           >
             <Linkedin className="h-5 w-5 shrink-0 transition-transform group-hover:-translate-y-0.5" />
             <span className="truncate">{siteConfig.socialLinks.linkedin.label}</span>
@@ -57,7 +57,7 @@ export function HeroHeader() {
         <div className="flex flex-col gap-3 rounded-2xl border border-white/8 bg-white/8 p-5 backdrop-blur-md">
           <div className="flex items-center gap-3 text-xs">
             <span className="inline-flex h-2.5 w-2.5 rounded-full bg-zinc-600"></span>
-            <span className="font-bold tracking-widest text-zinc-500 uppercase">
+            <span className="font-bold tracking-widest text-zinc-300 uppercase">
               {t.workHistoryLabel}
             </span>
           </div>
@@ -73,12 +73,12 @@ export function HeroHeader() {
                 {entry.organization} <ExternalLinkIcon className="h-4 w-4" />
               </Link>
               {(entry.role || entry.period) && (
-                <p className="text-xs text-zinc-500" data-testid="work-role-period">
+                <p className="text-xs text-zinc-300" data-testid="work-role-period">
                   {[entry.role, entry.period].filter(Boolean).join(' · ')}
                 </p>
               )}
               {t.workHistoryDescriptions[i] && (
-                <p className="text-xs text-zinc-500">{t.workHistoryDescriptions[i]}</p>
+                <p className="text-xs text-zinc-300">{t.workHistoryDescriptions[i]}</p>
               )}
             </div>
           ))}

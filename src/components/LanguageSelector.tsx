@@ -18,7 +18,7 @@ export const LanguageSelector: React.FC = () => {
         aria-label="Switch to English"
         aria-current={!isEs ? 'page' : undefined}
         className={`rounded-full px-3 py-1 transition-colors focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none ${
-          !isEs ? 'bg-blue-500 text-white' : 'text-zinc-500 hover:text-white'
+          !isEs ? 'bg-blue-700 text-white' : 'text-zinc-300 hover:text-white'
         }`}
       >
         EN
@@ -28,7 +28,7 @@ export const LanguageSelector: React.FC = () => {
         aria-label="Cambiar a Español"
         aria-current={isEs ? 'page' : undefined}
         className={`rounded-full px-3 py-1 transition-colors focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none ${
-          isEs ? 'bg-blue-500 text-white' : 'text-zinc-500 hover:text-white'
+          isEs ? 'bg-blue-700 text-white' : 'text-zinc-300 hover:text-white'
         }`}
       >
         ES
