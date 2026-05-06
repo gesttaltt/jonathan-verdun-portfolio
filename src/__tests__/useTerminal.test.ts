@@ -160,25 +160,24 @@ describe('useTerminal — command history navigation', () => {
   beforeEach(() => jest.useFakeTimers())
   afterEach(() => jest.useRealTimers())
 
-  const boot = (result: { current: ReturnType<typeof useTerminal> }) =>
-    act(() => jest.runAllTimers())
+  const boot = () => act(() => jest.runAllTimers())
 
   it('navigateHistory up returns currentInput when history is empty', () => {
     const { result } = renderHook(() => useTerminal([], makeProcessor()))
-    boot(result)
+    boot()
     expect(result.current.navigateHistory('up', 'draft')).toBe('draft')
   })
 
   it('navigateHistory up returns the most recently executed command', () => {
     const { result } = renderHook(() => useTerminal([], makeProcessor()))
-    boot(result)
+    boot()
     act(() => result.current.execute('help'))
     expect(result.current.navigateHistory('up', '')).toBe('help')
   })
 
   it('navigateHistory up steps backward through history on successive calls', () => {
     const { result } = renderHook(() => useTerminal([], makeProcessor()))
-    boot(result)
+    boot()
     act(() => {
       result.current.execute('cmd1')
       result.current.execute('cmd2')
@@ -189,7 +188,7 @@ describe('useTerminal — command history navigation', () => {
 
   it('navigateHistory up clamps at the oldest entry', () => {
     const { result } = renderHook(() => useTerminal([], makeProcessor()))
-    boot(result)
+    boot()
     act(() => result.current.execute('only'))
     result.current.navigateHistory('up', '')
     expect(result.current.navigateHistory('up', 'only')).toBe('only')
@@ -197,13 +196,13 @@ describe('useTerminal — command history navigation', () => {
 
   it('navigateHistory down at index -1 returns currentInput unchanged', () => {
     const { result } = renderHook(() => useTerminal([], makeProcessor()))
-    boot(result)
+    boot()
     expect(result.current.navigateHistory('down', 'typing')).toBe('typing')
   })
 
   it('navigateHistory down after up restores the saved draft', () => {
     const { result } = renderHook(() => useTerminal([], makeProcessor()))
-    boot(result)
+    boot()
     act(() => result.current.execute('help'))
     result.current.navigateHistory('up', 'my draft')
     expect(result.current.navigateHistory('down', 'help')).toBe('my draft')
@@ -211,7 +210,7 @@ describe('useTerminal — command history navigation', () => {
 
   it('execute resets navigation so next ArrowUp starts from the freshest entry', () => {
     const { result } = renderHook(() => useTerminal([], makeProcessor()))
-    boot(result)
+    boot()
     act(() => {
       result.current.execute('cmd1')
       result.current.execute('cmd2')
@@ -224,7 +223,7 @@ describe('useTerminal — command history navigation', () => {
 
   it('skips consecutive duplicate commands in history', () => {
     const { result } = renderHook(() => useTerminal([], makeProcessor()))
-    boot(result)
+    boot()
     act(() => {
       result.current.execute('help')
       result.current.execute('help')
@@ -235,7 +234,7 @@ describe('useTerminal — command history navigation', () => {
 
   it('clear is recorded in history so it can be recalled with ArrowUp', () => {
     const { result } = renderHook(() => useTerminal([], makeProcessor()))
-    boot(result)
+    boot()
     act(() => result.current.execute('clear'))
     expect(result.current.navigateHistory('up', '')).toBe('clear')
   })
