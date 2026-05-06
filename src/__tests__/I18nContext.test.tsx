@@ -60,7 +60,10 @@ describe('useTranslation (fallback)', () => {
 
   it('warns in console when used outside provider in development mode', () => {
     const originalEnv = process.env.NODE_ENV
-    process.env.NODE_ENV = 'development'
+    Object.defineProperty(process.env, 'NODE_ENV', {
+      value: 'development',
+      configurable: true,
+    })
     const warnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {})
 
     function Bare() {
@@ -74,7 +77,10 @@ describe('useTranslation (fallback)', () => {
     )
 
     warnSpy.mockRestore()
-    process.env.NODE_ENV = originalEnv
+    Object.defineProperty(process.env, 'NODE_ENV', {
+      value: originalEnv,
+      configurable: true,
+    })
   })
 
   it('en translations match expected tagline', () => {
