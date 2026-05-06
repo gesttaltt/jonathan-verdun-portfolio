@@ -39,9 +39,9 @@ const ES_PROJECT_TRANSLATIONS: Record<string, EsProjectTranslation> = {
   },
   'proj-07': {
     description:
-      'Implementación de referencia QA: 239 pruebas Jest con 100% de cobertura (unit, integración, basadas en propiedades via fast-check), 12 pruebas E2E con Playwright en rutas EN y ES, y un Lighthouse CI gate que exige a11y ≥95, SEO ≥90. Cada afirmación de calidad en la sección de Filosofía QA está respaldada por un gate ejecutándose en CI.',
+      'Implementación de referencia QA: 239 pruebas Jest con 100% de cobertura (unit, integración, basadas en propiedades via fast-check), 14 pruebas E2E con Playwright (12 smoke + 2 escaneos axe WCAG 2.1 AA) en rutas EN y ES, y un Lighthouse CI gate que exige a11y ≥95, SEO ≥90. Cada afirmación de calidad en la sección de Filosofía QA está respaldada por un gate ejecutándose en CI.',
     stats: [
-      { label: 'Pruebas', value: '251' },
+      { label: 'Pruebas', value: '253' },
       { label: 'Cobertura', value: '100%' },
     ],
   },

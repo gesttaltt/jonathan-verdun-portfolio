@@ -56,7 +56,7 @@ export function HeroHeader() {
       {siteConfig.workHistory.length > 0 && (
         <div className="flex flex-col gap-3 rounded-2xl border border-white/8 bg-white/8 p-5 backdrop-blur-md">
           <div className="flex items-center gap-3 text-xs">
-            <span className="inline-flex h-2.5 w-2.5 rounded-full bg-zinc-600"></span>
+            <span className="inline-flex h-2.5 w-2.5 rounded-full bg-green-500"></span>
             <span className="font-bold tracking-widest text-zinc-300 uppercase">
               {t.workHistoryLabel}
             </span>

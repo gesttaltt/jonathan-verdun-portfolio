@@ -76,7 +76,7 @@ export const PortfolioPage: React.FC = () => {
                       {t.qa.constraints.map((c) => (
                         <div key={c} className="flex items-start gap-4">
                           <div className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.6)]"></div>
-                          <p className="text-xs leading-relaxed font-medium text-zinc-400">{c}</p>
+                          <p className="text-xs leading-relaxed font-medium text-zinc-300">{c}</p>
                         </div>
                       ))}
                     </div>
@@ -105,7 +105,7 @@ export const PortfolioPage: React.FC = () => {
                     <h3 className="mb-2 text-sm font-bold tracking-wider text-white uppercase">
                       {t.sections.qaContact.title}
                     </h3>
-                    <p className="mb-4 text-xs text-zinc-400">{t.sections.qaContact.description}</p>
+                    <p className="mb-4 text-xs text-zinc-300">{t.sections.qaContact.description}</p>
                     <Link
                       href={`mailto:${siteConfig.contact.email}`}
                       className="focus-visible:ring-offset-background flex w-full items-center justify-center gap-2 rounded-lg bg-white/10 py-3 text-sm font-bold text-white transition-all hover:bg-white/20 hover:shadow-lg focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none"

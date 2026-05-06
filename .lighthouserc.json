@@ -3,7 +3,7 @@
     "collect": {
       "staticDistDir": "./out",
       "numberOfRuns": 1,
-      "url": ["http://localhost/"]
+      "url": ["http://localhost/", "http://localhost/es/"]
     },
     "assert": {
       "assertions": {

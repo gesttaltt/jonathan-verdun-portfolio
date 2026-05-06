@@ -44,12 +44,12 @@ export const PROJECT_DATA: ProjectSpec[] = [
     id: 'proj-07',
     title: 'This Portfolio',
     description:
-      'QA reference implementation: 239 Jest tests at 100% coverage (unit, integration, property-based via fast-check), 12 Playwright E2E smoke tests across EN and ES routes, and a Lighthouse CI gate enforcing a11y ≥95 and SEO ≥90. Every quality claim in the QA Philosophy section is backed by a gate running in CI.',
+      'QA reference implementation: 239 Jest tests at 100% coverage (unit, integration, property-based via fast-check), 14 Playwright E2E tests (12 smoke + 2 WCAG 2.1 AA axe scans) across EN and ES routes, and a Lighthouse CI gate enforcing a11y ≥95 and SEO ≥90. Every quality claim in the QA Philosophy section is backed by a gate running in CI.',
     techStack: ['TypeScript', 'Next.js', 'Playwright', 'Jest', 'fast-check'],
     link: 'https://github.com/gesttaltt/jonathan-verdun-portfolio',
     status: 'QA',
     stats: [
-      { label: 'Tests', value: '251' },
+      { label: 'Tests', value: '253' },
       { label: 'Coverage', value: '100%' },
     ],
   },

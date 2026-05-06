@@ -6,7 +6,7 @@ export default function NotFound() {
       <body className="font-mono antialiased">
         <div className="bg-background flex min-h-screen flex-col items-center justify-center px-6 font-mono text-zinc-300">
           <div className="w-full max-w-lg">
-            <div className="mb-8 space-y-1 text-xs text-zinc-500">
+            <div className="mb-8 space-y-1 text-xs text-zinc-300">
               <p>
                 <span className="text-blue-500">$</span> GET /route
               </p>
@@ -18,11 +18,11 @@ export default function NotFound() {
               </p>
             </div>
 
-            <p className="mb-2 text-[10px] font-bold tracking-widest text-zinc-500 uppercase sm:text-xs">
+            <p className="mb-2 text-[10px] font-bold tracking-widest text-zinc-300 uppercase sm:text-xs">
               Not Found
             </p>
             <h1 className="mb-4 text-8xl font-bold tracking-tight text-white">404</h1>
-            <p className="mb-10 text-sm text-zinc-400">This route does not exist.</p>
+            <p className="mb-10 text-sm text-zinc-300">This route does not exist.</p>
 
             <Link
               href="/"

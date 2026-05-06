@@ -16,7 +16,7 @@ export default function GlobalError({ error, reset }: ErrorProps) {
   return (
     <div className="bg-background flex min-h-screen flex-col items-center justify-center px-6 font-mono text-zinc-300">
       <div className="w-full max-w-lg">
-        <div className="mb-8 space-y-1 text-xs text-zinc-500">
+        <div className="mb-8 space-y-1 text-xs text-zinc-300">
           <p>
             <span className="text-blue-500">$</span> process.runtime
           </p>
@@ -26,16 +26,16 @@ export default function GlobalError({ error, reset }: ErrorProps) {
           {error.digest && (
             <p>
               <span className="text-amber-500/80">⚠</span> digest:{' '}
-              <code className="text-zinc-400">{error.digest}</code>
+              <code className="text-zinc-300">{error.digest}</code>
             </p>
           )}
         </div>
 
-        <p className="mb-2 text-[10px] font-bold tracking-widest text-zinc-500 uppercase sm:text-xs">
+        <p className="mb-2 text-[10px] font-bold tracking-widest text-zinc-300 uppercase sm:text-xs">
           Runtime Error
         </p>
         <h1 className="mb-4 text-8xl font-bold tracking-tight text-white">500</h1>
-        <p className="mb-10 text-sm text-zinc-400">Something went wrong.</p>
+        <p className="mb-10 text-sm text-zinc-300">Something went wrong.</p>
 
         <div className="flex flex-wrap gap-3">
           <button
