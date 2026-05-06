@@ -28,7 +28,7 @@ export interface Translations {
   lang: Lang
   tagline: string
   workHistoryLabel: string
-  workHistoryDescriptions: string[]
+  workHistoryDescriptions: Record<string, string>
   sections: {
     projects: string
     architecture: string

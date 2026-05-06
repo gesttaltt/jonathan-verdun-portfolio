@@ -60,6 +60,10 @@ export const TopologyMesh: React.FC<{ quality: number }> = ({ quality }) => {
     return new THREE.IcosahedronGeometry(4, detail)
   }, [quality])
 
+  useEffect(() => {
+    return () => geometry.dispose()
+  }, [geometry])
+
   return (
     <points ref={meshRef}>
       <primitive object={geometry} />

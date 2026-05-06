@@ -58,13 +58,19 @@ describe('i18n ↔ contract sync — bioinformatics specs', () => {
 })
 
 describe('i18n ↔ siteConfig sync — workHistoryDescriptions', () => {
-  const workHistoryLength = siteConfig.workHistory.length
+  const orgs = siteConfig.workHistory.map((e) => e.organization)
 
-  it('EN workHistoryDescriptions length matches siteConfig.workHistory length', () => {
-    expect(en.workHistoryDescriptions.length).toBe(workHistoryLength)
+  it('EN workHistoryDescriptions has an entry for every work history org', () => {
+    orgs.forEach((org) => {
+      expect(en.workHistoryDescriptions).toHaveProperty(org)
+      expect(en.workHistoryDescriptions[org].length).toBeGreaterThan(0)
+    })
   })
 
-  it('ES workHistoryDescriptions length matches siteConfig.workHistory length', () => {
-    expect(es.workHistoryDescriptions.length).toBe(workHistoryLength)
+  it('ES workHistoryDescriptions has an entry for every work history org', () => {
+    orgs.forEach((org) => {
+      expect(es.workHistoryDescriptions).toHaveProperty(org)
+      expect(es.workHistoryDescriptions[org].length).toBeGreaterThan(0)
+    })
   })
 })
