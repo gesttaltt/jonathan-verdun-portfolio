@@ -200,6 +200,18 @@ describe('useTerminal — command history navigation', () => {
     expect(result.current.navigateHistory('down', 'typing')).toBe('typing')
   })
 
+  it('navigateHistory down from index > 0 returns the newer history entry', () => {
+    const { result } = renderHook(() => useTerminal([], makeProcessor()))
+    boot()
+    act(() => {
+      result.current.execute('cmd1')
+      result.current.execute('cmd2')
+    })
+    result.current.navigateHistory('up', '') // index 0 → cmd2
+    result.current.navigateHistory('up', 'cmd2') // index 1 → cmd1
+    expect(result.current.navigateHistory('down', 'cmd1')).toBe('cmd2') // index 0
+  })
+
   it('navigateHistory down after up restores the saved draft', () => {
     const { result } = renderHook(() => useTerminal([], makeProcessor()))
     boot()
