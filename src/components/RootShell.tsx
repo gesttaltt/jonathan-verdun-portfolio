@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react'
-import { personJsonLd } from '@/lib/jsonLd'
+import { personJsonLd, websiteJsonLd } from '@/lib/jsonLd'
 import { MotionProvider } from '@/components/MotionProvider'
 import { I18nProvider } from '@/lib/i18n/context'
 
@@ -15,6 +15,10 @@ export function RootShell({ children }: { children: ReactNode }) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
       />
       <MotionProvider>
         <I18nProvider>{children}</I18nProvider>

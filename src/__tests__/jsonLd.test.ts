@@ -1,5 +1,32 @@
-import { personJsonLd } from '@/lib/jsonLd'
+import { personJsonLd, websiteJsonLd, buildWebPageJsonLd } from '@/lib/jsonLd'
 import { siteConfig } from '@/lib/siteConfig'
+
+describe('websiteJsonLd', () => {
+  it('has correct @context and @type', () => {
+    expect(websiteJsonLd['@context']).toBe('https://schema.org')
+    expect(websiteJsonLd['@type']).toBe('WebSite')
+  })
+
+  it('includes English and Spanish inLanguage', () => {
+    expect(websiteJsonLd.inLanguage).toContain('en')
+    expect(websiteJsonLd.inLanguage).toContain('es')
+  })
+})
+
+describe('buildWebPageJsonLd', () => {
+  it('returns default EN metadata when no locale provided', () => {
+    const pageLd = buildWebPageJsonLd()
+    expect(pageLd.inLanguage).toBe('en')
+    expect(pageLd.url).toBe(`${siteConfig.url}/`)
+  })
+
+  it('returns ES metadata when locale is es', () => {
+    const pageLd = buildWebPageJsonLd('es')
+    expect(pageLd.inLanguage).toBe('es')
+    expect(pageLd.url).toBe(`${siteConfig.url}/es/`)
+    expect(pageLd.name).toContain('Portafolio')
+  })
+})
 
 describe('personJsonLd — required fields', () => {
   it('has correct @context and @type', () => {

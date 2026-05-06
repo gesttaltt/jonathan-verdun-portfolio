@@ -6,7 +6,7 @@ export const dynamic = 'force-static'
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = process.env.SITE_LAST_MODIFIED
     ? new Date(process.env.SITE_LAST_MODIFIED)
-    : new Date()
+    : new Date('2026-05-06')
   return [
     {
       url: siteConfig.url,

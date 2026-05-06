@@ -58,6 +58,25 @@ describe('useTranslation (fallback)', () => {
     expect(screen.getByTestId('lang')).toHaveTextContent('en')
   })
 
+  it('warns in console when used outside provider in development mode', () => {
+    const originalEnv = process.env.NODE_ENV
+    process.env.NODE_ENV = 'development'
+    const warnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {})
+
+    function Bare() {
+      useTranslation()
+      return null
+    }
+    render(<Bare />)
+
+    expect(warnSpy).toHaveBeenCalledWith(
+      '[useTranslation] called outside I18nProvider — falling back to English'
+    )
+
+    warnSpy.mockRestore()
+    process.env.NODE_ENV = originalEnv
+  })
+
   it('en translations match expected tagline', () => {
     expect(en.tagline).toBe('Test Architecture · Automation Engineering')
   })

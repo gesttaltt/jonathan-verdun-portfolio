@@ -8,7 +8,6 @@ export { size, contentType }
 export default function OGImageEs() {
   return buildOgImage({
     tagline: es.tagline,
-    description:
-      'Portafolio de Jonathan Verdun — Ingeniero de Automatización QA e Investigador en Bioinformática, enfocado en desarrollo guiado por pruebas y biología computacional.',
+    description: es.description,
   })
 }

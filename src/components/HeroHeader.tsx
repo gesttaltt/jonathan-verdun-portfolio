@@ -72,9 +72,17 @@ export function HeroHeader() {
               >
                 {entry.organization} <ExternalLinkIcon className="h-4 w-4" />
               </Link>
-              {(entry.role || entry.period) && (
+              {(t.workHistoryRoles[entry.organization] ||
+                entry.role ||
+                t.workHistoryPeriods[entry.organization] ||
+                entry.period) && (
                 <p className="text-xs text-zinc-300" data-testid="work-role-period">
-                  {[entry.role, entry.period].filter(Boolean).join(' · ')}
+                  {[
+                    t.workHistoryRoles[entry.organization] || entry.role,
+                    t.workHistoryPeriods[entry.organization] || entry.period,
+                  ]
+                    .filter(Boolean)
+                    .join(' · ')}
                 </p>
               )}
               {t.workHistoryDescriptions[entry.organization] && (

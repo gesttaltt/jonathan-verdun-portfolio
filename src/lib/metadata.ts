@@ -1,11 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { siteConfig } from './siteConfig'
-
-const EN_TITLE = siteConfig.title
-const EN_DESCRIPTION = siteConfig.description
-const ES_TITLE = 'Jonathan Verdun | Ingeniero de Automatización QA'
-const ES_DESCRIPTION =
-  'Portafolio de Jonathan Verdun — Ingeniero de Automatización QA especializado en pytest, Playwright, Appium y pruebas basadas en propiedades con GitHub Actions CI.'
+import { en } from './i18n/en'
+import { es } from './i18n/es'
 
 export const SHARED_VIEWPORT: Viewport = {
   themeColor: '#0a0a0a',
@@ -15,8 +11,9 @@ export const SHARED_VIEWPORT: Viewport = {
 
 export function buildMetadata(lang: 'en' | 'es'): Metadata {
   const isEs = lang === 'es'
-  const title = isEs ? ES_TITLE : EN_TITLE
-  const description = isEs ? ES_DESCRIPTION : EN_DESCRIPTION
+  const translations = isEs ? es : en
+  const title = isEs ? `Jonathan Verdun | Ingeniero de Automatización QA` : siteConfig.title
+  const description = translations.description
   const canonical = isEs ? `${siteConfig.url}/es/` : siteConfig.url
   const locale = isEs ? 'es_ES' : siteConfig.locale
   const ogImageUrl = `${canonical.replace(/\/$/, '')}/opengraph-image`

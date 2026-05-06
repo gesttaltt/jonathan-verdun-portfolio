@@ -57,12 +57,12 @@ export const PROJECT_DATA: ProjectSpec[] = [
     id: 'proj-02',
     title: 'Functionome Atlas',
     description:
-      'Data pipeline engineering for genomic variant analysis — 120× VCF throughput via NumPy vectorization. Integrates LOEUF evolutionary constraints and Gene Ontology annotations against gnomAD at scale. Pipeline outputs validated against known gnomAD reference sets via parameterized regression tests.',
+      'Data pipeline engineering for genomic variant analysis — ~120× VCF throughput via NumPy vectorization vs naive Python. Integrates LOEUF evolutionary constraints and Gene Ontology annotations against gnomAD at scale. Pipeline outputs validated against known gnomAD reference sets via parameterized regression tests.',
     techStack: ['Python', 'NumPy', 'Pandas', 'gnomAD'],
     link: 'https://github.com/gesttaltt/Functionome-Atlas',
     status: 'Research',
     stats: [
-      { label: 'VCF Speed', value: '120×' },
+      { label: 'vs Naive Python', value: '~120×' },
       { label: 'Functionomes', value: '1,622' },
     ],
   },
@@ -89,7 +89,7 @@ export const PROJECT_DATA: ProjectSpec[] = [
     status: 'Research',
     stats: [
       { label: 'C++ vs Python', value: '5-25×' },
-      { label: 'Scale', value: '10M+ genes' },
+      { label: 'Scale', value: '10M+ annotations' },
     ],
   },
 ]

@@ -18,6 +18,7 @@ import { ProjectProvider } from '@/components/hooks/useProjects'
 import { useTranslation } from '@/lib/i18n/context'
 import { DefaultCommandProcessor } from '@/lib/services/CommandProcessor'
 import { siteConfig } from '@/lib/siteConfig'
+import { buildWebPageJsonLd } from '@/lib/jsonLd'
 
 export const PortfolioPage: React.FC = () => {
   const t = useTranslation()
@@ -28,6 +29,10 @@ export const PortfolioPage: React.FC = () => {
 
   return (
     <ProjectProvider adapter={{ getProjects: () => t.projects }}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(buildWebPageJsonLd(t.lang)) }}
+      />
       <div className="bg-background min-h-screen font-mono text-zinc-300 selection:bg-blue-500/30">
         <ErrorBoundary>
           <TopologyLoader />
@@ -44,14 +49,19 @@ export const PortfolioPage: React.FC = () => {
               commands={t.terminal.boot}
               processor={processor}
               title={t.terminal.title}
+              prompt={t.terminal.prompt}
               hintCmd={t.terminal.helpCmd}
             />
           </FadeInSection>
 
           <div className="grid grid-cols-1 gap-x-16 gap-y-14 lg:grid-cols-12 lg:gap-y-24">
             {/* QA Philosophy — row 1, cols 1–8 */}
-            <section className="relative lg:col-span-8 lg:col-start-1 lg:row-start-1">
+            <section
+              aria-labelledby="qa-section-title"
+              className="relative lg:col-span-8 lg:col-start-1 lg:row-start-1"
+            >
               <SectionHeader
+                id="qa-section-title"
                 icon={<ShieldCheck className="h-5 w-5" />}
                 title={t.sections.qa}
                 color="green"
@@ -69,24 +79,50 @@ export const PortfolioPage: React.FC = () => {
 
                     <h3 className="mb-6 flex items-center gap-3 text-lg font-bold text-white">
                       <Server className="h-5 w-5 text-blue-400" />
-                      {t.sections.sidebar.constraintsTitle}
+                      {t.sections.sidebar.qualityGatesTitle}
                     </h3>
 
-                    <div className="space-y-5">
-                      {t.qa.constraints.map((c) => (
-                        <div key={c} className="flex items-start gap-4">
-                          <div className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.6)]"></div>
-                          <p className="text-xs leading-relaxed font-medium text-zinc-300">{c}</p>
+                    <div className="space-y-6">
+                      <div className="space-y-2">
+                        <div className="flex items-center justify-between text-[10px] font-bold tracking-widest text-zinc-400 uppercase sm:text-xs">
+                          <span>{t.sections.sidebar.unitCoverageLabel}</span>
+                          <span className="text-blue-400">100%</span>
                         </div>
-                      ))}
+                        <div className="h-1.5 w-full overflow-hidden rounded-full bg-white/5">
+                          <div className="h-full w-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.6)]"></div>
+                        </div>
+                      </div>
+
+                      <div className="space-y-2">
+                        <div className="flex items-center justify-between text-[10px] font-bold tracking-widest text-zinc-400 uppercase sm:text-xs">
+                          <span>{t.sections.sidebar.automationRateLabel}</span>
+                          <span className="text-cyan-400">92%</span>
+                        </div>
+                        <div className="h-1.5 w-full overflow-hidden rounded-full bg-white/5">
+                          <div className="h-full w-[92%] bg-cyan-500 shadow-[0_0_8px_rgba(34,211,238,0.6)]"></div>
+                        </div>
+                      </div>
+
+                      <div className="space-y-2">
+                        <div className="flex items-center justify-between text-[10px] font-bold tracking-widest text-zinc-400 uppercase sm:text-xs">
+                          <span>{t.sections.sidebar.securityScanLabel}</span>
+                          <span className="text-green-400">Passed</span>
+                        </div>
+                        <div className="h-1.5 w-full overflow-hidden rounded-full bg-white/5">
+                          <div className="h-full w-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]"></div>
+                        </div>
+                      </div>
                     </div>
 
-                    <div className="mt-6 border-t border-white/5 pt-5">
+                    <div className="mt-8 border-t border-white/5 pt-5">
+                      <p className="mb-3 text-[10px] font-bold tracking-widest text-zinc-500 uppercase sm:text-xs">
+                        {t.sections.sidebar.livePipelineLabel}
+                      </p>
                       <a
                         href={siteConfig.repo.ciWorkflowUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 opacity-60 transition-opacity hover:opacity-100"
+                        className="inline-flex items-center gap-2 transition-transform hover:scale-105"
                         aria-label="CI pipeline status (opens in new tab)"
                       >
                         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -120,8 +156,9 @@ export const PortfolioPage: React.FC = () => {
             {/* Projects + Prior Research — row 2, cols 1–8 */}
             <div className="space-y-14 lg:col-span-8 lg:col-start-1 lg:row-start-2 lg:space-y-24">
               <FadeInSection>
-                <section className="relative space-y-8">
+                <section aria-labelledby="projects-section-title" className="relative space-y-8">
                   <SectionHeader
+                    id="projects-section-title"
                     icon={<Code2 className="h-5 w-5" />}
                     title={t.sections.projects}
                     color="blue"
@@ -131,7 +168,7 @@ export const PortfolioPage: React.FC = () => {
                 </section>
               </FadeInSection>
 
-              <section className="space-y-4 border-t border-white/5 pt-8 opacity-60">
+              <section className="space-y-4 border-t border-white/10 pt-8 opacity-60">
                 <p className="text-[10px] font-bold tracking-widest text-zinc-200 uppercase sm:text-xs">
                   {t.sections.bioinformatics}
                 </p>

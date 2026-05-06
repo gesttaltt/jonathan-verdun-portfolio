@@ -27,14 +27,24 @@ export interface I18nResearchSpec {
 export interface Translations {
   lang: Lang
   tagline: string
+  description: string
   workHistoryLabel: string
   workHistoryDescriptions: Record<string, string>
+  workHistoryRoles: Record<string, string>
+  workHistoryPeriods: Record<string, string>
   sections: {
     projects: string
     architecture: string
     qa: string
     bioinformatics: string
-    sidebar: { constraintsTitle: string }
+    sidebar: {
+      qualityGatesTitle: string
+      constraintsTitle: string
+      unitCoverageLabel: string
+      automationRateLabel: string
+      securityScanLabel: string
+      livePipelineLabel: string
+    }
     qaContact: { title: string; description: string; ctaLabel: string }
   }
   qa: {
@@ -57,6 +67,7 @@ export interface Translations {
   projects: ProjectSpec[]
   terminal: {
     title: string
+    prompt: string
     helpCmd: string
     boot: readonly { text: string; output: string; delay?: number }[]
     interactive: Record<string, string>

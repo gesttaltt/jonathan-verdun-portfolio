@@ -5,6 +5,7 @@
   --color-foreground: var(--foreground);
   --color-accent: var(--accent);
   --font-mono: var(--font-jetbrains-mono);
+  --color-bg-offset: var(--background);
 
   /* Semantic Tokens */
   --color-bg-deep: var(--bg-deep);

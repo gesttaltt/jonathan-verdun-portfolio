@@ -5,7 +5,7 @@ import { m } from 'framer-motion'
 import { ExternalLink, Terminal } from 'lucide-react'
 import Link from 'next/link'
 import { ProjectSpec } from '@/lib/contracts/ProjectContract.types'
-import { fadeUpVariants, SCROLL_VIEWPORT } from '@/lib/animations'
+import { fadeUpVariants } from '@/lib/animations'
 
 const PROJECT_STATUS_STYLES: Record<ProjectSpec['status'], string> = {
   Deployed: 'bg-green-500/20 text-green-400',
@@ -17,17 +17,12 @@ const PROJECT_STATUS_STYLES: Record<ProjectSpec['status'], string> = {
 
 interface ProjectCardProps {
   project: ProjectSpec
-  index: number
 }
 
-export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
+export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
   return (
     <m.div
-      custom={index}
-      initial="hidden"
-      whileInView="visible"
-      viewport={SCROLL_VIEWPORT}
-      variants={fadeUpVariants(index * 0.1)}
+      variants={fadeUpVariants()}
       role="listitem"
       className="group relative flex h-full flex-col justify-between overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-md transition-all duration-300 hover:border-blue-500/50 hover:bg-white/10 hover:shadow-[0_0_20px_var(--glow-blue)]"
     >
@@ -65,7 +60,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
 
       <div className="space-y-4">
         {project.stats && (
-          <div className="flex gap-4 border-t border-white/5 pt-4">
+          <div className="flex gap-4 border-t border-white/10 pt-4">
             {project.stats.map((stat) => (
               <div key={stat.label}>
                 <div className="text-[10px] font-bold text-zinc-300 uppercase sm:text-xs">

@@ -5,6 +5,17 @@ import { siteConfig } from '@/lib/siteConfig'
 import { en } from '@/lib/i18n/en'
 import { es } from '@/lib/i18n/es'
 
+describe('i18n metadata consistency', () => {
+  it('has a non-empty description in both locales', () => {
+    expect(en.description.length).toBeGreaterThan(0)
+    expect(es.description.length).toBeGreaterThan(0)
+  })
+
+  it('descriptions are distinct (translated)', () => {
+    expect(en.description).not.toBe(es.description)
+  })
+})
+
 describe('i18n ↔ contract sync — projects', () => {
   const contractIds = ProjectService.getProjects()
     .map((p) => p.id)

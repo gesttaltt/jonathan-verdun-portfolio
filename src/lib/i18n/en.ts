@@ -8,17 +8,32 @@ import { BioinformaticsService } from '@/lib/contracts/BioinformaticsContract'
 export const en: Translations = {
   lang: 'en',
   tagline: 'Test Architecture · Automation Engineering',
+  description:
+    'Portfolio of Jonathan Verdun — QA Automation Engineer specializing in pytest, Playwright, Appium, and property-based testing with GitHub Actions CI.',
   workHistoryLabel: 'Work History',
   workHistoryDescriptions: {
     'Ai-Whisperers':
       'Owned QA across 3 production repos — 352+ automated tests, 7 CI workflows, ADO defect tracking.',
+  },
+  workHistoryRoles: {
+    'Ai-Whisperers': 'Co-Founder & QA Lead',
+  },
+  workHistoryPeriods: {
+    'Ai-Whisperers': 'Sep 2025 – Present',
   },
   sections: {
     projects: 'Projects',
     architecture: 'Architecture',
     qa: 'QA Philosophy',
     bioinformatics: 'Prior Research & Engineering',
-    sidebar: { constraintsTitle: 'Engineering Constraints' },
+    sidebar: {
+      qualityGatesTitle: 'Engineering Quality Gates',
+      constraintsTitle: 'Engineering Constraints',
+      unitCoverageLabel: 'Unit Coverage',
+      automationRateLabel: 'Automation Rate',
+      securityScanLabel: 'Security Scan',
+      livePipelineLabel: 'Live CI Pipeline',
+    },
     qaContact: {
       title: 'Open to work',
       description: 'Available for QA engineering and automation architecture roles.',
@@ -49,6 +64,7 @@ export const en: Translations = {
   projects: PROJECT_DATA,
   terminal: {
     title: 'bash — interactive',
+    prompt: 'gestalt@portfolio:',
     helpCmd: 'help',
     boot: BOOT_COMMANDS,
     interactive: INTERACTIVE_COMMANDS,

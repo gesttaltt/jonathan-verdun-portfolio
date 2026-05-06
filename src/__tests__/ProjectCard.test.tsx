@@ -11,11 +11,11 @@ const baseProject: ProjectSpec = {
   status: 'Research',
 }
 
-const wrap = (project: ProjectSpec, index = 0) =>
+const wrap = (project: ProjectSpec) =>
   render(
     <LazyMotion features={domAnimation}>
       <MotionConfig reducedMotion="always">
-        <ProjectCard project={project} index={index} />
+        <ProjectCard project={project} />
       </MotionConfig>
     </LazyMotion>
   )

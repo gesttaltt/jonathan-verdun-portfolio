@@ -3,23 +3,27 @@
 import { m } from 'framer-motion'
 import { CheckCircle2 } from 'lucide-react'
 import React from 'react'
-import { staggerItemVariants, SCROLL_VIEWPORT } from '@/lib/animations'
+import { staggerItemVariants, containerVariants, SCROLL_VIEWPORT } from '@/lib/animations'
 import { useTranslation } from '@/lib/i18n/context'
 
 export const QAPhilosophyGrid: React.FC = () => {
   const t = useTranslation()
 
   return (
-    <div className="rounded-2xl border border-white/5 bg-black/40 p-5 backdrop-blur-sm sm:p-8">
-      <div role="list" className="grid grid-cols-1 gap-8 md:grid-cols-2">
-        {t.qa.specifications.map((spec, i) => (
+    <div className="rounded-2xl border border-white/10 bg-black/40 p-5 backdrop-blur-sm sm:p-8">
+      <m.div
+        role="list"
+        variants={containerVariants(0.12)}
+        initial="hidden"
+        whileInView="visible"
+        viewport={SCROLL_VIEWPORT}
+        className="grid grid-cols-1 gap-8 md:grid-cols-2"
+      >
+        {t.qa.specifications.map((spec) => (
           <m.div
             key={spec.layer}
             role="listitem"
-            initial="hidden"
-            whileInView="visible"
-            viewport={SCROLL_VIEWPORT}
-            variants={staggerItemVariants(i * 0.12)}
+            variants={staggerItemVariants()}
             className="group space-y-3"
           >
             <div className="flex items-center justify-between">
@@ -29,14 +33,14 @@ export const QAPhilosophyGrid: React.FC = () => {
                 </div>
                 <h3 className="text-sm font-bold text-white uppercase">{spec.layer}</h3>
               </div>
-              <span className="rounded bg-white/5 px-2 py-0.5 text-[10px] font-medium text-zinc-300 transition-colors group-hover:text-zinc-300 sm:text-xs">
+              <span className="rounded bg-white/5 px-2 py-0.5 text-[10px] font-medium text-zinc-300 transition-colors group-hover:text-zinc-200 sm:text-xs">
                 {spec.status}
               </span>
             </div>
             <p className="pl-9 text-xs leading-relaxed text-zinc-300">{spec.objective}</p>
           </m.div>
         ))}
-      </div>
+      </m.div>
     </div>
   )
 }

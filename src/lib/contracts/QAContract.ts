@@ -31,12 +31,17 @@ export const QA_PHILOSOPHY: QAPhilosophy = {
     {
       layer: 'integration',
       objective: 'Verify service boundaries, data flow, and cross-module contracts in CI',
-      status: 'maturing',
+      status: 'stable',
     },
     {
       layer: 'E2E',
       objective: 'Cover critical user paths end-to-end via automated browser and mobile automation',
       status: 'maturing',
+    },
+    {
+      layer: 'accessibility',
+      objective: 'Enforce WCAG 2.1 AA compliance via automated axe-core scans in CI',
+      status: 'stable',
     },
   ],
 }

@@ -7,6 +7,7 @@ import { fadeUpVariants, SCROLL_VIEWPORT } from '@/lib/animations'
 interface SectionHeaderProps {
   icon: React.ReactNode
   title: string
+  id?: string
   color?: 'blue' | 'purple' | 'cyan' | 'green'
   showAccentLine?: boolean
   showBorderBottom?: boolean
@@ -34,6 +35,7 @@ const COLOR_MAP = {
 export const SectionHeader: React.FC<SectionHeaderProps> = ({
   icon,
   title,
+  id,
   color = 'blue',
   showAccentLine = false,
   showBorderBottom = false,
@@ -60,7 +62,9 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
         >
           {icon}
         </div>
-        <h2 className="text-2xl font-bold text-white">{title}</h2>
+        <h2 id={id} className="text-2xl font-bold text-white">
+          {title}
+        </h2>
       </m.div>
     </>
   )

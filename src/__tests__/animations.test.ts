@@ -1,6 +1,7 @@
 import {
   fadeUpVariants,
   fadeInVariants,
+  containerVariants,
   slideDownVariants,
   staggerItemVariants,
   SCROLL_VIEWPORT,
@@ -10,7 +11,7 @@ describe('animations', () => {
   describe('fadeUpVariants', () => {
     it('returns correct hidden state', () => {
       const v = fadeUpVariants()
-      expect(v.hidden).toEqual({ opacity: 0, y: 20 })
+      expect(v.hidden).toEqual({ opacity: 0, y: 15 })
     })
 
     it('uses delay=0 by default', () => {
@@ -31,12 +32,33 @@ describe('animations', () => {
 
     it('returns correct hidden state', () => {
       const v = fadeInVariants()
-      expect(v.hidden).toEqual({ opacity: 0, y: 20 })
+      expect(v.hidden).toEqual({ opacity: 0, y: 15 })
     })
 
     it('uses the provided delay', () => {
       const v = fadeInVariants(0.2)
       expect((v.visible as { transition: { delay: number } }).transition.delay).toBe(0.2)
+    })
+  })
+
+  describe('containerVariants', () => {
+    it('returns correct hidden state', () => {
+      const v = containerVariants()
+      expect(v.hidden).toEqual({ opacity: 0 })
+    })
+
+    it('uses staggerChildren=0.1 by default', () => {
+      const v = containerVariants()
+      expect(
+        (v.visible as { transition: { staggerChildren: number } }).transition.staggerChildren
+      ).toBe(0.1)
+    })
+
+    it('uses the provided stagger value', () => {
+      const v = containerVariants(0.25)
+      expect(
+        (v.visible as { transition: { staggerChildren: number } }).transition.staggerChildren
+      ).toBe(0.25)
     })
   })
 
