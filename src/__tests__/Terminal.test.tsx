@@ -49,4 +49,24 @@ describe('Terminal', () => {
     await user.type(input, '   {Enter}')
     expect(mockProcessor.process).not.toHaveBeenCalled()
   })
+
+  it('ArrowUp populates the input with the last executed command', async () => {
+    const user = userEvent.setup({ delay: null })
+    render(<Terminal commands={[]} />)
+    const input = await screen.findByRole('textbox', { name: /terminal command input/i })
+    await user.type(input, 'help{Enter}')
+    await user.keyboard('{ArrowUp}')
+    expect(input).toHaveValue('help')
+  })
+
+  it('ArrowDown after ArrowUp restores the draft input', async () => {
+    const user = userEvent.setup({ delay: null })
+    render(<Terminal commands={[]} />)
+    const input = await screen.findByRole('textbox', { name: /terminal command input/i })
+    await user.type(input, 'help{Enter}')
+    await user.type(input, 'draft')
+    await user.keyboard('{ArrowUp}')
+    await user.keyboard('{ArrowDown}')
+    expect(input).toHaveValue('draft')
+  })
 })

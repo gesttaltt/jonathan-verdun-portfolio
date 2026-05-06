@@ -13,6 +13,7 @@ jest.mock('@/components/hooks/useTerminal', () => ({
     ],
     isBooting: false,
     execute: jest.fn(),
+    navigateHistory: jest.fn((_, input: string) => input),
   })),
 }))
 

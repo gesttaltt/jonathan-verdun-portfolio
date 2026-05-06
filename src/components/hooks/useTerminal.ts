@@ -20,6 +20,11 @@ export const useTerminal = (
   const idCounter = useRef(0)
   const nextId = () => String(idCounter.current++)
 
+  // Command history for Up/Down navigation — refs to avoid triggering re-renders.
+  const commandHistoryRef = useRef<string[]>([])
+  const historyIndexRef = useRef(-1) // -1 = at the live prompt, ≥0 = browsing history
+  const draftRef = useRef('') // input saved before first ArrowUp press
+
   useEffect(() => {
     const commands = initialRef.current
     const timeouts: NodeJS.Timeout[] = []
@@ -46,10 +51,35 @@ export const useTerminal = (
     return () => timeouts.forEach(clearTimeout)
   }, [])
 
+  // Returns the new input value after moving through history; caller owns setInputVal.
+  const navigateHistory = useCallback((direction: 'up' | 'down', currentInput: string): string => {
+    const hist = commandHistoryRef.current
+    if (direction === 'up') {
+      if (hist.length === 0) return currentInput
+      // Save the live draft before the first navigation step.
+      if (historyIndexRef.current === -1) draftRef.current = currentInput
+      historyIndexRef.current = Math.min(historyIndexRef.current + 1, hist.length - 1)
+      return hist[hist.length - 1 - historyIndexRef.current]
+    } else {
+      if (historyIndexRef.current === -1) return currentInput
+      historyIndexRef.current -= 1
+      return historyIndexRef.current === -1
+        ? draftRef.current
+        : hist[hist.length - 1 - historyIndexRef.current]
+    }
+  }, [])
+
   const execute = useCallback(
     (input: string) => {
       const cmd = input.trim()
       if (!cmd) return
+
+      // Append to command history; skip consecutive duplicates (mirrors bash HISTCONTROL=ignoredups).
+      const hist = commandHistoryRef.current
+      if (hist[hist.length - 1] !== cmd) hist.push(cmd)
+      // Reset navigation so the next ArrowUp starts from the freshest entry.
+      historyIndexRef.current = -1
+      draftRef.current = ''
 
       if (['clear', 'limpiar'].includes(cmd.toLowerCase())) {
         setHistory([])
@@ -68,5 +98,5 @@ export const useTerminal = (
     [processor]
   )
 
-  return { history, isBooting, execute }
+  return { history, isBooting, execute, navigateHistory }
 }

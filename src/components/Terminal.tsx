@@ -22,7 +22,7 @@ export const Terminal: React.FC<TerminalProps> = ({
   prompt = TERMINAL_PROMPT,
   hintCmd = 'help',
 }) => {
-  const { history, isBooting, execute } = useTerminal(commands, processor)
+  const { history, isBooting, execute, navigateHistory } = useTerminal(commands, processor)
   const [inputVal, setInputVal] = useState('')
   const scrollRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
@@ -38,6 +38,12 @@ export const Terminal: React.FC<TerminalProps> = ({
     if (e.key === 'Enter') {
       execute(inputVal)
       setInputVal('')
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault() // prevent cursor jumping to input start
+      setInputVal(navigateHistory('up', inputVal))
+    } else if (e.key === 'ArrowDown') {
+      e.preventDefault() // prevent cursor jumping to input end
+      setInputVal(navigateHistory('down', inputVal))
     }
   }
 
