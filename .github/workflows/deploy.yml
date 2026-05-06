@@ -46,7 +46,7 @@ jobs:
         run: npx typedoc --out out/docs/api --entryPointStrategy expand src/lib
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: ./out
 
