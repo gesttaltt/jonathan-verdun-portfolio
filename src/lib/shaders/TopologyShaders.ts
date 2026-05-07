@@ -4,6 +4,7 @@
 export const vertexShader = `
     uniform float time;
     uniform vec2 mouse;   // NDC cursor position, updated each frame via lerp
+    uniform bool uReducedMotion;
     varying float vDisplacement;
     varying float vPulse;
     varying float vHover;
@@ -85,16 +86,19 @@ export const vertexShader = `
     }
 
     void main() {
+        // Use a static time value if reduced motion is active to freeze animations
+        float effectiveTime = uReducedMotion ? 0.0 : time;
+
         // ── Ambient displacement ──────────────────────────────────────────────
         // Low-frequency noise (0.5 spatial, 0.2 temporal) keeps the surface
         // breathing slowly without visible tiling seams.
-        float noise = snoise(vec3(position.x * 0.5, position.y * 0.5, time * 0.2));
+        float noise = snoise(vec3(position.x * 0.5, position.y * 0.5, effectiveTime * 0.2));
         vDisplacement = noise;
 
         // ── Sparse sparkle ────────────────────────────────────────────────────
         // High-frequency noise (2.0 spatial, 2.0 temporal) generates values
         // that exceed 0.8 only ~10% of the time — those vertices pulse white.
-        float pulseNoise = snoise(vec3(position.x * 2.0, position.y * 2.0, time * 2.0));
+        float pulseNoise = snoise(vec3(position.x * 2.0, position.y * 2.0, effectiveTime * 2.0));
         vPulse = step(0.8, pulseNoise);
 
         // ── Screen-space hover detection ──────────────────────────────────────

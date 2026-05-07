@@ -1,4 +1,4 @@
-import { render, screen, within } from '@testing-library/react'
+import { render, screen, within, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { Terminal } from '@/components/Terminal'
 
@@ -25,6 +25,7 @@ describe('Terminal', () => {
     const user = userEvent.setup({ delay: null })
     render(<Terminal commands={[]} />)
     const input = await screen.findByRole('textbox', { name: /terminal command input/i })
+    await waitFor(() => expect(input).not.toBeDisabled())
     await user.type(input, 'help{Enter}')
     const log = screen.getByRole('log')
     expect(within(log).getByText('help')).toBeInTheDocument()
@@ -34,8 +35,8 @@ describe('Terminal', () => {
   it('typing "clear" resets history — prior boot output disappears', async () => {
     const user = userEvent.setup({ delay: null })
     render(<Terminal commands={[{ text: 'whoami', output: 'gestalt', delay: 10 }]} />)
-    // Wait for both the boot output and the input (input appears 500ms after last boot command)
     const input = await screen.findByRole('textbox', { name: /terminal command input/i })
+    await waitFor(() => expect(input).not.toBeDisabled())
     await user.type(input, 'clear{Enter}')
     expect(screen.queryByText('whoami')).not.toBeInTheDocument()
     expect(screen.queryByText('gestalt')).not.toBeInTheDocument()
@@ -46,6 +47,7 @@ describe('Terminal', () => {
     const mockProcessor = { process: jest.fn(() => '') }
     render(<Terminal commands={[]} processor={mockProcessor} />)
     const input = await screen.findByRole('textbox', { name: /terminal command input/i })
+    await waitFor(() => expect(input).not.toBeDisabled())
     await user.type(input, '   {Enter}')
     expect(mockProcessor.process).not.toHaveBeenCalled()
   })
@@ -54,6 +56,7 @@ describe('Terminal', () => {
     const user = userEvent.setup({ delay: null })
     render(<Terminal commands={[]} />)
     const input = await screen.findByRole('textbox', { name: /terminal command input/i })
+    await waitFor(() => expect(input).not.toBeDisabled())
     await user.type(input, 'help{Enter}')
     await user.keyboard('{ArrowUp}')
     expect(input).toHaveValue('help')
@@ -63,6 +66,7 @@ describe('Terminal', () => {
     const user = userEvent.setup({ delay: null })
     render(<Terminal commands={[]} />)
     const input = await screen.findByRole('textbox', { name: /terminal command input/i })
+    await waitFor(() => expect(input).not.toBeDisabled())
     await user.type(input, 'help{Enter}')
     await user.type(input, 'draft')
     await user.keyboard('{ArrowUp}')

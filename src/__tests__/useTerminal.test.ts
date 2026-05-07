@@ -84,6 +84,34 @@ describe('useTerminal', () => {
     expect(result.current.history).toHaveLength(0)
   })
 
+  it('stops boot sequence and clears timeouts when execute("clear") is called during boot', () => {
+    const commands = [
+      { text: 'cmd1', output: 'out1', delay: 100 },
+      { text: 'cmd2', output: 'out2', delay: 100 },
+    ]
+    const { result } = renderHook(() => useTerminal(commands, makeProcessor()))
+
+    // Advance to first command
+    act(() => {
+      jest.advanceTimersByTime(100)
+    })
+    expect(result.current.history).toHaveLength(1)
+    expect(result.current.isBooting).toBe(true)
+
+    // Clear during boot
+    act(() => {
+      result.current.execute('clear')
+    })
+    expect(result.current.history).toHaveLength(0)
+    expect(result.current.isBooting).toBe(false)
+
+    // Advance time further — no more boot commands should appear
+    act(() => {
+      jest.advanceTimersByTime(500)
+    })
+    expect(result.current.history).toHaveLength(0)
+  })
+
   it('execute("limpiar") also resets history (ES alias for clear)', () => {
     const { result } = renderHook(() => useTerminal([], makeProcessor()))
 

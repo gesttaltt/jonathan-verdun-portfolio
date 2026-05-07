@@ -19,15 +19,21 @@ export const useTerminal = (
   const initialRef = useRef(initialCommands)
   const idCounter = useRef(0)
   const nextId = () => String(idCounter.current++)
+  const bootTimeoutsRef = useRef<NodeJS.Timeout[]>([])
 
   // Command history for Up/Down navigation — refs to avoid triggering re-renders.
   const commandHistoryRef = useRef<string[]>([])
   const historyIndexRef = useRef(-1) // -1 = at the live prompt, ≥0 = browsing history
   const draftRef = useRef('') // input saved before first ArrowUp press
 
+  const stopBooting = useCallback(() => {
+    bootTimeoutsRef.current.forEach(clearTimeout)
+    bootTimeoutsRef.current = []
+    setIsBooting(false)
+  }, [])
+
   useEffect(() => {
     const commands = initialRef.current
-    const timeouts: NodeJS.Timeout[] = []
     let currentDelay = 0
 
     const boot = () => {
@@ -38,17 +44,20 @@ export const useTerminal = (
         const timeout = setTimeout(() => {
           setHistory((prev) => [...prev, { ...cmd, id, isUser: false }])
         }, currentDelay)
-        timeouts.push(timeout)
+        bootTimeoutsRef.current.push(timeout)
       }
 
       const finishTimeout = setTimeout(() => {
         setIsBooting(false)
       }, currentDelay + 500)
-      timeouts.push(finishTimeout)
+      bootTimeoutsRef.current.push(finishTimeout)
     }
 
     boot()
-    return () => timeouts.forEach(clearTimeout)
+    return () => {
+      bootTimeoutsRef.current.forEach(clearTimeout)
+      bootTimeoutsRef.current = []
+    }
   }, [])
 
   // Returns the new input value after moving through history; caller owns setInputVal.
@@ -82,6 +91,7 @@ export const useTerminal = (
       draftRef.current = ''
 
       if (['clear', 'limpiar'].includes(cmd.toLowerCase())) {
+        stopBooting()
         setHistory([])
         return
       }
@@ -95,7 +105,7 @@ export const useTerminal = (
 
       setHistory((prev) => [...prev, newEntry])
     },
-    [processor]
+    [processor, stopBooting]
   )
 
   return { history, isBooting, execute, navigateHistory }

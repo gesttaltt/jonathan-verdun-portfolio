@@ -35,6 +35,8 @@ export const Terminal: React.FC<TerminalProps> = ({
   }, [history, isBooting])
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (isBooting) return
+
     if (e.key === 'Enter') {
       execute(inputVal)
       setInputVal('')
@@ -106,10 +108,11 @@ export const Terminal: React.FC<TerminalProps> = ({
               ref={inputRef}
               type="text"
               value={inputVal}
+              disabled={isBooting}
               onChange={(e) => setInputVal(e.target.value)}
               onKeyDown={handleKeyDown}
               /* font-size ≥ 16px on mobile prevents iOS Safari from zooming the viewport on focus */
-              className="w-full bg-transparent text-base text-zinc-100 outline-none placeholder:text-zinc-700 sm:text-xs md:text-sm lg:text-base"
+              className="w-full bg-transparent text-base text-zinc-100 outline-none placeholder:text-zinc-700 disabled:cursor-not-allowed sm:text-xs md:text-sm lg:text-base"
               aria-label="Terminal command input"
               aria-describedby="terminal-hint"
               inputMode="text"

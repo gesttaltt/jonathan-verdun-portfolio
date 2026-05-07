@@ -1,5 +1,5 @@
 import { Translations } from './types'
-import { LS_PROJECTS_OUTPUT } from '@/lib/contracts/TerminalContract'
+import { generateLsOutput } from '@/lib/contracts/TerminalContract'
 import { DataEngineeringService } from '@/lib/contracts/DataEngineeringContract'
 import { BioinformaticsService } from '@/lib/contracts/BioinformaticsContract'
 import { PROJECT_DATA } from '@/lib/contracts/ProjectContract'
@@ -15,7 +15,7 @@ const ES_PROJECT_OVERRIDES: Record<string, { description: string; statLabels: st
   },
   'proj-05': {
     description:
-      'Suite de 96 pruebas que cubre todos los endpoints REST vía FastAPI TestClient y async httpx — rutas de codificación, codificación por lotes, clustering, visualización y variantes sinónimas. El CI gate requiere lint, type-check, análisis de seguridad (bandit + pip-audit), smoke test de Docker y cobertura antes de hacer merge.',
+      'Suite de 96 pruebas que cubre todos los endpoints REST vía FastAPI TestClient and async httpx — rutas de codificación, codificación por lotes, clustering, visualización y variantes sinónimas. El CI gate requiere lint, type-check, análisis de seguridad (bandit + pip-audit), smoke test de Docker y cobertura antes de hacer merge.',
     statLabels: ['Pruebas', 'Endpoints'],
   },
   'proj-06': {
@@ -78,6 +78,26 @@ const ES_BIO_OVERRIDES: Record<string, { methodology: string; invariants: string
     invariants: ['Determinismo de Incrustación', 'Consistencia de Aminoácidos'],
   },
 }
+
+const projects = PROJECT_DATA.map((p) => {
+  const override = ES_PROJECT_OVERRIDES[p.id]
+  if (!override) {
+    if (process.env.NODE_ENV === 'development') {
+      console.warn(`[i18n:es] Missing Project override for ${p.id}`)
+    }
+    return p
+  }
+  return {
+    ...p,
+    description: override.description,
+    stats: p.stats?.map((stat, i) => ({
+      ...stat,
+      label: override.statLabels[i] ?? stat.label,
+    })),
+  }
+})
+
+const esLsOutput = generateLsOutput(projects)
 
 export const es: Translations = {
   lang: 'es',
@@ -163,10 +183,16 @@ export const es: Translations = {
   architecture: {
     methodologyLabel: 'Metodología',
     invariantsLabel: 'Invariantes',
-    specs: DataEngineeringService.getSystemSpecs().map((s) => ({
-      ...s,
-      ...ES_ARCH_OVERRIDES[s.id],
-    })),
+    specs: DataEngineeringService.getSystemSpecs().map((s) => {
+      const override = ES_ARCH_OVERRIDES[s.id]
+      if (!override && process.env.NODE_ENV === 'development') {
+        console.warn(`[i18n:es] Missing Architecture override for ${s.id}`)
+      }
+      return {
+        ...s,
+        ...override,
+      }
+    }),
   },
   bioinformatics: {
     methodologyLabel: 'Metodología',
@@ -181,29 +207,25 @@ export const es: Translations = {
       'Codon Encoding':
         'Incrustación de codones de ADN en espacio hiperbólico mediante Autoencoder Variacional para representación determinista de aminoácidos.',
     },
-    specs: BioinformaticsService.getResearchSpecs().map((s) => ({
-      ...s,
-      ...ES_BIO_OVERRIDES[s.id],
-    })),
+    specs: BioinformaticsService.getResearchSpecs().map((s) => {
+      const override = ES_BIO_OVERRIDES[s.id]
+      if (!override && process.env.NODE_ENV === 'development') {
+        console.warn(`[i18n:es] Missing Bioinformatics override for ${s.id}`)
+      }
+      return {
+        ...s,
+        ...override,
+      }
+    }),
   },
-  projects: PROJECT_DATA.map((p) => {
-    const override = ES_PROJECT_OVERRIDES[p.id]
-    return {
-      ...p,
-      description: override.description,
-      stats: p.stats?.map((stat, i) => ({
-        ...stat,
-        label: override.statLabels[i],
-      })),
-    }
-  }),
+  projects,
   terminal: {
     title: 'bash — interactivo',
     prompt: 'gestalt@portafolio:',
     helpCmd: 'ayuda',
     boot: [
       { text: 'whoami', output: 'jonathan.verdun — Ingeniero de Automatización QA', delay: 500 },
-      { text: 'ls proyectos', output: LS_PROJECTS_OUTPUT, delay: 700 },
+      { text: 'ls proyectos', output: esLsOutput, delay: 700 },
       { text: 'ayuda', output: ES_HELP_OUTPUT, delay: 600 },
     ],
     interactive: {
@@ -212,7 +234,7 @@ export const es: Translations = {
         'Jonathan Verdun. Ingeniero QA y arquitecto de pruebas. Planes de prueba, matrices de trazabilidad, testing basado en propiedades y pipelines de automatización — quality gates aplicados via pre-commit hooks, GitHub Actions CI y umbrales de cobertura. En proceso de certificación ISTQB Foundation.',
       proyectos: 'Ver la sección de Proyectos abajo, o escribe "ls proyectos" para ver la lista.',
       contacto: 'Contáctame por LinkedIn o GitHub enlazados arriba.',
-      'ls proyectos': LS_PROJECTS_OUTPUT,
+      'ls proyectos': esLsOutput,
       sudo: 'El usuario no está en el archivo sudoers. Este incidente será reportado.',
     },
   },

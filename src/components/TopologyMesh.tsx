@@ -15,6 +15,7 @@ export const TopologyMesh: React.FC<{ quality: number }> = ({ quality }) => {
     () => ({
       time: { value: 0 },
       mouse: { value: new THREE.Vector2(0, 0) },
+      uReducedMotion: { value: false },
       color: { value: new THREE.Color('#3b82f6') },
       hoverColor: { value: new THREE.Color('#8b5cf6') },
     }),
@@ -49,6 +50,8 @@ export const TopologyMesh: React.FC<{ quality: number }> = ({ quality }) => {
     const elapsed = state.clock.getElapsedTime()
     mat.uniforms.time.value = elapsed
     mat.uniforms.mouse.value.lerp(state.mouse, 0.15)
+    mat.uniforms.uReducedMotion.value = prefersReducedMotionRef.current
+
     if (!prefersReducedMotionRef.current) {
       meshRef.current.rotation.y = elapsed * 0.05
       meshRef.current.rotation.x = Math.sin(elapsed * 0.1) * 0.1
