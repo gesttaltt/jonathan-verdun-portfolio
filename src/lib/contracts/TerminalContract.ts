@@ -3,15 +3,18 @@ import { ProjectSpec } from '@/lib/contracts/ProjectContract.types'
 
 export const TERMINAL_PROMPT = 'gestalt@portfolio:'
 
-export const generateLsOutput = (projects: ProjectSpec[]) =>
-  projects
+export const generateLsOutput = (projects: ProjectSpec[]) => {
+  return projects
     .map((p) => {
       const name = p.title.replace(/\s+/g, '-')
-      /* istanbul ignore next */
-      const perms = p.status === 'QA' ? 'drwxr-xr-x' : '-rw-r--r--'
+      let perms = '-rw-r--r--'
+      if (p.status === 'QA') {
+        perms = 'drwxr-xr-x'
+      }
       return `${perms} 1 gestalt staff  ${name}`
     })
     .join('\n')
+}
 
 export const LS_PROJECTS_OUTPUT = generateLsOutput(PROJECT_DATA)
 

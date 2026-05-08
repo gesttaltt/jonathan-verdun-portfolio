@@ -77,7 +77,8 @@ export const Terminal: React.FC<TerminalProps> = ({
         aria-label="Terminal output"
         aria-live="polite"
         aria-busy={isBooting}
-        className="custom-scrollbar relative h-[240px] w-full overflow-x-hidden overflow-y-auto p-4 sm:h-[280px] md:h-[400px] md:p-6"
+        tabIndex={0}
+        className="custom-scrollbar relative h-[240px] w-full overflow-x-hidden overflow-y-auto p-4 focus:outline-none sm:h-[280px] md:h-[400px] md:p-6"
       >
         <div className="space-y-4 pb-2">
           {history.map((entry, index) => (

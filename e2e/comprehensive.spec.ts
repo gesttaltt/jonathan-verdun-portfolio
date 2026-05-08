@@ -8,13 +8,13 @@ test.describe('Comprehensive Metadata & Interaction Audit', () => {
     await expect(description).toHaveAttribute('content', /QA Automation Engineer/)
 
     const canonical = page.locator('link[rel="canonical"]')
-    await expect(canonical).toHaveAttribute('content', 'https://jonathanverdun.com/')
+    await expect(canonical).toHaveAttribute('href', 'https://jonathanverdun.com/')
 
     const hreflangEn = page.locator('link[hreflang="en"]')
-    await expect(hreflangEn).toHaveAttribute('content', 'https://jonathanverdun.com/')
+    await expect(hreflangEn).toHaveAttribute('href', 'https://jonathanverdun.com/')
 
     const hreflangEs = page.locator('link[hreflang="es"]')
-    await expect(hreflangEs).toHaveAttribute('content', 'https://jonathanverdun.com/es/')
+    await expect(hreflangEs).toHaveAttribute('href', 'https://jonathanverdun.com/es/')
   })
 
   test('verifies ES metadata and translated content', async ({ page }) => {
@@ -24,7 +24,7 @@ test.describe('Comprehensive Metadata & Interaction Audit', () => {
     await expect(description).toHaveAttribute('content', /Portafolio/)
 
     const canonical = page.locator('link[rel="canonical"]')
-    await expect(canonical).toHaveAttribute('content', 'https://jonathanverdun.com/es/')
+    await expect(canonical).toHaveAttribute('href', 'https://jonathanverdun.com/es/')
   })
 
   test('verifies terminal boot state and interruption', async ({ page }) => {
@@ -45,7 +45,12 @@ test.describe('Comprehensive Metadata & Interaction Audit', () => {
 
     await input.fill('help')
     await input.press('Enter')
-    await expect(page.getByRole('log').getByText(/available commands/i)).toBeVisible()
+    await expect(
+      page
+        .getByRole('log')
+        .getByText(/available commands/i)
+        .last()
+    ).toBeVisible()
   })
 
   test('verifies Spanish terminal interaction', async ({ page }) => {
@@ -55,7 +60,12 @@ test.describe('Comprehensive Metadata & Interaction Audit', () => {
 
     await input.fill('ayuda')
     await input.press('Enter')
-    await expect(page.getByRole('log').getByText(/Comandos disponibles/i)).toBeVisible()
+    await expect(
+      page
+        .getByRole('log')
+        .getByText(/Comandos disponibles/i)
+        .last()
+    ).toBeVisible()
 
     await input.fill('limpiar')
     await input.press('Enter')

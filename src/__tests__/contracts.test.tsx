@@ -8,6 +8,7 @@ import {
 import { DataEngineeringService } from '@/lib/contracts/DataEngineeringContract'
 import { BioinformaticsService } from '@/lib/contracts/BioinformaticsContract'
 import { ProjectSpec } from '@/lib/contracts/ProjectContract.types'
+import { ProjectService } from '@/lib/contracts/ProjectContract'
 
 describe('DataEngineeringService', () => {
   it('returns valid system specs', () => {
@@ -25,6 +26,14 @@ describe('BioinformaticsService', () => {
   })
 })
 
+describe('ProjectService', () => {
+  it('returns valid projects', () => {
+    const projects = ProjectService.getProjects()
+    expect(projects.length).toBeGreaterThan(0)
+    expect(projects[0].id).toBeDefined()
+  })
+})
+
 describe('TerminalContract — generateLsOutput', () => {
   it('assigns directory perms to QA projects and file perms to others', () => {
     const mockProjects: ProjectSpec[] = [
@@ -34,6 +43,10 @@ describe('TerminalContract — generateLsOutput', () => {
     const output = generateLsOutput(mockProjects)
     expect(output).toContain('drwxr-xr-x 1 gestalt staff  QA-Proj')
     expect(output).toContain('-rw-r--r-- 1 gestalt staff  Other-Proj')
+  })
+
+  it('handles empty projects array', () => {
+    expect(generateLsOutput([])).toBe('')
   })
 
   it('exports valid boot and interactive commands', () => {
