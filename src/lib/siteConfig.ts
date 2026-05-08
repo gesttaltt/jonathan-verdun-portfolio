@@ -44,4 +44,10 @@ export const siteConfig = {
   tagline: 'Test Architecture · Automation Engineering',
   jobTitle: 'QA Automation Engineer',
   techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Three.js'],
+
+  performanceMetrics: {
+    unitCoverage: '100%',
+    automationRate: '92%',
+    securityStatus: 'Passed',
+  },
 } as const

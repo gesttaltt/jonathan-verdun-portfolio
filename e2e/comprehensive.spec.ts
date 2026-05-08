@@ -59,7 +59,7 @@ test.describe('Comprehensive Metadata & Interaction Audit', () => {
 
     await input.fill('limpiar')
     await input.press('Enter')
-    await expect(page.getByRole('log').getByText(/whoami/i)).not.toBeInTheDocument()
+    await expect(page.getByRole('log').getByText(/whoami/i)).not.toBeVisible()
   })
 
   test('verifies command history navigation (ArrowUp)', async ({ page }) => {

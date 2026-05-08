@@ -4,7 +4,8 @@ import { DataEngineeringService } from '@/lib/contracts/DataEngineeringContract'
 import { BioinformaticsService } from '@/lib/contracts/BioinformaticsContract'
 import { PROJECT_DATA } from '@/lib/contracts/ProjectContract'
 
-const ES_HELP_OUTPUT = 'Comandos disponibles: ayuda, sobre, proyectos, contacto, limpiar'
+const ES_HELP_OUTPUT =
+  'Comandos disponibles: ayuda, sobre, proyectos, contacto, habilidades, version, quiensoy, limpiar'
 
 // ── Overrides for Project Data ────────────────────────────────────────────────
 const ES_PROJECT_OVERRIDES: Record<string, { description: string; statLabels: string[] }> = {
@@ -234,6 +235,10 @@ export const es: Translations = {
         'Jonathan Verdun. Ingeniero QA y arquitecto de pruebas. Planes de prueba, matrices de trazabilidad, pruebas basadas en propiedades y pipelines de automatización — quality gates aplicados via pre-commit hooks, GitHub Actions CI y umbrales de cobertura. En proceso de certificación ISTQB Foundation.',
       proyectos: 'Ver la sección de Proyectos abajo, o escribe "ls proyectos" para ver la lista.',
       contacto: 'Contáctame por LinkedIn o GitHub enlazados arriba.',
+      habilidades:
+        'Stack principal: Next.js, TypeScript, Tailwind CSS, Three.js. Testing: pytest, Playwright, Appium, Jest, fast-check.',
+      version: 'v0.1.0-audit-hardened (Next.js 16.2.4)',
+      quiensoy: 'jonathan.verdun — Ingeniero de Automatización QA',
       'ls proyectos': esLsOutput,
       sudo: 'El usuario no está en el archivo sudoers. Este incidente será reportado.',
     },
