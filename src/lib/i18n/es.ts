@@ -35,22 +35,20 @@ siteConfig.workHistory?.forEach((job) => {
 
 // ── Overrides for QA Philosophy ─────────────────────────────────────────────
 const ES_QA_CONSTRAINTS = [
-  '100% de cobertura unitaria aplicada en CI via GitHub Actions — integración bloqueada por debajo del umbral',
-  'Pruebas basadas en propiedades via fast-check aplicadas a los contratos de dominio centrales y condiciones de frontera',
-  'Validación estricta de entradas en todas las fronteras del sistema; entradas inválidas rechazadas en ingesta',
-  'Pruebas escritas antes del código de funcionalidad — disciplina test-first aplicada en cada capa',
+  'Planificación de pruebas basada en riesgos priorizada por impacto de negocio y complejidad técnica',
+  'Gates de CI deterministas: 100% de cobertura unitaria y cero vulnerabilidades de alta severidad',
+  'Reporte detallado de defectos con análisis de causa raíz y pasos de regresión automatizados',
+  'Compromiso Shift-left: involucramiento de QA desde el levantamiento de requerimientos hasta el despliegue final',
 ]
 
 const ES_QA_OBJECTIVES: Record<string, string> = {
-  unit: 'Garantizar la corrección de la lógica de dominio aislada para evitar regresiones',
-  'property-based':
-    'Fuzzear contratos de dominio con fast-check para descubrir modos de fallo desconocidos',
-  component:
-    'Verificar el comportamiento renderizado e interacciones del usuario con React Testing Library',
-  integration: 'Verificar fronteras de servicio, flujo de datos y contratos entre módulos en CI',
-  E2E: 'Cubrir rutas críticas de usuario de extremo a extremo mediante automatización de navegador y móvil',
+  strategy: 'Definir planes de prueba integrales, matrices de riesgo y objetivos de calidad',
+  'api/contract': 'Validar la integridad de interfaces y consistencia de datos entre servicios',
+  automation: 'Suites escalables para navegador y móvil vía Playwright, Appium y pytest',
+  exploratory: 'Pruebas no estructuradas para descubrir casos de borde y fricción de usabilidad',
+  regression: 'Verificación automatizada de funcionalidad existente después de cada build',
   accessibility:
-    'Garantizar el cumplimiento de WCAG 2.1 AA mediante escaneos axe-core automatizados en CI',
+    'Garantizar el cumplimiento de WCAG 2.1 AA mediante auditorías automáticas y manuales',
 }
 
 // ── Overrides for Project Data ────────────────────────────────────────────────

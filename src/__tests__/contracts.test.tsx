@@ -57,9 +57,9 @@ describe('TerminalContract — generateLsOutput', () => {
 })
 
 describe('QA Contract Invariants', () => {
-  it('should maintain stable status for unit test layer', () => {
-    const unitLayer = QA_PHILOSOPHY.specifications.find((s) => s.layer === 'unit')
-    expect(unitLayer?.status).toBe('stable')
+  it('should maintain stable status for strategy layer', () => {
+    const layer = QA_PHILOSOPHY.specifications.find((s) => s.layer === 'strategy')
+    expect(layer?.status).toBe('stable')
   })
 
   it('should have non-empty constraints for system integrity', () => {

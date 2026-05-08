@@ -75,12 +75,12 @@ describe('personJsonLd — knowsAbout', () => {
   })
 
   it('includes specific QA tooling', () => {
-    const tools = personJsonLd.knowsAbout as readonly string[]
+    const tools = personJsonLd.knowsAbout
     expect(tools).toContain('Playwright')
     expect(tools).toContain('pytest')
     expect(tools).toContain('Appium')
-    expect(tools).toContain('GitHub Actions CI')
-    expect(tools).toContain('QA Automation')
+    expect(tools).toContain('Test Strategy & Planning')
+    expect(tools).toContain('Risk-Based Testing')
   })
 })
 
