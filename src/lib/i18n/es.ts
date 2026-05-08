@@ -137,15 +137,15 @@ export const es: Translations = {
   qa: {
     constraints: [
       '100% de cobertura unitaria aplicada en CI via GitHub Actions — integración bloqueada por debajo del umbral',
-      'Fuzzing basado en propiedades via fast-check aplicado a todos los contratos de dominio y condiciones de frontera',
-      'Todas las entradas en fronteras del sistema validadas contra esquemas estrictos; entradas inválidas rechazadas en ingesta',
+      'Pruebas basadas en propiedades via fast-check aplicadas a los contratos de dominio centrales y condiciones de frontera',
+      'Validación estricta de entradas en todas las fronteras del sistema; entradas inválidas rechazadas en ingesta',
       'Pruebas escritas antes del código de funcionalidad — disciplina test-first aplicada en cada capa',
     ],
     specifications: [
       {
         layer: 'unit',
         objective:
-          'Verificar la corrección aislada de la lógica de dominio para evitar regresiones',
+          'Garantizar la corrección de la lógica de dominio aislada para evitar regresiones',
         status: 'stable',
       },
       {
@@ -231,7 +231,7 @@ export const es: Translations = {
     interactive: {
       ayuda: ES_HELP_OUTPUT,
       sobre:
-        'Jonathan Verdun. Ingeniero QA y arquitecto de pruebas. Planes de prueba, matrices de trazabilidad, testing basado en propiedades y pipelines de automatización — quality gates aplicados via pre-commit hooks, GitHub Actions CI y umbrales de cobertura. En proceso de certificación ISTQB Foundation.',
+        'Jonathan Verdun. Ingeniero QA y arquitecto de pruebas. Planes de prueba, matrices de trazabilidad, pruebas basadas en propiedades y pipelines de automatización — quality gates aplicados via pre-commit hooks, GitHub Actions CI y umbrales de cobertura. En proceso de certificación ISTQB Foundation.',
       proyectos: 'Ver la sección de Proyectos abajo, o escribe "ls proyectos" para ver la lista.',
       contacto: 'Contáctame por LinkedIn o GitHub enlazados arriba.',
       'ls proyectos': esLsOutput,

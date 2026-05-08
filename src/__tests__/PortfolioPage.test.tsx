@@ -84,7 +84,7 @@ describe('PortfolioPage', () => {
       const input = screen.getByRole('textbox', { name: /terminal command input/i })
       await user.type(input, 'sobre{Enter}')
       // "sobre" output is unique — not part of the boot sequence
-      expect(screen.getByText(/Testing basado en propiedades/i)).toBeInTheDocument()
+      expect(screen.getByText(/pruebas basadas en propiedades/i)).toBeInTheDocument()
     })
 
     it('unknown command suggests "ayuda"', async () => {
