@@ -1,7 +1,7 @@
 import { siteConfig } from '@/lib/siteConfig'
 import { es } from '@/lib/i18n/es'
 
-interface OgImageProps {
+export interface OgImageProps {
   locale: 'en' | 'es'
 }
 

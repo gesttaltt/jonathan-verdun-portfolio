@@ -3,9 +3,30 @@ import { generateLsOutput } from '@/lib/contracts/TerminalContract'
 import { DataEngineeringService } from '@/lib/contracts/DataEngineeringContract'
 import { BioinformaticsService } from '@/lib/contracts/BioinformaticsContract'
 import { PROJECT_DATA } from '@/lib/contracts/ProjectContract'
+import { QA_PHILOSOPHY } from '@/lib/contracts/QAContract'
 
 const ES_HELP_OUTPUT =
   'Comandos disponibles: ayuda, sobre, proyectos, contacto, habilidades, version, quiensoy, limpiar'
+
+// ── Overrides for QA Philosophy ─────────────────────────────────────────────
+const ES_QA_CONSTRAINTS = [
+  '100% de cobertura unitaria aplicada en CI via GitHub Actions — integración bloqueada por debajo del umbral',
+  'Pruebas basadas en propiedades via fast-check aplicadas a los contratos de dominio centrales y condiciones de frontera',
+  'Validación estricta de entradas en todas las fronteras del sistema; entradas inválidas rechazadas en ingesta',
+  'Pruebas escritas antes del código de funcionalidad — disciplina test-first aplicada en cada capa',
+]
+
+const ES_QA_OBJECTIVES: Record<string, string> = {
+  unit: 'Garantizar la corrección de la lógica de dominio aislada para evitar regresiones',
+  'property-based':
+    'Fuzzear contratos de dominio con fast-check para descubrir modos de fallo desconocidos',
+  component:
+    'Verificar el comportamiento renderizado e interacciones del usuario con React Testing Library',
+  integration: 'Verificar fronteras de servicio, flujo de datos y contratos entre módulos en CI',
+  E2E: 'Cubrir rutas críticas de usuario de extremo a extremo mediante automatización de navegador y móvil',
+  accessibility:
+    'Garantizar el cumplimiento de WCAG 2.1 AA mediante escaneos axe-core automatizados en CI',
+}
 
 // ── Overrides for Project Data ────────────────────────────────────────────────
 const ES_PROJECT_OVERRIDES: Record<string, { description: string; statLabels: string[] }> = {
@@ -131,6 +152,14 @@ const esBioSpecs = BioinformaticsService.getResearchSpecs().map((s) => {
   }
 })
 
+const esQaPhilosophy = {
+  constraints: ES_QA_CONSTRAINTS,
+  specifications: QA_PHILOSOPHY.specifications.map((spec) => ({
+    ...spec,
+    objective: ES_QA_OBJECTIVES[spec.layer] ?? spec.objective,
+  })),
+}
+
 export const es: Translations = {
   lang: 'es',
   title: 'Jonathan Verdun | Ingeniero de Automatización QA',
@@ -167,52 +196,7 @@ export const es: Translations = {
       ctaLabel: 'Contáctame',
     },
   },
-  qa: {
-    constraints: [
-      '100% de cobertura unitaria aplicada en CI via GitHub Actions — integración bloqueada por debajo del umbral',
-      'Pruebas basadas en propiedades via fast-check aplicadas a los contratos de dominio centrales y condiciones de frontera',
-      'Validación estricta de entradas en todas las fronteras del sistema; entradas inválidas rechazadas en ingesta',
-      'Pruebas escritas antes del código de funcionalidad — disciplina test-first aplicada en cada capa',
-    ],
-    specifications: [
-      {
-        layer: 'unit',
-        objective:
-          'Garantizar la corrección de la lógica de dominio aislada para evitar regresiones',
-        status: 'stable',
-      },
-      {
-        layer: 'property-based',
-        objective:
-          'Fuzzear contratos de dominio con fast-check para descubrir modos de fallo desconocidos',
-        status: 'stable',
-      },
-      {
-        layer: 'component',
-        objective:
-          'Verificar el comportamiento renderizado e interacciones del usuario con React Testing Library',
-        status: 'maturing',
-      },
-      {
-        layer: 'integration',
-        objective:
-          'Verificar fronteras de servicio, flujo de datos y contratos entre módulos en CI',
-        status: 'stable',
-      },
-      {
-        layer: 'E2E',
-        objective:
-          'Cubrir rutas críticas de usuario de extremo a extremo mediante automatización de navegador y móvil',
-        status: 'maturing',
-      },
-      {
-        layer: 'accessibility',
-        objective:
-          'Garantizar el cumplimiento de WCAG 2.1 AA mediante escaneos axe-core automatizados en CI',
-        status: 'stable',
-      },
-    ],
-  },
+  qa: esQaPhilosophy,
   architecture: {
     methodologyLabel: 'Metodología',
     invariantsLabel: 'Invariantes',
@@ -220,7 +204,7 @@ export const es: Translations = {
   },
   bioinformatics: {
     methodologyLabel: 'Metodología',
-    invariantsLabel: 'Invariantes',
+    invariantsLabel: 'Invariants',
     graphicLabel: 'Análisis de Datos: [Pipeline de Descubrimiento de Epítopos]',
     focusLabels: {
       HIV: 'IA para Antígenos VIH',

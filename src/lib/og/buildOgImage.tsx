@@ -3,7 +3,7 @@ import { join } from 'path'
 import { ImageResponse } from 'next/og'
 import OgImageShared, { OG_IMAGE_SIZE } from './OgImageShared'
 
-interface OgImageOptions {
+export interface OgImageOptions {
   locale: 'en' | 'es'
 }
 
