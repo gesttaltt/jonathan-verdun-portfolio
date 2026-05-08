@@ -1,7 +1,13 @@
 import '@testing-library/jest-dom'
 
+// Mock next/navigation
+let mockPathname = '/'
+export const setMockPathname = (path: string) => {
+  mockPathname = path
+}
+
 jest.mock('next/navigation', () => ({
-  usePathname: () => '/',
+  usePathname: () => mockPathname,
   useRouter: () => ({ push: jest.fn(), replace: jest.fn(), prefetch: jest.fn() }),
 }))
 

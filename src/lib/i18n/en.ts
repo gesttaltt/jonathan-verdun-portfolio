@@ -7,6 +7,7 @@ import { BioinformaticsService } from '@/lib/contracts/BioinformaticsContract'
 
 export const en: Translations = {
   lang: 'en',
+  skipToContent: 'Skip to content',
   title: 'Jonathan Verdun | QA Automation Engineer',
   tagline: 'Test Architecture · Automation Engineering',
   description:

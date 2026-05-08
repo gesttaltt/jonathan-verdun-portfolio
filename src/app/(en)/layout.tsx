@@ -3,6 +3,7 @@ import '../globals.css'
 import { jetbrainsMono } from '@/lib/fonts'
 import { buildMetadata, SHARED_VIEWPORT } from '@/lib/metadata'
 import { RootShell } from '@/components/RootShell'
+import { I18nProvider } from '@/lib/i18n/context'
 
 export const viewport: Viewport = SHARED_VIEWPORT
 
@@ -16,7 +17,9 @@ export default function EnLayout({
   return (
     <html lang="en">
       <body className={`${jetbrainsMono.variable} font-mono antialiased`}>
-        <RootShell>{children}</RootShell>
+        <I18nProvider>
+          <RootShell>{children}</RootShell>
+        </I18nProvider>
       </body>
     </html>
   )

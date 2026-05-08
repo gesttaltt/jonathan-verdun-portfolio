@@ -11,9 +11,11 @@ jest.mock('@/components/MotionProvider', () => ({
 
 import EsLayout, { metadata, viewport } from '@/app/(es)/layout'
 import { siteConfig } from '@/lib/siteConfig'
+import { setMockPathname } from '../../jest.setup'
 
 let consoleErrorSpy: jest.SpyInstance
 beforeAll(() => {
+  setMockPathname('/es/')
   consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation((msg, ...args) => {
     if (typeof msg === 'string' && msg.includes('cannot be a child')) return
     console.warn(msg, ...args)
@@ -47,7 +49,7 @@ describe('EsLayout — rendered output', () => {
 
   it('renders the skip-nav link pointing to #main-content', () => {
     render(<EsLayout>child</EsLayout>)
-    const skip = screen.getByText('Skip to content')
+    const skip = screen.getByText('Saltar al contenido')
     expect(skip).toBeInTheDocument()
     expect(skip).toHaveAttribute('href', '#main-content')
   })

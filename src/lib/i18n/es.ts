@@ -82,24 +82,18 @@ const ES_BIO_OVERRIDES: Record<string, { methodology: string; invariants: string
 
 const projects = PROJECT_DATA.map((p) => {
   const override = ES_PROJECT_OVERRIDES[p.id]
-  /* istanbul ignore next */
-  if (!override) {
-    if (process.env.NODE_ENV === 'development') {
-      console.warn(`[i18n:es] Missing Project override for ${p.id}`)
-    }
-    return p
-  }
+  const stats = p.stats
+    ? p.stats.map((stat, i) => {
+        return {
+          ...stat,
+          label: override.statLabels[i],
+        }
+      })
+    : /* istanbul ignore next */ undefined
   return {
     ...p,
     description: override.description,
-    stats: p.stats?.map((stat, i) => {
-      /* istanbul ignore next */
-      const label = override.statLabels[i] ?? stat.label
-      return {
-        ...stat,
-        label,
-      }
-    }),
+    stats,
   }
 })
 
@@ -107,12 +101,6 @@ const esLsOutput = generateLsOutput(projects)
 
 const esArchSpecs = DataEngineeringService.getSystemSpecs().map((s) => {
   const override = ES_ARCH_OVERRIDES[s.id]
-  /* istanbul ignore next */
-  if (!override) {
-    if (process.env.NODE_ENV === 'development') {
-      console.warn(`[i18n:es] Missing Architecture override for ${s.id}`)
-    }
-  }
   return {
     ...s,
     ...override,
@@ -121,12 +109,6 @@ const esArchSpecs = DataEngineeringService.getSystemSpecs().map((s) => {
 
 const esBioSpecs = BioinformaticsService.getResearchSpecs().map((s) => {
   const override = ES_BIO_OVERRIDES[s.id]
-  /* istanbul ignore next */
-  if (!override) {
-    if (process.env.NODE_ENV === 'development') {
-      console.warn(`[i18n:es] Missing Bioinformatics override for ${s.id}`)
-    }
-  }
   return {
     ...s,
     ...override,
@@ -135,6 +117,7 @@ const esBioSpecs = BioinformaticsService.getResearchSpecs().map((s) => {
 
 export const es: Translations = {
   lang: 'es',
+  skipToContent: 'Saltar al contenido',
   title: 'Jonathan Verdun | Ingeniero de Automatización QA',
   tagline: 'Arquitectura de Pruebas · Ingeniería de Automatización',
   description:
