@@ -44,3 +44,30 @@ export const buildWebPageJsonLd = (locale: 'en' | 'es' = 'en') => {
     inLanguage: locale,
   }
 }
+
+export const buildBreadcrumbJsonLd = (locale: 'en' | 'es' = 'en') => {
+  const isEs = locale === 'es'
+  const items = [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: isEs ? 'Inicio' : 'Home',
+      item: siteConfig.url as string,
+    },
+  ]
+
+  if (isEs) {
+    items.push({
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Español',
+      item: `${siteConfig.url}/es/` as string,
+    })
+  }
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items,
+  }
+}

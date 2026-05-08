@@ -5,8 +5,33 @@ import { BioinformaticsService } from '@/lib/contracts/BioinformaticsContract'
 import { PROJECT_DATA } from '@/lib/contracts/ProjectContract'
 import { QA_PHILOSOPHY } from '@/lib/contracts/QAContract'
 
+import { siteConfig } from '@/lib/siteConfig'
+
 const ES_HELP_OUTPUT =
   'Comandos disponibles: ayuda, sobre, proyectos, contacto, habilidades, version, quiensoy, limpiar'
+
+// ── Overrides for Work History ──────────────────────────────────────────────
+const ES_WORK_OVERRIDES: Record<string, { role?: string; period?: string; description?: string }> =
+  {
+    'Ai-Whisperers': {
+      role: 'Cofundador y Líder de QA',
+      period: 'Sep 2025 – Presente',
+      description:
+        'Responsable de QA en 3 repos de producción — 352+ pruebas automatizadas, 7 flujos CI, seguimiento de defectos con ADO.',
+    },
+  }
+
+const esWorkHistoryDescriptions: Record<string, string> = {}
+const esWorkHistoryRoles: Record<string, string> = {}
+const esWorkHistoryPeriods: Record<string, string> = {}
+
+// Guard against undefined siteConfig during early module loading in tests
+siteConfig.workHistory?.forEach((job) => {
+  const override = ES_WORK_OVERRIDES[job.organization]
+  esWorkHistoryDescriptions[job.organization] = override?.description ?? ''
+  esWorkHistoryRoles[job.organization] = override?.role ?? job.role
+  esWorkHistoryPeriods[job.organization] = override?.period ?? job.period
+})
 
 // ── Overrides for QA Philosophy ─────────────────────────────────────────────
 const ES_QA_CONSTRAINTS = [
@@ -163,16 +188,9 @@ export const es: Translations = {
   description:
     'Portafolio de Jonathan Verdun — Ingeniero de Automatización QA e Investigador en Bioinformática, enfocado en desarrollo guiado por pruebas y biología computacional.',
   workHistoryLabel: 'Experiencia',
-  workHistoryDescriptions: {
-    'Ai-Whisperers':
-      'Responsable de QA en 3 repos de producción — 352+ pruebas automatizadas, 7 flujos CI, seguimiento de defectos con ADO.',
-  },
-  workHistoryRoles: {
-    'Ai-Whisperers': 'Cofundador y Líder de QA',
-  },
-  workHistoryPeriods: {
-    'Ai-Whisperers': 'Sep 2025 – Presente',
-  },
+  workHistoryDescriptions: esWorkHistoryDescriptions,
+  workHistoryRoles: esWorkHistoryRoles,
+  workHistoryPeriods: esWorkHistoryPeriods,
   sections: {
     projects: 'Proyectos',
     architecture: 'Arquitectura',
