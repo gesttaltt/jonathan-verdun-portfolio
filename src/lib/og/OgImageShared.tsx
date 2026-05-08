@@ -1,18 +1,14 @@
 import { siteConfig } from '@/lib/siteConfig'
-import { es } from '@/lib/i18n/es'
 
 export interface OgImageProps {
-  locale: 'en' | 'es'
+  tagline: string
+  description: string
 }
 
 export const OG_IMAGE_SIZE = { width: 1200, height: 630 }
 export const OG_IMAGE_CONTENT_TYPE = 'image/png'
 
-export default function OgImageShared({ locale }: OgImageProps) {
-  const isEs = locale === 'es'
-  const tagline = isEs ? es.tagline : siteConfig.tagline
-  const description = isEs ? es.description : siteConfig.description
-
+export default function OgImageShared({ tagline, description }: OgImageProps) {
   return (
     <div
       style={{

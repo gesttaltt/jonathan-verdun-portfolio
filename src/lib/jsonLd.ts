@@ -1,4 +1,6 @@
 import { siteConfig } from './siteConfig'
+import { en } from './i18n/en'
+import { es } from './i18n/es'
 
 export const personJsonLd = {
   '@context': 'https://schema.org',
@@ -11,23 +13,7 @@ export const personJsonLd = {
   image: `${siteConfig.url}/opengraph-image`,
   description: siteConfig.description,
   sameAs: [siteConfig.socialLinks.github.url, siteConfig.socialLinks.linkedin.url],
-  knowsAbout: [
-    'QA Automation',
-    'Test-Driven Development',
-    'Automation Engineering',
-    'Property-Based Testing',
-    'Playwright',
-    'pytest',
-    'Appium',
-    'GitHub Actions CI',
-    'TypeScript',
-    'FastAPI',
-    'Docker',
-    'NumPy',
-    'Apache Spark',
-    'C++',
-    'Bioinformatics',
-  ],
+  knowsAbout: [...siteConfig.expertise],
 } as const
 
 export const websiteJsonLd = {
@@ -41,14 +27,20 @@ export const websiteJsonLd = {
   inLanguage: ['en', 'es'],
 } as const
 
-export const buildWebPageJsonLd = (locale: 'en' | 'es' = 'en') => ({
-  '@context': 'https://schema.org',
-  '@type': 'WebPage',
-  '@id': `${siteConfig.url}/${locale === 'es' ? 'es/' : ''}#webpage`,
-  url: `${siteConfig.url}/${locale === 'es' ? 'es/' : ''}`,
-  name: locale === 'es' ? 'Jonathan Verdun | Portafolio' : 'Jonathan Verdun | Portfolio',
-  isPartOf: { '@id': `${siteConfig.url}/#website` },
-  about: { '@id': siteConfig.url },
-  description: siteConfig.description,
-  inLanguage: locale,
-})
+export const buildWebPageJsonLd = (locale: 'en' | 'es' = 'en') => {
+  const isEs = locale === 'es'
+  const translations = isEs ? es : en
+  const canonical = isEs ? `${siteConfig.url}/es/` : `${siteConfig.url}/`
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': `${canonical}#webpage`,
+    url: canonical,
+    name: translations.title,
+    isPartOf: { '@id': `${siteConfig.url}/#website` },
+    about: { '@id': siteConfig.url },
+    description: translations.description,
+    inLanguage: locale,
+  }
+}

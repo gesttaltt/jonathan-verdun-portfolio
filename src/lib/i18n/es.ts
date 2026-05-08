@@ -127,28 +127,24 @@ const esLsOutput = generateLsOutput(projects)
 const esArchSpecs = DataEngineeringService.getSystemSpecs().map((s) => {
   const override = ES_ARCH_OVERRIDES[s.id]
   /* istanbul ignore next */
-  if (!override) {
-    if (process.env.NODE_ENV === 'development') {
-      console.warn(`[i18n:es] Missing Architecture override for ${s.id}`)
-    }
+  if (!override && process.env.NODE_ENV === 'development') {
+    console.warn(`[i18n:es] Missing Architecture override for ${s.id}`)
   }
   return {
     ...s,
-    ...override,
+    ...(override ?? {}),
   }
 })
 
 const esBioSpecs = BioinformaticsService.getResearchSpecs().map((s) => {
   const override = ES_BIO_OVERRIDES[s.id]
   /* istanbul ignore next */
-  if (!override) {
-    if (process.env.NODE_ENV === 'development') {
-      console.warn(`[i18n:es] Missing Bioinformatics override for ${s.id}`)
-    }
+  if (!override && process.env.NODE_ENV === 'development') {
+    console.warn(`[i18n:es] Missing Bioinformatics override for ${s.id}`)
   }
   return {
     ...s,
-    ...override,
+    ...(override ?? {}),
   }
 })
 

@@ -24,7 +24,7 @@ describe('buildWebPageJsonLd', () => {
     const pageLd = buildWebPageJsonLd('es')
     expect(pageLd.inLanguage).toBe('es')
     expect(pageLd.url).toBe(`${siteConfig.url}/es/`)
-    expect(pageLd.name).toContain('Portafolio')
+    expect(pageLd.name).toContain('Jonathan Verdun')
   })
 })
 

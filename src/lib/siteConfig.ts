@@ -22,9 +22,12 @@ export const siteConfig = {
 
   repo: {
     url: 'https://github.com/gesttaltt/jonathan-verdun-portfolio',
-    ciWorkflowUrl:
-      'https://github.com/gesttaltt/jonathan-verdun-portfolio/actions/workflows/ci.yml',
-    ciBadgeUrl: 'https://github.com/gesttaltt/jonathan-verdun-portfolio/workflows/CI/badge.svg',
+    get ciWorkflowUrl() {
+      return `${this.url}/actions/workflows/ci.yml`
+    },
+    get ciBadgeUrl() {
+      return `${this.url}/actions/workflows/ci.yml/badge.svg`
+    },
   },
 
   workHistory: [
@@ -44,6 +47,23 @@ export const siteConfig = {
   tagline: 'Test Architecture · Automation Engineering',
   jobTitle: 'QA Automation Engineer',
   techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Three.js'],
+  expertise: [
+    'QA Automation',
+    'Test-Driven Development',
+    'Automation Engineering',
+    'Property-Based Testing',
+    'Playwright',
+    'pytest',
+    'Appium',
+    'GitHub Actions CI',
+    'TypeScript',
+    'FastAPI',
+    'Docker',
+    'NumPy',
+    'Apache Spark',
+    'C++',
+    'Bioinformatics',
+  ],
 
   performanceMetrics: {
     unitCoverage: '100%',
