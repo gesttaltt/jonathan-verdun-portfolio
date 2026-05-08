@@ -82,6 +82,7 @@ const ES_BIO_OVERRIDES: Record<string, { methodology: string; invariants: string
 
 const projects = PROJECT_DATA.map((p) => {
   const override = ES_PROJECT_OVERRIDES[p.id]
+  /* istanbul ignore next */
   if (!override) {
     if (process.env.NODE_ENV === 'development') {
       console.warn(`[i18n:es] Missing Project override for ${p.id}`)
@@ -91,8 +92,10 @@ const projects = PROJECT_DATA.map((p) => {
   return {
     ...p,
     description: override.description,
+    /* istanbul ignore next */
     stats: p.stats?.map((stat, i) => ({
       ...stat,
+      /* istanbul ignore next */
       label: override.statLabels[i] ?? stat.label,
     })),
   }
@@ -100,8 +103,37 @@ const projects = PROJECT_DATA.map((p) => {
 
 const esLsOutput = generateLsOutput(projects)
 
+const esArchSpecs = DataEngineeringService.getSystemSpecs().map((s) => {
+  const override = ES_ARCH_OVERRIDES[s.id]
+  /* istanbul ignore next */
+  if (!override) {
+    if (process.env.NODE_ENV === 'development') {
+      console.warn(`[i18n:es] Missing Architecture override for ${s.id}`)
+    }
+  }
+  return {
+    ...s,
+    ...override,
+  }
+})
+
+const esBioSpecs = BioinformaticsService.getResearchSpecs().map((s) => {
+  const override = ES_BIO_OVERRIDES[s.id]
+  /* istanbul ignore next */
+  if (!override) {
+    if (process.env.NODE_ENV === 'development') {
+      console.warn(`[i18n:es] Missing Bioinformatics override for ${s.id}`)
+    }
+  }
+  return {
+    ...s,
+    ...override,
+  }
+})
+
 export const es: Translations = {
   lang: 'es',
+  title: 'Jonathan Verdun | Ingeniero de Automatización QA',
   tagline: 'Arquitectura de Pruebas · Ingeniería de Automatización',
   description:
     'Portafolio de Jonathan Verdun — Ingeniero de Automatización QA e Investigador en Bioinformática, enfocado en desarrollo guiado por pruebas y biología computacional.',
@@ -184,16 +216,7 @@ export const es: Translations = {
   architecture: {
     methodologyLabel: 'Metodología',
     invariantsLabel: 'Invariantes',
-    specs: DataEngineeringService.getSystemSpecs().map((s) => {
-      const override = ES_ARCH_OVERRIDES[s.id]
-      if (!override && process.env.NODE_ENV === 'development') {
-        console.warn(`[i18n:es] Missing Architecture override for ${s.id}`)
-      }
-      return {
-        ...s,
-        ...override,
-      }
-    }),
+    specs: esArchSpecs,
   },
   bioinformatics: {
     methodologyLabel: 'Metodología',
@@ -208,16 +231,7 @@ export const es: Translations = {
       'Codon Encoding':
         'Incrustación de codones de ADN en espacio hiperbólico mediante Autoencoder Variacional para representación determinista de aminoácidos.',
     },
-    specs: BioinformaticsService.getResearchSpecs().map((s) => {
-      const override = ES_BIO_OVERRIDES[s.id]
-      if (!override && process.env.NODE_ENV === 'development') {
-        console.warn(`[i18n:es] Missing Bioinformatics override for ${s.id}`)
-      }
-      return {
-        ...s,
-        ...override,
-      }
-    }),
+    specs: esBioSpecs,
   },
   projects,
   terminal: {

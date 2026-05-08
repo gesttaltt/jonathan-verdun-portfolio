@@ -24,9 +24,10 @@ export const PortfolioPage: React.FC = () => {
     () => new DefaultCommandProcessor(t.terminal.interactive, t.terminal.helpCmd),
     [t.terminal.interactive, t.terminal.helpCmd]
   )
+  const projectAdapter = useMemo(() => ({ getProjects: () => t.projects }), [t.projects])
 
   return (
-    <ProjectProvider adapter={{ getProjects: () => t.projects }}>
+    <ProjectProvider adapter={projectAdapter}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(buildWebPageJsonLd(t.lang)) }}

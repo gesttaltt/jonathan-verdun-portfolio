@@ -7,6 +7,7 @@ import { BioinformaticsService } from '@/lib/contracts/BioinformaticsContract'
 
 export const en: Translations = {
   lang: 'en',
+  title: 'Jonathan Verdun | QA Automation Engineer',
   tagline: 'Test Architecture · Automation Engineering',
   description:
     'Portfolio of Jonathan Verdun — QA Automation Engineer specializing in pytest, Playwright, Appium, and property-based testing with GitHub Actions CI.',

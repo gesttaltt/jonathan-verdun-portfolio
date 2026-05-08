@@ -1,4 +1,47 @@
 import { QA_PHILOSOPHY } from '@/lib/contracts/QAContract'
+import {
+  generateLsOutput,
+  BOOT_COMMANDS,
+  INTERACTIVE_COMMANDS,
+  TERMINAL_PROMPT,
+} from '@/lib/contracts/TerminalContract'
+import { DataEngineeringService } from '@/lib/contracts/DataEngineeringContract'
+import { BioinformaticsService } from '@/lib/contracts/BioinformaticsContract'
+import { ProjectSpec } from '@/lib/contracts/ProjectContract.types'
+
+describe('DataEngineeringService', () => {
+  it('returns valid system specs', () => {
+    const specs = DataEngineeringService.getSystemSpecs()
+    expect(specs.length).toBeGreaterThan(0)
+    expect(specs[0].id).toBeDefined()
+  })
+})
+
+describe('BioinformaticsService', () => {
+  it('returns valid research specs', () => {
+    const specs = BioinformaticsService.getResearchSpecs()
+    expect(specs.length).toBeGreaterThan(0)
+    expect(specs[0].id).toBeDefined()
+  })
+})
+
+describe('TerminalContract — generateLsOutput', () => {
+  it('assigns directory perms to QA projects and file perms to others', () => {
+    const mockProjects: ProjectSpec[] = [
+      { id: '1', title: 'QA Proj', status: 'QA', techStack: [], description: '' },
+      { id: '2', title: 'Other Proj', status: 'Research', techStack: [], description: '' },
+    ]
+    const output = generateLsOutput(mockProjects)
+    expect(output).toContain('drwxr-xr-x 1 gestalt staff  QA-Proj')
+    expect(output).toContain('-rw-r--r-- 1 gestalt staff  Other-Proj')
+  })
+
+  it('exports valid boot and interactive commands', () => {
+    expect(BOOT_COMMANDS.length).toBeGreaterThan(0)
+    expect(Object.keys(INTERACTIVE_COMMANDS).length).toBeGreaterThan(0)
+    expect(typeof TERMINAL_PROMPT).toBe('string')
+  })
+})
 
 describe('QA Contract Invariants', () => {
   it('should maintain stable status for unit test layer', () => {

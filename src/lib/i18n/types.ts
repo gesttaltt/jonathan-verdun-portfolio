@@ -26,6 +26,7 @@ export interface I18nResearchSpec {
 
 export interface Translations {
   lang: Lang
+  title: string
   tagline: string
   description: string
   workHistoryLabel: string

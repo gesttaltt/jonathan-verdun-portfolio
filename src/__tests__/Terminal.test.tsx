@@ -1,4 +1,4 @@
-import { render, screen, within, waitFor } from '@testing-library/react'
+import { render, screen, within, waitFor, fireEvent } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { Terminal } from '@/components/Terminal'
 
@@ -19,6 +19,23 @@ describe('Terminal', () => {
     // Input is absent while isBooting — it appears once the 500ms finish timer fires
     const input = await screen.findByRole('textbox', { name: /terminal command input/i })
     expect(input).toBeInTheDocument()
+  })
+
+  it('ignores keyboard input while booting', async () => {
+    const mockProcessor = { process: jest.fn(() => '') }
+    // Use a long delay so it stays in booting state during the test
+    render(
+      <Terminal
+        commands={[{ text: 'whoami', output: 'gestalt', delay: 1000 }]}
+        processor={mockProcessor}
+      />
+    )
+    const input = screen.getByRole('textbox', { name: /terminal command input/i })
+
+    // Manually trigger Enter key on the input
+    fireEvent.keyDown(input, { key: 'Enter', code: 'Enter', charCode: 13 })
+
+    expect(mockProcessor.process).not.toHaveBeenCalled()
   })
 
   it('submitting a command via Enter appends it to history with processor output', async () => {

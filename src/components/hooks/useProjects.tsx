@@ -1,6 +1,6 @@
 'use client'
 
-import React, { createContext, useContext, useState } from 'react'
+import React, { createContext, useContext, useMemo } from 'react'
 import { IProjectRepository, StaticProjectAdapter } from '@/lib/services/ProjectRepository'
 
 // Create the context containing the repository instance
@@ -16,8 +16,8 @@ interface ProjectProviderProps {
  * Defaults to the StaticProjectAdapter if none is provided.
  */
 export const ProjectProvider: React.FC<ProjectProviderProps> = ({ children, adapter }) => {
-  // Use state initializer to ensure adapter is only created once per provider lifecycle
-  const [repo] = useState<IProjectRepository>(() => adapter || new StaticProjectAdapter())
+  // Use useMemo to ensure repo is stable but reactive to adapter prop changes
+  const repo = useMemo(() => adapter || new StaticProjectAdapter(), [adapter])
 
   return (
     <ProjectRepositoryContext.Provider value={repo}>{children}</ProjectRepositoryContext.Provider>

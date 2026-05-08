@@ -12,7 +12,7 @@ export const SHARED_VIEWPORT: Viewport = {
 export function buildMetadata(lang: 'en' | 'es'): Metadata {
   const isEs = lang === 'es'
   const translations = isEs ? es : en
-  const title = isEs ? `Jonathan Verdun | Ingeniero de Automatización QA` : siteConfig.title
+  const title = translations.title
   const description = translations.description
   const canonical = isEs ? `${siteConfig.url}/es/` : siteConfig.url
   const locale = isEs ? 'es_ES' : siteConfig.locale
