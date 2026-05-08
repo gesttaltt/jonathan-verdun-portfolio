@@ -2,10 +2,12 @@ import type { ReactNode } from 'react'
 import { personJsonLd, websiteJsonLd } from '@/lib/jsonLd'
 import { MotionProvider } from '@/components/MotionProvider'
 import { I18nProvider } from '@/lib/i18n/context'
+import { ServiceWorkerRegister } from '@/components/ServiceWorkerRegister'
 
 export function RootShell({ children }: { children: ReactNode }) {
   return (
     <>
+      <ServiceWorkerRegister />
       <a
         href="#main-content"
         className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-lg focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:font-bold focus:text-black focus:shadow-xl"
