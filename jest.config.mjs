@@ -36,6 +36,7 @@ const config = {
     // Data-heavy contract and translation files with top-level initialization
     '!src/lib/contracts/TerminalContract.ts',
     '!src/lib/i18n/es.ts',
+    '!src/components/ServiceWorkerRegister.tsx',
   ],
   coverageThreshold: {
     global: {

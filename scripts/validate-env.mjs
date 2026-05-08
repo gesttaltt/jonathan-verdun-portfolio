@@ -4,11 +4,6 @@
  * Prevents "silent" failures due to missing or malformed configuration.
  */
 
-const REQUIRED_ENV = {
-  // Add required env vars here if needed in the future.
-  // For now, we validate the presence of BASE_PATH if it's expected to be set.
-}
-
 function validate() {
   console.log('── Environment Validation ───────────────────────────────────')
   
