@@ -7,7 +7,6 @@ export const generateLsOutput = (projects: ProjectSpec[]) =>
   projects
     .map((p) => {
       const name = p.title.replace(/\s+/g, '-')
-      /* istanbul ignore next */
       const perms = p.status === 'QA' ? 'drwxr-xr-x' : '-rw-r--r--'
       return `${perms} 1 gestalt staff  ${name}`
     })

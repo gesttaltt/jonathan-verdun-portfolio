@@ -92,12 +92,14 @@ const projects = PROJECT_DATA.map((p) => {
   return {
     ...p,
     description: override.description,
-    /* istanbul ignore next */
-    stats: p.stats?.map((stat, i) => ({
-      ...stat,
+    stats: p.stats?.map((stat, i) => {
       /* istanbul ignore next */
-      label: override.statLabels[i] ?? stat.label,
-    })),
+      const label = override.statLabels[i] ?? stat.label
+      return {
+        ...stat,
+        label,
+      }
+    }),
   }
 })
 

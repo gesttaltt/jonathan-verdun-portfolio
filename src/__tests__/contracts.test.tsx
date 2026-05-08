@@ -4,6 +4,7 @@ import {
   BOOT_COMMANDS,
   INTERACTIVE_COMMANDS,
   TERMINAL_PROMPT,
+  LS_PROJECTS_OUTPUT,
 } from '@/lib/contracts/TerminalContract'
 import { DataEngineeringService } from '@/lib/contracts/DataEngineeringContract'
 import { BioinformaticsService } from '@/lib/contracts/BioinformaticsContract'
@@ -40,6 +41,8 @@ describe('TerminalContract — generateLsOutput', () => {
     expect(BOOT_COMMANDS.length).toBeGreaterThan(0)
     expect(Object.keys(INTERACTIVE_COMMANDS).length).toBeGreaterThan(0)
     expect(typeof TERMINAL_PROMPT).toBe('string')
+    expect(LS_PROJECTS_OUTPUT).toBeDefined()
+    expect(LS_PROJECTS_OUTPUT.length).toBeGreaterThan(0)
   })
 })
 
