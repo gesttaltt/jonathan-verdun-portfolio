@@ -14,6 +14,18 @@ export const personJsonLd = {
   description: siteConfig.description,
   sameAs: [siteConfig.socialLinks.github.url, siteConfig.socialLinks.linkedin.url],
   knowsAbout: [...siteConfig.expertise],
+  hasOccupation: {
+    '@type': 'Occupation',
+    name: siteConfig.jobTitle,
+    educationRequirements: 'ISTQB Foundation (in progress)',
+    skills: [...siteConfig.techStack, ...siteConfig.expertise],
+  },
+  contactPoint: {
+    '@type': 'ContactPoint',
+    contactType: 'professional',
+    email: siteConfig.contact.email,
+    url: siteConfig.url,
+  },
 } as const
 
 export const websiteJsonLd = {

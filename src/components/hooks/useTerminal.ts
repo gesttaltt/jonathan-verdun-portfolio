@@ -90,7 +90,9 @@ export const useTerminal = (
       historyIndexRef.current = -1
       draftRef.current = ''
 
-      if (['clear', 'limpiar'].includes(cmd.toLowerCase())) {
+      const response = processor.process(cmd)
+
+      if (response.signal === 'clear') {
         stopBooting()
         setHistory([])
         return
@@ -99,7 +101,7 @@ export const useTerminal = (
       const newEntry: CommandEntry = {
         id: nextId(),
         text: cmd,
-        output: processor.process(cmd),
+        output: response.output,
         isUser: true,
       }
 

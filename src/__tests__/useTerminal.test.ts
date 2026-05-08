@@ -3,7 +3,12 @@ import { useTerminal } from '@/components/hooks/useTerminal'
 import type { ICommandProcessor } from '@/lib/services/CommandProcessor'
 
 const makeProcessor = (): ICommandProcessor => ({
-  process: jest.fn((cmd: string) => `echo: ${cmd}`),
+  process: jest.fn((cmd: string) => {
+    if (cmd === 'clear' || cmd === 'limpiar') {
+      return { output: '', signal: 'clear' }
+    }
+    return { output: `echo: ${cmd}` }
+  }),
 })
 
 describe('useTerminal', () => {

@@ -30,6 +30,10 @@ jest.mock('@/lib/siteConfig', () => ({
       return (global as any).mockWorkHistory
     },
     contact: { email: 'jonathan.verdun@gmail.com', ctaLabel: 'Get in Touch' },
+    versions: {
+      portfolio: '0.1.0',
+      nextjs: '16.2.4',
+    },
   },
 }))
 

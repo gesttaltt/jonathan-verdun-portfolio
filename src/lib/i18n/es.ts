@@ -249,7 +249,7 @@ export const es: Translations = {
       contacto: 'Contáctame por LinkedIn o GitHub enlazados arriba.',
       habilidades:
         'Stack principal: Next.js, TypeScript, Tailwind CSS, Three.js. Testing: pytest, Playwright, Appium, Jest, fast-check.',
-      version: 'v0.1.0-audit-hardened (Next.js 16.2.4)',
+      version: `v${siteConfig.versions.portfolio}-audit-hardened (Next.js ${siteConfig.versions.nextjs})`,
       quiensoy: 'jonathan.verdun — Ingeniero de Automatización QA',
       'ls proyectos': esLsOutput,
       sudo: 'El usuario no está en el archivo sudoers. Este incidente será reportado.',

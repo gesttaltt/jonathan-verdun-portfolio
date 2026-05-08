@@ -1,7 +1,14 @@
 import { INTERACTIVE_COMMANDS } from '../contracts/TerminalContract'
 
+export type CommandSignal = 'clear'
+
+export interface CommandResponse {
+  output: string
+  signal?: CommandSignal
+}
+
 export interface ICommandProcessor {
-  process(cmd: string): string
+  process(cmd: string): CommandResponse
 }
 
 export class DefaultCommandProcessor implements ICommandProcessor {
@@ -13,12 +20,20 @@ export class DefaultCommandProcessor implements ICommandProcessor {
     this.helpCmd = helpCmd ?? 'help'
   }
 
-  process(cmd: string): string {
+  process(cmd: string): CommandResponse {
     const lowerCmd = cmd.toLowerCase().trim()
+
+    if (lowerCmd === 'clear' || lowerCmd === 'limpiar') {
+      return { output: '', signal: 'clear' }
+    }
+
     // Object.hasOwn guards against prototype keys like __proto__ being treated as commands.
     if (Object.hasOwn(this.commands, lowerCmd)) {
-      return this.commands[lowerCmd]
+      return { output: this.commands[lowerCmd] }
     }
-    return `bash: ${cmd}: command not found. Type '${this.helpCmd}' for available commands.`
+
+    return {
+      output: `bash: ${cmd}: command not found. Type '${this.helpCmd}' for available commands.`,
+    }
   }
 }

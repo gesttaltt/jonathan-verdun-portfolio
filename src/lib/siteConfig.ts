@@ -70,4 +70,9 @@ export const siteConfig = {
     automationRate: '92%',
     securityStatus: 'Passed',
   },
+
+  versions: {
+    portfolio: '0.1.0',
+    nextjs: '16.2.4',
+  },
 } as const
