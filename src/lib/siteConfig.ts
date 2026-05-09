@@ -76,4 +76,11 @@ export const siteConfig = {
     portfolio: '0.1.0',
     nextjs: '16.2.4',
   },
+
+  certification: {
+    name: 'ISTQB Foundation Level (CTFL)',
+    status: 'In Progress',
+    expectedDate: 'Q3 2026',
+    provider: 'ISTQB®',
+  },
 } as const

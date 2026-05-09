@@ -105,6 +105,45 @@ export const Sidebar: React.FC = () => {
         </m.div>
 
         <FadeInSection delay={0.2}>
+          <div className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/8 p-5 backdrop-blur-md transition-all hover:border-amber-500/20 sm:p-8">
+            <div className="absolute -top-10 -right-10 h-40 w-40 rounded-full bg-amber-500/5 blur-3xl transition-opacity group-hover:opacity-75"></div>
+
+            <h3 className="mb-4 flex items-center gap-3 text-lg font-bold text-white">
+              <Zap className="h-5 w-5 text-amber-400" />
+              {t.sections.sidebar.certificationTitle}
+            </h3>
+
+            <div className="space-y-4">
+              <div className="rounded-lg border border-white/5 bg-white/5 p-3">
+                <p className="text-xs font-bold text-white">{siteConfig.certification.name}</p>
+                <p className="mt-1 text-[10px] text-zinc-400">
+                  {siteConfig.certification.provider}
+                </p>
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-1">
+                  <p className="text-[10px] font-bold tracking-tighter text-zinc-500 uppercase">
+                    {t.sections.sidebar.certificationStatusLabel}
+                  </p>
+                  <p className="text-xs font-medium text-amber-400">
+                    {siteConfig.certification.status}
+                  </p>
+                </div>
+                <div className="space-y-1">
+                  <p className="text-[10px] font-bold tracking-tighter text-zinc-500 uppercase">
+                    {t.sections.sidebar.certificationExpectedLabel}
+                  </p>
+                  <p className="text-xs font-medium text-white">
+                    {siteConfig.certification.expectedDate}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </FadeInSection>
+
+        <FadeInSection delay={0.3}>
           <div className="rounded-2xl border border-white/5 bg-gradient-to-br from-blue-500/10 to-purple-500/5 p-6 backdrop-blur-sm">
             <h3 className="mb-2 text-sm font-bold tracking-wider text-white uppercase">
               {t.sections.qaContact.title}

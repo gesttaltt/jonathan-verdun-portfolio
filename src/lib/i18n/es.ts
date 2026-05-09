@@ -4,7 +4,6 @@ import { DataEngineeringService } from '@/lib/contracts/DataEngineeringContract'
 import { BioinformaticsService } from '@/lib/contracts/BioinformaticsContract'
 import { PROJECT_DATA } from '@/lib/contracts/ProjectContract'
 import { QA_PHILOSOPHY } from '@/lib/contracts/QAContract'
-
 import { siteConfig } from '@/lib/siteConfig'
 
 const ES_HELP_OUTPUT =
@@ -55,37 +54,37 @@ const ES_QA_OBJECTIVES: Record<string, string> = {
 const ES_PROJECT_OVERRIDES: Record<string, { description: string; statLabels: string[] }> = {
   'proj-01': {
     description:
-      '26 tests automatizados con pytest + Appium y 10 casos de prueba manuales en 4 historias de usuario (búsqueda, favoritos, PDF, red), vinculados a ADO Test Plans para trazabilidad completa. Reportes de defectos registrados como work items en Azure DevOps con clasificación de severidad y pasos de reproducción. Validación de API, flujos de smoke móvil y verificación de integridad de datos — todo gestionado vía GitHub Actions CI. Valida las restricciones de test-first y quality-gate descritas en la sección de Filosofía QA.',
+      '26 pruebas automatizadas con pytest + Appium y 10 casos de prueba manuales en 4 Historias de Usuario (Búsqueda, Favoritos, PDF, Red), vinculados a ADO Test Plans para trazabilidad completa. Reportes de defectos registrados como work items en Azure DevOps con clasificación de severidad y pasos de reproducción. Validación de API, flujos de smoke móvil y verificación de integridad de datos — todo gestionado vía GitHub Actions CI. Valida las restricciones de test-first y quality-gate descritas en la sección de Filosofía QA.',
     statLabels: ['Automatizados', 'Casos Manuales'],
   },
   'proj-05': {
     description:
-      'Suite de 96 pruebas que cubre todos los endpoints REST vía FastAPI TestClient and async httpx — rutas de codificación, codificación por lotes, clustering, visualización y variantes sinónimas. El CI gate requiere lint, type-check, análisis de seguridad (bandit + pip-audit), smoke test de Docker y cobertura antes de hacer merge.',
+      'Suite de 96 pruebas que cubre todos los endpoints REST vía FastAPI TestClient and async httpx — rutas de codificación, clustering y visualización. El CI gate requiere lint, type-check, análisis de seguridad (bandit + pip-audit), smoke test de Docker y cobertura antes de hacer merge. Implementa técnicas de prueba funcional de caja negra para asegurar el cumplimiento del contrato de la API.',
     statLabels: ['Pruebas', 'Endpoints'],
   },
   'proj-06': {
     description:
-      'Más de 230 pruebas en capas de unit (Jest), integración y E2E con Playwright para un servicio headless de extracción de transcripciones de YouTube. Campaña A/B en modo stealth — 100 ejecuciones automatizadas, tasa de éxito del 89.4%, análisis de patrones de fallo por video y documentación de causa raíz como artefactos de reporte.',
+      'Más de 230 pruebas en capas de unit (Jest), integración y E2E con Playwright para un servicio headless de extracción de transcripciones. Campaña A/B en modo stealth — 100 ejecuciones automatizadas, tasa de éxito del 89.4%, análisis de patrones de fallo por video y documentación de causa raíz (RCA) como artefactos de reporte. Enfocado en estabilidad no funcional y pruebas de regresión.',
     statLabels: ['Pruebas', 'Capas'],
   },
   'proj-07': {
     description:
-      'Implementación de referencia QA: 239 pruebas Jest con 100% de cobertura (unit, integración, basadas en propiedades via fast-check), 14 pruebas E2E con Playwright (12 smoke + 2 escaneos axe WCAG 2.1 AA) en rutas EN y ES, y un Lighthouse CI gate que exige a11y ≥95, SEO ≥90. Cada afirmación de calidad en la sección de Filosofía QA está respaldada por un gate ejecutándose en CI.',
+      'Implementación de referencia QA: 239 pruebas Jest con 100% de cobertura (unit, integración, basadas en propiedades via fast-check), 14 pruebas E2E con Playwright (12 smoke + 2 escaneos axe WCAG 2.1 AA) y un Lighthouse CI gate. Demuestra el diseño estructural de pruebas y gates de calidad automatizados. Cada afirmación de calidad en la sección de Filosofía QA está respaldada por un gate ejecutándose en CI.',
     statLabels: ['Pruebas', 'Cobertura'],
   },
   'proj-02': {
     description:
-      'Ingeniería de pipeline de datos para análisis de variantes genómicas — rendimiento VCF ~120× vía vectorización NumPy frente a Python nativo. Integra restricciones evolutivas LOEUF y anotaciones Gene Ontology contra gnomAD a escala. Salidas del pipeline validadas contra conjuntos de referencia gnomAD conocidos mediante pruebas de regresión parametrizadas.',
+      'Pipeline de ingeniería de datos para análisis genómico — rendimiento ~120× vía vectorización NumPy. Integra restricciones evolutivas LOEUF y anotaciones Gene Ontology. Salidas del pipeline validadas contra conjuntos de referencia conocidos mediante pruebas de regresión parametrizadas.',
     statLabels: ['vs Python Nativo', 'Funcionomas'],
   },
   'proj-04': {
     description:
-      'Ingeniería de pipeline ML con suite de 280 pruebas que cubre correctitud del VAE, invariantes geométricos y estabilidad de clustering (ARI 0.844). VAEs duales en geometría de bola de Poincaré — jerarquía enforced por valuación 3-ádica, no memorización.',
+      'Ingeniería de pipeline ML con suite de 280 pruebas que cubre la correctitud del VAE e invariantes geométricos. VAEs duales en geometría de bola de Poincaré — jerarquía impuesta por valuación 3-ádica. Se enfoca en la verificación de invariantes matemáticos en arquitecturas neuronales.',
     statLabels: ['Pruebas', 'ARI'],
   },
   'proj-03': {
     description:
-      'Ingeniería de pipeline multi-implementación: motor DAG en C++ (5–25× sobre Python base), Apache Spark para ejecución a escala en la nube y Python para flujos de desarrollo. Procesa 10M+ anotaciones génicas. Implementaciones en C++, Spark y Python verificadas cruzadamente para equivalencia funcional mediante salidas de referencia compartidas.',
+      'Ingeniería de pipeline multi-implementación: motor DAG en C++ (5–25× sobre Python), Apache Spark y Python. Implementaciones verificadas cruzadamente para equivalencia funcional mediante salidas de referencia compartidas.',
     statLabels: ['C++ vs Python', 'Escala'],
   },
 }
@@ -197,10 +196,13 @@ export const es: Translations = {
     sidebar: {
       qualityGatesTitle: 'Garantía de Calidad',
       constraintsTitle: 'Restricciones de Ingeniería',
-      unitCoverageLabel: 'Cobertura Unitaria',
+      unitCoverageLabel: 'Cobertura Lógica',
       automationRateLabel: 'Tasa de Automatización',
-      securityScanLabel: 'Escaneo de Seguridad',
+      securityScanLabel: 'Auditoría de Seguridad',
       livePipelineLabel: 'Pipeline de CI en Vivo',
+      certificationTitle: 'Desarrollo Profesional',
+      certificationStatusLabel: 'Estado',
+      certificationExpectedLabel: 'Previsto',
     },
     qaContact: {
       title: 'Disponible',
