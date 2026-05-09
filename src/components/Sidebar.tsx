@@ -1,8 +1,9 @@
 'use client'
 
-import { Server, ShieldCheck, Zap, Lock } from 'lucide-react'
+import { Server, ShieldCheck, Zap, Lock, Copy, Check } from 'lucide-react'
 import Link from 'next/link'
-import { m } from 'framer-motion'
+import { m, AnimatePresence } from 'framer-motion'
+import { useState } from 'react'
 import { FadeInSection } from '@/components/FadeInSection'
 import { useTranslation } from '@/lib/i18n/context'
 import { siteConfig } from '@/lib/siteConfig'
@@ -31,6 +32,18 @@ const GATES = [
 
 export const Sidebar: React.FC = () => {
   const t = useTranslation()
+  const [copied, setCopied] = useState(false)
+
+  const handleCopyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(siteConfig.contact.email)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    } catch (err) {
+      /* istanbul ignore next */
+      console.error('Failed to copy email:', err)
+    }
+  }
 
   return (
     <aside className="lg:col-span-4 lg:col-start-9 lg:row-span-2 lg:row-start-1 lg:pl-8">
@@ -149,12 +162,45 @@ export const Sidebar: React.FC = () => {
               {t.sections.qaContact.title}
             </h3>
             <p className="mb-4 text-xs text-zinc-300">{t.sections.qaContact.description}</p>
-            <Link
-              href={`mailto:${siteConfig.contact.email}`}
-              className="focus-visible:ring-offset-background flex w-full items-center justify-center gap-2 rounded-lg bg-white/10 py-3 text-sm font-bold text-white transition-all hover:bg-white/20 hover:shadow-lg focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none"
-            >
-              {t.sections.qaContact.ctaLabel}
-            </Link>
+            <div className="flex flex-col gap-2">
+              <Link
+                href={`mailto:${siteConfig.contact.email}`}
+                className="focus-visible:ring-offset-background flex flex-1 items-center justify-center gap-2 rounded-lg bg-white/10 py-3 text-sm font-bold text-white transition-all hover:bg-white/20 hover:shadow-lg focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none"
+              >
+                {t.sections.qaContact.ctaLabel}
+              </Link>
+              <button
+                onClick={handleCopyEmail}
+                className="focus-visible:ring-offset-background flex items-center justify-center gap-2 rounded-lg border border-white/5 bg-white/5 py-2 text-xs font-bold text-zinc-300 transition-all hover:bg-white/10 hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none"
+                aria-label="Copy email address"
+              >
+                <AnimatePresence mode="wait" initial={false}>
+                  {copied ? (
+                    <m.span
+                      key="copied"
+                      initial={{ opacity: 0, y: 5 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -5 }}
+                      className="flex items-center gap-2 text-green-400"
+                    >
+                      <Check className="h-3.5 w-3.5" />
+                      Copied!
+                    </m.span>
+                  ) : (
+                    <m.span
+                      key="copy"
+                      initial={{ opacity: 0, y: 5 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -5 }}
+                      className="flex items-center gap-2"
+                    >
+                      <Copy className="h-3.5 w-3.5" />
+                      Copy Email
+                    </m.span>
+                  )}
+                </AnimatePresence>
+              </button>
+            </div>
           </div>
         </FadeInSection>
       </div>
