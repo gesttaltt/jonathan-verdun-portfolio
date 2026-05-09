@@ -59,6 +59,20 @@ describe('Terminal', () => {
     expect(screen.queryByText('gestalt')).not.toBeInTheDocument()
   })
 
+  it('Ctrl+L keyboard shortcut clears history', async () => {
+    render(<Terminal commands={[{ text: 'whoami', output: 'gestalt', delay: 10 }]} />)
+    const input = await screen.findByRole('textbox', { name: /terminal command input/i })
+    await waitFor(() => expect(input).not.toBeDisabled())
+
+    // Shortcut should trigger clear
+    fireEvent.keyDown(input, { key: 'l', ctrlKey: true })
+
+    await waitFor(() => {
+      expect(screen.queryByText('whoami')).not.toBeInTheDocument()
+      expect(screen.queryByText('gestalt')).not.toBeInTheDocument()
+    })
+  })
+
   it('ignores blank input — processor is not called for whitespace-only commands', async () => {
     const user = userEvent.setup({ delay: null })
     const mockProcessor = { process: jest.fn(() => ({ output: '' })) }

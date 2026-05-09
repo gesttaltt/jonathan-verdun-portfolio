@@ -40,7 +40,7 @@ export const Terminal: React.FC<TerminalProps> = ({
     if (e.key === 'Enter') {
       execute(inputVal)
       setInputVal('')
-    } else if (e.key === 'l' && e.ctrlKey) {
+    } else if ((e.key === 'l' || e.key === 'L') && e.ctrlKey) {
       e.preventDefault()
       execute('clear')
     } else if (e.key === 'ArrowUp') {

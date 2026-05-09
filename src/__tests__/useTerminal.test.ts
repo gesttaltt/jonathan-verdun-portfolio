@@ -68,7 +68,8 @@ describe('useTerminal', () => {
     })
 
     expect(result.current.history).toHaveLength(1)
-    expect(result.current.history[0]).toMatchObject({ text: 'help', isUser: true })
+    expect(result.current.history[0]!.text).toBe('help')
+    expect(result.current.history[0]!.isUser).toBe(true)
     expect(processor.process).toHaveBeenCalledWith('help')
   })
 

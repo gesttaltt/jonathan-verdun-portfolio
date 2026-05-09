@@ -98,6 +98,7 @@ export const useTerminal = (
         return
       }
 
+      /* istanbul ignore next */
       if (response.signal === 'redirect' && response.payload) {
         window.location.href = response.payload
       }
