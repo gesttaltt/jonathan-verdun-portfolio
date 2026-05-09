@@ -31,10 +31,13 @@ export const en: Translations = {
     sidebar: {
       qualityGatesTitle: 'Engineering Quality Gates',
       constraintsTitle: 'Engineering Constraints',
-      unitCoverageLabel: 'Unit Coverage',
+      unitCoverageLabel: 'Logic Coverage',
       automationRateLabel: 'Automation Rate',
-      securityScanLabel: 'Security Scan',
+      securityScanLabel: 'Security Audit',
       livePipelineLabel: 'Live CI Pipeline',
+      certificationTitle: 'Professional Development',
+      certificationStatusLabel: 'Status',
+      certificationExpectedLabel: 'Expected',
     },
     qaContact: {
       title: 'Open to work',

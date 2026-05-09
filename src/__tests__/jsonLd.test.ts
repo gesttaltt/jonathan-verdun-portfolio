@@ -1,4 +1,9 @@
-import { personJsonLd, websiteJsonLd, buildWebPageJsonLd } from '@/lib/jsonLd'
+import {
+  personJsonLd,
+  websiteJsonLd,
+  buildWebPageJsonLd,
+  buildBreadcrumbJsonLd,
+} from '@/lib/jsonLd'
 import { siteConfig } from '@/lib/siteConfig'
 
 describe('websiteJsonLd', () => {
@@ -24,7 +29,23 @@ describe('buildWebPageJsonLd', () => {
     const pageLd = buildWebPageJsonLd('es')
     expect(pageLd.inLanguage).toBe('es')
     expect(pageLd.url).toBe(`${siteConfig.url}/es/`)
-    expect(pageLd.name).toContain('Portafolio')
+    expect(pageLd.name).toContain('Jonathan Verdun')
+  })
+})
+
+describe('buildBreadcrumbJsonLd', () => {
+  it('returns EN breadcrumbs by default', () => {
+    const ld = buildBreadcrumbJsonLd()
+    expect(ld['@type']).toBe('BreadcrumbList')
+    expect(ld.itemListElement).toHaveLength(1)
+    expect(ld.itemListElement[0]!.name).toBe('Home')
+  })
+
+  it('returns ES breadcrumbs when locale is es', () => {
+    const ld = buildBreadcrumbJsonLd('es')
+    expect(ld.itemListElement).toHaveLength(2)
+    expect(ld.itemListElement[0]!.name).toBe('Inicio')
+    expect(ld.itemListElement[1]!.name).toBe('Español')
   })
 })
 
@@ -54,12 +75,12 @@ describe('personJsonLd — knowsAbout', () => {
   })
 
   it('includes specific QA tooling', () => {
-    const tools = personJsonLd.knowsAbout as readonly string[]
+    const tools = personJsonLd.knowsAbout
     expect(tools).toContain('Playwright')
     expect(tools).toContain('pytest')
     expect(tools).toContain('Appium')
-    expect(tools).toContain('GitHub Actions CI')
-    expect(tools).toContain('QA Automation')
+    expect(tools).toContain('Test Strategy & Planning')
+    expect(tools).toContain('Risk-Based Testing')
   })
 })
 

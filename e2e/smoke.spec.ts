@@ -77,7 +77,12 @@ test.describe('Terminal interactive mode', () => {
     await expect(input).toBeVisible({ timeout: 10_000 })
     await input.fill('help')
     await input.press('Enter')
-    await expect(page.getByRole('log').getByText(/available commands:/i)).toBeVisible()
+    await expect(
+      page
+        .getByRole('log')
+        .getByText(/available commands:/i)
+        .last()
+    ).toBeVisible()
   })
 
   test('unknown command shows error with hint', async ({ page }) => {

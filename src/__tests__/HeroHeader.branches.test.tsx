@@ -2,13 +2,16 @@ import { render, screen } from '@testing-library/react'
 import { domAnimation, LazyMotion, MotionConfig } from 'framer-motion'
 import { HeroHeader } from '@/components/HeroHeader'
 
-// Mutable array — mutated per test so the getter always returns current state
 const mockWorkHistory: Array<{
   organization: string
   url: string
   role?: string
   period?: string
 }> = []
+
+// Set on global to make it accessible inside the hoisting jest.mock factory
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+;(global as any).mockWorkHistory = mockWorkHistory
 
 jest.mock('@/lib/siteConfig', () => ({
   siteConfig: {
@@ -23,9 +26,14 @@ jest.mock('@/lib/siteConfig', () => ({
       },
     },
     get workHistory() {
-      return mockWorkHistory
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      return (global as any).mockWorkHistory
     },
     contact: { email: 'jonathan.verdun@gmail.com', ctaLabel: 'Get in Touch' },
+    versions: {
+      portfolio: '0.1.0',
+      nextjs: '16.2.4',
+    },
   },
 }))
 

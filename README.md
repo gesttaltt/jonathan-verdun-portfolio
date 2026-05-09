@@ -61,15 +61,29 @@ The runner stage is `nginx:alpine` serving the static export. `nginx.conf` sets 
 
 ## CI pipeline
 
-Three jobs run on every push to `main` / PR:
+| Job     | What it does                                                                            |
+| :------ | :-------------------------------------------------------------------------------------- |
+| `build` | Format · lint · security audit · types · Jest (273 tests, 100% coverage) · Node 22 & 24 |
+| `e2e`   | Playwright suite (38 tests) + WCAG 2.1 AA axe scans (full coverage)                     |
+| `lhci`  | Lighthouse CI gate: a11y ≥ 95, best-practices ≥ 90, SEO ≥ 90                            |
 
-| Job     | What it does                                                                          |
-| :------ | :------------------------------------------------------------------------------------ |
-| `build` | Format · lint · types · Jest (239 tests, 100% coverage) · build — matrix Node 22 & 24 |
-| `e2e`   | Playwright smoke suite (12 tests) + WCAG 2.1 AA axe scans (2 tests)                   |
-| `lhci`  | Lighthouse CI gate: a11y ≥ 95, best-practices ≥ 90, SEO ≥ 90                          |
+The `out/` artifact produced by the `build (22.x)` run is shared with `lhci` to avoid a duplicate build. Build caching is implemented to optimize performance.
 
-The `out/` artifact produced by the `build (22.x)` run is shared with `lhci` to avoid a duplicate build.
+---
+
+## Technical Hardening (Deep Resilience)
+
+Every architectural decision is optimized for **Deterministic Future-Proofing**:
+
+- **Offline Autonomy:** Custom Service Worker (PWA) handles asset caching for functional offline viewing.
+- **Fail-Safe UX:** Deterministic 3s timeout for WebGL with a high-fidelity CSS gradient fallback.
+- **Security Gates:** `npm audit --audit-level=high` integrated into CI to block vulnerable dependencies.
+- **Config Resilience:** Build-time environment validation script prevents misconfigured deployments.
+- **Semantic SEO:** Full JSON-LD implementation (Person, WebSite, BreadcrumbList) for lead-gen discovery.
+
+---
+
+## Tech stack
 
 Deployments to GitHub Pages are triggered separately via `deploy.yml`, which also generates TypeDoc into `out/docs/api/`.
 

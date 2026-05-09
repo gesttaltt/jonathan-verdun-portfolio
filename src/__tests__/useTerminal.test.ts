@@ -3,7 +3,12 @@ import { useTerminal } from '@/components/hooks/useTerminal'
 import type { ICommandProcessor } from '@/lib/services/CommandProcessor'
 
 const makeProcessor = (): ICommandProcessor => ({
-  process: jest.fn((cmd: string) => `echo: ${cmd}`),
+  process: jest.fn((cmd: string) => {
+    if (cmd === 'clear' || cmd === 'limpiar') {
+      return { output: '', signal: 'clear' }
+    }
+    return { output: `echo: ${cmd}` }
+  }),
 })
 
 describe('useTerminal', () => {
@@ -27,13 +32,13 @@ describe('useTerminal', () => {
       jest.advanceTimersByTime(100)
     })
     expect(result.current.history).toHaveLength(1)
-    expect(result.current.history[0].text).toBe('whoami')
+    expect(result.current.history[0]!.text).toBe('whoami')
 
     act(() => {
       jest.advanceTimersByTime(200)
     })
     expect(result.current.history).toHaveLength(2)
-    expect(result.current.history[1].text).toBe('ls')
+    expect(result.current.history[1]!.text).toBe('ls')
   })
 
   it('marks isBooting false 500ms after the last command fires', () => {
@@ -63,7 +68,8 @@ describe('useTerminal', () => {
     })
 
     expect(result.current.history).toHaveLength(1)
-    expect(result.current.history[0]).toMatchObject({ text: 'help', isUser: true })
+    expect(result.current.history[0]!.text).toBe('help')
+    expect(result.current.history[0]!.isUser).toBe(true)
     expect(processor.process).toHaveBeenCalledWith('help')
   })
 
@@ -158,7 +164,7 @@ describe('useTerminal', () => {
       jest.advanceTimersByTime(1)
     })
     expect(result.current.history).toHaveLength(1)
-    expect(result.current.history[0].text).toBe('boot')
+    expect(result.current.history[0]!.text).toBe('boot')
   })
 
   it('fires immediately when a command has delay: 0', () => {
@@ -170,7 +176,7 @@ describe('useTerminal', () => {
       jest.advanceTimersByTime(0)
     })
     expect(result.current.history).toHaveLength(1)
-    expect(result.current.history[0].text).toBe('instant')
+    expect(result.current.history[0]!.text).toBe('instant')
   })
 
   it('clears all pending timeouts on unmount', () => {

@@ -3,45 +3,88 @@ import { generateLsOutput } from '@/lib/contracts/TerminalContract'
 import { DataEngineeringService } from '@/lib/contracts/DataEngineeringContract'
 import { BioinformaticsService } from '@/lib/contracts/BioinformaticsContract'
 import { PROJECT_DATA } from '@/lib/contracts/ProjectContract'
+import { QA_PHILOSOPHY } from '@/lib/contracts/QAContract'
+import { siteConfig } from '@/lib/siteConfig'
 
 const ES_HELP_OUTPUT =
   'Comandos disponibles: ayuda, sobre, proyectos, contacto, habilidades, version, quiensoy, limpiar'
+
+// ── Overrides for Work History ──────────────────────────────────────────────
+const ES_WORK_OVERRIDES: Record<string, { role?: string; period?: string; description?: string }> =
+  {
+    'Ai-Whisperers': {
+      role: 'Cofundador y Líder de QA',
+      period: 'Sep 2025 – Presente',
+      description:
+        'Responsable de QA en 3 repos de producción — 352+ pruebas automatizadas, 7 flujos CI, seguimiento de defectos con ADO.',
+    },
+  }
+
+const esWorkHistoryDescriptions: Record<string, string> = {}
+const esWorkHistoryRoles: Record<string, string> = {}
+const esWorkHistoryPeriods: Record<string, string> = {}
+
+// Guard against undefined siteConfig during early module loading in tests
+siteConfig.workHistory?.forEach((job) => {
+  const override = ES_WORK_OVERRIDES[job.organization]
+  esWorkHistoryDescriptions[job.organization] = override?.description ?? ''
+  esWorkHistoryRoles[job.organization] = override?.role ?? job.role
+  esWorkHistoryPeriods[job.organization] = override?.period ?? job.period
+})
+
+// ── Overrides for QA Philosophy ─────────────────────────────────────────────
+const ES_QA_CONSTRAINTS = [
+  'Planificación de pruebas basada en riesgos priorizada por impacto de negocio y complejidad técnica',
+  'Gates de CI deterministas: 100% de cobertura unitaria y cero vulnerabilidades de alta severidad',
+  'Reporte detallado de defectos con análisis de causa raíz y pasos de regresión automatizados',
+  'Compromiso Shift-left: involucramiento de QA desde el levantamiento de requerimientos hasta el despliegue final',
+]
+
+const ES_QA_OBJECTIVES: Record<string, string> = {
+  strategy: 'Definir planes de prueba integrales, matrices de riesgo y objetivos de calidad',
+  'api/contract': 'Validar la integridad de interfaces y consistencia de datos entre servicios',
+  automation: 'Suites escalables para navegador y móvil vía Playwright, Appium y pytest',
+  exploratory: 'Pruebas no estructuradas para descubrir casos de borde y fricción de usabilidad',
+  regression: 'Verificación automatizada de funcionalidad existente después de cada build',
+  accessibility:
+    'Garantizar el cumplimiento de WCAG 2.1 AA mediante auditorías automáticas y manuales',
+}
 
 // ── Overrides for Project Data ────────────────────────────────────────────────
 const ES_PROJECT_OVERRIDES: Record<string, { description: string; statLabels: string[] }> = {
   'proj-01': {
     description:
-      '26 tests automatizados con pytest + Appium y 10 casos de prueba manuales en 4 historias de usuario (búsqueda, favoritos, PDF, red), vinculados a ADO Test Plans para trazabilidad completa. Reportes de defectos registrados como work items en Azure DevOps con clasificación de severidad y pasos de reproducción. Validación de API, flujos de smoke móvil y verificación de integridad de datos — todo gestionado vía GitHub Actions CI. Valida las restricciones de test-first y quality-gate descritas en la sección de Filosofía QA.',
+      '26 pruebas automatizadas con pytest + Appium y 10 casos de prueba manuales en 4 Historias de Usuario (Búsqueda, Favoritos, PDF, Red), vinculados a ADO Test Plans para trazabilidad completa. Reportes de defectos registrados como work items en Azure DevOps con clasificación de severidad y pasos de reproducción. Validación de API, flujos de smoke móvil y verificación de integridad de datos — todo gestionado vía GitHub Actions CI. Valida las restricciones de test-first y quality-gate descritas en la sección de Filosofía QA.',
     statLabels: ['Automatizados', 'Casos Manuales'],
   },
   'proj-05': {
     description:
-      'Suite de 96 pruebas que cubre todos los endpoints REST vía FastAPI TestClient and async httpx — rutas de codificación, codificación por lotes, clustering, visualización y variantes sinónimas. El CI gate requiere lint, type-check, análisis de seguridad (bandit + pip-audit), smoke test de Docker y cobertura antes de hacer merge.',
+      'Suite de 96 pruebas que cubre todos los endpoints REST vía FastAPI TestClient and async httpx — rutas de codificación, clustering y visualización. El CI gate requiere lint, type-check, análisis de seguridad (bandit + pip-audit), smoke test de Docker y cobertura antes de hacer merge. Implementa técnicas de prueba funcional de caja negra para asegurar el cumplimiento del contrato de la API.',
     statLabels: ['Pruebas', 'Endpoints'],
   },
   'proj-06': {
     description:
-      'Más de 230 pruebas en capas de unit (Jest), integración y E2E con Playwright para un servicio headless de extracción de transcripciones de YouTube. Campaña A/B en modo stealth — 100 ejecuciones automatizadas, tasa de éxito del 89.4%, análisis de patrones de fallo por video y documentación de causa raíz como artefactos de reporte.',
+      'Más de 230 pruebas en capas de unit (Jest), integración y E2E con Playwright para un servicio headless de extracción de transcripciones. Campaña A/B en modo stealth — 100 ejecuciones automatizadas, tasa de éxito del 89.4%, análisis de patrones de fallo por video y documentación de causa raíz (RCA) como artefactos de reporte. Enfocado en estabilidad no funcional y pruebas de regresión.',
     statLabels: ['Pruebas', 'Capas'],
   },
   'proj-07': {
     description:
-      'Implementación de referencia QA: 239 pruebas Jest con 100% de cobertura (unit, integración, basadas en propiedades via fast-check), 14 pruebas E2E con Playwright (12 smoke + 2 escaneos axe WCAG 2.1 AA) en rutas EN y ES, y un Lighthouse CI gate que exige a11y ≥95, SEO ≥90. Cada afirmación de calidad en la sección de Filosofía QA está respaldada por un gate ejecutándose en CI.',
+      'Implementación de referencia QA: 239 pruebas Jest con 100% de cobertura (unit, integración, basadas en propiedades via fast-check), 14 pruebas E2E con Playwright (12 smoke + 2 escaneos axe WCAG 2.1 AA) y un Lighthouse CI gate. Demuestra el diseño estructural de pruebas y gates de calidad automatizados. Cada afirmación de calidad en la sección de Filosofía QA está respaldada por un gate ejecutándose en CI.',
     statLabels: ['Pruebas', 'Cobertura'],
   },
   'proj-02': {
     description:
-      'Ingeniería de pipeline de datos para análisis de variantes genómicas — rendimiento VCF ~120× vía vectorización NumPy frente a Python nativo. Integra restricciones evolutivas LOEUF y anotaciones Gene Ontology contra gnomAD a escala. Salidas del pipeline validadas contra conjuntos de referencia gnomAD conocidos mediante pruebas de regresión parametrizadas.',
+      'Pipeline de ingeniería de datos para análisis genómico — rendimiento ~120× vía vectorización NumPy. Integra restricciones evolutivas LOEUF y anotaciones Gene Ontology. Salidas del pipeline validadas contra conjuntos de referencia conocidos mediante pruebas de regresión parametrizadas.',
     statLabels: ['vs Python Nativo', 'Funcionomas'],
   },
   'proj-04': {
     description:
-      'Ingeniería de pipeline ML con suite de 280 pruebas que cubre correctitud del VAE, invariantes geométricos y estabilidad de clustering (ARI 0.844). VAEs duales en geometría de bola de Poincaré — jerarquía enforced por valuación 3-ádica, no memorización.',
+      'Ingeniería de pipeline ML con suite de 280 pruebas que cubre la correctitud del VAE e invariantes geométricos. VAEs duales en geometría de bola de Poincaré — jerarquía impuesta por valuación 3-ádica. Se enfoca en la verificación de invariantes matemáticos en arquitecturas neuronales.',
     statLabels: ['Pruebas', 'ARI'],
   },
   'proj-03': {
     description:
-      'Ingeniería de pipeline multi-implementación: motor DAG en C++ (5–25× sobre Python base), Apache Spark para ejecución a escala en la nube y Python para flujos de desarrollo. Procesa 10M+ anotaciones génicas. Implementaciones en C++, Spark y Python verificadas cruzadamente para equivalencia funcional mediante salidas de referencia compartidas.',
+      'Ingeniería de pipeline multi-implementación: motor DAG en C++ (5–25× sobre Python), Apache Spark y Python. Implementaciones verificadas cruzadamente para equivalencia funcional mediante salidas de referencia compartidas.',
     statLabels: ['C++ vs Python', 'Escala'],
   },
 }
@@ -101,19 +144,35 @@ const esLsOutput = generateLsOutput(projects)
 
 const esArchSpecs = DataEngineeringService.getSystemSpecs().map((s) => {
   const override = ES_ARCH_OVERRIDES[s.id]
+  /* istanbul ignore next */
+  if (!override && process.env.NODE_ENV === 'development') {
+    console.warn(`[i18n:es] Missing Architecture override for ${s.id}`)
+  }
   return {
     ...s,
-    ...override,
+    ...(override ?? {}),
   }
 })
 
 const esBioSpecs = BioinformaticsService.getResearchSpecs().map((s) => {
   const override = ES_BIO_OVERRIDES[s.id]
+  /* istanbul ignore next */
+  if (!override && process.env.NODE_ENV === 'development') {
+    console.warn(`[i18n:es] Missing Bioinformatics override for ${s.id}`)
+  }
   return {
     ...s,
-    ...override,
+    ...(override ?? {}),
   }
 })
+
+const esQaPhilosophy = {
+  constraints: ES_QA_CONSTRAINTS,
+  specifications: QA_PHILOSOPHY.specifications.map((spec) => ({
+    ...spec,
+    objective: ES_QA_OBJECTIVES[spec.layer] ?? spec.objective,
+  })),
+}
 
 export const es: Translations = {
   lang: 'es',
@@ -123,16 +182,9 @@ export const es: Translations = {
   description:
     'Portafolio de Jonathan Verdun — Ingeniero de Automatización QA e Investigador en Bioinformática, enfocado en desarrollo guiado por pruebas y biología computacional.',
   workHistoryLabel: 'Experiencia',
-  workHistoryDescriptions: {
-    'Ai-Whisperers':
-      'Responsable de QA en 3 repos de producción — 352+ pruebas automatizadas, 7 flujos CI, seguimiento de defectos con ADO.',
-  },
-  workHistoryRoles: {
-    'Ai-Whisperers': 'Cofundador y Líder de QA',
-  },
-  workHistoryPeriods: {
-    'Ai-Whisperers': 'Sep 2025 – Presente',
-  },
+  workHistoryDescriptions: esWorkHistoryDescriptions,
+  workHistoryRoles: esWorkHistoryRoles,
+  workHistoryPeriods: esWorkHistoryPeriods,
   sections: {
     projects: 'Proyectos',
     architecture: 'Arquitectura',
@@ -141,10 +193,13 @@ export const es: Translations = {
     sidebar: {
       qualityGatesTitle: 'Garantía de Calidad',
       constraintsTitle: 'Restricciones de Ingeniería',
-      unitCoverageLabel: 'Cobertura Unitaria',
+      unitCoverageLabel: 'Cobertura Lógica',
       automationRateLabel: 'Tasa de Automatización',
-      securityScanLabel: 'Escaneo de Seguridad',
+      securityScanLabel: 'Auditoría de Seguridad',
       livePipelineLabel: 'Pipeline de CI en Vivo',
+      certificationTitle: 'Desarrollo Profesional',
+      certificationStatusLabel: 'Estado',
+      certificationExpectedLabel: 'Previsto',
     },
     qaContact: {
       title: 'Disponible',
@@ -152,52 +207,7 @@ export const es: Translations = {
       ctaLabel: 'Contáctame',
     },
   },
-  qa: {
-    constraints: [
-      '100% de cobertura unitaria aplicada en CI via GitHub Actions — integración bloqueada por debajo del umbral',
-      'Pruebas basadas en propiedades via fast-check aplicadas a los contratos de dominio centrales y condiciones de frontera',
-      'Validación estricta de entradas en todas las fronteras del sistema; entradas inválidas rechazadas en ingesta',
-      'Pruebas escritas antes del código de funcionalidad — disciplina test-first aplicada en cada capa',
-    ],
-    specifications: [
-      {
-        layer: 'unit',
-        objective:
-          'Garantizar la corrección de la lógica de dominio aislada para evitar regresiones',
-        status: 'stable',
-      },
-      {
-        layer: 'property-based',
-        objective:
-          'Fuzzear contratos de dominio con fast-check para descubrir modos de fallo desconocidos',
-        status: 'stable',
-      },
-      {
-        layer: 'component',
-        objective:
-          'Verificar el comportamiento renderizado e interacciones del usuario con React Testing Library',
-        status: 'maturing',
-      },
-      {
-        layer: 'integration',
-        objective:
-          'Verificar fronteras de servicio, flujo de datos y contratos entre módulos en CI',
-        status: 'stable',
-      },
-      {
-        layer: 'E2E',
-        objective:
-          'Cubrir rutas críticas de usuario de extremo a extremo mediante automatización de navegador y móvil',
-        status: 'maturing',
-      },
-      {
-        layer: 'accessibility',
-        objective:
-          'Garantizar el cumplimiento de WCAG 2.1 AA mediante escaneos axe-core automatizados en CI',
-        status: 'stable',
-      },
-    ],
-  },
+  qa: esQaPhilosophy,
   architecture: {
     methodologyLabel: 'Metodología',
     invariantsLabel: 'Invariantes',
@@ -205,7 +215,7 @@ export const es: Translations = {
   },
   bioinformatics: {
     methodologyLabel: 'Metodología',
-    invariantsLabel: 'Invariantes',
+    invariantsLabel: 'Invariants',
     graphicLabel: 'Análisis de Datos: [Pipeline de Descubrimiento de Epítopos]',
     focusLabels: {
       HIV: 'IA para Antígenos VIH',
@@ -236,7 +246,7 @@ export const es: Translations = {
       contacto: 'Contáctame por LinkedIn o GitHub enlazados arriba.',
       habilidades:
         'Stack principal: Next.js, TypeScript, Tailwind CSS, Three.js. Testing: pytest, Playwright, Appium, Jest, fast-check.',
-      version: 'v0.1.0-audit-hardened (Next.js 16.2.4)',
+      version: `v${siteConfig.versions.portfolio}-audit-hardened (Next.js ${siteConfig.versions.nextjs})`,
       quiensoy: 'jonathan.verdun — Ingeniero de Automatización QA',
       'ls proyectos': esLsOutput,
       sudo: 'El usuario no está en el archivo sudoers. Este incidente será reportado.',

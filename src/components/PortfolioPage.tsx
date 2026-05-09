@@ -16,7 +16,7 @@ import { TopologyLoader } from '@/components/TopologyLoader'
 import { ProjectProvider } from '@/components/hooks/useProjects'
 import { useTranslation } from '@/lib/i18n/context'
 import { DefaultCommandProcessor } from '@/lib/services/CommandProcessor'
-import { buildWebPageJsonLd } from '@/lib/jsonLd'
+import { buildWebPageJsonLd, buildBreadcrumbJsonLd } from '@/lib/jsonLd'
 
 export const PortfolioPage: React.FC = () => {
   const t = useTranslation()
@@ -31,6 +31,10 @@ export const PortfolioPage: React.FC = () => {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(buildWebPageJsonLd(t.lang)) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(buildBreadcrumbJsonLd(t.lang)) }}
       />
       <div className="bg-background min-h-screen font-mono text-zinc-300 selection:bg-blue-500/30">
         <ErrorBoundary>
@@ -57,6 +61,7 @@ export const PortfolioPage: React.FC = () => {
             {/* QA Philosophy — row 1, cols 1–8 */}
             <section
               aria-labelledby="qa-section-title"
+              aria-describedby="qa-philosophy-grid"
               className="relative lg:col-span-8 lg:col-start-1 lg:row-start-1"
             >
               <SectionHeader
@@ -66,7 +71,9 @@ export const PortfolioPage: React.FC = () => {
                 color="green"
                 showAccentLine
               />
-              <QAPhilosophyGrid />
+              <div id="qa-philosophy-grid">
+                <QAPhilosophyGrid />
+              </div>
             </section>
 
             <Sidebar />
@@ -74,7 +81,11 @@ export const PortfolioPage: React.FC = () => {
             {/* Projects + Prior Research — row 2, cols 1–8 */}
             <div className="space-y-14 lg:col-span-8 lg:col-start-1 lg:row-start-2 lg:space-y-24">
               <FadeInSection>
-                <section aria-labelledby="projects-section-title" className="relative space-y-8">
+                <section
+                  aria-labelledby="projects-section-title"
+                  aria-describedby="projects-gallery"
+                  className="relative space-y-8"
+                >
                   <SectionHeader
                     id="projects-section-title"
                     icon={<Code2 className="h-5 w-5" />}
@@ -82,7 +93,9 @@ export const PortfolioPage: React.FC = () => {
                     color="blue"
                     showBorderBottom
                   />
-                  <ProjectGallery />
+                  <div id="projects-gallery">
+                    <ProjectGallery />
+                  </div>
                 </section>
               </FadeInSection>
 

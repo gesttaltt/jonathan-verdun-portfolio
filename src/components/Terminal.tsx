@@ -40,6 +40,9 @@ export const Terminal: React.FC<TerminalProps> = ({
     if (e.key === 'Enter') {
       execute(inputVal)
       setInputVal('')
+    } else if ((e.key === 'l' || e.key === 'L') && e.ctrlKey) {
+      e.preventDefault()
+      execute('clear')
     } else if (e.key === 'ArrowUp') {
       e.preventDefault() // prevent cursor jumping to input start
       setInputVal(navigateHistory('up', inputVal))
@@ -61,12 +64,15 @@ export const Terminal: React.FC<TerminalProps> = ({
           <div className="h-3 w-3 rounded-full bg-amber-500/50"></div>
           <div className="h-3 w-3 rounded-full bg-cyan-500/50"></div>
         </div>
-        <div className="text-[10px] font-bold tracking-widest text-zinc-300 uppercase sm:text-xs">
+        <div className="flex items-center gap-2 text-[10px] font-bold tracking-widest text-zinc-300 uppercase sm:text-xs">
           {title}
+          <div className="relative flex h-2 w-2">
+            <div className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-500/40 opacity-75"></div>
+            <div className="relative inline-flex h-2 w-2 rounded-full bg-green-500/80"></div>
+          </div>
         </div>
         <div className="w-12"></div>
       </div>
-
       <p id="terminal-hint" className="sr-only">
         Type &apos;{hintCmd}&apos; for available commands
       </p>
@@ -77,7 +83,8 @@ export const Terminal: React.FC<TerminalProps> = ({
         aria-label="Terminal output"
         aria-live="polite"
         aria-busy={isBooting}
-        className="custom-scrollbar relative h-[240px] w-full overflow-x-hidden overflow-y-auto p-4 sm:h-[280px] md:h-[400px] md:p-6"
+        tabIndex={0}
+        className="custom-scrollbar relative h-[240px] w-full overflow-x-hidden overflow-y-auto p-4 focus:outline-none sm:h-[280px] md:h-[400px] md:p-6"
       >
         <div className="space-y-4 pb-2">
           {history.map((entry, index) => (

@@ -22,9 +22,12 @@ export const siteConfig = {
 
   repo: {
     url: 'https://github.com/gesttaltt/jonathan-verdun-portfolio',
-    ciWorkflowUrl:
-      'https://github.com/gesttaltt/jonathan-verdun-portfolio/actions/workflows/ci.yml',
-    ciBadgeUrl: 'https://github.com/gesttaltt/jonathan-verdun-portfolio/workflows/CI/badge.svg',
+    get ciWorkflowUrl() {
+      return `${this.url}/actions/workflows/ci.yml`
+    },
+    get ciBadgeUrl() {
+      return `${this.url}/actions/workflows/ci.yml/badge.svg`
+    },
   },
 
   workHistory: [
@@ -44,10 +47,40 @@ export const siteConfig = {
   tagline: 'Test Architecture · Automation Engineering',
   jobTitle: 'QA Automation Engineer',
   techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Three.js'],
+  expertise: [
+    'Test Strategy & Planning',
+    'Risk-Based Testing',
+    'Defect Lifecycle Management',
+    'Shift-Left Testing',
+    'Root Cause Analysis',
+    'API & Integration Testing',
+    'Performance & Load Testing',
+    'Web & Mobile Automation',
+    'Property-Based Testing',
+    'CI/CD Pipeline Hardening',
+    'ISTQB Standards',
+    'Playwright',
+    'pytest',
+    'Appium',
+    'FastAPI',
+    'TypeScript',
+  ],
 
   performanceMetrics: {
     unitCoverage: '100%',
     automationRate: '92%',
     securityStatus: 'Passed',
+  },
+
+  versions: {
+    portfolio: '0.1.0',
+    nextjs: '16.2.4',
+  },
+
+  certification: {
+    name: 'ISTQB Foundation Level (CTFL)',
+    status: 'In Progress',
+    expectedDate: 'Q3 2026',
+    provider: 'ISTQB®',
   },
 } as const

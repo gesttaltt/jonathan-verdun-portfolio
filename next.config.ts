@@ -10,6 +10,9 @@ const nextConfig: NextConfig = {
   trailingSlash: true,
   basePath,
   reactCompiler: true,
+  experimental: {
+    optimizePackageImports: ['lucide-react', 'framer-motion', 'three', '@react-three/fiber'],
+  },
   images: {
     // Image Optimization requires a Node.js server; disable for static export.
     unoptimized: true,

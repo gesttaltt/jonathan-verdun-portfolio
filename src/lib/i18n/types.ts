@@ -46,6 +46,9 @@ export interface Translations {
       automationRateLabel: string
       securityScanLabel: string
       livePipelineLabel: string
+      certificationTitle: string
+      certificationStatusLabel: string
+      certificationExpectedLabel: string
     }
     qaContact: { title: string; description: string; ctaLabel: string }
   }

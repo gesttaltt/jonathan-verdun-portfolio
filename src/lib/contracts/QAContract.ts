@@ -7,40 +7,40 @@ import { QAPhilosophy } from './QAContract.types'
 
 export const QA_PHILOSOPHY: QAPhilosophy = {
   constraints: [
-    '100% unit coverage enforced in CI via GitHub Actions — merge blocked below threshold',
-    'Property-based fuzzing via fast-check applied to core domain contracts and boundary conditions',
-    'Strict input validation enforced at all system boundaries; invalid inputs rejected at ingestion',
-    'Tests written before feature code — test-first discipline enforced at every layer',
+    'Risk-based test planning prioritized by business impact and technical complexity',
+    'Deterministic CI gates: 100% unit coverage and zero high-severity vulnerabilities',
+    'Comprehensive defect reporting with root-cause analysis and automated regression steps',
+    'Shift-left engagement: QA involvement from requirements gathering to final deployment',
   ],
   specifications: [
     {
-      layer: 'unit',
-      objective: 'Enforce isolated domain logic correctness to prevent regression',
+      layer: 'strategy',
+      objective: 'Define comprehensive test plans, risk matrices, and quality objectives',
       status: 'stable',
     },
     {
-      layer: 'property-based',
-      objective: 'Fuzz domain contracts with fast-check to surface unknown failure modes',
+      layer: 'api/contract',
+      objective: 'Validate interface integrity and data consistency across service boundaries',
       status: 'stable',
     },
     {
-      layer: 'component',
-      objective: 'Verify rendered behaviour and user interactions via React Testing Library',
+      layer: 'automation',
+      objective: 'Scalable browser and mobile suites via Playwright, Appium, and pytest',
+      status: 'stable',
+    },
+    {
+      layer: 'exploratory',
+      objective: 'Unstructured testing to surface edge cases and usability friction',
       status: 'maturing',
     },
     {
-      layer: 'integration',
-      objective: 'Verify service boundaries, data flow, and cross-module contracts in CI',
+      layer: 'regression',
+      objective: 'Automated verification of existing functionality after each build',
       status: 'stable',
-    },
-    {
-      layer: 'E2E',
-      objective: 'Cover critical user paths end-to-end via automated browser and mobile automation',
-      status: 'maturing',
     },
     {
       layer: 'accessibility',
-      objective: 'Enforce WCAG 2.1 AA compliance via automated axe-core scans in CI',
+      objective: 'Enforce WCAG 2.1 AA compliance via automated and manual audits',
       status: 'stable',
     },
   ],

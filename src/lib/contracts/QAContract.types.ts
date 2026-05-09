@@ -8,6 +8,10 @@ export interface TestSuiteSpecification {
     | 'E2E'
     | 'api'
     | 'accessibility'
+    | 'strategy'
+    | 'api/contract'
+    | 'automation'
+    | 'exploratory'
   objective: string
   status: 'stable' | 'maturing'
 }

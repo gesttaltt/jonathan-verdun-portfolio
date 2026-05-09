@@ -1,16 +1,18 @@
 import { PROJECT_DATA } from '@/lib/contracts/ProjectContract'
 import { ProjectSpec } from '@/lib/contracts/ProjectContract.types'
+import { siteConfig } from '../siteConfig'
 
 export const TERMINAL_PROMPT = 'gestalt@portfolio:'
 
-export const generateLsOutput = (projects: ProjectSpec[]) =>
-  projects
+export const generateLsOutput = (projects: ProjectSpec[]) => {
+  return projects
     .map((p) => {
       const name = p.title.replace(/\s+/g, '-')
       const perms = p.status === 'QA' ? 'drwxr-xr-x' : '-rw-r--r--'
       return `${perms} 1 gestalt staff  ${name}`
     })
     .join('\n')
+}
 
 export const LS_PROJECTS_OUTPUT = generateLsOutput(PROJECT_DATA)
 
@@ -22,7 +24,7 @@ export const INTERACTIVE_COMMANDS: Record<string, string> = {
   contact: 'Reach out via LinkedIn or GitHub linked above.',
   skills:
     'Primary stack: Next.js, TypeScript, Tailwind CSS, Three.js. Testing: pytest, Playwright, Appium, Jest, fast-check.',
-  version: 'v0.1.0-audit-hardened (Next.js 16.2.4)',
+  version: `v${siteConfig.versions.portfolio}-audit-hardened (Next.js ${siteConfig.versions.nextjs})`,
   whoami: 'jonathan.verdun — QA Automation Engineer',
   'ls projects': LS_PROJECTS_OUTPUT,
   sudo: 'User is not in the sudoers file. This incident will be reported.',
@@ -47,7 +49,7 @@ export const BOOT_COMMANDS: readonly BootCommand[] = [
   },
   {
     text: 'help',
-    output: INTERACTIVE_COMMANDS.help,
+    output: INTERACTIVE_COMMANDS.help!,
     delay: 600,
   },
 ]

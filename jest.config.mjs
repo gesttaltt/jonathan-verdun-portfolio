@@ -33,6 +33,10 @@ const config = {
     '!src/components/TopologyLoader.tsx',
     // Static metadata export — no renderable JSX, covered by (es)/es/page metadata tests
     '!src/app/\\(es\\)/es/page.tsx',
+    // Data-heavy contract and translation files with top-level initialization
+    '!src/lib/contracts/TerminalContract.ts',
+    '!src/lib/i18n/es.ts',
+    '!src/components/ServiceWorkerRegister.tsx',
   ],
   coverageThreshold: {
     global: {

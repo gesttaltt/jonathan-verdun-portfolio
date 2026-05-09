@@ -85,8 +85,8 @@ export const InteractiveTopology: React.FC = () => {
             luminanceThreshold={0.2}
             luminanceSmoothing={0.9}
             height={300}
-            intensity={isMobile ? 0.4 : 1.0}
-            mipmapBlur
+            intensity={isMobile ? 0.3 : 1.0}
+            mipmapBlur={!isMobile}
           />
           <Vignette eskil={false} offset={0.1} darkness={1.1} />
         </EffectComposer>

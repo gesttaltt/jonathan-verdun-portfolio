@@ -11,12 +11,12 @@ import { buildMetadata } from '@/lib/metadata'
 describe('CommandProcessor — property-based', () => {
   const processor = new DefaultCommandProcessor()
 
-  it('always returns a string for any input', () => {
+  it('always returns a structured response for any input', () => {
     fc.assert(
       fc.property(fc.string(), (input) => {
         const result = processor.process(input)
-        expect(typeof result).toBe('string')
-        expect(result.length).toBeGreaterThan(0)
+        expect(typeof result).toBe('object')
+        expect(typeof result.output).toBe('string')
       })
     )
   })
@@ -37,7 +37,7 @@ describe('CommandProcessor — property-based', () => {
         fc.string({ minLength: 1 }).filter((s) => !knownCommands.has(s.toLowerCase().trim())),
         (input) => {
           const result = processor.process(input)
-          expect(result).toContain(input.trim())
+          expect(result.output).toContain(input.trim())
         }
       )
     )
@@ -49,7 +49,7 @@ describe('CommandProcessor — property-based', () => {
       fc.property(fc.constantFrom(...cases), (cmd) => {
         const lower = processor.process(cmd.toLowerCase())
         const upper = processor.process(cmd.toUpperCase())
-        expect(lower).toBe(upper)
+        expect(lower).toStrictEqual(upper)
       })
     )
   })
@@ -69,12 +69,12 @@ describe('ES CommandProcessor — property-based', () => {
   const esProcessor = new DefaultCommandProcessor(es.terminal.interactive, es.terminal.helpCmd)
   const esKnownCommands = new Set(Object.keys(es.terminal.interactive))
 
-  it('always returns a string for any ES input', () => {
+  it('always returns a structured response for any ES input', () => {
     fc.assert(
       fc.property(fc.string(), (input) => {
         const result = esProcessor.process(input)
-        expect(typeof result).toBe('string')
-        expect(result.length).toBeGreaterThan(0)
+        expect(typeof result).toBe('object')
+        expect(typeof result.output).toBe('string')
       })
     )
   })
@@ -85,7 +85,7 @@ describe('ES CommandProcessor — property-based', () => {
         fc.string({ minLength: 1 }).filter((s) => !esKnownCommands.has(s.toLowerCase().trim())),
         (input) => {
           const result = esProcessor.process(input)
-          expect(result).toContain(input.trim())
+          expect(result.output).toContain(input.trim())
         }
       )
     )
@@ -97,7 +97,7 @@ describe('ES CommandProcessor — property-based', () => {
       fc.property(fc.constantFrom(...cases), (cmd) => {
         const lower = esProcessor.process(cmd.toLowerCase())
         const upper = esProcessor.process(cmd.toUpperCase())
-        expect(lower).toBe(upper)
+        expect(lower).toStrictEqual(upper)
       })
     )
   })
@@ -286,7 +286,7 @@ describe('buildMetadata — property-based URL invariants', () => {
     fc.assert(
       fc.property(fc.constantFrom('en' as const, 'es' as const), (lang) => {
         const m = buildMetadata(lang)
-        const ogUrl = (m.openGraph as { images: Array<{ url: string }> }).images[0].url
+        const ogUrl = (m.openGraph as { images: Array<{ url: string }> }).images[0]!.url
         expect(ogUrl.replace(/^https?:\/\//, '')).not.toContain('//')
       })
     )
@@ -296,7 +296,7 @@ describe('buildMetadata — property-based URL invariants', () => {
     fc.assert(
       fc.property(fc.constantFrom('en' as const, 'es' as const), (lang) => {
         const m = buildMetadata(lang)
-        const twUrl = (m.twitter as { images: Array<{ url: string }> }).images[0].url
+        const twUrl = (m.twitter as { images: Array<{ url: string }> }).images[0]!.url
         expect(twUrl.replace(/^https?:\/\//, '')).not.toContain('//')
       })
     )
