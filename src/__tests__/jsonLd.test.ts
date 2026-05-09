@@ -38,14 +38,14 @@ describe('buildBreadcrumbJsonLd', () => {
     const ld = buildBreadcrumbJsonLd()
     expect(ld['@type']).toBe('BreadcrumbList')
     expect(ld.itemListElement).toHaveLength(1)
-    expect(ld.itemListElement[0].name).toBe('Home')
+    expect(ld.itemListElement[0]!.name).toBe('Home')
   })
 
   it('returns ES breadcrumbs when locale is es', () => {
     const ld = buildBreadcrumbJsonLd('es')
     expect(ld.itemListElement).toHaveLength(2)
-    expect(ld.itemListElement[0].name).toBe('Inicio')
-    expect(ld.itemListElement[1].name).toBe('Español')
+    expect(ld.itemListElement[0]!.name).toBe('Inicio')
+    expect(ld.itemListElement[1]!.name).toBe('Español')
   })
 })
 

@@ -33,6 +33,26 @@
   --glow-purple: rgba(139, 92, 246, 0.12);
 }
 
+/* Custom Cyberpunk Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-deep);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #18181b; /* zinc-900 equivalent */
+  border-radius: 10px;
+  border: 2px solid var(--bg-deep);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #27272a; /* zinc-800 equivalent */
+}
+
 body {
   background: var(--background);
   color: var(--foreground);

@@ -286,7 +286,7 @@ describe('buildMetadata — property-based URL invariants', () => {
     fc.assert(
       fc.property(fc.constantFrom('en' as const, 'es' as const), (lang) => {
         const m = buildMetadata(lang)
-        const ogUrl = (m.openGraph as { images: Array<{ url: string }> }).images[0].url
+        const ogUrl = (m.openGraph as { images: Array<{ url: string }> }).images[0]!.url
         expect(ogUrl.replace(/^https?:\/\//, '')).not.toContain('//')
       })
     )
@@ -296,7 +296,7 @@ describe('buildMetadata — property-based URL invariants', () => {
     fc.assert(
       fc.property(fc.constantFrom('en' as const, 'es' as const), (lang) => {
         const m = buildMetadata(lang)
-        const twUrl = (m.twitter as { images: Array<{ url: string }> }).images[0].url
+        const twUrl = (m.twitter as { images: Array<{ url: string }> }).images[0]!.url
         expect(twUrl.replace(/^https?:\/\//, '')).not.toContain('//')
       })
     )

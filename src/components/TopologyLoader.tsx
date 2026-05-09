@@ -28,7 +28,7 @@ export const TopologyLoader = dynamic(
             console.error('[TopologyLoader] Failed to load WebGL module:', err)
             resolve(() => null)
           })
-      }, 1500)
+      }, 500)
 
       return () => {
         clearTimeout(loadTimeout)

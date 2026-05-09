@@ -28,13 +28,13 @@ describe('buildMetadata', () => {
     it('openGraph includes images array with correct URL', () => {
       const images = (m.openGraph as { images: Array<{ url: string }> }).images
       expect(images).toHaveLength(1)
-      expect(images[0].url).toContain('/opengraph-image')
+      expect(images[0]!.url).toContain('/opengraph-image')
     })
 
     it('twitter includes images array with correct URL', () => {
       const images = (m.twitter as { images: Array<{ url: string }> }).images
       expect(images).toHaveLength(1)
-      expect(images[0].url).toContain('/opengraph-image')
+      expect(images[0]!.url).toContain('/opengraph-image')
     })
   })
 

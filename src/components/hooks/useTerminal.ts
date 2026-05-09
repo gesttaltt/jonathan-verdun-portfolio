@@ -68,16 +68,15 @@ export const useTerminal = (
       // Save the live draft before the first navigation step.
       if (historyIndexRef.current === -1) draftRef.current = currentInput
       historyIndexRef.current = Math.min(historyIndexRef.current + 1, hist.length - 1)
-      return hist[hist.length - 1 - historyIndexRef.current]
+      return hist[hist.length - 1 - historyIndexRef.current] ?? ''
     } else {
       if (historyIndexRef.current === -1) return currentInput
       historyIndexRef.current -= 1
       return historyIndexRef.current === -1
         ? draftRef.current
-        : hist[hist.length - 1 - historyIndexRef.current]
+        : (hist[hist.length - 1 - historyIndexRef.current] ?? '')
     }
   }, [])
-
   const execute = useCallback(
     (input: string) => {
       const cmd = input.trim()

@@ -14,7 +14,7 @@ describe('DataEngineeringService', () => {
   it('returns valid system specs', () => {
     const specs = DataEngineeringService.getSystemSpecs()
     expect(specs.length).toBeGreaterThan(0)
-    expect(specs[0].id).toBeDefined()
+    expect(specs[0]!.id).toBeDefined()
   })
 })
 
@@ -22,7 +22,7 @@ describe('BioinformaticsService', () => {
   it('returns valid research specs', () => {
     const specs = BioinformaticsService.getResearchSpecs()
     expect(specs.length).toBeGreaterThan(0)
-    expect(specs[0].id).toBeDefined()
+    expect(specs[0]!.id).toBeDefined()
   })
 })
 
@@ -30,7 +30,7 @@ describe('ProjectService', () => {
   it('returns valid projects', () => {
     const projects = ProjectService.getProjects()
     expect(projects.length).toBeGreaterThan(0)
-    expect(projects[0].id).toBeDefined()
+    expect(projects[0]!.id).toBeDefined()
   })
 })
 

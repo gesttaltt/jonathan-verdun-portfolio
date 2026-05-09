@@ -61,12 +61,15 @@ export const Terminal: React.FC<TerminalProps> = ({
           <div className="h-3 w-3 rounded-full bg-amber-500/50"></div>
           <div className="h-3 w-3 rounded-full bg-cyan-500/50"></div>
         </div>
-        <div className="text-[10px] font-bold tracking-widest text-zinc-300 uppercase sm:text-xs">
+        <div className="flex items-center gap-2 text-[10px] font-bold tracking-widest text-zinc-300 uppercase sm:text-xs">
           {title}
+          <div className="relative flex h-2 w-2">
+            <div className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-500/40 opacity-75"></div>
+            <div className="relative inline-flex h-2 w-2 rounded-full bg-green-500/80"></div>
+          </div>
         </div>
         <div className="w-12"></div>
       </div>
-
       <p id="terminal-hint" className="sr-only">
         Type &apos;{hintCmd}&apos; for available commands
       </p>

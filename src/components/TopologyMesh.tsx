@@ -39,18 +39,28 @@ export const TopologyMesh: React.FC<{ quality: number }> = ({ quality }) => {
     const style = getComputedStyle(document.documentElement)
     const nColor = style.getPropertyValue('--node-color').trim()
     const hColor = style.getPropertyValue('--interaction-glow').trim()
-    if (nColor) mat.uniforms.color.value.set(nColor)
-    if (hColor) mat.uniforms.hoverColor.value.set(hColor)
+
+    const colorUni = mat.uniforms['color']
+    const hoverColorUni = mat.uniforms['hoverColor']
+
+    if (nColor && colorUni) colorUni.value.set(nColor)
+    if (hColor && hoverColorUni) hoverColorUni.value.set(hColor)
   }, [])
 
   useFrame((state) => {
     if (!meshRef.current) return
     const mat = meshRef.current.material
     if (!(mat instanceof THREE.ShaderMaterial)) return
+
     const elapsed = state.clock.getElapsedTime()
-    mat.uniforms.time.value = elapsed
-    mat.uniforms.mouse.value.lerp(state.mouse, 0.15)
-    mat.uniforms.uReducedMotion.value = prefersReducedMotionRef.current
+
+    const time = mat.uniforms['time']
+    const mouse = mat.uniforms['mouse']
+    const reducedMotion = mat.uniforms['uReducedMotion']
+
+    if (time) time.value = elapsed
+    if (mouse) mouse.value.lerp(state.mouse, 0.15)
+    if (reducedMotion) reducedMotion.value = prefersReducedMotionRef.current
 
     if (!prefersReducedMotionRef.current) {
       meshRef.current.rotation.y = elapsed * 0.05

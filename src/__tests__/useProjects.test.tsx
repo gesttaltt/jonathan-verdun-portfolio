@@ -23,7 +23,7 @@ describe('useProjects', () => {
     )
     const { result } = renderHook(() => useProjects(), { wrapper })
     expect(result.current).toHaveLength(1)
-    expect(result.current[0].id).toBe('test-project')
+    expect(result.current[0]!.id).toBe('test-project')
   })
 
   it('throws when consumed outside a ProjectProvider', () => {
