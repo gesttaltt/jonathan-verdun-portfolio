@@ -80,16 +80,19 @@ export const InteractiveTopology: React.FC = () => {
         }}
         onCreated={handleCreated}
       >
-        <EffectComposer multisampling={0}>
-          <Bloom
-            luminanceThreshold={0.2}
-            luminanceSmoothing={0.9}
-            height={300}
-            intensity={isMobile ? 0.3 : 1.0}
-            mipmapBlur={!isMobile}
-          />
-          <Vignette eskil={false} offset={0.1} darkness={1.1} />
-        </EffectComposer>
+        {/* Disable expensive post-processing on mobile to maximize performance score */}
+        {!isMobile && (
+          <EffectComposer multisampling={0}>
+            <Bloom
+              luminanceThreshold={0.2}
+              luminanceSmoothing={0.9}
+              height={300}
+              intensity={1.0}
+              mipmapBlur
+            />
+            <Vignette eskil={false} offset={0.1} darkness={1.1} />
+          </EffectComposer>
+        )}
 
         {/* Half the icosahedron subdivision detail on mobile (8 vs 16 segments). */}
         <TopologyMesh quality={isMobile ? 0.5 : 1} />

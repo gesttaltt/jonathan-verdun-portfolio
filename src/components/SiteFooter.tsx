@@ -81,6 +81,13 @@ export const SiteFooter: React.FC = () => {
               API Docs
             </a>
             <span className="text-white/20">·</span>
+            <Link
+              href={t.lang === 'es' ? '/es/quality/' : '/quality/'}
+              className="rounded text-xs text-zinc-300 transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none"
+            >
+              {t.sections.quality}
+            </Link>
+            <span className="text-white/20">·</span>
             <a
               href={`${siteConfig.repo.url}/tree/main/docs`}
               target="_blank"

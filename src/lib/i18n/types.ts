@@ -39,6 +39,7 @@ export interface Translations {
     architecture: string
     qa: string
     bioinformatics: string
+    quality: string
     sidebar: {
       qualityGatesTitle: string
       constraintsTitle: string

@@ -194,6 +194,7 @@ export const es: Translations = {
     architecture: 'Arquitectura',
     qa: 'Filosofía QA',
     bioinformatics: 'Investigación y Trabajo Técnico Previo',
+    quality: 'Transparencia de Calidad',
     sidebar: {
       qualityGatesTitle: 'Garantía de Calidad',
       constraintsTitle: 'Restricciones de Ingeniería',

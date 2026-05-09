@@ -28,6 +28,7 @@ export const en: Translations = {
     architecture: 'Architecture',
     qa: 'QA Philosophy',
     bioinformatics: 'Prior Research & Engineering',
+    quality: 'Quality Transparency',
     sidebar: {
       qualityGatesTitle: 'Engineering Quality Gates',
       constraintsTitle: 'Engineering Constraints',
