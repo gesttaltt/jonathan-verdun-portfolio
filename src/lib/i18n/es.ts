@@ -250,7 +250,7 @@ export const es: Translations = {
       proyectos: 'Ver la sección de Proyectos abajo, o escribe "ls proyectos" para ver la lista.',
       contacto: 'Contáctame por LinkedIn o GitHub enlazados arriba.',
       habilidades:
-        'Stack principal: Next.js, TypeScript, Tailwind CSS, Three.js. Testing: pytest, Playwright, Appium, Jest, fast-check.',
+        'Stack principal: Next.js, TypeScript, Tailwind CSS, Three.js. Pruebas: pytest, Playwright, Appium, Jest, fast-check.',
       version: `v${siteConfig.versions.portfolio}-audit-hardened (Next.js ${siteConfig.versions.nextjs})`,
       quiensoy: 'jonathan.verdun — Ingeniero de Automatización QA',
       'ls proyectos': esLsOutput,
