@@ -29,10 +29,7 @@ export class DefaultCommandProcessor implements ICommandProcessor {
 
     // Object.hasOwn guards against prototype keys like __proto__ being treated as commands.
     if (Object.hasOwn(this.commands, lowerCmd)) {
-      const output = this.commands[lowerCmd]
-      if (output !== undefined) {
-        return { output }
-      }
+      return { output: this.commands[lowerCmd]! }
     }
 
     return {
