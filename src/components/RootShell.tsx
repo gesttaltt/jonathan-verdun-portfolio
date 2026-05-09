@@ -1,3 +1,5 @@
+'use client'
+
 import type { ReactNode } from 'react'
 import { personJsonLd, websiteJsonLd } from '@/lib/jsonLd'
 import { MotionProvider } from '@/components/MotionProvider'

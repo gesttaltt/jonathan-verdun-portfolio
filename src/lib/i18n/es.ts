@@ -125,17 +125,21 @@ const ES_BIO_OVERRIDES: Record<string, { methodology: string; invariants: string
 
 const projects = PROJECT_DATA.map((p) => {
   const override = ES_PROJECT_OVERRIDES[p.id]
+  /* istanbul ignore next */
+  if (!override && process.env.NODE_ENV === 'development') {
+    console.warn(`[i18n:es] Missing Project override for ${p.id}`)
+  }
   const stats = p.stats
     ? p.stats.map((stat, i) => {
         return {
           ...stat,
-          label: override.statLabels[i],
+          label: override?.statLabels[i] ?? stat.label,
         }
       })
     : /* istanbul ignore next */ undefined
   return {
     ...p,
-    description: override.description,
+    description: override?.description ?? p.description,
     stats,
   }
 })
