@@ -1,10 +1,11 @@
 import { INTERACTIVE_COMMANDS } from '../contracts/TerminalContract'
 
-export type CommandSignal = 'clear'
+export type CommandSignal = 'clear' | 'redirect'
 
 export interface CommandResponse {
   output: string
   signal?: CommandSignal
+  payload?: string
 }
 
 export interface ICommandProcessor {
@@ -25,6 +26,14 @@ export class DefaultCommandProcessor implements ICommandProcessor {
 
     if (lowerCmd === 'clear' || lowerCmd === 'limpiar') {
       return { output: '', signal: 'clear' }
+    }
+
+    if (lowerCmd === 'contact' || lowerCmd === 'contacto' || lowerCmd === 'email') {
+      return {
+        output: 'Opening email client...',
+        signal: 'redirect',
+        payload: `mailto:jonathan.verdun707@gmail.com`,
+      }
     }
 
     // Object.hasOwn guards against prototype keys like __proto__ being treated as commands.

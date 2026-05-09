@@ -98,6 +98,10 @@ export const useTerminal = (
         return
       }
 
+      if (response.signal === 'redirect' && response.payload) {
+        window.location.href = response.payload
+      }
+
       const newEntry: CommandEntry = {
         id: nextId(),
         text: cmd,

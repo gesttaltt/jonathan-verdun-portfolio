@@ -31,11 +31,17 @@ describe('DefaultCommandProcessor', () => {
     expect(result).toContain('3-Adic-ML')
   })
 
-  it('returns correct responses for all built-in INTERACTIVE_COMMANDS', () => {
+  it('returns correct responses for basic built-in INTERACTIVE_COMMANDS', () => {
     expect(processor.process('about').output).toContain('Jonathan Verdun')
     expect(processor.process('sudo').output).toContain('sudoers')
-    expect(processor.process('contact').output).toContain('LinkedIn')
     expect(processor.process('projects').output).toContain('Projects')
+  })
+
+  it('returns a redirect signal for contact/email commands', () => {
+    const response = processor.process('contact')
+    expect(response.output).toContain('Opening email client')
+    expect(response.signal).toBe('redirect')
+    expect(response.payload).toContain('mailto:')
   })
 
   it('help output lists core commands', () => {
