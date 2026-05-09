@@ -29,6 +29,8 @@ export const en: Translations = {
     qa: 'QA Philosophy',
     bioinformatics: 'Prior Research & Engineering',
     quality: 'Quality Transparency',
+    testPlan: 'Master Test Plan',
+    traceabilityMatrix: 'Traceability Matrix',
     sidebar: {
       qualityGatesTitle: 'Engineering Quality Gates',
       constraintsTitle: 'Engineering Constraints',

@@ -195,6 +195,8 @@ export const es: Translations = {
     qa: 'Filosofía QA',
     bioinformatics: 'Investigación y Trabajo Técnico Previo',
     quality: 'Transparencia de Calidad',
+    testPlan: 'Plan Maestro de Pruebas',
+    traceabilityMatrix: 'Matriz de Trazabilidad',
     sidebar: {
       qualityGatesTitle: 'Garantía de Calidad',
       constraintsTitle: 'Restricciones de Ingeniería',

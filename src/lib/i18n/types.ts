@@ -40,6 +40,8 @@ export interface Translations {
     qa: string
     bioinformatics: string
     quality: string
+    testPlan: string
+    traceabilityMatrix: string
     sidebar: {
       qualityGatesTitle: string
       constraintsTitle: string
