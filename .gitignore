@@ -43,6 +43,7 @@ next-env.d.ts
 
 # generated docs (run `npm run docs` locally to view)
 /docs/api/
+/public/docs/api/
 /out/docs/
 
 # Playwright
