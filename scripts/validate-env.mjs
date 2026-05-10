@@ -6,7 +6,7 @@
 
 function validate() {
   console.log('── Environment Validation ───────────────────────────────────')
-  
+
   // Example: Validate BASE_PATH format if provided
   const basePath = process.env.BASE_PATH
   if (basePath && !basePath.startsWith('/')) {

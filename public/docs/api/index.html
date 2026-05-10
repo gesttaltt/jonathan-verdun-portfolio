@@ -1,0 +1,539 @@
+<!doctype html>
+<html class="default" lang="en" data-base="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="IE=edge" />
+    <title>portfolio-website-jonathan-verdun</title>
+    <meta name="description" content="Documentation for portfolio-website-jonathan-verdun" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="assets/style.css" />
+    <link rel="stylesheet" href="assets/highlight.css" />
+    <script defer src="assets/main.js"></script>
+    <script async src="assets/icons.js" id="tsd-icons-script"></script>
+    <script async src="assets/search.js" id="tsd-search-script"></script>
+    <script async src="assets/navigation.js" id="tsd-nav-script"></script>
+    <script async src="assets/hierarchy.js" id="tsd-hierarchy-script"></script>
+  </head>
+  <body>
+    <script>
+      document.documentElement.dataset.theme = localStorage.getItem('tsd-theme') || 'os'
+      document.body.style.display = 'none'
+      setTimeout(
+        () => (window.app ? app.showPage() : document.body.style.removeProperty('display')),
+        500
+      )
+    </script>
+    <header class="tsd-page-toolbar">
+      <div class="tsd-toolbar-contents container">
+        <a href="index.html" class="title">portfolio-website-jonathan-verdun</a>
+        <div id="tsd-toolbar-links"></div>
+        <button id="tsd-search-trigger" class="tsd-widget" aria-label="Search">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <use href="assets/icons.svg#icon-search"></use>
+          </svg>
+        </button>
+        <dialog id="tsd-search" aria-label="Search">
+          <input
+            role="combobox"
+            id="tsd-search-input"
+            aria-controls="tsd-search-results"
+            aria-autocomplete="list"
+            aria-expanded="true"
+            autocapitalize="off"
+            autocomplete="off"
+            placeholder="Search the docs"
+            maxlength="100"
+          />
+          <ul role="listbox" id="tsd-search-results"></ul>
+          <div id="tsd-search-status" aria-live="polite" aria-atomic="true">
+            <div>Preparing search index...</div>
+          </div>
+        </dialog>
+        <a
+          href="#"
+          class="tsd-widget menu"
+          id="tsd-toolbar-menu-trigger"
+          data-toggle="menu"
+          aria-label="Menu"
+          ><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <use href="assets/icons.svg#icon-menu"></use></svg
+        ></a>
+      </div>
+    </header>
+    <div class="container-main container">
+      <div class="col-content">
+        <div class="tsd-page-title"><h1>portfolio-website-jonathan-verdun</h1></div>
+        <div class="tsd-panel tsd-typography">
+          <h1 id="jonathan-verdun-portfolio" class="tsd-anchor-link">
+            Jonathan Verdun — Portfolio<a
+              href="#jonathan-verdun-portfolio"
+              aria-label="Permalink"
+              class="tsd-anchor-icon"
+              ><svg viewBox="0 0 24 24" aria-hidden="true">
+                <use href="assets/icons.svg#icon-anchor"></use></svg
+            ></a>
+          </h1>
+          <p>
+            <a
+              href="https://github.com/gesttaltt/jonathan-verdun-portfolio/actions/workflows/ci.yml"
+              ><img
+                src="https://github.com/gesttaltt/jonathan-verdun-portfolio/actions/workflows/ci.yml/badge.svg"
+                alt="CI"
+            /></a>
+          </p>
+          <p>
+            QA Automation Engineer portfolio. Built with Next.js 16 static export, Three.js, and a
+            strict TDD architecture. Every quality claim on the site is backed by a gate running in
+            CI.
+          </p>
+          <p>
+            <strong>Live:</strong> <a href="https://jonathanverdun.com">jonathanverdun.com</a> ·
+            <strong>API Docs:</strong>
+            <a href="https://jonathanverdun.com/docs/api/">jonathanverdun.com/docs/api</a>
+          </p>
+          <hr />
+          <h2 id="quick-start" class="tsd-anchor-link">
+            Quick start<a href="#quick-start" aria-label="Permalink" class="tsd-anchor-icon"
+              ><svg viewBox="0 0 24 24" aria-hidden="true">
+                <use href="assets/icons.svg#icon-anchor"></use></svg
+            ></a>
+          </h2>
+          <pre><code class="bash"><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">install</span><br/><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">run</span><span class="hl-1"> </span><span class="hl-2">dev</span><span class="hl-1">        </span><span class="hl-3"># http://localhost:3000</span>
+</code><button type="button">Copy</button></pre>
+
+          <h3 id="lan-mobile-testing" class="tsd-anchor-link">
+            LAN / mobile testing<a
+              href="#lan-mobile-testing"
+              aria-label="Permalink"
+              class="tsd-anchor-icon"
+              ><svg viewBox="0 0 24 24" aria-hidden="true">
+                <use href="assets/icons.svg#icon-anchor"></use></svg
+            ></a>
+          </h3>
+          <pre><code class="bash"><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">run</span><span class="hl-1"> </span><span class="hl-2">dev</span><span class="hl-1"> </span><span class="hl-4">--</span><span class="hl-1"> </span><span class="hl-4">-H</span><span class="hl-1"> </span><span class="hl-5">0.0.0.0</span><br/><span class="hl-3"># Open http://&lt;your-ip&gt;:3000</span>
+</code><button type="button">Copy</button></pre>
+
+          <hr />
+          <h2 id="scripts" class="tsd-anchor-link">
+            Scripts<a href="#scripts" aria-label="Permalink" class="tsd-anchor-icon"
+              ><svg viewBox="0 0 24 24" aria-hidden="true">
+                <use href="assets/icons.svg#icon-anchor"></use></svg
+            ></a>
+          </h2>
+          <table>
+            <thead>
+              <tr>
+                <th style="text-align: left">Script</th>
+                <th style="text-align: left">Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="text-align: left"><code>npm run dev</code></td>
+                <td style="text-align: left">Dev server with HMR</td>
+              </tr>
+              <tr>
+                <td style="text-align: left"><code>npm run build</code></td>
+                <td style="text-align: left">Static export → <code>out/</code></td>
+              </tr>
+              <tr>
+                <td style="text-align: left"><code>npm run lint</code></td>
+                <td style="text-align: left">ESLint</td>
+              </tr>
+              <tr>
+                <td style="text-align: left"><code>npm run check-types</code></td>
+                <td style="text-align: left">TypeScript type check</td>
+              </tr>
+              <tr>
+                <td style="text-align: left"><code>npm run format</code></td>
+                <td style="text-align: left">Prettier</td>
+              </tr>
+              <tr>
+                <td style="text-align: left"><code>npm test</code></td>
+                <td style="text-align: left">Jest (unit · integration · property-based)</td>
+              </tr>
+              <tr>
+                <td style="text-align: left"><code>npm run test:watch</code></td>
+                <td style="text-align: left">Jest in watch mode</td>
+              </tr>
+              <tr>
+                <td style="text-align: left"><code>npm run e2e</code></td>
+                <td style="text-align: left">Playwright E2E + WCAG axe scans</td>
+              </tr>
+              <tr>
+                <td style="text-align: left"><code>npm run lhci</code></td>
+                <td style="text-align: left">
+                  Lighthouse CI against <code>out/</code> (build first)
+                </td>
+              </tr>
+              <tr>
+                <td style="text-align: left"><code>npm run docs</code></td>
+                <td style="text-align: left">
+                  TypeDoc → <code>docs/api/</code> (gitignored, local only)
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <hr />
+          <h2 id="docker" class="tsd-anchor-link">
+            Docker<a href="#docker" aria-label="Permalink" class="tsd-anchor-icon"
+              ><svg viewBox="0 0 24 24" aria-hidden="true">
+                <use href="assets/icons.svg#icon-anchor"></use></svg
+            ></a>
+          </h2>
+          <h3 id="development" class="tsd-anchor-link">
+            Development<a href="#development" aria-label="Permalink" class="tsd-anchor-icon"
+              ><svg viewBox="0 0 24 24" aria-hidden="true">
+                <use href="assets/icons.svg#icon-anchor"></use></svg
+            ></a>
+          </h3>
+          <pre><code class="bash"><span class="hl-0">docker</span><span class="hl-1"> </span><span class="hl-2">compose</span><span class="hl-1"> </span><span class="hl-2">up</span><span class="hl-1"> </span><span class="hl-4">--build</span><span class="hl-1">          </span><span class="hl-3"># dev service, http://localhost:3000</span>
+</code><button type="button">Copy</button></pre>
+
+          <h3 id="production-simulation" class="tsd-anchor-link">
+            Production simulation<a
+              href="#production-simulation"
+              aria-label="Permalink"
+              class="tsd-anchor-icon"
+              ><svg viewBox="0 0 24 24" aria-hidden="true">
+                <use href="assets/icons.svg#icon-anchor"></use></svg
+            ></a>
+          </h3>
+          <pre><code class="bash"><span class="hl-0">docker</span><span class="hl-1"> </span><span class="hl-2">compose</span><span class="hl-1"> </span><span class="hl-4">--profile</span><span class="hl-1"> </span><span class="hl-2">prod</span><span class="hl-1"> </span><span class="hl-2">up</span><span class="hl-1"> </span><span class="hl-4">--build</span><span class="hl-1"> </span><span class="hl-2">runner</span><span class="hl-1">   </span><span class="hl-3"># nginx serving out/, http://localhost:8080</span>
+</code><button type="button">Copy</button></pre>
+
+          <p>
+            The runner stage is <code>nginx:alpine</code> serving the static export.
+            <code>nginx.conf</code> sets 1-year immutable cache on <code>_next/static/</code> chunks
+            and enables gzip.
+          </p>
+          <hr />
+          <h2 id="ci-pipeline" class="tsd-anchor-link">
+            CI pipeline<a href="#ci-pipeline" aria-label="Permalink" class="tsd-anchor-icon"
+              ><svg viewBox="0 0 24 24" aria-hidden="true">
+                <use href="assets/icons.svg#icon-anchor"></use></svg
+            ></a>
+          </h2>
+          <table>
+            <thead>
+              <tr>
+                <th style="text-align: left">Job</th>
+                <th style="text-align: left">What it does</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="text-align: left"><code>build</code></td>
+                <td style="text-align: left">
+                  Format · lint · security audit · types · Jest (273 tests, 100% coverage) · Node 22
+                  &amp; 24
+                </td>
+              </tr>
+              <tr>
+                <td style="text-align: left"><code>e2e</code></td>
+                <td style="text-align: left">
+                  Playwright suite (38 tests) + WCAG 2.1 AA axe scans (full coverage)
+                </td>
+              </tr>
+              <tr>
+                <td style="text-align: left"><code>lhci</code></td>
+                <td style="text-align: left">
+                  Lighthouse CI gate: a11y ≥ 95, best-practices ≥ 90, SEO ≥ 90
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <p>
+            The <code>out/</code> artifact produced by the <code>build (22.x)</code> run is shared
+            with <code>lhci</code> to avoid a duplicate build. Build caching is implemented to
+            optimize performance.
+          </p>
+          <hr />
+          <h2 id="technical-hardening-deep-resilience" class="tsd-anchor-link">
+            Technical Hardening (Deep Resilience)<a
+              href="#technical-hardening-deep-resilience"
+              aria-label="Permalink"
+              class="tsd-anchor-icon"
+              ><svg viewBox="0 0 24 24" aria-hidden="true">
+                <use href="assets/icons.svg#icon-anchor"></use></svg
+            ></a>
+          </h2>
+          <p>
+            Every architectural decision is optimized for
+            <strong>Deterministic Future-Proofing</strong>:
+          </p>
+          <ul>
+            <li>
+              <strong>Offline Autonomy:</strong> Custom Service Worker (PWA) handles asset caching
+              for functional offline viewing.
+            </li>
+            <li>
+              <strong>Fail-Safe UX:</strong> Deterministic 3s timeout for WebGL with a high-fidelity
+              CSS gradient fallback.
+            </li>
+            <li>
+              <strong>Security Gates:</strong> <code>npm audit --audit-level=high</code> integrated
+              into CI to block vulnerable dependencies.
+            </li>
+            <li>
+              <strong>Config Resilience:</strong> Build-time environment validation script prevents
+              misconfigured deployments.
+            </li>
+            <li>
+              <strong>Semantic SEO:</strong> Full JSON-LD implementation (Person, WebSite,
+              BreadcrumbList) for lead-gen discovery.
+            </li>
+          </ul>
+          <hr />
+          <h2 id="tech-stack" class="tsd-anchor-link">
+            Tech stack<a href="#tech-stack" aria-label="Permalink" class="tsd-anchor-icon"
+              ><svg viewBox="0 0 24 24" aria-hidden="true">
+                <use href="assets/icons.svg#icon-anchor"></use></svg
+            ></a>
+          </h2>
+          <p>
+            Deployments to GitHub Pages are triggered separately via <code>deploy.yml</code>, which
+            also generates TypeDoc into <code>out/docs/api/</code>.
+          </p>
+          <hr />
+          <h2 id="tech-stack-1" class="tsd-anchor-link">
+            Tech stack<a href="#tech-stack-1" aria-label="Permalink" class="tsd-anchor-icon"
+              ><svg viewBox="0 0 24 24" aria-hidden="true">
+                <use href="assets/icons.svg#icon-anchor"></use></svg
+            ></a>
+          </h2>
+          <ul>
+            <li>
+              <strong>Next.js 16</strong> — App Router, static export (<code>output: 'export'</code
+              >)
+            </li>
+            <li><strong>React 19 / TypeScript 5</strong> — strict mode, zero <code>any</code></li>
+            <li><strong>Tailwind CSS v4</strong> — OKLCH colour space, CSS-variable tokens</li>
+            <li><strong>Framer Motion 12</strong> — centralised animation variants</li>
+            <li><strong>Three.js / React Three Fiber</strong> — WebGL topology visualisation</li>
+            <li>
+              <strong>Jest 30 + fast-check</strong> — unit, integration, property-based testing
+            </li>
+            <li><strong>Playwright + @axe-core/playwright</strong> — E2E + WCAG 2.1 AA</li>
+            <li><strong>Lighthouse CI</strong> — automated performance/a11y/SEO gating</li>
+            <li><strong>TypeDoc</strong> — API docs auto-generated on every deploy</li>
+          </ul>
+          <hr />
+          <h2 id="architecture" class="tsd-anchor-link">
+            Architecture<a href="#architecture" aria-label="Permalink" class="tsd-anchor-icon"
+              ><svg viewBox="0 0 24 24" aria-hidden="true">
+                <use href="assets/icons.svg#icon-anchor"></use></svg
+            ></a>
+          </h2>
+          <pre><code><span class="hl-6">src</span><span class="hl-1">/</span><br/><span class="hl-1">  </span><span class="hl-6">app</span><span class="hl-1">/             </span><span class="hl-6">Next</span><span class="hl-1">.</span><span class="hl-6">js</span><span class="hl-1"> </span><span class="hl-6">App</span><span class="hl-1"> </span><span class="hl-6">Router</span><span class="hl-1"> </span><span class="hl-0">routes</span><span class="hl-1"> ((</span><span class="hl-6">en</span><span class="hl-1">)/ </span><span class="hl-0">and</span><span class="hl-1"> (</span><span class="hl-6">es</span><span class="hl-1">)/</span><span class="hl-6">es</span><span class="hl-1">/)</span><br/><span class="hl-1">  </span><span class="hl-6">components</span><span class="hl-1">/      </span><span class="hl-6">Thin</span><span class="hl-1"> </span><span class="hl-7">UI</span><span class="hl-1"> </span><span class="hl-6">layer</span><span class="hl-1">; </span><span class="hl-6">hooks</span><span class="hl-1">/ </span><span class="hl-6">for</span><span class="hl-1"> </span><span class="hl-6">state</span><span class="hl-1"> + </span><span class="hl-7">DI</span><br/><span class="hl-1">  </span><span class="hl-6">lib</span><span class="hl-1">/</span><br/><span class="hl-1">    </span><span class="hl-6">contracts</span><span class="hl-1">/     </span><span class="hl-6">Domain</span><span class="hl-1"> </span><span class="hl-6">data</span><span class="hl-1"> </span><span class="hl-0">models</span><span class="hl-1"> (.</span><span class="hl-6">types</span><span class="hl-1">.</span><span class="hl-6">ts</span><span class="hl-1"> </span><span class="hl-6">separated</span><span class="hl-1">)</span><br/><span class="hl-1">    </span><span class="hl-6">services</span><span class="hl-1">/      </span><span class="hl-6">Business</span><span class="hl-1"> </span><span class="hl-0">logic</span><span class="hl-1"> (</span><span class="hl-6">CommandProcessor</span><span class="hl-1">, </span><span class="hl-6">ProjectRepository</span><span class="hl-1">)</span><br/><span class="hl-1">    </span><span class="hl-6">i18n</span><span class="hl-1">/          </span><span class="hl-7">EN</span><span class="hl-1">/</span><span class="hl-7">ES</span><span class="hl-1"> </span><span class="hl-6">translations</span><span class="hl-1"> </span><span class="hl-6">keyed</span><span class="hl-1"> </span><span class="hl-6">to</span><span class="hl-1"> </span><span class="hl-6">contracts</span><br/><span class="hl-1">    </span><span class="hl-6">animations</span><span class="hl-1">.</span><span class="hl-6">ts</span><span class="hl-1">  </span><span class="hl-6">Centralised</span><span class="hl-1"> </span><span class="hl-6">Framer</span><span class="hl-1"> </span><span class="hl-6">Motion</span><span class="hl-1"> </span><span class="hl-6">variants</span><br/><span class="hl-1">    </span><span class="hl-6">metadata</span><span class="hl-1">.</span><span class="hl-6">ts</span><span class="hl-1">    </span><span class="hl-0">buildMetadata</span><span class="hl-1">() </span><span class="hl-6">shared</span><span class="hl-1"> </span><span class="hl-6">by</span><span class="hl-1"> </span><span class="hl-6">both</span><span class="hl-1"> </span><span class="hl-6">locales</span><br/><span class="hl-1">    </span><span class="hl-6">siteConfig</span><span class="hl-1">.</span><span class="hl-6">ts</span><span class="hl-1">  </span><span class="hl-6">Single</span><span class="hl-1"> </span><span class="hl-6">source</span><span class="hl-1"> </span><span class="hl-4">of</span><span class="hl-1"> </span><span class="hl-6">truth</span><span class="hl-1"> </span><span class="hl-6">for</span><span class="hl-1"> </span><span class="hl-6">all</span><span class="hl-1"> </span><span class="hl-6">site</span><span class="hl-1">-</span><span class="hl-6">wide</span><span class="hl-1"> </span><span class="hl-6">values</span>
+</code><button>Copy</button></pre>
+
+          <p>
+            SOLID principles throughout: contracts own data shapes, services own logic, components
+            own presentation. No business logic in components.
+          </p>
+          <hr />
+          <h2 id="repository" class="tsd-anchor-link">
+            Repository<a href="#repository" aria-label="Permalink" class="tsd-anchor-icon"
+              ><svg viewBox="0 0 24 24" aria-hidden="true">
+                <use href="assets/icons.svg#icon-anchor"></use></svg
+            ></a>
+          </h2>
+          <p>
+            <a href="https://github.com/gesttaltt/jonathan-verdun-portfolio"
+              >github.com/gesttaltt/jonathan-verdun-portfolio</a
+            >
+          </p>
+        </div>
+      </div>
+      <div class="col-sidebar">
+        <div class="page-menu">
+          <div class="tsd-navigation settings">
+            <details class="tsd-accordion">
+              <summary class="tsd-accordion-summary">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <use href="assets/icons.svg#icon-chevronDown"></use>
+                </svg>
+                <h3>Settings</h3>
+              </summary>
+              <div class="tsd-accordion-details">
+                <div class="tsd-filter-visibility">
+                  <span class="settings-label">Member Visibility</span>
+                  <ul id="tsd-filter-options">
+                    <li class="tsd-filter-item">
+                      <label class="tsd-filter-input"
+                        ><input type="checkbox" id="tsd-filter-protected" name="protected" /><svg
+                          width="32"
+                          height="32"
+                          viewBox="0 0 32 32"
+                          aria-hidden="true"
+                        >
+                          <rect
+                            class="tsd-checkbox-background"
+                            width="30"
+                            height="30"
+                            x="1"
+                            y="1"
+                            rx="6"
+                            fill="none"
+                          ></rect>
+                          <path
+                            class="tsd-checkbox-checkmark"
+                            d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25"
+                            stroke="none"
+                            stroke-width="3.5"
+                            stroke-linejoin="round"
+                            fill="none"
+                          ></path></svg
+                        ><span>Protected</span></label
+                      >
+                    </li>
+                    <li class="tsd-filter-item">
+                      <label class="tsd-filter-input"
+                        ><input
+                          type="checkbox"
+                          id="tsd-filter-inherited"
+                          name="inherited"
+                          checked
+                        /><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true">
+                          <rect
+                            class="tsd-checkbox-background"
+                            width="30"
+                            height="30"
+                            x="1"
+                            y="1"
+                            rx="6"
+                            fill="none"
+                          ></rect>
+                          <path
+                            class="tsd-checkbox-checkmark"
+                            d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25"
+                            stroke="none"
+                            stroke-width="3.5"
+                            stroke-linejoin="round"
+                            fill="none"
+                          ></path></svg
+                        ><span>Inherited</span></label
+                      >
+                    </li>
+                    <li class="tsd-filter-item">
+                      <label class="tsd-filter-input"
+                        ><input type="checkbox" id="tsd-filter-external" name="external" /><svg
+                          width="32"
+                          height="32"
+                          viewBox="0 0 32 32"
+                          aria-hidden="true"
+                        >
+                          <rect
+                            class="tsd-checkbox-background"
+                            width="30"
+                            height="30"
+                            x="1"
+                            y="1"
+                            rx="6"
+                            fill="none"
+                          ></rect>
+                          <path
+                            class="tsd-checkbox-checkmark"
+                            d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25"
+                            stroke="none"
+                            stroke-width="3.5"
+                            stroke-linejoin="round"
+                            fill="none"
+                          ></path></svg
+                        ><span>External</span></label
+                      >
+                    </li>
+                  </ul>
+                </div>
+                <div class="tsd-theme-toggle">
+                  <label class="settings-label" for="tsd-theme">Theme</label
+                  ><select id="tsd-theme">
+                    <option value="os">OS</option>
+                    <option value="light">Light</option>
+                    <option value="dark">Dark</option>
+                  </select>
+                </div>
+              </div>
+            </details>
+          </div>
+          <details open class="tsd-accordion tsd-page-navigation">
+            <summary class="tsd-accordion-summary">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <use href="assets/icons.svg#icon-chevronDown"></use>
+              </svg>
+              <h3>On This Page</h3>
+            </summary>
+            <div class="tsd-accordion-details">
+              <a href="#jonathan-verdun-portfolio"
+                ><span>Jonathan <wbr />Verdun — <wbr />Portfolio</span></a
+              >
+              <ul>
+                <li>
+                  <a href="#quick-start"><span>Quick start</span></a>
+                </li>
+                <li>
+                  <ul>
+                    <li>
+                      <a href="#lan-mobile-testing"><span>LAN / mobile testing</span></a>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <a href="#scripts"><span>Scripts</span></a>
+                </li>
+                <li>
+                  <a href="#docker"><span>Docker</span></a>
+                </li>
+                <li>
+                  <ul>
+                    <li>
+                      <a href="#development"><span>Development</span></a>
+                    </li>
+                    <li>
+                      <a href="#production-simulation"><span>Production simulation</span></a>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <a href="#ci-pipeline"><span>CI pipeline</span></a>
+                </li>
+                <li>
+                  <a href="#technical-hardening-deep-resilience"
+                    ><span>Technical <wbr />Hardening (<wbr />Deep <wbr />Resilience)</span></a
+                  >
+                </li>
+                <li>
+                  <a href="#tech-stack"><span>Tech stack</span></a>
+                </li>
+                <li>
+                  <a href="#tech-stack-1"><span>Tech stack</span></a>
+                </li>
+                <li>
+                  <a href="#architecture"><span>Architecture</span></a>
+                </li>
+                <li>
+                  <a href="#repository"><span>Repository</span></a>
+                </li>
+              </ul>
+            </div>
+          </details>
+        </div>
+        <div class="site-menu">
+          <nav class="tsd-navigation">
+            <a href="modules.html">portfolio-website-jonathan-verdun</a>
+            <ul class="tsd-small-nested-navigation" id="tsd-nav-container">
+              <li>Loading...</li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+    <footer>
+      <p class="tsd-generator">
+        Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a>
+      </p>
+    </footer>
+    <div class="overlay"></div>
+  </body>
+</html>

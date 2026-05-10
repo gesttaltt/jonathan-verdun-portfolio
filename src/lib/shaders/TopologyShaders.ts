@@ -6,7 +6,7 @@ export const vertexShader = `
     uniform float time;
     uniform vec2 mouse;   // NDC cursor position, updated each frame via lerp
     uniform bool uReducedMotion;
-    attribute vec3 color;
+    attribute vec3 aColor;
     varying float vDisplacement;
     varying float vPulse;
     varying float vHover;
@@ -66,7 +66,7 @@ export const vertexShader = `
     }
 
     void main() {
-        vColor = color;
+        vColor = aColor;
         float effectiveTime = uReducedMotion ? 0.0 : time;
         float noise = snoise(vec3(position.x * 0.5, position.y * 0.5, effectiveTime * 0.2));
         vDisplacement = noise;
@@ -98,7 +98,7 @@ export const vertexShader = `
 // Renders each point as a circular sprite with an exponential glow falloff,
 // then blends layers: vertex color → hover cyan-white → pulse white.
 export const fragmentShader = `
-    uniform vec3 color;       // --node-color CSS variable
+    uniform vec3 uNodeColor;  // --node-color CSS variable
     uniform vec3 hoverColor;  // --interaction-glow CSS variable
     varying float vDisplacement;
     varying float vPulse;

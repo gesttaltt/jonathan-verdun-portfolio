@@ -21,7 +21,7 @@ export const TopologyMesh: React.FC<{ quality: number; mode: 'p-adic' | 'hyperbo
       time: { value: 0 },
       mouse: { value: new THREE.Vector2(0, 0) },
       uReducedMotion: { value: false },
-      color: { value: new THREE.Color('#3b82f6') },
+      uNodeColor: { value: new THREE.Color('#3b82f6') },
       hoverColor: { value: new THREE.Color('#8b5cf6') },
     }),
     []
@@ -45,7 +45,7 @@ export const TopologyMesh: React.FC<{ quality: number; mode: 'p-adic' | 'hyperbo
     const nColor = style.getPropertyValue('--node-color').trim()
     const hColor = style.getPropertyValue('--interaction-glow').trim()
 
-    const colorUni = mat.uniforms['color']
+    const colorUni = mat.uniforms['uNodeColor']
     const hoverColorUni = mat.uniforms['hoverColor']
 
     if (nColor && colorUni) colorUni.value.set(nColor)
@@ -87,7 +87,7 @@ export const TopologyMesh: React.FC<{ quality: number; mode: 'p-adic' | 'hyperbo
 
     const geo = new THREE.BufferGeometry()
     geo.setAttribute('position', new THREE.BufferAttribute(result.points, 3))
-    geo.setAttribute('color', new THREE.BufferAttribute(result.colors, 3))
+    geo.setAttribute('aColor', new THREE.BufferAttribute(result.colors, 3))
     return geo
   }, [quality, mode])
 
@@ -105,7 +105,6 @@ export const TopologyMesh: React.FC<{ quality: number; mode: 'p-adic' | 'hyperbo
         transparent
         depthWrite={false}
         blending={THREE.AdditiveBlending}
-        vertexColors
       />
     </points>
   )
