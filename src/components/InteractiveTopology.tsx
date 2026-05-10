@@ -65,6 +65,7 @@ export const InteractiveTopology: React.FC<{ mode?: 'p-adic' | 'hyperbolic' }> =
     <div className="bg-bg-deep fixed inset-0 z-0">
       <Canvas
         key={canvasKey}
+        role="img"
         aria-hidden="false"
         aria-label={`Interactive ${mode} bio-simulation background`}
         tabIndex={-1}
