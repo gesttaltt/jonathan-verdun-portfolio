@@ -15,6 +15,7 @@ export const useTerminal = (
 ) => {
   const [history, setHistory] = useState<CommandEntry[]>([])
   const [isBooting, setIsBooting] = useState(true)
+  const [currentPath, setCurrentPath] = useState('/')
   // Capture commands once at mount so the boot sequence never re-runs on re-renders.
   const initialRef = useRef(initialCommands)
   const idCounter = useRef(0)
@@ -95,7 +96,12 @@ export const useTerminal = (
       if (response.signal === 'clear') {
         stopBooting()
         setHistory([])
+        setCurrentPath('/')
         return
+      }
+
+      if (response.signal === 'vfs_update' && processor.getCurrentPath) {
+        setCurrentPath(processor.getCurrentPath())
       }
 
       /* istanbul ignore next */
@@ -115,5 +121,5 @@ export const useTerminal = (
     [processor, stopBooting]
   )
 
-  return { history, isBooting, execute, navigateHistory }
+  return { history, isBooting, execute, navigateHistory, currentPath }
 }

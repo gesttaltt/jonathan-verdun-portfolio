@@ -6,7 +6,9 @@ import { EffectComposer, Bloom, Vignette } from '@react-three/postprocessing'
 import * as THREE from 'three'
 import { TopologyMesh } from './TopologyMesh'
 
-export const InteractiveTopology: React.FC = () => {
+export const InteractiveTopology: React.FC<{ mode?: 'p-adic' | 'hyperbolic' }> = ({
+  mode = 'p-adic',
+}) => {
   // Lazy initializer reads window directly — safe because this component is
   // only ever loaded client-side (ssr: false in TopologyLoader).
   const [isMobile, setIsMobile] = useState(
@@ -63,7 +65,8 @@ export const InteractiveTopology: React.FC = () => {
     <div className="bg-bg-deep fixed inset-0 z-0">
       <Canvas
         key={canvasKey}
-        aria-hidden="true"
+        aria-hidden="false"
+        aria-label={`Interactive ${mode} bio-simulation background`}
         tabIndex={-1}
         // pan-y lets the browser handle vertical scroll while still firing pointer
         // events for horizontal movement — replaces the previous 'none' which blocked
@@ -95,7 +98,7 @@ export const InteractiveTopology: React.FC = () => {
         )}
 
         {/* Half the icosahedron subdivision detail on mobile (8 vs 16 segments). */}
-        <TopologyMesh quality={isMobile ? 0.5 : 1} />
+        <TopologyMesh quality={isMobile ? 0.5 : 1} mode={mode} />
       </Canvas>
 
       {/* Shown only while the GL context is lost — covers the blank canvas. */}

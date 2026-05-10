@@ -2,9 +2,13 @@ import { DefaultCommandProcessor, ICommandProcessor } from '@/lib/services/Comma
 
 describe('DefaultCommandProcessor', () => {
   let processor: ICommandProcessor
+  const mockProjects = [
+    { id: 'p1', title: 'QA Arxiv Mobile' },
+    { id: 'p2', title: '3-Adic ML' },
+  ]
 
   beforeEach(() => {
-    processor = new DefaultCommandProcessor()
+    processor = new DefaultCommandProcessor(undefined, 'help', mockProjects)
   })
 
   it('returns help text for the "help" command', () => {
@@ -27,8 +31,8 @@ describe('DefaultCommandProcessor', () => {
 
   it('handles multi-word commands like "ls projects"', () => {
     const result = processor.process('ls projects').output
-    expect(result).toContain('QA-Arxiv-Mobile')
-    expect(result).toContain('3-Adic-ML')
+    expect(result).toContain('qa-arxiv-mobile')
+    expect(result).toContain('3-adic-ml')
   })
 
   it('returns correct responses for basic built-in INTERACTIVE_COMMANDS', () => {

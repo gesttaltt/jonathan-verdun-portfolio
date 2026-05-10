@@ -20,10 +20,25 @@ import { buildWebPageJsonLd, buildBreadcrumbJsonLd } from '@/lib/jsonLd'
 
 export const PortfolioPage: React.FC = () => {
   const t = useTranslation()
-  const processor = useMemo(
-    () => new DefaultCommandProcessor(t.terminal.interactive, t.terminal.helpCmd),
-    [t.terminal.interactive, t.terminal.helpCmd]
-  )
+  const [simMode, setSimMode] = React.useState<'p-adic' | 'hyperbolic'>('p-adic')
+
+  const processor = useMemo(() => {
+    const p = new DefaultCommandProcessor(t.terminal.interactive, t.terminal.helpCmd, t.projects)
+    // Inject sim command
+    const originalProcess = p.process.bind(p)
+    p.process = (cmd: string) => {
+      if (cmd.startsWith('sim ')) {
+        const mode = cmd.split(' ')[1]
+        if (mode === 'p-adic' || mode === 'hyperbolic') {
+          setSimMode(mode)
+          return { output: `Background simulation mode set to: ${mode}` }
+        }
+        return { output: 'Usage: sim --mode [p-adic|hyperbolic]' }
+      }
+      return originalProcess(cmd)
+    }
+    return p
+  }, [t.terminal.interactive, t.terminal.helpCmd, t.projects])
   const projectAdapter = useMemo(() => ({ getProjects: () => t.projects }), [t.projects])
 
   return (
@@ -38,7 +53,7 @@ export const PortfolioPage: React.FC = () => {
       />
       <div className="bg-background min-h-screen font-mono text-zinc-300 selection:bg-blue-500/30">
         <ErrorBoundary>
-          <TopologyLoader />
+          <TopologyLoader mode={simMode} />
         </ErrorBoundary>
 
         <main

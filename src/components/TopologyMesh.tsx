@@ -4,8 +4,13 @@ import React, { useRef, useMemo, useEffect } from 'react'
 import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 import { vertexShader, fragmentShader } from '@/lib/shaders/TopologyShaders'
+import { generatePAdicPoints } from '@/lib/shaders/PAdicGenerator'
+import { generateHyperbolicPoints } from '@/lib/shaders/HyperbolicGenerator'
 
-export const TopologyMesh: React.FC<{ quality: number }> = ({ quality }) => {
+export const TopologyMesh: React.FC<{ quality: number; mode: 'p-adic' | 'hyperbolic' }> = ({
+  quality,
+  mode,
+}) => {
   const meshRef = useRef<THREE.Points>(null)
   const prefersReducedMotionRef = useRef(false)
 
@@ -69,9 +74,22 @@ export const TopologyMesh: React.FC<{ quality: number }> = ({ quality }) => {
   })
 
   const geometry = useMemo(() => {
-    const detail = quality > 0.8 ? 16 : 8
-    return new THREE.IcosahedronGeometry(4, detail)
-  }, [quality])
+    let result: { points: Float32Array; colors: Float32Array }
+
+    if (mode === 'p-adic') {
+      const p = 3
+      const levels = quality > 0.8 ? 6 : 4
+      result = generatePAdicPoints(p, levels, 3)
+    } else {
+      const count = quality > 0.8 ? 3000 : 1500
+      result = generateHyperbolicPoints(count, 4)
+    }
+
+    const geo = new THREE.BufferGeometry()
+    geo.setAttribute('position', new THREE.BufferAttribute(result.points, 3))
+    geo.setAttribute('color', new THREE.BufferAttribute(result.colors, 3))
+    return geo
+  }, [quality, mode])
 
   useEffect(() => {
     return () => geometry.dispose()
@@ -87,6 +105,7 @@ export const TopologyMesh: React.FC<{ quality: number }> = ({ quality }) => {
         transparent
         depthWrite={false}
         blending={THREE.AdditiveBlending}
+        vertexColors
       />
     </points>
   )

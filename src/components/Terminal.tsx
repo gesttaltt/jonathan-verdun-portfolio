@@ -22,7 +22,10 @@ export const Terminal: React.FC<TerminalProps> = ({
   prompt = TERMINAL_PROMPT,
   hintCmd = 'help',
 }) => {
-  const { history, isBooting, execute, navigateHistory } = useTerminal(commands, processor)
+  const { history, isBooting, execute, navigateHistory, currentPath } = useTerminal(
+    commands,
+    processor
+  )
   const [inputVal, setInputVal] = useState('')
   const scrollRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
@@ -91,7 +94,11 @@ export const Terminal: React.FC<TerminalProps> = ({
             <div key={entry.id ?? index} className="space-y-2 break-words">
               <div className="flex gap-2">
                 <span className="shrink-0 font-bold text-blue-500">
-                  <span className="hidden sm:inline">{prompt}</span>~$
+                  <span className="hidden sm:inline">{prompt}</span>
+                  <span className="text-zinc-400">
+                    {currentPath !== '/' ? `:${currentPath}` : ''}
+                  </span>
+                  ~$
                 </span>
                 <span className="min-w-0 text-zinc-100">{entry.text}</span>
               </div>
@@ -108,7 +115,9 @@ export const Terminal: React.FC<TerminalProps> = ({
           className={`flex items-center gap-2 pt-2 transition-opacity duration-300 ${isBooting ? 'pointer-events-none opacity-0' : 'opacity-100'}`}
         >
           <span className="shrink-0 font-bold text-blue-500">
-            <span className="hidden sm:inline">{prompt}</span>~$
+            <span className="hidden sm:inline">{prompt}</span>
+            <span className="text-zinc-400">{currentPath !== '/' ? `:${currentPath}` : ''}</span>
+            ~$
           </span>
           <div className="relative min-w-0 flex-grow">
             <input

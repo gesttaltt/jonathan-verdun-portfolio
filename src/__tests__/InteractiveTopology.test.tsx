@@ -22,10 +22,11 @@ jest.mock('@/components/TopologyMesh', () => ({
 import { InteractiveTopology } from '@/components/InteractiveTopology'
 
 describe('InteractiveTopology', () => {
-  it('renders the canvas wrapper with aria-hidden to exclude from assistive tech', () => {
+  it('renders the canvas wrapper with a descriptive aria-label for accessibility', () => {
     const { getByTestId } = render(<InteractiveTopology />)
     const canvas = getByTestId('r3f-canvas')
-    expect(canvas).toHaveAttribute('aria-hidden', 'true')
+    expect(canvas).toHaveAttribute('aria-hidden', 'false')
+    expect(canvas).toHaveAttribute('aria-label')
     expect(canvas).toHaveAttribute('tabIndex', '-1')
   })
 

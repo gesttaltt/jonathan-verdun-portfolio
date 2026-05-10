@@ -184,7 +184,7 @@ export const Sidebar: React.FC = () => {
                       className="flex items-center gap-2 text-green-400"
                     >
                       <Check className="h-3.5 w-3.5" />
-                      Copied!
+                      {t.sections.sidebar.copiedLabel}
                     </m.span>
                   ) : (
                     <m.span
@@ -195,7 +195,7 @@ export const Sidebar: React.FC = () => {
                       className="flex items-center gap-2"
                     >
                       <Copy className="h-3.5 w-3.5" />
-                      Copy Email
+                      {t.sections.sidebar.copyEmailLabel}
                     </m.span>
                   )}
                 </AnimatePresence>

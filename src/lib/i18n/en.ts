@@ -41,6 +41,8 @@ export const en: Translations = {
       certificationTitle: 'Professional Development',
       certificationStatusLabel: 'Status',
       certificationExpectedLabel: 'Expected',
+      copyEmailLabel: 'Copy Email',
+      copiedLabel: 'Copied!',
     },
     qaContact: {
       title: 'Open to work',

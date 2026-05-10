@@ -207,6 +207,8 @@ export const es: Translations = {
       certificationTitle: 'Desarrollo Profesional',
       certificationStatusLabel: 'Estado',
       certificationExpectedLabel: 'Previsto',
+      copyEmailLabel: 'Copiar Email',
+      copiedLabel: '¡Copiado!',
     },
     qaContact: {
       title: 'Disponible',

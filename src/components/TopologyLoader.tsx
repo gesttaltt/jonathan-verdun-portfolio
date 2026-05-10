@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic'
 
 export const TopologyLoader = dynamic(
   () =>
-    new Promise<React.ComponentType>((resolve) => {
+    new Promise<React.ComponentType<{ mode?: 'p-adic' | 'hyperbolic' }>>((resolve) => {
       let resolved = false
 
       // Fallback timer: if WebGL isn't ready in 3s, resolve to a null component
