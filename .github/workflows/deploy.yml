@@ -34,6 +34,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Generate API docs
+        run: npm run docs
+
       - name: Build
         run: npm run build
         env:
@@ -41,9 +44,6 @@ jobs:
           BASE_PATH: ${{ steps.pages.outputs.base_path }}
           # Suppress Next.js telemetry in CI.
           NEXT_TELEMETRY_DISABLED: 1
-
-      - name: Generate API docs
-        run: npx typedoc --out out/docs/api --entryPointStrategy expand src/lib
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v5
