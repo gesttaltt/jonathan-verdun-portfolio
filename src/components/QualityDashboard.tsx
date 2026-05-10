@@ -2,10 +2,11 @@
 
 import React from 'react'
 import { m } from 'framer-motion'
-import { ShieldCheck, Search, Activity } from 'lucide-react'
+import { ShieldCheck, Search } from 'lucide-react'
 import { AuditCard } from './AuditCard'
 import { SectionHeader } from './SectionHeader'
 import { FadeInSection } from './FadeInSection'
+import { VisualTestSummary } from './VisualTestSummary'
 import { containerVariants, SCROLL_VIEWPORT } from '@/lib/animations'
 import { useTranslation } from '@/lib/i18n/context'
 import type { AuditEntry } from '@/lib/services/AuditRepository'
@@ -26,23 +27,20 @@ export const QualityDashboard: React.FC<QualityDashboardProps> = ({ audits }) =>
   return (
     <div className="space-y-16">
       <FadeInSection>
-        <section className="space-y-8">
+        <div className="space-y-12">
           <SectionHeader
             icon={<ShieldCheck className="h-5 w-5" />}
             title={t.sections.quality}
             color="green"
           />
 
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
+          <VisualTestSummary />
+
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
             <div className="rounded-xl border border-white/5 bg-white/5 p-4 text-center">
               <Search className="mx-auto mb-2 h-5 w-5 text-amber-500" />
               <p className="text-xl font-bold text-white">{generalAudits.length}</p>
               <p className="text-[10px] font-bold text-zinc-500 uppercase">Audits Published</p>
-            </div>
-            <div className="rounded-xl border border-white/5 bg-white/5 p-4 text-center">
-              <Activity className="mx-auto mb-2 h-5 w-5 text-green-500" />
-              <p className="text-xl font-bold text-white">100%</p>
-              <p className="text-[10px] font-bold text-zinc-500 uppercase">Verification Rate</p>
             </div>
             <div className="rounded-xl border border-white/5 bg-white/5 p-4 text-center">
               <ShieldCheck className="mx-auto mb-2 h-5 w-5 text-blue-500" />
@@ -50,7 +48,7 @@ export const QualityDashboard: React.FC<QualityDashboardProps> = ({ audits }) =>
               <p className="text-[10px] font-bold text-zinc-500 uppercase">System Integrity</p>
             </div>
           </div>
-        </section>
+        </div>
       </FadeInSection>
 
       {/* Core Quality Artifacts (ISTQB Documents) */}

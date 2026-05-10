@@ -55,6 +55,19 @@ export interface Translations {
     }
     qaContact: { title: string; description: string; ctaLabel: string }
   }
+  visualTestSummary: {
+    title: string
+    statusLabel: string
+    activeProtocol: string
+    executionStatus: string
+    passed: string
+    failed: string
+    testPayload: string
+    assertions: string
+    verificationRate: string
+    lastVerified: string
+    regressionDetected: string
+  }
   qa: {
     constraints: string[]
     specifications: I18nQASpec[]

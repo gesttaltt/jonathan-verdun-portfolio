@@ -48,6 +48,20 @@ export const en: Translations = {
       ctaLabel: 'Get in Touch',
     },
   },
+  visualTestSummary: {
+    title: 'Live Verification Evidence',
+    statusLabel: 'Status',
+    activeProtocol: 'CI Protocol: Active',
+    executionStatus: 'Execution Status',
+    passed: 'PASSED',
+    failed: 'FAILED',
+    testPayload: 'Test Payload',
+    assertions: 'VERIFICATIONS',
+    verificationRate: 'Verification Rate',
+    lastVerified: 'Last Verified',
+    regressionDetected:
+      'REGRESSION DETECTED: {count} test(s) failed. System integrity compromised.',
+  },
   qa: QA_PHILOSOPHY,
   architecture: {
     methodologyLabel: 'Methodology',

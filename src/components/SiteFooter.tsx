@@ -89,15 +89,6 @@ export const SiteFooter: React.FC = () => {
             </Link>
             <span className="text-white/20">·</span>
             <a
-              href={`${siteConfig.repo.url}/tree/main/docs`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded text-xs text-zinc-300 transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none"
-            >
-              Technical Audits
-            </a>
-            <span className="text-white/20">·</span>
-            <a
               href={siteConfig.repo.url}
               target="_blank"
               rel="noopener noreferrer"

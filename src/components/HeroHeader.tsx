@@ -2,8 +2,6 @@
 
 import { Github, Linkedin, ExternalLink as ExternalLinkIcon } from 'lucide-react'
 import Link from 'next/link'
-import { m } from 'framer-motion'
-import { slideDownVariants } from '@/lib/animations'
 import { siteConfig } from '@/lib/siteConfig'
 import { useTranslation } from '@/lib/i18n/context'
 import { LanguageSelector } from '@/components/LanguageSelector'
@@ -12,12 +10,7 @@ export function HeroHeader() {
   const t = useTranslation()
 
   return (
-    <m.header
-      variants={slideDownVariants}
-      initial="hidden"
-      animate="visible"
-      className="mb-16 flex flex-col items-start gap-8 md:mb-24 md:flex-row md:items-end md:justify-between"
-    >
+    <header className="animate-hero mb-16 flex flex-col items-start gap-8 md:mb-24 md:flex-row md:items-end md:justify-between">
       <div>
         <div className="mb-4 flex items-center gap-3 text-blue-500">
           <span className="h-px w-12 bg-blue-500"></span>
@@ -94,6 +87,6 @@ export function HeroHeader() {
           ))}
         </div>
       )}
-    </m.header>
+    </header>
   )
 }

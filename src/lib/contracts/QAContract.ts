@@ -8,8 +8,8 @@ import { QAPhilosophy } from './QAContract.types'
 export const QA_PHILOSOPHY: QAPhilosophy = {
   constraints: [
     'Risk-based test planning prioritized by business impact and technical complexity',
-    'Deterministic CI gates: 100% unit coverage and zero high-severity vulnerabilities',
-    'Comprehensive defect reporting with root-cause analysis and automated regression steps',
+    'Property-based fuzzing applied to core domain invariants via fast-check',
+    'Strict input validation enforced at all system boundaries',
     'Shift-left engagement: QA involvement from requirements gathering to final deployment',
   ],
   specifications: [

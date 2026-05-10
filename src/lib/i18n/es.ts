@@ -35,8 +35,8 @@ siteConfig.workHistory?.forEach((job) => {
 // ── Overrides for QA Philosophy ─────────────────────────────────────────────
 const ES_QA_CONSTRAINTS = [
   'Planificación de pruebas basada en riesgos priorizada por impacto de negocio y complejidad técnica',
-  'Gates de CI deterministas: 100% de cobertura unitaria y cero vulnerabilidades de alta severidad',
-  'Reporte detallado de defectos con análisis de causa raíz y pasos de regresión automatizados',
+  'Pruebas basadas en propiedades aplicadas a los invariantes centrales del dominio vía fast-check',
+  'Validación estricta de entradas aplicada en todos los límites del sistema',
   'Compromiso Shift-left: involucramiento de QA desde el levantamiento de requerimientos hasta el despliegue final',
 ]
 
@@ -214,6 +214,20 @@ export const es: Translations = {
       ctaLabel: 'Contáctame',
     },
   },
+  visualTestSummary: {
+    title: 'Evidencia de Verificación en Vivo',
+    statusLabel: 'Estado',
+    activeProtocol: 'Protocolo CI: Activo',
+    executionStatus: 'Estado de Ejecución',
+    passed: 'PASADO',
+    failed: 'FALLIDO',
+    testPayload: 'Carga de Pruebas',
+    assertions: 'VERIFICACIONES',
+    verificationRate: 'Tasa de Verificación',
+    lastVerified: 'Última Verificación',
+    regressionDetected:
+      'REGRESIÓN DETECTADA: {count} prueba(s) fallida(s). Integridad del sistema comprometida.',
+  },
   qa: esQaPhilosophy,
   architecture: {
     methodologyLabel: 'Metodología',
@@ -222,7 +236,7 @@ export const es: Translations = {
   },
   bioinformatics: {
     methodologyLabel: 'Metodología',
-    invariantsLabel: 'Invariants',
+    invariantsLabel: 'Invariantes',
     graphicLabel: 'Análisis de Datos: [Pipeline de Descubrimiento de Epítopos]',
     focusLabels: {
       HIV: 'IA para Antígenos VIH',

@@ -51,7 +51,22 @@ export class AuditRepository {
   }
 
   static async getAuditBySlug(slug: string): Promise<AuditEntry | null> {
-    const audits = await this.getAudits()
-    return audits.find((a) => a.slug === slug) || null
+    const filePath = path.join(this.AUDITS_PATH, `${slug}.md`)
+    if (!fs.existsSync(filePath)) return null
+
+    const fileContent = fs.readFileSync(filePath, 'utf8')
+    const { data, content } = matter(fileContent)
+
+    const title = data.title || content.split('\n')[0]?.replace('# ', '') || slug
+    const date = data.date || slug.match(/\d{4}-\d{2}-\d{2}/)?.[0] || '2026-05-01'
+
+    return {
+      id: slug,
+      slug,
+      title,
+      date,
+      content: marked.parse(content) as string,
+      excerpt: content.slice(0, 150).replace(/[#*`]/g, '') + '...',
+    }
   }
 }

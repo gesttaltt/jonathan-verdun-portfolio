@@ -3,7 +3,9 @@
 import React from 'react'
 import { m } from 'framer-motion'
 import { FileText, Calendar, ArrowRight } from 'lucide-react'
+import Link from 'next/link'
 import { staggerItemVariants } from '@/lib/animations'
+import { useTranslation } from '@/lib/i18n/context'
 import type { AuditEntry } from '@/lib/services/AuditRepository'
 
 interface AuditCardProps {
@@ -11,6 +13,9 @@ interface AuditCardProps {
 }
 
 export const AuditCard: React.FC<AuditCardProps> = ({ audit }) => {
+  const t = useTranslation()
+  const detailHref = t.lang === 'es' ? `/es/quality/${audit.slug}/` : `/quality/${audit.slug}/`
+
   return (
     <m.div
       variants={staggerItemVariants()}
@@ -32,20 +37,13 @@ export const AuditCard: React.FC<AuditCardProps> = ({ audit }) => {
 
       <p className="mb-6 line-clamp-2 text-sm leading-relaxed text-zinc-400">{audit.excerpt}</p>
 
-      <button
-        onClick={() => {
-          // In a real app we'd navigate to a detail page,
-          // for now we'll just show the commitment to transparency.
-          window.open(
-            `https://github.com/gesttaltt/jonathan-verdun-portfolio/blob/main/docs/${audit.slug}.md`,
-            '_blank'
-          )
-        }}
+      <Link
+        href={detailHref}
         className="flex items-center gap-2 text-xs font-bold tracking-widest text-amber-500 uppercase transition-colors hover:text-amber-400"
       >
         Read Full Audit{' '}
         <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
-      </button>
+      </Link>
     </m.div>
   )
 }
