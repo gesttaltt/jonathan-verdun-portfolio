@@ -2,7 +2,7 @@ export const siteConfig = {
   name: 'Jonathan Verdun',
   title: 'Jonathan Verdun | QA Automation Engineer',
   description:
-    'Portfolio of Jonathan Verdun — QA Automation Engineer specializing in pytest, Playwright, Appium, and property-based testing with GitHub Actions CI.',
+    'Portfolio of Jonathan Verdun — QA Automation Engineer specializing in Test Architecture, Playwright, Appium, and Azure DevOps. Expert in building deterministic quality gates and scalable automation suites.',
   url: 'https://jonathanverdun.com',
   locale: 'en',
 
@@ -50,15 +50,15 @@ export const siteConfig = {
   expertise: [
     'Test Strategy & Planning',
     'Risk-Based Testing',
-    'Defect Lifecycle Management',
-    'Shift-Left Testing',
-    'Root Cause Analysis',
-    'API & Integration Testing',
+    'Defect Lifecycle Management (Azure DevOps)',
+    'Shift-Left Testing & CI/CD Gates',
+    'Root Cause Analysis (RCA)',
+    'API & Integration Testing (FastAPI, httpx)',
     'Performance & Load Testing',
-    'Web & Mobile Automation',
-    'Property-Based Testing',
-    'CI/CD Pipeline Hardening',
-    'ISTQB Standards',
+    'Web & Mobile Automation (Playwright, Appium)',
+    'Property-Based Testing (fast-check)',
+    'CI/CD Pipeline Hardening (GitHub Actions)',
+    'ISTQB Standards Compliance',
     'Playwright',
     'pytest',
     'Appium',
@@ -68,7 +68,7 @@ export const siteConfig = {
 
   performanceMetrics: {
     unitCoverage: '100%',
-    automationRate: '92%',
+    automationRate: '95%',
     securityStatus: 'Passed',
   },
 

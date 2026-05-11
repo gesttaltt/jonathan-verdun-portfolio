@@ -11,11 +11,11 @@ export const en: Translations = {
   title: 'Jonathan Verdun | QA Automation Engineer',
   tagline: 'Test Architecture · Automation Engineering',
   description:
-    'Portfolio of Jonathan Verdun — QA Automation Engineer specializing in pytest, Playwright, Appium, and property-based testing with GitHub Actions CI.',
+    'Portfolio of Jonathan Verdun — QA Automation Engineer specializing in Test Architecture, Playwright, Appium, and Azure DevOps. Expert in building deterministic quality gates and scalable automation suites.',
   workHistoryLabel: 'Work History',
   workHistoryDescriptions: {
     'Ai-Whisperers':
-      'Owned QA across 3 production repos — 352+ automated tests, 7 CI workflows, ADO defect tracking.',
+      'Led the QA strategy as Co-Founder & QA Lead, implementing 350+ automated tests across Web, Mobile, and API layers. Established full-lifecycle defect management in Azure DevOps and hardened CI/CD pipelines with 100% coverage gates.',
   },
   workHistoryRoles: {
     'Ai-Whisperers': 'Co-Founder & QA Lead',

@@ -16,7 +16,7 @@ const ES_WORK_OVERRIDES: Record<string, { role?: string; period?: string; descri
       role: 'Cofundador y Líder de QA',
       period: 'Sep 2025 – Presente',
       description:
-        'Responsable de QA en 3 repos de producción — 352+ pruebas automatizadas, 7 flujos CI, seguimiento de defectos con ADO.',
+        'Lideré la estrategia de QA como Cofundador y Líder de QA, implementando más de 350 pruebas automatizadas en capas Web, Mobile y API. Establecí la gestión de defectos del ciclo completo en Azure DevOps y endurecí los pipelines de CI/CD con gates de cobertura al 100%.',
     },
   }
 
@@ -184,7 +184,7 @@ export const es: Translations = {
   title: 'Jonathan Verdun | Ingeniero de Automatización QA',
   tagline: 'Arquitectura de Pruebas · Ingeniería de Automatización',
   description:
-    'Portafolio de Jonathan Verdun — Ingeniero de Automatización QA e Investigador en Bioinformática, enfocado en desarrollo guiado por pruebas y biología computacional.',
+    'Portafolio de Jonathan Verdun — Ingeniero de Automatización QA especializado en Arquitectura de Pruebas, Playwright, Appium y Azure DevOps. Experto en construir gates de calidad deterministas y suites de automatización escalables.',
   workHistoryLabel: 'Experiencia',
   workHistoryDescriptions: esWorkHistoryDescriptions,
   workHistoryRoles: esWorkHistoryRoles,
