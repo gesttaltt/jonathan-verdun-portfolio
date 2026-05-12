@@ -42,6 +42,8 @@ export interface Translations {
     quality: string
     testPlan: string
     traceabilityMatrix: string
+    searchPlaceholder: string
+    noResults: string
     sidebar: {
       qualityGatesTitle: string
       constraintsTitle: string

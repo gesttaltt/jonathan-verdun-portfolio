@@ -197,6 +197,8 @@ export const es: Translations = {
     quality: 'Transparencia de Calidad',
     testPlan: 'Plan Maestro de Pruebas',
     traceabilityMatrix: 'Matriz de Trazabilidad',
+    searchPlaceholder: 'Buscar auditorías...',
+    noResults: 'No se encontraron auditorías que coincidan con su búsqueda.',
     sidebar: {
       qualityGatesTitle: 'Garantía de Calidad',
       constraintsTitle: 'Restricciones de Ingeniería',

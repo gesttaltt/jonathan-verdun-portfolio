@@ -31,6 +31,8 @@ export const en: Translations = {
     quality: 'Quality Transparency',
     testPlan: 'Master Test Plan',
     traceabilityMatrix: 'Traceability Matrix',
+    searchPlaceholder: 'Search audits...',
+    noResults: 'No audits match your search query.',
     sidebar: {
       qualityGatesTitle: 'Engineering Quality Gates',
       constraintsTitle: 'Engineering Constraints',

@@ -6,9 +6,10 @@ import { EffectComposer, Bloom, Vignette } from '@react-three/postprocessing'
 import * as THREE from 'three'
 import { TopologyMesh } from './TopologyMesh'
 
-export const InteractiveTopology: React.FC<{ mode?: 'p-adic' | 'hyperbolic' }> = ({
-  mode = 'p-adic',
-}) => {
+export const InteractiveTopology: React.FC<{
+  mode?: 'p-adic' | 'hyperbolic'
+  quality?: number
+}> = ({ mode = 'p-adic', quality = 1 }) => {
   // Lazy initializer reads window directly — safe because this component is
   // only ever loaded client-side (ssr: false in TopologyLoader).
   const [isMobile, setIsMobile] = useState(
@@ -99,7 +100,7 @@ export const InteractiveTopology: React.FC<{ mode?: 'p-adic' | 'hyperbolic' }> =
         )}
 
         {/* Half the icosahedron subdivision detail on mobile (8 vs 16 segments). */}
-        <TopologyMesh quality={isMobile ? 0.5 : 1} mode={mode} />
+        <TopologyMesh quality={isMobile ? quality * 0.5 : quality} mode={mode} />
       </Canvas>
 
       {/* Shown only while the GL context is lost — covers the blank canvas. */}

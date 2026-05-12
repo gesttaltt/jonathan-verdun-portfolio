@@ -188,6 +188,36 @@ describe('useTerminal', () => {
     expect(spy).toHaveBeenCalled()
     spy.mockRestore()
   })
+
+  it('updates currentPath on vfs_update signal', () => {
+    const processor = makeProcessor()
+    ;(processor.process as jest.Mock).mockReturnValue({ output: 'ok', signal: 'vfs_update' })
+    processor.getCurrentPath = jest.fn(() => '/new-path')
+
+    const { result } = renderHook(() => useTerminal([], processor))
+    act(() => {
+      jest.runAllTimers()
+    })
+    act(() => {
+      result.current.execute('cd somewhere')
+    })
+    expect(result.current.currentPath).toBe('/new-path')
+  })
+
+  it('does not update currentPath if signal is vfs_update but getCurrentPath is missing', () => {
+    const processor = makeProcessor()
+    ;(processor.process as jest.Mock).mockReturnValue({ output: 'ok', signal: 'vfs_update' })
+    // getCurrentPath is missing
+
+    const { result } = renderHook(() => useTerminal([], processor))
+    act(() => {
+      jest.runAllTimers()
+    })
+    act(() => {
+      result.current.execute('cd somewhere')
+    })
+    expect(result.current.currentPath).toBe('/')
+  })
 })
 
 describe('useTerminal — command history navigation', () => {

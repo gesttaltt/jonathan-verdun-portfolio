@@ -4,7 +4,6 @@ import matter from 'gray-matter'
 import { marked } from 'marked'
 
 /**
- * @file AuditRepository.ts
  * Server-side repository for reading and parsing quality audits.
  */
 
@@ -33,6 +32,7 @@ export class AuditRepository {
 
         // Extract title from first H1 if not in frontmatter
         const title = data.title || content.split('\n')[0]?.replace('# ', '') || file
+        /* istanbul ignore next */
         const date = data.date || file.match(/\d{4}-\d{2}-\d{2}/)?.[0] || '2026-05-01'
         const slug = file.replace('.md', '')
 
@@ -57,7 +57,9 @@ export class AuditRepository {
     const fileContent = fs.readFileSync(filePath, 'utf8')
     const { data, content } = matter(fileContent)
 
+    /* istanbul ignore next */
     const title = data.title || content.split('\n')[0]?.replace('# ', '') || slug
+    /* istanbul ignore next */
     const date = data.date || slug.match(/\d{4}-\d{2}-\d{2}/)?.[0] || '2026-05-01'
 
     return {

@@ -72,4 +72,110 @@ describe('DefaultCommandProcessor', () => {
     expect(response.output).toBe('')
     expect(response.signal).toBe('clear')
   })
+
+  describe('VFS commands', () => {
+    it('handles "pwd"', () => {
+      expect(processor.process('pwd').output).toBe('/')
+    })
+
+    it('handles "ls" without arguments', () => {
+      const output = processor.process('ls').output
+      expect(output).toContain('README.md')
+      expect(output).toContain('projects')
+    })
+
+    it('handles "ls" with a valid path', () => {
+      const output = processor.process('ls research').output
+      expect(output).toContain('p-adic-embeddings.md')
+    })
+
+    it('handles "ls" with a nested valid path', () => {
+      const output = processor.process('ls /research').output
+      expect(output).toContain('p-adic-embeddings.md')
+    })
+
+    it('handles "ls" for root path', () => {
+      const output = processor.process('ls /').output
+      expect(output).toContain('README.md')
+    })
+
+    it('handles "ls" with an invalid path', () => {
+      const output = processor.process('ls invalid').output
+      expect(output).toContain('cannot access')
+    })
+
+    it('handles "cd" to a directory', () => {
+      const response = processor.process('cd research')
+      expect(response.signal).toBe('vfs_update')
+      expect(processor.getCurrentPath?.()).toBe('/research')
+    })
+
+    it('handles "cd" without arguments (goes to root)', () => {
+      processor.process('cd research')
+      processor.process('cd')
+      expect(processor.getCurrentPath?.()).toBe('/')
+    })
+
+    it('handles "cd .."', () => {
+      processor.process('cd research')
+      processor.process('cd ..')
+      expect(processor.getCurrentPath?.()).toBe('/')
+    })
+
+    it('handles "cd /"', () => {
+      processor.process('cd research')
+      processor.process('cd /')
+      expect(processor.getCurrentPath?.()).toBe('/')
+    })
+
+    it('handles "cd" to a file (error)', () => {
+      const response = processor.process('cd README.md')
+      expect(response.output).toContain('not a directory')
+    })
+
+    it('handles "cd" to non-existent path', () => {
+      const response = processor.process('cd nowhere')
+      expect(response.output).toContain('no such file or directory')
+    })
+
+    it('handles "cat" for a file', () => {
+      const output = processor.process('cat README.md').output
+      expect(output).toContain('Jonathan Verdun Portfolio')
+    })
+
+    it('handles "cat" without arguments', () => {
+      const output = processor.process('cat').output
+      expect(output).toContain('No such file or directory')
+    })
+
+    it('handles "cat" for a directory (error)', () => {
+      const output = processor.process('cat projects').output
+      expect(output).toContain('Is a directory')
+    })
+
+    it('handles "cat" for non-existent file', () => {
+      const output = processor.process('cat missing.txt').output
+      expect(output).toContain('No such file or directory')
+    })
+
+    it('handles "cd .." at root', () => {
+      expect(processor.process('cd ..').output).toBe('Already at root')
+    })
+
+    it('handles "ls" on a file', () => {
+      // ls on a file should return empty or some info, currently returns formatNodeList which returns ''
+      expect(processor.process('ls README.md').output).toBe('')
+    })
+  })
+
+  describe('Custom Handlers', () => {
+    it('handles custom commands with arguments', () => {
+      const p = new DefaultCommandProcessor(undefined, undefined, [], {
+        test: (arg) => ({ output: `arg: ${arg}` }),
+        undef: () => undefined,
+      })
+      expect(p.process('test hello').output).toBe('arg: hello')
+      expect(p.process('undef').output).toContain('command not found')
+    })
+  })
 })

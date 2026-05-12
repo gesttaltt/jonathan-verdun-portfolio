@@ -14,21 +14,24 @@ export interface ICommandProcessor {
   getCurrentPath?(): string
 }
 
-interface ProjectMinimal {
+export interface ProjectMinimal {
   title: string
 }
 
 export class DefaultCommandProcessor implements ICommandProcessor {
   private readonly commands: Record<string, string>
+  private readonly customHandlers: Record<string, (arg?: string) => CommandResponse | undefined>
   private readonly helpCmd: string
   private readonly vfs: VirtualFileSystem
 
   constructor(
     customCommands?: Record<string, string>,
     helpCmd?: string,
-    projects?: ProjectMinimal[]
+    projects?: ProjectMinimal[],
+    customHandlers?: Record<string, (arg?: string) => CommandResponse | undefined>
   ) {
     this.commands = customCommands ?? INTERACTIVE_COMMANDS
+    this.customHandlers = customHandlers ?? {}
     this.helpCmd = helpCmd ?? 'help'
     this.vfs = new VirtualFileSystem()
 
@@ -66,12 +69,17 @@ export class DefaultCommandProcessor implements ICommandProcessor {
       return { output: this.vfs.pwd() }
     }
 
-    if (mainCmd === 'contact' || mainCmd === 'contacto' || mainCmd === 'email') {
+    if (mainCmd === 'contacto' || mainCmd === 'email' || mainCmd === 'contact') {
       return {
-        output: 'Opening email client...',
+        output: 'Opening email client... Reach out via LinkedIn or GitHub linked above.',
         signal: 'redirect',
         payload: `mailto:jonathan.verdun707@gmail.com`,
       }
+    }
+
+    if (Object.hasOwn(this.customHandlers, mainCmd)) {
+      const result = this.customHandlers[mainCmd]!(arg)
+      if (result) return result
     }
 
     // Object.hasOwn guards against prototype keys like __proto__ being treated as commands.

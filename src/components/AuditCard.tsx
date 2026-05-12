@@ -14,7 +14,7 @@ interface AuditCardProps {
 
 export const AuditCard: React.FC<AuditCardProps> = ({ audit }) => {
   const t = useTranslation()
-  const detailHref = t.lang === 'es' ? `/es/quality/${audit.slug}/` : `/quality/${audit.slug}/`
+  const detailHref = t.lang === 'es' ? `/es/quality/${audit.slug}` : `/quality/${audit.slug}`
 
   return (
     <m.div

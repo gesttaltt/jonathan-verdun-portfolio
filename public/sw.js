@@ -1,35 +1,30 @@
 /**
  * @file sw.js
- * Simple Service Worker for offline asset caching.
- * Ensures the portfolio remains functional without a network connection.
+ * Enhanced Service Worker for offline asset caching.
+ * Implements a Cache-First strategy with dynamic caching for all static assets.
  */
 
-const CACHE_NAME = 'portfolio-v1'
-const ASSETS_TO_CACHE = [
+const CACHE_NAME = 'portfolio-v1-hardened'
+const STATIC_ASSETS = [
   '/',
   '/index.html',
   '/manifest.json',
   '/favicon.ico',
   '/icon-192.png',
   '/icon-512.png',
-  '/fonts/JetBrainsMono-Bold.ttf', // Assuming this is locally served
+  '/fonts/JetBrainsMono-Bold.ttf',
 ]
+
+// Patterns to exclude from dynamic caching (e.g., telemetry, external scripts)
+const EXCLUDE_PATTERNS = [/google-analytics\.com/, /clarity\.ms/]
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(ASSETS_TO_CACHE)
+      return cache.addAll(STATIC_ASSETS)
     })
   )
-})
-
-self.addEventListener('fetch', (event) => {
-  event.respondWith(
-    caches.match(event.request).then((response) => {
-      // Return cached asset or fetch from network
-      return response || fetch(event.request)
-    })
-  )
+  self.skipWaiting()
 })
 
 self.addEventListener('activate', (event) => {
@@ -42,6 +37,44 @@ self.addEventListener('activate', (event) => {
           }
         })
       )
+    })
+  )
+  self.clients.claim()
+})
+
+self.addEventListener('fetch', (event) => {
+  const { request } = event
+  const url = new URL(request.url)
+
+  // Skip non-GET requests and excluded patterns
+  if (request.method !== 'GET' || EXCLUDE_PATTERNS.some((p) => p.test(url.href))) {
+    return
+  }
+
+  event.respondWith(
+    caches.match(request).then((cachedResponse) => {
+      if (cachedResponse) {
+        return cachedResponse
+      }
+
+      return fetch(request).then((networkResponse) => {
+        // Cache static files dynamically (JS chunks, CSS, images, etc.)
+        if (
+          networkResponse.status === 200 &&
+          (url.pathname.startsWith('/_next/static/') ||
+            url.pathname.endsWith('.png') ||
+            url.pathname.endsWith('.jpg') ||
+            url.pathname.endsWith('.svg') ||
+            url.pathname.endsWith('.css') ||
+            url.pathname.endsWith('.js'))
+        ) {
+          const responseToCache = networkResponse.clone()
+          caches.open(CACHE_NAME).then((cache) => {
+            cache.put(request, responseToCache)
+          })
+        }
+        return networkResponse
+      })
     })
   )
 })

@@ -9,6 +9,14 @@ export const setMockPathname = (path: string) => {
 jest.mock('next/navigation', () => ({
   usePathname: () => mockPathname,
   useRouter: () => ({ push: jest.fn(), replace: jest.fn(), prefetch: jest.fn() }),
+  notFound: jest.fn(),
+}))
+
+// Mock marked to avoid ESM export issues
+jest.mock('marked', () => ({
+  marked: {
+    parse: jest.fn((str) => str),
+  },
 }))
 
 // Polyfill IntersectionObserver for framer-motion

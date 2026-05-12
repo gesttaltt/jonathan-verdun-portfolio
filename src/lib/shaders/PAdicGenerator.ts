@@ -6,7 +6,7 @@ import { Vector3, Color } from 'three'
  *
  * @param p The prime number base (e.g., 2, 3, 5)
  * @param levels The number of levels in the tree
- * @param radius The radius of the sphere/disk
+ * @param scale The overall scale/radius of the structure
  */
 export function generatePAdicPoints(p: number = 3, levels: number = 4, scale: number = 4) {
   const points: number[] = []

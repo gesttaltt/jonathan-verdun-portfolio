@@ -69,6 +69,22 @@ describe('PortfolioPage', () => {
         within(screen.getByRole('log')).getByText(/type 'help' for available commands/i)
       ).toBeInTheDocument()
     })
+
+    it('handles the "sim" command for different modes', async () => {
+      const user = userEvent.setup({ delay: null, advanceTimers: jest.advanceTimersByTime })
+      wrap('/')
+      await flushBoot()
+      const input = screen.getByRole('textbox', { name: /terminal command input/i })
+
+      await user.type(input, 'sim p-adic{Enter}')
+      expect(screen.getByText(/simulation mode set to: p-adic/i)).toBeInTheDocument()
+
+      await user.type(input, 'sim hyperbolic{Enter}')
+      expect(screen.getByText(/simulation mode set to: hyperbolic/i)).toBeInTheDocument()
+
+      await user.type(input, 'sim invalid{Enter}')
+      expect(screen.getByText(/Usage: sim --mode/i)).toBeInTheDocument()
+    })
   })
 
   describe('Spanish locale (/es/)', () => {
