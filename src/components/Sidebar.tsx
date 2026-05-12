@@ -82,12 +82,16 @@ export const Sidebar: React.FC = () => {
     }
 
     fetchCIStatus()
-    // Poll every 5 minutes
-    const interval = setInterval(fetchCIStatus, 5 * 60 * 1000)
+
+    // Poll every 5 minutes (skip in tests to avoid infinite timer loops)
+    let interval: NodeJS.Timeout | undefined
+    if (process.env.NODE_ENV !== 'test') {
+      interval = setInterval(fetchCIStatus, 5 * 60 * 1000)
+    }
 
     return () => {
       mounted = false
-      clearInterval(interval)
+      if (interval) clearInterval(interval)
     }
   }, [])
 

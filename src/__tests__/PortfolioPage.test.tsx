@@ -13,6 +13,18 @@ jest.mock('@/components/TopologyLoader', () => ({
   TopologyLoader: () => <div data-testid="topology-loader-mock" />,
 }))
 
+jest.mock('@/lib/services/vfsData', () => ({
+  VFS_DATA: {
+    name: '/',
+    type: 'dir',
+    children: {
+      docs: { name: 'docs', type: 'dir', children: {} },
+      projects: { name: 'projects', type: 'dir', children: {} },
+      'README.md': { name: 'README.md', type: 'file', content: 'Mock README' },
+    },
+  },
+}))
+
 const mockPathname = usePathname as jest.Mock
 
 const wrap = (path = '/') => {

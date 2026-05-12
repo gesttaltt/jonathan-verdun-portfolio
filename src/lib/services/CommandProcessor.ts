@@ -1,5 +1,6 @@
 import { INTERACTIVE_COMMANDS } from '../contracts/TerminalContract'
 import { VirtualFileSystem } from './VirtualFileSystem'
+import { VFS_DATA } from './vfsData'
 
 export type CommandSignal = 'clear' | 'redirect' | 'vfs_update'
 
@@ -33,7 +34,7 @@ export class DefaultCommandProcessor implements ICommandProcessor {
     this.commands = customCommands ?? INTERACTIVE_COMMANDS
     this.customHandlers = customHandlers ?? {}
     this.helpCmd = helpCmd ?? 'help'
-    this.vfs = new VirtualFileSystem()
+    this.vfs = new VirtualFileSystem(VFS_DATA)
 
     if (projects) {
       projects.forEach((p) => {

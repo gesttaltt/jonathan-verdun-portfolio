@@ -10,8 +10,8 @@ export class VirtualFileSystem {
   private root: VFSNode
   private currentPath: string[] = []
 
-  constructor() {
-    this.root = {
+  constructor(initialRoot?: VFSNode) {
+    this.root = initialRoot || {
       name: '/',
       type: 'dir',
       children: {
@@ -109,6 +109,14 @@ export class VirtualFileSystem {
         const perms = n.permissions || (n.type === 'dir' ? 'drwxr-xr-x' : '-rw-r--r--')
         return `${perms} 1 gestalt staff ${n.name}`
       })
+      .sort((a, b) => {
+        // Sort directories first, then files
+        const aIsDir = a.startsWith('d')
+        const bIsDir = b.startsWith('d')
+        if (aIsDir && !bIsDir) return -1
+        if (!aIsDir && bIsDir) return 1
+        return a.localeCompare(b)
+      })
       .join('\n')
   }
 
@@ -123,6 +131,29 @@ export class VirtualFileSystem {
 
     if (path === '/') {
       this.currentPath = []
+      return null
+    }
+
+    // Handle nested paths for cd (simple implementation)
+    if (path.includes('/')) {
+      const targetParts = path.split('/').filter(Boolean)
+      const tempPath = path.startsWith('/') ? [] : [...this.currentPath]
+
+      let node = path.startsWith('/') ? this.root : this.getCurrentNode()
+
+      for (const part of targetParts) {
+        if (part === '..') {
+          if (tempPath.length > 0) tempPath.pop()
+        } else if (part === '.') {
+          // do nothing
+        } else if (node.children?.[part] && node.children[part].type === 'dir') {
+          node = node.children[part]
+          tempPath.push(part)
+        } else {
+          return `cd: no such file or directory: ${path}`
+        }
+      }
+      this.currentPath = tempPath
       return null
     }
 

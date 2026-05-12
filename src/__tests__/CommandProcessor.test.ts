@@ -85,18 +85,20 @@ describe('DefaultCommandProcessor', () => {
     })
 
     it('handles "ls" with a valid path', () => {
-      const output = processor.process('ls research').output
-      expect(output).toContain('p-adic-embeddings.md')
+      const output = processor.process('ls docs').output
+      expect(output).toContain('specs')
+      expect(output).toContain('TEST_PLAN.md')
     })
 
     it('handles "ls" with a nested valid path', () => {
-      const output = processor.process('ls /research').output
-      expect(output).toContain('p-adic-embeddings.md')
+      const output = processor.process('ls /docs/specs').output
+      expect(output).toContain('ARCHITECTURE.md')
     })
 
     it('handles "ls" for root path', () => {
       const output = processor.process('ls /').output
       expect(output).toContain('README.md')
+      expect(output).toContain('docs')
     })
 
     it('handles "ls" with an invalid path', () => {
@@ -105,25 +107,25 @@ describe('DefaultCommandProcessor', () => {
     })
 
     it('handles "cd" to a directory', () => {
-      const response = processor.process('cd research')
+      const response = processor.process('cd docs')
       expect(response.signal).toBe('vfs_update')
-      expect(processor.getCurrentPath?.()).toBe('/research')
+      expect(processor.getCurrentPath?.()).toBe('/docs')
     })
 
     it('handles "cd" without arguments (goes to root)', () => {
-      processor.process('cd research')
+      processor.process('cd docs')
       processor.process('cd')
       expect(processor.getCurrentPath?.()).toBe('/')
     })
 
     it('handles "cd .."', () => {
-      processor.process('cd research')
+      processor.process('cd docs')
       processor.process('cd ..')
       expect(processor.getCurrentPath?.()).toBe('/')
     })
 
     it('handles "cd /"', () => {
-      processor.process('cd research')
+      processor.process('cd docs')
       processor.process('cd /')
       expect(processor.getCurrentPath?.()).toBe('/')
     })

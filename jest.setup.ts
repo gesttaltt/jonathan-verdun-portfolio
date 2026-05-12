@@ -19,6 +19,14 @@ jest.mock('marked', () => ({
   },
 }))
 
+// Polyfill fetch for components that hit external APIs (e.g. Sidebar CI status)
+global.fetch = jest.fn(() =>
+  Promise.resolve({
+    ok: true,
+    json: () => Promise.resolve({ workflow_runs: [] }),
+  })
+) as jest.Mock
+
 // Polyfill IntersectionObserver for framer-motion
 class IntersectionObserver {
   readonly root: Element | Document | null = null

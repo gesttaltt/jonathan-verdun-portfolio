@@ -9,6 +9,7 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "docs": "typedoc --out public/docs/api --entryPointStrategy expand src/lib",
+    "generate-vfs": "node scripts/generate-vfs.mjs",
     "check-types": "tsc --noEmit",
     "format": "prettier --write .",
     "e2e": "playwright test",
@@ -16,7 +17,7 @@
     "lhci": "lhci autorun",
     "prepare": "husky",
     "validate-env": "node scripts/validate-env.mjs",
-    "build": "npm run validate-env && next build"
+    "build": "npm run generate-vfs && npm run validate-env && next build"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
