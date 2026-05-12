@@ -61,16 +61,18 @@ export const QualityDashboard: React.FC<QualityDashboardProps> = ({ audits }) =>
       </FadeInSection>
 
       {/* Core Quality Artifacts (ISTQB Documents) */}
-      <section className="space-y-6">
-        <h3 className="text-sm font-bold tracking-widest text-zinc-500 uppercase">
-          Formal Quality Artifacts
-        </h3>
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-          {coreArtifacts.map((artifact) => (
-            <AuditCard key={artifact.id} audit={artifact} />
-          ))}
-        </div>
-      </section>
+      {!searchQuery.trim() && (
+        <section className="space-y-6">
+          <h3 className="text-sm font-bold tracking-widest text-zinc-500 uppercase">
+            Formal Quality Artifacts
+          </h3>
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+            {coreArtifacts.map((artifact) => (
+              <AuditCard key={artifact.id} audit={artifact} />
+            ))}
+          </div>
+        </section>
+      )}
 
       <section className="space-y-8">
         <div className="flex flex-col justify-between gap-4 border-b border-white/10 pb-6 sm:flex-row sm:items-end">

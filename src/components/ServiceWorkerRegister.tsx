@@ -8,13 +8,24 @@ import { useEffect } from 'react'
  */
 export const ServiceWorkerRegister: React.FC = () => {
   useEffect(() => {
-    if ('serviceWorker' in navigator && process.env.NODE_ENV === 'production') {
-      window.addEventListener('load', () => {
+    const isE2E =
+      typeof window !== 'undefined' &&
+      window.location.hostname === 'localhost' &&
+      document.cookie.includes('e2e=true')
+    if ('serviceWorker' in navigator && (process.env.NODE_ENV === 'production' || isE2E)) {
+      const register = () => {
         navigator.serviceWorker
           .register('/sw.js')
           .then((reg) => console.log('[PWA] Service Worker registered:', reg.scope))
           .catch((err) => console.error('[PWA] Service Worker registration failed:', err))
-      })
+      }
+
+      if (document.readyState === 'complete') {
+        register()
+      } else {
+        window.addEventListener('load', register)
+        return () => window.removeEventListener('load', register)
+      }
     }
   }, [])
 
