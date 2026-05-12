@@ -1,9 +1,9 @@
 'use client'
 
-import { Server, ShieldCheck, Zap, Lock, Copy, Check } from 'lucide-react'
+import { Server, ShieldCheck, Zap, Lock, Copy, Check, Activity, ExternalLink } from 'lucide-react'
 import Link from 'next/link'
 import { m, AnimatePresence } from 'framer-motion'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { FadeInSection } from '@/components/FadeInSection'
 import { useTranslation } from '@/lib/i18n/context'
 import { siteConfig } from '@/lib/siteConfig'
@@ -30,9 +30,66 @@ const GATES = [
   },
 ] as const
 
+type CIStatus = 'loading' | 'success' | 'failure' | 'error'
+
 export const Sidebar: React.FC = () => {
   const t = useTranslation()
   const [copied, setCopied] = useState(false)
+  const [ciStatus, setCiStatus] = useState<CIStatus>('loading')
+
+  useEffect(() => {
+    let mounted = true
+    const fetchCIStatus = async () => {
+      try {
+        // Extract owner/repo from siteConfig.repo.url
+        // URL is: https://github.com/gesttaltt/jonathan-verdun-portfolio
+        const repoUrl = siteConfig.repo?.url
+        if (!repoUrl) {
+          if (mounted) setCiStatus('error')
+          return
+        }
+        const parts = repoUrl.split('/')
+        const owner = parts[parts.length - 2]
+        const repo = parts[parts.length - 1]
+
+        const response = await fetch(
+          `https://api.github.com/repos/${owner}/${repo}/actions/workflows/ci.yml/runs?per_page=1`,
+          { headers: { Accept: 'application/vnd.github.v3+json' } }
+        )
+
+        if (!response.ok) throw new Error('API request failed')
+
+        const data = await response.json()
+        if (!data.workflow_runs || data.workflow_runs.length === 0) {
+          if (mounted) setCiStatus('error')
+          return
+        }
+
+        const latestRun = data.workflow_runs[0]
+        if (latestRun.status === 'completed') {
+          if (mounted) setCiStatus(latestRun.conclusion === 'success' ? 'success' : 'failure')
+        } else {
+          // If still running, we'll keep it as loading or maybe add a "running" state
+          // but for now success/failure based on conclusion is what we want.
+          // If conclusion is null but status is 'in_progress' or 'queued', we can check the PREVIOUS run
+          // or just show 'loading' (Active).
+          if (mounted) setCiStatus('loading')
+        }
+      } catch (err) {
+        console.error('Failed to fetch CI status:', err)
+        if (mounted) setCiStatus('error')
+      }
+    }
+
+    fetchCIStatus()
+    // Poll every 5 minutes
+    const interval = setInterval(fetchCIStatus, 5 * 60 * 1000)
+
+    return () => {
+      mounted = false
+      clearInterval(interval)
+    }
+  }, [])
 
   const handleCopyEmail = async () => {
     try {
@@ -44,6 +101,29 @@ export const Sidebar: React.FC = () => {
       console.error('Failed to copy email:', err)
     }
   }
+
+  const ciTheme = {
+    loading: {
+      color: 'text-zinc-500',
+      bg: 'bg-zinc-500/10',
+      label: t.sections.sidebar.ciStatusLoading,
+    },
+    success: {
+      color: 'text-green-400',
+      bg: 'bg-green-400/10',
+      label: t.sections.sidebar.ciStatusSuccess,
+    },
+    failure: {
+      color: 'text-red-400',
+      bg: 'bg-red-400/10',
+      label: t.sections.sidebar.ciStatusFailure,
+    },
+    error: {
+      color: 'text-amber-400',
+      bg: 'bg-amber-400/10',
+      label: t.sections.sidebar.ciStatusError,
+    },
+  }[ciStatus]
 
   return (
     <aside className="lg:col-span-4 lg:col-start-9 lg:row-span-2 lg:row-start-1 lg:pl-8">
@@ -101,18 +181,37 @@ export const Sidebar: React.FC = () => {
           </div>
 
           <div className="mt-8 border-t border-white/5 pt-5">
-            <p className="mb-3 text-[10px] font-bold tracking-widest text-zinc-500 uppercase sm:text-xs">
-              {t.sections.sidebar.livePipelineLabel}
-            </p>
+            <div className="flex items-center justify-between">
+              <p className="text-[10px] font-bold tracking-widest text-zinc-500 uppercase sm:text-xs">
+                {t.sections.sidebar.livePipelineLabel}
+              </p>
+              <div
+                className={`flex items-center gap-1.5 rounded-full px-2 py-0.5 text-[9px] font-bold tracking-tighter ${ciTheme.bg} ${ciTheme.color} uppercase`}
+              >
+                <span
+                  className={`relative flex h-1.5 w-1.5 ${ciStatus === 'loading' ? 'animate-pulse' : ''}`}
+                >
+                  <span
+                    className={`absolute inline-flex h-full w-full rounded-full opacity-75 ${ciTheme.bg.replace('/10', '')} ${ciStatus === 'loading' || ciStatus === 'success' ? 'animate-ping' : ''}`}
+                  ></span>
+                  <span
+                    className={`relative inline-flex h-1.5 w-1.5 rounded-full ${ciTheme.bg.replace('/10', '')}`}
+                  ></span>
+                </span>
+                {ciTheme.label}
+              </div>
+            </div>
+
             <a
               href={siteConfig.repo.ciWorkflowUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 transition-transform hover:scale-105"
+              className="group/ci mt-3 flex items-center gap-2 text-xs font-medium text-zinc-400 transition-colors hover:text-white"
               aria-label="CI pipeline status (opens in new tab)"
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={siteConfig.repo.ciBadgeUrl} alt="CI passing" className="h-5 w-auto" />
+              <Activity className="h-4 w-4 text-blue-400" />
+              <span>GitHub Actions</span>
+              <ExternalLink className="h-3 w-3 opacity-0 transition-all group-hover/ci:translate-x-0.5 group-hover/ci:opacity-100" />
             </a>
           </div>
         </m.div>

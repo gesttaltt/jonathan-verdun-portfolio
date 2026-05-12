@@ -45,6 +45,10 @@ export const en: Translations = {
       certificationExpectedLabel: 'Expected',
       copyEmailLabel: 'Copy Email',
       copiedLabel: 'Copied!',
+      ciStatusSuccess: 'PASSING',
+      ciStatusFailure: 'FAILING',
+      ciStatusLoading: 'Checking CI status...',
+      ciStatusError: 'Status unavailable',
     },
     qaContact: {
       title: 'Open to work',

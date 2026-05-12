@@ -56,6 +56,10 @@ export interface Translations {
       certificationExpectedLabel: string
       copyEmailLabel: string
       copiedLabel: string
+      ciStatusSuccess: string
+      ciStatusFailure: string
+      ciStatusLoading: string
+      ciStatusError: string
     }
     qaContact: { title: string; description: string; ctaLabel: string }
   }

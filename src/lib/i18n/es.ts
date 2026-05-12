@@ -211,6 +211,10 @@ export const es: Translations = {
       certificationExpectedLabel: 'Previsto',
       copyEmailLabel: 'Copiar Email',
       copiedLabel: '¡Copiado!',
+      ciStatusSuccess: 'PASANDO',
+      ciStatusFailure: 'FALLANDO',
+      ciStatusLoading: 'Verificando CI...',
+      ciStatusError: 'Estado no disponible',
     },
     qaContact: {
       title: 'Disponible',
