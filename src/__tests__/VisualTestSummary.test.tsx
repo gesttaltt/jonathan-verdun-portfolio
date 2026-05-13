@@ -67,4 +67,18 @@ describe('VisualTestSummary', () => {
     expect(screen.getByText('FAILED')).toBeInTheDocument()
     expect(screen.getByText(/REGRESSION DETECTED: 5/i)).toBeInTheDocument()
   })
+
+  it('renders singular regression message if count is 1 (hypothetical)', () => {
+    // Current translation doesn't distinguish between singular/plural but we should check interpolation
+    mockCoverageData.numPassedTests = 274
+    mockCoverageData.numFailedTests = 1
+    mockCoverageData.success = false
+
+    render(
+      <I18nProvider>
+        <VisualTestSummary />
+      </I18nProvider>
+    )
+    expect(screen.getByText(/REGRESSION DETECTED: 1/i)).toBeInTheDocument()
+  })
 })
