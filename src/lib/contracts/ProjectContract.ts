@@ -31,7 +31,7 @@ export const PROJECT_DATA: ProjectSpec[] = [
     id: 'proj-06',
     title: 'Transcription Engine QA',
     description:
-      '230+ tests across unit (Jest), integration, and E2E Playwright layers for a headless YouTube transcript extraction service. Stealth mode A/B campaign — 100 automated runs, 89.4% success rate, failure pattern analysis per video, and root-cause documentation as report artifacts. Focused on non-functional stability and regression testing.',
+      '230+ tests across unit (Jest), integration, and E2E Playwright layers for a headless YouTube transcript extraction service. Stealth mode A/B campaign — 100 automated runs, 89.4% success rate across edge cases; leveraged Root Cause Analysis (RCA) to categorize failure patterns and drive stability improvements. Focused on non-functional stability and regression testing.',
     techStack: ['Playwright', 'Jest', 'CI/CD', 'RCA'],
     link: 'https://github.com/gesttaltt/yt-transcript-api',
     status: 'Deployed',
@@ -44,7 +44,7 @@ export const PROJECT_DATA: ProjectSpec[] = [
     id: 'proj-07',
     title: 'Portfolio QA Hardened',
     description:
-      'QA reference implementation: 239 Jest tests with 100% coverage (unit, integration, property-based via fast-check), 14 Playwright E2E tests (12 smoke + 2 axe WCAG 2.1 AA scans) on EN and ES routes, and a Lighthouse CI gate requiring a11y ≥95, SEO ≥90. Every quality claim in the QA Philosophy section is backed by a CI gate. Demonstrates structural test design and automated quality gates.',
+      'QA reference implementation featuring 100% logic coverage and automated WCAG 2.1 AA compliance gates. Includes 239 Jest tests (unit, integration, property-based via fast-check) and 14 Playwright E2E tests. Every quality claim in the QA Philosophy section is backed by a CI gate. Demonstrates structural test design and automated quality gates.',
     techStack: ['Next.js', 'Playwright', 'Jest', 'fast-check'],
     link: 'https://github.com/gesttaltt/jonathan-verdun-portfolio',
     status: 'QA',

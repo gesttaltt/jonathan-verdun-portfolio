@@ -10,7 +10,21 @@ export const QAPhilosophyGrid: React.FC = () => {
   const t = useTranslation()
 
   return (
-    <div className="rounded-2xl border border-white/10 bg-black/40 p-5 backdrop-blur-sm sm:p-8">
+    <div className="space-y-8 rounded-2xl border border-white/10 bg-black/40 p-5 backdrop-blur-sm sm:p-8">
+      {t.qa.manifesto && (
+        <m.div
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={SCROLL_VIEWPORT}
+          className="relative overflow-hidden rounded-xl border border-blue-500/20 bg-blue-500/5 p-4 sm:p-6"
+        >
+          <div className="absolute top-0 left-0 h-1 w-full bg-gradient-to-r from-blue-500/50 to-purple-500/50"></div>
+          <p className="relative text-sm leading-relaxed font-medium text-zinc-200 italic sm:text-base">
+            &ldquo;{t.qa.manifesto}&rdquo;
+          </p>
+        </m.div>
+      )}
+
       <m.div
         role="list"
         variants={containerVariants(0.12)}

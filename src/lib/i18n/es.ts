@@ -64,12 +64,12 @@ const ES_PROJECT_OVERRIDES: Record<string, { description: string; statLabels: st
   },
   'proj-06': {
     description:
-      'Más de 230 pruebas en capas de unit (Jest), integración y E2E con Playwright para un servicio headless de extracción de transcripciones. Campaña A/B en modo stealth — 100 ejecuciones automatizadas, tasa de éxito del 89.4%, análisis de patrones de fallo por video y documentación de causa raíz (RCA) como artefactos de reporte. Enfocado en estabilidad no funcional y pruebas de regresión.',
+      'Más de 230 pruebas en capas de unit (Jest), integración y E2E con Playwright para un servicio headless de extracción de transcripciones. Campaña A/B en modo stealth — 100 ejecuciones automatizadas, tasa de éxito del 89.4% en casos de borde; aprovechamiento del Análisis de Causa Raíz (RCA) para categorizar patrones de fallo e impulsar mejoras de estabilidad. Enfocado en estabilidad no funcional y pruebas de regresión.',
     statLabels: ['Pruebas', 'Capas'],
   },
   'proj-07': {
     description:
-      'Implementación de referencia QA: 239 pruebas Jest con 100% de cobertura (unit, integración, basadas en propiedades via fast-check), 14 pruebas E2E con Playwright (12 smoke + 2 escaneos axe WCAG 2.1 AA) y un Lighthouse CI gate. Demuestra el diseño estructural de pruebas y gates de calidad automatizados. Cada afirmación de calidad en la sección de Filosofía QA está respaldada por un gate ejecutándose en CI.',
+      'Implementación de referencia QA con 100% de cobertura lógica y gates automatizados de cumplimiento WCAG 2.1 AA. Incluye 239 pruebas Jest y 14 pruebas E2E con Playwright. Cada afirmación en la sección de Filosofía QA está respaldada por un gate en CI, demostrando un diseño de pruebas estructural y automatizado.',
     statLabels: ['Pruebas', 'Cobertura'],
   },
   'proj-02': {
@@ -171,6 +171,8 @@ const esBioSpecs = BioinformaticsService.getResearchSpecs().map((s) => {
 })
 
 const esQaPhilosophy = {
+  manifesto:
+    'Veo la calidad como un invariante estructural. Mi misión es construir software que sea correcto por construcción mediante el compromiso shift-left y gates de verificación automatizados.',
   constraints: ES_QA_CONSTRAINTS,
   specifications: QA_PHILOSOPHY.specifications.map((spec) => ({
     ...spec,
@@ -182,7 +184,7 @@ export const es: Translations = {
   lang: 'es',
   skipToContent: 'Saltar al contenido',
   title: 'Jonathan Verdun | Ingeniero de Automatización QA',
-  tagline: 'Arquitectura de Pruebas · Ingeniería de Automatización',
+  tagline: 'Construyendo Gates de Calidad Resilientes · Ingeniería de Automatización Determinista',
   description:
     'Portafolio de Jonathan Verdun — Ingeniero de Automatización QA especializado en Arquitectura de Pruebas, Playwright, Appium y Azure DevOps. Experto en construir gates de calidad deterministas y suites de automatización escalables.',
   workHistoryLabel: 'Experiencia',
@@ -243,6 +245,8 @@ export const es: Translations = {
     specs: esArchSpecs,
   },
   bioinformatics: {
+    bridge:
+      'Aplicando el mismo rigor matemático utilizado en el análisis de secuencias genómicas a la verificación de software y pruebas de invariantes.',
     methodologyLabel: 'Metodología',
     invariantsLabel: 'Invariantes',
     graphicLabel: 'Análisis de Datos: [Pipeline de Descubrimiento de Epítopos]',
@@ -270,7 +274,7 @@ export const es: Translations = {
     interactive: {
       ayuda: ES_HELP_OUTPUT,
       sobre:
-        'Jonathan Verdun. Ingeniero QA y arquitecto de pruebas. Planes de prueba, matrices de trazabilidad, pruebas basadas en propiedades y pipelines de automatización — quality gates aplicados via pre-commit hooks, GitHub Actions CI y umbrales de cobertura. En proceso de certificación ISTQB Foundation.',
+        'Soy Jonathan, un ingeniero de QA enfocado en construir gates de calidad deterministas. Desde pruebas basadas en propiedades hasta pipelines de automatización complejos, trato la calidad como un requisito estructural, no como algo secundario. Actualmente endureciendo sistemas en Ai-Whisperers y cursando la certificación ISTQB.',
       proyectos: 'Ver la sección de Proyectos abajo, o escribe "ls proyectos" para ver la lista.',
       contacto: 'Contáctame por LinkedIn o GitHub enlazados arriba.',
       habilidades:

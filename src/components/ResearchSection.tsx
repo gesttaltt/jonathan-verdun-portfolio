@@ -26,6 +26,20 @@ export const ResearchSection: React.FC = () => {
           title={t.sections.bioinformatics}
           color="purple"
         />
+
+        {t.bioinformatics.bridge && (
+          <m.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={SCROLL_VIEWPORT}
+            className="rounded-lg border-l-2 border-purple-500/30 bg-purple-500/5 p-4"
+          >
+            <p className="text-sm leading-relaxed text-zinc-300 italic">
+              {t.bioinformatics.bridge}
+            </p>
+          </m.div>
+        )}
+
         <m.div
           id="research-content"
           variants={containerVariants(0.08)}

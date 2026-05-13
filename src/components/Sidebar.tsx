@@ -241,6 +241,11 @@ export const Sidebar: React.FC = () => {
                 <p className="mt-1 text-[10px] text-zinc-400">
                   {siteConfig.certification.provider}
                 </p>
+                {'details' in siteConfig.certification && (
+                  <p className="mt-2 text-[10px] text-amber-400/80 italic">
+                    {siteConfig.certification.details}
+                  </p>
+                )}
               </div>
 
               <div className="grid grid-cols-2 gap-4">

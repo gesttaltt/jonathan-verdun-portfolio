@@ -44,7 +44,7 @@ export const siteConfig = {
     ctaLabel: 'Get in Touch',
   },
 
-  tagline: 'Test Architecture · Automation Engineering',
+  tagline: 'Architecting Resilient Quality Gates · Engineering Deterministic Automation',
   jobTitle: 'QA Automation Engineer',
   techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Three.js'],
   expertise: [
@@ -82,5 +82,6 @@ export const siteConfig = {
     status: 'In Progress',
     expectedDate: 'Q3 2026',
     provider: 'ISTQB®',
+    details: 'Actively applying CTFL principles to current automation suites.',
   },
 } as const

@@ -5,3 +5,8 @@ export interface ResearchSpec {
   invariants: string[]
   link?: string
 }
+
+export interface BioinformaticsResearch {
+  bridge: string
+  specs: ResearchSpec[]
+}

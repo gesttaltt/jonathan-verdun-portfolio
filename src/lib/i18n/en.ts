@@ -9,7 +9,7 @@ export const en: Translations = {
   lang: 'en',
   skipToContent: 'Skip to content',
   title: 'Jonathan Verdun | QA Automation Engineer',
-  tagline: 'Test Architecture · Automation Engineering',
+  tagline: 'Architecting Resilient Quality Gates · Engineering Deterministic Automation',
   description:
     'Portfolio of Jonathan Verdun — QA Automation Engineer specializing in Test Architecture, Playwright, Appium, and Azure DevOps. Expert in building deterministic quality gates and scalable automation suites.',
   workHistoryLabel: 'Work History',
@@ -77,6 +77,7 @@ export const en: Translations = {
     specs: DataEngineeringService.getSystemSpecs(),
   },
   bioinformatics: {
+    bridge: BioinformaticsService.getResearch().bridge,
     methodologyLabel: 'Methodology',
     invariantsLabel: 'Invariants',
     graphicLabel: 'Data Analysis: [Epitope Discovery Pipeline]',
@@ -97,6 +98,10 @@ export const en: Translations = {
     prompt: 'gestalt@portfolio:',
     helpCmd: 'help',
     boot: BOOT_COMMANDS,
-    interactive: INTERACTIVE_COMMANDS,
+    interactive: {
+      ...INTERACTIVE_COMMANDS,
+      about:
+        "I'm Jonathan, a QA Engineer focused on building deterministic quality gates. From property-based testing to complex automation pipelines, I treat quality as a structural requirement, not an afterthought. Currently hardening systems at Ai-Whisperers and pursuing ISTQB certification.",
+    },
   },
 }

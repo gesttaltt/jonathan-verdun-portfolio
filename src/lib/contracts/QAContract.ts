@@ -6,6 +6,8 @@
 import { QAPhilosophy } from './QAContract.types'
 
 export const QA_PHILOSOPHY: QAPhilosophy = {
+  manifesto:
+    'I view quality as a structural invariant. My mission is to build software that is correct by construction through shift-left engagement and automated verification gates.',
   constraints: [
     'Risk-based test planning prioritized by business impact and technical complexity',
     'Property-based fuzzing applied to core domain invariants via fast-check',

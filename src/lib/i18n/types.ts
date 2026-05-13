@@ -77,6 +77,7 @@ export interface Translations {
     regressionDetected: string
   }
   qa: {
+    manifesto: string
     constraints: string[]
     specifications: I18nQASpec[]
   }
@@ -86,6 +87,7 @@ export interface Translations {
     invariantsLabel: string
   }
   bioinformatics: {
+    bridge: string
     specs: I18nResearchSpec[]
     focusLabels: Record<string, string>
     focusDescriptions: Record<string, string>
