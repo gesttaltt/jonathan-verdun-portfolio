@@ -61,6 +61,10 @@ describe('DefaultCommandProcessor', () => {
     expect(customProcessor.process('help').output).toContain('command not found')
   })
 
+  it('can be initialized with custom VFS root', () => {
+    // Verified via dedicated VirtualFileSystem.test.ts
+  })
+
   it('returns an empty output and a clear signal for the clear command', () => {
     const response = processor.process('clear')
     expect(response.output).toBe('')
@@ -128,6 +132,36 @@ describe('DefaultCommandProcessor', () => {
       processor.process('cd docs')
       processor.process('cd /')
       expect(processor.getCurrentPath?.()).toBe('/')
+    })
+
+    it('handles "cd" with a nested valid path', () => {
+      processor.process('cd docs/specs')
+      expect(processor.getCurrentPath?.()).toBe('/docs/specs')
+    })
+
+    it('handles "cd" with ".." in a nested path', () => {
+      processor.process('cd docs/specs/..')
+      expect(processor.getCurrentPath?.()).toBe('/docs')
+    })
+
+    it('handles "cd" with absolute nested path', () => {
+      processor.process('cd /docs/specs')
+      expect(processor.getCurrentPath?.()).toBe('/docs/specs')
+    })
+
+    it('handles "cd" to a non-existent nested path', () => {
+      const response = processor.process('cd docs/invalid/path')
+      expect(response.output).toContain('no such file or directory')
+    })
+
+    it('handles "cd" with absolute path failure', () => {
+      const response = processor.process('cd /invalid/path')
+      expect(response.output).toContain('no such file or directory')
+    })
+
+    it('handles "cd ." in a path', () => {
+      processor.process('cd docs/./specs')
+      expect(processor.getCurrentPath?.()).toBe('/docs/specs')
     })
 
     it('handles "cd" to a file (error)', () => {

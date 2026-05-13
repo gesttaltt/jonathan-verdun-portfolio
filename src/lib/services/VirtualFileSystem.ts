@@ -15,30 +15,18 @@ export class VirtualFileSystem {
       name: '/',
       type: 'dir',
       children: {
+        docs: {
+          name: 'docs',
+          type: 'dir',
+          children: {
+            specs: { name: 'specs', type: 'dir', children: {}, permissions: 'drwxr-xr-x' },
+          },
+          permissions: 'drwxr-xr-x',
+        },
         projects: {
           name: 'projects',
           type: 'dir',
           children: {},
-          permissions: 'drwxr-xr-x',
-        },
-        research: {
-          name: 'research',
-          type: 'dir',
-          children: {
-            'p-adic-embeddings.md': {
-              name: 'p-adic-embeddings.md',
-              type: 'file',
-              content:
-                '# p-adic embeddings\nResearch into ultrametric spaces for DNA sequence analysis.',
-              permissions: '-rw-r--r--',
-            },
-            'hyperbolic-vae.md': {
-              name: 'hyperbolic-vae.md',
-              type: 'file',
-              content: '# Hyperbolic VAE\nDNA codon embedding in hyperbolic space via VAE.',
-              permissions: '-rw-r--r--',
-            },
-          },
           permissions: 'drwxr-xr-x',
         },
         'README.md': {
@@ -46,11 +34,6 @@ export class VirtualFileSystem {
           type: 'file',
           content: 'Jonathan Verdun Portfolio System. QA & Bioinformatics.',
           permissions: '-rw-r--r--',
-        },
-        '.hidden': {
-          name: '.hidden',
-          type: 'file',
-          content: 'hidden',
         },
       },
       permissions: 'drwxr-xr-x',
