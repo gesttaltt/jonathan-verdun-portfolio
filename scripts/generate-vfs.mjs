@@ -26,7 +26,8 @@ function buildVfsNode(dirPath, name = '/') {
     // Only include content for markdown files, and limit size
     if (name.endsWith('.md')) {
       const content = fs.readFileSync(dirPath, 'utf8')
-      node.content = content.length > 5000 ? content.slice(0, 5000) + '\n\n[Content truncated...]' : content
+      node.content =
+        content.length > 5000 ? content.slice(0, 5000) + '\n\n[Content truncated...]' : content
     }
   }
 
@@ -35,7 +36,7 @@ function buildVfsNode(dirPath, name = '/') {
 
 try {
   const docsNode = buildVfsNode(DOCS_DIR, 'docs')
-  
+
   const vfsData = {
     name: '/',
     type: 'dir',
@@ -51,10 +52,11 @@ try {
       'README.md': {
         name: 'README.md',
         type: 'file',
-        content: '# Jonathan Verdun Portfolio\nQA Automation Engineer & Bioinformatics Researcher.\n\nType "ls projects" to see work history, or "cd docs" to read audits.',
+        content:
+          '# Jonathan Verdun Portfolio\nQA Automation Engineer & Bioinformatics Researcher.\n\nType "ls projects" to see work history, or "cd docs" to read audits.',
         permissions: '-rw-r--r--',
-      }
-    }
+      },
+    },
   }
 
   const content = `/**
