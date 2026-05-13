@@ -14,7 +14,7 @@ const ES_WORK_OVERRIDES: Record<string, { role?: string; period?: string; descri
   {
     'Ai-Whisperers': {
       role: 'Cofundador y Líder de QA',
-      period: 'Sep 2025 – Presente',
+      period: 'Sep 2025 – Abril 2026',
       description:
         'Lideré la estrategia de QA como Cofundador y Líder de QA, implementando más de 350 pruebas automatizadas en capas Web, Mobile y API. Establecí la gestión de defectos del ciclo completo en Azure DevOps y endurecí los pipelines de CI/CD con gates de cobertura al 100%.',
     },
@@ -274,7 +274,7 @@ export const es: Translations = {
     interactive: {
       ayuda: ES_HELP_OUTPUT,
       sobre:
-        'Soy Jonathan, un ingeniero de QA enfocado en construir gates de calidad deterministas. Desde pruebas basadas en propiedades hasta pipelines de automatización complejos, trato la calidad como un requisito estructural, no como algo secundario. Actualmente endureciendo sistemas en Ai-Whisperers y cursando la certificación ISTQB.',
+        'Soy Jonathan, un ingeniero de QA enfocado en construir gates de calidad deterministas. Desde pruebas basadas en propiedades hasta pipelines de automatización complejos, trato la calidad como un requisito estructural, no como algo secundario. He endurecido sistemas en Ai-Whisperers y sigo cursando la certificación ISTQB.',
       proyectos: 'Ver la sección de Proyectos abajo, o escribe "ls proyectos" para ver la lista.',
       contacto: 'Contáctame por LinkedIn o GitHub enlazados arriba.',
       habilidades:

@@ -35,7 +35,7 @@ export const siteConfig = {
       organization: 'Ai-Whisperers',
       url: 'https://github.com/Ai-Whisperers',
       role: 'Co-Founder & QA Lead',
-      period: 'Sep 2025 – Present',
+      period: 'Sep 2025 – April 2026',
     },
   ],
 

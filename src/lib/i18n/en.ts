@@ -21,7 +21,7 @@ export const en: Translations = {
     'Ai-Whisperers': 'Co-Founder & QA Lead',
   },
   workHistoryPeriods: {
-    'Ai-Whisperers': 'Sep 2025 – Present',
+    'Ai-Whisperers': 'Sep 2025 – April 2026',
   },
   sections: {
     projects: 'Projects',
@@ -101,7 +101,7 @@ export const en: Translations = {
     interactive: {
       ...INTERACTIVE_COMMANDS,
       about:
-        "I'm Jonathan, a QA Engineer focused on building deterministic quality gates. From property-based testing to complex automation pipelines, I treat quality as a structural requirement, not an afterthought. Currently hardening systems at Ai-Whisperers and pursuing ISTQB certification.",
+        "I'm Jonathan, a QA Engineer focused on building deterministic quality gates. From property-based testing to complex automation pipelines, I treat quality as a structural requirement, not an afterthought. Hardened systems at Ai-Whisperers and pursuing ISTQB certification.",
     },
   },
 }
