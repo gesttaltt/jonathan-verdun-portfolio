@@ -1,8 +1,8 @@
 export const siteConfig = {
   name: 'Jonathan Verdun',
-  title: 'Jonathan Verdun | QA Automation Engineer',
+  title: 'Jonathan Verdun | Architecting Resilient Quality Gates',
   description:
-    'Portfolio of Jonathan Verdun — QA Automation Engineer specializing in Test Architecture, Playwright, Appium, and Azure DevOps. Expert in building deterministic quality gates and scalable automation suites.',
+    'Architecting resilient quality gates and engineering deterministic automation. Portfolio of Jonathan Verdun — QA Automation Engineer specializing in Test Architecture, Playwright, and Reliability.',
   url: process.env.NEXT_PUBLIC_SITE_URL || 'https://jonathanverdun.com',
   locale: 'en',
 

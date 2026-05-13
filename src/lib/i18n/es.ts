@@ -183,10 +183,10 @@ const esQaPhilosophy = {
 export const es: Translations = {
   lang: 'es',
   skipToContent: 'Saltar al contenido',
-  title: 'Jonathan Verdun | Ingeniero de Automatización QA',
-  tagline: 'Construyendo Gates de Calidad Resilientes · Ingeniería de Automatización Determinista',
+  title: 'Jonathan Verdun | Arquitecto de Gates de Calidad Resilientes',
+  tagline: 'Arquitecto de Gates de Calidad Resilientes · Ingeniería de Automatización Determinista',
   description:
-    'Portafolio de Jonathan Verdun — Ingeniero de Automatización QA especializado en Arquitectura de Pruebas, Playwright, Appium y Azure DevOps. Experto en construir gates de calidad deterministas y suites de automatización escalables.',
+    'Arquitecto de gates de calidad resilientes e ingeniería de automatización determinista. Portafolio de Jonathan Verdun — Ingeniero de Automatización QA especializado en Arquitectura de Pruebas, Playwright y Confiabilidad.',
   workHistoryLabel: 'Experiencia',
   workHistoryDescriptions: esWorkHistoryDescriptions,
   workHistoryRoles: esWorkHistoryRoles,

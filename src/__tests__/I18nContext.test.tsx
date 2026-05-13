@@ -91,7 +91,7 @@ describe('useTranslation (fallback)', () => {
 
   it('es translations match expected tagline', () => {
     expect(es.tagline).toBe(
-      'Construyendo Gates de Calidad Resilientes · Ingeniería de Automatización Determinista'
+      'Arquitecto de Gates de Calidad Resilientes · Ingeniería de Automatización Determinista'
     )
   })
 

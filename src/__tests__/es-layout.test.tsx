@@ -25,7 +25,7 @@ afterAll(() => consoleErrorSpy.mockRestore())
 
 describe('EsLayout — metadata exports', () => {
   it('title is Spanish', () => {
-    expect(String(metadata.title)).toContain('Automatización')
+    expect(String(metadata.title)).toContain('Gates de Calidad')
   })
 
   it('description is Spanish', () => {
