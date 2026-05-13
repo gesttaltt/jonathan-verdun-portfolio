@@ -17,7 +17,7 @@ export interface TestSuiteSpecification {
 }
 
 export interface QAPhilosophy {
-  manifesto?: string
+  manifesto: string
   constraints: string[]
   specifications: TestSuiteSpecification[]
 }

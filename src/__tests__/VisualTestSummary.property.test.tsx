@@ -2,7 +2,6 @@ import * as fc from 'fast-check'
 import { render, screen } from '@testing-library/react'
 import { VisualTestSummary } from '@/components/VisualTestSummary'
 import { I18nProvider } from '@/lib/i18n/context'
-import React from 'react'
 
 // We need to mock coverageData since it's a direct import in the component
 jest.mock(
