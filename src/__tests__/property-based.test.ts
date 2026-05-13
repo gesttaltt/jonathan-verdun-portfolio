@@ -2,6 +2,7 @@ import * as fc from 'fast-check'
 import { DefaultCommandProcessor } from '@/lib/services/CommandProcessor'
 import { ProjectService } from '@/lib/contracts/ProjectContract'
 import { DataEngineeringService } from '@/lib/contracts/DataEngineeringContract'
+import { BioinformaticsService } from '@/lib/contracts/BioinformaticsContract'
 import { en } from '@/lib/i18n/en'
 import { es } from '@/lib/i18n/es'
 import { buildMetadata } from '@/lib/metadata'
@@ -197,6 +198,41 @@ describe('DataEngineeringService — property-based', () => {
   })
 })
 
+// ─── BioinformaticsService ───────────────────────────────────────────────────
+
+describe('BioinformaticsService — property-based', () => {
+  it('getResearch is deterministic across repeated calls', () => {
+    fc.assert(
+      fc.property(fc.integer({ min: 1, max: 10 }), () => {
+        expect(BioinformaticsService.getResearch()).toEqual(BioinformaticsService.getResearch())
+      })
+    )
+  })
+
+  it('bridge is a non-empty string with appropriate length', () => {
+    fc.assert(
+      fc.property(fc.integer({ min: 1, max: 5 }), () => {
+        const research = BioinformaticsService.getResearch()
+        expect(typeof research.bridge).toBe('string')
+        expect(research.bridge.length).toBeGreaterThan(20)
+      })
+    )
+  })
+
+  it('every research spec satisfies invariant constraints', () => {
+    const specs = BioinformaticsService.getResearchSpecs()
+    fc.assert(
+      fc.property(fc.constantFrom(...specs), (spec) => {
+        expect(spec.invariants.length).toBeGreaterThan(0)
+        spec.invariants.forEach((inv) => {
+          expect(typeof inv).toBe('string')
+          expect(inv.length).toBeGreaterThan(0)
+        })
+      })
+    )
+  })
+})
+
 // ─── i18n completeness ────────────────────────────────────────────────────────
 
 describe('i18n completeness — property-based', () => {
@@ -216,6 +252,24 @@ describe('i18n completeness — property-based', () => {
       fc.property(fc.constantFrom(...entries), ([cmd, response]) => {
         expect(cmd.length).toBeGreaterThan(0)
         expect(response.length).toBeGreaterThan(0)
+      })
+    )
+  })
+
+  it('manifesto is present and non-empty in both locales', () => {
+    fc.assert(
+      fc.property(fc.constantFrom(en, es), (loc) => {
+        expect(typeof loc.qa.manifesto).toBe('string')
+        expect(loc.qa.manifesto.length).toBeGreaterThan(50)
+      })
+    )
+  })
+
+  it('bridge is present and non-empty in both locales', () => {
+    fc.assert(
+      fc.property(fc.constantFrom(en, es), (loc) => {
+        expect(typeof loc.bioinformatics.bridge).toBe('string')
+        expect(loc.bioinformatics.bridge.length).toBeGreaterThan(20)
       })
     )
   })

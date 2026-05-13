@@ -84,11 +84,15 @@ describe('useTranslation (fallback)', () => {
   })
 
   it('en translations match expected tagline', () => {
-    expect(en.tagline).toBe('Test Architecture · Automation Engineering')
+    expect(en.tagline).toBe(
+      'Architecting Resilient Quality Gates · Engineering Deterministic Automation'
+    )
   })
 
   it('es translations match expected tagline', () => {
-    expect(es.tagline).toBe('Arquitectura de Pruebas · Ingeniería de Automatización')
+    expect(es.tagline).toBe(
+      'Construyendo Gates de Calidad Resilientes · Ingeniería de Automatización Determinista'
+    )
   })
 
   it('en and es have the same top-level keys', () => {
