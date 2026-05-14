@@ -8,7 +8,7 @@ const CACHE_NAME = 'portfolio-v1-hardened'
 const STATIC_ASSETS = [
   '/',
   '/manifest.json',
-  '/favicon.ico',
+  '/favicon.svg',
   '/icon-192.png',
   '/icon-512.png',
   '/fonts/JetBrainsMono-Bold.ttf',
