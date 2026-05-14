@@ -58,6 +58,7 @@ export const Terminal: React.FC<TerminalProps> = ({
   return (
     <div
       role="group"
+      data-testid="terminal-bash"
       className={`flex w-full max-w-full flex-col overflow-hidden rounded-2xl border border-white/5 bg-black/80 font-mono text-xs shadow-2xl backdrop-blur-lg md:text-sm lg:text-base ${className}`}
       onClick={() => !isBooting && inputRef.current?.focus()}
     >
