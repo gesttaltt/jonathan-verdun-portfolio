@@ -2,7 +2,7 @@
 
 import React from 'react'
 import Link from 'next/link'
-import { Github, Linkedin, Mail } from 'lucide-react'
+import { Github, Linkedin, Mail, ShieldCheck } from 'lucide-react'
 import { m } from 'framer-motion'
 import { siteConfig } from '@/lib/siteConfig'
 import { useTranslation } from '@/lib/i18n/context'
@@ -112,7 +112,16 @@ export const SiteFooter: React.FC = () => {
               </a>{' '}
               on GitHub.
             </p>
-            <p className="text-xs text-zinc-300">{siteConfig.techStack.join(' · ')}</p>
+            <div className="flex flex-wrap items-center gap-3">
+              <div
+                className="flex items-center gap-1.5 rounded-full border border-green-500/20 bg-green-500/10 px-2 py-0.5 text-[10px] font-bold tracking-tighter text-green-400 uppercase"
+                title="PWA Hardened: Available Offline"
+              >
+                <ShieldCheck className="h-3 w-3" />
+                Offline Ready
+              </div>
+              <p className="text-xs text-zinc-300">{siteConfig.techStack.join(' · ')}</p>
+            </div>
           </div>
         </div>
       </div>

@@ -96,7 +96,6 @@ export const useTerminal = (
       if (response.signal === 'clear') {
         stopBooting()
         setHistory([])
-        setCurrentPath('/')
         return
       }
 

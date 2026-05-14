@@ -5,23 +5,28 @@ import { ArrowLeft, Calendar } from 'lucide-react'
 
 export async function generateStaticParams() {
   const audits = await AuditRepository.getAudits()
-  return audits.map((a) => ({ slug: a.slug }))
+  return audits.map((a) => ({ slug: a.slug.split('/') }))
 }
 
-export default async function AuditDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function AuditDetailPageEs({
+  params,
+}: {
+  params: Promise<{ slug: string[] }>
+}) {
   const { slug } = await params
-  const audit = await AuditRepository.getAuditBySlug(slug)
+  const joinedSlug = slug.join('/')
+  const audit = await AuditRepository.getAuditBySlug(joinedSlug)
 
   if (!audit) notFound()
 
   return (
     <main className="mx-auto max-w-4xl px-4 py-10 sm:px-6 sm:py-16 lg:py-24">
       <Link
-        href="/quality/"
-        className="group mb-8 flex items-center gap-2 text-xs font-bold tracking-widest text-zinc-500 uppercase transition-colors hover:text-white"
+        href="/es/quality/"
+        className="group mb-8 flex items-center gap-2 text-xs font-bold tracking-widest text-zinc-400 uppercase transition-colors hover:text-white"
       >
         <ArrowLeft className="h-3 w-3 transition-transform group-hover:-translate-x-1" />
-        Back to Dashboard
+        Volver al Panel de Calidad
       </Link>
 
       <article className="space-y-8">

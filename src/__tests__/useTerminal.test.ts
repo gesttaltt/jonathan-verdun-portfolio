@@ -90,6 +90,33 @@ describe('useTerminal', () => {
     expect(result.current.history).toHaveLength(0)
   })
 
+  it('execute("clear") does not reset the current path', () => {
+    const processor = makeProcessor()
+    ;(processor.process as jest.Mock).mockReturnValue({ output: 'ok', signal: 'vfs_update' })
+    processor.getCurrentPath = jest.fn(() => '/docs')
+
+    const { result } = renderHook(() => useTerminal([], processor))
+    act(() => {
+      jest.runAllTimers()
+    })
+
+    // First, change path
+    act(() => {
+      result.current.execute('cd docs')
+    })
+    expect(result.current.currentPath).toBe('/docs')
+
+    // Now clear
+    ;(processor.process as jest.Mock).mockReturnValue({ output: '', signal: 'clear' })
+    act(() => {
+      result.current.execute('clear')
+    })
+
+    expect(result.current.history).toHaveLength(0)
+    // BUG: currentPath should still be '/docs', but it's currently being reset to '/'
+    expect(result.current.currentPath).toBe('/docs')
+  })
+
   it('stops boot sequence and clears timeouts when execute("clear") is called during boot', () => {
     const commands = [
       { text: 'cmd1', output: 'out1', delay: 100 },

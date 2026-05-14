@@ -122,18 +122,24 @@ export class VirtualFileSystem {
       const targetParts = path.split('/').filter(Boolean)
       const tempPath = path.startsWith('/') ? [] : [...this.currentPath]
 
-      let node = path.startsWith('/') ? this.root : this.getCurrentNode()
-
       for (const part of targetParts) {
         if (part === '..') {
           if (tempPath.length > 0) tempPath.pop()
         } else if (part === '.') {
           // do nothing
-        } else if (node.children?.[part] && node.children[part].type === 'dir') {
-          node = node.children[part]
-          tempPath.push(part)
         } else {
-          return `cd: no such file or directory: ${path}`
+          // To validate the part, we need to traverse from root using tempPath
+          let node = this.root
+          for (const p of tempPath) {
+            /* istanbul ignore next */
+            node = node.children?.[p] as VFSNode
+          }
+
+          if (node.children?.[part] && node.children[part].type === 'dir') {
+            tempPath.push(part)
+          } else {
+            return `cd: no such file or directory: ${path}`
+          }
         }
       }
       this.currentPath = tempPath

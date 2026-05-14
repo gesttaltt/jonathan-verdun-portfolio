@@ -30,4 +30,16 @@ describe('VirtualFileSystem', () => {
     const error = vfs.cd('/README.md/nested')
     expect(error).toContain('no such file or directory')
   })
+
+  it('handles complex nested path with ".." correctly', () => {
+    const vfs = new VirtualFileSystem()
+    // Move to a subdirectory
+    vfs.cd('docs')
+    expect(vfs.pwd()).toBe('/docs')
+
+    // Navigate back and forth
+    const error = vfs.cd('specs/../../projects')
+    expect(error).toBeNull()
+    expect(vfs.pwd()).toBe('/projects')
+  })
 })

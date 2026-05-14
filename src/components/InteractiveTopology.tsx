@@ -5,6 +5,7 @@ import { Canvas } from '@react-three/fiber'
 import { EffectComposer, Bloom, Vignette } from '@react-three/postprocessing'
 import * as THREE from 'three'
 import { TopologyMesh } from './TopologyMesh'
+import { TopologyWrapper } from './TopologyWrapper'
 
 export const InteractiveTopology: React.FC<{
   mode?: 'p-adic' | 'hyperbolic'
@@ -63,7 +64,7 @@ export const InteractiveTopology: React.FC<{
   }, [])
 
   return (
-    <div className="bg-bg-deep fixed inset-0 z-0">
+    <TopologyWrapper showScanline={ctxLost}>
       <Canvas
         key={canvasKey}
         role="img"
@@ -102,18 +103,6 @@ export const InteractiveTopology: React.FC<{
         {/* Half the icosahedron subdivision detail on mobile (8 vs 16 segments). */}
         <TopologyMesh quality={isMobile ? quality * 0.5 : quality} mode={mode} />
       </Canvas>
-
-      {/* Shown only while the GL context is lost — covers the blank canvas. */}
-      {ctxLost && <div className="scanline absolute inset-0" aria-hidden="true" />}
-
-      <div
-        className="pointer-events-none absolute inset-0 opacity-5"
-        style={{
-          backgroundImage:
-            'linear-gradient(var(--grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line) 1px, transparent 1px)',
-          backgroundSize: '100px 100px',
-        }}
-      />
-    </div>
+    </TopologyWrapper>
   )
 }

@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react'
 import QualityPage from '@/app/(en)/quality/page'
 import QualityPageES from '@/app/(es)/es/quality/page'
-import AuditSlugPage from '@/app/(en)/quality/[slug]/page'
-import AuditSlugPageES from '@/app/(es)/es/quality/[slug]/page'
+import AuditSlugPage from '@/app/(en)/quality/[...slug]/page'
+import AuditSlugPageES from '@/app/(es)/es/quality/[...slug]/page'
 import { AuditRepository } from '@/lib/services/AuditRepository'
 import { I18nProvider } from '@/lib/i18n/context'
 import { notFound } from 'next/navigation'
@@ -29,6 +29,7 @@ const mockAudits = [
     date: '2026-05-11',
     content: '<p>HTML content</p>',
     excerpt: 'Excerpt',
+    category: 'audit',
   },
 ]
 
@@ -54,7 +55,7 @@ describe('Quality Pages', () => {
   })
 
   it('renders English Audit slug page', async () => {
-    const Result = await AuditSlugPage({ params: Promise.resolve({ slug: 'test-audit' }) })
+    const Result = await AuditSlugPage({ params: Promise.resolve({ slug: ['test-audit'] }) })
     render(<I18nProvider>{Result}</I18nProvider>)
     expect(screen.getByText('Test Audit')).toBeInTheDocument()
     expect(screen.getByText('2026-05-11')).toBeInTheDocument()
@@ -62,14 +63,14 @@ describe('Quality Pages', () => {
 
   it('renders Spanish Audit slug page', async () => {
     setMockPathname('/es/quality')
-    const Result = await AuditSlugPageES({ params: Promise.resolve({ slug: 'test-audit' }) })
+    const Result = await AuditSlugPageES({ params: Promise.resolve({ slug: ['test-audit'] }) })
     render(<I18nProvider>{Result}</I18nProvider>)
     expect(screen.getByText('Test Audit')).toBeInTheDocument()
   })
 
   it('calls notFound for non-existent audit slug', async () => {
     ;(AuditRepository.getAuditBySlug as jest.Mock).mockResolvedValue(null)
-    await expect(AuditSlugPage({ params: Promise.resolve({ slug: 'invalid' }) })).rejects.toThrow(
+    await expect(AuditSlugPage({ params: Promise.resolve({ slug: ['invalid'] }) })).rejects.toThrow(
       'NEXT_NOT_FOUND'
     )
     expect(notFound).toHaveBeenCalled()
@@ -77,21 +78,21 @@ describe('Quality Pages', () => {
 
   it('calls notFound for non-existent audit slug (ES)', async () => {
     ;(AuditRepository.getAuditBySlug as jest.Mock).mockResolvedValue(null)
-    await expect(AuditSlugPageES({ params: Promise.resolve({ slug: 'invalid' }) })).rejects.toThrow(
-      'NEXT_NOT_FOUND'
-    )
+    await expect(
+      AuditSlugPageES({ params: Promise.resolve({ slug: ['invalid'] }) })
+    ).rejects.toThrow('NEXT_NOT_FOUND')
     expect(notFound).toHaveBeenCalled()
   })
 
   it('generates static params from audits', async () => {
-    const { generateStaticParams } = await import('@/app/(en)/quality/[slug]/page')
+    const { generateStaticParams } = await import('@/app/(en)/quality/[...slug]/page')
     const params = await generateStaticParams()
-    expect(params).toEqual([{ slug: 'test-audit' }])
+    expect(params).toEqual([{ slug: ['test-audit'] }])
   })
 
   it('generates static params from audits (ES)', async () => {
-    const { generateStaticParams } = await import('@/app/(es)/es/quality/[slug]/page')
+    const { generateStaticParams } = await import('@/app/(es)/es/quality/[...slug]/page')
     const params = await generateStaticParams()
-    expect(params).toEqual([{ slug: 'test-audit' }])
+    expect(params).toEqual([{ slug: ['test-audit'] }])
   })
 })

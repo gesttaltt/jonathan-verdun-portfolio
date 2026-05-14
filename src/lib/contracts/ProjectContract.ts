@@ -9,6 +9,7 @@ export const PROJECT_DATA: ProjectSpec[] = [
     techStack: ['Appium', 'pytest', 'Azure DevOps', 'GitHub Actions'],
     link: 'https://github.com/gesttaltt/qa-arxiv-mobile',
     status: 'QA',
+    specLink: '/quality/specs/TESTING',
     stats: [
       { label: 'Automated', value: '26' },
       { label: 'Manual Cases', value: '10' },
@@ -22,6 +23,7 @@ export const PROJECT_DATA: ProjectSpec[] = [
     techStack: ['FastAPI', 'pytest', 'Docker', 'Security Audit'],
     link: 'https://github.com/gesttaltt/codon-encoding-api',
     status: 'Deployed',
+    specLink: '/quality/specs/CONTRACTS',
     stats: [
       { label: 'Tests', value: '96' },
       { label: 'Endpoints', value: '8' },
@@ -35,6 +37,7 @@ export const PROJECT_DATA: ProjectSpec[] = [
     techStack: ['Playwright', 'Jest', 'CI/CD', 'RCA'],
     link: 'https://github.com/gesttaltt/yt-transcript-api',
     status: 'Deployed',
+    specLink: '/quality/specs/ARCHITECTURE',
     stats: [
       { label: 'Tests', value: '230+' },
       { label: 'Layers', value: '3' },
@@ -48,6 +51,7 @@ export const PROJECT_DATA: ProjectSpec[] = [
     techStack: ['Next.js', 'Playwright', 'Jest', 'fast-check'],
     link: 'https://github.com/gesttaltt/jonathan-verdun-portfolio',
     status: 'QA',
+    specLink: '/quality/specs/TESTING',
     stats: [
       { label: 'Tests', value: '239' },
       { label: 'Coverage', value: '100%' },
@@ -61,6 +65,7 @@ export const PROJECT_DATA: ProjectSpec[] = [
     techStack: ['Python', 'NumPy', 'GnomAD', 'Genomics'],
     link: 'https://github.com/gesttaltt/variant-analysis-pipeline',
     status: 'Research',
+    specLink: '/quality/specs/ARCHITECTURE',
     stats: [
       { label: 'vs Native Python', value: '~120×' },
       { label: 'Functionomes', value: 'Yes' },
@@ -74,6 +79,7 @@ export const PROJECT_DATA: ProjectSpec[] = [
     techStack: ['PyTorch', '3-Adic Analysis', 'Geometric DL'],
     link: 'https://github.com/gesttaltt/3-adic-valuation-vae',
     status: 'Research',
+    specLink: '/quality/specs/SHADERS',
     stats: [
       { label: 'Tests', value: '280' },
       { label: 'ARI', value: '0.844' },
@@ -87,6 +93,7 @@ export const PROJECT_DATA: ProjectSpec[] = [
     techStack: ['Python', 'C++', 'Apache Spark', 'Gene Ontology'],
     link: 'https://github.com/gesttaltt/gene-ontology-functionomes',
     status: 'Research',
+    specLink: '/quality/specs/ARCHITECTURE',
     stats: [
       { label: 'C++ vs Python', value: '5-25×' },
       { label: 'Scale', value: '10M+ annotations' },

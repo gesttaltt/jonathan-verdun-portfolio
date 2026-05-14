@@ -9,4 +9,5 @@ export interface ProjectSpec {
     label: string
     value: string
   }[]
+  specLink?: string
 }

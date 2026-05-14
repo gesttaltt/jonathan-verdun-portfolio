@@ -12,7 +12,7 @@ export const VisualTestSummary: React.FC = () => {
 
   const { numPassedTests, numTotalTests, numFailedTests, startTime, success } = coverageData
 
-  const passRate = ((numPassedTests / numTotalTests) * 100).toFixed(1)
+  const passRate = numTotalTests > 0 ? ((numPassedTests / numTotalTests) * 100).toFixed(1) : '0.0'
   const date = new Date(startTime).toLocaleDateString(t.lang === 'es' ? 'es-ES' : 'en-US', {
     month: 'short',
     day: 'numeric',
@@ -39,7 +39,7 @@ export const VisualTestSummary: React.FC = () => {
 
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
         <div className="space-y-1">
-          <p className="text-[10px] font-bold text-zinc-500 uppercase">{vt.executionStatus}</p>
+          <p className="text-[10px] font-bold text-zinc-400 uppercase">{vt.executionStatus}</p>
           <div className="flex items-center gap-2">
             {success ? (
               <CheckCircle2 className="h-4 w-4 text-green-500" />
@@ -51,17 +51,17 @@ export const VisualTestSummary: React.FC = () => {
         </div>
 
         <div className="space-y-1">
-          <p className="text-[10px] font-bold text-zinc-500 uppercase">{vt.testPayload}</p>
+          <p className="text-[10px] font-bold text-zinc-400 uppercase">{vt.testPayload}</p>
           <div className="flex items-baseline gap-1">
             <span className="text-2xl font-black text-white">{numPassedTests}</span>
-            <span className="text-xs font-bold text-zinc-500">
+            <span className="text-xs font-bold text-zinc-400">
               / {numTotalTests} {vt.assertions}
             </span>
           </div>
         </div>
 
         <div className="space-y-1">
-          <p className="text-[10px] font-bold text-zinc-500 uppercase">{vt.verificationRate}</p>
+          <p className="text-[10px] font-bold text-zinc-400 uppercase">{vt.verificationRate}</p>
           <div className="flex items-baseline gap-1">
             <span className="text-2xl font-black text-green-400">{passRate}%</span>
             <div className="h-1.5 w-12 overflow-hidden rounded-full bg-white/10">
@@ -75,9 +75,9 @@ export const VisualTestSummary: React.FC = () => {
         </div>
 
         <div className="space-y-1">
-          <p className="text-[10px] font-bold text-zinc-500 uppercase">{vt.lastVerified}</p>
+          <p className="text-[10px] font-bold text-zinc-400 uppercase">{vt.lastVerified}</p>
           <div className="flex items-center gap-2 text-xs font-medium text-zinc-300">
-            <Clock className="h-3.5 w-3.5 text-zinc-500" />
+            <Clock className="h-3.5 w-3.5 text-zinc-400" />
             {date}
           </div>
         </div>

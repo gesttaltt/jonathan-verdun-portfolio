@@ -6,12 +6,13 @@ import type { AuditEntry } from '@/lib/services/AuditRepository'
 
 const mockAudits: AuditEntry[] = [
   {
-    id: 'TEST_PLAN',
-    slug: 'TEST_PLAN',
+    id: 'specs/TEST_PLAN',
+    slug: 'specs/TEST_PLAN',
     title: 'Test Plan',
     date: '2026-05-01',
     content: 'Plan content',
     excerpt: 'Plan...',
+    category: 'spec',
   },
   {
     id: 'audit-1',
@@ -20,6 +21,7 @@ const mockAudits: AuditEntry[] = [
     date: '2026-05-02',
     content: 'Audit content',
     excerpt: 'Audit excerpt text',
+    category: 'audit',
   },
   {
     id: 'audit-2',
@@ -28,6 +30,7 @@ const mockAudits: AuditEntry[] = [
     date: '2026-05-03',
     content: 'Visual content',
     excerpt: 'Snapshots...',
+    category: 'audit',
   },
 ]
 
@@ -41,7 +44,7 @@ describe('QualityDashboard', () => {
 
   it('renders formal quality artifacts separately', () => {
     renderDashboard()
-    expect(screen.getByText('Formal Quality Artifacts')).toBeInTheDocument()
+    expect(screen.getByText(/The QA Handbook/i)).toBeInTheDocument()
     expect(screen.getByText('Test Plan')).toBeInTheDocument()
   })
 
@@ -105,9 +108,11 @@ describe('QualityDashboard', () => {
 
   it('displays correct counts and status', () => {
     renderDashboard()
-    // 2 general audits in mock
+    // 2 chronological audits in mock
     expect(screen.getByText('2')).toBeInTheDocument()
     expect(screen.getByText('Audits Published')).toBeInTheDocument()
-    expect(screen.getByText('LOCKED')).toBeInTheDocument()
+    // 1 spec in mock
+    expect(screen.getByText('1')).toBeInTheDocument()
+    expect(screen.getByText('Architecture Specs')).toBeInTheDocument()
   })
 })

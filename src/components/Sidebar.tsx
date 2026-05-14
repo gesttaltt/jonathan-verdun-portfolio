@@ -15,18 +15,21 @@ const GATES = [
     value: siteConfig.performanceMetrics.unitCoverage,
     color: 'blue',
     icon: ShieldCheck,
+    link: '/quality/specs/TESTING',
   },
   {
     key: 'automationRateLabel',
     value: siteConfig.performanceMetrics.automationRate,
     color: 'cyan',
     icon: Zap,
+    link: '/quality/specs/ARCHITECTURE',
   },
   {
     key: 'securityScanLabel',
     value: siteConfig.performanceMetrics.securityStatus,
     color: 'green',
     icon: Lock,
+    link: '/quality/specs/DEVOPS',
   },
 ] as const
 
@@ -79,7 +82,9 @@ export const Sidebar: React.FC = () => {
         }
       } catch (err) {
         /* istanbul ignore next */
-        console.error('Failed to fetch CI status:', err)
+        if (process.env.NODE_ENV !== 'test') {
+          console.error('Failed to fetch CI status:', err)
+        }
         /* istanbul ignore next */
         if (mounted) setCiStatus('error')
       }
@@ -114,7 +119,7 @@ export const Sidebar: React.FC = () => {
 
   const ciTheme = {
     loading: {
-      color: 'text-zinc-500',
+      color: 'text-zinc-400',
       bg: 'bg-zinc-500/10',
       label: t.sections.sidebar.ciStatusLoading,
     },
@@ -169,13 +174,20 @@ export const Sidebar: React.FC = () => {
 
               return (
                 <m.div key={gate.key} variants={staggerItemVariants()} className="space-y-2">
-                  <div className="flex items-center justify-between text-[10px] font-bold tracking-widest text-zinc-400 uppercase sm:text-xs">
+                  <Link
+                    href={gate.link}
+                    className="group/gate flex items-center justify-between text-[10px] font-bold tracking-widest text-zinc-400 uppercase transition-colors hover:text-white sm:text-xs"
+                  >
                     <span className="flex items-center gap-2">
-                      <gate.icon className={`h-3 w-3 ${textColors}`} />
+                      <gate.icon
+                        className={`h-3 w-3 ${textColors} transition-transform group-hover/gate:scale-110`}
+                      />
                       {label}
                     </span>
-                    <span className={textColors}>{gate.value}</span>
-                  </div>
+                    <span className={`${textColors} transition-colors group-hover/gate:text-white`}>
+                      {gate.value}
+                    </span>
+                  </Link>
                   <div className="h-1.5 w-full overflow-hidden rounded-full bg-white/5">
                     <m.div
                       initial={{ width: 0 }}
@@ -192,7 +204,7 @@ export const Sidebar: React.FC = () => {
 
           <div className="mt-8 border-t border-white/5 pt-5">
             <div className="flex items-center justify-between">
-              <p className="text-[10px] font-bold tracking-widest text-zinc-500 uppercase sm:text-xs">
+              <p className="text-[10px] font-bold tracking-widest text-zinc-400 uppercase sm:text-xs">
                 {t.sections.sidebar.livePipelineLabel}
               </p>
               <div
@@ -250,7 +262,7 @@ export const Sidebar: React.FC = () => {
 
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-1">
-                  <p className="text-[10px] font-bold tracking-tighter text-zinc-500 uppercase">
+                  <p className="text-[10px] font-bold tracking-tighter text-zinc-400 uppercase">
                     {t.sections.sidebar.certificationStatusLabel}
                   </p>
                   <p className="text-xs font-medium text-amber-400">
@@ -258,7 +270,7 @@ export const Sidebar: React.FC = () => {
                   </p>
                 </div>
                 <div className="space-y-1">
-                  <p className="text-[10px] font-bold tracking-tighter text-zinc-500 uppercase">
+                  <p className="text-[10px] font-bold tracking-tighter text-zinc-400 uppercase">
                     {t.sections.sidebar.certificationExpectedLabel}
                   </p>
                   <p className="text-xs font-medium text-white">

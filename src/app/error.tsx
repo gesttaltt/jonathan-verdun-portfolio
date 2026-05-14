@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useEffect } from 'react'
+import { useTranslation } from '@/lib/i18n/context'
 
 interface ErrorProps {
   error: Error & { digest?: string }
@@ -9,6 +10,8 @@ interface ErrorProps {
 }
 
 export default function GlobalError({ error, reset }: ErrorProps) {
+  const t = useTranslation()
+
   useEffect(() => {
     console.error(error)
   }, [error])
@@ -21,7 +24,8 @@ export default function GlobalError({ error, reset }: ErrorProps) {
             <span className="text-blue-500">$</span> process.runtime
           </p>
           <p>
-            <span className="text-amber-500/80">⚠</span> Uncaught runtime error
+            <span className="text-amber-500/80">⚠</span>{' '}
+            {t.lang === 'es' ? 'Error de ejecución no capturado' : 'Uncaught runtime error'}
           </p>
           {error.digest && (
             <p>
@@ -32,23 +36,26 @@ export default function GlobalError({ error, reset }: ErrorProps) {
         </div>
 
         <p className="mb-2 text-[10px] font-bold tracking-widest text-zinc-300 uppercase sm:text-xs">
-          Runtime Error
+          {t.lang === 'es' ? 'Error de ejecución' : 'Runtime Error'}
         </p>
         <h1 className="mb-4 text-8xl font-bold tracking-tight text-white">500</h1>
-        <p className="mb-10 text-sm text-zinc-300">Something went wrong.</p>
+        <p className="mb-10 text-sm text-zinc-300">
+          {t.lang === 'es' ? 'Algo salió mal.' : 'Something went wrong.'}
+        </p>
 
         <div className="flex flex-wrap gap-3">
           <button
             onClick={reset}
             className="focus-visible:ring-offset-background inline-flex items-center gap-2 rounded-lg border border-amber-500/30 bg-amber-500/10 px-5 py-2.5 text-sm font-semibold text-amber-300 transition-all hover:border-amber-500/50 hover:bg-amber-500/20 focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2 focus-visible:outline-none"
           >
-            ↺ Try again
+            ↺ {t.lang === 'es' ? 'Reintentar' : 'Try again'}
           </button>
           <Link
-            href="/"
+            href={t.lang === 'es' ? '/es/' : '/'}
             className="focus-visible:ring-offset-background inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-5 py-2.5 text-sm font-semibold text-white transition-all hover:border-blue-500/40 hover:bg-white/10 hover:shadow-[0_0_20px_var(--glow-blue)] focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none"
           >
-            <span className="text-blue-500">~/</span> Return home
+            <span className="text-blue-500">~/</span>{' '}
+            {t.lang === 'es' ? 'Volver al inicio' : 'Return home'}
           </Link>
         </div>
       </div>

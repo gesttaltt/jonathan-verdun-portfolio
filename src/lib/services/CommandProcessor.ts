@@ -40,7 +40,21 @@ export class DefaultCommandProcessor implements ICommandProcessor {
       projects.forEach((p) => {
         const id = p.title.toLowerCase().replace(/\s+/g, '-')
         this.vfs.addProject(id, p.title)
+
+        // Add a mock 'README.md' for each project in the VFS
+        this.vfs.cd('/projects')
+        const projectDir = this.vfs.getCurrentNode().children?.[id]
+        if (projectDir) {
+          projectDir.children = projectDir.children || {}
+          projectDir.children['summary.txt'] = {
+            name: 'summary.txt',
+            type: 'file',
+            permissions: '-rw-r--r--',
+            content: `Project: ${p.title}\nStatus: ${'status' in p ? p.status : 'Active'}\n\nType "cd .." to go back or "ls /docs" for audits.`,
+          }
+        }
       })
+      this.vfs.cd('/')
     }
   }
 

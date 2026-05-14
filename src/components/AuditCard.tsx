@@ -25,7 +25,7 @@ export const AuditCard: React.FC<AuditCardProps> = ({ audit }) => {
         <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-amber-500/10 text-amber-500">
           <FileText className="h-5 w-5" />
         </div>
-        <div className="flex items-center gap-2 text-[10px] font-bold tracking-tighter text-zinc-500 uppercase sm:text-xs">
+        <div className="flex items-center gap-2 text-[10px] font-bold tracking-tighter text-zinc-400 uppercase sm:text-xs">
           <Calendar className="h-3 w-3" />
           {audit.date}
         </div>

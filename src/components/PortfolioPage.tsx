@@ -11,6 +11,7 @@ import { ErrorBoundary } from '@/components/ErrorBoundary'
 import { HeroHeader } from '@/components/HeroHeader'
 import { SectionHeader } from '@/components/SectionHeader'
 import { Sidebar } from '@/components/Sidebar'
+import { VisualTestSummary } from '@/components/VisualTestSummary'
 import { ResearchSection } from '@/components/ResearchSection'
 import { TopologyLoader } from '@/components/TopologyLoader'
 import { ProjectProvider } from '@/components/hooks/useProjects'
@@ -83,6 +84,9 @@ export const PortfolioPage: React.FC = () => {
               />
               <div id="qa-philosophy-grid">
                 <QAPhilosophyGrid />
+              </div>
+              <div className="mt-8">
+                <VisualTestSummary />
               </div>
             </section>
 

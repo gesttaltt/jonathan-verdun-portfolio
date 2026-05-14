@@ -10,21 +10,23 @@ jest.mock('marked')
 
 describe('AuditRepository', () => {
   const mockDocsPath = path.join(process.cwd(), 'docs')
+  const mockSpecsPath = path.join(process.cwd(), 'docs', 'specs')
 
   beforeEach(() => {
     jest.clearAllMocks()
   })
 
   describe('getAudits', () => {
-    it('returns empty array if docs directory does not exist', async () => {
+    it('returns empty array if docs and specs directories do not exist', async () => {
       ;(fs.existsSync as jest.Mock).mockReturnValue(false)
       const audits = await AuditRepository.getAudits()
       expect(audits).toEqual([])
       expect(fs.existsSync).toHaveBeenCalledWith(mockDocsPath)
+      expect(fs.existsSync).toHaveBeenCalledWith(mockSpecsPath)
     })
 
     it('returns parsed audits from markdown files', async () => {
-      ;(fs.existsSync as jest.Mock).mockReturnValue(true)
+      ;(fs.existsSync as jest.Mock).mockImplementation((path) => path === mockDocsPath)
       ;(fs.readdirSync as jest.Mock).mockReturnValue(['audit1.md', 'README.md', 'other.txt'])
       ;(fs.readFileSync as jest.Mock).mockReturnValue('content')
       ;(matter as unknown as jest.Mock).mockReturnValue({
@@ -43,11 +45,36 @@ describe('AuditRepository', () => {
         date: '2026-05-11',
         content: '<p>Some content</p>',
         excerpt: ' Test Audit\nSome content...',
+        category: 'audit',
+      })
+    })
+
+    it('returns specs from the specs directory', async () => {
+      ;(fs.existsSync as jest.Mock).mockImplementation((path) => path === mockSpecsPath)
+      ;(fs.readdirSync as jest.Mock).mockReturnValue(['spec1.md'])
+      ;(fs.readFileSync as jest.Mock).mockReturnValue('content')
+      ;(matter as unknown as jest.Mock).mockReturnValue({
+        data: { title: 'Test Spec' },
+        content: '# Test Spec\nSome content',
+      })
+      ;(marked.parse as unknown as jest.Mock).mockReturnValue('<p>Some content</p>')
+
+      const audits = await AuditRepository.getAudits()
+
+      expect(audits).toHaveLength(1)
+      expect(audits[0]!).toEqual({
+        id: 'specs/spec1',
+        slug: 'specs/spec1',
+        title: 'Test Spec',
+        date: '2026-05-01',
+        content: '<p>Some content</p>',
+        excerpt: ' Test Spec\nSome content...',
+        category: 'spec',
       })
     })
 
     it('extracts title and date from content/filename if missing in frontmatter', async () => {
-      ;(fs.existsSync as jest.Mock).mockReturnValue(true)
+      ;(fs.existsSync as jest.Mock).mockImplementation((path) => path === mockDocsPath)
       ;(fs.readdirSync as jest.Mock).mockReturnValue(['2026-05-10-test.md'])
       ;(fs.readFileSync as jest.Mock).mockReturnValue('content')
       ;(matter as unknown as jest.Mock).mockReturnValue({
@@ -63,7 +90,7 @@ describe('AuditRepository', () => {
     })
 
     it('sorts audits by date descending', async () => {
-      ;(fs.existsSync as jest.Mock).mockReturnValue(true)
+      ;(fs.existsSync as jest.Mock).mockImplementation((path) => path === mockDocsPath)
       ;(fs.readdirSync as jest.Mock).mockReturnValue(['a.md', 'b.md'])
       ;(fs.readFileSync as jest.Mock).mockReturnValue('content')
       ;(matter as unknown as jest.Mock)
@@ -74,20 +101,6 @@ describe('AuditRepository', () => {
       const audits = await AuditRepository.getAudits()
       expect(audits[0]!.date).toBe('2026-05-10')
       expect(audits[1]!.date).toBe('2026-05-01')
-    })
-
-    it('falls back to default date if none found', async () => {
-      ;(fs.existsSync as jest.Mock).mockReturnValue(true)
-      ;(fs.readdirSync as jest.Mock).mockReturnValue(['no-date-file.md'])
-      ;(fs.readFileSync as jest.Mock).mockReturnValue('content')
-      ;(matter as unknown as jest.Mock).mockReturnValue({
-        data: {},
-        content: 'Content',
-      })
-      ;(marked.parse as unknown as jest.Mock).mockReturnValue('html')
-
-      const audits = await AuditRepository.getAudits()
-      expect(audits[0]!.date).toBe('2026-05-01')
     })
   })
 
@@ -113,19 +126,25 @@ describe('AuditRepository', () => {
       expect(audit).not.toBeNull()
       expect(audit?.slug).toBe(slug)
       expect(audit?.title).toBe('Specific Audit')
+      expect(audit?.category).toBe('audit')
     })
 
-    it('falls back to default date in getAuditBySlug', async () => {
+    it('returns parsed spec for a given specs/ slug', async () => {
+      const slug = 'specs/test-spec'
       ;(fs.existsSync as jest.Mock).mockReturnValue(true)
       ;(fs.readFileSync as jest.Mock).mockReturnValue('content')
       ;(matter as unknown as jest.Mock).mockReturnValue({
-        data: {},
+        data: { title: 'Specific Spec' },
         content: 'Content',
       })
       ;(marked.parse as unknown as jest.Mock).mockReturnValue('html')
 
-      const audit = await AuditRepository.getAuditBySlug('no-date')
-      expect(audit?.date).toBe('2026-05-01')
+      const audit = await AuditRepository.getAuditBySlug(slug)
+
+      expect(audit).not.toBeNull()
+      expect(audit?.slug).toBe(slug)
+      expect(audit?.title).toBe('Specific Spec')
+      expect(audit?.category).toBe('spec')
     })
   })
 })

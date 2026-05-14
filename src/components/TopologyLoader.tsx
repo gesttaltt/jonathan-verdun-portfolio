@@ -1,6 +1,7 @@
 'use client'
 
 import dynamic from 'next/dynamic'
+import { TopologyWrapper } from './TopologyWrapper'
 
 export const TopologyLoader = dynamic(
   () =>
@@ -39,13 +40,6 @@ export const TopologyLoader = dynamic(
     ),
   {
     ssr: false,
-    loading: () => (
-      <div className="bg-bg-deep fixed inset-0 z-0">
-        {/* The scanline and gradient here serve as both the loading state 
-            and the permanent fallback if the WebGL module fails to load. */}
-        <div className="scanline" />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-blue-900/20 via-transparent to-purple-900/20 opacity-50" />
-      </div>
-    ),
+    loading: () => <TopologyWrapper />,
   }
 )

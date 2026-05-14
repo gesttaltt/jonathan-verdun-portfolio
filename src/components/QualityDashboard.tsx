@@ -7,6 +7,7 @@ import { AuditCard } from './AuditCard'
 import { SectionHeader } from './SectionHeader'
 import { FadeInSection } from './FadeInSection'
 import { VisualTestSummary } from './VisualTestSummary'
+import { TestDetailedList } from './TestDetailedList'
 import { containerVariants, staggerItemVariants, SCROLL_VIEWPORT } from '@/lib/animations'
 import { useTranslation } from '@/lib/i18n/context'
 import type { AuditEntry } from '@/lib/services/AuditRepository'
@@ -19,19 +20,18 @@ export const QualityDashboard: React.FC<QualityDashboardProps> = ({ audits }) =>
   const t = useTranslation()
   const [searchQuery, setSearchQuery] = useState('')
 
-  // Filter out the formal artifacts from the chronological audit list
-  const coreArtifacts = audits.filter((a) => ['TEST_PLAN', 'TRACEABILITY_MATRIX'].includes(a.slug))
-  const generalAudits = audits.filter(
-    (a) => !['TEST_PLAN', 'TRACEABILITY_MATRIX', 'GITHUB_PROFILE_README_TEMPLATE'].includes(a.slug)
-  )
+  // Formal specifications and architectural contracts (The QA Handbook)
+  const handbookSpecs = audits.filter((a) => a.category === 'spec')
+  // Chronological audits and reports
+  const chronologicalAudits = audits.filter((a) => a.category === 'audit')
 
   const filteredAudits = useMemo(() => {
-    if (!searchQuery.trim()) return generalAudits
+    if (!searchQuery.trim()) return chronologicalAudits
     const query = searchQuery.toLowerCase()
-    return generalAudits.filter(
+    return chronologicalAudits.filter(
       (a) => a.title.toLowerCase().includes(query) || a.excerpt.toLowerCase().includes(query)
     )
-  }, [generalAudits, searchQuery])
+  }, [chronologicalAudits, searchQuery])
 
   return (
     <div className="space-y-16">
@@ -45,30 +45,32 @@ export const QualityDashboard: React.FC<QualityDashboardProps> = ({ audits }) =>
 
           <VisualTestSummary />
 
+          <TestDetailedList />
+
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
             <div className="rounded-xl border border-white/5 bg-white/5 p-4 text-center">
               <SearchIcon className="mx-auto mb-2 h-5 w-5 text-amber-500" />
-              <p className="text-xl font-bold text-white">{generalAudits.length}</p>
-              <p className="text-[10px] font-bold text-zinc-500 uppercase">Audits Published</p>
+              <p className="text-xl font-bold text-white">{chronologicalAudits.length}</p>
+              <p className="text-[10px] font-bold text-zinc-400 uppercase">Audits Published</p>
             </div>
             <div className="rounded-xl border border-white/5 bg-white/5 p-4 text-center">
               <ShieldCheck className="mx-auto mb-2 h-5 w-5 text-blue-500" />
-              <p className="text-xl font-bold text-white">LOCKED</p>
-              <p className="text-[10px] font-bold text-zinc-500 uppercase">System Integrity</p>
+              <p className="text-xl font-bold text-white">{handbookSpecs.length}</p>
+              <p className="text-[10px] font-bold text-zinc-400 uppercase">Architecture Specs</p>
             </div>
           </div>
         </div>
       </FadeInSection>
 
-      {/* Core Quality Artifacts (ISTQB Documents) */}
+      {/* The QA Handbook (Architectural Specifications) */}
       {!searchQuery.trim() && (
         <section className="space-y-6">
-          <h3 className="text-sm font-bold tracking-widest text-zinc-500 uppercase">
-            Formal Quality Artifacts
+          <h3 className="text-sm font-bold tracking-widest text-zinc-400 uppercase">
+            The QA Handbook — Architectural Specifications
           </h3>
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-            {coreArtifacts.map((artifact) => (
-              <AuditCard key={artifact.id} audit={artifact} />
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {handbookSpecs.map((spec) => (
+              <AuditCard key={spec.id} audit={spec} />
             ))}
           </div>
         </section>
@@ -76,12 +78,12 @@ export const QualityDashboard: React.FC<QualityDashboardProps> = ({ audits }) =>
 
       <section className="space-y-8">
         <div className="flex flex-col justify-between gap-4 border-b border-white/10 pb-6 sm:flex-row sm:items-end">
-          <h3 className="text-sm font-bold tracking-widest text-zinc-500 uppercase">
+          <h3 className="text-sm font-bold tracking-widest text-zinc-400 uppercase">
             Chronological Audit History
           </h3>
 
           <div className="relative w-full max-w-sm">
-            <SearchIcon className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-zinc-500" />
+            <SearchIcon className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-zinc-400" />
             <input
               type="text"
               placeholder={t.sections.searchPlaceholder}
@@ -92,7 +94,7 @@ export const QualityDashboard: React.FC<QualityDashboardProps> = ({ audits }) =>
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery('')}
-                className="absolute top-1/2 right-3 -translate-y-1/2 text-zinc-500 hover:text-white"
+                className="absolute top-1/2 right-3 -translate-y-1/2 text-zinc-400 hover:text-white"
               >
                 <X className="h-4 w-4" />
               </button>

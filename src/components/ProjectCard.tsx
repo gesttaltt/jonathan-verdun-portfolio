@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { m } from 'framer-motion'
-import { ExternalLink, Terminal } from 'lucide-react'
+import { ExternalLink, Terminal, ShieldCheck } from 'lucide-react'
 import Link from 'next/link'
 import { ProjectSpec } from '@/lib/contracts/ProjectContract.types'
 import { fadeUpVariants } from '@/lib/animations'
@@ -40,17 +40,28 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
               {project.status}
             </span>
           </div>
-          {project.link && (
-            <Link
-              href={project.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`View ${project.title} on GitHub (opens in new tab)`}
-              className="focus-visible:ring-offset-background flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full bg-white/5 p-2.5 text-zinc-300 transition-colors hover:bg-blue-500/20 hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none"
-            >
-              <ExternalLink className="h-4 w-4" />
-            </Link>
-          )}
+          <div className="flex gap-2">
+            {project.specLink && (
+              <Link
+                href={project.specLink}
+                aria-label={`View ${project.title} specification`}
+                className="focus-visible:ring-offset-background flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full bg-white/5 p-2.5 text-zinc-300 transition-colors hover:bg-purple-500/20 hover:text-white focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2 focus-visible:outline-none"
+              >
+                <ShieldCheck className="h-4 w-4" />
+              </Link>
+            )}
+            {project.link && (
+              <Link
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`View ${project.title} on GitHub (opens in new tab)`}
+                className="focus-visible:ring-offset-background flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full bg-white/5 p-2.5 text-zinc-300 transition-colors hover:bg-blue-500/20 hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none"
+              >
+                <ExternalLink className="h-4 w-4" />
+              </Link>
+            )}
+          </div>
         </div>
 
         <h3 className="mb-2 text-base font-bold text-white transition-colors group-hover:text-cyan-400">
