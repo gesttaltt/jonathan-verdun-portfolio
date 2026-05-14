@@ -39,7 +39,6 @@ test.describe('Layout Integrity & Viewports', () => {
           // On smaller screens, the sidebar should either be hidden or stacked
           // (Current design stacks it or hides specific sub-elements)
           // Adjust this assertion based on the specific implementation (e.g., hidden via CSS)
-          const isVisible = await sidebar.isVisible()
           if (viewport.width < 768) {
             // If fully hidden on mobile:
             // await expect(sidebar).not.toBeVisible()
