@@ -17,6 +17,7 @@ export function buildMetadata(lang: 'en' | 'es'): Metadata {
   const canonical = isEs ? `${siteConfig.url}/es/` : siteConfig.url
   const locale = isEs ? 'es_ES' : siteConfig.locale
   const ogImageUrl = `${canonical.replace(/\/$/, '')}/opengraph-image`
+  const withBase = (path: string) => `${siteConfig.basePath}${path}`
 
   return {
     metadataBase: new URL(siteConfig.url),
@@ -24,14 +25,14 @@ export function buildMetadata(lang: 'en' | 'es'): Metadata {
     description,
     authors: [{ name: siteConfig.name }],
     creator: siteConfig.name,
-    manifest: '/manifest.json',
+    manifest: withBase('/manifest.json'),
     icons: {
       icon: [
-        { url: '/favicon.svg', type: 'image/svg+xml' },
-        { url: '/icon-192.png', sizes: '192x192', type: 'image/png' },
-        { url: '/icon-512.png', sizes: '512x512', type: 'image/png' },
+        { url: withBase('/favicon.svg'), type: 'image/svg+xml' },
+        { url: withBase('/icon-192.png'), sizes: '192x192', type: 'image/png' },
+        { url: withBase('/icon-512.png'), sizes: '512x512', type: 'image/png' },
       ],
-      apple: [{ url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
+      apple: [{ url: withBase('/apple-touch-icon.png'), sizes: '180x180', type: 'image/png' }],
     },
     robots: { index: true, follow: true },
     alternates: {

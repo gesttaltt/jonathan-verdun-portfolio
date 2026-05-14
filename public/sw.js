@@ -6,12 +6,12 @@
 
 const CACHE_NAME = 'portfolio-v1-hardened'
 const STATIC_ASSETS = [
-  '/',
-  '/manifest.json',
-  '/favicon.svg',
-  '/icon-192.png',
-  '/icon-512.png',
-  '/fonts/JetBrainsMono-Bold.ttf',
+  './',
+  './manifest.json',
+  './favicon.svg',
+  './icon-192.png',
+  './icon-512.png',
+  './fonts/JetBrainsMono-Bold.ttf',
 ]
 
 // Patterns to exclude from dynamic caching (e.g., telemetry, external scripts)
@@ -60,7 +60,7 @@ self.addEventListener('fetch', (event) => {
         // Cache static files dynamically (JS chunks, CSS, images, etc.)
         if (
           networkResponse.status === 200 &&
-          (url.pathname.startsWith('/_next/static/') ||
+          (url.pathname.includes('/_next/static/') ||
             url.pathname.endsWith('.png') ||
             url.pathname.endsWith('.jpg') ||
             url.pathname.endsWith('.svg') ||
