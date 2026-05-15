@@ -93,7 +93,7 @@ export const QualityDashboard: React.FC<QualityDashboardProps> = ({ audits }) =>
               placeholder={t.sections.searchPlaceholder}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="light:border-zinc-200 light:bg-white text-text-primary light:focus:border-amber-400 w-full rounded-lg border border-white/10 bg-white/5 py-2 pr-10 pl-9 text-sm transition-colors focus:border-amber-500/50 focus:bg-white/10 focus:outline-none"
+              className="light:border-zinc-200 light:bg-white text-text-primary light:focus:border-amber-400 w-full rounded-lg border border-white/10 bg-white/5 py-2 pr-10 pl-10 text-sm transition-colors focus:border-amber-500/50 focus:bg-white/10 focus:outline-none"
             />
             {searchQuery && (
               <button

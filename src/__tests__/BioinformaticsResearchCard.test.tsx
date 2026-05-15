@@ -56,7 +56,7 @@ describe('BioinformaticsResearchCard — unknown focus key (fallback branches)',
 
   it('renders an empty description when focus is unknown', () => {
     const { container } = wrap(unknownSpec)
-    const descEl = container.querySelector('p.mb-4')
+    const descEl = container.querySelector('p.mb-6')
     expect(descEl?.textContent).toBe('')
   })
 

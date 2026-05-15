@@ -18,37 +18,39 @@ export const SystemSpecCard: React.FC<SystemSpecCardProps> = ({ spec }) => {
   return (
     <m.div
       variants={staggerItemVariants()}
-      className="group bg-bg-card hover:bg-bg-card-hover light:border-zinc-200 light:hover:shadow-xl light:hover:shadow-cyan-500/5 relative overflow-hidden rounded-2xl border border-white/10 p-6 transition-all duration-300 hover:border-cyan-500/30 hover:shadow-[0_0_24px_var(--glow-cyan)]"
+      className="group bg-bg-card hover:bg-bg-card-hover light:border-zinc-200 light:hover:shadow-xl light:hover:shadow-cyan-500/5 relative overflow-hidden rounded-2xl border border-white/10 p-6 transition-all duration-300 hover:border-cyan-500/30 hover:shadow-[0_0_24px_var(--glow-cyan)] sm:p-8"
     >
-      <div className="mb-4 flex items-center justify-between">
+      <div className="mb-6 flex items-center justify-between">
         <h3 className="flex items-center gap-2 text-base font-bold tracking-wide text-cyan-300 uppercase">
-          <FlaskConical className="h-4 w-4" /> {spec.focus}
+          <FlaskConical className="h-5 w-5" /> {spec.focus}
         </h3>
-        <Cpu className="text-text-tertiary h-4 w-4 transition-colors group-hover:text-cyan-300" />
+        <Cpu className="text-text-tertiary h-5 w-5 transition-colors group-hover:text-cyan-300" />
       </div>
-      <div className="text-text-secondary space-y-3 text-sm leading-relaxed">
+      <div className="text-text-secondary space-y-4 text-sm leading-relaxed">
         <p>
-          {t.architecture.methodologyLabel}:{' '}
+          <span className="text-text-muted text-[11px] font-black uppercase sm:text-xs">
+            {t.architecture.methodologyLabel}:
+          </span>{' '}
           <span className="text-text-primary font-bold">{spec.methodology}</span>
         </p>
         <div>
           <span className="text-text-muted text-[11px] font-black uppercase sm:text-xs">
             {t.architecture.invariantsLabel}:
           </span>
-          <p className="text-text-tertiary mt-1 text-xs font-medium">
+          <p className="text-text-tertiary mt-1.5 text-xs leading-relaxed font-medium">
             {spec.invariants.join(' · ')}
           </p>
         </div>
         {spec.link && (
-          <div className="flex min-h-[44px] items-center">
+          <div className="pt-2">
             <Link
               href={spec.link}
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`View ${spec.link.replace('https://github.com/', '')} on GitHub (opens in new tab)`}
-              className="focus-visible:ring-offset-background text-text-tertiary inline-flex items-center gap-1 rounded text-[11px] font-bold transition-colors hover:text-cyan-300 focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 focus-visible:outline-none sm:text-xs"
+              className="focus-visible:ring-offset-background text-text-tertiary light:hover:text-cyan-700 inline-flex items-center gap-1.5 rounded text-[11px] font-bold transition-colors hover:text-cyan-300 focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 focus-visible:outline-none sm:text-xs"
             >
-              <ExternalLink className="h-3 w-3" />
+              <ExternalLink className="h-4 w-4" />
               {spec.link.replace('https://github.com/', '')}
             </Link>
           </div>

@@ -18,7 +18,7 @@ export const ResearchSection: React.FC = () => {
       <section
         aria-labelledby="research-section-title"
         aria-describedby="research-content"
-        className="space-y-8 border-t border-white/10 pt-12 opacity-80 transition-opacity hover:opacity-100"
+        className="light:border-zinc-200 space-y-8 border-t border-white/10 pt-12"
       >
         <SectionHeader
           id="research-section-title"
@@ -29,13 +29,13 @@ export const ResearchSection: React.FC = () => {
 
         {t.bioinformatics.bridge && (
           <m.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+            initial={{ opacity: 0, x: -10 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={SCROLL_VIEWPORT}
-            className="rounded-lg border-l-2 border-purple-500/30 bg-purple-500/5 p-4"
+            className="light:border-purple-200 light:bg-zinc-50 bg-bg-badge rounded-lg border-l-4 border-purple-500/30 p-4 sm:p-6"
           >
-            <p className="text-sm leading-relaxed text-zinc-300 italic">
-              {t.bioinformatics.bridge}
+            <p className="text-text-secondary text-sm leading-relaxed italic">
+              &ldquo;{t.bioinformatics.bridge}&rdquo;
             </p>
           </m.div>
         )}
