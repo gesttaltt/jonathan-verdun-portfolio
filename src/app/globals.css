@@ -57,31 +57,31 @@
 }
 
 .light {
-  --background: #fcfcfc;
+  --background: #ffffff;
   --foreground: #09090b;
   --accent: #2563eb;
 
   /* Surfaces — Light Mode */
-  --bg-card: #ffffff;
-  --bg-card-hover: #ffffff;
-  --bg-badge: #f4f4f5;
+  --bg-card: #f9fafb; /* gray-50 equivalent */
+  --bg-card-hover: #f3f4f6; /* gray-100 equivalent */
+  --bg-badge: #e5e7eb; /* gray-200 equivalent */
 
   /* Text Readability — Light Mode */
   --text-primary: #09090b; /* zinc-950 */
-  --text-secondary: #27272a; /* zinc-800 */
-  --text-tertiary: #52525b; /* zinc-600 */
-  --text-muted: #71717a; /* zinc-500 */
+  --text-secondary: #18181b; /* zinc-900 */
+  --text-tertiary: #3f3f46; /* zinc-700 */
+  --text-muted: #52525b; /* zinc-600 */
 
-  --bg-deep: #f4f4f5;
-  --grid-line: rgba(0, 0, 0, 0.05);
-  --particle: #3b82f6;
+  --bg-deep: #f3f4f6;
+  --grid-line: rgba(0, 0, 0, 0.06);
+  --particle: #2563eb;
 
-  --node-color: #2563eb;
-  --interaction-glow: #7c3aed;
+  --node-color: #1d4ed8; /* Deepened blue for light mode contrast */
+  --interaction-glow: #6d28d9; /* Deepened purple for light mode contrast */
 
-  --glow-blue: rgba(37, 99, 235, 0.08);
-  --glow-cyan: rgba(8, 145, 178, 0.06);
-  --glow-purple: rgba(124, 58, 237, 0.06);
+  --glow-blue: rgba(37, 99, 235, 0.12);
+  --glow-cyan: rgba(8, 145, 178, 0.1);
+  --glow-purple: rgba(124, 58, 237, 0.1);
 }
 
 /* Custom Cyberpunk Scrollbar */
