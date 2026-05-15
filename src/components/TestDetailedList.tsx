@@ -8,7 +8,8 @@ export const TestDetailedList: React.FC = () => {
   const suites = useMemo(() => {
     return coverageData.testResults
       .map((suite) => {
-        const filePath = suite.name.split('/').pop() || suite.name
+        const parts = suite.name.split('/')
+        const filePath = parts[parts.length - 1]
         const passed = suite.status === 'passed'
         const duration = (suite.endTime - suite.startTime) / 1000
         const assertions = suite.assertionResults.length

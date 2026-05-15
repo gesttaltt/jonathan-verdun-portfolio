@@ -81,4 +81,17 @@ describe('VisualTestSummary', () => {
     )
     expect(screen.getByText(/REGRESSION DETECTED: 1/i)).toBeInTheDocument()
   })
+
+  it('handles zero total tests gracefully', () => {
+    mockCoverageData.numPassedTests = 0
+    mockCoverageData.numTotalTests = 0
+    mockCoverageData.success = true
+
+    render(
+      <I18nProvider>
+        <VisualTestSummary />
+      </I18nProvider>
+    )
+    expect(screen.getByText('0.0%')).toBeInTheDocument()
+  })
 })

@@ -61,6 +61,18 @@ describe('DefaultCommandProcessor', () => {
     expect(customProcessor.process('help').output).toContain('command not found')
   })
 
+  it('executes a custom string command directly from the commands map', () => {
+    const custom: Record<string, string> = { hello: 'world' }
+    const p = new DefaultCommandProcessor(custom)
+    expect(p.process('hello').output).toBe('world')
+  })
+
+  it('returns command not found when a custom function command returns undefined', () => {
+    const handlers = { oops: () => undefined }
+    const p = new DefaultCommandProcessor({}, 'help', [], handlers)
+    expect(p.process('oops').output).toContain('command not found')
+  })
+
   it('can be initialized with custom VFS root', () => {
     // Verified via dedicated VirtualFileSystem.test.ts
   })

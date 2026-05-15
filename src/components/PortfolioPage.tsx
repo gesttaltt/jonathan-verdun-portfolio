@@ -12,6 +12,7 @@ import { HeroHeader } from '@/components/HeroHeader'
 import { SectionHeader } from '@/components/SectionHeader'
 import { Sidebar } from '@/components/Sidebar'
 import { VisualTestSummary } from '@/components/VisualTestSummary'
+import { QAContact } from '@/components/QAContact'
 import { ResearchSection } from '@/components/ResearchSection'
 import { TopologyLoader } from '@/components/TopologyLoader'
 import { ProjectProvider } from '@/components/hooks/useProjects'
@@ -88,6 +89,7 @@ export const PortfolioPage: React.FC = () => {
               <div className="mt-8">
                 <VisualTestSummary />
               </div>
+              <QAContact />
             </section>
 
             <Sidebar />

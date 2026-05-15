@@ -10,7 +10,7 @@ interface GlobalErrorProps {
 
 export default function GlobalError({ error, reset }: GlobalErrorProps) {
   const [lang] = useState(() => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== 'undefined' && window.location?.pathname) {
       return window.location.pathname.startsWith('/es') ? 'es' : 'en'
     }
     return 'en'

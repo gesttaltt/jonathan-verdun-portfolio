@@ -68,7 +68,15 @@ describe('CommandProcessor — property-based', () => {
 
 describe('ES CommandProcessor — property-based', () => {
   const esProcessor = new DefaultCommandProcessor(es.terminal.interactive, es.terminal.helpCmd)
-  const esKnownCommands = new Set(Object.keys(es.terminal.interactive))
+  const esKnownCommands = new Set([
+    ...Object.keys(es.terminal.interactive),
+    'ls',
+    'cd',
+    'cat',
+    'pwd',
+    'ls proyectos',
+    'limpiar',
+  ])
 
   it('always returns a structured response for any ES input', () => {
     fc.assert(

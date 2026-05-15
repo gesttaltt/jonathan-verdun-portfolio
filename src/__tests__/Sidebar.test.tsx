@@ -31,6 +31,10 @@ jest.mock('@/lib/siteConfig', () => ({
   },
 }))
 
+jest.mock('@/components/FadeInSection', () => ({
+  FadeInSection: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
+}))
+
 // Mock navigator.clipboard
 const mockWriteText = jest.fn()
 Object.assign(navigator, {
@@ -40,8 +44,6 @@ Object.assign(navigator, {
 })
 
 describe('Sidebar', () => {
-  const originalFetch = global.fetch
-
   beforeEach(() => {
     jest.clearAllMocks()
     jest.useFakeTimers()
@@ -50,102 +52,129 @@ describe('Sidebar', () => {
 
   afterEach(() => {
     jest.useRealTimers()
-    global.fetch = originalFetch
   })
 
-  const renderSidebar = () =>
+  const renderSidebar = (props = {}) =>
     render(
       <I18nProvider>
-        <Sidebar />
+        <Sidebar {...props} />
       </I18nProvider>
     )
 
   it('renders all quality gates with correct values', async () => {
-    await act(async () => {
-      renderSidebar()
-    })
-    expect(screen.getByText('100%')).toBeInTheDocument()
+    renderSidebar()
+    expect(await screen.findByText('100%')).toBeInTheDocument()
     expect(screen.getByText('95%')).toBeInTheDocument()
     expect(screen.getByText('A+')).toBeInTheDocument()
   })
 
-  it('displays PASSING when CI conclusion is success', async () => {
-    ;(global.fetch as jest.Mock).mockResolvedValueOnce({
-      ok: true,
-      json: () =>
-        Promise.resolve({
-          workflow_runs: [{ status: 'completed', conclusion: 'success' }],
-        }),
-    })
-
-    await act(async () => {
-      renderSidebar()
-    })
-
-    expect(screen.getByText('PASSING')).toBeInTheDocument()
+  it('handles missing repo config without crashing', () => {
+    renderSidebar({ repo: null })
+    expect(screen.queryByText('PASSING')).not.toBeInTheDocument()
+    expect(screen.getByText('100%')).toBeInTheDocument()
   })
 
-  it('displays FAILING when CI conclusion is failure', async () => {
-    ;(global.fetch as jest.Mock).mockResolvedValueOnce({
-      ok: true,
-      json: () =>
-        Promise.resolve({
-          workflow_runs: [{ status: 'completed', conclusion: 'failure' }],
-        }),
-    })
+  it('copies email to clipboard and resets after timeout', async () => {
+    mockWriteText.mockResolvedValue(undefined)
+    renderSidebar()
 
-    await act(async () => {
-      renderSidebar()
-    })
+    const copyButton = await screen.findByRole('button', { name: 'Copy Email' })
 
-    expect(screen.getByText('FAILING')).toBeInTheDocument()
-  })
-
-  it('displays loading when CI is in progress', async () => {
-    ;(global.fetch as jest.Mock).mockResolvedValueOnce({
-      ok: true,
-      json: () =>
-        Promise.resolve({
-          workflow_runs: [{ status: 'in_progress', conclusion: null }],
-        }),
-    })
-
-    await act(async () => {
-      renderSidebar()
-    })
-
-    expect(screen.getByText(/checking/i)).toBeInTheDocument()
-  })
-
-  it('cleans up on unmount', async () => {
-    const { unmount } = await act(async () => {
-      return renderSidebar()
-    })
-
-    act(() => {
-      unmount()
-    })
-  })
-
-  it('copies email to clipboard when clicking copy button', async () => {
-    mockWriteText.mockResolvedValueOnce(undefined)
-    await act(async () => {
-      renderSidebar()
-    })
-
-    const copyButton = screen.getByRole('button', { name: /copy email address/i })
     await act(async () => {
       fireEvent.click(copyButton)
     })
 
     expect(mockWriteText).toHaveBeenCalledWith('test@example.com')
-    expect(screen.getByText(/copied!/i)).toBeInTheDocument()
+    expect(await screen.findByText(/Copied!/i)).toBeInTheDocument()
 
-    // Test timeout to revert state
-    act(() => {
+    await act(async () => {
       jest.advanceTimersByTime(2000)
     })
 
-    expect(screen.getByText(/copy email/i)).toBeInTheDocument()
+    expect(await screen.findByText(/Copy Email/i)).toBeInTheDocument()
+  })
+
+  describe('CI Status Fetching Logic', () => {
+    const mockRepo = { url: 'https://github.com/o/r', ciWorkflowUrl: 'u', ciBadgeUrl: 'b' }
+
+    it('updates status to success when API returns valid runs', async () => {
+      ;(global.fetch as jest.Mock).mockResolvedValueOnce({
+        ok: true,
+        json: () =>
+          Promise.resolve({
+            workflow_runs: [{ status: 'completed', conclusion: 'success' }],
+          }),
+      })
+
+      renderSidebar({ repo: mockRepo })
+      expect(await screen.findByText('PASSING')).toBeInTheDocument()
+    })
+
+    it('updates status to failure when API returns failing runs', async () => {
+      ;(global.fetch as jest.Mock).mockResolvedValueOnce({
+        ok: true,
+        json: () =>
+          Promise.resolve({
+            workflow_runs: [{ status: 'completed', conclusion: 'failure' }],
+          }),
+      })
+
+      renderSidebar({ repo: mockRepo })
+      expect(await screen.findByText('FAILING')).toBeInTheDocument()
+    })
+
+    it('updates status to success when API returns successful runs', async () => {
+      ;(global.fetch as jest.Mock).mockResolvedValueOnce({
+        ok: true,
+        json: () =>
+          Promise.resolve({
+            workflow_runs: [{ status: 'completed', conclusion: 'success' }],
+          }),
+      })
+
+      renderSidebar({ repo: mockRepo })
+      expect(await screen.findByText('PASSING')).toBeInTheDocument()
+    })
+
+    it('displays loading status when CI is in progress', async () => {
+      ;(global.fetch as jest.Mock).mockResolvedValueOnce({
+        ok: true,
+        json: () =>
+          Promise.resolve({
+            workflow_runs: [{ status: 'in_progress', conclusion: null }],
+          }),
+      })
+
+      renderSidebar({ repo: mockRepo })
+      expect(await screen.findByText(/checking/i)).toBeInTheDocument()
+    })
+
+    it('updates status to error when API fails', async () => {
+      ;(global.fetch as jest.Mock).mockResolvedValueOnce({ ok: false })
+
+      renderSidebar({ repo: mockRepo })
+      expect(await screen.findByText('Status unavailable')).toBeInTheDocument()
+    })
+
+    it('updates status to error when workflow runs are empty', async () => {
+      ;(global.fetch as jest.Mock).mockResolvedValueOnce({
+        ok: true,
+        json: () => Promise.resolve({ workflow_runs: [] }),
+      })
+
+      renderSidebar({ repo: mockRepo })
+      expect(await screen.findByText('Status unavailable')).toBeInTheDocument()
+    })
+
+    it('immediately sets success status in mock mode', async () => {
+      const originalMockCi = process.env.MOCK_CI
+      process.env.MOCK_CI = 'true'
+
+      renderSidebar({ repo: mockRepo })
+      expect(await screen.findByText('PASSING')).toBeInTheDocument()
+      expect(global.fetch).not.toHaveBeenCalled()
+
+      process.env.MOCK_CI = originalMockCi
+    })
   })
 })

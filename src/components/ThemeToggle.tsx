@@ -13,7 +13,7 @@ export function ThemeToggle() {
   const { theme, toggleTheme } = useTheme()
   const mounted = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
 
-  if (!mounted) return <div className="h-9 w-9" />
+  if (!mounted) return <div data-testid="theme-toggle-placeholder" className="h-9 w-9" />
 
   const isLight = theme === 'light'
 
@@ -27,6 +27,7 @@ export function ThemeToggle() {
         {isLight ? (
           <m.div
             key="sun"
+            data-testid="theme-toggle-sun"
             initial={{ y: 20, opacity: 0, rotate: 45 }}
             animate={{ y: 0, opacity: 1, rotate: 0 }}
             exit={{ y: -20, opacity: 0, rotate: -45 }}
@@ -37,6 +38,7 @@ export function ThemeToggle() {
         ) : (
           <m.div
             key="moon"
+            data-testid="theme-toggle-moon"
             initial={{ y: 20, opacity: 0, rotate: -45 }}
             animate={{ y: 0, opacity: 1, rotate: 0 }}
             exit={{ y: -20, opacity: 0, rotate: 45 }}
