@@ -23,6 +23,7 @@ export const TopologyMesh: React.FC<{ quality: number; mode: 'p-adic' | 'hyperbo
       uReducedMotion: { value: false },
       uNodeColor: { value: new THREE.Color('#3b82f6') },
       hoverColor: { value: new THREE.Color('#8b5cf6') },
+      uLightMode: { value: 0.0 },
     }),
     []
   )
@@ -37,19 +38,38 @@ export const TopologyMesh: React.FC<{ quality: number; mode: 'p-adic' | 'hyperbo
     return () => mq.removeEventListener('change', handler)
   }, [])
 
-  // Pull CSS custom properties into the uniform Color objects after first paint.
   useEffect(() => {
     const mat = meshRef.current?.material
     if (!(mat instanceof THREE.ShaderMaterial)) return
-    const style = getComputedStyle(document.documentElement)
-    const nColor = style.getPropertyValue('--node-color').trim()
-    const hColor = style.getPropertyValue('--interaction-glow').trim()
 
-    const colorUni = mat.uniforms['uNodeColor']
-    const hoverColorUni = mat.uniforms['hoverColor']
+    const updateTheme = () => {
+      const style = getComputedStyle(document.documentElement)
+      const nColor = style.getPropertyValue('--node-color').trim()
+      const hColor = style.getPropertyValue('--interaction-glow').trim()
+      const isLight = document.documentElement.classList.contains('light')
 
-    if (nColor && colorUni) colorUni.value.set(nColor)
-    if (hColor && hoverColorUni) hoverColorUni.value.set(hColor)
+      const colorUni = mat.uniforms['uNodeColor']
+      const hoverColorUni = mat.uniforms['hoverColor']
+      const lightModeUni = mat.uniforms['uLightMode']
+
+      if (nColor && colorUni) colorUni.value.set(nColor)
+      if (hColor && hoverColorUni) hoverColorUni.value.set(hColor)
+      if (lightModeUni) lightModeUni.value = isLight ? 1.0 : 0.0
+
+      mat.blending = isLight ? THREE.NormalBlending : THREE.AdditiveBlending
+      mat.needsUpdate = true
+    }
+
+    updateTheme()
+
+    // Observe changes to the 'light' class on the html element
+    const observer = new MutationObserver(updateTheme)
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class'],
+    })
+
+    return () => observer.disconnect()
   }, [])
 
   useFrame((state) => {

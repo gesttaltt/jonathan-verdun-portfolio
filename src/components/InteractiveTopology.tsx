@@ -16,6 +16,7 @@ export const InteractiveTopology: React.FC<{
   const [isMobile, setIsMobile] = useState(
     () => typeof window !== 'undefined' && window.matchMedia('(max-width: 768px)').matches
   )
+  const [isLight, setIsLight] = useState(false)
   const [ctxLost, setCtxLost] = useState(false)
   // Incrementing this key forces a full Canvas remount after context restoration,
   // which re-initialises the R3F renderer against the fresh GL context.
@@ -35,7 +36,21 @@ export const InteractiveTopology: React.FC<{
     const mq = window.matchMedia('(max-width: 768px)')
     const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches)
     mq.addEventListener('change', handler)
-    return () => mq.removeEventListener('change', handler)
+
+    const updateTheme = () => {
+      setIsLight(document.documentElement.classList.contains('light'))
+    }
+    updateTheme()
+    const observer = new MutationObserver(updateTheme)
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class'],
+    })
+
+    return () => {
+      mq.removeEventListener('change', handler)
+      observer.disconnect()
+    }
   }, [])
 
   const handleCreated = useCallback(({ gl }: { gl: THREE.WebGLRenderer }) => {
@@ -90,13 +105,13 @@ export const InteractiveTopology: React.FC<{
         {!isMobile && (
           <EffectComposer multisampling={0}>
             <Bloom
-              luminanceThreshold={0.2}
+              luminanceThreshold={isLight ? 0.8 : 0.2}
               luminanceSmoothing={0.9}
               height={300}
-              intensity={1.0}
+              intensity={isLight ? 0.4 : 1.0}
               mipmapBlur
             />
-            <Vignette eskil={false} offset={0.1} darkness={1.1} />
+            <Vignette eskil={false} offset={0.1} darkness={isLight ? 0.3 : 1.1} />
           </EffectComposer>
         )}
 

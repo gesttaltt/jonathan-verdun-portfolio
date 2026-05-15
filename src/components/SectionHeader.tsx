@@ -15,20 +15,20 @@ interface SectionHeaderProps {
 
 const COLOR_MAP = {
   blue: {
-    badge: 'bg-blue-500/10 text-blue-500',
-    line: 'via-blue-500/20',
+    badge: 'bg-blue-500/10 text-blue-500 light:text-blue-700 light:bg-blue-50',
+    line: 'via-blue-500/20 light:via-blue-500/10',
   },
   purple: {
-    badge: 'bg-purple-500/10 text-purple-500',
-    line: 'via-purple-500/20',
+    badge: 'bg-purple-500/10 text-purple-500 light:text-purple-700 light:bg-purple-50',
+    line: 'via-purple-500/20 light:via-purple-500/10',
   },
   cyan: {
-    badge: 'bg-cyan-500/10 text-cyan-500',
-    line: 'via-cyan-500/20',
+    badge: 'bg-cyan-500/10 text-cyan-500 light:text-cyan-700 light:bg-cyan-50',
+    line: 'via-cyan-500/20 light:via-cyan-500/10',
   },
   green: {
-    badge: 'bg-green-500/10 text-green-500',
-    line: 'via-green-500/20',
+    badge: 'bg-green-500/10 text-green-500 light:text-green-700 light:bg-green-50',
+    line: 'via-green-500/20 light:via-green-500/10',
   },
 }
 
@@ -54,7 +54,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
         initial="hidden"
         whileInView="visible"
         viewport={SCROLL_VIEWPORT}
-        className={`mb-6 flex items-center gap-4 ${showBorderBottom ? 'border-b border-white/10 pb-4' : ''}`}
+        className={`mb-6 flex items-center gap-4 ${showBorderBottom ? 'light:border-zinc-100 border-b border-white/10 pb-4' : ''}`}
       >
         <div
           aria-hidden="true"
@@ -62,7 +62,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
         >
           {icon}
         </div>
-        <h2 id={id} className="text-2xl font-bold text-white">
+        <h2 id={id} className="light:text-zinc-950 text-2xl font-bold text-white">
           {title}
         </h2>
       </m.div>

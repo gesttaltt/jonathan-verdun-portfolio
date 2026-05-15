@@ -22,7 +22,7 @@ export const VisualTestSummary: React.FC = () => {
   })
 
   return (
-    <div className="light:border-zinc-200 light:bg-white/50 rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
+    <div className="light:border-zinc-200 light:bg-white rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
       <div className="mb-6 flex items-center justify-between">
         <h3 className="light:text-zinc-900 flex items-center gap-2 text-sm font-bold tracking-widest text-white uppercase">
           <Shield className="light:text-blue-600 h-4 w-4 text-blue-400" />

@@ -95,11 +95,14 @@ export const vertexShader = `
 `
 
 // ─── Fragment Shader ───────────────────────────────────────────────────────────
-// Renders each point as a circular sprite with an exponential glow falloff,
-// then blends layers: vertex color → hover cyan-white → pulse white.
+// Renders each point as a circular sprite with an exponential glow falloff.
+// Adapts behavior based on uLightMode:
+// - Dark Mode: Additive glow, bright colors.
+// - Light Mode: Solid circles, darker contrast, Normal blending.
 export const fragmentShader = `
-    uniform vec3 uNodeColor;  // --node-color CSS variable
-    uniform vec3 hoverColor;  // --interaction-glow CSS variable
+    uniform vec3 uNodeColor;   // --node-color
+    uniform vec3 hoverColor;   // --interaction-glow
+    uniform float uLightMode;  // 0.0 (dark) or 1.0 (light)
     varying float vDisplacement;
     varying float vPulse;
     varying float vHover;
@@ -108,11 +111,30 @@ export const fragmentShader = `
     void main() {
         float r = distance(gl_PointCoord, vec2(0.5));
         if (r > 0.5) discard;
+
+        // Exponential falloff for glow
         float glow = pow(1.0 - r * 2.0, 1.5);
+        
         vec3 baseColor = vColor;
-        vec3 litColor = mix(baseColor, vec3(0.85, 1.0, 1.0), vHover);
-        vec3 finalColor = mix(litColor, vec3(1.0), vPulse * 0.8);
-        float finalAlpha = glow * (0.15 + vPulse * 0.8 + vHover * 0.85);
-        gl_FragColor = vec4(finalColor, finalAlpha);
+        
+        // In light mode, we want the points to be slightly darker/more solid
+        if (uLightMode > 0.5) {
+            // Darken the base color slightly for better contrast on white
+            baseColor *= 0.8;
+            
+            // Hover logic for light mode
+            vec3 litColor = mix(baseColor, hoverColor, vHover);
+            vec3 finalColor = mix(litColor, vec3(0.0), vPulse * 0.2); // Subtle pulse
+            
+            // Sharper falloff in light mode for a 'cleaner' look
+            float mask = smoothstep(0.5, 0.45, r);
+            gl_FragColor = vec4(finalColor, mask * (0.6 + vHover * 0.4));
+        } else {
+            // Dark Mode: Classic glowing behavior
+            vec3 litColor = mix(baseColor, vec3(0.85, 1.0, 1.0), vHover);
+            vec3 finalColor = mix(litColor, vec3(1.0), vPulse * 0.8);
+            float finalAlpha = glow * (0.15 + vPulse * 0.8 + vHover * 0.85);
+            gl_FragColor = vec4(finalColor, finalAlpha);
+        }
     }
 `
