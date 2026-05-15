@@ -135,7 +135,7 @@ export const PortfolioPage: React.FC = () => {
           <SiteFooter />
         </main>
 
-        <div className="pointer-events-none fixed inset-0 z-[1] bg-gradient-to-tr from-blue-900/10 via-transparent to-purple-900/10"></div>
+        <div className="light:from-blue-50/20 light:via-transparent light:to-purple-50/20 pointer-events-none fixed inset-0 z-[1] bg-gradient-to-tr from-blue-900/10 via-transparent to-purple-900/10"></div>
       </div>
     </ProjectProvider>
   )

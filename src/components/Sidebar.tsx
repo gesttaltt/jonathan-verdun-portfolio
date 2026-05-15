@@ -138,11 +138,11 @@ export const Sidebar: React.FC<SidebarProps> = ({ repo = siteConfig.repo }) => {
   }[ciStatus]
 
   return (
-    <aside className="light:from-zinc-50 light:to-white light:border-zinc-200 sticky top-24 h-fit rounded-3xl border border-white/10 bg-gradient-to-b from-zinc-900/50 to-zinc-950/50 p-6 backdrop-blur-xl transition-all hover:border-blue-500/20">
+    <aside className="light:from-white light:to-zinc-50 light:border-zinc-200 sticky top-24 h-fit rounded-3xl border border-white/10 bg-gradient-to-b from-zinc-900/50 to-zinc-950/50 p-6 backdrop-blur-xl transition-all hover:border-blue-500/20">
       <div className="space-y-8">
         <FadeInSection delay={0.1}>
           <div className="space-y-4">
-            <h3 className="light:text-zinc-500 flex items-center gap-3 text-lg font-bold text-white">
+            <h3 className="light:text-zinc-800 flex items-center gap-3 text-lg font-bold text-white">
               <Server className="light:text-blue-600 h-5 w-5 text-blue-400" />
               {t.sections.sidebar.constraintsTitle}
             </h3>
@@ -150,9 +150,9 @@ export const Sidebar: React.FC<SidebarProps> = ({ repo = siteConfig.repo }) => {
             <div className="grid grid-cols-1 gap-4">
               {GATES.map((gate) => {
                 const textColors = {
-                  blue: 'text-blue-400 light:text-blue-800',
-                  cyan: 'text-cyan-400 light:text-cyan-800',
-                  green: 'text-green-400 light:text-green-800',
+                  blue: 'text-blue-400 light:text-blue-700',
+                  cyan: 'text-cyan-400 light:text-cyan-700',
+                  green: 'text-green-400 light:text-green-700',
                 }[gate.color]
 
                 const bgColors = {
@@ -169,7 +169,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ repo = siteConfig.repo }) => {
                     >
                       <div className="flex items-center gap-3">
                         <div className={`h-1.5 w-1.5 rounded-full ${bgColors}`} />
-                        <span className="light:text-zinc-600 text-xs font-medium text-zinc-400">
+                        <span className="light:text-zinc-700 text-xs font-medium text-zinc-400">
                           {t.sections.sidebar[gate.key]}
                         </span>
                       </div>
@@ -183,9 +183,9 @@ export const Sidebar: React.FC<SidebarProps> = ({ repo = siteConfig.repo }) => {
             </div>
 
             {repo && (
-              <div className="light:border-zinc-100 mt-8 border-t border-white/5 pt-5">
+              <div className="light:border-zinc-200 mt-8 border-t border-white/5 pt-5">
                 <div className="flex items-center justify-between">
-                  <p className="light:text-zinc-500 text-[10px] font-bold tracking-widest text-zinc-400 uppercase sm:text-xs">
+                  <p className="light:text-zinc-600 text-[10px] font-bold tracking-widest text-zinc-400 uppercase sm:text-xs">
                     {t.sections.sidebar.livePipelineLabel}
                   </p>
                   <div
@@ -209,7 +209,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ repo = siteConfig.repo }) => {
                   href={repo.ciWorkflowUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group/ci light:text-zinc-500 light:hover:text-zinc-900 mt-3 flex items-center gap-2 text-xs font-medium text-zinc-400 transition-colors hover:text-white"
+                  className="group/ci light:text-zinc-600 light:hover:text-zinc-900 mt-3 flex items-center gap-2 text-xs font-medium text-zinc-400 transition-colors hover:text-white"
                   aria-label="CI pipeline status (opens in new tab)"
                 >
                   <Activity className="light:text-blue-600 h-4 w-4 text-blue-400" />
@@ -222,8 +222,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ repo = siteConfig.repo }) => {
         </FadeInSection>
 
         <FadeInSection delay={0.2}>
-          <div className="group light:border-zinc-200 light:bg-white/50 light:hover:border-amber-300 relative overflow-hidden rounded-2xl border border-white/10 bg-white/8 p-5 backdrop-blur-md transition-all hover:border-amber-500/20 sm:p-8">
-            <div className="light:bg-amber-100 absolute -top-10 -right-10 h-40 w-40 rounded-full bg-amber-500/5 blur-3xl transition-opacity group-hover:opacity-75"></div>
+          <div className="group light:border-zinc-200 light:bg-white light:hover:border-amber-400/50 light:hover:shadow-xl light:hover:shadow-amber-500/5 relative overflow-hidden rounded-2xl border border-white/10 bg-white/8 p-5 backdrop-blur-md transition-all hover:border-amber-500/20 sm:p-8">
+            <div className="light:bg-amber-100/50 absolute -top-10 -right-10 h-40 w-40 rounded-full bg-amber-500/5 blur-3xl transition-opacity group-hover:opacity-75"></div>
 
             <div className="relative space-y-4">
               <div className="flex items-center gap-3">
@@ -240,7 +240,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ repo = siteConfig.repo }) => {
                   <p className="light:text-zinc-900 text-sm font-bold text-white">
                     {siteConfig.certification.name}
                   </p>
-                  <p className="light:text-zinc-500 text-xs font-medium text-zinc-400">
+                  <p className="light:text-zinc-700 text-xs font-medium text-zinc-400">
                     {siteConfig.certification.provider}
                   </p>
                 </div>
@@ -249,7 +249,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ repo = siteConfig.repo }) => {
                   <div className="light:bg-amber-100 light:text-amber-800 rounded-full bg-amber-500/10 px-2 py-0.5 text-[10px] font-bold text-amber-400 uppercase">
                     {siteConfig.certification.status}
                   </div>
-                  <span className="light:text-zinc-400 text-[10px] text-zinc-500">
+                  <span className="light:text-zinc-500 text-[10px] text-zinc-500">
                     {siteConfig.certification.expectedDate}
                   </span>
                 </div>
@@ -258,7 +258,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ repo = siteConfig.repo }) => {
               <button
                 onClick={handleCopyEmail}
                 aria-label={t.sections.sidebar.copyEmailLabel}
-                className="light:bg-zinc-900 light:hover:bg-zinc-800 focus-visible:ring-offset-background group/btn relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-xl bg-white px-4 py-3 text-sm font-bold text-black transition-all hover:scale-[1.02] focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none active:scale-95"
+                className="light:bg-zinc-950 light:hover:bg-black light:text-white focus-visible:ring-offset-background group/btn relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-xl bg-white px-4 py-3 text-sm font-bold text-black transition-all hover:scale-[1.02] focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none active:scale-95"
               >
                 <AnimatePresence mode="wait">
                   {copied ? (

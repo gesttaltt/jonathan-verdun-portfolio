@@ -94,8 +94,8 @@ describe('animations', () => {
       expect(SCROLL_VIEWPORT.once).toBe(true)
     })
 
-    it('uses -40px margin', () => {
-      expect(SCROLL_VIEWPORT.margin).toBe('-40px')
+    it('uses -20px margin', () => {
+      expect(SCROLL_VIEWPORT.margin).toBe('-20px')
     })
   })
 })

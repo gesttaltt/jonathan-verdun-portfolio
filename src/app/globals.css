@@ -37,20 +37,20 @@
 }
 
 .light {
-  --background: #fafafa;
+  --background: #fcfcfc;
   --foreground: #09090b;
   --accent: #2563eb;
 
   --bg-deep: #f4f4f5;
-  --grid-line: rgba(0, 0, 0, 0.08);
+  --grid-line: rgba(0, 0, 0, 0.05);
   --particle: #3b82f6;
 
   --node-color: #2563eb;
   --interaction-glow: #7c3aed;
 
-  --glow-blue: rgba(37, 99, 235, 0.1);
-  --glow-cyan: rgba(8, 145, 178, 0.08);
-  --glow-purple: rgba(124, 58, 237, 0.08);
+  --glow-blue: rgba(37, 99, 235, 0.08);
+  --glow-cyan: rgba(8, 145, 178, 0.06);
+  --glow-purple: rgba(124, 58, 237, 0.06);
 }
 
 /* Custom Cyberpunk Scrollbar */
@@ -69,8 +69,16 @@
   border: 2px solid var(--bg-deep);
 }
 
+.light ::-webkit-scrollbar-thumb {
+  background: #d4d4d8; /* zinc-300 equivalent */
+}
+
 ::-webkit-scrollbar-thumb:hover {
   background: #27272a; /* zinc-800 equivalent */
+}
+
+.light ::-webkit-scrollbar-thumb:hover {
+  background: #a1a1aa; /* zinc-400 equivalent */
 }
 
 body {
