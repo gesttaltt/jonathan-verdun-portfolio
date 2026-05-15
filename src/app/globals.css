@@ -7,10 +7,16 @@
   --font-mono: var(--font-jetbrains-mono);
   --color-bg-offset: var(--background);
 
-  /* Semantic Tokens */
+  /* Semantic Tokens — Layout */
   --color-bg-deep: var(--bg-deep);
   --color-grid-line: var(--grid-line);
   --color-particle: var(--particle);
+
+  /* Semantic Tokens — Text Readability */
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-tertiary: var(--text-tertiary);
+  --color-text-muted: var(--text-muted);
 }
 
 @variant light (&:where(.light, .light *));
@@ -20,6 +26,12 @@
   --background: #0a0a0a;
   --foreground: #ededed;
   --accent: #3b82f6;
+
+  /* Text Readability — Dark Mode */
+  --text-primary: #ffffff;
+  --text-secondary: #d4d4d8; /* zinc-300 */
+  --text-tertiary: #a1a1aa; /* zinc-400 */
+  --text-muted: #71717a; /* zinc-500 */
 
   /* P-adic Theme Tokens */
   --bg-deep: #050510;
@@ -40,6 +52,12 @@
   --background: #fcfcfc;
   --foreground: #09090b;
   --accent: #2563eb;
+
+  /* Text Readability — Light Mode */
+  --text-primary: #09090b; /* zinc-950 */
+  --text-secondary: #27272a; /* zinc-800 */
+  --text-tertiary: #52525b; /* zinc-600 */
+  --text-muted: #71717a; /* zinc-500 */
 
   --bg-deep: #f4f4f5;
   --grid-line: rgba(0, 0, 0, 0.05);

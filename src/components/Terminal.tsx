@@ -68,7 +68,7 @@ export const Terminal: React.FC<TerminalProps> = ({
           <div className="light:bg-amber-400 h-3 w-3 rounded-full bg-amber-500/50"></div>
           <div className="light:bg-cyan-400 h-3 w-3 rounded-full bg-cyan-500/50"></div>
         </div>
-        <div className="light:text-zinc-600 flex items-center gap-2 text-[10px] font-bold tracking-widest text-zinc-300 uppercase sm:text-xs">
+        <div className="light:text-zinc-600 text-text-secondary flex items-center gap-2 text-[10px] font-bold tracking-widest uppercase sm:text-xs">
           {title}
           <div className="relative flex h-2 w-2">
             <div className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-500/40 opacity-75"></div>
@@ -96,15 +96,15 @@ export const Terminal: React.FC<TerminalProps> = ({
               <div className="flex gap-2">
                 <span className="light:text-blue-700 shrink-0 font-bold text-blue-400">
                   <span className="hidden sm:inline">{prompt}</span>
-                  <span className="light:text-zinc-500 text-zinc-400">
+                  <span className="text-text-tertiary">
                     {currentPath !== '/' ? `:${currentPath}` : ''}
                   </span>
                   ~$
                 </span>
-                <span className="light:text-zinc-950 min-w-0 text-zinc-100">{entry.text}</span>
+                <span className="light:text-zinc-950 text-text-primary min-w-0">{entry.text}</span>
               </div>
               {entry.output && (
-                <div className="light:border-zinc-200 light:text-zinc-800 border-l-2 border-blue-500/20 py-1 pl-4 whitespace-pre-wrap text-zinc-300">
+                <div className="light:border-zinc-200 light:text-zinc-800 text-text-secondary border-l-2 border-blue-500/20 py-1 pl-4 whitespace-pre-wrap">
                   {entry.output}
                 </div>
               )}
@@ -117,7 +117,7 @@ export const Terminal: React.FC<TerminalProps> = ({
         >
           <span className="light:text-blue-700 shrink-0 font-bold text-blue-400">
             <span className="hidden sm:inline">{prompt}</span>
-            <span className="light:text-zinc-50">
+            <span className="text-text-tertiary">
               {currentPath !== '/' ? `:${currentPath}` : ''}
             </span>
             ~$
@@ -131,7 +131,7 @@ export const Terminal: React.FC<TerminalProps> = ({
               onChange={(e) => setInputVal(e.target.value)}
               onKeyDown={handleKeyDown}
               /* font-size ≥ 16px on mobile prevents iOS Safari from zooming the viewport on focus */
-              className="light:text-zinc-950 w-full bg-transparent text-base text-zinc-100 outline-none placeholder:text-zinc-700 disabled:cursor-not-allowed sm:text-xs md:text-sm lg:text-base"
+              className="light:text-zinc-950 text-text-primary w-full bg-transparent text-base outline-none placeholder:text-zinc-700 disabled:cursor-not-allowed sm:text-xs md:text-sm lg:text-base"
               aria-label="Terminal command input"
               aria-describedby="terminal-hint"
               inputMode="text"

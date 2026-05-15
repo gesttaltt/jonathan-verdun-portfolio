@@ -19,7 +19,7 @@ export const QAPhilosophyGrid: React.FC = () => {
           className="relative overflow-hidden rounded-xl border border-blue-500/20 bg-blue-500/5 p-4 sm:p-6"
         >
           <div className="absolute top-0 left-0 h-1 w-full bg-gradient-to-r from-blue-500/50 to-purple-500/50"></div>
-          <p className="light:text-zinc-700 relative text-sm leading-relaxed font-medium text-zinc-200 italic sm:text-base">
+          <p className="text-text-secondary relative text-sm leading-relaxed font-medium italic sm:text-base">
             &ldquo;{t.qa.manifesto}&rdquo;
           </p>
         </m.div>
@@ -45,17 +45,13 @@ export const QAPhilosophyGrid: React.FC = () => {
                 <div className="light:bg-green-100 light:text-green-800 flex h-6 w-6 items-center justify-center rounded-full bg-green-500/10 text-green-500">
                   <CheckCircle2 className="h-3.5 w-3.5" />
                 </div>
-                <h3 className="light:text-zinc-950 text-sm font-bold text-white uppercase">
-                  {spec.layer}
-                </h3>
+                <h3 className="text-text-primary text-sm font-bold uppercase">{spec.layer}</h3>
               </div>
-              <span className="light:bg-zinc-100 light:text-zinc-600 light:group-hover:text-zinc-900 rounded bg-white/5 px-2 py-0.5 text-[10px] font-medium text-zinc-300 transition-colors group-hover:text-zinc-200 sm:text-xs">
+              <span className="light:bg-zinc-100 light:text-zinc-600 light:group-hover:text-zinc-900 text-text-tertiary rounded bg-white/5 px-2 py-0.5 text-[10px] font-medium transition-colors hover:text-white sm:text-xs">
                 {spec.status}
               </span>
             </div>
-            <p className="light:text-zinc-700 pl-9 text-xs leading-relaxed text-zinc-300">
-              {spec.objective}
-            </p>
+            <p className="text-text-tertiary pl-9 text-xs leading-relaxed">{spec.objective}</p>
           </m.div>
         ))}
       </m.div>

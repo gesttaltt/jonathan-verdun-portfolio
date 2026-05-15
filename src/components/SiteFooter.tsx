@@ -50,10 +50,10 @@ export const SiteFooter: React.FC = () => {
           {/* Top row: identity + socials */}
           <div className="light:border-zinc-100 flex flex-col gap-6 border-b border-white/5 pb-8 sm:flex-row sm:items-center sm:justify-between">
             <div className="space-y-1">
-              <p className="light:text-zinc-900 text-base font-extrabold tracking-tight text-white">
+              <p className="text-text-primary text-base font-extrabold tracking-tight">
                 {siteConfig.name}
               </p>
-              <p className="light:text-zinc-500 text-xs font-medium text-zinc-300">{t.tagline}</p>
+              <p className="text-text-tertiary text-xs font-medium">{t.tagline}</p>
             </div>
 
             <div className="flex items-center gap-2">
@@ -64,7 +64,7 @@ export const SiteFooter: React.FC = () => {
                   target={href.startsWith('mailto') ? undefined : '_blank'}
                   rel={href.startsWith('mailto') ? undefined : 'noopener noreferrer'}
                   aria-label={label}
-                  className="light:border-zinc-200 light:bg-zinc-100 light:text-zinc-500 light:hover:border-blue-300 light:hover:text-blue-600 flex h-9 w-9 items-center justify-center rounded-lg border border-white/5 bg-white/5 text-zinc-300 transition-all hover:border-blue-500/30 hover:bg-blue-500/10 hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none"
+                  className="light:border-zinc-200 light:bg-zinc-100 text-text-tertiary light:hover:border-blue-300 light:hover:text-blue-600 flex h-9 w-9 items-center justify-center rounded-lg border border-white/5 bg-white/5 transition-all hover:border-blue-500/30 hover:bg-blue-500/10 hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none"
                 >
                   <Icon className="h-4 w-4" />
                 </Link>
@@ -76,14 +76,14 @@ export const SiteFooter: React.FC = () => {
           <div className="light:border-zinc-100 flex items-center gap-4 border-b border-white/5 py-5">
             <a
               href="/docs/api/"
-              className="light:text-zinc-500 light:hover:text-zinc-900 rounded text-xs text-zinc-300 transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none"
+              className="text-text-tertiary light:hover:text-text-primary rounded text-xs transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none"
             >
               API Docs
             </a>
             <span className="light:text-zinc-300 text-white/20">·</span>
             <Link
               href={t.lang === 'es' ? '/es/quality/' : '/quality/'}
-              className="light:text-zinc-500 light:hover:text-zinc-900 rounded text-xs text-zinc-300 transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none"
+              className="text-text-tertiary light:hover:text-text-primary rounded text-xs transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none"
             >
               {t.sections.quality}
             </Link>
@@ -92,14 +92,14 @@ export const SiteFooter: React.FC = () => {
               href={siteConfig.repo.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="light:text-zinc-500 light:hover:text-zinc-900 rounded text-xs text-zinc-300 transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none"
+              className="text-text-tertiary light:hover:text-text-primary rounded text-xs transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none"
             >
               Source
             </a>
             <span className="light:text-zinc-300 text-white/20">·</span>
             <a
               href="/sitemap.xml"
-              className="light:text-zinc-500 light:hover:text-zinc-900 rounded text-xs text-zinc-300 transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none"
+              className="text-text-tertiary light:hover:text-text-primary rounded text-xs transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none"
             >
               Sitemap
             </a>
@@ -107,13 +107,13 @@ export const SiteFooter: React.FC = () => {
 
           {/* Bottom row: copyright + stack */}
           <div className="flex flex-col items-start gap-2 pt-6 sm:flex-row sm:items-center sm:justify-between">
-            <p className="light:text-zinc-500 text-xs text-zinc-300">
+            <p className="text-text-tertiary text-xs">
               &copy; {CURRENT_YEAR} {siteConfig.name}{' '}
               <a
                 href={siteConfig.socialLinks.github.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="light:text-zinc-600 light:hover:text-zinc-900 rounded text-zinc-300 transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none"
+                className="text-text-secondary light:hover:text-text-primary rounded transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none"
               >
                 @gesttaltt
               </a>{' '}
@@ -127,9 +127,7 @@ export const SiteFooter: React.FC = () => {
                 <ShieldCheck className="h-3 w-3" />
                 Offline Ready
               </div>
-              <p className="light:text-zinc-500 text-xs text-zinc-300">
-                {siteConfig.techStack.join(' · ')}
-              </p>
+              <p className="text-text-tertiary text-xs">{siteConfig.techStack.join(' · ')}</p>
             </div>
           </div>
         </div>

@@ -64,12 +64,10 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
           </div>
         </div>
 
-        <h3 className="light:text-zinc-900 light:group-hover:text-blue-700 mb-2 text-base font-bold text-white transition-colors group-hover:text-cyan-400">
+        <h3 className="light:group-hover:text-blue-700 text-text-primary mb-2 text-base font-bold transition-colors group-hover:text-cyan-400">
           {project.title}
         </h3>
-        <p className="light:text-zinc-700 mb-6 text-sm leading-relaxed text-zinc-300">
-          {project.description}
-        </p>
+        <p className="text-text-tertiary mb-6 text-sm leading-relaxed">{project.description}</p>
       </div>
 
       <div className="space-y-4">
@@ -77,10 +75,10 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
           <div className="light:border-zinc-100 flex gap-4 border-t border-white/10 pt-4">
             {project.stats.map((stat) => (
               <div key={stat.label}>
-                <div className="light:text-zinc-500 text-[10px] font-bold text-zinc-300 uppercase sm:text-xs">
+                <div className="text-text-muted text-[10px] font-bold uppercase sm:text-xs">
                   {stat.label}
                 </div>
-                <div className="light:text-zinc-900 font-mono text-xs font-semibold text-white">
+                <div className="text-text-secondary font-mono text-xs font-semibold">
                   {stat.value}
                 </div>
               </div>
@@ -92,7 +90,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
           {project.techStack.map((tech) => (
             <span
               key={tech}
-              className="light:border-zinc-200 light:bg-zinc-50 light:text-zinc-700 light:group-hover:border-blue-200 light:group-hover:text-blue-800 rounded border border-white/5 bg-black/20 px-2 py-1 text-[10px] text-zinc-300 transition-colors group-hover:border-blue-500/20 group-hover:text-blue-200 sm:text-xs"
+              className="light:border-zinc-200 light:bg-zinc-50 text-text-tertiary light:group-hover:border-blue-200 light:group-hover:text-blue-800 rounded border border-white/5 bg-black/20 px-2 py-1 text-[10px] transition-colors group-hover:border-blue-500/20 group-hover:text-blue-200 sm:text-xs"
             >
               {tech}
             </span>

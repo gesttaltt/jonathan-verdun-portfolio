@@ -25,17 +25,17 @@ export const AuditCard: React.FC<AuditCardProps> = ({ audit }) => {
         <div className="light:bg-amber-100 light:text-amber-700 flex h-10 w-10 items-center justify-center rounded-lg bg-amber-500/10 text-amber-500">
           <FileText className="h-5 w-5" />
         </div>
-        <div className="light:text-zinc-500 flex items-center gap-2 text-[10px] font-bold tracking-tighter text-zinc-400 uppercase sm:text-xs">
+        <div className="text-text-muted flex items-center gap-2 text-[10px] font-bold tracking-tighter uppercase sm:text-xs">
           <Calendar className="h-3 w-3" />
           {audit.date}
         </div>
       </div>
 
-      <h3 className="light:text-zinc-900 light:group-hover:text-amber-700 mb-2 text-lg font-bold text-white transition-colors group-hover:text-amber-400">
+      <h3 className="light:group-hover:text-amber-700 text-text-primary mb-2 text-lg font-bold transition-colors group-hover:text-amber-400">
         {audit.title}
       </h3>
 
-      <p className="light:text-zinc-700 mb-6 line-clamp-2 text-sm leading-relaxed text-zinc-400">
+      <p className="text-text-tertiary mb-6 line-clamp-2 text-sm leading-relaxed">
         {audit.excerpt}
       </p>
 

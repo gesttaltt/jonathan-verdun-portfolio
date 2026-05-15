@@ -73,7 +73,7 @@ export const QualityDashboard: React.FC<QualityDashboardProps> = ({ audits }) =>
       {/* The QA Handbook (Architectural Specifications) */}
       {!searchQuery.trim() && (
         <section className="space-y-6">
-          <h3 className="light:text-zinc-500 text-sm font-bold tracking-widest text-zinc-400 uppercase">
+          <h3 className="text-text-tertiary text-sm font-bold tracking-widest uppercase">
             The QA Handbook — Architectural Specifications
           </h3>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -86,23 +86,23 @@ export const QualityDashboard: React.FC<QualityDashboardProps> = ({ audits }) =>
 
       <section className="space-y-8">
         <div className="light:border-zinc-200 flex flex-col justify-between gap-4 border-b border-white/10 pb-6 sm:flex-row sm:items-end">
-          <h3 className="light:text-zinc-500 text-sm font-bold tracking-widest text-zinc-400 uppercase">
+          <h3 className="text-text-tertiary text-sm font-bold tracking-widest uppercase">
             Chronological Audit History
           </h3>
 
           <div className="relative w-full max-w-sm">
-            <SearchIcon className="light:text-zinc-500 absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-zinc-400" />
+            <SearchIcon className="text-text-tertiary absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
             <input
               type="text"
               placeholder={t.sections.searchPlaceholder}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="light:border-zinc-200 light:bg-white light:text-zinc-900 light:focus:border-amber-400 w-full rounded-lg border border-white/10 bg-white/5 py-2 pr-10 pl-9 text-sm text-white transition-colors focus:border-amber-500/50 focus:bg-white/10 focus:outline-none"
+              className="light:border-zinc-200 light:bg-white text-text-primary light:focus:border-amber-400 w-full rounded-lg border border-white/10 bg-white/5 py-2 pr-10 pl-9 text-sm transition-colors focus:border-amber-500/50 focus:bg-white/10 focus:outline-none"
             />
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery('')}
-                className="absolute top-1/2 right-3 -translate-y-1/2 text-zinc-400 hover:text-white"
+                className="text-text-tertiary absolute top-1/2 right-3 -translate-y-1/2 hover:text-white"
               >
                 <X className="h-4 w-4" />
               </button>
@@ -133,10 +133,10 @@ export const QualityDashboard: React.FC<QualityDashboardProps> = ({ audits }) =>
             animate={{ opacity: 1, y: 0 }}
             className="flex flex-col items-center justify-center py-20 text-center"
           >
-            <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-white/5 text-zinc-600">
+            <div className="text-text-tertiary mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-white/5">
               <SearchIcon className="h-8 w-8" />
             </div>
-            <p className="text-zinc-400">{t.sections.noResults}</p>
+            <p className="text-text-tertiary">{t.sections.noResults}</p>
           </m.div>
         )}
       </section>

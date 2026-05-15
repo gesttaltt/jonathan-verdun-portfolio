@@ -24,7 +24,7 @@ export const VisualTestSummary: React.FC = () => {
   return (
     <div className="light:border-zinc-200 light:bg-white rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
       <div className="mb-6 flex items-center justify-between">
-        <h3 className="light:text-zinc-900 flex items-center gap-2 text-sm font-bold tracking-widest text-white uppercase">
+        <h3 className="text-text-primary flex items-center gap-2 text-sm font-bold tracking-widest uppercase">
           <Shield className="light:text-blue-600 h-4 w-4 text-blue-400" />
           {vt.title}
         </h3>
@@ -39,37 +39,31 @@ export const VisualTestSummary: React.FC = () => {
 
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
         <div className="space-y-1">
-          <p className="light:text-zinc-500 text-[10px] font-bold text-zinc-400 uppercase">
-            {vt.executionStatus}
-          </p>
+          <p className="text-text-tertiary text-[10px] font-bold uppercase">{vt.executionStatus}</p>
           <div className="flex items-center gap-2">
             {success ? (
               <CheckCircle2 className="light:text-green-800 h-4 w-4 text-green-500" />
             ) : (
               <XCircle className="light:text-red-800 h-4 w-4 text-red-500" />
             )}
-            <span className="light:text-zinc-900 text-lg font-bold text-white">
+            <span className="text-text-primary text-lg font-bold">
               {success ? vt.passed : vt.failed}
             </span>
           </div>
         </div>
 
         <div className="space-y-1">
-          <p className="light:text-zinc-500 text-[10px] font-bold text-zinc-400 uppercase">
-            {vt.testPayload}
-          </p>
+          <p className="text-text-tertiary text-[10px] font-bold uppercase">{vt.testPayload}</p>
           <div className="flex items-baseline gap-1">
-            <span className="light:text-zinc-900 text-2xl font-black text-white">
-              {numPassedTests}
-            </span>
-            <span className="light:text-zinc-500 text-xs font-bold text-zinc-400">
+            <span className="text-text-primary text-2xl font-black">{numPassedTests}</span>
+            <span className="text-text-tertiary text-xs font-bold">
               / {numTotalTests} {vt.assertions}
             </span>
           </div>
         </div>
 
         <div className="space-y-1">
-          <p className="light:text-zinc-500 text-[10px] font-bold text-zinc-400 uppercase">
+          <p className="text-text-tertiary text-[10px] font-bold uppercase">
             {vt.verificationRate}
           </p>
           <div className="flex items-baseline gap-1">
@@ -87,11 +81,9 @@ export const VisualTestSummary: React.FC = () => {
         </div>
 
         <div className="space-y-1">
-          <p className="light:text-zinc-500 text-[10px] font-bold text-zinc-400 uppercase">
-            {vt.lastVerified}
-          </p>
-          <div className="light:text-zinc-600 flex items-center gap-2 text-xs font-medium text-zinc-300">
-            <Clock className="light:text-zinc-500 h-3.5 w-3.5 text-zinc-400" />
+          <p className="text-text-tertiary text-[10px] font-bold uppercase">{vt.lastVerified}</p>
+          <div className="text-text-secondary flex items-center gap-2 text-xs font-medium">
+            <Clock className="text-text-tertiary h-3.5 w-3.5" />
             {date}
           </div>
         </div>

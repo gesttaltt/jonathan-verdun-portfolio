@@ -116,7 +116,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ repo = siteConfig.repo }) => {
 
   const ciTheme = {
     loading: {
-      color: 'text-zinc-400 light:text-zinc-600',
+      color: 'text-text-tertiary',
       bg: 'bg-zinc-500/10 light:bg-zinc-100',
       label: t.sections.sidebar.ciStatusLoading,
     },
@@ -142,7 +142,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ repo = siteConfig.repo }) => {
       <div className="space-y-8">
         <FadeInSection delay={0.1}>
           <div className="space-y-4">
-            <h3 className="light:text-zinc-800 flex items-center gap-3 text-lg font-bold text-white">
+            <h3 className="text-text-primary flex items-center gap-3 text-lg font-bold">
               <Server className="light:text-blue-600 h-5 w-5 text-blue-400" />
               {t.sections.sidebar.constraintsTitle}
             </h3>
@@ -169,7 +169,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ repo = siteConfig.repo }) => {
                     >
                       <div className="flex items-center gap-3">
                         <div className={`h-1.5 w-1.5 rounded-full ${bgColors}`} />
-                        <span className="light:text-zinc-700 text-xs font-medium text-zinc-400">
+                        <span className="text-text-tertiary text-xs font-medium">
                           {t.sections.sidebar[gate.key]}
                         </span>
                       </div>
@@ -185,7 +185,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ repo = siteConfig.repo }) => {
             {repo && (
               <div className="light:border-zinc-200 mt-8 border-t border-white/5 pt-5">
                 <div className="flex items-center justify-between">
-                  <p className="light:text-zinc-600 text-[10px] font-bold tracking-widest text-zinc-400 uppercase sm:text-xs">
+                  <p className="text-text-tertiary text-[10px] font-bold tracking-widest uppercase sm:text-xs">
                     {t.sections.sidebar.livePipelineLabel}
                   </p>
                   <div
@@ -209,7 +209,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ repo = siteConfig.repo }) => {
                   href={repo.ciWorkflowUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group/ci light:text-zinc-600 light:hover:text-zinc-900 mt-3 flex items-center gap-2 text-xs font-medium text-zinc-400 transition-colors hover:text-white"
+                  className="group/ci text-text-tertiary light:hover:text-text-primary mt-3 flex items-center gap-2 text-xs font-medium transition-colors hover:text-white"
                   aria-label="CI pipeline status (opens in new tab)"
                 >
                   <Activity className="light:text-blue-600 h-4 w-4 text-blue-400" />
@@ -230,17 +230,17 @@ export const Sidebar: React.FC<SidebarProps> = ({ repo = siteConfig.repo }) => {
                 <div className="light:bg-amber-50 rounded-lg bg-amber-500/10 p-2">
                   <Zap className="light:text-amber-600 h-5 w-5 text-amber-400" />
                 </div>
-                <h3 className="light:text-zinc-900 text-lg font-bold text-white">
+                <h3 className="text-text-primary text-lg font-bold">
                   {t.sections.sidebar.certificationTitle}
                 </h3>
               </div>
 
               <div className="space-y-4">
                 <div className="space-y-1">
-                  <p className="light:text-zinc-900 text-sm font-bold text-white">
+                  <p className="text-text-primary text-sm font-bold">
                     {siteConfig.certification.name}
                   </p>
-                  <p className="light:text-zinc-700 text-xs font-medium text-zinc-400">
+                  <p className="text-text-tertiary text-xs font-medium">
                     {siteConfig.certification.provider}
                   </p>
                 </div>
@@ -249,7 +249,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ repo = siteConfig.repo }) => {
                   <div className="light:bg-amber-100 light:text-amber-800 rounded-full bg-amber-500/10 px-2 py-0.5 text-[10px] font-bold text-amber-400 uppercase">
                     {siteConfig.certification.status}
                   </div>
-                  <span className="light:text-zinc-500 text-[10px] text-zinc-500">
+                  <span className="text-text-muted text-[10px]">
                     {siteConfig.certification.expectedDate}
                   </span>
                 </div>

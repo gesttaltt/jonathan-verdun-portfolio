@@ -28,7 +28,7 @@ export function HeroHeader() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="GitHub profile (opens in new tab)"
-            className="group focus-visible:ring-offset-background light:text-zinc-600 light:hover:text-zinc-900 flex min-h-[44px] items-center gap-2 rounded text-zinc-300 transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none dark:hover:text-white"
+            className="group focus-visible:ring-offset-background text-text-tertiary light:hover:text-text-primary flex min-h-[44px] items-center gap-2 rounded transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none dark:hover:text-white"
           >
             <Github className="h-5 w-5 shrink-0 transition-transform group-hover:-translate-y-0.5" />
             <span className="truncate">{siteConfig.socialLinks.github.label}</span>
@@ -38,7 +38,7 @@ export function HeroHeader() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn profile (opens in new tab)"
-            className="group focus-visible:ring-offset-background light:text-zinc-600 light:hover:text-zinc-900 flex min-h-[44px] items-center gap-2 rounded text-zinc-300 transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none dark:hover:text-white"
+            className="group focus-visible:ring-offset-background text-text-tertiary light:hover:text-text-primary flex min-h-[44px] items-center gap-2 rounded transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none dark:hover:text-white"
           >
             <Linkedin className="h-5 w-5 shrink-0 transition-transform group-hover:-translate-y-0.5" />
             <span className="truncate">{siteConfig.socialLinks.linkedin.label}</span>
@@ -54,7 +54,7 @@ export function HeroHeader() {
         <div className="light:border-zinc-200 light:bg-white flex flex-col gap-3 rounded-2xl border border-white/8 bg-white/8 p-5 backdrop-blur-md dark:border-white/8 dark:bg-white/8">
           <div className="flex items-center gap-3 text-xs">
             <span className="inline-flex h-2.5 w-2.5 rounded-full bg-green-500"></span>
-            <span className="light:text-zinc-700 font-bold tracking-widest text-zinc-300 uppercase dark:text-zinc-300">
+            <span className="text-text-secondary font-bold tracking-widest uppercase">
               {t.workHistoryLabel}
             </span>
           </div>
@@ -65,7 +65,7 @@ export function HeroHeader() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`${entry.organization} (opens in new tab)`}
-                className="focus-visible:ring-offset-background light:text-zinc-900 light:hover:text-blue-700 flex items-center gap-2 rounded text-lg font-bold text-white transition-colors hover:text-cyan-400 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none dark:text-white dark:hover:text-cyan-400"
+                className="focus-visible:ring-offset-background text-text-primary light:hover:text-blue-700 flex items-center gap-2 rounded text-lg font-bold transition-colors hover:text-cyan-400 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none dark:hover:text-cyan-400"
               >
                 {entry.organization} <ExternalLinkIcon className="h-4 w-4" />
               </Link>
@@ -73,10 +73,7 @@ export function HeroHeader() {
                 entry.role ||
                 t.workHistoryPeriods[entry.organization] ||
                 entry.period) && (
-                <p
-                  className="light:text-zinc-600 text-xs text-zinc-300 dark:text-zinc-300"
-                  data-testid="work-role-period"
-                >
+                <p className="text-text-tertiary text-xs" data-testid="work-role-period">
                   {[
                     t.workHistoryRoles[entry.organization] || entry.role,
                     t.workHistoryPeriods[entry.organization] || entry.period,
@@ -86,7 +83,7 @@ export function HeroHeader() {
                 </p>
               )}
               {t.workHistoryDescriptions[entry.organization] && (
-                <p className="light:text-zinc-700 text-xs text-zinc-300 dark:text-zinc-300">
+                <p className="text-text-tertiary text-xs">
                   {t.workHistoryDescriptions[entry.organization]}
                 </p>
               )}

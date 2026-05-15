@@ -24,18 +24,18 @@ export const SystemSpecCard: React.FC<SystemSpecCardProps> = ({ spec }) => {
         <h3 className="flex items-center gap-2 text-base font-bold tracking-wide text-cyan-300 uppercase">
           <FlaskConical className="h-4 w-4" /> {spec.focus}
         </h3>
-        <Cpu className="h-4 w-4 text-zinc-300 transition-colors group-hover:text-cyan-300" />
+        <Cpu className="text-text-tertiary h-4 w-4 transition-colors group-hover:text-cyan-300" />
       </div>
-      <div className="space-y-3 text-sm leading-relaxed text-zinc-300">
+      <div className="text-text-secondary space-y-3 text-sm leading-relaxed">
         <p>
           {t.architecture.methodologyLabel}:{' '}
-          <span className="font-semibold text-white">{spec.methodology}</span>
+          <span className="text-text-primary font-semibold">{spec.methodology}</span>
         </p>
         <div>
-          <span className="text-[10px] font-bold text-zinc-300 uppercase sm:text-xs">
+          <span className="text-text-muted text-[10px] font-bold uppercase sm:text-xs">
             {t.architecture.invariantsLabel}:
           </span>
-          <p className="mt-1 text-xs text-zinc-300">{spec.invariants.join(' · ')}</p>
+          <p className="text-text-tertiary mt-1 text-xs">{spec.invariants.join(' · ')}</p>
         </div>
         {spec.link && (
           <div className="flex min-h-[44px] items-center">
@@ -44,7 +44,7 @@ export const SystemSpecCard: React.FC<SystemSpecCardProps> = ({ spec }) => {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`View ${spec.link.replace('https://github.com/', '')} on GitHub (opens in new tab)`}
-              className="focus-visible:ring-offset-background inline-flex items-center gap-1 rounded text-[10px] text-zinc-300 transition-colors hover:text-cyan-300 focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 focus-visible:outline-none sm:text-xs"
+              className="focus-visible:ring-offset-background text-text-tertiary inline-flex items-center gap-1 rounded text-[10px] transition-colors hover:text-cyan-300 focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 focus-visible:outline-none sm:text-xs"
             >
               <ExternalLink className="h-3 w-3" />
               {spec.link.replace('https://github.com/', '')}
