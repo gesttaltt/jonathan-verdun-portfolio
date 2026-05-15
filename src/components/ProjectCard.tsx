@@ -8,11 +8,11 @@ import { ProjectSpec } from '@/lib/contracts/ProjectContract.types'
 import { fadeUpVariants } from '@/lib/animations'
 
 const PROJECT_STATUS_STYLES: Record<ProjectSpec['status'], string> = {
-  Deployed: 'bg-green-500/20 text-green-400',
-  QA: 'bg-blue-500/20 text-blue-400',
-  Research: 'bg-purple-500/20 text-purple-400',
-  Prototype: 'bg-amber-500/20 text-amber-400',
-  Archived: 'bg-zinc-500/20 text-zinc-300',
+  Deployed: 'bg-green-500/20 text-green-400 light:text-green-800 light:bg-green-500/10',
+  QA: 'bg-blue-500/20 text-blue-400 light:text-blue-800 light:bg-blue-500/10',
+  Research: 'bg-purple-500/20 text-purple-400 light:text-purple-800 light:bg-purple-500/10',
+  Prototype: 'bg-amber-500/20 text-amber-400 light:text-amber-900 light:bg-amber-500/10',
+  Archived: 'bg-zinc-500/20 text-zinc-300 light:text-zinc-700 light:bg-zinc-500/10',
 }
 
 interface ProjectCardProps {
@@ -25,10 +25,10 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
       variants={fadeUpVariants()}
       role="listitem"
       data-testid={`project-card-${project.id}`}
-      className="group relative flex h-full flex-col justify-between overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-md transition-all duration-300 hover:border-blue-500/50 hover:bg-white/10 hover:shadow-[0_0_20px_var(--glow-blue)]"
+      className="group light:border-zinc-200 light:bg-white/50 light:hover:border-blue-300 light:hover:bg-white light:hover:shadow-lg relative flex h-full flex-col justify-between overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-md transition-all duration-300 hover:border-blue-500/50 hover:bg-white/10 hover:shadow-[0_0_20px_var(--glow-blue)]"
     >
       {/* Glowing Corner */}
-      <div className="absolute top-0 right-0 h-16 w-16 translate-x-8 -translate-y-8 rotate-45 bg-blue-500/10 blur-xl transition-all duration-500 group-hover:bg-blue-500/20" />
+      <div className="light:bg-blue-200/50 absolute top-0 right-0 h-16 w-16 translate-x-8 -translate-y-8 rotate-45 bg-blue-500/10 blur-xl transition-all duration-500 group-hover:bg-blue-500/20" />
 
       <div>
         <div className="mb-4 flex items-center justify-between">
@@ -45,7 +45,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
               <Link
                 href={project.specLink}
                 aria-label={`View ${project.title} specification`}
-                className="focus-visible:ring-offset-background flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full bg-white/5 p-2.5 text-zinc-300 transition-colors hover:bg-purple-500/20 hover:text-white focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2 focus-visible:outline-none"
+                className="focus-visible:ring-offset-background light:bg-zinc-100 light:text-zinc-600 light:hover:bg-purple-100 light:hover:text-purple-700 flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full bg-white/5 p-2.5 text-zinc-300 transition-colors hover:bg-purple-500/20 hover:text-white focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2 focus-visible:outline-none"
               >
                 <ShieldCheck className="h-4 w-4" />
               </Link>
@@ -56,7 +56,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`View ${project.title} on GitHub (opens in new tab)`}
-                className="focus-visible:ring-offset-background flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full bg-white/5 p-2.5 text-zinc-300 transition-colors hover:bg-blue-500/20 hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none"
+                className="focus-visible:ring-offset-background light:bg-zinc-100 light:text-zinc-600 light:hover:bg-blue-100 light:hover:text-blue-700 flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full bg-white/5 p-2.5 text-zinc-300 transition-colors hover:bg-blue-500/20 hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none"
               >
                 <ExternalLink className="h-4 w-4" />
               </Link>
@@ -64,21 +64,25 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
           </div>
         </div>
 
-        <h3 className="mb-2 text-base font-bold text-white transition-colors group-hover:text-cyan-400">
+        <h3 className="light:text-zinc-900 light:group-hover:text-blue-600 mb-2 text-base font-bold text-white transition-colors group-hover:text-cyan-400">
           {project.title}
         </h3>
-        <p className="mb-6 text-sm leading-relaxed text-zinc-300">{project.description}</p>
+        <p className="light:text-zinc-600 mb-6 text-sm leading-relaxed text-zinc-300">
+          {project.description}
+        </p>
       </div>
 
       <div className="space-y-4">
         {project.stats && (
-          <div className="flex gap-4 border-t border-white/10 pt-4">
+          <div className="light:border-zinc-200 flex gap-4 border-t border-white/10 pt-4">
             {project.stats.map((stat) => (
               <div key={stat.label}>
-                <div className="text-[10px] font-bold text-zinc-300 uppercase sm:text-xs">
+                <div className="light:text-zinc-500 text-[10px] font-bold text-zinc-300 uppercase sm:text-xs">
                   {stat.label}
                 </div>
-                <div className="font-mono text-xs font-semibold text-white">{stat.value}</div>
+                <div className="light:text-zinc-900 font-mono text-xs font-semibold text-white">
+                  {stat.value}
+                </div>
               </div>
             ))}
           </div>
@@ -88,7 +92,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
           {project.techStack.map((tech) => (
             <span
               key={tech}
-              className="rounded border border-white/5 bg-black/20 px-2 py-1 text-[10px] text-zinc-300 transition-colors group-hover:border-blue-500/20 group-hover:text-blue-200 sm:text-xs"
+              className="light:border-zinc-200 light:bg-zinc-100 light:text-zinc-600 light:group-hover:border-blue-200 light:group-hover:text-blue-700 rounded border border-white/5 bg-black/20 px-2 py-1 text-[10px] text-zinc-300 transition-colors group-hover:border-blue-500/20 group-hover:text-blue-200 sm:text-xs"
             >
               {tech}
             </span>

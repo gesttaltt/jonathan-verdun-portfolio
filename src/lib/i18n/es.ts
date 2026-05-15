@@ -7,7 +7,7 @@ import { QA_PHILOSOPHY } from '@/lib/contracts/QAContract'
 import { siteConfig } from '@/lib/siteConfig'
 
 const ES_HELP_OUTPUT =
-  'Comandos disponibles: ayuda, sobre, proyectos, contacto, habilidades, version, quiensoy, limpiar'
+  'Comandos disponibles: ayuda, sobre, proyectos, contacto, habilidades, version, quiensoy, limpiar, ls, cd, cat, pwd'
 
 // ── Overrides for Work History ──────────────────────────────────────────────
 const ES_WORK_OVERRIDES: Record<string, { role?: string; period?: string; description?: string }> =
@@ -48,6 +48,15 @@ const ES_QA_OBJECTIVES: Record<string, string> = {
   regression: 'Verificación automatizada de funcionalidad existente después de cada build',
   accessibility:
     'Garantizar el cumplimiento de WCAG 2.1 AA mediante auditorías automáticas y manuales',
+}
+
+const ES_QA_LAYERS: Record<string, string> = {
+  strategy: 'estrategia',
+  'api/contract': 'api/contratos',
+  automation: 'automatización',
+  exploratory: 'exploratorio',
+  regression: 'regresión',
+  accessibility: 'accesibilidad',
 }
 
 // ── Overrides for Project Data ────────────────────────────────────────────────
@@ -176,6 +185,7 @@ const esQaPhilosophy = {
   constraints: ES_QA_CONSTRAINTS,
   specifications: QA_PHILOSOPHY.specifications.map((spec) => ({
     ...spec,
+    layer: ES_QA_LAYERS[spec.layer] ?? spec.layer,
     objective: ES_QA_OBJECTIVES[spec.layer] ?? spec.objective,
   })),
 }

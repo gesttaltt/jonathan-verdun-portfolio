@@ -22,13 +22,13 @@ export const VisualTestSummary: React.FC = () => {
   })
 
   return (
-    <div className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
+    <div className="light:border-zinc-200 light:bg-white/50 rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
       <div className="mb-6 flex items-center justify-between">
-        <h3 className="flex items-center gap-2 text-sm font-bold tracking-widest text-white uppercase">
-          <Shield className="h-4 w-4 text-blue-400" />
+        <h3 className="light:text-zinc-900 flex items-center gap-2 text-sm font-bold tracking-widest text-white uppercase">
+          <Shield className="light:text-blue-600 h-4 w-4 text-blue-400" />
           {vt.title}
         </h3>
-        <div className="flex items-center gap-2 rounded-full bg-green-500/10 px-3 py-1 text-[10px] font-bold text-green-500 uppercase">
+        <div className="light:bg-green-100 light:text-green-800 flex items-center gap-2 rounded-full bg-green-500/10 px-3 py-1 text-[10px] font-bold text-green-500 uppercase">
           <span className="relative flex h-2 w-2">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75"></span>
             <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500"></span>
@@ -39,53 +39,67 @@ export const VisualTestSummary: React.FC = () => {
 
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
         <div className="space-y-1">
-          <p className="text-[10px] font-bold text-zinc-400 uppercase">{vt.executionStatus}</p>
+          <p className="light:text-zinc-500 text-[10px] font-bold text-zinc-400 uppercase">
+            {vt.executionStatus}
+          </p>
           <div className="flex items-center gap-2">
             {success ? (
-              <CheckCircle2 className="h-4 w-4 text-green-500" />
+              <CheckCircle2 className="light:text-green-800 h-4 w-4 text-green-500" />
             ) : (
-              <XCircle className="h-4 w-4 text-red-500" />
+              <XCircle className="light:text-red-800 h-4 w-4 text-red-500" />
             )}
-            <span className="text-lg font-bold text-white">{success ? vt.passed : vt.failed}</span>
+            <span className="light:text-zinc-900 text-lg font-bold text-white">
+              {success ? vt.passed : vt.failed}
+            </span>
           </div>
         </div>
 
         <div className="space-y-1">
-          <p className="text-[10px] font-bold text-zinc-400 uppercase">{vt.testPayload}</p>
+          <p className="light:text-zinc-500 text-[10px] font-bold text-zinc-400 uppercase">
+            {vt.testPayload}
+          </p>
           <div className="flex items-baseline gap-1">
-            <span className="text-2xl font-black text-white">{numPassedTests}</span>
-            <span className="text-xs font-bold text-zinc-400">
+            <span className="light:text-zinc-900 text-2xl font-black text-white">
+              {numPassedTests}
+            </span>
+            <span className="light:text-zinc-500 text-xs font-bold text-zinc-400">
               / {numTotalTests} {vt.assertions}
             </span>
           </div>
         </div>
 
         <div className="space-y-1">
-          <p className="text-[10px] font-bold text-zinc-400 uppercase">{vt.verificationRate}</p>
+          <p className="light:text-zinc-500 text-[10px] font-bold text-zinc-400 uppercase">
+            {vt.verificationRate}
+          </p>
           <div className="flex items-baseline gap-1">
-            <span className="text-2xl font-black text-green-400">{passRate}%</span>
-            <div className="h-1.5 w-12 overflow-hidden rounded-full bg-white/10">
+            <span className="light:text-green-800 text-2xl font-black text-green-400">
+              {passRate}%
+            </span>
+            <div className="light:bg-zinc-200 h-1.5 w-12 overflow-hidden rounded-full bg-white/10">
               <m.div
                 initial={{ width: 0 }}
                 animate={{ width: `${passRate}%` }}
-                className="h-full bg-green-500"
+                className="light:bg-green-800 h-full bg-green-500"
               />
             </div>
           </div>
         </div>
 
         <div className="space-y-1">
-          <p className="text-[10px] font-bold text-zinc-400 uppercase">{vt.lastVerified}</p>
-          <div className="flex items-center gap-2 text-xs font-medium text-zinc-300">
-            <Clock className="h-3.5 w-3.5 text-zinc-400" />
+          <p className="light:text-zinc-500 text-[10px] font-bold text-zinc-400 uppercase">
+            {vt.lastVerified}
+          </p>
+          <div className="light:text-zinc-600 flex items-center gap-2 text-xs font-medium text-zinc-300">
+            <Clock className="light:text-zinc-500 h-3.5 w-3.5 text-zinc-400" />
             {date}
           </div>
         </div>
       </div>
 
       {numFailedTests > 0 && (
-        <div className="mt-6 rounded-lg border border-red-500/20 bg-red-500/5 p-3">
-          <p className="text-xs font-bold text-red-400">
+        <div className="light:border-red-200 light:bg-red-50 mt-6 rounded-lg border border-red-500/20 bg-red-500/5 p-3">
+          <p className="light:text-red-600 text-xs font-bold text-red-400">
             {vt.regressionDetected.replace('{count}', String(numFailedTests))}
           </p>
         </div>

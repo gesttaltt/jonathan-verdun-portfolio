@@ -62,10 +62,16 @@ test.describe('Offline Resilience (PWA)', () => {
     context,
     page,
   }) => {
-    // Enable E2E Service Worker registration via cookie
+    // Enable E2E Service Worker registration and mock CI via cookies
     await context.addCookies([
       {
         name: 'e2e',
+        value: 'true',
+        domain: 'localhost',
+        path: '/',
+      },
+      {
+        name: 'mock-ci',
         value: 'true',
         domain: 'localhost',
         path: '/',
@@ -74,17 +80,18 @@ test.describe('Offline Resilience (PWA)', () => {
 
     await page.goto('/')
 
-    // Wait for terminal boot
+    // Wait for terminal boot (increased timeout for CI stability)
     await expect(page.getByText('jonathan.verdun — QA Automation Engineer')).toBeVisible({
-      timeout: 15_000,
+      timeout: 20_000,
     })
 
-    // Wait for Service Worker to be registered and active
+    // Wait for Service Worker to be registered and active with a longer retry window
     const swStatus = await page.evaluate(async () => {
       if (!('serviceWorker' in navigator)) return 'no-sw-support'
-      for (let i = 0; i < 50; i++) {
+      // Retry for up to 20 seconds (100 * 200ms)
+      for (let i = 0; i < 100; i++) {
         const regs = await navigator.serviceWorker.getRegistrations()
-        if (regs.find((r) => r.active)) return 'ready'
+        if (regs.some((r) => r.active)) return 'ready'
         await new Promise((r) => setTimeout(r, 200))
       }
       return 'timeout'

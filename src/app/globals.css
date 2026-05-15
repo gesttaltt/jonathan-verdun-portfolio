@@ -13,6 +13,9 @@
   --color-particle: var(--particle);
 }
 
+@variant light (&:where(.light, .light *));
+@variant dark (&:where(:not(.light), :not(.light) *));
+
 :root {
   --background: #0a0a0a;
   --foreground: #ededed;
@@ -31,6 +34,23 @@
   --glow-blue: rgba(59, 130, 246, 0.15);
   --glow-cyan: rgba(6, 182, 212, 0.12);
   --glow-purple: rgba(139, 92, 246, 0.12);
+}
+
+.light {
+  --background: #fafafa;
+  --foreground: #09090b;
+  --accent: #2563eb;
+
+  --bg-deep: #f4f4f5;
+  --grid-line: rgba(0, 0, 0, 0.08);
+  --particle: #3b82f6;
+
+  --node-color: #2563eb;
+  --interaction-glow: #7c3aed;
+
+  --glow-blue: rgba(37, 99, 235, 0.1);
+  --glow-cyan: rgba(8, 145, 178, 0.08);
+  --glow-purple: rgba(124, 58, 237, 0.08);
 }
 
 /* Custom Cyberpunk Scrollbar */

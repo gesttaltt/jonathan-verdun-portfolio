@@ -2,6 +2,7 @@ import { render, screen, act, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { usePathname } from 'next/navigation'
 import { I18nProvider } from '@/lib/i18n/context'
+import { ThemeProvider } from '@/lib/theme/context'
 import { PortfolioPage } from '@/components/PortfolioPage'
 
 jest.mock('next/navigation', () => ({
@@ -30,9 +31,11 @@ const mockPathname = usePathname as jest.Mock
 const wrap = (path = '/') => {
   mockPathname.mockReturnValue(path)
   return render(
-    <I18nProvider>
-      <PortfolioPage />
-    </I18nProvider>
+    <ThemeProvider>
+      <I18nProvider>
+        <PortfolioPage />
+      </I18nProvider>
+    </ThemeProvider>
   )
 }
 

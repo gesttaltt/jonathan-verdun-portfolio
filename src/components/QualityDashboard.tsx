@@ -48,15 +48,23 @@ export const QualityDashboard: React.FC<QualityDashboardProps> = ({ audits }) =>
           <TestDetailedList />
 
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-            <div className="rounded-xl border border-white/5 bg-white/5 p-4 text-center">
-              <SearchIcon className="mx-auto mb-2 h-5 w-5 text-amber-500" />
-              <p className="text-xl font-bold text-white">{chronologicalAudits.length}</p>
-              <p className="text-[10px] font-bold text-zinc-400 uppercase">Audits Published</p>
+            <div className="light:border-zinc-200 light:bg-zinc-100/50 rounded-xl border border-white/5 bg-white/5 p-4 text-center">
+              <SearchIcon className="light:text-amber-600 mx-auto mb-2 h-5 w-5 text-amber-500" />
+              <p className="light:text-zinc-900 text-xl font-bold text-white">
+                {chronologicalAudits.length}
+              </p>
+              <p className="light:text-zinc-500 text-[10px] font-bold text-zinc-400 uppercase">
+                Audits Published
+              </p>
             </div>
-            <div className="rounded-xl border border-white/5 bg-white/5 p-4 text-center">
-              <ShieldCheck className="mx-auto mb-2 h-5 w-5 text-blue-500" />
-              <p className="text-xl font-bold text-white">{handbookSpecs.length}</p>
-              <p className="text-[10px] font-bold text-zinc-400 uppercase">Architecture Specs</p>
+            <div className="light:border-zinc-200 light:bg-zinc-100/50 rounded-xl border border-white/5 bg-white/5 p-4 text-center">
+              <ShieldCheck className="light:text-blue-600 mx-auto mb-2 h-5 w-5 text-blue-500" />
+              <p className="light:text-zinc-900 text-xl font-bold text-white">
+                {handbookSpecs.length}
+              </p>
+              <p className="light:text-zinc-500 text-[10px] font-bold text-zinc-400 uppercase">
+                Architecture Specs
+              </p>
             </div>
           </div>
         </div>
@@ -65,7 +73,7 @@ export const QualityDashboard: React.FC<QualityDashboardProps> = ({ audits }) =>
       {/* The QA Handbook (Architectural Specifications) */}
       {!searchQuery.trim() && (
         <section className="space-y-6">
-          <h3 className="text-sm font-bold tracking-widest text-zinc-400 uppercase">
+          <h3 className="light:text-zinc-500 text-sm font-bold tracking-widest text-zinc-400 uppercase">
             The QA Handbook — Architectural Specifications
           </h3>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -77,19 +85,19 @@ export const QualityDashboard: React.FC<QualityDashboardProps> = ({ audits }) =>
       )}
 
       <section className="space-y-8">
-        <div className="flex flex-col justify-between gap-4 border-b border-white/10 pb-6 sm:flex-row sm:items-end">
-          <h3 className="text-sm font-bold tracking-widest text-zinc-400 uppercase">
+        <div className="light:border-zinc-200 flex flex-col justify-between gap-4 border-b border-white/10 pb-6 sm:flex-row sm:items-end">
+          <h3 className="light:text-zinc-500 text-sm font-bold tracking-widest text-zinc-400 uppercase">
             Chronological Audit History
           </h3>
 
           <div className="relative w-full max-w-sm">
-            <SearchIcon className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-zinc-400" />
+            <SearchIcon className="light:text-zinc-500 absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-zinc-400" />
             <input
               type="text"
               placeholder={t.sections.searchPlaceholder}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full rounded-lg border border-white/10 bg-white/5 py-2 pr-10 pl-9 text-sm text-white transition-colors focus:border-amber-500/50 focus:bg-white/10 focus:outline-none"
+              className="light:border-zinc-200 light:bg-white light:text-zinc-900 light:focus:border-amber-400 w-full rounded-lg border border-white/10 bg-white/5 py-2 pr-10 pl-9 text-sm text-white transition-colors focus:border-amber-500/50 focus:bg-white/10 focus:outline-none"
             />
             {searchQuery && (
               <button

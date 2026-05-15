@@ -88,11 +88,12 @@ jobs:
         run: npm ci
 
       - name: Install Playwright browsers
-        run: npx playwright install --with-deps chromium
+        run: npx playwright install --with-deps
 
       - name: E2E tests
         run: npm run e2e
         env:
+          MOCK_CI: 'true'
           NEXT_TELEMETRY_DISABLED: 1
 
       - name: Upload Playwright report

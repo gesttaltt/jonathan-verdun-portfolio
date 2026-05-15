@@ -4,6 +4,8 @@ import { jetbrainsMono } from '@/lib/fonts'
 import { buildMetadata, SHARED_VIEWPORT } from '@/lib/metadata'
 import { RootShell } from '@/components/RootShell'
 import { I18nProvider } from '@/lib/i18n/context'
+import { ThemeProvider } from '@/lib/theme/context'
+import { ThemeScript } from '@/components/ThemeScript'
 
 export const viewport: Viewport = SHARED_VIEWPORT
 
@@ -15,11 +17,16 @@ export default function EsLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="es">
+    <html lang="es" suppressHydrationWarning>
+      <head>
+        <ThemeScript />
+      </head>
       <body className={`${jetbrainsMono.variable} font-mono antialiased`}>
-        <I18nProvider>
-          <RootShell>{children}</RootShell>
-        </I18nProvider>
+        <ThemeProvider>
+          <I18nProvider>
+            <RootShell>{children}</RootShell>
+          </I18nProvider>
+        </ThemeProvider>
       </body>
     </html>
   )

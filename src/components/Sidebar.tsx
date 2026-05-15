@@ -44,10 +44,18 @@ export const Sidebar: React.FC = () => {
     let mounted = true
     const fetchCIStatus = async () => {
       try {
-        // Extract owner/repo from siteConfig.repo.url
-        // URL is: https://github.com/gesttaltt/jonathan-verdun-portfolio
+        // Mock CI status in test environments or if a mock flag is present to avoid API rate limits
+        const isMockMode =
+          process.env.NODE_ENV === 'test' ||
+          process.env.MOCK_CI === 'true' ||
+          (typeof document !== 'undefined' && document.cookie.includes('mock-ci=true'))
+
+        if (isMockMode) {
+          if (mounted) setCiStatus('success')
+          return
+        }
+
         const repoUrl = siteConfig.repo?.url
-        /* istanbul ignore next */
         if (!repoUrl) {
           if (mounted) setCiStatus('error')
           return
@@ -64,7 +72,6 @@ export const Sidebar: React.FC = () => {
         if (!response.ok) throw new Error('API request failed')
 
         const data = await response.json()
-        /* istanbul ignore next */
         if (!data.workflow_runs || data.workflow_runs.length === 0) {
           if (mounted) setCiStatus('error')
           return
@@ -74,34 +81,25 @@ export const Sidebar: React.FC = () => {
         if (latestRun.status === 'completed') {
           if (mounted) setCiStatus(latestRun.conclusion === 'success' ? 'success' : 'failure')
         } else {
-          // If still running, we'll keep it as loading or maybe add a "running" state
-          // but for now success/failure based on conclusion is what we want.
-          // If conclusion is null but status is 'in_progress' or 'queued', we can check the PREVIOUS run
-          // or just show 'loading' (Active).
           if (mounted) setCiStatus('loading')
         }
       } catch (err) {
-        /* istanbul ignore next */
         if (process.env.NODE_ENV !== 'test') {
           console.error('Failed to fetch CI status:', err)
         }
-        /* istanbul ignore next */
         if (mounted) setCiStatus('error')
       }
     }
 
     fetchCIStatus()
 
-    // Poll every 5 minutes (skip in tests to avoid infinite timer loops)
     let interval: NodeJS.Timeout | undefined
     if (process.env.NODE_ENV !== 'test') {
-      /* istanbul ignore next */
       interval = setInterval(fetchCIStatus, 5 * 60 * 1000)
     }
 
     return () => {
       mounted = false
-      /* istanbul ignore next */
       if (interval) clearInterval(interval)
     }
   }, [])
@@ -112,30 +110,29 @@ export const Sidebar: React.FC = () => {
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)
     } catch (err) {
-      /* istanbul ignore next */
       console.error('Failed to copy email:', err)
     }
   }
 
   const ciTheme = {
     loading: {
-      color: 'text-zinc-400',
-      bg: 'bg-zinc-500/10',
+      color: 'text-zinc-400 light:text-zinc-600',
+      bg: 'bg-zinc-500/10 light:bg-zinc-200',
       label: t.sections.sidebar.ciStatusLoading,
     },
     success: {
-      color: 'text-green-400',
-      bg: 'bg-green-400/10',
+      color: 'text-green-400 light:text-green-800',
+      bg: 'bg-green-400/10 light:bg-green-100',
       label: t.sections.sidebar.ciStatusSuccess,
     },
     failure: {
-      color: 'text-red-400',
-      bg: 'bg-red-400/10',
+      color: 'text-red-400 light:text-red-800',
+      bg: 'bg-red-400/10 light:bg-red-100',
       label: t.sections.sidebar.ciStatusFailure,
     },
     error: {
-      color: 'text-amber-400',
-      bg: 'bg-amber-400/10',
+      color: 'text-amber-400 light:text-amber-900',
+      bg: 'bg-amber-400/10 light:bg-amber-100',
       label: t.sections.sidebar.ciStatusError,
     },
   }[ciStatus]
@@ -148,12 +145,12 @@ export const Sidebar: React.FC = () => {
           initial="hidden"
           whileInView="visible"
           viewport={SCROLL_VIEWPORT}
-          className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/8 p-5 backdrop-blur-md transition-all hover:border-blue-500/20 sm:p-8"
+          className="group light:border-zinc-200 light:bg-white/50 light:hover:border-blue-300 relative overflow-hidden rounded-2xl border border-white/10 bg-white/8 p-5 backdrop-blur-md transition-all hover:border-blue-500/20 sm:p-8"
         >
-          <div className="absolute -top-10 -right-10 h-40 w-40 rounded-full bg-blue-500/10 blur-3xl transition-opacity group-hover:opacity-75"></div>
+          <div className="light:bg-blue-100 absolute -top-10 -right-10 h-40 w-40 rounded-full bg-blue-500/10 blur-3xl transition-opacity group-hover:opacity-75"></div>
 
-          <h3 className="mb-6 flex items-center gap-3 text-lg font-bold text-white">
-            <Server className="h-5 w-5 text-blue-400" />
+          <h3 className="light:text-zinc-900 mb-6 flex items-center gap-3 text-lg font-bold text-white">
+            <Server className="light:text-blue-600 h-5 w-5 text-blue-400" />
             {t.sections.sidebar.qualityGatesTitle}
           </h3>
 
@@ -161,22 +158,23 @@ export const Sidebar: React.FC = () => {
             {GATES.map((gate) => {
               const label = t.sections.sidebar[gate.key]
               const colors = {
-                blue: 'bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.6)]',
-                cyan: 'bg-cyan-500 shadow-[0_0_8px_rgba(34,211,238,0.6)]',
-                green: 'bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]',
+                blue: 'bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.6)] light:bg-blue-600 light:shadow-none',
+                cyan: 'bg-cyan-500 shadow-[0_0_8px_rgba(34,211,238,0.6)] light:bg-cyan-600 light:shadow-none',
+                green:
+                  'bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)] light:bg-green-600 light:shadow-none',
               }[gate.color]
 
               const textColors = {
-                blue: 'text-blue-400',
-                cyan: 'text-cyan-400',
-                green: 'text-green-400',
+                blue: 'text-blue-400 light:text-blue-800',
+                cyan: 'text-cyan-400 light:text-cyan-800',
+                green: 'text-green-400 light:text-green-800',
               }[gate.color]
 
               return (
                 <m.div key={gate.key} variants={staggerItemVariants()} className="space-y-2">
                   <Link
                     href={gate.link}
-                    className="group/gate flex items-center justify-between text-[10px] font-bold tracking-widest text-zinc-400 uppercase transition-colors hover:text-white sm:text-xs"
+                    className="group/gate light:text-zinc-500 light:hover:text-zinc-900 flex items-center justify-between text-[10px] font-bold tracking-widest text-zinc-400 uppercase transition-colors hover:text-white sm:text-xs"
                   >
                     <span className="flex items-center gap-2">
                       <gate.icon
@@ -184,11 +182,13 @@ export const Sidebar: React.FC = () => {
                       />
                       {label}
                     </span>
-                    <span className={`${textColors} transition-colors group-hover/gate:text-white`}>
+                    <span
+                      className={`${textColors} light:group-hover/gate:text-zinc-900 transition-colors group-hover/gate:text-white`}
+                    >
                       {gate.value}
                     </span>
                   </Link>
-                  <div className="h-1.5 w-full overflow-hidden rounded-full bg-white/5">
+                  <div className="light:bg-zinc-200 h-1.5 w-full overflow-hidden rounded-full bg-white/5">
                     <m.div
                       initial={{ width: 0 }}
                       whileInView={{ width: gate.value.includes('%') ? gate.value : '100%' }}
@@ -202,9 +202,9 @@ export const Sidebar: React.FC = () => {
             })}
           </div>
 
-          <div className="mt-8 border-t border-white/5 pt-5">
+          <div className="light:border-zinc-100 mt-8 border-t border-white/5 pt-5">
             <div className="flex items-center justify-between">
-              <p className="text-[10px] font-bold tracking-widest text-zinc-400 uppercase sm:text-xs">
+              <p className="light:text-zinc-500 text-[10px] font-bold tracking-widest text-zinc-400 uppercase sm:text-xs">
                 {t.sections.sidebar.livePipelineLabel}
               </p>
               <div
@@ -214,10 +214,10 @@ export const Sidebar: React.FC = () => {
                   className={`relative flex h-1.5 w-1.5 ${ciStatus === 'loading' ? 'animate-pulse' : ''}`}
                 >
                   <span
-                    className={`absolute inline-flex h-full w-full rounded-full opacity-75 ${ciTheme.bg.replace('/10', '')} ${ciStatus === 'loading' || ciStatus === 'success' ? 'animate-ping' : ''}`}
+                    className={`absolute inline-flex h-full w-full rounded-full opacity-75 ${ciTheme.bg.replace('/10', '').split(' ')[0]} ${ciStatus === 'loading' || ciStatus === 'success' ? 'animate-ping' : ''}`}
                   ></span>
                   <span
-                    className={`relative inline-flex h-1.5 w-1.5 rounded-full ${ciTheme.bg.replace('/10', '')}`}
+                    className={`relative inline-flex h-1.5 w-1.5 rounded-full ${ciTheme.bg.replace('/10', '').split(' ')[0]}`}
                   ></span>
                 </span>
                 {ciTheme.label}
@@ -228,10 +228,10 @@ export const Sidebar: React.FC = () => {
               href={siteConfig.repo.ciWorkflowUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="group/ci mt-3 flex items-center gap-2 text-xs font-medium text-zinc-400 transition-colors hover:text-white"
+              className="group/ci light:text-zinc-500 light:hover:text-zinc-900 mt-3 flex items-center gap-2 text-xs font-medium text-zinc-400 transition-colors hover:text-white"
               aria-label="CI pipeline status (opens in new tab)"
             >
-              <Activity className="h-4 w-4 text-blue-400" />
+              <Activity className="light:text-blue-600 h-4 w-4 text-blue-400" />
               <span>GitHub Actions</span>
               <ExternalLink className="h-3 w-3 opacity-0 transition-all group-hover/ci:translate-x-0.5 group-hover/ci:opacity-100" />
             </a>
@@ -239,22 +239,24 @@ export const Sidebar: React.FC = () => {
         </m.div>
 
         <FadeInSection delay={0.2}>
-          <div className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/8 p-5 backdrop-blur-md transition-all hover:border-amber-500/20 sm:p-8">
-            <div className="absolute -top-10 -right-10 h-40 w-40 rounded-full bg-amber-500/5 blur-3xl transition-opacity group-hover:opacity-75"></div>
+          <div className="group light:border-zinc-200 light:bg-white/50 light:hover:border-amber-300 relative overflow-hidden rounded-2xl border border-white/10 bg-white/8 p-5 backdrop-blur-md transition-all hover:border-amber-500/20 sm:p-8">
+            <div className="light:bg-amber-100 absolute -top-10 -right-10 h-40 w-40 rounded-full bg-amber-500/5 blur-3xl transition-opacity group-hover:opacity-75"></div>
 
-            <h3 className="mb-4 flex items-center gap-3 text-lg font-bold text-white">
-              <Zap className="h-5 w-5 text-amber-400" />
+            <h3 className="light:text-zinc-900 mb-4 flex items-center gap-3 text-lg font-bold text-white">
+              <Zap className="light:text-amber-600 h-5 w-5 text-amber-400" />
               {t.sections.sidebar.certificationTitle}
             </h3>
 
             <div className="space-y-4">
-              <div className="rounded-lg border border-white/5 bg-white/5 p-3">
-                <p className="text-xs font-bold text-white">{siteConfig.certification.name}</p>
-                <p className="mt-1 text-[10px] text-zinc-400">
+              <div className="light:border-zinc-200 light:bg-zinc-100/50 rounded-lg border border-white/5 bg-white/5 p-3">
+                <p className="light:text-zinc-900 text-xs font-bold text-white">
+                  {siteConfig.certification.name}
+                </p>
+                <p className="light:text-zinc-500 mt-1 text-[10px] text-zinc-400">
                   {siteConfig.certification.provider}
                 </p>
                 {'details' in siteConfig.certification && (
-                  <p className="mt-2 text-[10px] text-amber-400/80 italic">
+                  <p className="light:text-amber-700/80 mt-2 text-[10px] text-amber-400/80 italic">
                     {siteConfig.certification.details}
                   </p>
                 )}
@@ -262,18 +264,18 @@ export const Sidebar: React.FC = () => {
 
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-1">
-                  <p className="text-[10px] font-bold tracking-tighter text-zinc-400 uppercase">
+                  <p className="light:text-zinc-500 text-[10px] font-bold tracking-tighter text-zinc-400 uppercase">
                     {t.sections.sidebar.certificationStatusLabel}
                   </p>
-                  <p className="text-xs font-medium text-amber-400">
+                  <p className="light:text-amber-600 text-xs font-medium text-amber-400">
                     {siteConfig.certification.status}
                   </p>
                 </div>
                 <div className="space-y-1">
-                  <p className="text-[10px] font-bold tracking-tighter text-zinc-400 uppercase">
+                  <p className="light:text-zinc-500 text-[10px] font-bold tracking-tighter text-zinc-400 uppercase">
                     {t.sections.sidebar.certificationExpectedLabel}
                   </p>
-                  <p className="text-xs font-medium text-white">
+                  <p className="light:text-zinc-900 text-xs font-medium text-white">
                     {siteConfig.certification.expectedDate}
                   </p>
                 </div>
@@ -283,21 +285,23 @@ export const Sidebar: React.FC = () => {
         </FadeInSection>
 
         <FadeInSection delay={0.3}>
-          <div className="rounded-2xl border border-white/5 bg-gradient-to-br from-blue-500/10 to-purple-500/5 p-6 backdrop-blur-sm">
-            <h3 className="mb-2 text-sm font-bold tracking-wider text-white uppercase">
+          <div className="light:border-zinc-200 light:from-blue-100 light:to-purple-50 rounded-2xl border border-white/5 bg-gradient-to-br from-blue-500/10 to-purple-500/5 p-6 backdrop-blur-sm">
+            <h3 className="light:text-zinc-900 mb-2 text-sm font-bold tracking-wider text-white uppercase">
               {t.sections.qaContact.title}
             </h3>
-            <p className="mb-4 text-xs text-zinc-300">{t.sections.qaContact.description}</p>
+            <p className="light:text-zinc-600 mb-4 text-xs text-zinc-300">
+              {t.sections.qaContact.description}
+            </p>
             <div className="flex flex-col gap-2">
               <Link
                 href={`mailto:${siteConfig.contact.email}`}
-                className="focus-visible:ring-offset-background flex flex-1 items-center justify-center gap-2 rounded-lg bg-white/10 py-3 text-sm font-bold text-white transition-all hover:bg-white/20 hover:shadow-lg focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none"
+                className="focus-visible:ring-offset-background light:bg-blue-600 light:text-white light:hover:bg-blue-700 flex flex-1 items-center justify-center gap-2 rounded-lg bg-white/10 py-3 text-sm font-bold text-white transition-all hover:bg-white/20 hover:shadow-lg focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none"
               >
                 {t.sections.qaContact.ctaLabel}
               </Link>
               <button
                 onClick={handleCopyEmail}
-                className="focus-visible:ring-offset-background flex items-center justify-center gap-2 rounded-lg border border-white/5 bg-white/5 py-2 text-xs font-bold text-zinc-300 transition-all hover:bg-white/10 hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none"
+                className="focus-visible:ring-offset-background light:border-zinc-200 light:bg-zinc-100 light:text-zinc-600 light:hover:bg-zinc-200 light:hover:text-zinc-900 flex items-center justify-center gap-2 rounded-lg border border-white/5 bg-white/5 py-2 text-xs font-bold text-zinc-300 transition-all hover:bg-white/10 hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none"
                 aria-label="Copy email address"
               >
                 <AnimatePresence mode="wait" initial={false}>

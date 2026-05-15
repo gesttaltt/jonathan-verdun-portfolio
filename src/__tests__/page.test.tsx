@@ -3,6 +3,8 @@ import Home from '@/app/(en)/page'
 import { ProjectProvider } from '@/components/hooks/useProjects'
 import { siteConfig } from '@/lib/siteConfig'
 import { en } from '@/lib/i18n/en'
+import { ThemeProvider } from '@/lib/theme/context'
+import { I18nProvider } from '@/lib/i18n/context'
 
 jest.mock('@/components/TopologyLoader', () => ({
   TopologyLoader: () => <div data-testid="topology-loader-mock" />,
@@ -10,9 +12,13 @@ jest.mock('@/components/TopologyLoader', () => ({
 
 const renderHome = () =>
   render(
-    <ProjectProvider>
-      <Home />
-    </ProjectProvider>
+    <ThemeProvider>
+      <I18nProvider>
+        <ProjectProvider>
+          <Home />
+        </ProjectProvider>
+      </I18nProvider>
+    </ThemeProvider>
   )
 
 describe('Home', () => {
