@@ -138,7 +138,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ repo = siteConfig.repo }) => {
   }[ciStatus]
 
   return (
-    <aside className="light:from-white light:to-zinc-50 light:border-zinc-200 sticky top-24 h-fit rounded-3xl border border-white/10 bg-gradient-to-b from-zinc-900/50 to-zinc-950/50 p-6 backdrop-blur-xl transition-all hover:border-blue-500/20">
+    <aside className="bg-bg-card light:from-white light:to-zinc-50 light:border-zinc-200 sticky top-24 h-fit rounded-3xl border border-white/10 p-6 backdrop-blur-xl transition-all hover:border-blue-500/20">
       <div className="space-y-8">
         <FadeInSection delay={0.1}>
           <div className="space-y-4">
@@ -185,11 +185,11 @@ export const Sidebar: React.FC<SidebarProps> = ({ repo = siteConfig.repo }) => {
             {repo && (
               <div className="light:border-zinc-200 mt-8 border-t border-white/5 pt-5">
                 <div className="flex items-center justify-between">
-                  <p className="text-text-tertiary text-[10px] font-bold tracking-widest uppercase sm:text-xs">
+                  <p className="text-text-tertiary text-[11px] font-black tracking-widest uppercase sm:text-xs">
                     {t.sections.sidebar.livePipelineLabel}
                   </p>
                   <div
-                    className={`flex items-center gap-1.5 rounded-full px-2 py-0.5 text-[9px] font-bold tracking-tighter ${ciTheme.bg} ${ciTheme.color} uppercase`}
+                    className={`flex items-center gap-1.5 rounded-full px-2 py-0.5 text-[11px] font-black tracking-tighter ${ciTheme.bg} ${ciTheme.color} uppercase sm:text-xs`}
                   >
                     <span
                       className={`relative flex h-1.5 w-1.5 ${ciStatus === 'loading' ? 'animate-pulse' : ''}`}
@@ -222,7 +222,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ repo = siteConfig.repo }) => {
         </FadeInSection>
 
         <FadeInSection delay={0.2}>
-          <div className="group light:border-zinc-200 light:bg-white light:hover:border-amber-400/50 light:hover:shadow-xl light:hover:shadow-amber-500/5 relative overflow-hidden rounded-2xl border border-white/10 bg-white/8 p-5 backdrop-blur-md transition-all hover:border-amber-500/20 sm:p-8">
+          <div className="group bg-bg-card hover:bg-bg-card-hover light:border-zinc-200 light:hover:border-amber-400/50 light:hover:shadow-xl light:hover:shadow-amber-500/5 relative overflow-hidden rounded-2xl border border-white/10 p-5 backdrop-blur-md transition-all sm:p-8">
             <div className="light:bg-amber-100/50 absolute -top-10 -right-10 h-40 w-40 rounded-full bg-amber-500/5 blur-3xl transition-opacity group-hover:opacity-75"></div>
 
             <div className="relative space-y-4">
@@ -246,10 +246,10 @@ export const Sidebar: React.FC<SidebarProps> = ({ repo = siteConfig.repo }) => {
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <div className="light:bg-amber-100 light:text-amber-800 rounded-full bg-amber-500/10 px-2 py-0.5 text-[10px] font-bold text-amber-400 uppercase">
+                  <div className="light:bg-amber-100 light:text-amber-800 rounded-full bg-amber-500/10 px-2 py-0.5 text-[11px] font-black text-amber-400 uppercase sm:text-xs">
                     {siteConfig.certification.status}
                   </div>
-                  <span className="text-text-muted text-[10px]">
+                  <span className="text-text-muted text-[11px] font-bold sm:text-xs">
                     {siteConfig.certification.expectedDate}
                   </span>
                 </div>

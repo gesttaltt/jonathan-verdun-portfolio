@@ -50,19 +50,15 @@ export const QualityDashboard: React.FC<QualityDashboardProps> = ({ audits }) =>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
             <div className="light:border-zinc-200 light:bg-zinc-100/50 rounded-xl border border-white/5 bg-white/5 p-4 text-center">
               <SearchIcon className="light:text-amber-600 mx-auto mb-2 h-5 w-5 text-amber-500" />
-              <p className="light:text-zinc-900 text-xl font-bold text-white">
-                {chronologicalAudits.length}
-              </p>
-              <p className="light:text-zinc-500 text-[10px] font-bold text-zinc-400 uppercase">
+              <p className="text-text-primary text-xl font-bold">{chronologicalAudits.length}</p>
+              <p className="text-text-tertiary text-[11px] font-black uppercase sm:text-xs">
                 Audits Published
               </p>
             </div>
             <div className="light:border-zinc-200 light:bg-zinc-100/50 rounded-xl border border-white/5 bg-white/5 p-4 text-center">
               <ShieldCheck className="light:text-blue-600 mx-auto mb-2 h-5 w-5 text-blue-500" />
-              <p className="light:text-zinc-900 text-xl font-bold text-white">
-                {handbookSpecs.length}
-              </p>
-              <p className="light:text-zinc-500 text-[10px] font-bold text-zinc-400 uppercase">
+              <p className="text-text-primary text-xl font-bold">{handbookSpecs.length}</p>
+              <p className="text-text-tertiary text-[11px] font-black uppercase sm:text-xs">
                 Architecture Specs
               </p>
             </div>
@@ -73,7 +69,7 @@ export const QualityDashboard: React.FC<QualityDashboardProps> = ({ audits }) =>
       {/* The QA Handbook (Architectural Specifications) */}
       {!searchQuery.trim() && (
         <section className="space-y-6">
-          <h3 className="text-text-tertiary text-sm font-bold tracking-widest uppercase">
+          <h3 className="text-text-tertiary text-[11px] font-black tracking-widest uppercase sm:text-xs">
             The QA Handbook — Architectural Specifications
           </h3>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -86,7 +82,7 @@ export const QualityDashboard: React.FC<QualityDashboardProps> = ({ audits }) =>
 
       <section className="space-y-8">
         <div className="light:border-zinc-200 flex flex-col justify-between gap-4 border-b border-white/10 pb-6 sm:flex-row sm:items-end">
-          <h3 className="text-text-tertiary text-sm font-bold tracking-widest uppercase">
+          <h3 className="text-text-tertiary text-[11px] font-black tracking-widest uppercase sm:text-xs">
             Chronological Audit History
           </h3>
 

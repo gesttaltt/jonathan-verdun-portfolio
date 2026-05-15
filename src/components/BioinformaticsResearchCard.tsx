@@ -20,7 +20,7 @@ export const BioinformaticsResearchCard: React.FC<BioinformaticsResearchCardProp
   return (
     <m.div
       variants={staggerItemVariants()}
-      className="group light:border-zinc-200 light:bg-white light:hover:border-purple-400/50 light:hover:shadow-xl light:hover:shadow-purple-500/5 relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-6 transition-all duration-300 hover:border-purple-500/30 hover:bg-white/10 hover:shadow-[0_0_24px_var(--glow-purple)]"
+      className="group bg-bg-card hover:bg-bg-card-hover light:border-zinc-200 light:hover:shadow-xl light:hover:shadow-purple-500/5 relative overflow-hidden rounded-2xl border border-white/10 p-6 transition-all duration-300 hover:border-purple-500/30 hover:shadow-[0_0_24px_var(--glow-purple)]"
     >
       <div className="mb-4 flex items-center gap-2">
         <h3 className="light:text-purple-700 flex items-center gap-2 text-base font-bold tracking-wide text-purple-200 uppercase">
@@ -31,13 +31,15 @@ export const BioinformaticsResearchCard: React.FC<BioinformaticsResearchCardProp
       <div className="text-text-secondary space-y-3 text-sm">
         <p>
           {t.bioinformatics.methodologyLabel}:{' '}
-          <span className="text-text-primary font-semibold">{spec.methodology}</span>
+          <span className="text-text-primary font-bold">{spec.methodology}</span>
         </p>
         <div>
-          <span className="text-text-muted text-[10px] font-bold uppercase sm:text-xs">
+          <span className="text-text-muted text-[11px] font-black uppercase sm:text-xs">
             {t.bioinformatics.invariantsLabel}:
           </span>
-          <p className="text-text-tertiary mt-1 text-xs">{spec.invariants.join(' · ')}</p>
+          <p className="text-text-tertiary mt-1 text-xs font-medium">
+            {spec.invariants.join(' · ')}
+          </p>
         </div>
         {spec.link && (
           <Link
@@ -45,7 +47,7 @@ export const BioinformaticsResearchCard: React.FC<BioinformaticsResearchCardProp
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`View ${spec.link.replace('https://github.com/', '')} on GitHub (opens in new tab)`}
-            className="focus-visible:ring-offset-background text-text-tertiary light:hover:text-purple-700 inline-flex items-center gap-1 rounded text-[10px] transition-colors hover:text-purple-300 focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2 focus-visible:outline-none sm:text-xs"
+            className="focus-visible:ring-offset-background text-text-tertiary light:hover:text-purple-700 inline-flex items-center gap-1 rounded text-[11px] font-bold transition-colors hover:text-purple-300 focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2 focus-visible:outline-none sm:text-xs"
           >
             <ExternalLink className="h-3 w-3" />
             {spec.link.replace('https://github.com/', '')}

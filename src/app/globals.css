@@ -7,8 +7,11 @@
   --font-mono: var(--font-jetbrains-mono);
   --color-bg-offset: var(--background);
 
-  /* Semantic Tokens — Layout */
+  /* Semantic Tokens — Layout & Surfaces */
   --color-bg-deep: var(--bg-deep);
+  --color-bg-card: var(--bg-card);
+  --color-bg-card-hover: var(--bg-card-hover);
+  --color-bg-badge: var(--bg-badge);
   --color-grid-line: var(--grid-line);
   --color-particle: var(--particle);
 
@@ -26,6 +29,11 @@
   --background: #0a0a0a;
   --foreground: #ededed;
   --accent: #3b82f6;
+
+  /* Surfaces — Dark Mode */
+  --bg-card: rgba(255, 255, 255, 0.07);
+  --bg-card-hover: rgba(255, 255, 255, 0.12);
+  --bg-badge: rgba(0, 0, 0, 0.3);
 
   /* Text Readability — Dark Mode */
   --text-primary: #ffffff;
@@ -52,6 +60,11 @@
   --background: #fcfcfc;
   --foreground: #09090b;
   --accent: #2563eb;
+
+  /* Surfaces — Light Mode */
+  --bg-card: #ffffff;
+  --bg-card-hover: #ffffff;
+  --bg-badge: #f4f4f5;
 
   /* Text Readability — Light Mode */
   --text-primary: #09090b; /* zinc-950 */

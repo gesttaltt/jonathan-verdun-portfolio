@@ -18,7 +18,7 @@ export const SystemSpecCard: React.FC<SystemSpecCardProps> = ({ spec }) => {
   return (
     <m.div
       variants={staggerItemVariants()}
-      className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-6 transition-all duration-300 hover:border-cyan-500/30 hover:bg-white/10 hover:shadow-[0_0_24px_var(--glow-cyan)]"
+      className="group bg-bg-card hover:bg-bg-card-hover light:border-zinc-200 light:hover:shadow-xl light:hover:shadow-cyan-500/5 relative overflow-hidden rounded-2xl border border-white/10 p-6 transition-all duration-300 hover:border-cyan-500/30 hover:shadow-[0_0_24px_var(--glow-cyan)]"
     >
       <div className="mb-4 flex items-center justify-between">
         <h3 className="flex items-center gap-2 text-base font-bold tracking-wide text-cyan-300 uppercase">
@@ -29,13 +29,15 @@ export const SystemSpecCard: React.FC<SystemSpecCardProps> = ({ spec }) => {
       <div className="text-text-secondary space-y-3 text-sm leading-relaxed">
         <p>
           {t.architecture.methodologyLabel}:{' '}
-          <span className="text-text-primary font-semibold">{spec.methodology}</span>
+          <span className="text-text-primary font-bold">{spec.methodology}</span>
         </p>
         <div>
-          <span className="text-text-muted text-[10px] font-bold uppercase sm:text-xs">
+          <span className="text-text-muted text-[11px] font-black uppercase sm:text-xs">
             {t.architecture.invariantsLabel}:
           </span>
-          <p className="text-text-tertiary mt-1 text-xs">{spec.invariants.join(' · ')}</p>
+          <p className="text-text-tertiary mt-1 text-xs font-medium">
+            {spec.invariants.join(' · ')}
+          </p>
         </div>
         {spec.link && (
           <div className="flex min-h-[44px] items-center">
@@ -44,7 +46,7 @@ export const SystemSpecCard: React.FC<SystemSpecCardProps> = ({ spec }) => {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`View ${spec.link.replace('https://github.com/', '')} on GitHub (opens in new tab)`}
-              className="focus-visible:ring-offset-background text-text-tertiary inline-flex items-center gap-1 rounded text-[10px] transition-colors hover:text-cyan-300 focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 focus-visible:outline-none sm:text-xs"
+              className="focus-visible:ring-offset-background text-text-tertiary inline-flex items-center gap-1 rounded text-[11px] font-bold transition-colors hover:text-cyan-300 focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 focus-visible:outline-none sm:text-xs"
             >
               <ExternalLink className="h-3 w-3" />
               {spec.link.replace('https://github.com/', '')}

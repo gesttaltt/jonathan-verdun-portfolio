@@ -10,7 +10,7 @@ export const QAPhilosophyGrid: React.FC = () => {
   const t = useTranslation()
 
   return (
-    <div className="light:border-zinc-200 light:bg-white space-y-8 rounded-2xl border border-white/10 bg-black/40 p-5 backdrop-blur-sm sm:p-8">
+    <div className="bg-bg-card light:border-zinc-200 light:bg-white space-y-8 rounded-2xl border border-white/10 p-5 backdrop-blur-sm sm:p-8">
       {t.qa.manifesto && (
         <m.div
           initial={{ opacity: 0, y: 10 }}
@@ -47,7 +47,7 @@ export const QAPhilosophyGrid: React.FC = () => {
                 </div>
                 <h3 className="text-text-primary text-sm font-bold uppercase">{spec.layer}</h3>
               </div>
-              <span className="light:bg-zinc-100 light:text-zinc-600 light:group-hover:text-zinc-900 text-text-tertiary rounded bg-white/5 px-2 py-0.5 text-[10px] font-medium transition-colors hover:text-white sm:text-xs">
+              <span className="light:bg-zinc-100 light:text-zinc-600 light:group-hover:text-zinc-900 text-text-tertiary bg-bg-badge rounded px-2 py-0.5 text-[11px] font-black transition-colors hover:text-white sm:text-xs">
                 {spec.status}
               </span>
             </div>

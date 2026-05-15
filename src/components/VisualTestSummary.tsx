@@ -22,13 +22,13 @@ export const VisualTestSummary: React.FC = () => {
   })
 
   return (
-    <div className="light:border-zinc-200 light:bg-white rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
+    <div className="bg-bg-card light:border-zinc-200 light:bg-white rounded-2xl border border-white/10 p-6 backdrop-blur-sm">
       <div className="mb-6 flex items-center justify-between">
         <h3 className="text-text-primary flex items-center gap-2 text-sm font-bold tracking-widest uppercase">
           <Shield className="light:text-blue-600 h-4 w-4 text-blue-400" />
           {vt.title}
         </h3>
-        <div className="light:bg-green-100 light:text-green-800 flex items-center gap-2 rounded-full bg-green-500/10 px-3 py-1 text-[10px] font-bold text-green-500 uppercase">
+        <div className="light:bg-green-100 light:text-green-800 flex items-center gap-2 rounded-full bg-green-500/10 px-3 py-1 text-[11px] font-black text-green-500 uppercase sm:text-xs">
           <span className="relative flex h-2 w-2">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75"></span>
             <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500"></span>
@@ -39,7 +39,9 @@ export const VisualTestSummary: React.FC = () => {
 
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
         <div className="space-y-1">
-          <p className="text-text-tertiary text-[10px] font-bold uppercase">{vt.executionStatus}</p>
+          <p className="text-text-tertiary text-[11px] font-black uppercase sm:text-xs">
+            {vt.executionStatus}
+          </p>
           <div className="flex items-center gap-2">
             {success ? (
               <CheckCircle2 className="light:text-green-800 h-4 w-4 text-green-500" />
@@ -53,7 +55,9 @@ export const VisualTestSummary: React.FC = () => {
         </div>
 
         <div className="space-y-1">
-          <p className="text-text-tertiary text-[10px] font-bold uppercase">{vt.testPayload}</p>
+          <p className="text-text-tertiary text-[11px] font-black uppercase sm:text-xs">
+            {vt.testPayload}
+          </p>
           <div className="flex items-baseline gap-1">
             <span className="text-text-primary text-2xl font-black">{numPassedTests}</span>
             <span className="text-text-tertiary text-xs font-bold">
@@ -63,7 +67,7 @@ export const VisualTestSummary: React.FC = () => {
         </div>
 
         <div className="space-y-1">
-          <p className="text-text-tertiary text-[10px] font-bold uppercase">
+          <p className="text-text-tertiary text-[11px] font-black uppercase sm:text-xs">
             {vt.verificationRate}
           </p>
           <div className="flex items-baseline gap-1">
@@ -81,7 +85,9 @@ export const VisualTestSummary: React.FC = () => {
         </div>
 
         <div className="space-y-1">
-          <p className="text-text-tertiary text-[10px] font-bold uppercase">{vt.lastVerified}</p>
+          <p className="text-text-tertiary text-[11px] font-black uppercase sm:text-xs">
+            {vt.lastVerified}
+          </p>
           <div className="text-text-secondary flex items-center gap-2 text-xs font-medium">
             <Clock className="text-text-tertiary h-3.5 w-3.5" />
             {date}

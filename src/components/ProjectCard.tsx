@@ -25,7 +25,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
       variants={fadeUpVariants()}
       role="listitem"
       data-testid={`project-card-${project.id}`}
-      className="group light:border-zinc-200 light:bg-white light:hover:border-blue-400/50 light:hover:shadow-xl light:hover:shadow-blue-500/5 relative flex h-full flex-col justify-between overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-md transition-all duration-300 hover:border-blue-500/50 hover:bg-white/10 hover:shadow-[0_0_20px_var(--glow-blue)]"
+      className="group bg-bg-card hover:bg-bg-card-hover light:border-zinc-200 light:hover:shadow-xl light:hover:shadow-blue-500/5 relative flex h-full flex-col justify-between overflow-hidden rounded-2xl border border-white/10 p-6 backdrop-blur-md transition-all duration-300 hover:border-blue-500/50 hover:shadow-[0_0_20px_var(--glow-blue)]"
     >
       {/* Glowing Corner */}
       <div className="light:bg-blue-100/40 absolute top-0 right-0 h-16 w-16 translate-x-8 -translate-y-8 rotate-45 bg-blue-500/10 blur-xl transition-all duration-500 group-hover:bg-blue-500/20" />
@@ -35,7 +35,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
           <div className="flex items-center gap-2">
             <Terminal className="light:text-blue-600 h-5 w-5 text-blue-500" />
             <span
-              className={`rounded px-1.5 py-0.5 text-[10px] font-bold tracking-wider uppercase sm:text-xs ${PROJECT_STATUS_STYLES[project.status] ?? 'bg-zinc-500/20 text-zinc-300'}`}
+              className={`rounded px-2 py-0.5 text-[11px] font-black tracking-wider uppercase sm:text-xs ${PROJECT_STATUS_STYLES[project.status] ?? 'text-text-primary bg-zinc-500/20'}`}
             >
               {project.status}
             </span>
@@ -75,12 +75,10 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
           <div className="light:border-zinc-100 flex gap-4 border-t border-white/10 pt-4">
             {project.stats.map((stat) => (
               <div key={stat.label}>
-                <div className="text-text-muted text-[10px] font-bold uppercase sm:text-xs">
+                <div className="text-text-muted text-[11px] font-black uppercase sm:text-xs">
                   {stat.label}
                 </div>
-                <div className="text-text-secondary font-mono text-xs font-semibold">
-                  {stat.value}
-                </div>
+                <div className="text-text-secondary font-mono text-xs font-bold">{stat.value}</div>
               </div>
             ))}
           </div>
@@ -90,7 +88,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
           {project.techStack.map((tech) => (
             <span
               key={tech}
-              className="light:border-zinc-200 light:bg-zinc-50 text-text-tertiary light:group-hover:border-blue-200 light:group-hover:text-blue-800 rounded border border-white/5 bg-black/20 px-2 py-1 text-[10px] transition-colors group-hover:border-blue-500/20 group-hover:text-blue-200 sm:text-xs"
+              className="light:border-zinc-200 light:bg-zinc-50 text-text-tertiary light:group-hover:border-blue-200 light:group-hover:text-blue-800 bg-bg-badge rounded border border-white/5 px-2 py-1 text-[11px] font-bold transition-colors group-hover:border-blue-500/20 group-hover:text-blue-200 sm:text-xs"
             >
               {tech}
             </span>

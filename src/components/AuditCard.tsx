@@ -19,13 +19,13 @@ export const AuditCard: React.FC<AuditCardProps> = ({ audit }) => {
   return (
     <m.div
       variants={staggerItemVariants()}
-      className="group light:border-zinc-200 light:bg-white light:hover:border-amber-400/50 light:hover:shadow-xl light:hover:shadow-amber-500/5 relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-6 transition-all duration-300 hover:border-amber-500/30 hover:bg-white/10"
+      className="group bg-bg-card hover:bg-bg-card-hover light:border-zinc-200 light:hover:border-amber-300 relative overflow-hidden rounded-2xl border border-white/10 p-6 transition-all duration-300 hover:border-amber-500/30"
     >
       <div className="mb-4 flex items-center justify-between">
         <div className="light:bg-amber-100 light:text-amber-700 flex h-10 w-10 items-center justify-center rounded-lg bg-amber-500/10 text-amber-500">
           <FileText className="h-5 w-5" />
         </div>
-        <div className="text-text-muted flex items-center gap-2 text-[10px] font-bold tracking-tighter uppercase sm:text-xs">
+        <div className="text-text-muted flex items-center gap-2 text-[11px] font-black tracking-tighter uppercase sm:text-xs">
           <Calendar className="h-3 w-3" />
           {audit.date}
         </div>
