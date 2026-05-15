@@ -43,7 +43,8 @@
     "three": "0.182.0"
   },
   "overrides": {
-    "tmp": "^0.2.3"
+    "tmp": "^0.2.3",
+    "postcss": "^8.5.12"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.11.3",

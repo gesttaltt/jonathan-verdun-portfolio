@@ -9,14 +9,14 @@ export const TestDetailedList: React.FC = () => {
     return coverageData.testResults
       .map((suite) => {
         const parts = suite.name.split('/')
-        const filePath = parts[parts.length - 1]
+        const fileName = parts[parts.length - 1] || 'unknown'
         const passed = suite.status === 'passed'
         const duration = (suite.endTime - suite.startTime) / 1000
         const assertions = suite.assertionResults.length
 
         return {
           id: suite.name,
-          name: filePath,
+          name: fileName,
           passed,
           duration,
           assertions,

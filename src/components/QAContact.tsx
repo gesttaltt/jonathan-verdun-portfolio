@@ -16,13 +16,14 @@ export const QAContact: React.FC = () => {
       initial="hidden"
       whileInView="visible"
       viewport={SCROLL_VIEWPORT}
+      aria-labelledby="qa-contact-title"
       className="relative mt-8 overflow-hidden rounded-2xl border border-blue-500/20 bg-blue-500/5 p-6 sm:p-8"
     >
       <div className="absolute top-0 right-0 h-32 w-32 rounded-full bg-blue-500/10 blur-3xl"></div>
 
       <div className="relative flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
         <div className="space-y-2">
-          <h3 className="light:text-zinc-900 text-xl font-bold text-white">
+          <h3 id="qa-contact-title" className="light:text-zinc-900 text-xl font-bold text-white">
             {t.sections.qaContact.title}
           </h3>
           <p className="light:text-zinc-600 max-w-xl text-sm leading-relaxed text-zinc-300">

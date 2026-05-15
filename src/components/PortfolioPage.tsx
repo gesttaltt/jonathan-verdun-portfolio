@@ -18,7 +18,12 @@ import { TopologyLoader } from '@/components/TopologyLoader'
 import { ProjectProvider } from '@/components/hooks/useProjects'
 import { useTranslation } from '@/lib/i18n/context'
 import { DefaultCommandProcessor } from '@/lib/services/CommandProcessor'
-import { buildWebPageJsonLd, buildBreadcrumbJsonLd } from '@/lib/jsonLd'
+import {
+  buildWebPageJsonLd,
+  buildBreadcrumbJsonLd,
+  personJsonLd,
+  websiteJsonLd,
+} from '@/lib/jsonLd'
 
 export const PortfolioPage: React.FC = () => {
   const t = useTranslation()
@@ -40,6 +45,14 @@ export const PortfolioPage: React.FC = () => {
 
   return (
     <ProjectProvider adapter={projectAdapter}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(buildWebPageJsonLd(t.lang)) }}

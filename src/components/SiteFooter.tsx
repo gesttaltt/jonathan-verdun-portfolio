@@ -96,6 +96,13 @@ export const SiteFooter: React.FC = () => {
             >
               Source
             </a>
+            <span className="light:text-zinc-300 text-white/20">·</span>
+            <a
+              href="/sitemap.xml"
+              className="light:text-zinc-500 light:hover:text-zinc-900 rounded text-xs text-zinc-300 transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none"
+            >
+              Sitemap
+            </a>
           </div>
 
           {/* Bottom row: copyright + stack */}

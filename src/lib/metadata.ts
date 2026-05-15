@@ -25,7 +25,7 @@ export function buildMetadata(lang: 'en' | 'es'): Metadata {
     description,
     authors: [{ name: siteConfig.name }],
     creator: siteConfig.name,
-    manifest: withBase('/manifest.json'),
+    manifest: withBase('/manifest.webmanifest'),
     icons: {
       icon: [
         { url: withBase('/favicon.svg'), type: 'image/svg+xml' },
