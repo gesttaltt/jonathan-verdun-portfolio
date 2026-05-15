@@ -59,10 +59,10 @@ export const Terminal: React.FC<TerminalProps> = ({
     <div
       role="group"
       data-testid="terminal-bash"
-      className={`light:border-zinc-200 light:bg-zinc-50/95 light:text-zinc-900 flex w-full max-w-full flex-col overflow-hidden rounded-2xl border border-white/5 bg-black/80 font-mono text-xs shadow-2xl backdrop-blur-lg md:text-sm lg:text-base ${className}`}
+      className={`border-border-subtle light:bg-zinc-50/95 light:text-zinc-900 flex w-full max-w-full flex-col overflow-hidden rounded-2xl border bg-black/80 font-mono text-xs shadow-2xl backdrop-blur-lg md:text-sm lg:text-base ${className}`}
       onClick={() => !isBooting && inputRef.current?.focus()}
     >
-      <div className="light:border-zinc-200 light:bg-zinc-100 flex shrink-0 items-center justify-between border-b border-white/10 bg-white/5 px-4 py-2">
+      <div className="border-border-subtle light:bg-zinc-100 flex shrink-0 items-center justify-between border-b bg-white/5 px-4 py-2">
         <div className="flex gap-1.5">
           <div className="light:bg-red-400 h-3 w-3 rounded-full bg-red-500/50"></div>
           <div className="light:bg-amber-400 h-3 w-3 rounded-full bg-amber-500/50"></div>

@@ -27,19 +27,19 @@ export const TestDetailedList: React.FC = () => {
 
   return (
     <div className="space-y-4">
-      <h3 className="text-sm font-bold tracking-widest text-zinc-400 uppercase">
+      <h3 className="text-text-tertiary text-sm font-bold tracking-widest uppercase">
         Verified Modules & Components
       </h3>
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {suites.map((suite) => (
           <div
             key={suite.id}
-            className="flex flex-col justify-between rounded-xl border border-white/5 bg-white/5 p-4 transition-all hover:border-blue-500/30 hover:bg-white/10"
+            className="bg-bg-card border-border-subtle hover:bg-bg-card-hover flex flex-col justify-between rounded-xl border p-4 transition-all hover:border-blue-500/30"
           >
             <div className="mb-3 flex items-start justify-between">
               <div className="flex items-center gap-2 overflow-hidden">
-                <FileCode className="h-4 w-4 shrink-0 text-blue-400" />
-                <span className="truncate text-xs font-bold text-white" title={suite.name}>
+                <FileCode className="text-text-muted h-4 w-4 shrink-0" />
+                <span className="text-text-primary truncate text-xs font-bold" title={suite.name}>
                   {suite.name.replace('.test.tsx', '').replace('.test.ts', '')}
                 </span>
               </div>
@@ -50,7 +50,7 @@ export const TestDetailedList: React.FC = () => {
               )}
             </div>
 
-            <div className="flex items-center justify-between text-[10px] font-medium text-zinc-400">
+            <div className="text-text-muted flex items-center justify-between text-[11px] font-black uppercase sm:text-xs">
               <div className="flex items-center gap-1">
                 <Clock className="h-3 w-3" />
                 {suite.duration.toFixed(2)}s

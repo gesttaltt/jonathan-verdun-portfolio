@@ -10,7 +10,7 @@ export const QAPhilosophyGrid: React.FC = () => {
   const t = useTranslation()
 
   return (
-    <div className="bg-bg-card light:border-zinc-200 light:bg-white space-y-10 rounded-2xl border border-white/10 p-6 backdrop-blur-sm sm:p-8">
+    <div className="bg-bg-card border-border-subtle space-y-10 rounded-2xl border p-6 backdrop-blur-sm sm:p-8">
       {t.qa.manifesto && (
         <m.div
           initial={{ opacity: 0, y: 10 }}

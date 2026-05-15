@@ -25,7 +25,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
       variants={fadeUpVariants()}
       role="listitem"
       data-testid={`project-card-${project.id}`}
-      className="group bg-bg-card hover:bg-bg-card-hover light:border-zinc-200 light:hover:shadow-xl light:hover:shadow-blue-500/5 relative flex h-full flex-col justify-between overflow-hidden rounded-2xl border border-white/10 p-6 backdrop-blur-md transition-all duration-300 hover:border-blue-500/50 hover:shadow-[0_0_20px_var(--glow-blue)]"
+      className="group bg-bg-card hover:bg-bg-card-hover border-border-subtle hover:border-border-strong light:hover:shadow-xl light:hover:shadow-blue-500/5 relative flex h-full flex-col justify-between overflow-hidden rounded-2xl border p-6 backdrop-blur-md transition-all duration-300 hover:border-blue-500/50 hover:shadow-[0_0_20px_var(--glow-blue)]"
     >
       {/* Glowing Corner */}
       <div className="light:bg-blue-100/40 absolute top-0 right-0 h-16 w-16 translate-x-8 -translate-y-8 rotate-45 bg-blue-500/10 blur-xl transition-all duration-500 group-hover:bg-blue-500/20" />

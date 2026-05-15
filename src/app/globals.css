@@ -20,6 +20,10 @@
   --color-text-secondary: var(--text-secondary);
   --color-text-tertiary: var(--text-tertiary);
   --color-text-muted: var(--text-muted);
+
+  /* Semantic Tokens — Borders */
+  --color-border-subtle: var(--border-subtle);
+  --color-border-strong: var(--border-strong);
 }
 
 @variant light (&:where(.light, .light *));
@@ -33,13 +37,17 @@
   /* Surfaces — Dark Mode */
   --bg-card: rgba(255, 255, 255, 0.07);
   --bg-card-hover: rgba(255, 255, 255, 0.12);
-  --bg-badge: rgba(0, 0, 0, 0.3);
+  --bg-badge: rgba(0, 0, 0, 0.4);
 
   /* Text Readability — Dark Mode */
   --text-primary: #ffffff;
-  --text-secondary: #d4d4d8; /* zinc-300 */
+  --text-secondary: #e4e4e7; /* zinc-200 */
   --text-tertiary: #a1a1aa; /* zinc-400 */
   --text-muted: #71717a; /* zinc-500 */
+
+  /* Borders — Dark Mode */
+  --border-subtle: rgba(255, 255, 255, 0.1);
+  --border-strong: rgba(255, 255, 255, 0.2);
 
   /* P-adic Theme Tokens */
   --bg-deep: #050510;
@@ -62,17 +70,21 @@
   --accent: #2563eb;
 
   /* Surfaces — Light Mode */
-  --bg-card: #f9fafb; /* gray-50 equivalent */
-  --bg-card-hover: #f3f4f6; /* gray-100 equivalent */
-  --bg-badge: #e5e7eb; /* gray-200 equivalent */
+  --bg-card: #f8fafc; /* slate-50 */
+  --bg-card-hover: #f1f5f9; /* slate-100 */
+  --bg-badge: #e2e8f0; /* slate-200 */
 
   /* Text Readability — Light Mode */
-  --text-primary: #09090b; /* zinc-950 */
-  --text-secondary: #18181b; /* zinc-900 */
-  --text-tertiary: #3f3f46; /* zinc-700 */
-  --text-muted: #52525b; /* zinc-600 */
+  --text-primary: #020617; /* slate-950 */
+  --text-secondary: #0f172a; /* slate-900 */
+  --text-tertiary: #334155; /* slate-700 */
+  --text-muted: #475569; /* slate-600 */
 
-  --bg-deep: #f3f4f6;
+  /* Borders — Light Mode */
+  --border-subtle: #e2e8f0; /* slate-200 */
+  --border-strong: #cbd5e1; /* slate-300 */
+
+  --bg-deep: #f1f5f9;
   --grid-line: rgba(0, 0, 0, 0.06);
   --particle: #2563eb;
 

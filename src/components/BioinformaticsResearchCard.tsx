@@ -20,7 +20,7 @@ export const BioinformaticsResearchCard: React.FC<BioinformaticsResearchCardProp
   return (
     <m.div
       variants={staggerItemVariants()}
-      className="group bg-bg-card hover:bg-bg-card-hover light:border-zinc-200 light:hover:shadow-xl light:hover:shadow-purple-500/5 relative overflow-hidden rounded-2xl border border-white/10 p-6 transition-all duration-300 hover:border-purple-500/30 hover:shadow-[0_0_24px_var(--glow-purple)] sm:p-8"
+      className="group bg-bg-card hover:bg-bg-card-hover border-border-subtle hover:border-border-strong light:hover:shadow-xl light:hover:shadow-purple-500/5 relative overflow-hidden rounded-2xl border p-6 transition-all duration-300 hover:shadow-[0_0_24px_var(--glow-purple)] sm:p-8"
     >
       <div className="mb-6 flex items-center gap-2">
         <h3 className="light:text-purple-700 flex items-center gap-2 text-base font-bold tracking-wide text-purple-200 uppercase">

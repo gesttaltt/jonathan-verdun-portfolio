@@ -18,7 +18,7 @@ export const SystemSpecCard: React.FC<SystemSpecCardProps> = ({ spec }) => {
   return (
     <m.div
       variants={staggerItemVariants()}
-      className="group bg-bg-card hover:bg-bg-card-hover light:border-zinc-200 light:hover:shadow-xl light:hover:shadow-cyan-500/5 relative overflow-hidden rounded-2xl border border-white/10 p-6 transition-all duration-300 hover:border-cyan-500/30 hover:shadow-[0_0_24px_var(--glow-cyan)] sm:p-8"
+      className="group bg-bg-card hover:bg-bg-card-hover border-border-subtle hover:border-border-strong light:hover:shadow-xl light:hover:shadow-cyan-500/5 relative overflow-hidden rounded-2xl border p-6 transition-all duration-300 hover:shadow-[0_0_24px_var(--glow-cyan)] sm:p-8"
     >
       <div className="mb-6 flex items-center justify-between">
         <h3 className="flex items-center gap-2 text-base font-bold tracking-wide text-cyan-300 uppercase">

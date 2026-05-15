@@ -40,7 +40,7 @@ export const SiteFooter: React.FC = () => {
       aria-label="Site footer"
       className="mt-14 sm:mt-24"
     >
-      <div className="light:border-zinc-200 light:bg-white/50 relative overflow-hidden rounded-2xl border border-white/10 bg-white/8 backdrop-blur-md">
+      <div className="border-border-subtle light:bg-white relative overflow-hidden rounded-2xl border bg-white/8 backdrop-blur-md">
         {/* Ambient glow */}
         <div className="light:bg-blue-100/50 pointer-events-none absolute -top-24 left-1/2 h-48 w-96 -translate-x-1/2 rounded-full bg-blue-500/8 blur-3xl" />
         <div className="light:bg-purple-100/30 pointer-events-none absolute right-0 -bottom-16 h-32 w-64 rounded-full bg-purple-500/6 blur-3xl" />
@@ -48,7 +48,7 @@ export const SiteFooter: React.FC = () => {
         {/* Main content */}
         <div className="relative z-10 px-6 py-8 sm:px-10 sm:py-10">
           {/* Top row: identity + socials */}
-          <div className="light:border-zinc-100 flex flex-col gap-6 border-b border-white/5 pb-8 sm:flex-row sm:items-center sm:justify-between">
+          <div className="border-border-subtle flex flex-col gap-6 border-b pb-8 sm:flex-row sm:items-center sm:justify-between">
             <div className="space-y-1">
               <p className="text-text-primary text-base font-extrabold tracking-tight">
                 {siteConfig.name}
@@ -73,21 +73,21 @@ export const SiteFooter: React.FC = () => {
           </div>
 
           {/* Middle row: quick links */}
-          <div className="light:border-zinc-100 flex items-center gap-4 border-b border-white/5 py-5">
+          <div className="border-border-subtle flex items-center gap-4 border-b py-5">
             <a
               href="/docs/api/"
               className="text-text-tertiary light:hover:text-text-primary rounded text-xs transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none"
             >
               API Docs
             </a>
-            <span className="light:text-zinc-300 text-white/20">·</span>
+            <span className="text-border-subtle text-white/20">·</span>
             <Link
               href={t.lang === 'es' ? '/es/quality/' : '/quality/'}
               className="text-text-tertiary light:hover:text-text-primary rounded text-xs transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none"
             >
               {t.sections.quality}
             </Link>
-            <span className="light:text-zinc-300 text-white/20">·</span>
+            <span className="text-border-subtle text-white/20">·</span>
             <a
               href={siteConfig.repo.url}
               target="_blank"
@@ -96,7 +96,7 @@ export const SiteFooter: React.FC = () => {
             >
               Source
             </a>
-            <span className="light:text-zinc-300 text-white/20">·</span>
+            <span className="text-border-subtle text-white/20">·</span>
             <a
               href="/sitemap.xml"
               className="text-text-tertiary light:hover:text-text-primary rounded text-xs transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none"
