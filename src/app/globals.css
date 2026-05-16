@@ -107,7 +107,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #18181b; /* zinc-900 equivalent */
+  background: #27272a; /* zinc-800 — improved contrast for dark mode */
   border-radius: 10px;
   border: 2px solid var(--bg-deep);
 }

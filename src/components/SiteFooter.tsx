@@ -64,7 +64,7 @@ export const SiteFooter: React.FC = () => {
                   target={href.startsWith('mailto') ? undefined : '_blank'}
                   rel={href.startsWith('mailto') ? undefined : 'noopener noreferrer'}
                   aria-label={label}
-                  className="light:border-zinc-200 light:bg-zinc-100 text-text-tertiary light:hover:border-blue-300 light:hover:text-blue-600 flex h-9 w-9 items-center justify-center rounded-lg border border-white/5 bg-white/5 transition-all hover:border-blue-500/30 hover:bg-blue-500/10 hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none"
+                  className="light:border-zinc-200 light:bg-zinc-100 text-text-tertiary light:hover:border-blue-300 light:hover:text-blue-600 flex h-10 w-10 items-center justify-center rounded-lg border border-white/5 bg-white/5 transition-all hover:border-blue-500/30 hover:bg-blue-500/10 hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none"
                 >
                   <Icon className="h-4 w-4" />
                 </Link>

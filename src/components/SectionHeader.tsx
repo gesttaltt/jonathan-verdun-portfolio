@@ -15,19 +15,19 @@ interface SectionHeaderProps {
 
 const COLOR_MAP = {
   blue: {
-    badge: 'bg-blue-500/10 text-blue-500 light:text-blue-800 light:bg-blue-100',
+    badge: 'bg-blue-500/10 text-blue-400 light:text-blue-800 light:bg-blue-100',
     line: 'via-blue-500/20 light:via-blue-500/10',
   },
   purple: {
-    badge: 'bg-purple-500/10 text-purple-500 light:text-purple-800 light:bg-purple-100',
+    badge: 'bg-purple-500/10 text-purple-400 light:text-purple-800 light:bg-purple-100',
     line: 'via-purple-500/20 light:via-purple-500/10',
   },
   cyan: {
-    badge: 'bg-cyan-500/10 text-cyan-500 light:text-cyan-800 light:bg-cyan-100',
+    badge: 'bg-cyan-500/10 text-cyan-400 light:text-cyan-800 light:bg-cyan-100',
     line: 'via-cyan-500/20 light:via-cyan-500/10',
   },
   green: {
-    badge: 'bg-green-500/10 text-green-500 light:text-green-800 light:bg-green-100',
+    badge: 'bg-green-500/10 text-green-400 light:text-green-800 light:bg-green-100',
     line: 'via-green-500/20 light:via-green-500/10',
   },
 }

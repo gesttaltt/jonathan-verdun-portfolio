@@ -13,14 +13,14 @@ export function ThemeToggle() {
   const { theme, toggleTheme } = useTheme()
   const mounted = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
 
-  if (!mounted) return <div data-testid="theme-toggle-placeholder" className="h-9 w-9" />
+  if (!mounted) return <div data-testid="theme-toggle-placeholder" className="h-10 w-10" />
 
   const isLight = theme === 'light'
 
   return (
     <button
       onClick={toggleTheme}
-      className="focus-visible:ring-offset-background group relative flex h-9 w-9 items-center justify-center overflow-hidden rounded-full bg-white/5 text-zinc-300 transition-colors hover:bg-white/10 hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none"
+      className="focus-visible:ring-offset-background group relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-full bg-white/5 text-zinc-300 transition-colors hover:bg-white/10 hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none"
       aria-label={`Switch to ${isLight ? 'dark' : 'light'} theme`}
     >
       <AnimatePresence mode="wait" initial={false}>

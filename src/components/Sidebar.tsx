@@ -138,7 +138,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ repo = siteConfig.repo }) => {
   }[ciStatus]
 
   return (
-    <aside className="bg-bg-card light:from-white light:to-zinc-50 light:border-zinc-200 sticky top-24 h-fit rounded-3xl border border-white/10 p-6 backdrop-blur-xl transition-all hover:border-blue-500/20">
+    <aside className="bg-bg-card light:from-white light:to-zinc-50 light:border-zinc-200 sticky top-24 h-fit rounded-3xl border border-white/10 p-6 backdrop-blur-lg transition-all hover:border-blue-500/20">
       <div className="space-y-8">
         <FadeInSection delay={0.1}>
           <div className="space-y-4">

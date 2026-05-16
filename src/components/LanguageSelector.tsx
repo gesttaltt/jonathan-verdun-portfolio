@@ -17,7 +17,7 @@ export const LanguageSelector: React.FC = () => {
         href="/"
         aria-label="Switch to English"
         aria-current={!isEs ? 'page' : undefined}
-        className={`rounded-full px-3 py-1 transition-colors focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none ${
+        className={`rounded-full px-4 py-1.5 transition-colors focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none ${
           !isEs
             ? 'bg-blue-700 text-white'
             : 'light:text-zinc-500 light:hover:text-zinc-900 text-zinc-300 hover:text-white'
@@ -29,7 +29,7 @@ export const LanguageSelector: React.FC = () => {
         href="/es/"
         aria-label="Cambiar a Español"
         aria-current={isEs ? 'page' : undefined}
-        className={`rounded-full px-3 py-1 transition-colors focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none ${
+        className={`rounded-full px-4 py-1.5 transition-colors focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none ${
           isEs
             ? 'bg-blue-700 text-white'
             : 'light:text-zinc-500 light:hover:text-zinc-900 text-zinc-300 hover:text-white'
