@@ -49,14 +49,14 @@ export const QualityDashboard: React.FC<QualityDashboardProps> = ({ audits }) =>
 
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
             <div className="light:border-zinc-200 light:bg-zinc-100/50 rounded-xl border border-white/5 bg-white/5 p-4 text-center">
-              <SearchIcon className="light:text-amber-600 mx-auto mb-2 h-5 w-5 text-amber-500" />
+              <SearchIcon className="light:text-amber-800 mx-auto mb-2 h-5 w-5 text-amber-400" />
               <p className="text-text-primary text-xl font-bold">{chronologicalAudits.length}</p>
               <p className="text-text-tertiary text-[11px] font-black uppercase sm:text-xs">
                 Audits Published
               </p>
             </div>
             <div className="light:border-zinc-200 light:bg-zinc-100/50 rounded-xl border border-white/5 bg-white/5 p-4 text-center">
-              <ShieldCheck className="light:text-blue-600 mx-auto mb-2 h-5 w-5 text-blue-500" />
+              <ShieldCheck className="light:text-blue-800 mx-auto mb-2 h-5 w-5 text-blue-400" />
               <p className="text-text-primary text-xl font-bold">{handbookSpecs.length}</p>
               <p className="text-text-tertiary text-[11px] font-black uppercase sm:text-xs">
                 Architecture Specs

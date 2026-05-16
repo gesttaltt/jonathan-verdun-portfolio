@@ -16,10 +16,10 @@ export const QAPhilosophyGrid: React.FC = () => {
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={SCROLL_VIEWPORT}
-          className="relative overflow-hidden rounded-xl border border-blue-500/20 bg-blue-500/5 p-5 sm:p-7"
+          className="light:border-blue-300 light:bg-blue-50/50 relative overflow-hidden rounded-xl border border-blue-500/20 bg-blue-500/5 p-5 sm:p-7"
         >
           <div className="absolute top-0 left-0 h-1 w-full bg-gradient-to-r from-blue-500/50 to-purple-500/50"></div>
-          <p className="text-text-secondary relative text-sm leading-relaxed font-medium italic sm:text-base">
+          <p className="text-text-secondary light:text-blue-900 relative text-sm leading-relaxed font-medium italic sm:text-base">
             &ldquo;{t.qa.manifesto}&rdquo;
           </p>
         </m.div>
