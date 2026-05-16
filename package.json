@@ -18,7 +18,7 @@
     "lhci": "lhci autorun",
     "prepare": "husky",
     "validate-env": "node scripts/validate-env.mjs",
-    "build": "npm run generate-vfs && npm run validate-env && next build"
+    "build": "npm run generate-vfs && npm run validate-env && npm test -- --json --outputFile=coverage.json && next build"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
