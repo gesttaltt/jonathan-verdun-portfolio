@@ -66,27 +66,27 @@
 }
 
 .light {
-  --background: #f8fafc; /* slate-50 — grounds the UI for white cards */
+  --background: #f1f5f9; /* slate-100 — deeper grounding for white cards */
   --foreground: #09090b;
   --accent: #2563eb;
 
   /* Surfaces — Light Mode — Precision Ivory */
   --bg-card: #ffffff;
   --bg-card-hover: #f8fafc; /* slate-50 */
-  --bg-badge: #f1f5f9; /* slate-100 */
+  --bg-badge: #e2e8f0; /* slate-200 — hardened from slate-100 */
 
   /* Text Readability — Light Mode — High Authority Grays */
   --text-primary: #020617; /* slate-950 */
   --text-secondary: #0f172a; /* slate-900 */
-  --text-tertiary: #334155; /* slate-700 */
-  --text-muted: #475569; /* slate-600 — deepened for better readability */
+  --text-tertiary: #1e293b; /* slate-800 — deepened from slate-700 */
+  --text-muted: #334155; /* slate-700 — deepened from slate-600 */
 
   /* Borders — Light Mode — Technical Lines */
-  --border-subtle: #e2e8f0; /* slate-200 */
-  --border-strong: #cbd5e1; /* slate-300 */
+  --border-subtle: #cbd5e1; /* slate-300 — hardened from slate-200 */
+  --border-strong: #94a3b8; /* slate-400 — hardened from slate-300 */
 
   --bg-deep: #f1f5f9;
-  --grid-line: rgba(15, 23, 42, 0.05);
+  --grid-line: rgba(15, 23, 42, 0.08);
   --particle: #2563eb;
 
   --node-color: #1d4ed8;
