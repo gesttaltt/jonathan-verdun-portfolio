@@ -13,6 +13,8 @@ describe('siteConfig', () => {
 
   it('has a default url if env var is missing', () => {
     delete process.env.NEXT_PUBLIC_SITE_URL
+    delete process.env.BASE_PATH
+    delete process.env.NEXT_PUBLIC_BASE_PATH
     const { siteConfig } = require('../siteConfig')
     expect(siteConfig.url).toBe('https://jonathanverdun.com')
   })
