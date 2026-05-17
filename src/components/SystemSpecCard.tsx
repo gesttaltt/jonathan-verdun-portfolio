@@ -19,7 +19,7 @@ export const SystemSpecCard: React.FC<SystemSpecCardProps> = ({ spec }) => {
     <m.div
       variants={staggerItemVariants()}
       tabIndex={0}
-      className="group bg-bg-card hover:bg-bg-card-hover border-border-subtle hover:border-border-strong light:border-slate-300 light:hover:shadow-2xl light:hover:shadow-cyan-500/15 focus-visible:ring-offset-background relative overflow-hidden rounded-2xl border p-6 transition-all duration-300 hover:shadow-[0_0_24px_var(--glow-cyan)] focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 focus-visible:outline-none sm:p-8"
+      className="group bg-bg-card hover:bg-bg-card-hover border-border-subtle hover:border-border-strong light:border-zinc-200 light:hover:shadow-2xl light:hover:shadow-cyan-500/15 focus-visible:ring-offset-background relative overflow-hidden rounded-2xl border p-6 transition-all duration-300 hover:shadow-[0_0_24px_var(--glow-cyan)] focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 focus-visible:outline-none sm:p-8"
     >
       <div className="mb-6 flex items-center justify-between">
         <h3 className="light:text-cyan-900 flex items-center gap-2 text-base font-bold tracking-wide text-cyan-400 uppercase">
