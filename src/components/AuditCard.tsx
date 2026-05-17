@@ -19,10 +19,10 @@ export const AuditCard: React.FC<AuditCardProps> = ({ audit }) => {
   return (
     <m.div
       variants={staggerItemVariants()}
-      className="group bg-bg-card hover:bg-bg-card-hover light:border-zinc-200 light:hover:border-amber-300 relative overflow-hidden rounded-2xl border border-white/10 p-6 transition-all duration-300 hover:border-amber-500/30"
+      className="group bg-bg-card hover:bg-bg-card-hover light:border-border-subtle light:hover:border-amber-400/50 relative overflow-hidden rounded-2xl border border-white/10 p-6 transition-all duration-300 hover:border-amber-500/30"
     >
       <div className="mb-4 flex items-center justify-between">
-        <div className="light:bg-amber-100 light:text-amber-700 flex h-10 w-10 items-center justify-center rounded-lg bg-amber-500/10 text-amber-500">
+        <div className="light:bg-amber-500/10 light:text-amber-700 flex h-10 w-10 items-center justify-center rounded-lg bg-amber-500/10 text-amber-500">
           <FileText className="h-5 w-5" />
         </div>
         <div className="text-text-muted flex items-center gap-2 text-[11px] font-black tracking-tighter uppercase sm:text-xs">

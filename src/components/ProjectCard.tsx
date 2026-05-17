@@ -28,7 +28,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
       className="group bg-bg-card hover:bg-bg-card-hover border-border-subtle hover:border-border-strong light:hover:shadow-xl light:hover:shadow-blue-500/5 relative flex h-full flex-col justify-between overflow-hidden rounded-2xl border p-6 backdrop-blur-md transition-all duration-300 hover:border-blue-500/50 hover:shadow-[0_0_20px_var(--glow-blue)]"
     >
       {/* Glowing Corner */}
-      <div className="light:bg-blue-100/40 absolute top-0 right-0 h-16 w-16 translate-x-8 -translate-y-8 rotate-45 bg-blue-500/10 blur-xl transition-all duration-500 group-hover:bg-blue-500/20" />
+      <div className="light:bg-blue-500/10 absolute top-0 right-0 h-16 w-16 translate-x-8 -translate-y-8 rotate-45 bg-blue-500/10 blur-xl transition-all duration-500 group-hover:bg-blue-500/20" />
 
       <div>
         <div className="mb-4 flex items-center justify-between">
@@ -45,7 +45,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
               <Link
                 href={project.specLink}
                 aria-label={`View ${project.title} specification`}
-                className="focus-visible:ring-offset-background light:bg-zinc-100 light:text-zinc-700 light:hover:bg-purple-100 light:hover:text-purple-800 flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full bg-white/5 p-2.5 text-zinc-300 transition-colors hover:bg-purple-500/20 hover:text-white focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2 focus-visible:outline-none"
+                className="focus-visible:ring-offset-background light:bg-bg-badge light:text-text-tertiary light:hover:bg-purple-100 light:hover:text-purple-800 flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full bg-white/5 p-2.5 text-zinc-300 transition-colors hover:bg-purple-500/20 hover:text-white focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2 focus-visible:outline-none"
               >
                 <ShieldCheck className="h-4 w-4" />
               </Link>
@@ -56,7 +56,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`View ${project.title} on GitHub (opens in new tab)`}
-                className="focus-visible:ring-offset-background light:bg-zinc-100 light:text-zinc-700 light:hover:bg-blue-100 light:hover:text-blue-800 flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full bg-white/5 p-2.5 text-zinc-300 transition-colors hover:bg-blue-500/20 hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none"
+                className="focus-visible:ring-offset-background light:bg-bg-badge light:text-text-tertiary light:hover:bg-blue-100 light:hover:text-blue-800 flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full bg-white/5 p-2.5 text-zinc-300 transition-colors hover:bg-blue-500/20 hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none"
               >
                 <ExternalLink className="h-4 w-4" />
               </Link>
@@ -72,7 +72,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
 
       <div className="space-y-4">
         {project.stats && (
-          <div className="light:border-zinc-100 flex gap-4 border-t border-white/10 pt-4">
+          <div className="light:border-border-subtle flex gap-4 border-t border-white/10 pt-4">
             {project.stats.map((stat) => (
               <div key={stat.label}>
                 <div className="text-text-muted text-[11px] font-black uppercase sm:text-xs">
@@ -88,7 +88,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
           {project.techStack.map((tech) => (
             <span
               key={tech}
-              className="light:border-zinc-200 light:bg-zinc-50 text-text-tertiary light:group-hover:border-blue-200 light:group-hover:text-blue-800 bg-bg-badge rounded border border-white/5 px-2 py-1 text-[11px] font-bold transition-colors group-hover:border-blue-500/20 group-hover:text-blue-200 sm:text-xs"
+              className="light:border-border-subtle light:bg-bg-card-hover text-text-tertiary light:group-hover:border-blue-200 light:group-hover:text-blue-800 bg-bg-badge rounded border border-white/5 px-2 py-1 text-[11px] font-bold transition-colors group-hover:border-blue-500/20 group-hover:text-blue-200 sm:text-xs"
             >
               {tech}
             </span>

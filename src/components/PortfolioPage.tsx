@@ -61,7 +61,7 @@ export const PortfolioPage: React.FC = () => {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(buildBreadcrumbJsonLd(t.lang)) }}
       />
-      <div className="bg-background min-h-screen font-mono text-zinc-300 selection:bg-blue-500/30">
+      <div className="bg-background text-text-secondary min-h-screen font-mono selection:bg-blue-500/30">
         <ErrorBoundary>
           <TopologyLoader mode={simMode} quality={0.85} />
         </ErrorBoundary>

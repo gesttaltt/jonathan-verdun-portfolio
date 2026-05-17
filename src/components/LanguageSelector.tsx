@@ -10,7 +10,7 @@ export const LanguageSelector: React.FC = () => {
 
   return (
     <nav
-      className="light:border-zinc-200 light:bg-white flex items-center gap-1 rounded-full border border-white/10 bg-white/5 p-1 text-xs font-bold"
+      className="light:border-border-subtle light:bg-bg-card flex items-center gap-1 rounded-full border border-white/10 bg-white/5 p-1 text-xs font-bold"
       aria-label="Language selector"
     >
       <Link
@@ -20,7 +20,7 @@ export const LanguageSelector: React.FC = () => {
         className={`rounded-full px-4 py-1.5 transition-colors focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none ${
           !isEs
             ? 'bg-blue-700 text-white'
-            : 'light:text-zinc-500 light:hover:text-zinc-900 text-zinc-300 hover:text-white'
+            : 'light:text-text-tertiary light:hover:text-text-primary text-zinc-300 hover:text-white'
         }`}
       >
         EN
@@ -32,7 +32,7 @@ export const LanguageSelector: React.FC = () => {
         className={`rounded-full px-4 py-1.5 transition-colors focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none ${
           isEs
             ? 'bg-blue-700 text-white'
-            : 'light:text-zinc-500 light:hover:text-zinc-900 text-zinc-300 hover:text-white'
+            : 'light:text-text-tertiary light:hover:text-text-primary text-zinc-300 hover:text-white'
         }`}
       >
         ES

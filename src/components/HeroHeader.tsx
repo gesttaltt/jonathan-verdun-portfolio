@@ -51,7 +51,7 @@ export function HeroHeader() {
       </div>
 
       {siteConfig.workHistory.length > 0 && (
-        <div className="light:border-zinc-200 light:bg-white flex flex-col gap-3 rounded-2xl border border-white/8 bg-white/8 p-5 backdrop-blur-md dark:border-white/8 dark:bg-white/8">
+        <div className="light:border-border-subtle light:bg-bg-card flex flex-col gap-3 rounded-2xl border border-white/8 bg-white/8 p-5 backdrop-blur-md dark:border-white/8 dark:bg-white/8">
           <div className="flex items-center gap-3 text-xs">
             <span className="inline-flex h-2.5 w-2.5 rounded-full bg-green-500"></span>
             <span className="text-text-secondary font-bold tracking-widest uppercase">

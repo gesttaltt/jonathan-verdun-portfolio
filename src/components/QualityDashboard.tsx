@@ -48,14 +48,14 @@ export const QualityDashboard: React.FC<QualityDashboardProps> = ({ audits }) =>
           <TestDetailedList />
 
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-            <div className="light:border-zinc-200 light:bg-zinc-100/50 rounded-xl border border-white/5 bg-white/5 p-4 text-center">
+            <div className="light:border-border-subtle light:bg-bg-badge/50 rounded-xl border border-white/5 bg-white/5 p-4 text-center">
               <SearchIcon className="light:text-amber-800 mx-auto mb-2 h-5 w-5 text-amber-400" />
               <p className="text-text-primary text-xl font-bold">{chronologicalAudits.length}</p>
               <p className="text-text-tertiary text-[11px] font-black uppercase sm:text-xs">
                 Audits Published
               </p>
             </div>
-            <div className="light:border-zinc-200 light:bg-zinc-100/50 rounded-xl border border-white/5 bg-white/5 p-4 text-center">
+            <div className="light:border-border-subtle light:bg-bg-badge/50 rounded-xl border border-white/5 bg-white/5 p-4 text-center">
               <ShieldCheck className="light:text-blue-800 mx-auto mb-2 h-5 w-5 text-blue-400" />
               <p className="text-text-primary text-xl font-bold">{handbookSpecs.length}</p>
               <p className="text-text-tertiary text-[11px] font-black uppercase sm:text-xs">
@@ -81,7 +81,7 @@ export const QualityDashboard: React.FC<QualityDashboardProps> = ({ audits }) =>
       )}
 
       <section className="space-y-8">
-        <div className="light:border-zinc-200 flex flex-col justify-between gap-4 border-b border-white/10 pb-6 sm:flex-row sm:items-end">
+        <div className="light:border-border-subtle flex flex-col justify-between gap-4 border-b border-white/10 pb-6 sm:flex-row sm:items-end">
           <h3 className="text-text-tertiary text-[11px] font-black tracking-widest uppercase sm:text-xs">
             Chronological Audit History
           </h3>
@@ -93,7 +93,7 @@ export const QualityDashboard: React.FC<QualityDashboardProps> = ({ audits }) =>
               placeholder={t.sections.searchPlaceholder}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="light:border-zinc-200 light:bg-white text-text-primary light:focus:border-amber-400 w-full rounded-lg border border-white/10 bg-white/5 py-2 pr-10 pl-10 text-sm transition-colors focus:border-amber-500/50 focus:bg-white/10 focus:outline-none"
+              className="light:border-border-subtle light:bg-white text-text-primary light:focus:border-amber-400 w-full rounded-lg border border-white/10 bg-white/5 py-2 pr-10 pl-10 text-sm transition-colors focus:border-amber-500/50 focus:bg-white/10 focus:outline-none"
             />
             {searchQuery && (
               <button

@@ -138,12 +138,12 @@ export const Sidebar: React.FC<SidebarProps> = ({ repo = siteConfig.repo }) => {
   }[ciStatus]
 
   return (
-    <aside className="bg-bg-card light:from-white light:to-zinc-50 light:border-zinc-200 sticky top-24 h-fit rounded-3xl border border-white/10 p-6 backdrop-blur-lg transition-all hover:border-blue-500/20">
+    <aside className="bg-bg-card light:border-border-subtle sticky top-24 h-fit rounded-3xl border border-white/10 p-6 backdrop-blur-lg transition-all hover:border-blue-500/20">
       <div className="space-y-8">
         <FadeInSection delay={0.1}>
           <div className="space-y-4">
             <h3 className="text-text-primary flex items-center gap-3 text-lg font-bold">
-              <Server className="light:text-blue-600 h-5 w-5 text-blue-400" />
+              <Server className="light:text-blue-700 h-5 w-5 text-blue-400" />
               {t.sections.sidebar.constraintsTitle}
             </h3>
 
@@ -183,7 +183,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ repo = siteConfig.repo }) => {
             </div>
 
             {repo && (
-              <div className="light:border-zinc-200 mt-8 border-t border-white/5 pt-5">
+              <div className="light:border-border-subtle mt-8 border-t border-white/5 pt-5">
                 <div className="flex items-center justify-between">
                   <p className="text-text-tertiary text-[11px] font-black tracking-widest uppercase sm:text-xs">
                     {t.sections.sidebar.livePipelineLabel}
@@ -222,13 +222,13 @@ export const Sidebar: React.FC<SidebarProps> = ({ repo = siteConfig.repo }) => {
         </FadeInSection>
 
         <FadeInSection delay={0.2}>
-          <div className="group bg-bg-card hover:bg-bg-card-hover light:border-zinc-200 light:hover:border-amber-400/50 light:hover:shadow-xl light:hover:shadow-amber-500/5 relative overflow-hidden rounded-2xl border border-white/10 p-5 backdrop-blur-md transition-all sm:p-8">
-            <div className="light:bg-amber-100/50 absolute -top-10 -right-10 h-40 w-40 rounded-full bg-amber-500/5 blur-3xl transition-opacity group-hover:opacity-75"></div>
+          <div className="group bg-bg-card hover:bg-bg-card-hover light:border-border-subtle light:hover:border-amber-400/50 light:hover:shadow-xl light:hover:shadow-amber-500/5 relative overflow-hidden rounded-2xl border border-white/10 p-5 backdrop-blur-md transition-all sm:p-8">
+            <div className="light:bg-amber-500/5 absolute -top-10 -right-10 h-40 w-40 rounded-full bg-amber-500/5 blur-3xl transition-opacity group-hover:opacity-75"></div>
 
             <div className="relative space-y-4">
               <div className="flex items-center gap-3">
-                <div className="light:bg-amber-50 rounded-lg bg-amber-500/10 p-2">
-                  <Zap className="light:text-amber-600 h-5 w-5 text-amber-400" />
+                <div className="light:bg-amber-500/10 rounded-lg bg-amber-500/10 p-2">
+                  <Zap className="light:text-amber-800 h-5 w-5 text-amber-400" />
                 </div>
                 <h3 className="text-text-primary text-lg font-bold">
                   {t.sections.sidebar.certificationTitle}
@@ -258,7 +258,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ repo = siteConfig.repo }) => {
               <button
                 onClick={handleCopyEmail}
                 aria-label={t.sections.sidebar.copyEmailLabel}
-                className="light:bg-zinc-950 light:hover:bg-black light:text-white focus-visible:ring-offset-background group/btn relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-xl bg-white px-4 py-3 text-sm font-bold text-black transition-all hover:scale-[1.02] focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none active:scale-95"
+                className="light:bg-text-primary light:hover:bg-black light:text-background focus-visible:ring-offset-background group/btn relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-xl bg-white px-4 py-3 text-sm font-bold text-black transition-all hover:scale-[1.02] focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none active:scale-95"
               >
                 <AnimatePresence mode="wait">
                   {copied ? (

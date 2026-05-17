@@ -59,9 +59,10 @@
   --interaction-glow: #8b5cf6;
 
   /* Card hover glow tokens — ProjectCard · SystemSpecCard · BioinformaticsResearchCard */
-  --glow-blue: rgba(59, 130, 246, 0.15);
-  --glow-cyan: rgba(6, 182, 212, 0.12);
-  --glow-purple: rgba(139, 92, 246, 0.12);
+  --glow-blue: rgba(59, 130, 246, 0.25);
+  --glow-cyan: rgba(6, 182, 212, 0.2);
+  --glow-purple: rgba(139, 92, 246, 0.2);
+  --glow-strong: rgba(59, 130, 246, 0.45);
 }
 
 .light {
@@ -69,31 +70,32 @@
   --foreground: #09090b;
   --accent: #2563eb;
 
-  /* Surfaces — Light Mode */
-  --bg-card: #f8fafc; /* slate-50 */
-  --bg-card-hover: #f1f5f9; /* slate-100 */
-  --bg-badge: #e2e8f0; /* slate-200 */
+  /* Surfaces — Light Mode — Precision Ivory */
+  --bg-card: #ffffff;
+  --bg-card-hover: #f8fafc; /* slate-50 */
+  --bg-badge: #f1f5f9; /* slate-100 */
 
-  /* Text Readability — Light Mode */
+  /* Text Readability — Light Mode — High Authority Grays */
   --text-primary: #020617; /* slate-950 */
   --text-secondary: #0f172a; /* slate-900 */
   --text-tertiary: #334155; /* slate-700 */
-  --text-muted: #475569; /* slate-600 */
+  --text-muted: #64748b; /* slate-500 */
 
-  /* Borders — Light Mode */
+  /* Borders — Light Mode — Technical Lines */
   --border-subtle: #e2e8f0; /* slate-200 */
   --border-strong: #cbd5e1; /* slate-300 */
 
-  --bg-deep: #f1f5f9;
-  --grid-line: rgba(0, 0, 0, 0.06);
+  --bg-deep: #f8fafc;
+  --grid-line: rgba(15, 23, 42, 0.05);
   --particle: #2563eb;
 
-  --node-color: #1d4ed8; /* Deepened blue for light mode contrast */
-  --interaction-glow: #6d28d9; /* Deepened purple for light mode contrast */
+  --node-color: #1d4ed8;
+  --interaction-glow: #6d28d9;
 
-  --glow-blue: rgba(37, 99, 235, 0.12);
-  --glow-cyan: rgba(8, 145, 178, 0.1);
-  --glow-purple: rgba(124, 58, 237, 0.1);
+  --glow-blue: rgba(37, 99, 235, 0.18);
+  --glow-cyan: rgba(8, 145, 178, 0.15);
+  --glow-purple: rgba(124, 58, 237, 0.15);
+  --glow-strong: rgba(37, 99, 235, 0.3);
 }
 
 /* Custom Cyberpunk Scrollbar */

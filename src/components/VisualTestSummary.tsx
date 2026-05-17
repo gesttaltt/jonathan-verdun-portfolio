@@ -74,11 +74,11 @@ export const VisualTestSummary: React.FC = () => {
             <span className="light:text-green-800 text-2xl font-black text-green-400">
               {passRate}%
             </span>
-            <div className="light:bg-zinc-200 h-1.5 w-12 overflow-hidden rounded-full bg-white/10">
+            <div className="light:bg-bg-badge h-1.5 w-12 overflow-hidden rounded-full bg-white/10">
               <m.div
                 initial={{ width: 0 }}
                 animate={{ width: `${passRate}%` }}
-                className="light:bg-green-800 h-full bg-green-500"
+                className="light:bg-green-700 h-full bg-green-500"
               />
             </div>
           </div>
@@ -96,8 +96,8 @@ export const VisualTestSummary: React.FC = () => {
       </div>
 
       {numFailedTests > 0 && (
-        <div className="light:border-red-200 light:bg-red-50 mt-6 rounded-lg border border-red-500/20 bg-red-500/5 p-3">
-          <p className="light:text-red-600 text-xs font-bold text-red-400">
+        <div className="light:border-red-300 light:bg-red-50/50 mt-6 rounded-lg border border-red-500/20 bg-red-500/5 p-3">
+          <p className="light:text-red-800 text-xs font-bold text-red-400">
             {vt.regressionDetected.replace('{count}', String(numFailedTests))}
           </p>
         </div>

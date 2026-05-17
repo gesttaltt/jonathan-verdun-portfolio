@@ -40,10 +40,10 @@ export const SiteFooter: React.FC = () => {
       aria-label="Site footer"
       className="mt-14 sm:mt-24"
     >
-      <div className="border-border-subtle light:bg-white relative overflow-hidden rounded-2xl border bg-white/8 backdrop-blur-md">
+      <div className="border-border-subtle light:bg-bg-card relative overflow-hidden rounded-2xl border bg-white/8 backdrop-blur-md">
         {/* Ambient glow */}
-        <div className="light:bg-blue-100/50 pointer-events-none absolute -top-24 left-1/2 h-48 w-96 -translate-x-1/2 rounded-full bg-blue-500/8 blur-3xl" />
-        <div className="light:bg-purple-100/30 pointer-events-none absolute right-0 -bottom-16 h-32 w-64 rounded-full bg-purple-500/6 blur-3xl" />
+        <div className="light:bg-blue-500/10 pointer-events-none absolute -top-24 left-1/2 h-48 w-96 -translate-x-1/2 rounded-full bg-blue-500/8 blur-3xl" />
+        <div className="light:bg-purple-500/10 pointer-events-none absolute right-0 -bottom-16 h-32 w-64 rounded-full bg-purple-500/6 blur-3xl" />
 
         {/* Main content */}
         <div className="relative z-10 px-6 py-8 sm:px-10 sm:py-10">
@@ -64,7 +64,7 @@ export const SiteFooter: React.FC = () => {
                   target={href.startsWith('mailto') ? undefined : '_blank'}
                   rel={href.startsWith('mailto') ? undefined : 'noopener noreferrer'}
                   aria-label={label}
-                  className="light:border-zinc-200 light:bg-zinc-100 text-text-tertiary light:hover:border-blue-300 light:hover:text-blue-600 flex h-10 w-10 items-center justify-center rounded-lg border border-white/5 bg-white/5 transition-all hover:border-blue-500/30 hover:bg-blue-500/10 hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none"
+                  className="light:border-border-subtle light:bg-bg-badge text-text-tertiary light:hover:border-blue-400 light:hover:text-blue-700 flex h-10 w-10 items-center justify-center rounded-lg border border-white/5 bg-white/5 transition-all hover:border-blue-500/30 hover:bg-blue-500/10 hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none"
                 >
                   <Icon className="h-4 w-4" />
                 </Link>
