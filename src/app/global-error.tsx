@@ -54,7 +54,7 @@ export default function GlobalError({ error, reset }: GlobalErrorProps) {
             <div className="flex flex-wrap gap-3">
               <button
                 onClick={reset}
-                className="focus-visible:ring-offset-background border-border-subtle bg-bg-card hover:bg-bg-card-hover inline-flex items-center gap-2 rounded-lg border px-5 py-2.5 text-sm font-semibold text-red-400 transition-all hover:border-red-500/50 focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 focus-visible:outline-none"
+                className="focus-visible:ring-offset-background border-border-subtle bg-bg-card hover:bg-bg-card-hover light:text-red-800 inline-flex items-center gap-2 rounded-lg border px-5 py-2.5 text-sm font-semibold text-red-400 transition-all hover:border-red-500/50 focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 focus-visible:outline-none"
               >
                 ↺ {isEs ? 'Reintentar' : 'Try again'}
               </button>

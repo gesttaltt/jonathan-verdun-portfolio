@@ -65,7 +65,7 @@ export function HeroHeader() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`${entry.organization} (opens in new tab)`}
-                className="focus-visible:ring-offset-background text-text-primary light:hover:text-blue-700 flex items-center gap-2 rounded text-lg font-bold transition-colors hover:text-cyan-400 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none dark:hover:text-cyan-400"
+                className="focus-visible:ring-offset-background text-text-primary light:hover:text-blue-800 flex items-center gap-2 rounded text-lg font-bold transition-colors hover:text-cyan-400 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none dark:hover:text-cyan-400"
               >
                 {entry.organization} <ExternalLinkIcon className="h-4 w-4" />
               </Link>

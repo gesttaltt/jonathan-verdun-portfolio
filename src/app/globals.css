@@ -115,15 +115,15 @@
 }
 
 .light ::-webkit-scrollbar-thumb {
-  background: #d4d4d8; /* zinc-300 equivalent */
+  background: #cbd5e1; /* slate-300 — improved contrast for light mode */
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #27272a; /* zinc-800 equivalent */
+  background: #27272a; /* zinc-800 — improved contrast for dark mode */
 }
 
 .light ::-webkit-scrollbar-thumb:hover {
-  background: #a1a1aa; /* zinc-400 equivalent */
+  background: #94a3b8; /* slate-400 — improved hover contrast */
 }
 
 body {

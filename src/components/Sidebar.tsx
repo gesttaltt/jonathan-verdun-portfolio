@@ -150,15 +150,15 @@ export const Sidebar: React.FC<SidebarProps> = ({ repo = siteConfig.repo }) => {
             <div className="grid grid-cols-1 gap-4">
               {GATES.map((gate) => {
                 const textColors = {
-                  blue: 'text-blue-400 light:text-blue-700',
-                  cyan: 'text-cyan-400 light:text-cyan-700',
-                  green: 'text-green-400 light:text-green-700',
+                  blue: 'text-blue-400 light:text-blue-800',
+                  cyan: 'text-cyan-400 light:text-cyan-800',
+                  green: 'text-green-400 light:text-green-800',
                 }[gate.color]
 
                 const bgColors = {
-                  blue: 'bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.6)] light:bg-blue-600',
-                  cyan: 'bg-cyan-500 shadow-[0_0_8px_rgba(34,211,238,0.6)] light:bg-cyan-600',
-                  green: 'bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)] light:bg-green-600',
+                  blue: 'bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.6)] light:bg-blue-700',
+                  cyan: 'bg-cyan-500 shadow-[0_0_8px_rgba(34,211,238,0.6)] light:bg-cyan-700',
+                  green: 'bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)] light:bg-green-700',
                 }[gate.color]
 
                 return (
