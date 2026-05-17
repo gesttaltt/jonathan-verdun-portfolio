@@ -54,7 +54,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
         initial="hidden"
         whileInView="visible"
         viewport={SCROLL_VIEWPORT}
-        className={`mb-6 flex items-center gap-4 ${showBorderBottom ? 'light:border-zinc-100 border-b border-white/10 pb-4' : ''}`}
+        className={`group shimmer-scan mb-6 flex items-center gap-4 ${showBorderBottom ? 'light:border-zinc-100 border-b border-white/10 pb-4' : ''}`}
       >
         <div
           aria-hidden="true"

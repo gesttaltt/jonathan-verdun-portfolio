@@ -125,6 +125,48 @@
 .light ::-webkit-scrollbar-thumb:hover {
   background: #94a3b8; /* slate-400 — improved hover contrast */
 }
+/* Mechanical 'Quint' Easing — sharp entry, smooth settlement */
+.easing-mechanical {
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Elite Shimmer Scanline — applied to card headers on hover */
+.shimmer-scan {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer-scan::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+  transform: skewX(-20deg);
+  pointer-events: none;
+}
+
+.group:hover .shimmer-scan::after {
+  animation: shimmer 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.light .shimmer-scan::after {
+  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+}
+
+@keyframes shimmer {
+  100% {
+    left: 200%;
+  }
+}
+
+/* Mechanical Click State */
+.btn-mechanical:active {
+  transform: scale(0.96);
+  filter: brightness(0.9);
+}
 
 body {
   background: var(--background);

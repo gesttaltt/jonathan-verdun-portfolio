@@ -258,7 +258,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ repo = siteConfig.repo }) => {
               <button
                 onClick={handleCopyEmail}
                 aria-label={t.sections.sidebar.copyEmailLabel}
-                className="light:bg-text-primary light:hover:bg-black light:text-background focus-visible:ring-offset-background group/btn relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-xl bg-white px-4 py-3 text-sm font-bold text-black transition-all hover:scale-[1.02] focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none active:scale-95"
+                className="light:bg-text-primary light:hover:bg-black light:text-background btn-mechanical focus-visible:ring-offset-background group/btn relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-xl bg-white px-4 py-3 text-sm font-bold text-black transition-all hover:scale-[1.02] focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none active:scale-95"
               >
                 <AnimatePresence mode="wait">
                   {copied ? (
