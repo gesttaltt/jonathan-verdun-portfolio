@@ -22,13 +22,6 @@ export class DataEngineeringService {
         methodology: 'Additive Modeling',
         invariants: ['Monotonic Constraints', 'Bounded Predictions'],
       },
-      {
-        id: 'spec-03',
-        focus: 'AI Site Builder',
-        methodology: 'Progressive Delivery',
-        invariants: ['Lighthouse CI Gate', 'Preview Deployments', 'Nightly Regression'],
-        link: 'https://github.com/Ai-Whisperers/paragu-ai-builder',
-      },
     ]
   }
 }
