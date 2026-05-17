@@ -135,7 +135,7 @@ export const Terminal: React.FC<TerminalProps> = ({
               onChange={(e) => setInputVal(e.target.value)}
               onKeyDown={handleKeyDown}
               /* font-size ≥ 16px on mobile prevents iOS Safari from zooming the viewport on focus */
-              className="light:text-text-primary text-text-primary w-full bg-transparent text-base outline-none placeholder:text-zinc-700 disabled:cursor-not-allowed sm:text-xs md:text-sm lg:text-base"
+              className="light:text-text-primary text-text-primary placeholder:text-text-muted w-full bg-transparent text-base outline-none disabled:cursor-not-allowed sm:text-xs md:text-sm lg:text-base"
               aria-label="Terminal command input"
               aria-describedby="terminal-hint"
               inputMode="text"

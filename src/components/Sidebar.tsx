@@ -169,7 +169,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ repo = siteConfig.repo }) => {
                     >
                       <div className="flex items-center gap-3">
                         <div className={`h-1.5 w-1.5 rounded-full ${bgColors}`} />
-                        <span className="text-text-tertiary text-xs font-medium">
+                        <span className="text-text-tertiary light:font-bold text-xs font-medium">
                           {t.sections.sidebar[gate.key]}
                         </span>
                       </div>
