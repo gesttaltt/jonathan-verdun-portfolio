@@ -84,12 +84,13 @@ export const TopologyMesh: React.FC<{ quality: number; mode: 'p-adic' | 'hyperbo
     const reducedMotion = mat.uniforms['uReducedMotion']
 
     if (time) time.value = elapsed
-    if (mouse) mouse.value.lerp(state.mouse, 0.15)
+    if (mouse) mouse.value.lerp(state.mouse, 0.2) // Sharper response
     if (reducedMotion) reducedMotion.value = prefersReducedMotionRef.current
 
     if (!prefersReducedMotionRef.current) {
-      meshRef.current.rotation.y = elapsed * 0.05
-      meshRef.current.rotation.x = Math.sin(elapsed * 0.1) * 0.1
+      meshRef.current.rotation.y = elapsed * 0.08 // Faster rotation
+      meshRef.current.rotation.x = Math.sin(elapsed * 0.15) * 0.15
+      meshRef.current.position.z = Math.cos(elapsed * 0.2) * 0.5 // Subtle breathing depth
     }
   })
 
