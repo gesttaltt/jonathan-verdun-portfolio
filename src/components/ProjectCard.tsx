@@ -45,7 +45,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
               <Link
                 href={project.specLink}
                 aria-label={`View ${project.title} specification`}
-                className="focus-visible:ring-offset-background light:bg-bg-badge light:text-text-tertiary light:hover:bg-purple-100 light:hover:text-purple-800 flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full bg-white/5 p-2.5 text-zinc-300 transition-colors hover:bg-purple-500/20 hover:text-white focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2 focus-visible:outline-none"
+                className="focus-visible:ring-offset-background light:bg-bg-badge light:text-text-tertiary light:hover:bg-purple-100 light:hover:text-purple-800 bg-bg-badge text-text-tertiary flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full p-2.5 transition-colors hover:bg-purple-500/20 hover:text-white focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2 focus-visible:outline-none"
               >
                 <ShieldCheck className="h-4 w-4" />
               </Link>
@@ -56,7 +56,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`View ${project.title} on GitHub (opens in new tab)`}
-                className="focus-visible:ring-offset-background light:bg-bg-badge light:text-text-tertiary light:hover:bg-blue-100 light:hover:text-blue-800 flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full bg-white/5 p-2.5 text-zinc-300 transition-colors hover:bg-blue-500/20 hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none"
+                className="focus-visible:ring-offset-background light:bg-bg-badge light:text-text-tertiary light:hover:bg-blue-100 light:hover:text-blue-800 bg-bg-badge text-text-tertiary flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full p-2.5 transition-colors hover:bg-blue-500/20 hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none"
               >
                 <ExternalLink className="h-4 w-4" />
               </Link>
