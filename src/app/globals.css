@@ -134,6 +134,9 @@ body {
   scroll-behavior: smooth;
   /* Remove tap flash on iOS/Android */
   -webkit-tap-highlight-color: transparent;
+  /* Standardize font smoothing */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 ::selection {
@@ -150,6 +153,11 @@ body {
   position: absolute;
   bottom: 100%;
   animation: scanline 6s linear infinite;
+}
+
+.light .scanline {
+  background: rgba(37, 99, 235, 0.05);
+  opacity: 0.05;
 }
 
 @keyframes scanline {

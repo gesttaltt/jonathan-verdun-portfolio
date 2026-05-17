@@ -30,7 +30,7 @@ export const TopologyWrapper: React.FC<TopologyWrapperProps> = ({
       />
 
       {/* Atmospheric Gradient */}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-blue-900/20 via-transparent to-purple-900/20 opacity-50" />
+      <div className="light:from-blue-100/20 light:to-purple-100/20 pointer-events-none absolute inset-0 bg-gradient-to-tr from-blue-900/20 via-transparent to-purple-900/20 opacity-50" />
 
       {children}
     </div>

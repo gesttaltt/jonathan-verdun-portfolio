@@ -62,7 +62,10 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
         >
           {icon}
         </div>
-        <h2 id={id} className="light:text-zinc-950 text-2xl font-bold text-white">
+        <h2
+          id={id}
+          className="light:text-text-primary light:font-extrabold text-2xl font-bold text-white"
+        >
           {title}
         </h2>
       </m.div>
