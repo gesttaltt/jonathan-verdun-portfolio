@@ -105,7 +105,9 @@ export const PortfolioPage: React.FC = () => {
               <QAContact />
             </section>
 
-            <Sidebar />
+            <div className="lg:col-span-4">
+              <Sidebar />
+            </div>
 
             {/* Projects + Prior Research — row 2, cols 1–8 */}
             <div className="space-y-14 lg:col-span-8 lg:col-start-1 lg:row-start-2 lg:space-y-24">
