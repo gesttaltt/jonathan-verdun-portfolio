@@ -7,8 +7,7 @@ export function ThemeScript() {
     (function() {
       try {
         const savedTheme = localStorage.getItem('theme');
-        const supportLight = window.matchMedia('(prefers-color-scheme: light)').matches;
-        if (savedTheme === 'light' || (!savedTheme && supportLight)) {
+        if (savedTheme === 'light') {
           document.documentElement.classList.add('light');
         } else {
           document.documentElement.classList.remove('light');

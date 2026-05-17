@@ -23,10 +23,11 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
         setTheme(savedTheme)
         document.documentElement.classList.toggle('light', savedTheme === 'light')
       })
-    } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+    } else {
+      // Default to Dark theme regardless of system preference for elite aesthetic
       queueMicrotask(() => {
-        setTheme('light')
-        document.documentElement.classList.add('light')
+        setTheme('dark')
+        document.documentElement.classList.remove('light')
       })
     }
   }, [])
