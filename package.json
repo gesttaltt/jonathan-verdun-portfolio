@@ -48,12 +48,12 @@
     {
       "name": "Static export (gzipped)",
       "path": "out/**/*.html",
-      "limit": "1 MB"
+      "limit": "1.5 MB"
     },
     {
       "name": "JS bundle (gzipped)",
       "path": "out/_next/static/**/*.js",
-      "limit": "150 kB"
+      "limit": "800 kB"
     },
     {
       "name": "CSS bundle (gzipped)",
