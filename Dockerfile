@@ -22,7 +22,7 @@ RUN touch /var/run/nginx.pid && \
 
 USER nginx
 
-COPY --chown=nginx:nginx nginx.conf /etc/nginx/conf.d/default.conf
+COPY --chown=nginx:nginx scripts/nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=builder --chown=nginx:nginx /app/out /usr/share/nginx/html
 
 EXPOSE 80
