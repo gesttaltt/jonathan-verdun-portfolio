@@ -62,6 +62,25 @@ export interface Translations {
       ciStatusError: string
     }
     qaContact: { title: string; description: string; ctaLabel: string }
+    contactForm: {
+      nameLabel: string
+      namePlaceholder: string
+      emailLabel: string
+      emailPlaceholder: string
+      subjectLabel: string
+      subjectPlaceholder: string
+      messageLabel: string
+      messagePlaceholder: string
+      submitLabel: string
+      submittingLabel: string
+      successTitle: string
+      successMessage: string
+      errorTitle: string
+      errorMessage: string
+      validationRequired: string
+      validationEmail: string
+      formDisabled: string
+    }
   }
   visualTestSummary: {
     title: string

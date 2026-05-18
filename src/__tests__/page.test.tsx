@@ -1,7 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import Home from '@/app/(en)/page'
 import { ProjectProvider } from '@/components/hooks/useProjects'
-import { siteConfig } from '@/lib/siteConfig'
 import { en } from '@/lib/i18n/en'
 import { ThemeProvider } from '@/lib/theme/context'
 import { I18nProvider } from '@/lib/i18n/context'
@@ -38,9 +37,11 @@ describe('Home', () => {
     expect(screen.getByRole('heading', { name: en.sections.projects })).toBeInTheDocument()
   })
 
-  it('renders the contact CTA link with the correct mailto href', () => {
+  it('renders the contact section with heading and disabled form notice', () => {
     renderHome()
-    const link = screen.getByRole('link', { name: siteConfig.contact.ctaLabel })
-    expect(link).toHaveAttribute('href', `mailto:${siteConfig.contact.email}`)
+    expect(screen.getByRole('heading', { name: en.sections.qaContact.title })).toBeInTheDocument()
+    expect(screen.getByText(en.sections.qaContact.description)).toBeInTheDocument()
+    // ContactForm renders a disabled notice when NEXT_PUBLIC_FORMSPREE_ID is not set
+    expect(screen.getByText(en.sections.contactForm.formDisabled)).toBeInTheDocument()
   })
 })

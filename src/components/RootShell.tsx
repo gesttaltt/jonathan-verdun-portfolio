@@ -6,10 +6,15 @@ import { MotionProvider } from '@/components/MotionProvider'
 import { useTranslation } from '@/lib/i18n/context'
 import { ServiceWorkerRegister } from '@/components/ServiceWorkerRegister'
 
+const plausibleDomain = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN
+
 export function RootShell({ children }: { children: ReactNode }) {
   const t = useTranslation()
   return (
     <>
+      {plausibleDomain && (
+        <script defer data-domain={plausibleDomain} src="https://plausible.io/js/script.js" />
+      )}
       <ServiceWorkerRegister />
       <a
         href="#main-content"
