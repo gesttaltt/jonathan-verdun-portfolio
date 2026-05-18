@@ -16,6 +16,7 @@
     "e2e:ui": "playwright test --ui",
     "test:visual": "playwright test e2e/visual.spec.ts",
     "lhci": "lhci autorun",
+    "size": "size-limit",
     "prepare": "husky",
     "validate-env": "node scripts/validate-env.mjs",
     "build": "npm run generate-vfs && npm run validate-env && npm test -- --json --outputFile=coverage.json && next build"
@@ -43,6 +44,23 @@
     "react-dom": "19.2.5",
     "three": "0.182.0"
   },
+  "size-limit": [
+    {
+      "name": "Static export (gzipped)",
+      "path": "out/**/*.html",
+      "limit": "1 MB"
+    },
+    {
+      "name": "JS bundle (gzipped)",
+      "path": "out/_next/static/**/*.js",
+      "limit": "150 kB"
+    },
+    {
+      "name": "CSS bundle (gzipped)",
+      "path": "out/_next/static/**/*.css",
+      "limit": "50 kB"
+    }
+  ],
   "overrides": {
     "tmp": "^0.2.3",
     "postcss": "^8.5.12"
@@ -51,6 +69,7 @@
     "@axe-core/playwright": "^4.11.3",
     "@lhci/cli": "^0.15.1",
     "@playwright/test": "^1.59.1",
+    "@size-limit/file": "^12.1.0",
     "@tailwindcss/postcss": "^4",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",
@@ -71,6 +90,7 @@
     "lint-staged": "^16.2.7",
     "prettier": "^3.8.1",
     "prettier-plugin-tailwindcss": "^0.8.0",
+    "size-limit": "^12.1.0",
     "tailwindcss": "^4",
     "ts-jest": "^29.4.9",
     "typedoc": "^0.28.19",
