@@ -34,7 +34,7 @@
     "@react-three/fiber": "^9.6.1",
     "@react-three/postprocessing": "^3.0.4",
     "@types/three": "0.182.0",
-    "framer-motion": "^12.34.0",
+    "framer-motion": "^12.38.0",
     "gray-matter": "^4.0.3",
     "lucide-react": "^0.563.0",
     "marked": "^18.0.3",
