@@ -234,6 +234,14 @@ export const es: Translations = {
       ctaLabel: 'Contáctame',
     },
     testimonials: { title: 'Testimonios' },
+    resume: {
+      title: 'Currículum',
+      experienceTitle: 'Experiencia',
+      skillsTitle: 'Habilidades y Tecnologías',
+      expertiseTitle: 'Áreas de Especialización',
+      certificationsTitle: 'Certificaciones',
+      downloadLabel: 'Descargar PDF',
+    },
     contactForm: {
       nameLabel: 'Nombre',
       namePlaceholder: 'Tu nombre',

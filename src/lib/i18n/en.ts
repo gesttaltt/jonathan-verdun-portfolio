@@ -56,6 +56,14 @@ export const en: Translations = {
       ctaLabel: 'Get in Touch',
     },
     testimonials: { title: 'Testimonials' },
+    resume: {
+      title: 'Resume',
+      experienceTitle: 'Experience',
+      skillsTitle: 'Skills & Technologies',
+      expertiseTitle: 'Core Expertise',
+      certificationsTitle: 'Certifications',
+      downloadLabel: 'Download PDF',
+    },
     contactForm: {
       nameLabel: 'Name',
       namePlaceholder: 'Your name',

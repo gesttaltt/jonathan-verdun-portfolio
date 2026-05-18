@@ -63,6 +63,14 @@ export interface Translations {
     }
     qaContact: { title: string; description: string; ctaLabel: string }
     testimonials: { title: string }
+    resume: {
+      title: string
+      experienceTitle: string
+      skillsTitle: string
+      expertiseTitle: string
+      certificationsTitle: string
+      downloadLabel: string
+    }
     contactForm: {
       nameLabel: string
       namePlaceholder: string
