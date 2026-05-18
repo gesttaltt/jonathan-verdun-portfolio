@@ -1,0 +1,98 @@
+---
+title: "Why my portfolio has a CI pipeline — treating your resume like production code"
+date: "2026-05-18"
+tags: ["CI/CD", "testing", "architecture", "portfolio"]
+description: "Every quality claim on jonathanverdun.com is backed by an automated gate. Here's why I treat my resume like production code."
+---
+
+## The premise
+
+I'm a QA Automation Engineer. My portfolio makes claims about test coverage, accessibility standards, and CI/CD expertise. If those claims weren't verifiable, the site would be undermining its own message.
+
+So I made a rule: **every quality claim on the site must be backed by an automated gate running in CI.**
+
+## What that looks like in practice
+
+The site is a Next.js 16 static export with 99 pages, two languages, an interactive WebGL topology, and a full test suite. The CI pipeline runs 7 stages on every push:
+
+```yaml
+# .github/workflows/ci.yml (simplified)
+jobs:
+  build:
+    steps:
+      - Check formatting        # prettier --check
+      - Linting                 # eslint
+      - Security audit          # npm audit --audit-level=high
+      - Type checking           # tsc --noEmit
+      - Run tests               # jest --coverage
+      - Build                   # next build
+      - Bundle size check       # size-limit
+
+  e2e:                          # Playwright + axe-core
+    needs: build
+    steps:
+      - E2E tests               # 38 tests across all routes
+      - WCAG scans              # axe-core on every page
+
+  lhci:                         # Lighthouse CI
+    needs: build
+    gates:
+      - a11y ≥ 95
+      - best-practices ≥ 90
+      - SEO ≥ 90
+```
+
+## The coverage gate
+
+The Jest configuration enforces 100% on branches, functions, lines, and statements:
+
+```json
+{
+  "coverageThreshold": {
+    "global": {
+      "branches": 100,
+      "functions": 100,
+      "lines": 100,
+      "statements": 100
+    }
+  }
+}
+```
+
+This isn't about the number. It's a forcing function for testable architecture. When a component is hard to test, I redesign it — I don't lower the threshold. The result is 396 tests across 53 suites, with property-based testing (fast-check) for domain logic.
+
+## What it catches
+
+The CI pipeline has caught:
+
+- **A malformed JSON-LD script** that would have broken LinkedIn previews
+- **A regression in theme contrast** after a Tailwind config change
+- **Bundle bloat** from an unused dependency (size-limit alerted before merge)
+- **A broken ES locale route** after renaming a directory
+- **Accessibility violations** in new components before they reached production
+
+Every one of these was caught automatically, without a manual QA pass.
+
+## The maintenance cost
+
+Running this pipeline costs about 2-3 minutes per push. The E2E suite adds another 4 minutes. The total CI time is under 10 minutes for the full matrix (Node 22 + Node 24).
+
+The test maintenance is real — every new component needs tests, every route change needs updated E2E selectors. But the cost is predictable and front-loaded. I'd estimate ~15% of development time goes to tests and pipeline upkeep.
+
+## Is it worth it?
+
+For a personal portfolio? Yes — if your craft IS quality engineering. The pipeline isn't just infrastructure; it's the product. Every recruiter who clicks the CI badge sees proof, not promises.
+
+> "Your portfolio should demonstrate your standards, not just describe them." — Jonathan Verdun
+
+## How to start
+
+If you want to do something similar:
+
+1. Start with a single GitHub Actions workflow that runs `npm test` and `npm run build`
+2. Add type checking (`tsc --noEmit`) — it catches more real bugs than linting
+3. Add a coverage threshold at a level that makes sense for your project
+4. Add a bundle size check — `size-limit` takes 5 minutes to configure
+5. Layer on E2E testing once your routes are stable (Playwright + axe-core for a11y)
+
+The key is to make the pipeline **actionable** — if it fails, you should know exactly what to fix. No flaky tests, no ignored thresholds.
