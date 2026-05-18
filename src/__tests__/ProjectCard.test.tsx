@@ -60,4 +60,61 @@ describe('ProjectCard', () => {
     wrap({ ...baseProject, status: 'Unknown' as ProjectSpec['status'] })
     expect(screen.getByText('Unknown')).toHaveClass('bg-zinc-500/20')
   })
+
+  it('does not render spec link button when specLink is missing', () => {
+    wrap(baseProject)
+    expect(screen.queryByLabelText(/View .* specification/i)).not.toBeInTheDocument()
+  })
+
+  it('does not render external link when link is missing', () => {
+    wrap(baseProject)
+    expect(screen.queryByLabelText(/opens in new tab/i)).not.toBeInTheDocument()
+  })
+
+  it('renders accessory buttons when both specLink and link are provided', () => {
+    wrap({
+      ...baseProject,
+      specLink: 'https://example.com/spec',
+      link: 'https://github.com/test/repo',
+    })
+    expect(screen.getByLabelText(/View .* specification/i)).toBeInTheDocument()
+    expect(screen.getByLabelText(/opens in new tab/i)).toBeInTheDocument()
+  })
+
+  it('does not render stats section when stats is undefined', () => {
+    wrap(baseProject)
+    expect(screen.queryByText('Coverage')).not.toBeInTheDocument()
+  })
+
+  it('renders multiple stats', () => {
+    wrap({
+      ...baseProject,
+      stats: [
+        { label: 'Stars', value: '100' },
+        { label: 'Forks', value: '25' },
+      ],
+    })
+    expect(screen.getByText('Stars')).toBeInTheDocument()
+    expect(screen.getByText('100')).toBeInTheDocument()
+    expect(screen.getByText('Forks')).toBeInTheDocument()
+    expect(screen.getByText('25')).toBeInTheDocument()
+  })
+
+  it('slugifies title for case-study link', () => {
+    wrap({ ...baseProject, title: 'My Cool Project!' })
+    const link = screen.getByRole('link', { name: /case study/i })
+    expect(link).toHaveAttribute('href', '/projects/my-cool-project')
+  })
+
+  it('renders tech stack as multiple tags', () => {
+    wrap({ ...baseProject, techStack: ['Go', 'Rust', 'Python', 'Docker'] })
+    for (const tech of ['Go', 'Rust', 'Python', 'Docker']) {
+      expect(screen.getByText(tech)).toBeInTheDocument()
+    }
+  })
+
+  it('renders correct testid', () => {
+    wrap({ ...baseProject, id: 'my-project' })
+    expect(screen.getByTestId('project-card-my-project')).toBeInTheDocument()
+  })
 })
