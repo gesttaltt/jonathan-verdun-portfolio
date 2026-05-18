@@ -4,21 +4,23 @@ Last updated: 2026-05-18
 
 ## Recently Resolved (this session)
 
-| Item                                                                           | Status | Commit                          |
-| ------------------------------------------------------------------------------ | ------ | ------------------------------- |
-| Silent failure audit (6 fixes)                                                 | ✅     | `a0fc33d`                       |
-| Animation timing polish                                                        | ✅     | `300dc11`                       |
-| Size-limit budgets                                                             | ✅     | `352ae41`                       |
-| EN/ES page dedup (blog, quality, projects)                                     | ✅     | `0fd5e01`, `c86893f`, `e2d1def` |
-| JSON-LD dedup                                                                  | ✅     | `832dfd2`                       |
-| CI fix (coverage thresholds, action v5)                                        | ✅     | `c569497`, `2188176`            |
-| **lint-staged** 16.2.7 → **17.0.5**                                            | ✅     | pending                         |
-| **lucide-react** 0.563.0 → **1.16.0** (brand icons replaced with SVGs)         | ✅     | pending                         |
-| **typescript** 5.9.3 → **6.0.3** (`types: ["node", "jest"]` added to tsconfig) | ✅     | pending                         |
+| Item                                                               | Status | Commit                          |
+| ------------------------------------------------------------------ | ------ | ------------------------------- |
+| Silent failure audit (6 fixes)                                     | ✅     | `a0fc33d`                       |
+| Animation timing polish                                            | ✅     | `300dc11`                       |
+| Size-limit budgets                                                 | ✅     | `352ae41`                       |
+| EN/ES page dedup (blog, quality, projects)                         | ✅     | `0fd5e01`, `c86893f`, `e2d1def` |
+| JSON-LD dedup                                                      | ✅     | `832dfd2`                       |
+| CI fix (coverage thresholds, action v5)                            | ✅     | `c569497`, `2188176`            |
+| **lint-staged** 16.2.7 → **17.0.5**                                | ✅     | `5b8580a`                       |
+| **lucide-react** 0.563.0 → **1.16.0** (brand icons → SVGs)         | ✅     | `5b8580a`                       |
+| **typescript** 5.9.3 → **6.0.3** (`types` field added to tsconfig) | ✅     | `5b8580a`                       |
+| Tests: BlogDetailContent, AuditDetailContent, ContactForm (11 new) | ✅     | `9d63f2c`                       |
+| docs/REMAINING_ITEMS.md created                                    | ✅     | `9d63f2c`                       |
 
 ## High Priority
 
-### 1. Coverage Gap — App & components at ~0%
+### 1. Coverage Gap — App & components still under-tested
 
 | Directory          | Statements | Branches | Functions | Lines    |
 | ------------------ | ---------- | -------- | --------- | -------- |
@@ -27,45 +29,50 @@ Last updated: 2026-05-18
 | **components/**    | ~16%       | ~8%      | ~17%      | ~16%     |
 | **Total (global)** | **~73%**   | **~70%** | **~70%**  | **~75%** |
 
-Thresholds (70/65/65/70) are currently met globally, but app pages and UI components have near-zero coverage. High-traffic components (ContactForm, HeroHeader, BlogList, PortfolioPage) have no tests.
+Thresholds (70/65/65/70) met globally, but still wide open:
+
+| Component         | Lines  | Why it matters                                       |
+| ----------------- | ------ | ---------------------------------------------------- |
+| BlogList.tsx      | 64     | Main blog listing, renders cards from BlogService    |
+| PortfolioPage.tsx | 200+   | Core portfolio layout, JSON-LD, Three.js integration |
+| ProjectCard.tsx   | ~40    | Project grid card used on portfolio page             |
+| ProjectDetail.tsx | ~120   | Full case study view with expanded data              |
+| Sidebar.tsx       | ~60    | Navigation sidebar, routing logic                    |
+| SiteFooter.tsx    | ~50    | Footer with social links, rendered on every page     |
+| App route pages   | varies | 22 route files at 0% coverage                        |
 
 ### 2. eslint 9 → 10 — Blocked by eslint-config-next
 
-`eslint-config-next@16.2.6` uses `eslint-plugin-react` with deprecated API (`contextOrFilename.getFilename`) removed in ESLint 10. Need to wait for eslint-config-next to publish a compatible version.
+`eslint-config-next@16.2.6` bundles `eslint-plugin-react` which uses `contextOrFilename.getFilename()` — removed in ESLint 10. Need to wait for eslint-config-next to publish a compatible version (check canary releases).
+
+### 3. Flaky Test — QualityDashboard search filter timeout
+
+`QualityDashboard › filters audits based on search query in title` times out at 5s. Caused by `userEvent.type()` being slow with async rendering. Needs a higher timeout or a more efficient test setup.
 
 ## Medium Priority
 
-### 3. Bundle — Three.js chunk is 1.08 MB
+### 4. Bundle — Three.js chunk is 1.08 MB
 
-The largest JS chunk (`0r~mo3~wj37w7.js` at 1.08 MB) contains Three.js + framer-motion + R3F. Loaded on every page via RootShell even when topology isn't displayed. Could be deferred with dynamic imports or route-level splitting.
+Largest JS chunk contains Three.js + framer-motion + R3F. Loaded on every page via RootShell even when topology isn't displayed. Could be deferred with dynamic imports or route-level splitting.
 
 Total `.next/` output is ~979 MB (includes static export).
 
-### 4. Flaky Test — QualityDashboard search filter timeout
+### 5. Dirty Generated Files
 
-```
-FAIL src/__tests__/QualityDashboard.test.tsx
-  ● QualityDashboard › filters audits based on search query in title
-    thrown: "Exceeded timeout of 5000 ms for a test."
-```
+`coverage.json` (root) and `src/lib/services/vfsData.ts` show as modified after every build/test run. `coverage.json` is test output; `vfsData.ts` is an autogenerated VFS snapshot. Could gitignore `coverage.json` and investigate why `vfsData.ts` regenerates.
 
-Pre-existing flaky test (async rendering timeout, not a logic failure). Needs either a higher timeout or a more efficient test setup.
+### 6. Remaining Pinned Dependencies
+
+| Package      | Current  | Latest  | Constraint       |
+| ------------ | -------- | ------- | ---------------- |
+| eslint       | 9.39.4   | 10.4.0  | Blocked (see #2) |
+| @types/node  | 20.19.41 | 25.9.0  | `^20` in package |
+| @types/three | 0.182.0  | 0.184.1 | `0.182.0` exact  |
+| react        | 19.2.5   | 19.2.6  | `19.2.5` exact   |
+| react-dom    | 19.2.5   | 19.2.6  | `19.2.5` exact   |
+| three        | 0.182.0  | 0.184.0 | `0.182.0` exact  |
 
 ## Low Priority
-
-### 5. Remaining Minor Outdated Dependencies
-
-| Package         | Current  | Latest  | Reason not bumped                        |
-| --------------- | -------- | ------- | ---------------------------------------- |
-| eslint          | 9.39.4   | 10.4.0  | Blocked by eslint-config-next compat     |
-| @types/node     | 20.19.41 | 25.9.0  | `^20` range, would need explicit upgrade |
-| @types/three    | 0.182.0  | 0.184.1 | Exact pin in package.json                |
-| react/react-dom | 19.2.5   | 19.2.6  | Exact pin in package.json                |
-| three           | 0.182.0  | 0.184.0 | Exact pin in package.json                |
-
-### 6. Dirty Generated Files
-
-`coverage.json` and `src/lib/services/vfsData.ts` show as modified after every build/test run. These are generated artifacts that should either be `.gitignore`d or regenerated in CI only.
 
 ### 7. E2E Error-State Coverage
 
@@ -75,3 +82,15 @@ Pre-existing flaky test (async rendering timeout, not a logic failure). Needs ei
 - Network error states in ContactForm
 - Invalid route handling beyond notFound()
 - Service Worker registration failures
+
+### 8. npm audit / Security
+
+`npm audit` outputs 0 vulnerabilities currently, but should be checked periodically — especially after major dependency upgrades.
+
+### 9. CI Pipeline — Real-time monitoring
+
+CI takes ~10-15 min for all jobs. Could optimize with:
+
+- Caching strategy improvements
+- Parallelizing independent jobs more aggressively
+- Removing duplicated build (build 22.x artifact shared with LHCI already)
