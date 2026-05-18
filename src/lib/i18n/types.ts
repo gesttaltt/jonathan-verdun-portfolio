@@ -62,7 +62,6 @@ export interface Translations {
       ciStatusError: string
     }
     qaContact: { title: string; description: string; ctaLabel: string }
-    testimonials: { title: string }
     resume: {
       title: string
       experienceTitle: string

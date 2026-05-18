@@ -233,7 +233,6 @@ export const es: Translations = {
       description: 'Disponible para roles de ingeniería QA y arquitectura de automatización.',
       ctaLabel: 'Contáctame',
     },
-    testimonials: { title: 'Testimonios' },
     resume: {
       title: 'Currículum',
       experienceTitle: 'Experiencia',
