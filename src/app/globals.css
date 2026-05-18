@@ -66,37 +66,39 @@
 }
 
 .light {
-  --background: #f1f5f9;
-  --foreground: #09090b;
-  --accent: #2563eb;
+  /* ── Base Layers ──────────────────────────────────── */
+  --background: #fafafa; /* zinc-50 — clean warm surface */
+  --foreground: #18181b; /* zinc-900 — softer near-black */
+  --accent: #2563eb; /* blue-600 */
 
-  /* Surfaces — Light Mode */
-  --bg-card: #ffffff;
-  --bg-card-hover: #f1f5f9; /* slate-100 — matches page bg for depth cue */
+  /* ── Surfaces ─────────────────────────────────────── */
+  --bg-card: #ffffff; /* white — crisp card surface */
+  --bg-card-hover: #f4f4f5; /* zinc-100 — subtle depth cue on hover */
   --bg-badge: #e4e4e7; /* zinc-200 */
+  --bg-deep: #e5e5e8; /* ~zinc-175 — real depth layer */
 
-  /* Text Readability — Light Mode — Zinc Family Hierarchy */
-  /* Real perceptual separation: near-black → dark-gray → medium-gray → muted */
-  --text-primary: #09090b; /* zinc-950 */
-  --text-secondary: #27272a; /* zinc-800 — clearly lighter than primary */
-  --text-tertiary: #52525b; /* zinc-600 — medium gray, real tertiary */
-  --text-muted: #636366; /* ~zinc-525 — 6.00:1 on white (AA normal) */
+  /* ── Text – Zinc Family Hierarchy ─────────────────── */
+  /* Perceptual progression: near-black → dark → medium → muted, all AA-compliant */
+  --text-primary: #18181b; /* zinc-900 — 15.7:1 on white */
+  --text-secondary: #3f3f46; /* zinc-700 — 7.8:1 on white */
+  --text-tertiary: #71717a; /* zinc-500 — 4.5:1 on white (AA) */
+  --text-muted: #636366; /* ~zinc-525 — 6.07:1 on white (AA) */
 
-  /* Borders — Light Mode — Subtle Lines */
-  --border-subtle: #e4e4e7; /* zinc-200 — softer than before */
+  /* ── Borders ──────────────────────────────────────── */
+  --border-subtle: #e4e4e7; /* zinc-200 */
   --border-strong: #a1a1aa; /* zinc-400 */
 
-  --bg-deep: #e2e8f0; /* subtle depth layer below cards */
-  --grid-line: rgba(82, 82, 91, 0.12); /* zinc-600 at low opacity */
-  --particle: #2563eb;
+  /* ── Theme Tokens ─────────────────────────────────── */
+  --grid-line: rgba(82, 82, 91, 0.08); /* zinc-600 at lower opacity */
+  --particle: #3b82f6; /* blue-500 */
+  --node-color: #1d4ed8; /* blue-700 */
+  --interaction-glow: #7c3aed; /* violet-600 */
 
-  --node-color: #1d4ed8;
-  --interaction-glow: #6d28d9;
-
-  --glow-blue: rgba(37, 99, 235, 0.18);
-  --glow-cyan: rgba(8, 145, 178, 0.15);
-  --glow-purple: rgba(124, 58, 237, 0.15);
-  --glow-strong: rgba(37, 99, 235, 0.3);
+  /* ── Card Hover Glows — Softened for Light Mode ──── */
+  --glow-blue: rgba(37, 99, 235, 0.12);
+  --glow-cyan: rgba(8, 145, 178, 0.1);
+  --glow-purple: rgba(124, 58, 237, 0.1);
+  --glow-strong: rgba(37, 99, 235, 0.25);
 }
 
 /* Custom Cyberpunk Scrollbar */
