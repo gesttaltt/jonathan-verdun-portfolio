@@ -39,12 +39,15 @@ describe('ProjectCard', () => {
 
   it('renders an external link when project.link is provided', () => {
     wrap({ ...baseProject, link: 'https://github.com/test/repo' })
-    expect(screen.getByRole('link')).toHaveAttribute('href', 'https://github.com/test/repo')
+    expect(screen.getByRole('link', { name: /github/i })).toHaveAttribute(
+      'href',
+      'https://github.com/test/repo'
+    )
   })
 
-  it('does not render a link when project.link is absent', () => {
+  it('renders a case-study link by default', () => {
     wrap(baseProject)
-    expect(screen.queryByRole('link')).not.toBeInTheDocument()
+    expect(screen.getByRole('link', { name: /case study/i })).toBeInTheDocument()
   })
 
   it('renders stats when present', () => {

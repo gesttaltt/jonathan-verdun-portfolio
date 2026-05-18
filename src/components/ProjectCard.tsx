@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { m } from 'framer-motion'
-import { ExternalLink, Terminal, ShieldCheck } from 'lucide-react'
+import { ExternalLink, Terminal, ShieldCheck, BookOpen } from 'lucide-react'
 import Link from 'next/link'
 import { ProjectSpec } from '@/lib/contracts/ProjectContract.types'
 import { fadeUpVariants } from '@/lib/animations'
@@ -13,6 +13,13 @@ const PROJECT_STATUS_STYLES: Record<ProjectSpec['status'], string> = {
   Research: 'bg-purple-500/20 text-purple-400 light:text-purple-800 light:bg-purple-500/10',
   Prototype: 'bg-amber-500/20 text-amber-400 light:text-amber-800 light:bg-amber-500/10',
   Archived: 'bg-zinc-500/20 text-zinc-300 light:text-zinc-800 light:bg-zinc-500/10',
+}
+
+function slugify(title: string): string {
+  return title
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '')
 }
 
 interface ProjectCardProps {
@@ -65,10 +72,17 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
           </div>
         </div>
 
-        <h3 className="light:group-hover:text-blue-700 text-text-primary mb-2 text-base font-bold transition-colors group-hover:text-cyan-400">
-          {project.title}
-        </h3>
-        <p className="text-text-tertiary mb-6 text-sm leading-relaxed">{project.description}</p>
+        <Link
+          href={`/projects/${slugify(project.title)}`}
+          className="focus-visible:ring-offset-background block rounded-sm focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none"
+        >
+          <h3 className="light:group-hover:text-blue-700 text-text-primary mb-2 text-base font-bold transition-colors group-hover:text-cyan-400">
+            {project.title}
+          </h3>
+          <p className="text-text-tertiary mb-4 line-clamp-3 text-sm leading-relaxed">
+            {project.description}
+          </p>
+        </Link>
       </div>
 
       <div className="space-y-4">
@@ -95,6 +109,17 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
             </span>
           ))}
         </div>
+
+        <Link
+          href={`/projects/${slugify(project.title)}`}
+          className="text-text-muted hover:text-text-primary group/link mt-1 flex items-center gap-1.5 text-[11px] font-bold tracking-wider uppercase transition-colors sm:text-xs"
+        >
+          <BookOpen className="h-3 w-3" />
+          Case Study
+          <span className="inline-block transition-transform group-hover/link:translate-x-0.5">
+            →
+          </span>
+        </Link>
       </div>
     </m.div>
   )
