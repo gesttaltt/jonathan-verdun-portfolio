@@ -5,8 +5,9 @@ import { AuditRepository } from '@/lib/services/AuditRepository'
 export const dynamic = 'force-static'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const lastModified = process.env.SITE_LAST_MODIFIED
-    ? new Date(process.env.SITE_LAST_MODIFIED)
+  const rawDate = process.env.SITE_LAST_MODIFIED
+  const lastModified = rawDate
+    ? ((d) => (Number.isNaN(d.getTime()) ? new Date() : d))(new Date(rawDate))
     : new Date()
 
   const staticRoutes: MetadataRoute.Sitemap = [

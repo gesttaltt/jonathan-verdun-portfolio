@@ -33,6 +33,7 @@ export const InteractiveTopology: React.FC<{
   }, [canvasKey])
 
   useEffect(() => {
+    if (typeof window === 'undefined') return
     const mq = window.matchMedia('(max-width: 768px)')
     const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches)
     mq.addEventListener('change', handler)

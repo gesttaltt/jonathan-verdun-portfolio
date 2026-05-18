@@ -109,7 +109,8 @@ export const ContactForm: React.FC = () => {
       setFields({ name: '', email: '', subject: '', message: '' })
       setTouched(new Set())
       setErrors({})
-    } catch {
+    } catch (err) {
+      console.error('[ContactForm] submission failed:', err)
       setStatus('error')
     }
   }

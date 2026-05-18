@@ -24,7 +24,10 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ projectId }) => {
   const t = useTranslation()
   const project = t.projects.find((p) => p.id === projectId)
 
-  if (!project) return null
+  if (!project) {
+    console.warn(`[ProjectDetail] Project not found for id: ${projectId}`)
+    return null
+  }
 
   return (
     <m.main

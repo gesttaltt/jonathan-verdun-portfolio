@@ -29,6 +29,7 @@ export const TopologyMesh: React.FC<{ quality: number; mode: 'p-adic' | 'hyperbo
   )
 
   useEffect(() => {
+    if (typeof window === 'undefined') return
     const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
     prefersReducedMotionRef.current = mq.matches
     const handler = (e: MediaQueryListEvent) => {
