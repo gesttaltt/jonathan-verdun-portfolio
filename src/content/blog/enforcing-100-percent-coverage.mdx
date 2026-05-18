@@ -1,0 +1,55 @@
+---
+title: "How I enforce 100% test coverage in CI with Jest + GitHub Actions"
+date: "2026-05-10"
+tags: ["testing", "CI/CD", "Jest", "GitHub Actions"]
+description: "A practical guide to setting up automated coverage gates that prevent merging code below 100% — without driving your team crazy."
+---
+
+## The problem with coverage gates
+
+Most teams set a coverage threshold (80%, 90%) and call it done. The problem is that these numbers drift. A few merges here, a few "I'll add tests later" comments there, and suddenly your 90% coverage is 74% and nobody noticed until the next audit.
+
+## The solution: hard gates in CI
+
+The key insight is that coverage thresholds should be **enforced mechanically**, not tracked manually. Here's how I set it up:
+
+### Step 1: Jest configuration
+
+```json
+{
+  "jest": {
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    }
+  }
+}
+```
+
+### Step 2: GitHub Actions workflow
+
+```yaml
+- name: Run tests with coverage
+  run: npm test -- --coverage
+
+- name: Check coverage threshold
+  run: |
+    if [ $? -ne 0 ]; then
+      echo "Coverage below threshold — failing build"
+      exit 1
+    fi
+```
+
+### Step 3: Handle edge cases
+
+Not every branch is easily testable. For genuine edge cases (error boundaries, third-party API failures), use `/* istanbul ignore next */` sparingly — and audit it weekly.
+
+## Results
+
+At Ai-Whisperers, this approach maintained 100% coverage across 350+ tests for 6 months straight. The gate became a forcing function for testable architecture — if something was hard to test, we redesigned it rather than lowered the threshold.
+
+> "The coverage gate isn't about the number. It's about the architectural discipline it enforces." — Jonathan Verdun

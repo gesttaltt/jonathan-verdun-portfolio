@@ -38,6 +38,7 @@
     "lucide-react": "^0.563.0",
     "marked": "^18.0.3",
     "next": "^16.2.6",
+    "next-mdx-remote": "^6.0.0",
     "react": "19.2.5",
     "react-dom": "19.2.5",
     "three": "0.182.0"

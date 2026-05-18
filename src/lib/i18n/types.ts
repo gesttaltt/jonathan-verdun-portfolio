@@ -71,6 +71,15 @@ export interface Translations {
       certificationsTitle: string
       downloadLabel: string
     }
+    blog: {
+      title: string
+      readMore: string
+      backToBlog: string
+      backToHome: string
+      publishedOn: string
+      tags: string
+      noPosts: string
+    }
     contactForm: {
       nameLabel: string
       namePlaceholder: string

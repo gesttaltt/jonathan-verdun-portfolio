@@ -64,6 +64,15 @@ export const en: Translations = {
       certificationsTitle: 'Certifications',
       downloadLabel: 'Download PDF',
     },
+    blog: {
+      title: 'Blog',
+      readMore: 'Read post',
+      backToBlog: 'Back to Blog',
+      backToHome: 'Back to home',
+      publishedOn: 'Published on',
+      tags: 'Tags',
+      noPosts: 'No posts yet.',
+    },
     contactForm: {
       nameLabel: 'Name',
       namePlaceholder: 'Your name',

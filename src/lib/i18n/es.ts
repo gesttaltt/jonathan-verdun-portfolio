@@ -242,6 +242,15 @@ export const es: Translations = {
       certificationsTitle: 'Certificaciones',
       downloadLabel: 'Descargar PDF',
     },
+    blog: {
+      title: 'Blog',
+      readMore: 'Leer artículo',
+      backToBlog: 'Volver al Blog',
+      backToHome: 'Volver al inicio',
+      publishedOn: 'Publicado el',
+      tags: 'Etiquetas',
+      noPosts: 'Aún no hay artículos.',
+    },
     contactForm: {
       nameLabel: 'Nombre',
       namePlaceholder: 'Tu nombre',
