@@ -1,6 +1,7 @@
 'use client'
 
-import { Github, Linkedin, ExternalLink as ExternalLinkIcon } from 'lucide-react'
+import { ExternalLink as ExternalLinkIcon } from 'lucide-react'
+import { GithubIcon, LinkedinIcon } from '@/components/BrandIcons'
 import Link from 'next/link'
 import { siteConfig } from '@/lib/siteConfig'
 import { useTranslation } from '@/lib/i18n/context'
@@ -30,7 +31,7 @@ export function HeroHeader() {
             aria-label="GitHub profile (opens in new tab)"
             className="group focus-visible:ring-offset-background text-text-tertiary light:hover:text-text-primary flex min-h-[44px] items-center gap-2 rounded transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none dark:hover:text-white"
           >
-            <Github className="h-5 w-5 shrink-0 transition-transform group-hover:-translate-y-0.5" />
+            <GithubIcon className="h-5 w-5 shrink-0 transition-transform group-hover:-translate-y-0.5" />
             <span className="truncate">{siteConfig.socialLinks.github.label}</span>
           </Link>
           <Link
@@ -40,7 +41,7 @@ export function HeroHeader() {
             aria-label="LinkedIn profile (opens in new tab)"
             className="group focus-visible:ring-offset-background text-text-tertiary light:hover:text-text-primary flex min-h-[44px] items-center gap-2 rounded transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none dark:hover:text-white"
           >
-            <Linkedin className="h-5 w-5 shrink-0 transition-transform group-hover:-translate-y-0.5" />
+            <LinkedinIcon className="h-5 w-5 shrink-0 transition-transform group-hover:-translate-y-0.5" />
             <span className="truncate">{siteConfig.socialLinks.linkedin.label}</span>
           </Link>
           <div className="flex items-center gap-4">

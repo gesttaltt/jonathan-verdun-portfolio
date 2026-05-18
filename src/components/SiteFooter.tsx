@@ -2,7 +2,8 @@
 
 import React from 'react'
 import Link from 'next/link'
-import { Github, Linkedin, Mail, ShieldCheck } from 'lucide-react'
+import { Mail, ShieldCheck } from 'lucide-react'
+import { GithubIcon, LinkedinIcon } from '@/components/BrandIcons'
 import { m } from 'framer-motion'
 import { siteConfig } from '@/lib/siteConfig'
 import { useTranslation } from '@/lib/i18n/context'
@@ -14,12 +15,12 @@ const SOCIAL = [
   {
     href: siteConfig.socialLinks.github.url,
     label: 'GitHub',
-    icon: Github,
+    icon: GithubIcon,
   },
   {
     href: siteConfig.socialLinks.linkedin.url,
     label: 'LinkedIn',
-    icon: Linkedin,
+    icon: LinkedinIcon,
   },
   {
     href: `mailto:${siteConfig.contact.email}`,
