@@ -8,7 +8,7 @@ interface SectionHeaderProps {
   icon: React.ReactNode
   title: string
   id?: string
-  color?: 'blue' | 'purple' | 'cyan' | 'green'
+  color?: 'blue' | 'purple' | 'cyan' | 'green' | 'amber'
   showAccentLine?: boolean
   showBorderBottom?: boolean
 }
@@ -29,6 +29,10 @@ const COLOR_MAP = {
   green: {
     badge: 'bg-green-500/10 text-green-400 light:text-green-800 light:bg-green-100',
     line: 'via-green-500/20 light:via-green-500/10',
+  },
+  amber: {
+    badge: 'bg-amber-500/10 text-amber-400 light:text-amber-800 light:bg-amber-100',
+    line: 'via-amber-500/20 light:via-amber-500/10',
   },
 }
 

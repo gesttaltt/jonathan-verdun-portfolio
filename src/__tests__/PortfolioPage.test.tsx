@@ -70,8 +70,8 @@ describe('PortfolioPage', () => {
       await flushBoot()
       const input = screen.getByRole('textbox', { name: /terminal command input/i })
       await user.type(input, 'about{Enter}')
-      // "about" output is unique — not part of the boot sequence
-      expect(screen.getByText(/Property-based testing/i)).toBeInTheDocument()
+      const log = screen.getByRole('log')
+      expect(within(log).getByText(/Property-based testing/i)).toBeInTheDocument()
     })
 
     it('unknown command suggests "help"', async () => {

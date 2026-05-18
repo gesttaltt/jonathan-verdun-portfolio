@@ -14,6 +14,7 @@ import { Sidebar } from '@/components/Sidebar'
 import { VisualTestSummary } from '@/components/VisualTestSummary'
 import { QAContact } from '@/components/QAContact'
 import { ResearchSection } from '@/components/ResearchSection'
+import { Testimonials } from '@/components/Testimonials'
 import { TopologyLoader } from '@/components/TopologyLoader'
 import { ProjectProvider } from '@/components/hooks/useProjects'
 import { useTranslation } from '@/lib/i18n/context'
@@ -131,6 +132,10 @@ export const PortfolioPage: React.FC = () => {
               </FadeInSection>
 
               <ResearchSection />
+
+              <FadeInSection>
+                <Testimonials />
+              </FadeInSection>
             </div>
           </div>
 

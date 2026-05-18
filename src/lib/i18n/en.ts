@@ -55,6 +55,7 @@ export const en: Translations = {
       description: 'Available for QA engineering and automation architecture roles.',
       ctaLabel: 'Get in Touch',
     },
+    testimonials: { title: 'Testimonials' },
     contactForm: {
       nameLabel: 'Name',
       namePlaceholder: 'Your name',
