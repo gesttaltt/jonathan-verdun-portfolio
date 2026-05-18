@@ -3,7 +3,12 @@
 import { m } from 'framer-motion'
 import { CheckCircle2 } from 'lucide-react'
 import React from 'react'
-import { staggerItemVariants, containerVariants, SCROLL_VIEWPORT } from '@/lib/animations'
+import {
+  staggerItemVariants,
+  containerVariants,
+  SCROLL_VIEWPORT,
+  fadeUpVariants,
+} from '@/lib/animations'
 import { useTranslation } from '@/lib/i18n/context'
 
 export const QAPhilosophyGrid: React.FC = () => {
@@ -13,8 +18,9 @@ export const QAPhilosophyGrid: React.FC = () => {
     <div className="bg-bg-card border-border-subtle space-y-10 rounded-2xl border p-6 backdrop-blur-sm sm:p-8">
       {t.qa.manifesto && (
         <m.div
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          variants={fadeUpVariants()}
+          initial="hidden"
+          whileInView="visible"
           viewport={SCROLL_VIEWPORT}
           className="light:border-blue-300 light:bg-blue-50/50 relative overflow-hidden rounded-xl border border-blue-500/20 bg-blue-500/5 p-5 sm:p-7"
         >
@@ -27,7 +33,7 @@ export const QAPhilosophyGrid: React.FC = () => {
 
       <m.div
         role="list"
-        variants={containerVariants(0.12)}
+        variants={containerVariants()}
         initial="hidden"
         whileInView="visible"
         viewport={SCROLL_VIEWPORT}

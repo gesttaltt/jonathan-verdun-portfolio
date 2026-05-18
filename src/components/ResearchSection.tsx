@@ -8,7 +8,7 @@ import { SystemSpecCard } from '@/components/SystemSpecCard'
 import { SectionHeader } from '@/components/SectionHeader'
 import { FadeInSection } from '@/components/FadeInSection'
 import { useTranslation } from '@/lib/i18n/context'
-import { containerVariants, SCROLL_VIEWPORT } from '@/lib/animations'
+import { containerVariants, SCROLL_VIEWPORT, fadeUpVariants } from '@/lib/animations'
 
 export const ResearchSection: React.FC = () => {
   const t = useTranslation()
@@ -29,8 +29,9 @@ export const ResearchSection: React.FC = () => {
 
         {t.bioinformatics.bridge && (
           <m.div
-            initial={{ opacity: 0, x: -10 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            variants={fadeUpVariants()}
+            initial="hidden"
+            whileInView="visible"
             viewport={SCROLL_VIEWPORT}
             className="light:border-purple-400 light:bg-purple-100/50 border-border-subtle bg-bg-badge rounded-lg border-l-4 p-4 sm:p-6"
           >
@@ -42,7 +43,7 @@ export const ResearchSection: React.FC = () => {
 
         <m.div
           id="research-content"
-          variants={containerVariants(0.08)}
+          variants={containerVariants()}
           initial="hidden"
           whileInView="visible"
           viewport={SCROLL_VIEWPORT}

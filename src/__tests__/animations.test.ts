@@ -4,6 +4,7 @@ import {
   containerVariants,
   slideDownVariants,
   staggerItemVariants,
+  DEFAULT_STAGGER,
   SCROLL_VIEWPORT,
 } from '@/lib/animations'
 
@@ -47,11 +48,11 @@ describe('animations', () => {
       expect(v.hidden).toEqual({ opacity: 0 })
     })
 
-    it('uses staggerChildren=0.1 by default', () => {
+    it('uses DEFAULT_STAGGER by default', () => {
       const v = containerVariants()
       expect(
         (v.visible as { transition: { staggerChildren: number } }).transition.staggerChildren
-      ).toBe(0.1)
+      ).toBe(DEFAULT_STAGGER)
     })
 
     it('uses the provided stagger value', () => {
