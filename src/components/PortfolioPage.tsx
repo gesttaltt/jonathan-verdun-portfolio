@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useMemo } from 'react'
+import dynamic from 'next/dynamic'
 import { ShieldCheck, Code2 } from 'lucide-react'
 import { SiteFooter } from '@/components/SiteFooter'
 import { FadeInSection } from '@/components/FadeInSection'
@@ -14,11 +15,15 @@ import { Sidebar } from '@/components/Sidebar'
 import { VisualTestSummary } from '@/components/VisualTestSummary'
 import { QAContact } from '@/components/QAContact'
 import { ResearchSection } from '@/components/ResearchSection'
-import { TopologyLoader } from '@/components/TopologyLoader'
 import { ProjectProvider } from '@/components/hooks/useProjects'
 import { useTranslation } from '@/lib/i18n/context'
 import { DefaultCommandProcessor } from '@/lib/services/CommandProcessor'
 import { buildWebPageJsonLd, buildBreadcrumbJsonLd } from '@/lib/jsonLd'
+
+const TopologyLoader = dynamic(
+  () => import('@/components/TopologyLoader').then((m) => m.TopologyLoader),
+  { ssr: false }
+)
 
 export const PortfolioPage: React.FC = () => {
   const t = useTranslation()

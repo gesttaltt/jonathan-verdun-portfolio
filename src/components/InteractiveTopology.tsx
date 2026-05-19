@@ -1,11 +1,21 @@
 'use client'
 
 import React, { useEffect, useState, useCallback, useRef } from 'react'
+import dynamic from 'next/dynamic'
 import { Canvas } from '@react-three/fiber'
-import { EffectComposer, Bloom, Vignette } from '@react-three/postprocessing'
 import * as THREE from 'three'
-import { TopologyMesh } from './TopologyMesh'
 import { TopologyWrapper } from './TopologyWrapper'
+
+const TopologyMesh = dynamic(() => import('./TopologyMesh').then((m) => m.TopologyMesh), {
+  ssr: false,
+})
+
+const TopologyPostProcessing = dynamic(
+  () => import('./TopologyPostProcessing').then((m) => m.TopologyPostProcessing),
+  {
+    ssr: false,
+  }
+)
 
 export const InteractiveTopology: React.FC<{
   mode?: 'p-adic' | 'hyperbolic'
@@ -103,18 +113,7 @@ export const InteractiveTopology: React.FC<{
         onCreated={handleCreated}
       >
         {/* Disable expensive post-processing on mobile to maximize performance score */}
-        {!isMobile && (
-          <EffectComposer multisampling={0}>
-            <Bloom
-              luminanceThreshold={isLight ? 0.8 : 0.2}
-              luminanceSmoothing={0.9}
-              height={300}
-              intensity={isLight ? 0.4 : 1.0}
-              mipmapBlur
-            />
-            <Vignette eskil={false} offset={0.1} darkness={isLight ? 0.3 : 1.1} />
-          </EffectComposer>
-        )}
+        {!isMobile && <TopologyPostProcessing isLight={isLight} />}
 
         {/* Half the icosahedron subdivision detail on mobile (8 vs 16 segments). */}
         <TopologyMesh quality={isMobile ? quality * 0.5 : quality} mode={mode} />
