@@ -21,9 +21,10 @@ interface ValidationErrors {
   message?: string
 }
 
-const formEndpoint = process.env.NEXT_PUBLIC_FORMSPREE_ID
-  ? `https://formspree.io/f/${process.env.NEXT_PUBLIC_FORMSPREE_ID}`
-  : null
+const getFormEndpoint = (): string | null => {
+  const id = process.env.NEXT_PUBLIC_FORMSPREE_ID
+  return id ? `https://formspree.io/f/${id}` : null
+}
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
@@ -94,12 +95,13 @@ export const ContactForm: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!formEndpoint) return
+    const endpoint = getFormEndpoint()
+    if (!endpoint) return
     if (!validate()) return
 
     setStatus('submitting')
     try {
-      const res = await fetch(formEndpoint, {
+      const res = await fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(fields),
@@ -143,7 +145,7 @@ export const ContactForm: React.FC = () => {
           onChange={(e) => handleChange(field, e.target.value)}
           onBlur={() => handleBlur(field)}
           placeholder={placeholder}
-          disabled={status === 'submitting' || status === 'success' || !formEndpoint}
+          disabled={status === 'submitting' || status === 'success' || !getFormEndpoint()}
           aria-invalid={!!errors[field]}
           aria-describedby={errors[field] ? `cf-${field}-error` : undefined}
           className={`${inputBase} ${isTextarea ? 'min-h-[100px] resize-y' : ''}`}
@@ -167,7 +169,7 @@ export const ContactForm: React.FC = () => {
     )
   }
 
-  if (!formEndpoint) {
+  if (!getFormEndpoint()) {
     return (
       <div className="light:border-border-subtle rounded-xl border border-dashed border-white/10 p-4 text-center">
         <p className="text-text-muted text-xs font-medium">{ct.formDisabled}</p>
