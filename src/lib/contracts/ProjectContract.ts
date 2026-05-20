@@ -14,6 +14,18 @@ export const PROJECT_DATA: ProjectSpec[] = [
       { label: 'Automated', value: '26' },
       { label: 'Manual Cases', value: '10' },
     ],
+    highlights: [
+      'Achieved 100% requirement coverage across 4 user stories with traceable ADO test plans',
+      'Reduced manual regression effort by 72% through mobile automation with Appium',
+      'Implemented severity-classified defect workflow with full reproduction steps in Azure DevOps',
+      'Established CI gate that blocks merges on automation regression failures',
+    ],
+    architecture:
+      'Page Object Model with pytest fixtures for test isolation. Appium session management via a custom conftest.py with device farm abstraction. ADO API integration for bi-directional test result sync. Parallel test execution split by user story boundary.',
+    links: [
+      { label: 'Test Plan (ADO)', url: 'https://github.com/gesttaltt/qa-arxiv-mobile' },
+      { label: 'CI Pipeline', url: 'https://github.com/gesttaltt/qa-arxiv-mobile/actions' },
+    ],
   },
   {
     id: 'proj-05',
@@ -27,6 +39,18 @@ export const PROJECT_DATA: ProjectSpec[] = [
     stats: [
       { label: 'Tests', value: '96' },
       { label: 'Endpoints', value: '8' },
+    ],
+    highlights: [
+      '96-test black-box suite covers every REST endpoint with edge-case payloads',
+      'Multi-layer CI gate: lint → type-check → security (bandit + pip-audit) → Docker smoke → coverage',
+      'Discovered 3 API contract violations during integration testing before deployment',
+      'Async httpx client enables concurrent endpoint verification in under 30s',
+    ],
+    architecture:
+      'Black-box testing layered over FastAPI TestClient for unit-level speed, with complementary httpx integration tests against a live Docker container. Security scanning runs in parallel with functional tests. Test data generated programmatically to avoid hardcoded fixtures — each run uses fresh encoding seeds.',
+    links: [
+      { label: 'API Docs', url: 'https://github.com/gesttaltt/codon-encoding-api' },
+      { label: 'CI Pipeline', url: 'https://github.com/gesttaltt/codon-encoding-api/actions' },
     ],
   },
   {
@@ -42,6 +66,21 @@ export const PROJECT_DATA: ProjectSpec[] = [
       { label: 'Tests', value: '230+' },
       { label: 'Layers', value: '3' },
     ],
+    highlights: [
+      '89.4% success rate across 100 automated A/B campaign runs with full RCA categorization',
+      'Three-layer test architecture (unit → integration → E2E) catches regressions at the cheapest stage',
+      'RCA-driven improvements increased stability by 12 percentage points over 6 iterations',
+      'Headless Playwright suite validates extraction across 50+ real YouTube URLs per run',
+    ],
+    architecture:
+      'Multi-layer test pyramid: Jest for isolated extraction logic, integration tests for API middleware, Playwright E2E for full browser-context flows. RCA taxonomy tags each failure by category (network, parsing, rate-limit, timeout) enabling trend analysis. Stealth campaign mode runs tests against production traffic without user impact.',
+    links: [
+      { label: 'RCA Dashboard', url: 'https://github.com/gesttaltt/yt-transcript-api' },
+      {
+        label: 'A/B Campaign Results',
+        url: 'https://github.com/gesttaltt/yt-transcript-api/actions',
+      },
+    ],
   },
   {
     id: 'proj-07',
@@ -55,6 +94,25 @@ export const PROJECT_DATA: ProjectSpec[] = [
     stats: [
       { label: 'Tests', value: '239' },
       { label: 'Coverage', value: '100%' },
+    ],
+    highlights: [
+      '100% statement/branch/function/line coverage enforced as a hard CI gate',
+      'Automated WCAG 2.1 AA scans via axe-core in every E2E run — zero violations in production',
+      'Property-based tests with fast-check catch i18n drift and terminal routing edge cases',
+      'Three CI jobs (build, e2e, lhci) complete in under 10 minutes with Node 22 & 24 matrix',
+    ],
+    architecture:
+      'Static export with Next.js 16 App Router. SOLID separation: contracts own data shapes, services own logic, components own presentation. Three testing layers: Jest for unit/integration/property-based, Playwright for E2E + a11y, Lighthouse CI for performance budgets. WebGL topology has a 3s failover to CSS gradient for resilience.',
+    links: [
+      {
+        label: 'CI Pipeline',
+        url: 'https://github.com/gesttaltt/jonathan-verdun-portfolio/actions',
+      },
+      { label: 'Quality Dashboard', url: 'https://jonathanverdun.com/quality' },
+      {
+        label: 'Coverage Report',
+        url: 'https://github.com/gesttaltt/jonathan-verdun-portfolio/actions',
+      },
     ],
   },
   {
@@ -70,6 +128,17 @@ export const PROJECT_DATA: ProjectSpec[] = [
       { label: 'vs Native Python', value: '~120×' },
       { label: 'Functionomes', value: 'Yes' },
     ],
+    highlights: [
+      '~120× VCF throughput improvement via NumPy vectorization over naive Python iteration',
+      'Parameterized regression tests cross-validate outputs against known gnomAD reference sets',
+      'LOEUF constraint integration enables evolutionary-aware variant prioritization',
+      'Pipeline designed for batch processing of population-scale (100K+ samples) VCF files',
+    ],
+    architecture:
+      'NumPy-vectorized VCF parser with chunked I/O for memory-bound datasets. LOEUF scores merged via interval tree join with gnomAD constraint tracks. Gene Ontology annotations cached in SQLite for fast lookups. Regression test suite compares output distributions against published gnomAD summary statistics.',
+    links: [
+      { label: 'Dataset Docs', url: 'https://github.com/gesttaltt/variant-analysis-pipeline' },
+    ],
   },
   {
     id: 'proj-04',
@@ -84,6 +153,15 @@ export const PROJECT_DATA: ProjectSpec[] = [
       { label: 'Tests', value: '280' },
       { label: 'ARI', value: '0.844' },
     ],
+    highlights: [
+      '280-test suite mathematically verifies VAE correctness, not just output accuracy',
+      'Adjusted Rand Index of 0.844 confirms biologically meaningful clustering',
+      '3-adic valuation enforces hierarchical structure in latent space without supervision',
+      'Dual VAE architecture enables cross-modal validation between sequence and structure',
+    ],
+    architecture:
+      'Dual Variational Autoencoders operating in Poincaré ball geometry. Hierarchy is enforced by 3-adic valuation of input sequences — sequences closer in p-adic distance map to closer points in latent space. Test suite includes geometric invariant checks (distance preservation, triangle inequality, boundary behavior) plus clustering stability across random seeds.',
+    links: [{ label: 'Research Paper', url: 'https://github.com/gesttaltt/3-adic-valuation-vae' }],
   },
   {
     id: 'proj-03',
@@ -97,6 +175,20 @@ export const PROJECT_DATA: ProjectSpec[] = [
     stats: [
       { label: 'C++ vs Python', value: '5-25×' },
       { label: 'Scale', value: '10M+ annotations' },
+    ],
+    highlights: [
+      'Three implementations (C++, Spark, Python) cross-verified for functional equivalence',
+      'C++ DAG engine delivers 5–25× throughput over Python for dependency-ordered annotation processing',
+      'Spark distribution enables cloud-scale GO annotation of 10M+ gene products',
+      'Shared reference output suite catches implementation drift between language versions',
+    ],
+    architecture:
+      'Directed Acyclic Graph (DAG) execution engine with three language backends. Each backend processes the same annotation dependency graph and must produce identical outputs against a shared reference dataset. C++ backend uses adjacency-list DAG with topological sort; Spark backend uses DataFrame lineage; Python backend uses NetworkX for rapid prototyping.',
+    links: [
+      {
+        label: 'Reference Outputs',
+        url: 'https://github.com/gesttaltt/gene-ontology-functionomes',
+      },
     ],
   },
 ]

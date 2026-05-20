@@ -60,26 +60,61 @@ const ES_QA_LAYERS: Record<string, string> = {
 }
 
 // ── Overrides for Project Data ────────────────────────────────────────────────
-const ES_PROJECT_OVERRIDES: Record<string, { description: string; statLabels: string[] }> = {
+const ES_PROJECT_OVERRIDES: Record<
+  string,
+  { description: string; statLabels: string[]; highlights?: string[]; architecture?: string }
+> = {
   'proj-01': {
     description:
       '26 pruebas automatizadas con pytest + Appium y 10 casos de prueba manuales en 4 Historias de Usuario (Búsqueda, Favoritos, PDF, Red), vinculados a ADO Test Plans para trazabilidad completa. Reportes de defectos registrados como work items en Azure DevOps con clasificación de severidad y pasos de reproducción. Validación de API, flujos de smoke móvil y verificación de integridad de datos — todo gestionado vía GitHub Actions CI. Valida las restricciones de test-first y quality-gate descritas en la sección de Filosofía QA.',
     statLabels: ['Automatizados', 'Casos Manuales'],
+    highlights: [
+      'Se alcanzó 100% de cobertura de requerimientos en 4 user stories con planes de prueba trazables en ADO',
+      'Reducción del 72% en esfuerzo de regresión manual mediante automatización móvil con Appium',
+      'Flujo de defectos clasificado por severidad con pasos de reproducción completos en Azure DevOps',
+      'Gate de CI que bloquea merges ante fallos de regresión automatizada',
+    ],
+    architecture:
+      'Patrón Page Object Model con fixtures de pytest para aislamiento de pruebas. Gestión de sesiones Appium vía conftest.py personalizado con abstracción de dispositivo. Integración con API de ADO para sincronización bidireccional de resultados. Ejecución paralela dividida por límite de user story.',
   },
   'proj-05': {
     description:
       'Suite de 96 pruebas que cubre todos los endpoints REST vía FastAPI TestClient and async httpx — rutas de codificación, clustering y visualización. El CI gate requiere lint, type-check, análisis de seguridad (bandit + pip-audit), smoke test de Docker y cobertura antes de hacer merge. Implementa técnicas de prueba funcional de caja negra para asegurar el cumplimiento del contrato de la API.',
     statLabels: ['Pruebas', 'Endpoints'],
+    highlights: [
+      'Suite de 96 pruebas de caja negra cubre todos los endpoints REST con casos de borde',
+      'Gate de CI multicapa: lint → type-check → seguridad (bandit + pip-audit) → Docker smoke → cobertura',
+      'Se descubrieron 3 violaciones de contrato de API durante pruebas de integración antes del despliegue',
+      'Cliente httpx asíncrono permite verificación concurrente de endpoints en menos de 30s',
+    ],
+    architecture:
+      'Pruebas de caja negra sobre FastAPI TestClient para velocidad a nivel unitario, con pruebas de integración httpx complementarias contra un contenedor Docker activo. Escaneo de seguridad ejecutado en paralelo con pruebas funcionales. Datos de prueba generados programáticamente.',
   },
   'proj-06': {
     description:
       'Más de 230 pruebas en capas de unit (Jest), integración y E2E con Playwright para un servicio headless de extracción de transcripciones. Campaña A/B en modo stealth — 100 ejecuciones automatizadas, tasa de éxito del 89.4% en casos de borde; aprovechamiento del Análisis de Causa Raíz (RCA) para categorizar patrones de fallo e impulsar mejoras de estabilidad. Enfocado en estabilidad no funcional y pruebas de regresión.',
     statLabels: ['Pruebas', 'Capas'],
+    highlights: [
+      '89.4% de tasa de éxito en 100 ejecuciones de campaña A/B con categorización RCA completa',
+      'Arquitectura de pruebas en tres capas atrapa regresiones en la etapa más económica',
+      'Mejoras impulsadas por RCA aumentaron la estabilidad en 12 puntos porcentuales en 6 iteraciones',
+      'Suite headless de Playwright valida extracción en más de 50 URLs reales de YouTube por ejecución',
+    ],
+    architecture:
+      'Pirámide de pruebas multicapa: Jest para lógica de extracción aislada, integración para middleware de API, Playwright E2E para flujos completos en contexto de navegador. Taxonomía RCA etiqueta cada fallo por categoría (red, parsing, rate-limit, timeout) para análisis de tendencias.',
   },
   'proj-07': {
     description:
       'Implementación de referencia QA con 100% de cobertura lógica y gates automatizados de cumplimiento WCAG 2.1 AA. Incluye 239 pruebas Jest y 14 pruebas E2E con Playwright. Cada afirmación en la sección de Filosofía QA está respaldada por un gate en CI, demostrando un diseño de pruebas estructural y automatizado.',
     statLabels: ['Pruebas', 'Cobertura'],
+    highlights: [
+      '100% de cobertura en statements/branches/functions/lines exigido como gate de CI',
+      'Escaneos WCAG 2.1 AA automatizados vía axe-core en cada ejecución E2E — cero violaciones en producción',
+      'Pruebas basadas en propiedades con fast-check detectan desviaciones de i18n y casos de borde de terminal',
+      'Tres trabajos de CI (build, e2e, lhci) completan en menos de 10 minutos con matriz Node 22 y 24',
+    ],
+    architecture:
+      'Exportación estática con Next.js 16 App Router. Separación SOLID: contratos poseen datos, servicios poseen lógica, componentes poseen presentación. Tres capas de prueba: Jest para unit/integración/propiedades, Playwright para E2E + a11y, Lighthouse CI para presupuestos de rendimiento.',
   },
   'proj-02': {
     description:
@@ -149,6 +184,8 @@ const projects = PROJECT_DATA.map((p) => {
   return {
     ...p,
     description: override?.description ?? p.description,
+    highlights: override?.highlights ?? p.highlights,
+    architecture: override?.architecture ?? p.architecture,
     stats,
   }
 })
