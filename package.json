@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "predev": "node scripts/generate-vfs.mjs",
     "dev": "next dev",
     "start": "next start",
     "lint": "eslint",
@@ -36,7 +37,7 @@
     "framer-motion": "^12.34.0",
     "gray-matter": "^4.0.3",
     "lucide-react": "^1.16.0",
-    "marked": "^18.0.3",
+    "marked": "^18.0.4",
     "next": "^16.2.6",
     "next-mdx-remote": "^6.0.0",
     "react": "^19.2.6",
@@ -75,8 +76,8 @@
     "@testing-library/react": "^16.3.2",
     "@testing-library/user-event": "^14.6.1",
     "@types/jest": "^30.0.0",
-    "@types/node": "^20",
-    "@types/react": "^19",
+    "@types/node": "^22",
+    "@types/react": "^19.2.15",
     "@types/react-dom": "^19",
     "@types/three": "^0.184.1",
     "babel-plugin-react-compiler": "1.0.0",
@@ -92,7 +93,7 @@
     "prettier-plugin-tailwindcss": "^0.8.0",
     "size-limit": "^12.1.0",
     "tailwindcss": "^4",
-    "ts-jest": "^29.4.9",
+    "ts-jest": "^29.4.10",
     "typedoc": "^0.28.19",
     "typescript": "^6.0.3"
   }

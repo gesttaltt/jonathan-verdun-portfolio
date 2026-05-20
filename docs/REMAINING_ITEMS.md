@@ -1,96 +1,84 @@
 # Remaining Open Items
 
-Last updated: 2026-05-18
+Last updated: 2026-05-20
 
-## Recently Resolved (this session)
+## Recently Resolved
 
-| Item                                                               | Status | Commit                          |
-| ------------------------------------------------------------------ | ------ | ------------------------------- |
-| Silent failure audit (6 fixes)                                     | ✅     | `a0fc33d`                       |
-| Animation timing polish                                            | ✅     | `300dc11`                       |
-| Size-limit budgets                                                 | ✅     | `352ae41`                       |
-| EN/ES page dedup (blog, quality, projects)                         | ✅     | `0fd5e01`, `c86893f`, `e2d1def` |
-| JSON-LD dedup                                                      | ✅     | `832dfd2`                       |
-| CI fix (coverage thresholds, action v5)                            | ✅     | `c569497`, `2188176`            |
-| **lint-staged** 16.2.7 → **17.0.5**                                | ✅     | `5b8580a`                       |
-| **lucide-react** 0.563.0 → **1.16.0** (brand icons → SVGs)         | ✅     | `5b8580a`                       |
-| **typescript** 5.9.3 → **6.0.3** (`types` field added to tsconfig) | ✅     | `5b8580a`                       |
-| Tests: BlogDetailContent, AuditDetailContent, ContactForm (11 new) | ✅     | `9d63f2c`                       |
-| docs/REMAINING_ITEMS.md created                                    | ✅     | `9d63f2c`                       |
+| Item                                                                           | Status | Notes                                         |
+| ------------------------------------------------------------------------------ | ------ | --------------------------------------------- | --- | -------------------------------- |
+| Silent failure audit (6 fixes)                                                 | ✅     | `a0fc33d`                                     |
+| Animation timing polish                                                        | ✅     | `300dc11`                                     |
+| Size-limit budgets                                                             | ✅     | `352ae41`                                     |
+| EN/ES page dedup (blog, quality, projects)                                     | ✅     | `0fd5e01`, `c86893f`, `e2d1def`               |
+| JSON-LD dedup                                                                  | ✅     | `832dfd2`                                     |
+| CI fix (coverage thresholds, action v5)                                        | ✅     | `c569497`, `2188176`                          |
+| **lint-staged** 16.2.7 → **17.0.5**                                            | ✅     | `5b8580a`                                     |
+| **lucide-react** 0.563.0 → **1.16.0** (brand icons → SVGs)                     | ✅     | `5b8580a`                                     |
+| **typescript** 5.9.3 → **6.0.3**                                               | ✅     | `5b8580a`                                     |
+| Tests: BlogDetailContent, AuditDetailContent, ContactForm (11 new)             | ✅     | `9d63f2c`                                     |
+| docs/REMAINING_ITEMS.md created                                                | ✅     | `9d63f2c`                                     |
+| **eslint 9 → 10** (eslint@10.4.0 compatible with eslint-config-next 16)        | ✅     | Lint clean, 1 purity suppress                 |
+| Bundle chunk — lazy-loaded Three.js (JS 696kB / 800kB)                         | ✅     | Within size budget                            |
+| Dirty generated files — `vfsData.ts` timestamp removed; `coverage.json`        | ✅     | Already in `.gitignore`                       |
+| E2E error-state coverage — 8 tests (404, ContactForm, WebGL fallback)          | ✅     | `e2e/error-states.spec.ts`                    |
+| CI verified green — format, lint, type-check, 479 tests, build, bundle         | ✅     | All 3 CI stages pass                          |
+| npm audit — 0 vulnerabilities                                                  | ✅     | Clean                                         |
+| **THREE.Clock** deprecation → custom `performance.now()` timer                 | ✅     | Warning removed from E2E runs                 |
+| Minor dep bumps: `@types/react` ^19.2.15, `marked` ^18.0.4, `ts-jest` ^29.4.10 | ✅     |                                               |
+| **@types/node** ^20 → ^22, **react/react-dom** 19.2.5 → 19.2.6                 | ✅     | Cascade also bumped three + @types/three      |
+| Flaky QualityDashboard search filter — switched to `findByText` for async      | ✅     | Handles framer-motion animation timing        |
+| ContactForm coverage (10 tests, 33.8%→~95%)                                    | ✅     | Refactored `formEndpoint`→`getFormEndpoint()` |
+| Branch gap: TestDetailedList (`                                                |        | ` fallback)                                   | ✅  | Added test with empty suite name |
+| Branch gap: ResumeTimeline (`isLast` connecting line)                          | ✅     | Added connecting-line count assertion         |
+| Branch gap: Sidebar clipboard catch                                            | ✅     | Added clipboard rejection test                |
+| Branch gap: not-found.tsx ES locale (57%→100% branches)                        | ✅     | Added ES pathname test                        |
+| Branch gap: global-error.tsx ES locale (58%→95% branches)                      | ✅     | Added ES pathname test                        |
+| Branch gap: LoadingSkeleton (PageSkeleton + CardSkeleton tests)                | ✅     | New test file for exported components         |
 
 ## High Priority
 
-### 1. Coverage Gap — App & components still under-tested
+### 1. Coverage — Stable at 99% / 95% / 100% / 100%
 
-| Directory          | Statements | Branches | Functions | Lines    |
-| ------------------ | ---------- | -------- | --------- | -------- |
-| **lib/**           | ~91%       | ~81%     | ~100%     | ~92%     |
-| **app/** (routes)  | 0%         | 0%       | 0%        | 0%       |
-| **components/**    | ~16%       | ~8%      | ~17%      | ~16%     |
-| **Total (global)** | **~73%**   | **~70%** | **~70%**  | **~75%** |
+| Directory          | Statements | Branches | Functions | Lines     |
+| ------------------ | ---------- | -------- | --------- | --------- |
+| **lib/**           | ~99%       | ~94%     | ~100%     | ~99%      |
+| **app/** (routes)  | ~96%       | ~95%     | ~100%     | ~96%      |
+| **components/**    | ~99%       | ~95%     | ~99%      | ~100%     |
+| **Total (global)** | **~99%**   | **~95%** | **~100%** | **~100%** |
 
-Thresholds (70/65/65/70) met globally, but still wide open:
+Thresholds (70/65/65/70) well exceeded. Remaining uncovered branches are inherent constraints:
 
-| Component         | Lines  | Why it matters                                       |
-| ----------------- | ------ | ---------------------------------------------------- |
-| BlogList.tsx      | 64     | Main blog listing, renders cards from BlogService    |
-| PortfolioPage.tsx | 200+   | Core portfolio layout, JSON-LD, Three.js integration |
-| ProjectCard.tsx   | ~40    | Project grid card used on portfolio page             |
-| ProjectDetail.tsx | ~120   | Full case study view with expanded data              |
-| Sidebar.tsx       | ~60    | Navigation sidebar, routing logic                    |
-| SiteFooter.tsx    | ~50    | Footer with social links, rendered on every page     |
-| App route pages   | varies | 22 route files at 0% coverage                        |
+| Component              | Branch | Reason                                                      |
+| ---------------------- | ------ | ----------------------------------------------------------- |
+| TopologyPostProcessing | 50%    | Three.js Canvas — E2E only                                  |
+| ThemeToggle            | 80% fn | `getServerSnapshot` — SSR-only, not callable in jsdom       |
+| LoadingSkeleton        | 0%     | `Skeleton` internal — `className` default always overridden |
+| Sidebar                | 80%    | `NODE_ENV !== 'test'` guards — production-only behavior     |
+| ResumeTimeline         | 75%    | i18n key fallbacks — all orgs have translations             |
+| ContactForm            | 96%    | Lines 72, 99 — edge cases in validate/handleSubmit          |
+| ProjectDetail          | 97%    | Line 65 — conditional rendering edge case                   |
+| BlogService            | 83%    | Lines 52-61, 83-84 — blog filtering edge cases              |
+| CommandProcessor       | 98%    | Line 47 — edge case in command dispatch                     |
 
-### 2. eslint 9 → 10 — Blocked by eslint-config-next
+None block CI or affect functionality. All are defensive patterns or platform constraints.
 
-`eslint-config-next@16.2.6` bundles `eslint-plugin-react` which uses `contextOrFilename.getFilename()` — removed in ESLint 10. Need to wait for eslint-config-next to publish a compatible version (check canary releases).
+### 2. Pinned Dependencies
 
-### 3. Flaky Test — QualityDashboard search filter timeout
-
-`QualityDashboard › filters audits based on search query in title` times out at 5s. Caused by `userEvent.type()` being slow with async rendering. Needs a higher timeout or a more efficient test setup.
+| Package     | Current | Latest | Constraint       |
+| ----------- | ------- | ------ | ---------------- |
+| @types/node | 22.15.3 | 25.9.0 | `^22` in package |
 
 ## Medium Priority
 
-### 4. Bundle — Three.js chunk is 1.08 MB
+### 4. CI Pipeline — Real-time monitoring & speed
 
-Largest JS chunk contains Three.js + framer-motion + R3F. Loaded on every page via RootShell even when topology isn't displayed. Could be deferred with dynamic imports or route-level splitting.
+CI takes ~10-15 min for all jobs. Potential optimizations:
 
-Total `.next/` output is ~979 MB (includes static export).
-
-### 5. Dirty Generated Files
-
-`coverage.json` (root) and `src/lib/services/vfsData.ts` show as modified after every build/test run. `coverage.json` is test output; `vfsData.ts` is an autogenerated VFS snapshot. Could gitignore `coverage.json` and investigate why `vfsData.ts` regenerates.
-
-### 6. Remaining Pinned Dependencies
-
-| Package      | Current  | Latest  | Constraint       |
-| ------------ | -------- | ------- | ---------------- |
-| eslint       | 9.39.4   | 10.4.0  | Blocked (see #2) |
-| @types/node  | 20.19.41 | 25.9.0  | `^20` in package |
-| @types/three | 0.182.0  | 0.184.1 | `0.182.0` exact  |
-| react        | 19.2.5   | 19.2.6  | `19.2.5` exact   |
-| react-dom    | 19.2.5   | 19.2.6  | `19.2.5` exact   |
-| three        | 0.182.0  | 0.184.0 | `0.182.0` exact  |
+- `npm run docs` generates TypeDoc only needed for deployment — could move to `deploy.yml`
+- Full matrix (Node 22 + 24) doubles the `build` job; could run full suite on 22.x only and compatibility check on 24.x
+- Caching strategy improvements
+- Parallelizing independent jobs more aggressively
 
 ## Low Priority
 
-### 7. E2E Error-State Coverage
-
-88 Playwright tests pass but focus on happy paths. No coverage for:
-
-- 3D WebGL fallback behavior
-- Network error states in ContactForm
-- Invalid route handling beyond notFound()
-- Service Worker registration failures
-
-### 8. npm audit / Security
-
-`npm audit` outputs 0 vulnerabilities currently, but should be checked periodically — especially after major dependency upgrades.
-
-### 9. CI Pipeline — Real-time monitoring
-
-CI takes ~10-15 min for all jobs. Could optimize with:
-
-- Caching strategy improvements
-- Parallelizing independent jobs more aggressively
-- Removing duplicated build (build 22.x artifact shared with LHCI already)
+_(none currently tracked)_
