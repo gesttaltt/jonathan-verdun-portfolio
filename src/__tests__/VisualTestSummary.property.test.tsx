@@ -4,20 +4,16 @@ import { VisualTestSummary } from '@/components/VisualTestSummary'
 import { I18nProvider } from '@/lib/i18n/context'
 
 // We need to mock coverageData since it's a direct import in the component
-jest.mock(
-  '../../coverage.json',
-  () => ({
-    __esModule: true,
-    default: {
-      numPassedTests: 0,
-      numTotalTests: 0,
-      numFailedTests: 0,
-      startTime: 0,
-      success: true,
-    },
-  }),
-  { virtual: true }
-)
+jest.mock('../../coverage.json', () => ({
+  __esModule: true,
+  default: {
+    numPassedTests: 0,
+    numTotalTests: 0,
+    numFailedTests: 0,
+    startTime: 0,
+    success: true,
+  },
+}))
 
 import coverageData from '../../coverage.json'
 

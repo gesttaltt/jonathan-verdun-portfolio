@@ -12,16 +12,12 @@ const mockCoverageData = {
   success: true,
 }
 
-jest.mock(
-  '../../coverage.json',
-  () => ({
-    __esModule: true,
-    get default() {
-      return mockCoverageData
-    },
-  }),
-  { virtual: true }
-)
+jest.mock('../../coverage.json', () => ({
+  __esModule: true,
+  get default() {
+    return mockCoverageData
+  },
+}))
 
 describe('VisualTestSummary', () => {
   beforeEach(() => {

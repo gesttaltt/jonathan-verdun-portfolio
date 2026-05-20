@@ -21,16 +21,12 @@ const mockCoverageData = {
   ],
 }
 
-jest.mock(
-  '../../coverage.json',
-  () => ({
-    __esModule: true,
-    get default() {
-      return mockCoverageData
-    },
-  }),
-  { virtual: true }
-)
+jest.mock('../../coverage.json', () => ({
+  __esModule: true,
+  get default() {
+    return mockCoverageData
+  },
+}))
 
 describe('TestDetailedList', () => {
   it('renders all test suites with correct names and stats', () => {
