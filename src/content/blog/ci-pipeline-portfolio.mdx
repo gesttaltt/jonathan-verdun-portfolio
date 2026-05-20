@@ -1,7 +1,7 @@
 ---
-title: "Why my portfolio has a CI pipeline — treating your resume like production code"
-date: "2026-05-18"
-tags: ["CI/CD", "testing", "architecture", "portfolio"]
+title: 'Why my portfolio has a CI pipeline — treating your resume like production code'
+date: '2026-05-18'
+tags: ['CI/CD', 'testing', 'architecture', 'portfolio']
 description: "Every quality claim on jonathanverdun.com is backed by an automated gate. Here's why I treat my resume like production code."
 ---
 
@@ -20,21 +20,21 @@ The site is a Next.js 16 static export with 99 pages, two languages, an interact
 jobs:
   build:
     steps:
-      - Check formatting        # prettier --check
-      - Linting                 # eslint
-      - Security audit          # npm audit --audit-level=high
-      - Type checking           # tsc --noEmit
-      - Run tests               # jest --coverage
-      - Build                   # next build
-      - Bundle size check       # size-limit
+      - Check formatting # prettier --check
+      - Linting # eslint
+      - Security audit # npm audit --audit-level=high
+      - Type checking # tsc --noEmit
+      - Run tests # jest --coverage
+      - Build # next build
+      - Bundle size check # size-limit
 
-  e2e:                          # Playwright + axe-core
+  e2e: # Playwright + axe-core
     needs: build
     steps:
-      - E2E tests               # 38 tests across all routes
-      - WCAG scans              # axe-core on every page
+      - E2E tests # 38 tests across all routes
+      - WCAG scans # axe-core on every page
 
-  lhci:                         # Lighthouse CI
+  lhci: # Lighthouse CI
     needs: build
     gates:
       - a11y ≥ 95

@@ -1,0 +1,137 @@
+---
+title: "Why I use property-based testing for my portfolio's critical logic"
+date: '2026-05-19'
+tags: ['testing', 'fast-check', 'property-based', 'TypeScript']
+description: "How fast-check catches edge cases that example-based tests miss — and why I run it on my portfolio's i18n, routing, and domain invariants."
+---
+
+## The problem with example-based tests
+
+Most tests look like this:
+
+```typescript
+expect(add(2, 2)).toBe(4)
+expect(add(-1, 1)).toBe(0)
+```
+
+These are **example-based** — they test specific inputs you thought of. They pass today. They pass tomorrow. They tell you nothing about `add(Number.MAX_SAFE_INTEGER, 1)`, `add(NaN, 0)`, or `add(undefined, null)`.
+
+After enough years of finding bugs that "should have been caught," I started using **property-based testing** for any logic that has a well-defined invariant.
+
+## What property-based testing is
+
+Instead of writing specific input-output pairs, you define a **property** that should hold for ALL inputs within a domain, and the framework generates hundreds of random inputs to try to falsify it.
+
+```typescript
+import fc from 'fast-check'
+
+// Example-based: tests what I thought of
+it('adds two numbers', () => {
+  expect(add(2, 2)).toBe(4)
+})
+
+// Property-based: tests what I *didn't* think of
+it('addition is commutative for all integers', () => {
+  fc.assert(
+    fc.property(fc.integer(), fc.integer(), (a, b) => {
+      expect(add(a, b)).toBe(add(b, a))
+    })
+  )
+})
+```
+
+The second test runs `add` with hundreds of random integer pairs — including negative numbers, zero, `Number.MIN_SAFE_INTEGER`, and everything in between. If there's a hidden overflow or edge case, it finds it.
+
+## Where I use it on this portfolio
+
+### 1. i18n key parity (EN ↔ ES)
+
+The most impactful property I test: **every translation key in English must exist in Spanish, and vice versa**.
+
+```typescript
+it('EN and ES translations have identical key structures', () => {
+  fc.assert(
+    fc.property(fc.constantFrom(...getAllKeys(en)), (key) => {
+      expect(lookup(es, key)).toBeDefined()
+    })
+  )
+})
+```
+
+This caught three drift incidents during development — keys added to one locale but not the other. Without the property test, those would have shipped as missing translations.
+
+### 2. Terminal command routing
+
+The terminal has a dispatcher that maps command strings to outputs. The property:
+
+```typescript
+it('every registered command produces non-empty output', () => {
+  fc.assert(
+    fc.property(fc.constantFrom(...COMMAND_KEYS), (cmd) => {
+      const output = terminal.execute(cmd)
+      expect(output.length).toBeGreaterThan(0)
+    })
+  )
+})
+```
+
+This caught a command that was registered in the help menu but had no handler — it would have returned undefined at runtime.
+
+### 3. Stateless service functions
+
+Services like `ProjectService.getProjects()` and `DataEngineeringService.getSystemSpecs()` don't take parameters, so they're trivially deterministic. The property test verifies they never return empty arrays or malformed data:
+
+```typescript
+it('all services return consistent, non-empty data', () => {
+  const projects = ProjectService.getProjects()
+  expect(projects.length).toBeGreaterThan(0)
+  projects.forEach((p) => {
+    expect(p.id).toMatch(/^proj-\d+$/)
+    expect(p.stats.length).toBeGreaterThan(0)
+  })
+})
+```
+
+This isn't a property in the strict sense (it's deterministic), but it codifies the contract as a test that runs on every build rather than a manually checked assumption.
+
+## The practical trade-offs
+
+**What property-based testing is good at:**
+
+- Finding edge cases in algorithmic logic
+- Verifying invariants (commutativity, idempotence, associativity)
+- Catching regressions in data transformations
+- Testing parser/validator logic
+
+**What it's not good at:**
+
+- UI component testing (rendering, interaction)
+- Async integration flows
+- Snapshot or visual regression
+
+On this portfolio, I use it for about 15% of the test suite. The remaining 85% is conventional Jest + React Testing Library. The property tests are concentrated on the domain logic and contracts — the parts where edge cases actually matter.
+
+## Getting started
+
+If you want to try fast-check on a TypeScript project:
+
+```bash
+npm install --save-dev fast-check
+```
+
+Then pick one function with a clear invariant — a validation function, a parser, a sorting helper — and write a property test for it:
+
+```typescript
+it('the parser never produces NaN from valid input', () => {
+  fc.assert(
+    fc.property(fc.oneof(fc.integer(), fc.float()), (value) => {
+      const result = parseValue(value)
+      expect(Number.isNaN(result)).toBe(false)
+    })
+  )
+})
+```
+
+One property test, hundreds of random inputs, zero manual test cases to write.
+
+The portfolio test suite runs 476 tests in under 10 seconds. The property-based tests add negligible overhead (fast-check is fast) and have caught bugs that example-based tests missed on three separate occasions. That alone justifies the approach.
