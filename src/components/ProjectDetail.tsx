@@ -2,7 +2,17 @@
 
 import React from 'react'
 import { m } from 'framer-motion'
-import { ExternalLink, ShieldCheck, ArrowLeft, Terminal, Code2, BarChart3 } from 'lucide-react'
+import {
+  ExternalLink,
+  ShieldCheck,
+  ArrowLeft,
+  Terminal,
+  Code2,
+  BarChart3,
+  Lightbulb,
+  Workflow,
+  Link2,
+} from 'lucide-react'
 import Link from 'next/link'
 import { ProjectSpec } from '@/lib/contracts/ProjectContract.types'
 import { containerVariants, staggerItemVariants } from '@/lib/animations'
@@ -102,6 +112,59 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ projectId }) => {
               ))}
             </div>
           </div>
+
+          {project.highlights && project.highlights.length > 0 && (
+            <div className="space-y-4">
+              <h2 className="text-text-primary flex items-center gap-2 text-lg font-bold">
+                <Lightbulb className="h-5 w-5 text-amber-400" />
+                {t.lang === 'es' ? 'Resultados Clave' : 'Key Results'}
+              </h2>
+              <ul className="space-y-2">
+                {project.highlights.map((h, i) => (
+                  <li
+                    key={i}
+                    className="text-text-tertiary flex items-start gap-2 text-sm leading-relaxed"
+                  >
+                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-400/60" />
+                    {h}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {project.architecture && (
+            <div className="space-y-4">
+              <h2 className="text-text-primary flex items-center gap-2 text-lg font-bold">
+                <Workflow className="h-5 w-5 text-violet-400" />
+                {t.lang === 'es' ? 'Arquitectura' : 'Architecture'}
+              </h2>
+              <p className="text-text-tertiary text-sm leading-relaxed">{project.architecture}</p>
+            </div>
+          )}
+
+          {project.links && project.links.length > 0 && (
+            <div className="space-y-4">
+              <h2 className="text-text-primary flex items-center gap-2 text-lg font-bold">
+                <Link2 className="h-5 w-5 text-emerald-400" />
+                {t.lang === 'es' ? 'Enlaces Relacionados' : 'Related Links'}
+              </h2>
+              <div className="flex flex-wrap gap-2">
+                {project.links.map((link) => (
+                  <a
+                    key={link.label}
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="border-border-subtle text-text-secondary hover:text-text-primary inline-flex items-center gap-1.5 rounded-lg border border-white/10 px-3 py-1.5 text-xs font-bold transition-all hover:border-blue-500/30"
+                  >
+                    <ExternalLink className="h-3 w-3" />
+                    {link.label}
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
         </m.div>
 
         <m.div variants={staggerItemVariants()} className="space-y-4 lg:col-span-1">

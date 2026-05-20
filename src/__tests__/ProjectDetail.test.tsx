@@ -52,6 +52,46 @@ describe('ProjectDetail', () => {
     expect(screen.getByText(/metrics/i)).toBeInTheDocument()
   })
 
+  it('renders highlights section when project has highlights', () => {
+    render(
+      <I18nProvider>
+        <ProjectDetail projectId={existingProjectId} />
+      </I18nProvider>
+    )
+
+    const project = en.projects.find((p) => p.id === existingProjectId)
+    if (project?.highlights) {
+      expect(screen.getByText('Key Results')).toBeInTheDocument()
+      expect(screen.getAllByRole('listitem').length).toBeGreaterThanOrEqual(1)
+    }
+  })
+
+  it('renders architecture section when project has architecture', () => {
+    render(
+      <I18nProvider>
+        <ProjectDetail projectId={existingProjectId} />
+      </I18nProvider>
+    )
+
+    const project = en.projects.find((p) => p.id === existingProjectId)
+    if (project?.architecture) {
+      expect(screen.getByText('Architecture')).toBeInTheDocument()
+    }
+  })
+
+  it('renders related links section when project has extra links', () => {
+    render(
+      <I18nProvider>
+        <ProjectDetail projectId={existingProjectId} />
+      </I18nProvider>
+    )
+
+    const project = en.projects.find((p) => p.id === existingProjectId)
+    if (project?.links && project.links.length > 0) {
+      expect(screen.getByText('Related Links')).toBeInTheDocument()
+    }
+  })
+
   it('returns null and warns when project id is not found', () => {
     const warnSpy = jest.spyOn(console, 'warn').mockImplementation(() => undefined)
     const { container } = render(
