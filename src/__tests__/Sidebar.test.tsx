@@ -94,6 +94,22 @@ describe('Sidebar', () => {
     expect(await screen.findByText(/Copy Email/i)).toBeInTheDocument()
   })
 
+  it('handles clipboard write failure without crashing', async () => {
+    mockWriteText.mockRejectedValue(new Error('Clipboard denied'))
+    renderSidebar()
+
+    const copyButton = await screen.findByRole('button', { name: 'Copy Email' })
+
+    await act(async () => {
+      fireEvent.click(copyButton)
+    })
+
+    expect(mockWriteText).toHaveBeenCalledWith('test@example.com')
+
+    await screen.findByText(/Copy Email/i)
+    expect(screen.queryByText(/Copied!/i)).not.toBeInTheDocument()
+  })
+
   describe('CI Status Fetching Logic', () => {
     const mockRepo = { url: 'https://github.com/o/r', ciWorkflowUrl: 'u', ciBadgeUrl: 'b' }
 

@@ -31,4 +31,17 @@ describe('NotFound page', () => {
     render(<NotFound />)
     expect(screen.getByText(/This route does not exist/i)).toBeInTheDocument()
   })
+
+  it('renders Spanish content when pathname starts with /es', () => {
+    window.history.pushState({}, '', '/es/some-path')
+
+    render(<NotFound />)
+
+    expect(screen.getByRole('heading', { name: '404' })).toBeInTheDocument()
+    expect(screen.getByText('No Encontrado')).toBeInTheDocument()
+    expect(screen.getByText(/Esta ruta no existe/i)).toBeInTheDocument()
+    expect(screen.getByText(/Volver al inicio/i)).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: /Volver al inicio/i })).toHaveAttribute('href', '/es')
+    expect(document.documentElement.lang).toBe('es')
+  })
 })

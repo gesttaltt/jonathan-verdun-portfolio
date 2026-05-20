@@ -48,4 +48,23 @@ describe('TestDetailedList', () => {
     expect(screen.getByText('2 assertions')).toBeInTheDocument()
     expect(screen.getByText('1 assertions')).toBeInTheDocument()
   })
+
+  it('falls back to "unknown" when suite name is empty', () => {
+    const originalData = mockCoverageData.testResults
+    mockCoverageData.testResults = [
+      {
+        name: '',
+        status: 'passed',
+        startTime: 1000,
+        endTime: 2000,
+        assertionResults: [],
+      },
+    ]
+
+    render(<TestDetailedList />)
+
+    expect(screen.getByText('unknown')).toBeInTheDocument()
+
+    mockCoverageData.testResults = originalData
+  })
 })

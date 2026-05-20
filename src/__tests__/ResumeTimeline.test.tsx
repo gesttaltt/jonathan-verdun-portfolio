@@ -61,4 +61,12 @@ describe('ResumeTimeline', () => {
     const backLink = screen.getByRole('link', { name: /volver al inicio/i })
     expect(backLink).toHaveAttribute('href', '/es')
   })
+
+  it('renders connecting line before last work history item but not after it', () => {
+    setMockPathname('/resume')
+    const { container } = renderTimeline()
+
+    const gradientLineDivs = container.querySelectorAll('.bg-gradient-to-b.from-blue-500\\/30')
+    expect(gradientLineDivs.length).toBe(siteConfig.workHistory.length - 1)
+  })
 })

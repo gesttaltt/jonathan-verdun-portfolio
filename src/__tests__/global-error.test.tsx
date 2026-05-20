@@ -48,4 +48,16 @@ describe('GlobalError', () => {
     render(<GlobalError error={error} reset={reset} />)
     expect(screen.queryByText(/digest:/i)).not.toBeInTheDocument()
   })
+
+  it('renders Spanish content when pathname starts with /es', () => {
+    window.history.pushState({}, '', '/es/some-path')
+
+    render(<GlobalError error={error} reset={reset} />)
+
+    expect(screen.getByText(/Fallo crítico del sistema/i)).toBeInTheDocument()
+    expect(screen.getByText(/Error Crítico/i)).toBeInTheDocument()
+    expect(screen.getByText(/Algo salió mal/i)).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /Reintentar/i })).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: /Volver al inicio/i })).toHaveAttribute('href', '/es')
+  })
 })
