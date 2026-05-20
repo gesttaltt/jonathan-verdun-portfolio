@@ -49,7 +49,7 @@ jobs:
         run: npm run check-types
 
       - name: Run Tests
-        run: npm test -- --ci --coverage
+        run: npm test -- --ci --coverage --json --outputFile=coverage.json
         env:
           NEXT_TELEMETRY_DISABLED: 1
 
