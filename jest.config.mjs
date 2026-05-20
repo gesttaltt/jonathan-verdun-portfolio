@@ -30,6 +30,8 @@ const config = {
     '!src/lib/shaders/**',
     // Three.js mesh with useFrame — requires a real WebGL context, untestable in jsdom
     '!src/components/TopologyMesh.tsx',
+    // Three.js post-processing — WebGL context required; isLight branches only testable via E2E
+    '!src/components/TopologyPostProcessing.tsx',
     // Three.js Canvas wrapper — WebGL context required; aria/layout tested via TopologyLoader
     '!src/components/InteractiveTopology.tsx',
     // next/dynamic wrapper — dynamic import resolution untestable in jsdom without heavy mocking

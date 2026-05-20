@@ -53,9 +53,6 @@ jobs:
         env:
           NEXT_TELEMETRY_DISABLED: 1
 
-      - name: Generate Documentation
-        run: npm run docs
-
       - name: Build
         run: npm run build
         env:
