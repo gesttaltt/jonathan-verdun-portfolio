@@ -14,6 +14,8 @@ const config = {
   ],
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
+    // coverage.json is gitignored (generated at build time) — resolve to a stub for all tests
+    '^[.].*/coverage\\.json$': '<rootDir>/__mocks__/coverageJson.ts',
   },
   collectCoverageFrom: [
     'src/**/*.{ts,tsx}',
