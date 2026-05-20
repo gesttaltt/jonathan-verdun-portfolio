@@ -62,7 +62,7 @@ describe('QualityDashboard', () => {
 
     await user.type(input, 'Visual')
 
-    expect(screen.getByText('Visual Regression')).toBeInTheDocument()
+    expect(await screen.findByText('Visual Regression')).toBeInTheDocument()
     expect(screen.queryByText('General Audit')).not.toBeInTheDocument()
     expect(screen.queryByText('Test Plan')).not.toBeInTheDocument()
   }, 10000)
@@ -74,7 +74,7 @@ describe('QualityDashboard', () => {
 
     await user.type(input, 'excerpt')
 
-    expect(screen.getByText('General Audit')).toBeInTheDocument()
+    expect(await screen.findByText('General Audit')).toBeInTheDocument()
     expect(screen.queryByText('Visual Regression')).not.toBeInTheDocument()
   }, 10000)
 

@@ -13,9 +13,8 @@ export const TopologyMesh: React.FC<{ quality: number; mode: 'p-adic' | 'hyperbo
 }) => {
   const meshRef = useRef<THREE.Points>(null)
   const prefersReducedMotionRef = useRef(false)
+  const startTimeRef = useRef<number>(0)
 
-  // Stable object passed to JSX — never reassigned, so useMemo immutability rules are satisfied.
-  // All per-frame mutations go through meshRef.current.material to stay outside render.
   const uniforms = useMemo(
     () => ({
       time: { value: 0 },
@@ -78,7 +77,8 @@ export const TopologyMesh: React.FC<{ quality: number; mode: 'p-adic' | 'hyperbo
     const mat = meshRef.current.material
     if (!(mat instanceof THREE.ShaderMaterial)) return
 
-    const elapsed = state.clock.getElapsedTime()
+    if (startTimeRef.current === 0) startTimeRef.current = performance.now()
+    const elapsed = (performance.now() - startTimeRef.current) / 1000
 
     const time = mat.uniforms['time']
     const mouse = mat.uniforms['mouse']
