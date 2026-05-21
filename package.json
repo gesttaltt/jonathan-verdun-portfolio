@@ -21,7 +21,7 @@
     "prepare": "husky",
     "validate-env": "node scripts/validate-env.mjs",
     "build": "npm run generate-vfs && npm run validate-env && npm test -- --json --outputFile=coverage.json && next build",
-    "build:ci": "npm run generate-vfs && npm run validate-env && next build"
+    "build:ci": "npm run generate-vfs && node scripts/generate-stub-coverage.mjs && npm run validate-env && next build"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
