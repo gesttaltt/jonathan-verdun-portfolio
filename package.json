@@ -37,7 +37,7 @@
   "dependencies": {
     "@react-three/fiber": "^9.6.1",
     "@react-three/postprocessing": "^3.0.4",
-    "framer-motion": "^12.34.0",
+    "framer-motion": "^12.40.0",
     "gray-matter": "^4.0.3",
     "lucide-react": "^1.16.0",
     "marked": "^18.0.4",
@@ -96,7 +96,7 @@
     "prettier-plugin-tailwindcss": "^0.8.0",
     "size-limit": "^12.1.0",
     "tailwindcss": "^4",
-    "ts-jest": "^29.4.10",
+    "ts-jest": "^29.4.11",
     "typedoc": "^0.28.19",
     "typescript": "^6.0.3"
   }
