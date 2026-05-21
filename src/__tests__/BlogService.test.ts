@@ -54,6 +54,41 @@ describe('BlogService', () => {
     expect(posts[0]?.slug).toBe('valid')
   })
 
+  it('returns empty list when no .mdx files exist in directory', () => {
+    mockedFs.existsSync.mockReturnValue(true)
+    mockedFs.readdirSync.mockReturnValue(asReaddirResult(['notes.txt', 'readme.md']))
+    expect(BlogService.getAllPosts()).toEqual([])
+  })
+
+  it('filters out files with no frontmatter delimiters at all', () => {
+    mockedFs.existsSync.mockReturnValue(true)
+    mockedFs.readdirSync.mockReturnValue(asReaddirResult(['plain.mdx']))
+    mockedFs.readFileSync.mockReturnValue('no frontmatter block here at all')
+    expect(BlogService.getAllPosts()).toEqual([])
+  })
+
+  it('parses tags as string (no brackets) into empty array', () => {
+    mockedFs.existsSync.mockReturnValue(true)
+    mockedFs.readdirSync.mockReturnValue(asReaddirResult(['post.mdx']))
+    mockedFs.readFileSync.mockReturnValue(
+      `---\ntitle: Post\ndate: 2026-01-01\ntags: qa\ndescription: Desc\n---\nbody`
+    )
+    const posts = BlogService.getAllPosts()
+    expect(posts).toHaveLength(1)
+    expect(posts[0]?.tags).toEqual([])
+  })
+
+  it('skips frontmatter lines without a colon separator', () => {
+    mockedFs.existsSync.mockReturnValue(true)
+    mockedFs.readdirSync.mockReturnValue(asReaddirResult(['post.mdx']))
+    mockedFs.readFileSync.mockReturnValue(
+      `---\ntitle: Post\ndate: 2026-01-01\ninvalid-no-colon-line\ndescription: Desc\n---\nbody`
+    )
+    const posts = BlogService.getAllPosts()
+    expect(posts).toHaveLength(1)
+    expect(posts[0]?.title).toBe('Post')
+  })
+
   it('returns null from getPost when file does not exist', () => {
     mockedFs.existsSync.mockReturnValue(false)
     expect(BlogService.getPost('missing')).toBeNull()

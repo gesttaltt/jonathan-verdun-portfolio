@@ -116,6 +116,23 @@ describe('ContactForm', () => {
       expect(container.textContent).toContain('Message sent!')
     })
 
+    it('persists validation errors when typing in untouched fields', async () => {
+      const user = userEvent.setup()
+      renderWithI18n(<ContactForm />)
+
+      // Submit empty form to trigger all 4 validation errors
+      await user.click(screen.getByRole('button', { name: /send message/i }))
+      expect(await screen.findAllByText(/this field is required/i)).toHaveLength(4)
+
+      // Type in the name field WITHOUT blurring (so it stays NOT touched).
+      // The error should persist because handleChange only clears errors
+      // for touched fields (line 72 guard).
+      const nameInput = screen.getByPlaceholderText(/your name/i)
+      await user.type(nameInput, 'J')
+
+      expect(await screen.findAllByText(/this field is required/i)).toHaveLength(4)
+    })
+
     it('shows submitting state while request is in flight', async () => {
       let resolvePromise!: (value: Response) => void
       mockFetch.mockReturnValue(
