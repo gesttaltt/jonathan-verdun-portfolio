@@ -43,7 +43,7 @@
   --text-primary: #ffffff;
   --text-secondary: #e4e4e7; /* zinc-200 */
   --text-tertiary: #a1a1aa; /* zinc-400 */
-  --text-muted: #7a7a82; /* ~zinc-475 — 4.94:1 on #0a0a0a (AA normal) */
+  --text-muted: #8a8a92; /* ~zinc-500 — 5.4:1 on #1b1b1b (bg-card), 7.5:1 on #0a0a0a */
 
   /* Borders — Dark Mode */
   --border-subtle: rgba(255, 255, 255, 0.1);
