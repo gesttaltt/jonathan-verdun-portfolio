@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Jonathan Verdun — Blog</title>
+    <link>https://jonathanverdun.com/blog</link>
+    <description>QA Automation Engineering, test architecture, and CI/CD hardening — by Jonathan Verdun</description>
+    <language>en</language>
+    <lastBuildDate>Thu, 21 May 2026 16:12:23 GMT</lastBuildDate>
+    <atom:link href="https://jonathanverdun.com/feed.xml" rel="self" type="application/rss+xml"/>
+    
+    <item>
+      <title>Why I use property-based testing for my portfolio&apos;s critical logic</title>
+      <link>https://jonathanverdun.com/blog/property-based-testing-fast-check</link>
+      <guid isPermaLink="true">https://jonathanverdun.com/blog/property-based-testing-fast-check</guid>
+      <pubDate>Tue, 19 May 2026 00:00:00 GMT</pubDate>
+      <description>How fast-check catches edge cases that example-based tests miss — and why I run it on my portfolio&apos;s i18n, routing, and domain invariants.</description>
+            <category>testing</category>
+      <category>fast-check</category>
+      <category>property-based</category>
+      <category>TypeScript</category>
+    </item>
+    <item>
+      <title>Why my portfolio has a CI pipeline — treating your resume like production code</title>
+      <link>https://jonathanverdun.com/blog/ci-pipeline-portfolio</link>
+      <guid isPermaLink="true">https://jonathanverdun.com/blog/ci-pipeline-portfolio</guid>
+      <pubDate>Mon, 18 May 2026 00:00:00 GMT</pubDate>
+      <description>Every quality claim on jonathanverdun.com is backed by an automated gate. Here&apos;s why I treat my resume like production code.</description>
+            <category>CI/CD</category>
+      <category>testing</category>
+      <category>architecture</category>
+      <category>portfolio</category>
+    </item>
+    <item>
+      <title>How I enforce 100% test coverage in CI with Jest + GitHub Actions</title>
+      <link>https://jonathanverdun.com/blog/enforcing-100-percent-coverage</link>
+      <guid isPermaLink="true">https://jonathanverdun.com/blog/enforcing-100-percent-coverage</guid>
+      <pubDate>Sun, 10 May 2026 00:00:00 GMT</pubDate>
+      <description>A practical guide to setting up automated coverage gates that prevent merging code below 100% — without driving your team crazy.</description>
+            <category>testing</category>
+      <category>CI/CD</category>
+      <category>Jest</category>
+      <category>GitHub Actions</category>
+    </item>
+    <item>
+      <title>Building a WCAG-compliant theme system with OKLCH and Tailwind v4</title>
+      <link>https://jonathanverdun.com/blog/building-wcag-compliant-themes</link>
+      <guid isPermaLink="true">https://jonathanverdun.com/blog/building-wcag-compliant-themes</guid>
+      <pubDate>Fri, 08 May 2026 00:00:00 GMT</pubDate>
+      <description>How I built a dark + light theme system that passes WCAG AA contrast requirements using OKLCH color space and Tailwind CSS v4 CSS-variable tokens.</description>
+            <category>accessibility</category>
+      <category>CSS</category>
+      <category>Tailwind</category>
+      <category>theming</category>
+    </item>
+  </channel>
+</rss>

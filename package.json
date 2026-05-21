@@ -11,6 +11,7 @@
     "test:watch": "jest --watch",
     "docs": "typedoc --out public/docs/api --entryPointStrategy expand src/lib",
     "generate-vfs": "node scripts/generate-vfs.mjs",
+    "generate-feed": "node scripts/generate-feed.mjs",
     "check-types": "tsc --noEmit",
     "format": "prettier --write .",
     "e2e": "playwright test",
@@ -21,8 +22,8 @@
     "size": "size-limit",
     "prepare": "husky",
     "validate-env": "node scripts/validate-env.mjs",
-    "build": "npm run generate-vfs && npm run validate-env && npm test -- --json --outputFile=coverage.json && next build",
-    "build:ci": "npm run generate-vfs && node scripts/generate-stub-coverage.mjs && npm run validate-env && next build"
+    "build": "npm run generate-vfs && npm run validate-env && npm test -- --json --outputFile=coverage.json && npm run generate-feed && next build",
+    "build:ci": "npm run generate-vfs && node scripts/generate-stub-coverage.mjs && npm run validate-env && npm run generate-feed && next build"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
