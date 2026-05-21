@@ -28,10 +28,11 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: 'npm run dev',
+    command:
+      process.env.MOCK_CI === 'true' ? 'npx --yes serve out -l 3000 --no-clipboard' : 'npm run dev',
     url: 'http://localhost:3000',
     reuseExistingServer: !process.env.CI,
-    timeout: 120_000,
+    timeout: process.env.MOCK_CI === 'true' ? 30_000 : 120_000,
     env: { NEXT_TELEMETRY_DISABLED: '1' },
   },
 })

@@ -90,6 +90,7 @@ export const QualityDashboard: React.FC<QualityDashboardProps> = ({ audits }) =>
             <SearchIcon className="text-text-tertiary absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
             <input
               type="text"
+              aria-label={t.sections.searchPlaceholder}
               placeholder={t.sections.searchPlaceholder}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
@@ -98,6 +99,7 @@ export const QualityDashboard: React.FC<QualityDashboardProps> = ({ audits }) =>
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery('')}
+                aria-label={t.sections.searchPlaceholder + ' — clear'}
                 className="text-text-tertiary absolute top-1/2 right-3 -translate-y-1/2 hover:text-white"
               >
                 <X className="h-4 w-4" />
