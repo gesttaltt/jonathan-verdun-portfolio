@@ -13,6 +13,8 @@ jobs:
     strategy:
       matrix:
         node-version: [22.x, 24.x]
+        # 22.x runs full suite (format, lint, audit, build, size) and produces the artifact.
+        # 24.x runs a lightweight compatibility check (type-check + test only).
 
     steps:
       - uses: actions/checkout@v6
@@ -37,12 +39,15 @@ jobs:
             ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
 
       - name: Check formatting
+        if: matrix.node-version == '22.x'
         run: npm run format -- --check
 
       - name: Linting
+        if: matrix.node-version == '22.x'
         run: npm run lint
 
       - name: Security audit
+        if: matrix.node-version == '22.x'
         run: npm audit --audit-level=high
 
       - name: Type checking
@@ -54,7 +59,9 @@ jobs:
           NEXT_TELEMETRY_DISABLED: 1
 
       - name: Build
-        run: npm run build
+        if: matrix.node-version == '22.x'
+        # Use build:ci to avoid re-running tests (already done in the step above)
+        run: npm run build:ci
         env:
           NEXT_TELEMETRY_DISABLED: 1
 
@@ -87,6 +94,12 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Cache Playwright browsers
+        uses: actions/cache@v5
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
 
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
