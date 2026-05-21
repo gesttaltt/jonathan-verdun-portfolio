@@ -17,7 +17,11 @@ const SectionTitle: React.FC<{ icon: React.ReactNode; title: string }> = ({ icon
   </h2>
 )
 
-export const ResumeTimeline: React.FC = () => {
+interface ResumeTimelineProps {
+  hasResumePdf?: boolean
+}
+
+export const ResumeTimeline: React.FC<ResumeTimelineProps> = ({ hasResumePdf = false }) => {
   const t = useTranslation()
 
   return (
@@ -34,13 +38,24 @@ export const ResumeTimeline: React.FC = () => {
           </h1>
           <p className="text-text-tertiary mt-2 text-sm">{siteConfig.jobTitle}</p>
         </div>
-        <a
-          href={`mailto:${siteConfig.contact.email}`}
-          className="light:bg-zinc-950 light:hover:bg-black light:text-white focus-visible:ring-offset-background group flex items-center gap-2 rounded-xl bg-white px-5 py-2.5 text-sm font-bold text-black transition-all hover:scale-[1.04] focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none active:scale-95"
-        >
-          <Download className="h-4 w-4" />
-          {t.sections.resume.downloadLabel}
-        </a>
+        <div className="flex flex-wrap gap-3">
+          {hasResumePdf && (
+            <a
+              href="/resume-jonathan-verdun.pdf"
+              download
+              className="light:bg-zinc-950 light:hover:bg-black light:text-white focus-visible:ring-offset-background group flex items-center gap-2 rounded-xl bg-white px-5 py-2.5 text-sm font-bold text-black transition-all hover:scale-[1.04] focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none active:scale-95"
+            >
+              <Download className="h-4 w-4" />
+              {t.sections.resume.downloadLabel}
+            </a>
+          )}
+          <a
+            href={`mailto:${siteConfig.contact.email}`}
+            className="light:border-zinc-300 light:hover:bg-zinc-100 light:text-zinc-800 focus-visible:ring-offset-background group flex items-center gap-2 rounded-xl border border-white/20 px-5 py-2.5 text-sm font-bold text-white transition-all hover:bg-white/5 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none active:scale-95"
+          >
+            {t.sections.contactForm.submitLabel || t.sections.resume.downloadLabel}
+          </a>
+        </div>
       </div>
 
       <m.section variants={containerVariants()} className="mb-16">

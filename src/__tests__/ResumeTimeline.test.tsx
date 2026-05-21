@@ -4,10 +4,10 @@ import { siteConfig } from '@/lib/siteConfig'
 import { ResumeTimeline } from '@/components/ResumeTimeline'
 import { setMockPathname } from '../../jest.setup'
 
-const renderTimeline = () =>
+const renderTimeline = (hasResumePdf = false) =>
   render(
     <I18nProvider>
-      <ResumeTimeline />
+      <ResumeTimeline hasResumePdf={hasResumePdf} />
     </I18nProvider>
   )
 
@@ -26,12 +26,21 @@ describe('ResumeTimeline', () => {
     expect(screen.getByRole('heading', { name: 'Currículum' })).toBeInTheDocument()
   })
 
-  it('renders download email CTA with mailto href', () => {
+  it('renders PDF download button when resume file exists', () => {
+    setMockPathname('/resume')
+    renderTimeline(true)
+
+    const downloadLink = screen.getByRole('link', { name: /download pdf/i })
+    expect(downloadLink).toHaveAttribute('href', '/resume-jonathan-verdun.pdf')
+    expect(downloadLink).toHaveAttribute('download')
+  })
+
+  it('renders email CTA with mailto href', () => {
     setMockPathname('/resume')
     renderTimeline()
 
-    const downloadLink = screen.getByRole('link', { name: /download pdf/i })
-    expect(downloadLink).toHaveAttribute('href', `mailto:${siteConfig.contact.email}`)
+    const emailLink = screen.getByRole('link', { name: /send message/i })
+    expect(emailLink).toHaveAttribute('href', `mailto:${siteConfig.contact.email}`)
   })
 
   it('renders work history organizations and experience heading', () => {

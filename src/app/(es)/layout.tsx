@@ -20,6 +20,10 @@ export default function EsLayout({
     <html lang="es" suppressHydrationWarning>
       <head>
         <ThemeScript />
+        <meta
+          httpEquiv="Content-Security-Policy"
+          content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob:; worker-src blob:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
+        />
       </head>
       <body className={`${jetbrainsMono.variable} font-mono antialiased`}>
         <ThemeProvider>

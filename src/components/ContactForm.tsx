@@ -93,8 +93,16 @@ export const ContactForm: React.FC = () => {
     }
   }
 
+  // Honeypot: hidden field bots fill but humans don't see.
+  const [honeypot, setHoneypot] = useState('')
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    if (honeypot) {
+      // Likely a bot — silently pretend success without sending.
+      setStatus('success')
+      return
+    }
     const endpoint = getFormEndpoint()
     if (!endpoint) return
     if (!validate()) return
@@ -210,6 +218,19 @@ export const ContactForm: React.FC = () => {
           noValidate
           aria-label="Contact form"
         >
+          {/* Honeypot — visually hidden, screen-reader hidden, bots only */}
+          <div aria-hidden="true" className="absolute -top-[9999px] left-0 opacity-0">
+            <label htmlFor="cf-hp">Leave this empty</label>
+            <input
+              id="cf-hp"
+              name="_hp"
+              type="text"
+              tabIndex={-1}
+              autoComplete="off"
+              value={honeypot}
+              onChange={(e) => setHoneypot(e.target.value)}
+            />
+          </div>
           {renderField('name', ct.nameLabel, ct.namePlaceholder)}
           {renderField('email', ct.emailLabel, ct.emailPlaceholder, { type: 'email' })}
           {renderField('subject', ct.subjectLabel, ct.subjectPlaceholder)}
