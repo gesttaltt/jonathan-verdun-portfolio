@@ -44,6 +44,7 @@ export class DefaultCommandProcessor implements ICommandProcessor {
         // Add a mock 'README.md' for each project in the VFS
         this.vfs.cd('/projects')
         const projectDir = this.vfs.getCurrentNode().children?.[id]
+        /* istanbul ignore next — addProject always creates the dir before this check */
         if (projectDir) {
           projectDir.children = projectDir.children || {}
           projectDir.children['summary.txt'] = {

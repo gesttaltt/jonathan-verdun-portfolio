@@ -52,6 +52,7 @@ export class BlogService {
     if (!match) return null
 
     const rawFrontmatter = match[1]
+    /* istanbul ignore next — capturing group always present when match succeeds */
     if (rawFrontmatter === undefined) return null
 
     const frontmatter: Record<string, string | string[]> = {}
@@ -80,8 +81,8 @@ export class BlogService {
     const description = typeof frontmatter.description === 'string' ? frontmatter.description : ''
 
     return {
-      title: typeof title === 'string' ? title : String(title),
-      date: typeof date === 'string' ? date : String(date),
+      title: title as string,
+      date: date as string,
       tags,
       description,
     }

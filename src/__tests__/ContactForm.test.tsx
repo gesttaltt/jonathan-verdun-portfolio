@@ -209,6 +209,25 @@ describe('ContactForm', () => {
       })
     })
 
+    it('clears per-field error when typing in a touched field', async () => {
+      const user = userEvent.setup()
+      renderWithI18n(<ContactForm />)
+
+      // Submit empty to trigger all 4 validation errors
+      await user.click(screen.getByRole('button', { name: /send message/i }))
+      expect(await screen.findAllByText(/this field is required/i)).toHaveLength(4)
+
+      // Focus name input then blur — marks it as touched
+      const nameInput = screen.getByPlaceholderText(/your name/i)
+      await user.click(nameInput)
+      await user.tab()
+      expect(await screen.findAllByText(/this field is required/i)).toHaveLength(4)
+
+      // Type in the now-touched name field — should clear its error
+      await user.type(nameInput, 'John')
+      expect(await screen.findAllByText(/this field is required/i)).toHaveLength(3)
+    })
+
     it('silently succeeds when honeypot is filled without calling fetch', async () => {
       const user = userEvent.setup()
       renderWithI18n(<ContactForm />)

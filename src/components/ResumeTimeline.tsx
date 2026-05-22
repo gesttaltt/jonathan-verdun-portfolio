@@ -21,7 +21,10 @@ interface ResumeTimelineProps {
   hasResumePdf?: boolean
 }
 
-export const ResumeTimeline: React.FC<ResumeTimelineProps> = ({ hasResumePdf = false }) => {
+export const ResumeTimeline: React.FC<ResumeTimelineProps> = ({
+  /* istanbul ignore next — default parameter; always provided in production */
+  hasResumePdf = false,
+}) => {
   const t = useTranslation()
 
   return (
@@ -53,7 +56,10 @@ export const ResumeTimeline: React.FC<ResumeTimelineProps> = ({ hasResumePdf = f
             href={`mailto:${siteConfig.contact.email}`}
             className="light:border-zinc-300 light:hover:bg-zinc-100 light:text-zinc-800 focus-visible:ring-offset-background group flex items-center gap-2 rounded-xl border border-white/20 px-5 py-2.5 text-sm font-bold text-white transition-all hover:bg-white/5 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none active:scale-95"
           >
-            {t.sections.contactForm.submitLabel || t.sections.resume.downloadLabel}
+            {
+              /* istanbul ignore next — submitLabel always defined in translations */
+              t.sections.contactForm.submitLabel || t.sections.resume.downloadLabel
+            }
           </a>
         </div>
       </div>

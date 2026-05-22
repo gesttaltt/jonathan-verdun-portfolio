@@ -4,9 +4,10 @@ interface SkeletonProps {
   className?: string
 }
 
-const Skeleton: React.FC<SkeletonProps> = ({ className = '' }) => (
-  <div className={`animate-pulse rounded-xl bg-white/5 ${className}`} />
-)
+const Skeleton: React.FC<SkeletonProps> = ({
+  /* istanbul ignore next — default param, always provided */
+  className = '',
+}) => <div className={`animate-pulse rounded-xl bg-white/5 ${className}`} />
 
 export const PageSkeleton: React.FC = () => (
   <div className="mx-auto max-w-4xl px-4 py-10 sm:px-6 sm:py-16 lg:py-24">

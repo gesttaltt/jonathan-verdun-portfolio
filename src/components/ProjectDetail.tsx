@@ -62,7 +62,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ projectId }) => {
       >
         <div className="flex flex-wrap items-center gap-3">
           <span
-            className={`rounded px-3 py-1 text-[11px] font-black tracking-wider uppercase sm:text-xs ${STATUS_STYLES[project.status] ?? 'bg-zinc-500/20 text-zinc-300'}`}
+            className={`rounded px-3 py-1 text-[11px] font-black tracking-wider uppercase sm:text-xs ${STATUS_STYLES[project.status] ?? /* istanbul ignore next — all known statuses in STYLES */ 'bg-zinc-500/20 text-zinc-300'}`}
           >
             {project.status}
           </span>

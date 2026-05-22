@@ -4,6 +4,26 @@ import { siteConfig } from '@/lib/siteConfig'
 import { ResumeTimeline } from '@/components/ResumeTimeline'
 import { setMockPathname } from '../../jest.setup'
 
+// Extend workHistory with an org that has no translation entries
+// so fallback branches (t.workHistoryRoles[org] || job.role) are exercised.
+jest.mock('@/lib/siteConfig', () => {
+  const actual = jest.requireActual('@/lib/siteConfig')
+  return {
+    siteConfig: {
+      ...actual.siteConfig,
+      workHistory: [
+        ...actual.siteConfig.workHistory,
+        {
+          organization: 'Unknown Org',
+          role: 'Contract Engineer',
+          period: 'Jan 2020 – Dec 2020',
+          url: 'https://example.com',
+        },
+      ],
+    },
+  }
+})
+
 const renderTimeline = (hasResumePdf = false) =>
   render(
     <I18nProvider>
@@ -77,5 +97,29 @@ describe('ResumeTimeline', () => {
 
     const gradientLineDivs = container.querySelectorAll('.bg-gradient-to-b.from-blue-500\\/30')
     expect(gradientLineDivs.length).toBe(siteConfig.workHistory.length - 1)
+  })
+
+  it('falls back to job.role when translation has no role for an org', () => {
+    setMockPathname('/resume')
+    renderTimeline()
+
+    // Unknown Org has no entry in workHistoryRoles → falls back to siteConfig value
+    expect(screen.getByText('Contract Engineer')).toBeInTheDocument()
+  })
+
+  it('falls back to job.period when translation has no period for an org', () => {
+    setMockPathname('/resume')
+    renderTimeline()
+
+    // Unknown Org has no entry in workHistoryPeriods → falls back to siteConfig value
+    expect(screen.getByText('Jan 2020 – Dec 2020')).toBeInTheDocument()
+  })
+
+  it('renders org link for unknown org with fallback data', () => {
+    setMockPathname('/resume')
+    renderTimeline()
+
+    const link = screen.getByRole('link', { name: 'Unknown Org' })
+    expect(link).toHaveAttribute('href', 'https://example.com')
   })
 })

@@ -192,5 +192,45 @@ describe('Sidebar', () => {
 
       process.env.MOCK_CI = originalMockCi
     })
+
+    it('logs fetch errors and sets error outside test environment', async () => {
+      const env = process.env as Record<string, string | undefined>
+      const originalNodeEnv = env['NODE_ENV']
+      env['NODE_ENV'] = 'development'
+      const consoleSpy = jest.spyOn(console, 'error').mockImplementation(() => {})
+
+      ;(global.fetch as jest.Mock).mockRejectedValue(new Error('conn refused'))
+
+      renderSidebar({ repo: mockRepo })
+      expect(await screen.findByText('Status unavailable')).toBeInTheDocument()
+      expect(consoleSpy).toHaveBeenCalledWith('Failed to fetch CI status:', expect.any(Error))
+
+      consoleSpy.mockRestore()
+      env['NODE_ENV'] = originalNodeEnv
+    })
+
+    it('polls CI status at interval outside test environment', async () => {
+      const env = process.env as Record<string, string | undefined>
+      const originalNodeEnv = env['NODE_ENV']
+      env['NODE_ENV'] = 'development'
+      jest.useFakeTimers()
+      ;(global.fetch as jest.Mock).mockResolvedValue({
+        ok: true,
+        json: () =>
+          Promise.resolve({
+            workflow_runs: [{ status: 'completed', conclusion: 'success' }],
+          }),
+      })
+
+      renderSidebar({ repo: mockRepo })
+      expect(await screen.findByText('PASSING')).toBeInTheDocument()
+      expect(global.fetch).toHaveBeenCalledTimes(1)
+
+      jest.advanceTimersByTime(60000)
+      expect(global.fetch).toHaveBeenCalledTimes(2)
+
+      jest.useRealTimers()
+      env['NODE_ENV'] = originalNodeEnv
+    })
   })
 })

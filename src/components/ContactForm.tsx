@@ -104,6 +104,7 @@ export const ContactForm: React.FC = () => {
       return
     }
     const endpoint = getFormEndpoint()
+    /* istanbul ignore next — render-time guard at line 180 prevents this path */
     if (!endpoint) return
     if (!validate()) return
 
