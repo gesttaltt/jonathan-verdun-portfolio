@@ -208,5 +208,26 @@ describe('ContactForm', () => {
         expect(container.textContent).toContain('Send Message')
       })
     })
+
+    it('silently succeeds when honeypot is filled without calling fetch', async () => {
+      const user = userEvent.setup()
+      renderWithI18n(<ContactForm />)
+
+      const honeypotInput = screen.getByLabelText('Leave this empty')
+      await user.type(honeypotInput, 'spam-bot-value')
+
+      await screen.findByPlaceholderText(/your name/i)
+      await user.type(screen.getByPlaceholderText(/your name/i), 'Bot')
+      await user.type(screen.getByPlaceholderText(/you@example/i), 'bot@example.com')
+      await user.type(screen.getByPlaceholderText(/what is this about/i), 'Spam')
+      await user.type(screen.getByPlaceholderText(/tell me about/i), 'Buy now')
+
+      await user.click(screen.getByRole('button', { name: /send message/i }))
+
+      await waitFor(() => {
+        expect(screen.getByText(/Message sent/i)).toBeInTheDocument()
+      })
+      expect(mockFetch).not.toHaveBeenCalled()
+    })
   })
 })

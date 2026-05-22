@@ -80,3 +80,18 @@ test.describe('Blog — List and Detail Pages', () => {
     await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
   })
 })
+
+test.describe('Quality Audit Detail Pages', () => {
+  test('EN quality audit detail renders content', async ({ page }) => {
+    await page.goto('/quality/audit-2026-04-27')
+
+    await expect(page.locator('article, h1, h2').first()).toBeVisible()
+    await expect(page.getByText(/Portfolio Audit/i).first()).toBeVisible()
+  })
+
+  test('ES quality audit detail renders', async ({ page }) => {
+    await page.goto('/es/quality/audit-2026-04-27')
+
+    await expect(page.locator('article, h1, h2').first()).toBeVisible()
+  })
+})

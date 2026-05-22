@@ -41,3 +41,33 @@ test.describe('Accessibility — Quality route (/quality/)', () => {
     expect(results.violations).toEqual([])
   })
 })
+
+test.describe('Keyboard Accessibility', () => {
+  test('skip-to-content link appears on Tab press', async ({ page }) => {
+    await page.goto('/')
+    await expect(page.getByText('jonathan.verdun — QA Automation Engineer')).toBeVisible({
+      timeout: 10_000,
+    })
+
+    await page.keyboard.press('Tab')
+
+    const skipLink = page.getByRole('link', { name: /skip/i })
+    await expect(skipLink).toBeVisible()
+    await expect(skipLink).toHaveAttribute('href', '#main-content')
+  })
+
+  test('language selector is reachable via keyboard', async ({ page }) => {
+    await page.goto('/')
+    await expect(page.getByText('jonathan.verdun — QA Automation Engineer')).toBeVisible({
+      timeout: 10_000,
+    })
+
+    await page.keyboard.press('Tab')
+    const skipLink = page.getByRole('link', { name: /skip/i })
+    await expect(skipLink).toBeVisible()
+
+    await page.keyboard.press('Tab')
+    const langSelector = page.getByRole('link', { name: /cambiar a español|cambiar a/i })
+    await expect(langSelector).toBeVisible()
+  })
+})
