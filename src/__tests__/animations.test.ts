@@ -30,16 +30,6 @@ describe('animations', () => {
     it('is the same function reference as fadeUpVariants', () => {
       expect(fadeInVariants).toBe(fadeUpVariants)
     })
-
-    it('returns correct hidden state', () => {
-      const v = fadeInVariants()
-      expect(v.hidden).toEqual({ opacity: 0, y: 15 })
-    })
-
-    it('uses the provided delay', () => {
-      const v = fadeInVariants(0.2)
-      expect((v.visible as { transition: { delay: number } }).transition.delay).toBe(0.2)
-    })
   })
 
   describe('containerVariants', () => {

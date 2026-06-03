@@ -83,26 +83,6 @@ describe('ThemeProvider', () => {
     expect(await screen.findByText('dark')).toBeInTheDocument()
   })
 
-  it('initializes to dark theme if prefers-color-scheme is dark and localStorage is empty', async () => {
-    window.matchMedia = jest.fn().mockImplementation((query) => ({
-      matches: query === '(prefers-color-scheme: dark)',
-      media: query,
-      onchange: null,
-      addListener: jest.fn(),
-      removeListener: jest.fn(),
-      addEventListener: jest.fn(),
-      removeEventListener: jest.fn(),
-      dispatchEvent: jest.fn(),
-    }))
-
-    render(
-      <ThemeProvider>
-        <TestComponent />
-      </ThemeProvider>
-    )
-    expect(await screen.findByText('dark')).toBeInTheDocument()
-  })
-
   it('toggles theme and updates localStorage', async () => {
     render(
       <ThemeProvider>

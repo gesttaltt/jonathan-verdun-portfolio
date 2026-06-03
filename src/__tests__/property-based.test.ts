@@ -32,6 +32,10 @@ describe('CommandProcessor — property-based', () => {
       'sudo',
       'clear',
       'limpiar',
+      'ls',
+      'cd',
+      'pwd',
+      'cat',
     ])
     fc.assert(
       fc.property(
@@ -174,11 +178,10 @@ describe('ProjectService — property-based', () => {
 
 describe('DataEngineeringService — property-based', () => {
   it('getSystemSpecs is deterministic across repeated calls', () => {
+    const first = DataEngineeringService.getSystemSpecs()
     fc.assert(
       fc.property(fc.integer({ min: 1, max: 10 }), () => {
-        expect(DataEngineeringService.getSystemSpecs()).toEqual(
-          DataEngineeringService.getSystemSpecs()
-        )
+        expect(DataEngineeringService.getSystemSpecs()).toEqual(first)
       })
     )
   })
@@ -210,9 +213,10 @@ describe('DataEngineeringService — property-based', () => {
 
 describe('BioinformaticsService — property-based', () => {
   it('getResearch is deterministic across repeated calls', () => {
+    const first = BioinformaticsService.getResearch()
     fc.assert(
       fc.property(fc.integer({ min: 1, max: 10 }), () => {
-        expect(BioinformaticsService.getResearch()).toEqual(BioinformaticsService.getResearch())
+        expect(BioinformaticsService.getResearch()).toEqual(first)
       })
     )
   })

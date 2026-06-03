@@ -46,9 +46,12 @@ describe('AuditRepository', () => {
 
     it('handles missing metadata gracefully', async () => {
       mockedFs.existsSync.mockReturnValue(true)
-      mockedFs.readdirSync.mockReturnValue(['no-meta.md'] as unknown as fs.Dirent[])
+      mockedFs.readdirSync
+        .mockReturnValueOnce(['no-meta.md'] as unknown as fs.Dirent[])
+        .mockReturnValueOnce([] as unknown as fs.Dirent[])
       mockedFs.readFileSync.mockReturnValue('')
       const audits = await AuditRepository.getAudits()
+      expect(audits).toHaveLength(1)
       expect(audits[0].title).toBe('no-meta.md')
       expect(audits[0].date).toBe('2026-05-01')
     })

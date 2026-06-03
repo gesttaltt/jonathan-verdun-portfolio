@@ -8,7 +8,7 @@ jest.mock('@/lib/siteConfig', () => ({
     performanceMetrics: {
       unitCoverage: '100%',
       automationRate: '95%',
-      securityStatus: 'A+',
+      securityStatus: 'Passed',
     },
     repo: {
       url: 'https://github.com/test/repo',
@@ -65,7 +65,7 @@ describe('Sidebar', () => {
     renderSidebar()
     expect(await screen.findByText('100%')).toBeInTheDocument()
     expect(screen.getByText('95%')).toBeInTheDocument()
-    expect(screen.getByText('A+')).toBeInTheDocument()
+    expect(screen.getByText('Passed')).toBeInTheDocument()
   })
 
   it('handles missing repo config without crashing', () => {

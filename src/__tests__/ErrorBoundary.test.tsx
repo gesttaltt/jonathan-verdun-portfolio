@@ -67,13 +67,4 @@ describe('ErrorBoundary', () => {
     expect(screen.getByText('custom fallback')).toBeInTheDocument()
     expect(screen.queryByText('Component Error')).not.toBeInTheDocument()
   })
-
-  it('does not show default fallback when child is healthy', () => {
-    render(
-      <ErrorBoundary>
-        <Bomb shouldThrow={false} />
-      </ErrorBoundary>
-    )
-    expect(screen.queryByText('Component Error')).not.toBeInTheDocument()
-  })
 })

@@ -73,8 +73,11 @@ describe('DefaultCommandProcessor', () => {
     expect(p.process('oops').output).toContain('command not found')
   })
 
-  it('can be initialized with custom VFS root', () => {
-    // Verified via dedicated VirtualFileSystem.test.ts
+  it('initializes project directories in the VFS from the projects list', () => {
+    const custom = new DefaultCommandProcessor(undefined, 'help', [
+      { id: 'test-proj', title: 'Test Proj' },
+    ])
+    expect(custom.process('ls /projects').output).toContain('test-proj')
   })
 
   it('returns an empty output and a clear signal for the clear command', () => {

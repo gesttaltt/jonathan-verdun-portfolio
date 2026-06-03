@@ -113,7 +113,6 @@ describe('useTerminal', () => {
     })
 
     expect(result.current.history).toHaveLength(0)
-    // BUG: currentPath should still be '/docs', but it's currently being reset to '/'
     expect(result.current.currentPath).toBe('/docs')
   })
 
