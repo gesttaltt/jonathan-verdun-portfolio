@@ -2,6 +2,16 @@ import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
 import { marked } from 'marked'
+import sanitizeHtml from 'sanitize-html'
+
+const SANITIZE_OPTIONS: sanitizeHtml.IOptions = {
+  allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img']),
+  allowedAttributes: {
+    ...sanitizeHtml.defaults.allowedAttributes,
+    img: ['src', 'alt', 'title'],
+    a: ['href', 'name', 'target', 'rel'],
+  },
+}
 
 /**
  * Server-side repository for reading and parsing quality audits.
@@ -42,7 +52,7 @@ export class AuditRepository {
             slug,
             title,
             date,
-            content: marked.parse(content) as string,
+            content: sanitizeHtml(marked.parse(content) as string, SANITIZE_OPTIONS),
             excerpt: content.slice(0, 150).replace(/[#*`]/g, '') + '...',
             category: 'audit',
           })
@@ -66,7 +76,7 @@ export class AuditRepository {
             slug,
             title,
             date: '2026-05-01', // Specs are structural, date is less relevant but needed for sorting
-            content: marked.parse(content) as string,
+            content: sanitizeHtml(marked.parse(content) as string, SANITIZE_OPTIONS),
             excerpt: content.slice(0, 150).replace(/[#*`]/g, '') + '...',
             category: 'spec',
           })
@@ -95,7 +105,7 @@ export class AuditRepository {
       slug,
       title,
       date,
-      content: marked.parse(content) as string,
+      content: sanitizeHtml(marked.parse(content) as string, SANITIZE_OPTIONS),
       excerpt: content.slice(0, 150).replace(/[#*`]/g, '') + '...',
       category: isSpec ? 'spec' : 'audit',
     }

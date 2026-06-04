@@ -104,6 +104,27 @@ describe('AuditRepository', () => {
     })
   })
 
+  describe('XSS sanitization', () => {
+    it('strips script tags and event-handler attributes from marked output', async () => {
+      ;(fs.existsSync as jest.Mock).mockImplementation((p) => p === mockDocsPath)
+      ;(fs.readdirSync as jest.Mock).mockReturnValue(['xss-test.md'])
+      ;(fs.readFileSync as jest.Mock).mockReturnValue('content')
+      ;(matter as unknown as jest.Mock).mockReturnValue({
+        data: { title: 'XSS Test', date: '2026-05-11' },
+        content: '## Title',
+      })
+      ;(marked.parse as unknown as jest.Mock).mockReturnValue(
+        '<p>Safe</p><script>alert(1)</script><img src="x" onerror="alert(2)">'
+      )
+
+      const audits = await AuditRepository.getAudits()
+
+      expect(audits[0]?.content).not.toContain('<script>')
+      expect(audits[0]?.content).not.toContain('onerror')
+      expect(audits[0]?.content).toContain('Safe')
+    })
+  })
+
   describe('getAuditBySlug', () => {
     it('returns null if file does not exist', async () => {
       ;(fs.existsSync as jest.Mock).mockReturnValue(false)

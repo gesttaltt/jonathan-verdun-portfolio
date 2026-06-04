@@ -78,15 +78,26 @@ describe('BlogService', () => {
     expect(posts[0]?.tags).toEqual([])
   })
 
-  it('skips frontmatter lines without a colon separator', () => {
+  it('gracefully filters out files with malformed YAML frontmatter', () => {
     mockedFs.existsSync.mockReturnValue(true)
     mockedFs.readdirSync.mockReturnValue(asReaddirResult(['post.mdx']))
     mockedFs.readFileSync.mockReturnValue(
       `---\ntitle: Post\ndate: 2026-01-01\ninvalid-no-colon-line\ndescription: Desc\n---\nbody`
     )
+    // gray-matter/js-yaml throws on invalid YAML; file is silently skipped
+    expect(BlogService.getAllPosts()).toHaveLength(0)
+  })
+
+  it('preserves apostrophes and special characters in metadata', () => {
+    mockedFs.existsSync.mockReturnValue(true)
+    mockedFs.readdirSync.mockReturnValue(asReaddirResult(['post.mdx']))
+    mockedFs.readFileSync.mockReturnValue(
+      `---\ntitle: "It's Done"\ndate: 2026-01-01\ndescription: "Author's guide"\n---\nbody`
+    )
     const posts = BlogService.getAllPosts()
     expect(posts).toHaveLength(1)
-    expect(posts[0]?.title).toBe('Post')
+    expect(posts[0]?.title).toBe("It's Done")
+    expect(posts[0]?.description).toBe("Author's guide")
   })
 
   it('returns null from getPost when file does not exist', () => {
