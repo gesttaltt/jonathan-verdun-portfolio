@@ -56,8 +56,8 @@ export class VirtualFileSystem {
     let node = this.root
     for (const part of this.currentPath) {
       /* istanbul ignore next */
-      if (node.children?.[part]) {
-        node = node.children[part]
+      if (node.children && Object.hasOwn(node.children, part)) {
+        node = node.children[part]!
       }
     }
     return node
@@ -73,8 +73,8 @@ export class VirtualFileSystem {
     let node = this.root
     const parts = path === '/' ? [] : path.split('/').filter(Boolean)
     for (const part of parts) {
-      if (node.children?.[part]) {
-        node = node.children[part]
+      if (node.children && Object.hasOwn(node.children, part)) {
+        node = node.children[part]!
       } else {
         return `ls: cannot access '${path}': No such file or directory`
       }
@@ -132,10 +132,12 @@ export class VirtualFileSystem {
           let node = this.root
           for (const p of tempPath) {
             /* istanbul ignore next */
-            node = node.children?.[p] as VFSNode
+            if (node.children && Object.hasOwn(node.children, p)) {
+              node = node.children[p]!
+            }
           }
 
-          if (node.children?.[part] && node.children[part].type === 'dir') {
+          if (node.children && Object.hasOwn(node.children, part) && node.children[part]!.type === 'dir') {
             tempPath.push(part)
           } else {
             return `cd: no such file or directory: ${path}`
@@ -148,8 +150,8 @@ export class VirtualFileSystem {
 
     const node = this.getCurrentNode()
     /* istanbul ignore next */
-    if (node.children?.[path]) {
-      if (node.children[path].type === 'dir') {
+    if (node.children && Object.hasOwn(node.children, path)) {
+      if (node.children[path]!.type === 'dir') {
         this.currentPath.push(path)
         return null
       }
@@ -161,9 +163,9 @@ export class VirtualFileSystem {
   cat(filename: string): string {
     const node = this.getCurrentNode()
     /* istanbul ignore next */
-    if (node.children?.[filename]) {
-      if (node.children[filename].type === 'file') {
-        return node.children[filename].content || ''
+    if (node.children && Object.hasOwn(node.children, filename)) {
+      if (node.children[filename]!.type === 'file') {
+        return node.children[filename]!.content || ''
       }
       return `cat: ${filename}: Is a directory`
     }

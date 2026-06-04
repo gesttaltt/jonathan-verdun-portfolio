@@ -70,6 +70,33 @@ describe('CommandProcessor — property-based', () => {
   })
 })
 
+// ─── CommandProcessor — prototype-pollution resistance ────────────────────────
+
+describe('CommandProcessor — prototype-pollution resistance', () => {
+  const processor = new DefaultCommandProcessor()
+
+  const poisonKeys = [
+    '__proto__',
+    'constructor',
+    'hasOwnProperty',
+    'toString',
+    'valueOf',
+    'prototype',
+    '__defineGetter__',
+    '__lookupGetter__',
+  ]
+
+  it('prototype and built-in Object keys never produce a real command response', () => {
+    fc.assert(
+      fc.property(fc.constantFrom(...poisonKeys), (key) => {
+        const result = processor.process(key)
+        expect(result.output).toContain('command not found')
+        expect(result.signal).toBeUndefined()
+      })
+    )
+  })
+})
+
 // ─── CommandProcessor (ES) ─────────────────────────────────────────────────────
 
 describe('ES CommandProcessor — property-based', () => {
