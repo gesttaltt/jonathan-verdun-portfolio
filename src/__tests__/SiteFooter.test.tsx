@@ -13,6 +13,15 @@ const wrap = () =>
   )
 
 describe('SiteFooter', () => {
+  beforeAll(() => {
+    jest.useFakeTimers()
+    jest.setSystemTime(new Date('2026-01-01'))
+  })
+
+  afterAll(() => {
+    jest.useRealTimers()
+  })
+
   it('renders as a footer landmark', () => {
     wrap()
     expect(screen.getByRole('contentinfo')).toBeInTheDocument()
@@ -48,8 +57,8 @@ describe('SiteFooter', () => {
 
   it('renders the current year in the copyright line', () => {
     wrap()
-    const year = new Date().getFullYear().toString()
-    expect(screen.getByText(new RegExp(year))).toBeInTheDocument()
+    // Year is fixed to 2026 via jest.setSystemTime in beforeAll
+    expect(screen.getByText(/2026/)).toBeInTheDocument()
   })
 
   it('renders the @gesttaltt GitHub handle as a link', () => {

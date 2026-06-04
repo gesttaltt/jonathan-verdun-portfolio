@@ -65,7 +65,7 @@ describe('QualityDashboard', () => {
     expect(await screen.findByText('Visual Regression')).toBeInTheDocument()
     expect(screen.queryByText('General Audit')).not.toBeInTheDocument()
     expect(screen.queryByText('Test Plan')).not.toBeInTheDocument()
-  }, 10000)
+  }, 3000)
 
   it('filters audits based on search query in excerpt', async () => {
     const user = userEvent.setup()
@@ -76,7 +76,7 @@ describe('QualityDashboard', () => {
 
     expect(await screen.findByText('General Audit')).toBeInTheDocument()
     expect(screen.queryByText('Visual Regression')).not.toBeInTheDocument()
-  }, 10000)
+  }, 3000)
 
   it('shows no results message when no audits match', async () => {
     const user = userEvent.setup()
@@ -87,7 +87,7 @@ describe('QualityDashboard', () => {
 
     expect(screen.getByText(/no audits match your search query/i)).toBeInTheDocument()
     expect(screen.queryByText('General Audit')).not.toBeInTheDocument()
-  }, 10000)
+  }, 3000)
 
   it('clears search results when clicking the clear button', async () => {
     const user = userEvent.setup()
@@ -97,13 +97,13 @@ describe('QualityDashboard', () => {
     await user.type(input, 'Visual')
     expect(screen.queryByText('General Audit')).not.toBeInTheDocument()
 
-    const clearButton = screen.getByRole('button')
+    const clearButton = screen.getByRole('button', { name: /clear/i })
     await user.click(clearButton)
 
     expect(input).toHaveValue('')
     expect(screen.getByText('General Audit')).toBeInTheDocument()
     expect(screen.getByText('Visual Regression')).toBeInTheDocument()
-  }, 10000)
+  }, 3000)
 
   it('displays correct counts and status', () => {
     renderDashboard()

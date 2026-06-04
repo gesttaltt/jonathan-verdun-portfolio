@@ -184,13 +184,15 @@ describe('Sidebar', () => {
 
     it('immediately sets success status in mock mode', async () => {
       const originalMockCi = process.env.MOCK_CI
-      process.env.MOCK_CI = 'true'
+      try {
+        process.env.MOCK_CI = 'true'
 
-      renderSidebar({ repo: mockRepo })
-      expect(await screen.findByText('PASSING')).toBeInTheDocument()
-      expect(global.fetch).not.toHaveBeenCalled()
-
-      process.env.MOCK_CI = originalMockCi
+        renderSidebar({ repo: mockRepo })
+        expect(await screen.findByText('PASSING')).toBeInTheDocument()
+        expect(global.fetch).not.toHaveBeenCalled()
+      } finally {
+        process.env.MOCK_CI = originalMockCi
+      }
     })
 
     it('logs fetch errors and sets error outside test environment', async () => {

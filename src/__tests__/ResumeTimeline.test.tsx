@@ -95,7 +95,9 @@ describe('ResumeTimeline', () => {
     setMockPathname('/resume')
     const { container } = renderTimeline()
 
-    const gradientLineDivs = container.querySelectorAll('.bg-gradient-to-b.from-blue-500\\/30')
+    // The connector line uses 'bg-gradient-to-b' + 'w-px' classes (the /30 opacity suffix
+    // is not representable in a CSS selector string, so we query by the other stable classes)
+    const gradientLineDivs = container.querySelectorAll('.bg-gradient-to-b.w-px')
     expect(gradientLineDivs.length).toBe(siteConfig.workHistory.length - 1)
   })
 

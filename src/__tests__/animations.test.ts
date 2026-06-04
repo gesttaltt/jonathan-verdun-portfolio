@@ -17,12 +17,14 @@ describe('animations', () => {
 
     it('uses delay=0 by default', () => {
       const v = fadeUpVariants()
-      expect((v.visible as { transition: { delay: number } }).transition.delay).toBe(0)
+      expect(typeof (v.visible as any).transition?.delay).toBe('number')
+      expect((v.visible as any).transition?.delay).toBe(0)
     })
 
     it('uses the provided delay', () => {
       const v = fadeUpVariants(0.3)
-      expect((v.visible as { transition: { delay: number } }).transition.delay).toBe(0.3)
+      expect(typeof (v.visible as any).transition?.delay).toBe('number')
+      expect((v.visible as any).transition?.delay).toBe(0.3)
     })
   })
 
@@ -40,16 +42,14 @@ describe('animations', () => {
 
     it('uses DEFAULT_STAGGER by default', () => {
       const v = containerVariants()
-      expect(
-        (v.visible as { transition: { staggerChildren: number } }).transition.staggerChildren
-      ).toBe(DEFAULT_STAGGER)
+      expect(typeof (v.visible as any).transition?.staggerChildren).toBe('number')
+      expect((v.visible as any).transition?.staggerChildren).toBe(DEFAULT_STAGGER)
     })
 
     it('uses the provided stagger value', () => {
       const v = containerVariants(0.25)
-      expect(
-        (v.visible as { transition: { staggerChildren: number } }).transition.staggerChildren
-      ).toBe(0.25)
+      expect(typeof (v.visible as any).transition?.staggerChildren).toBe('number')
+      expect((v.visible as any).transition?.staggerChildren).toBe(0.25)
     })
   })
 
@@ -61,12 +61,14 @@ describe('animations', () => {
 
     it('uses delay=0 by default', () => {
       const v = staggerItemVariants()
-      expect((v.visible as { transition: { delay: number } }).transition.delay).toBe(0)
+      expect(typeof (v.visible as any).transition?.delay).toBe('number')
+      expect((v.visible as any).transition?.delay).toBe(0)
     })
 
     it('uses the provided delay', () => {
       const v = staggerItemVariants(0.5)
-      expect((v.visible as { transition: { delay: number } }).transition.delay).toBe(0.5)
+      expect(typeof (v.visible as any).transition?.delay).toBe('number')
+      expect((v.visible as any).transition?.delay).toBe(0.5)
     })
   })
 
@@ -76,7 +78,8 @@ describe('animations', () => {
     })
 
     it('returns correct visible state', () => {
-      expect((slideDownVariants.visible as { opacity: number }).opacity).toBe(1)
+      expect(typeof (slideDownVariants.visible as any).opacity).toBe('number')
+      expect((slideDownVariants.visible as any).opacity).toBe(1)
     })
   })
 

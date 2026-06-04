@@ -32,12 +32,14 @@ describe('Loading skeletons and manifest', () => {
   it('renders PageSkeleton structural blocks', () => {
     const { container } = render(<PageSkeleton />)
     const pulseBlocks = container.querySelectorAll('.animate-pulse')
+    // 6 = 3 header blocks (back-link, title, subtitle) + 3 content blocks (two full-width + one 3/4-width)
     expect(pulseBlocks.length).toBe(6)
   })
 
   it('renders CardSkeleton structural blocks', () => {
     const { container } = render(<CardSkeleton />)
     const pulseBlocks = container.querySelectorAll('.animate-pulse')
+    // 5 = header icon + header label + title + body + footer link
     expect(pulseBlocks.length).toBe(5)
   })
 })

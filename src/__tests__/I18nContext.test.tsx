@@ -49,6 +49,15 @@ describe('I18nProvider', () => {
 })
 
 describe('useTranslation (fallback)', () => {
+  const originalNodeEnv = process.env.NODE_ENV
+
+  afterEach(() => {
+    Object.defineProperty(process.env, 'NODE_ENV', {
+      value: originalNodeEnv,
+      configurable: true,
+    })
+  })
+
   it('returns English translations when used outside I18nProvider', () => {
     function Bare() {
       const t = useTranslation()

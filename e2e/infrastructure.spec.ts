@@ -39,6 +39,9 @@ test.describe('Content Security Policy', () => {
     expect(content).toContain("default-src 'self'")
     expect(content).toContain('script-src')
     expect(content).toContain('style-src')
+    expect(content).toContain("frame-ancestors 'none'")
+    expect(content).toContain("form-action 'self'")
+    expect(content).not.toContain('*')
   })
 
   test('ES pages include CSP meta tag', async ({ page }) => {
@@ -86,6 +89,13 @@ test.describe('Contact Form Honeypot', () => {
       has: page.locator('input[name="_hp"]'),
     })
     await expect(container).toBeAttached()
+
+    // Verify the container is actually off-screen
+    const box = await container.boundingBox()
+    // off-screen: either null (not rendered) or positioned far off-screen
+    if (box !== null) {
+      expect(box.y).toBeLessThan(-1000)
+    }
   })
 
   test('filling honeypot silently pretends success', async ({ page }) => {

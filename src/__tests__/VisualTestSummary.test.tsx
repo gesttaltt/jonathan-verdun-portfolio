@@ -90,4 +90,36 @@ describe('VisualTestSummary', () => {
     )
     expect(screen.getByText('0.0%')).toBeInTheDocument()
   })
+
+  it('calculates and displays correct pass rate for 2 of 4 passing (50.0%)', () => {
+    mockCoverageData.numPassedTests = 2
+    mockCoverageData.numTotalTests = 4
+    mockCoverageData.numFailedTests = 2
+    mockCoverageData.success = false
+
+    render(
+      <I18nProvider>
+        <VisualTestSummary />
+      </I18nProvider>
+    )
+    // (2/4)*100 = 50.0
+    expect(screen.getByText('50.0%')).toBeInTheDocument()
+    // passed count displayed
+    expect(screen.getByText('2')).toBeInTheDocument()
+  })
+
+  it('calculates and displays 100.0% pass rate when all tests pass', () => {
+    mockCoverageData.numPassedTests = 275
+    mockCoverageData.numTotalTests = 275
+    mockCoverageData.numFailedTests = 0
+    mockCoverageData.success = true
+
+    render(
+      <I18nProvider>
+        <VisualTestSummary />
+      </I18nProvider>
+    )
+    expect(screen.getByText('100.0%')).toBeInTheDocument()
+    expect(screen.getByText('PASSED')).toBeInTheDocument()
+  })
 })

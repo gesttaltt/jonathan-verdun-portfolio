@@ -36,6 +36,8 @@ describe('CommandProcessor — property-based', () => {
       'cd',
       'pwd',
       'cat',
+      'email',
+      'contacto',
     ])
     fc.assert(
       fc.property(

@@ -56,7 +56,9 @@ describe('BioinformaticsResearchCard — unknown focus key (fallback branches)',
 
   it('renders an empty description when focus is unknown', () => {
     const { container } = wrap(unknownSpec)
-    const descEl = container.querySelector('p.mb-6')
+    // The description paragraph falls back to '' for unknown focusDescriptions.
+    // It is the only paragraph with both text-sm and leading-relaxed classes.
+    const descEl = container.querySelector('p.text-sm.leading-relaxed')
     expect(descEl?.textContent).toBe('')
   })
 

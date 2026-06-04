@@ -5,6 +5,28 @@ import { siteConfig } from '@/lib/siteConfig'
 import { en } from '@/lib/i18n/en'
 import { es } from '@/lib/i18n/es'
 
+describe('i18n translation value completeness', () => {
+  it('every en.terminal.interactive value is a non-empty string', () => {
+    for (const [key, value] of Object.entries(en.terminal.interactive)) {
+      expect(typeof value).toBe('string')
+      expect(value.trim().length).toBeGreaterThan(0)
+      ;(void key) // suppress unused-var lint
+    }
+  })
+
+  it('every es.terminal.interactive value is a non-empty string', () => {
+    for (const [key, value] of Object.entries(es.terminal.interactive)) {
+      expect(typeof value).toBe('string')
+      expect(value.trim().length).toBeGreaterThan(0)
+      ;(void key)
+    }
+  })
+
+  it('en and es sections.projects labels are not identical (i.e., they are actually translated)', () => {
+    expect(en.sections.projects).not.toBe(es.sections.projects)
+  })
+})
+
 describe('i18n metadata consistency', () => {
   it('has a non-empty description in both locales', () => {
     expect(en.description.length).toBeGreaterThan(0)

@@ -29,6 +29,12 @@ jest.mock('../../coverage.json', () => ({
 }))
 
 describe('TestDetailedList', () => {
+  const originalTestResults = mockCoverageData.testResults
+
+  afterEach(() => {
+    mockCoverageData.testResults = originalTestResults
+  })
+
   it('renders all test suites with correct names and stats', () => {
     render(<TestDetailedList />)
 
@@ -46,7 +52,6 @@ describe('TestDetailedList', () => {
   })
 
   it('falls back to "unknown" when suite name is empty', () => {
-    const originalData = mockCoverageData.testResults
     mockCoverageData.testResults = [
       {
         name: '',
@@ -60,7 +65,5 @@ describe('TestDetailedList', () => {
     render(<TestDetailedList />)
 
     expect(screen.getByText('unknown')).toBeInTheDocument()
-
-    mockCoverageData.testResults = originalData
   })
 })

@@ -340,4 +340,20 @@ describe('useTerminal — command history navigation', () => {
     act(() => result.current.execute('clear'))
     expect(result.current.navigateHistory('up', '')).toBe('clear')
   })
+
+  it('ArrowUp past the oldest command stays at oldest command (no wrap-around)', () => {
+    const { result } = renderHook(() => useTerminal([], makeProcessor()))
+    boot()
+    act(() => {
+      result.current.execute('first')
+      result.current.execute('second')
+    })
+    // Navigate to newest
+    result.current.navigateHistory('up', '')        // → 'second'
+    // Navigate to oldest
+    result.current.navigateHistory('up', 'second') // → 'first'
+    // Press ArrowUp again — should clamp at 'first', not wrap
+    const clamped = result.current.navigateHistory('up', 'first')
+    expect(clamped).toBe('first')
+  })
 })

@@ -49,15 +49,25 @@ describe('GlobalError', () => {
     expect(screen.queryByText(/digest:/i)).not.toBeInTheDocument()
   })
 
-  it('renders Spanish content when pathname starts with /es', () => {
-    window.history.pushState({}, '', '/es/some-path')
+  describe('Spanish locale tests', () => {
+    const originalPathname = window.location.pathname
 
-    render(<GlobalError error={error} reset={reset} />)
+    beforeEach(() => {
+      window.history.pushState({}, '', '/es/some-path')
+    })
 
-    expect(screen.getByText(/Fallo crítico del sistema/i)).toBeInTheDocument()
-    expect(screen.getByText(/Error Crítico/i)).toBeInTheDocument()
-    expect(screen.getByText(/Algo salió mal/i)).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: /Reintentar/i })).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: /Volver al inicio/i })).toHaveAttribute('href', '/es')
+    afterEach(() => {
+      window.history.pushState({}, '', originalPathname)
+    })
+
+    it('renders Spanish content when pathname starts with /es', () => {
+      render(<GlobalError error={error} reset={reset} />)
+
+      expect(screen.getByText(/Fallo crítico del sistema/i)).toBeInTheDocument()
+      expect(screen.getByText(/Error Crítico/i)).toBeInTheDocument()
+      expect(screen.getByText(/Algo salió mal/i)).toBeInTheDocument()
+      expect(screen.getByRole('button', { name: /Reintentar/i })).toBeInTheDocument()
+      expect(screen.getByRole('link', { name: /Volver al inicio/i })).toHaveAttribute('href', '/es')
+    })
   })
 })

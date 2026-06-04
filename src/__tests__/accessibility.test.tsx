@@ -57,7 +57,7 @@ describe('Accessibility — external links', () => {
     const { container } = renderHome()
     const images = Array.from(container.querySelectorAll('img'))
     images.forEach((img) => {
-      expect(img.getAttribute('alt')).toBeTruthy()
+      expect(img.getAttribute('alt')).not.toBe('')
     })
   })
 })

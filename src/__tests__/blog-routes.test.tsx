@@ -121,7 +121,7 @@ describe('Blog route wrappers', () => {
   it('generates metadata for EN slug route when post exists', async () => {
     const metadata = await generateEnMetadata({ params: Promise.resolve({ slug: 'qa-article' }) })
     expect(metadata).toMatchObject({
-      title: expect.stringContaining('QA Article'),
+      title: 'QA Article — Jonathan Verdun',
       description: 'Desc',
     })
   })
@@ -135,7 +135,7 @@ describe('Blog route wrappers', () => {
   it('generates metadata for ES slug route when post exists', async () => {
     const metadata = await generateEsMetadata({ params: Promise.resolve({ slug: 'qa-article' }) })
     expect(metadata).toMatchObject({
-      title: expect.stringContaining('QA Article'),
+      title: 'QA Article — Jonathan Verdun',
       description: 'Desc',
     })
   })
