@@ -33,6 +33,12 @@ export default defineConfig({
     url: 'http://localhost:3000',
     reuseExistingServer: !process.env.CI,
     timeout: process.env.MOCK_CI === 'true' ? 30_000 : 120_000,
-    env: { NEXT_TELEMETRY_DISABLED: '1' },
+    env: {
+      NEXT_TELEMETRY_DISABLED: '1',
+      // Provide a synthetic Formspree ID so the contact form renders in E2E.
+      // The honeypot and error-state tests need the form to be active.
+      // Real submissions are intercepted by page.route() in those tests.
+      NEXT_PUBLIC_FORMSPREE_ID: process.env.NEXT_PUBLIC_FORMSPREE_ID ?? 'e2e-test-form',
+    },
   },
 })

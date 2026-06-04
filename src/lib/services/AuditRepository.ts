@@ -87,8 +87,11 @@ export class AuditRepository {
   }
 
   static async getAuditBySlug(slug: string): Promise<AuditEntry | null> {
+    // Reject traversal sequences. baseSlug must also be a single path component.
+    if (!slug || slug.includes('..')) return null
     const isSpec = slug.startsWith('specs/')
     const baseSlug = isSpec ? slug.replace('specs/', '') : slug
+    if (baseSlug.includes('/')) return null
     const basePath = isSpec ? this.SPECS_PATH : this.AUDITS_PATH
 
     const filePath = path.join(basePath, `${baseSlug}.md`)

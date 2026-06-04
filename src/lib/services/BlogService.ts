@@ -34,6 +34,11 @@ export class BlogService {
   }
 
   static getPost(slug: string): { meta: BlogPostMeta; content: string } | null {
+    // Reject traversal sequences and path separators — slugs are plain filenames only.
+    // Static export makes this safe today (slugs enumerated at build time), but this
+    // guard protects against future SSR migration without code change.
+    if (!slug || slug.includes('..') || slug.includes('/')) return null
+
     const filePath = path.join(CONTENT_DIR, `${slug}.mdx`)
     if (!fs.existsSync(filePath)) return null
 

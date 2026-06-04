@@ -28,6 +28,30 @@ describe('AuditDetailContent', () => {
     expect(screen.getByText('Audit content here')).toBeInTheDocument()
   })
 
+  it('renders inline HTML markup faithfully (dangerouslySetInnerHTML contract)', () => {
+    const { container } = render(
+      <AuditDetailContent
+        {...defaultProps}
+        content='<p><strong>Formatted</strong> text with <em>emphasis</em> and <a href="#">links</a></p>'
+      />
+    )
+    expect(container.querySelector('strong')).not.toBeNull()
+    expect(container.querySelector('em')).not.toBeNull()
+    expect(container.querySelector('a')).not.toBeNull()
+  })
+
+  it('does not escape HTML entities — sanitization is the responsibility of AuditRepository', () => {
+    const { container } = render(
+      <AuditDetailContent
+        {...defaultProps}
+        content='<p class="highlight">Raw &amp; HTML</p>'
+      />
+    )
+    // Class attribute present and & entity decoded — confirms dangerouslySetInnerHTML path
+    expect(container.querySelector('.highlight')).not.toBeNull()
+    expect(container.querySelector('.highlight')?.textContent).toBe('Raw & HTML')
+  })
+
   it('renders Spanish back label correctly', () => {
     render(
       <AuditDetailContent

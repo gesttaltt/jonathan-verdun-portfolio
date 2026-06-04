@@ -1,3 +1,5 @@
+import pkg from '../../package.json'
+
 export const siteConfig = {
   name: 'Jonathan Verdun',
   title: 'Jonathan Verdun | Architecting Resilient Quality Gates',
@@ -78,8 +80,8 @@ export const siteConfig = {
   },
 
   versions: {
-    portfolio: '0.1.0',
-    nextjs: '16.2.4',
+    portfolio: pkg.version,
+    nextjs: (pkg.dependencies as Record<string, string>).next?.replace(/^\^/, '') ?? '?',
   },
 
   certification: {

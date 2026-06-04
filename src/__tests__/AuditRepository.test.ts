@@ -125,6 +125,32 @@ describe('AuditRepository', () => {
     })
   })
 
+  describe('getAuditBySlug — path traversal rejection', () => {
+    it('returns null for slug containing .. without touching the filesystem', async () => {
+      const audit = await AuditRepository.getAuditBySlug('../etc/passwd')
+      expect(audit).toBeNull()
+      expect(fs.existsSync).not.toHaveBeenCalled()
+    })
+
+    it('returns null for specs/ slug containing ..', async () => {
+      const audit = await AuditRepository.getAuditBySlug('specs/../../../etc/shadow')
+      expect(audit).toBeNull()
+      expect(fs.existsSync).not.toHaveBeenCalled()
+    })
+
+    it('returns null for slug with extra / in baseSlug', async () => {
+      const audit = await AuditRepository.getAuditBySlug('specs/foo/bar')
+      expect(audit).toBeNull()
+      expect(fs.existsSync).not.toHaveBeenCalled()
+    })
+
+    it('returns null for empty slug', async () => {
+      const audit = await AuditRepository.getAuditBySlug('')
+      expect(audit).toBeNull()
+      expect(fs.existsSync).not.toHaveBeenCalled()
+    })
+  })
+
   describe('getAuditBySlug', () => {
     it('returns null if file does not exist', async () => {
       ;(fs.existsSync as jest.Mock).mockReturnValue(false)

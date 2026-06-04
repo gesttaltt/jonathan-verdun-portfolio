@@ -100,6 +100,23 @@ describe('BlogService', () => {
     expect(posts[0]?.description).toBe("Author's guide")
   })
 
+  describe('getPost — path traversal rejection', () => {
+    it('returns null for slug containing .. without touching the filesystem', () => {
+      expect(BlogService.getPost('../../../etc/passwd')).toBeNull()
+      expect(mockedFs.existsSync).not.toHaveBeenCalled()
+    })
+
+    it('returns null for slug containing / without touching the filesystem', () => {
+      expect(BlogService.getPost('../../secrets')).toBeNull()
+      expect(mockedFs.existsSync).not.toHaveBeenCalled()
+    })
+
+    it('returns null for empty slug', () => {
+      expect(BlogService.getPost('')).toBeNull()
+      expect(mockedFs.existsSync).not.toHaveBeenCalled()
+    })
+  })
+
   it('returns null from getPost when file does not exist', () => {
     mockedFs.existsSync.mockReturnValue(false)
     expect(BlogService.getPost('missing')).toBeNull()
