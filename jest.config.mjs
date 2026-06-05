@@ -43,6 +43,8 @@ const config = {
     // Data-heavy contract and translation files with top-level initialization
     '!src/lib/contracts/TerminalContract.ts',
     '!src/lib/i18n/es.ts',
+    // Shared test helper — not application code
+    '!src/test-utils.tsx',
   ],
   coverageThreshold: {
     global: {

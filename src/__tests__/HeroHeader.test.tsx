@@ -1,19 +1,15 @@
-import { render, screen } from '@testing-library/react'
-import { domAnimation, LazyMotion, MotionConfig } from 'framer-motion'
+import { screen } from '@testing-library/react'
 import { HeroHeader } from '@/components/HeroHeader'
 import { siteConfig } from '@/lib/siteConfig'
 import { ThemeProvider } from '@/lib/theme/context'
 import { I18nProvider } from '@/lib/i18n/context'
+import { renderWithMotion } from '@/test-utils'
 
 const wrap = () =>
-  render(
+  renderWithMotion(
     <ThemeProvider>
       <I18nProvider>
-        <LazyMotion features={domAnimation}>
-          <MotionConfig reducedMotion="always">
-            <HeroHeader />
-          </MotionConfig>
-        </LazyMotion>
+        <HeroHeader />
       </I18nProvider>
     </ThemeProvider>
   )

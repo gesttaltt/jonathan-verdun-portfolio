@@ -35,6 +35,9 @@ jest.mock('next/navigation', () => {
   }
 })
 
+// BlogList is mocked here so route-wrapper tests stay fast and isolated.
+// Locale-aware href generation (e.g. /es/blog/slug vs /blog/slug) is covered
+// by the dedicated BlogList.test.tsx suite which exercises useTranslation directly.
 jest.mock('@/components/BlogList', () => ({
   BlogList: ({ posts }: { posts: Array<{ slug: string }> }) => (
     <div data-testid="blog-list">{posts.map((p) => p.slug).join(',')}</div>

@@ -41,12 +41,11 @@ describe('VisualTestSummary — property-based component logic', () => {
           // Verify that essential elements are still present
           expect(screen.getByText(/CI Protocol/i)).toBeInTheDocument()
 
+          // The regression banner appears iff numFailedTests > 0.
           if (data.numFailedTests > 0) {
-            // Just verify it doesn't crash during rendering the regression message
-            const regressionText = screen.queryByText(/REGRESSION DETECTED/i)
-            if (regressionText) {
-              expect(regressionText).toBeInTheDocument()
-            }
+            expect(screen.queryByText(/REGRESSION DETECTED/i)).not.toBeNull()
+          } else {
+            expect(screen.queryByText(/REGRESSION DETECTED/i)).toBeNull()
           }
 
           unmount()

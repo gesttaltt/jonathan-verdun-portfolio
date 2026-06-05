@@ -53,17 +53,15 @@ describe('ProjectDetail', () => {
   })
 
   it('renders highlights section when project has highlights', () => {
+    // proj-01 (existingProjectId) always has highlights in en.ts — assertion fires unconditionally
     render(
       <I18nProvider>
         <ProjectDetail projectId={existingProjectId} />
       </I18nProvider>
     )
 
-    const project = en.projects.find((p) => p.id === existingProjectId)
-    if (project?.highlights) {
-      expect(screen.getByText('Key Results')).toBeInTheDocument()
-      expect(screen.getAllByRole('listitem').length).toBeGreaterThanOrEqual(1)
-    }
+    expect(screen.getByText('Key Results')).toBeInTheDocument()
+    expect(screen.getAllByRole('listitem').length).toBeGreaterThanOrEqual(1)
   })
 
   it('renders architecture section when project has architecture', () => {
@@ -73,10 +71,7 @@ describe('ProjectDetail', () => {
       </I18nProvider>
     )
 
-    const project = en.projects.find((p) => p.id === existingProjectId)
-    if (project?.architecture) {
-      expect(screen.getByText('Architecture')).toBeInTheDocument()
-    }
+    expect(screen.getByText('Architecture')).toBeInTheDocument()
   })
 
   it('renders related links section when project has extra links', () => {
@@ -86,10 +81,7 @@ describe('ProjectDetail', () => {
       </I18nProvider>
     )
 
-    const project = en.projects.find((p) => p.id === existingProjectId)
-    if (project?.links && project.links.length > 0) {
-      expect(screen.getByText('Related Links')).toBeInTheDocument()
-    }
+    expect(screen.getByText('Related Links')).toBeInTheDocument()
   })
 
   it('returns null and warns when project id is not found', () => {
