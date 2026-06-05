@@ -75,7 +75,7 @@ describe('DefaultCommandProcessor', () => {
 
   it('initializes project directories in the VFS from the projects list', () => {
     const custom = new DefaultCommandProcessor(undefined, 'help', [
-      { id: 'test-proj', title: 'Test Proj' },
+      { title: 'Test Proj' },
     ])
     expect(custom.process('ls /projects').output).toContain('test-proj')
   })

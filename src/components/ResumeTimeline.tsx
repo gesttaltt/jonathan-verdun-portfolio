@@ -21,10 +21,7 @@ interface ResumeTimelineProps {
   hasResumePdf?: boolean
 }
 
-export const ResumeTimeline: React.FC<ResumeTimelineProps> = ({
-  /* istanbul ignore next — default parameter; always provided in production */
-  hasResumePdf = false,
-}) => {
+export const ResumeTimeline: React.FC<ResumeTimelineProps> = ({ hasResumePdf = false }) => {
   const t = useTranslation()
 
   return (

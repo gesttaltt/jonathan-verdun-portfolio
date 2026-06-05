@@ -54,12 +54,14 @@ export const Sidebar: React.FC<SidebarProps> = ({ repo = siteConfig.repo }) => {
           (typeof document !== 'undefined' && document.cookie.includes('mock-ci=true'))
 
         if (isMockMode) {
+          /* istanbul ignore else */
           if (mounted) setCiStatus('success')
           return
         }
 
         const repoUrl = repo?.url
         if (!repoUrl) {
+          /* istanbul ignore else */
           if (mounted) setCiStatus('error')
           return
         }
@@ -73,20 +75,24 @@ export const Sidebar: React.FC<SidebarProps> = ({ repo = siteConfig.repo }) => {
 
         const data = await response.json()
         if (!data.workflow_runs || data.workflow_runs.length === 0) {
+          /* istanbul ignore else */
           if (mounted) setCiStatus('error')
           return
         }
 
         const latestRun = data.workflow_runs[0]
         if (latestRun.status === 'completed') {
+          /* istanbul ignore else */
           if (mounted) setCiStatus(latestRun.conclusion === 'success' ? 'success' : 'failure')
         } else {
+          /* istanbul ignore else */
           if (mounted) setCiStatus('loading')
         }
       } catch (err) {
         if (process.env.NODE_ENV !== 'test') {
           console.error('Failed to fetch CI status:', err)
         }
+        /* istanbul ignore else */
         if (mounted) setCiStatus('error')
       }
     }

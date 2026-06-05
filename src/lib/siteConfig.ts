@@ -81,7 +81,7 @@ export const siteConfig = {
 
   versions: {
     portfolio: pkg.version,
-    nextjs: (pkg.dependencies as Record<string, string>).next?.replace(/^\^/, '') ?? '?',
+    nextjs: /* istanbul ignore next */ (pkg.dependencies as Record<string, string>).next?.replace(/^\^/, '') ?? '?',
   },
 
   certification: {

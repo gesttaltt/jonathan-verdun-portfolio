@@ -75,5 +75,7 @@ test.describe('ContactForm — Network Error State', () => {
 })
 
 test.describe('WebGL Fallback — Topology Load Timeout', () => {
-  test.skip('site renders without WebGL topology (CSS fallback)', 'Topology container presence is environment-dependent in headless mode; skipped to avoid false negatives')
+  test('site renders without WebGL topology (CSS fallback)', async () => {
+    test.skip(true, 'Topology container presence is environment-dependent in headless mode; skipped to avoid false negatives')
+  })
 })

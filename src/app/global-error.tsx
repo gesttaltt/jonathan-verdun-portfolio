@@ -10,10 +10,11 @@ interface GlobalErrorProps {
 
 export default function GlobalError({ error, reset }: GlobalErrorProps) {
   const [lang] = useState(() => {
+    /* istanbul ignore else — window is always defined in jsdom; else branch is SSR-only */
     if (typeof window !== 'undefined' && window.location?.pathname) {
       return window.location.pathname.startsWith('/es') ? 'es' : 'en'
     }
-    /* istanbul ignore next — SSR guard unreachable in jsdom */
+    /* istanbul ignore next */
     return 'en'
   })
 

@@ -89,6 +89,21 @@ describe('AuditRepository', () => {
       expect(audits[0]!.date).toBe('2026-05-10')
     })
 
+    it('falls back to filename for spec title when frontmatter and first content line are absent', async () => {
+      ;(fs.existsSync as jest.Mock).mockImplementation((p) => p === mockSpecsPath)
+      ;(fs.readdirSync as jest.Mock).mockReturnValue(['my-spec.md'])
+      ;(fs.readFileSync as jest.Mock).mockReturnValue('content')
+      ;(matter as unknown as jest.Mock).mockReturnValue({
+        data: {},     // no title in frontmatter
+        content: '',  // empty — first line is '' which is falsy after replace
+      })
+      ;(marked.parse as unknown as jest.Mock).mockReturnValue('')
+
+      const audits = await AuditRepository.getAudits()
+      // Both data.title and content first-line are absent — falls back to the filename
+      expect(audits[0]!.title).toBe('my-spec.md')
+    })
+
     it('sorts audits by date descending', async () => {
       ;(fs.existsSync as jest.Mock).mockImplementation((path) => path === mockDocsPath)
       ;(fs.readdirSync as jest.Mock).mockReturnValue(['a.md', 'b.md'])

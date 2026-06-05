@@ -122,11 +122,30 @@ describe('BlogService', () => {
     expect(BlogService.getPost('missing')).toBeNull()
   })
 
+  it('returns null from getPost when readFileSync throws (e.g. permission error)', () => {
+    mockedFs.existsSync.mockReturnValue(true)
+    mockedFs.readFileSync.mockImplementation(() => { throw new Error('EPERM') })
+    expect(BlogService.getPost('broken')).toBeNull()
+  })
+
   it('returns null from getPost when frontmatter is invalid', () => {
     mockedFs.existsSync.mockReturnValue(true)
     mockedFs.readFileSync.mockReturnValue(`---\ndescription: no title/date\n---\nbody`)
 
     expect(BlogService.getPost('bad')).toBeNull()
+  })
+
+  it('accepts a quoted YAML date (parsed as string, not Date object)', () => {
+    // Bare YAML dates (2026-05-01) are auto-cast to Date objects by the YAML parser.
+    // A quoted date ("2026-05-01") stays as a string and exercises the typeof === 'string' branch.
+    mockedFs.existsSync.mockReturnValue(true)
+    mockedFs.readFileSync.mockReturnValue(
+      `---\ntitle: Quoted Date\ndate: "2026-05-01"\ntags: [qa]\ndescription: Desc\n---\ncontent`
+    )
+
+    const post = BlogService.getPost('quoted-date')
+    expect(post).not.toBeNull()
+    expect(post?.meta.date).toBe('2026-05-01')
   })
 
   it('returns post meta and strips frontmatter from content', () => {

@@ -46,6 +46,16 @@ describe('ResumeTimeline', () => {
     expect(screen.getByRole('heading', { name: 'Currículum' })).toBeInTheDocument()
   })
 
+  it('hides download button when hasResumePdf prop is omitted (exercises default = false)', () => {
+    setMockPathname('/resume')
+    render(
+      <I18nProvider>
+        <ResumeTimeline />
+      </I18nProvider>
+    )
+    expect(screen.queryByRole('link', { name: /download pdf/i })).not.toBeInTheDocument()
+  })
+
   it('renders PDF download button when resume file exists', () => {
     setMockPathname('/resume')
     renderTimeline(true)

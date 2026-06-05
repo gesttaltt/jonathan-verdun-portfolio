@@ -7,6 +7,7 @@ import { useTheme } from '@/lib/theme/context'
 
 const subscribe = () => () => {}
 const getSnapshot = () => true
+/* istanbul ignore next — only called during SSR, never in jsdom */
 const getServerSnapshot = () => false
 
 export function ThemeToggle() {
