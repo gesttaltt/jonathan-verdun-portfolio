@@ -19,6 +19,14 @@ test.describe('Language Persistence', () => {
     await page.getByRole('link', { name: 'Switch to English' }).click()
     await expect(page).toHaveURL(/^http:\/\/localhost:3000\/$/)
 
+    // Verify the page actually rendered in English after the switch — URL alone
+    // would pass even if the layout were broken or the locale were still Spanish.
+    await expect(page.getByRole('heading', { level: 1 })).toContainText('Jonathan Verdun')
+    await expect(page.getByRole('link', { name: 'Switch to English' })).toHaveAttribute(
+      'aria-current',
+      'page'
+    )
+
     await page.goto('/quality/')
     await expect(page).toHaveURL(/\/quality\//)
     await expect(page.getByText(/Quality Transparency/i)).toBeVisible()

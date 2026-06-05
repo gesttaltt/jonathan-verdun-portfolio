@@ -55,6 +55,11 @@ test.describe('Blog — List and Detail Pages', () => {
     await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
     // MDX content should be rendered
     await expect(page.locator('article, [data-testid="blog-content"]')).toBeVisible()
+    // Back link must point to the EN blog index — a wrong locale prefix would
+    // silently pass all other assertions while sending users to the wrong index.
+    const backLink = page.getByRole('link', { name: /back to blog/i })
+    await expect(backLink).toBeVisible()
+    await expect(backLink).toHaveAttribute('href', /^\/blog\/?$/)
   })
 
   test('ES blog index is accessible', async ({ page }) => {
@@ -78,6 +83,10 @@ test.describe('Blog — List and Detail Pages', () => {
 
     await expect(page).toHaveURL(href ?? '/es/blog/')
     await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
+    // Back link must point to the ES blog index, not the EN /blog/ path.
+    const backLink = page.getByRole('link', { name: /volver al blog/i })
+    await expect(backLink).toBeVisible()
+    await expect(backLink).toHaveAttribute('href', /^\/es\/blog\/?$/)
   })
 })
 
@@ -87,11 +96,19 @@ test.describe('Quality Audit Detail Pages', () => {
 
     await expect(page.locator('article, h1, h2').first()).toBeVisible()
     await expect(page.getByText(/Portfolio Audit/i).first()).toBeVisible()
+    // Back link must point to the EN quality index.
+    const backLink = page.getByRole('link', { name: /back to dashboard/i })
+    await expect(backLink).toBeVisible()
+    await expect(backLink).toHaveAttribute('href', /^\/quality\/?$/)
   })
 
   test('ES quality audit detail renders', async ({ page }) => {
     await page.goto('/es/quality/audit-2026-04-27')
 
     await expect(page.locator('article, h1, h2').first()).toBeVisible()
+    // Back link must point to the ES quality index, not the EN /quality/ path.
+    const backLink = page.getByRole('link', { name: /volver al panel/i })
+    await expect(backLink).toBeVisible()
+    await expect(backLink).toHaveAttribute('href', /^\/es\/quality\/?$/)
   })
 })
