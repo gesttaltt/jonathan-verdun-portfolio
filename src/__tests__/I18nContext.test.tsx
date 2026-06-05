@@ -104,8 +104,23 @@ describe('useTranslation (fallback)', () => {
     )
   })
 
-  it('en and es have the same top-level keys', () => {
-    expect(Object.keys(en)).toEqual(Object.keys(es))
+  it('en and es have the same keys at every nesting level', () => {
+    function collectKeys(obj: Record<string, unknown>, prefix = ''): string[] {
+      return Object.keys(obj).flatMap((k) => {
+        const key = prefix ? `${prefix}.${k}` : k
+        const val = obj[k]
+        // terminal.interactive keys are locale-specific command vocabulary (e.g. 'about'
+        // vs 'sobre') — their names intentionally differ between locales, so we treat
+        // terminal.interactive as a leaf and only verify both locales define it.
+        if (key === 'terminal.interactive') return [key]
+        return val !== null && typeof val === 'object' && !Array.isArray(val)
+          ? collectKeys(val as Record<string, unknown>, key)
+          : [key]
+      })
+    }
+    const enKeys = collectKeys(en as unknown as Record<string, unknown>).sort()
+    const esKeys = collectKeys(es as unknown as Record<string, unknown>).sort()
+    expect(enKeys).toEqual(esKeys)
   })
 })
 

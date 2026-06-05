@@ -154,6 +154,10 @@ describe('ContactForm', () => {
       expect(container.textContent).toContain('Sending')
 
       resolvePromise({ ok: true } as Response)
+      await waitFor(() => {
+        expect(container.textContent).not.toContain('Sending')
+        expect(container.textContent).toContain('Message sent!')
+      })
     })
 
     it('shows error state on submission failure (rejected fetch)', async () => {

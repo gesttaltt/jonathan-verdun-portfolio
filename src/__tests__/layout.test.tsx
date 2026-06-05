@@ -16,11 +16,19 @@ jest.mock('@/components/hooks/useProjects', () => ({
 import EnLayout, { metadata, viewport } from '@/app/(en)/layout'
 import { siteConfig } from '@/lib/siteConfig'
 
+// React emits a "cannot appear as a child of <html>" warning when rendering
+// layout components in jsdom. Suppress only that specific warning; route all
+// other errors back through the original handler so CI still sees them.
 let consoleErrorSpy: jest.SpyInstance
+const originalConsoleError = console.error.bind(console)
 beforeAll(() => {
-  consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation((msg, ...args) => {
-    if (typeof msg === 'string' && msg.includes('cannot be a child')) return
-    console.warn(msg, ...args)
+  consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation((msg: unknown, ...args: unknown[]) => {
+    if (
+      typeof msg === 'string' &&
+      /cannot appear as a (child|descendant) of/i.test(msg)
+    )
+      return
+    originalConsoleError(msg, ...args)
   })
 })
 afterAll(() => consoleErrorSpy.mockRestore())

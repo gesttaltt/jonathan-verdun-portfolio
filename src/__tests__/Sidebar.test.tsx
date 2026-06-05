@@ -215,7 +215,9 @@ describe('Sidebar', () => {
       const env = process.env as Record<string, string | undefined>
       const originalNodeEnv = env['NODE_ENV']
       env['NODE_ENV'] = 'development'
-      jest.useFakeTimers()
+      // Fake timers are already active from the outer beforeEach — do not call
+      // jest.useFakeTimers() or jest.useRealTimers() here; the outer afterEach
+      // restores real timers after every test.
       ;(global.fetch as jest.Mock).mockResolvedValue({
         ok: true,
         json: () =>
@@ -231,7 +233,6 @@ describe('Sidebar', () => {
       jest.advanceTimersByTime(60000)
       expect(global.fetch).toHaveBeenCalledTimes(2)
 
-      jest.useRealTimers()
       env['NODE_ENV'] = originalNodeEnv
     })
   })

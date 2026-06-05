@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react'
+import { render, waitFor } from '@testing-library/react'
 import { ServiceWorkerRegister } from '@/components/ServiceWorkerRegister'
 
 function mockCookie(value: string) {
@@ -76,13 +76,12 @@ describe('ServiceWorkerRegister', () => {
     const errSpy = jest.spyOn(console, 'error').mockImplementation(() => {})
 
     render(<ServiceWorkerRegister />)
-    // flush microtask queue for the rejected promise
-    await Promise.resolve()
-    await Promise.resolve()
-
-    expect(errSpy).toHaveBeenCalledWith(
-      '[PWA] Service Worker registration failed:',
-      expect.any(Error)
+    // waitFor is robust to any number of promise hops in the production chain
+    await waitFor(() =>
+      expect(errSpy).toHaveBeenCalledWith(
+        '[PWA] Service Worker registration failed:',
+        expect.any(Error)
+      )
     )
     errSpy.mockRestore()
   })

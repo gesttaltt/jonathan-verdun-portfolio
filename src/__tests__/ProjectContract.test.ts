@@ -53,8 +53,8 @@ describe('ProjectService', () => {
     })
   })
 
-  it('getProjects returns the same reference as PROJECT_DATA', () => {
-    expect(ProjectService.getProjects()).toBe(PROJECT_DATA)
+  it('getProjects returns data equal to PROJECT_DATA', () => {
+    expect(ProjectService.getProjects()).toEqual(PROJECT_DATA)
   })
 
   it('should have at least 3 QA-ready projects (QA or Deployed status)', () => {

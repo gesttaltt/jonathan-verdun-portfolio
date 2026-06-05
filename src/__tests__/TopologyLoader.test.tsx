@@ -1,8 +1,10 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 
-// Intercept next/dynamic before TopologyLoader is evaluated.
-// Returns the loading component synchronously so we can assert the skeleton.
+// next/dynamic is mocked to return the loading component synchronously.
+// This tests the skeleton that renders while WebGL initialises.
+// The factory's timer logic (500ms defer, 3s WebGL fallback) requires
+// exporting the factory separately from TopologyLoader.tsx, or e2e coverage.
 jest.mock('next/dynamic', () => ({
   __esModule: true,
   default: (_importFn: unknown, options: { loading?: () => React.JSX.Element }) => {
@@ -10,10 +12,13 @@ jest.mock('next/dynamic', () => ({
   },
 }))
 
-// Import after the mock is registered
+jest.mock('@/components/InteractiveTopology', () => ({
+  InteractiveTopology: () => React.createElement('div', { 'data-testid': 'topology' }),
+}))
+
 import { TopologyLoader } from '@/components/TopologyLoader'
 
-describe('TopologyLoader', () => {
+describe('TopologyLoader — loading skeleton', () => {
   it('loading skeleton covers the full viewport', () => {
     const { container } = render(<TopologyLoader />)
     const el = container.firstChild as HTMLElement

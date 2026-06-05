@@ -327,11 +327,17 @@ describe('useTerminal — command history navigation', () => {
     const { result } = renderHook(() => useTerminal([], makeProcessor()))
     boot()
     act(() => {
+      result.current.execute('first')
       result.current.execute('help')
-      result.current.execute('help')
+      result.current.execute('help') // consecutive duplicate
     })
-    result.current.navigateHistory('up', '')
-    expect(result.current.navigateHistory('up', 'help')).toBe('help')
+    // With dedup: history = ['first', 'help'] — two entries.
+    // Without dedup: history = ['first', 'help', 'help'] — three entries.
+    // The difference is observable on the second ArrowUp:
+    //   deduplicated → returns 'first'
+    //   not deduplicated → returns 'help' again
+    expect(result.current.navigateHistory('up', '')).toBe('help')
+    expect(result.current.navigateHistory('up', 'help')).toBe('first')
   })
 
   it('clear is recorded in history so it can be recalled with ArrowUp', () => {

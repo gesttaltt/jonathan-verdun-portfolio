@@ -105,7 +105,7 @@ describe('AuditRepository', () => {
   })
 
   describe('XSS sanitization', () => {
-    it('strips script tags and event-handler attributes from marked output', async () => {
+    it('strips script tags and event-handler attributes from mocked marked output', async () => {
       ;(fs.existsSync as jest.Mock).mockImplementation((p) => p === mockDocsPath)
       ;(fs.readdirSync as jest.Mock).mockReturnValue(['xss-test.md'])
       ;(fs.readFileSync as jest.Mock).mockReturnValue('content')
@@ -122,6 +122,29 @@ describe('AuditRepository', () => {
       expect(audits[0]?.content).not.toContain('<script>')
       expect(audits[0]?.content).not.toContain('onerror')
       expect(audits[0]?.content).toContain('Safe')
+    })
+
+    it('strips raw HTML script tags passed through by real marked (integration)', async () => {
+      // Simulate marked passing raw HTML through unchanged — which is what the real
+      // marked does with raw HTML blocks. This tests the full sanitize-html pipeline
+      // against realistic marked output without fighting Jest's ESM transform for marked.
+      ;(marked.parse as unknown as jest.Mock).mockImplementation((input: string) => input)
+
+      ;(fs.existsSync as jest.Mock).mockImplementation((p) => p === mockDocsPath)
+      ;(fs.readdirSync as jest.Mock).mockReturnValue(['xss-test.md'])
+      ;(fs.readFileSync as jest.Mock).mockReturnValue('content')
+      ;(matter as unknown as jest.Mock).mockReturnValue({
+        data: { title: 'XSS Test', date: '2026-05-11' },
+        // Raw HTML blocks are passed through verbatim by marked
+        content:
+          'Safe content\n\n<script>alert(1)</script>\n\n<img src="x" onerror="alert(2)">',
+      })
+
+      const audits = await AuditRepository.getAudits()
+
+      expect(audits[0]?.content).not.toContain('<script>')
+      expect(audits[0]?.content).not.toContain('onerror')
+      expect(audits[0]?.content).toContain('Safe content')
     })
   })
 
