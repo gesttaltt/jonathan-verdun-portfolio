@@ -5,6 +5,20 @@ import { siteConfig } from '@/lib/siteConfig'
 import { en } from '@/lib/i18n/en'
 import { es } from '@/lib/i18n/es'
 
+// Recursively collect every string-valued leaf in an object as [dotted.key, value] pairs.
+function collectStringLeaves(
+  obj: Record<string, unknown>,
+  prefix = ''
+): Array<[string, string]> {
+  return Object.entries(obj).flatMap(([k, v]) => {
+    const key = prefix ? `${prefix}.${k}` : k
+    if (typeof v === 'string') return [[key, v]] as Array<[string, string]>
+    if (v !== null && typeof v === 'object' && !Array.isArray(v))
+      return collectStringLeaves(v as Record<string, unknown>, key)
+    return []
+  })
+}
+
 describe('i18n translation value completeness', () => {
   it('every en.terminal.interactive value is a non-empty string', () => {
     for (const [key, value] of Object.entries(en.terminal.interactive)) {
@@ -24,6 +38,65 @@ describe('i18n translation value completeness', () => {
 
   it('en and es sections.projects labels are not identical (i.e., they are actually translated)', () => {
     expect(en.sections.projects).not.toBe(es.sections.projects)
+  })
+})
+
+describe('i18n sections string completeness', () => {
+  it('no EN sections leaf string is empty', () => {
+    const empty = collectStringLeaves(en.sections as unknown as Record<string, unknown>)
+      .filter(([, v]) => v.trim() === '')
+      .map(([k]) => `en.sections.${k}`)
+    expect(empty).toEqual([])
+  })
+
+  it('no ES sections leaf string is empty', () => {
+    const empty = collectStringLeaves(es.sections as unknown as Record<string, unknown>)
+      .filter(([, v]) => v.trim() === '')
+      .map(([k]) => `es.sections.${k}`)
+    expect(empty).toEqual([])
+  })
+
+  it('key UI labels are translated and differ between EN and ES', () => {
+    const pairs: Array<[string, string, string]> = [
+      ['sidebar.qualityGatesTitle', en.sections.sidebar.qualityGatesTitle, es.sections.sidebar.qualityGatesTitle],
+      ['sidebar.ciStatusSuccess', en.sections.sidebar.ciStatusSuccess, es.sections.sidebar.ciStatusSuccess],
+      ['qaContact.title', en.sections.qaContact.title, es.sections.qaContact.title],
+      ['resume.title', en.sections.resume.title, es.sections.resume.title],
+      ['blog.backToBlog', en.sections.blog.backToBlog, es.sections.blog.backToBlog],
+      ['contactForm.submitLabel', en.sections.contactForm.submitLabel, es.sections.contactForm.submitLabel],
+      ['contactForm.successTitle', en.sections.contactForm.successTitle, es.sections.contactForm.successTitle],
+      ['contactForm.validationRequired', en.sections.contactForm.validationRequired, es.sections.contactForm.validationRequired],
+    ]
+    const untranslated = pairs
+      .filter(([, enVal, esVal]) => enVal === esVal)
+      .map(([key]) => key)
+    expect(untranslated).toEqual([])
+  })
+})
+
+describe('i18n visualTestSummary completeness', () => {
+  it('no EN visualTestSummary leaf string is empty', () => {
+    const empty = collectStringLeaves(en.visualTestSummary as unknown as Record<string, unknown>)
+      .filter(([, v]) => v.trim() === '')
+      .map(([k]) => `en.visualTestSummary.${k}`)
+    expect(empty).toEqual([])
+  })
+
+  it('no ES visualTestSummary leaf string is empty', () => {
+    const empty = collectStringLeaves(es.visualTestSummary as unknown as Record<string, unknown>)
+      .filter(([, v]) => v.trim() === '')
+      .map(([k]) => `es.visualTestSummary.${k}`)
+    expect(empty).toEqual([])
+  })
+
+  it('regressionDetected contains {count} placeholder in both locales', () => {
+    expect(en.visualTestSummary.regressionDetected).toContain('{count}')
+    expect(es.visualTestSummary.regressionDetected).toContain('{count}')
+  })
+
+  it('key visualTestSummary strings are translated and differ between EN and ES', () => {
+    expect(en.visualTestSummary.title).not.toBe(es.visualTestSummary.title)
+    expect(en.visualTestSummary.regressionDetected).not.toBe(es.visualTestSummary.regressionDetected)
   })
 })
 
