@@ -1,6 +1,11 @@
 # Jonathan Verdun — Portfolio
 
 [![CI](https://github.com/gesttaltt/jonathan-verdun-portfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/gesttaltt/jonathan-verdun-portfolio/actions/workflows/ci.yml)
+[![Deploy](https://github.com/gesttaltt/jonathan-verdun-portfolio/actions/workflows/deploy.yml/badge.svg)](https://github.com/gesttaltt/jonathan-verdun-portfolio/actions/workflows/deploy.yml)
+[![Coverage](https://img.shields.io/badge/Coverage-100%25-brightgreen.svg?style=flat-square)](https://github.com/gesttaltt/jonathan-verdun-portfolio/actions/workflows/ci.yml)
+![Lighthouse](https://img.shields.io/badge/Lighthouse-100%2F100-brightgreen.svg?style=flat-square&logo=lighthouse)
+![Accessibility: WCAG AA](https://img.shields.io/badge/Accessibility-WCAG%20AA-blueviolet.svg?style=flat-square)
+[![Code Style: Prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
 QA Automation Engineer portfolio. Built with Next.js 16 static export, Three.js, and a strict TDD architecture. Every quality claim on the site is backed by a gate running in CI.
 
@@ -43,17 +48,10 @@ npm run dev -- -H 0.0.0.0
 
 ## Docker
 
-### Development
-
-```bash
-docker compose up --build          # dev service, http://localhost:3000
-```
-
-### Production simulation
-
-```bash
-docker compose --profile prod up --build runner   # nginx serving out/, http://localhost:8080
-```
+| Stage       | Command                                                           |
+| :---------- | :---------------------------------------------------------------- |
+| Development | `docker compose up --build` (dev service, http://localhost:3000)  |
+| Production  | `docker compose --profile prod up --build runner` (nginx serving) |
 
 The runner stage is `nginx:alpine` serving the static export. `nginx.conf` sets 1-year immutable cache on `_next/static/` chunks and enables gzip.
 
@@ -61,11 +59,11 @@ The runner stage is `nginx:alpine` serving the static export. `nginx.conf` sets 
 
 ## CI pipeline
 
-| Job     | What it does                                                                            |
-| :------ | :-------------------------------------------------------------------------------------- |
-| `build` | Format · lint · security audit · types · Jest (273 tests, 100% coverage) · Node 22 & 24 |
-| `e2e`   | Playwright suite (38 tests) + WCAG 2.1 AA axe scans (full coverage)                     |
-| `lhci`  | Lighthouse CI gate: a11y ≥ 95, best-practices ≥ 90, SEO ≥ 90                            |
+| Job     | What it does                                                                             |
+| :------ | :--------------------------------------------------------------------------------------- |
+| `build` | Format · lint · security audit · types · Jest (570+ tests, 100% coverage) · Node 22 & 24 |
+| `e2e`   | Playwright suite (66 tests) + WCAG 2.1 AA axe scans (full coverage)                      |
+| `lhci`  | Lighthouse CI gate: a11y ≥ 95, best-practices ≥ 90, SEO ≥ 90                             |
 
 The `out/` artifact produced by the `build (22.x)` run is shared with `lhci` to avoid a duplicate build. Build caching is implemented to optimize performance.
 
