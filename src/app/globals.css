@@ -133,7 +133,7 @@
   transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Elite Shimmer Scanline — applied to card headers on hover */
+/* Shimmer scanline — applied to card headers on hover */
 .shimmer-scan {
   position: relative;
   overflow: hidden;
