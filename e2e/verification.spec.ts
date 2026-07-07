@@ -13,11 +13,11 @@ test.describe('Audit Search Validation', () => {
     const searchInput = page.getByPlaceholder('Search audits...')
     await expect(searchInput).toBeVisible()
 
-    // Type a specific query (e.g., "Refinement")
-    await searchInput.fill('Refinement')
+    // Type a specific query (e.g., "Styling")
+    await searchInput.fill('Styling')
 
     // Check filtered results
-    await expect(page.getByRole('heading', { name: 'Quality & UX Refinement Audit' })).toBeVisible()
+    await expect(page.getByRole('heading', { name: 'Styling Audit — 2026-05-01' })).toBeVisible()
 
     // Other audits should be hidden (we use popLayout AnimatePresence)
     // We check that the count of visible cards has decreased
@@ -36,7 +36,7 @@ test.describe('Audit Search Validation', () => {
 
   test('clear button resets search results', async ({ page }) => {
     const searchInput = page.getByPlaceholder('Search audits...')
-    await searchInput.fill('Refinement')
+    await searchInput.fill('Styling')
 
     // Click the X button specifically
     const clearButton = page.locator('button').filter({ has: page.locator('svg.lucide-x') })
@@ -52,8 +52,8 @@ test.describe('Audit Search Validation', () => {
     const searchInput = page.getByPlaceholder('Buscar auditorías...')
     await expect(searchInput).toBeVisible()
 
-    await searchInput.fill('Refinement')
-    await expect(page.getByRole('heading', { name: 'Quality & UX Refinement Audit' })).toBeVisible()
+    await searchInput.fill('Styling')
+    await expect(page.getByRole('heading', { name: 'Styling Audit — 2026-05-01' })).toBeVisible()
   })
 })
 
@@ -62,6 +62,10 @@ test.describe('Offline Resilience (PWA)', () => {
     context,
     page,
   }) => {
+    // This test's own waits (terminal boot up to 20s, SW polling up to 20s, plus
+    // two subsequent page loads) exceed the 30s MOCK_CI test timeout on their own.
+    test.setTimeout(60_000)
+
     // Enable E2E Service Worker registration and mock CI via cookies
     await context.addCookies([
       {

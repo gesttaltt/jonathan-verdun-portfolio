@@ -48,7 +48,7 @@ const nextConfig: NextConfig = {
   // CSP reference (for manual CDN config):
   //   default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval';
   //   style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob:;
-  //   worker-src blob:; connect-src 'self'; frame-ancestors 'none';
+  //   worker-src 'self' blob:; connect-src 'self' https://api.github.com; frame-ancestors 'none';
   //   base-uri 'self'; form-action 'self'
 }
 

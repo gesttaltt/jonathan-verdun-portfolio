@@ -22,7 +22,7 @@ export default function EsLayout({
         <ThemeScript />
         <meta
           httpEquiv="Content-Security-Policy"
-          content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob:; worker-src blob:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
+          content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob:; worker-src 'self' blob:; connect-src 'self' https://api.github.com; base-uri 'self'; form-action 'self'"
         />
       </head>
       <body className={`${jetbrainsMono.variable} font-mono antialiased`}>

@@ -39,7 +39,8 @@ test.describe('Content Security Policy', () => {
     expect(content).toContain("default-src 'self'")
     expect(content).toContain('script-src')
     expect(content).toContain('style-src')
-    expect(content).toContain("frame-ancestors 'none'")
+    // frame-ancestors is intentionally omitted here — browsers ignore it in a
+    // <meta> CSP, so it's only set via the real HTTP header in public/_headers.
     expect(content).toContain("form-action 'self'")
     expect(content).not.toContain('*')
   })
