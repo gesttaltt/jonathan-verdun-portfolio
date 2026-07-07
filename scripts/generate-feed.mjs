@@ -6,7 +6,8 @@ import { join } from 'path'
 import matter from 'gray-matter'
 
 const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/+$/, '') || 'https://jonathanverdun.com'
+  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/+$/, '') ||
+  `https://gesttaltt.github.io${process.env.BASE_PATH || process.env.NEXT_PUBLIC_BASE_PATH || '/jonathan-verdun-portfolio'}`
 const BLOG_DIR = join(process.cwd(), 'src/content/blog')
 const OUT_FILE = join(process.cwd(), 'public/feed.xml')
 

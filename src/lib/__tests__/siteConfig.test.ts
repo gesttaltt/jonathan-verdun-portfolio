@@ -16,7 +16,7 @@ describe('siteConfig', () => {
     delete process.env.BASE_PATH
     delete process.env.NEXT_PUBLIC_BASE_PATH
     const { siteConfig } = require('../siteConfig')
-    expect(siteConfig.url).toBe('https://jonathanverdun.com')
+    expect(siteConfig.url).toBe('https://gesttaltt.github.io')
   })
 
   it('uses NEXT_PUBLIC_SITE_URL if provided', () => {

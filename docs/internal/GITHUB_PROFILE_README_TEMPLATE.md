@@ -34,6 +34,6 @@
 
 ### 📫 Connect with me
 
-- **Portfolio:** [jonathanverdun.com](https://jonathanverdun.com)
+- **Portfolio:** [gesttaltt.github.io/jonathan-verdun-portfolio](https://gesttaltt.github.io/jonathan-verdun-portfolio/)
 - **LinkedIn:** [linkedin.com/in/jonathan-verdun](https://www.linkedin.com/in/jonathan-verdun/)
 - **Email:** [jonathan.verdun707@gmail.com](mailto:jonathan.verdun707@gmail.com)

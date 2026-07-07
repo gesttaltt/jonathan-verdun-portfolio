@@ -11,7 +11,7 @@ test.describe('RSS Feed', () => {
     expect(body).toContain('<rss')
     expect(body).toContain('<channel>')
     expect(body).toContain('<item>')
-    expect(body).toContain('jonathanverdun.com')
+    expect(body).toContain('gesttaltt.github.io')
     expect(body).not.toContain('undefined')
   })
 

@@ -4,7 +4,7 @@
 
 QA Automation Engineer portfolio. Built with Next.js 16 static export, Three.js, and a strict TDD architecture. Every quality claim on the site is backed by a gate running in CI.
 
-**Live:** [jonathanverdun.com](https://jonathanverdun.com) · **API Docs:** [jonathanverdun.com/docs/api](https://jonathanverdun.com/docs/api/)
+**Live:** [gesttaltt.github.io/jonathan-verdun-portfolio](https://gesttaltt.github.io/jonathan-verdun-portfolio/) · **API Docs:** [.../docs/api](https://gesttaltt.github.io/jonathan-verdun-portfolio/docs/api/)
 
 ---
 

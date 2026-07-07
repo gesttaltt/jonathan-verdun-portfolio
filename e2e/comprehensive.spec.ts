@@ -8,13 +8,13 @@ test.describe('Comprehensive Metadata & Interaction Audit', () => {
     await expect(description).toHaveAttribute('content', /QA Automation Engineer/)
 
     const canonical = page.locator('link[rel="canonical"]')
-    await expect(canonical).toHaveAttribute('href', 'https://jonathanverdun.com/')
+    await expect(canonical).toHaveAttribute('href', 'https://gesttaltt.github.io/')
 
     const hreflangEn = page.locator('link[hreflang="en"]')
-    await expect(hreflangEn).toHaveAttribute('href', 'https://jonathanverdun.com/')
+    await expect(hreflangEn).toHaveAttribute('href', 'https://gesttaltt.github.io/')
 
     const hreflangEs = page.locator('link[hreflang="es"]')
-    await expect(hreflangEs).toHaveAttribute('href', 'https://jonathanverdun.com/es/')
+    await expect(hreflangEs).toHaveAttribute('href', 'https://gesttaltt.github.io/es/')
   })
 
   test('verifies ES metadata and translated content', async ({ page }) => {
@@ -24,7 +24,7 @@ test.describe('Comprehensive Metadata & Interaction Audit', () => {
     await expect(description).toHaveAttribute('content', /Portafolio/)
 
     const canonical = page.locator('link[rel="canonical"]')
-    await expect(canonical).toHaveAttribute('href', 'https://jonathanverdun.com/es/')
+    await expect(canonical).toHaveAttribute('href', 'https://gesttaltt.github.io/es/')
   })
 
   test('verifies terminal boot state and interruption', async ({ page }) => {

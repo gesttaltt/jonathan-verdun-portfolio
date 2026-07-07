@@ -32,12 +32,12 @@ describe('siteConfig', () => {
     expect(siteConfig.url).toBe('https://gesttaltt.github.io/next-portfolio')
   })
 
-  it('defaults to jonathanverdun.com if no env vars are provided', () => {
+  it('defaults to the github.io root if no env vars are provided', () => {
     delete process.env.NEXT_PUBLIC_SITE_URL
     delete process.env.BASE_PATH
     delete process.env.NEXT_PUBLIC_BASE_PATH
     const { siteConfig } = require('../lib/siteConfig')
-    expect(siteConfig.url).toBe('https://jonathanverdun.com')
+    expect(siteConfig.url).toBe('https://gesttaltt.github.io')
   })
 
   it('correctly computes basePath from env vars', () => {

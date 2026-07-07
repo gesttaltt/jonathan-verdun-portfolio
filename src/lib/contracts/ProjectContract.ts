@@ -108,7 +108,10 @@ export const PROJECT_DATA: ProjectSpec[] = [
         label: 'CI Pipeline',
         url: 'https://github.com/gesttaltt/jonathan-verdun-portfolio/actions',
       },
-      { label: 'Quality Dashboard', url: 'https://jonathanverdun.com/quality' },
+      {
+        label: 'Quality Dashboard',
+        url: 'https://gesttaltt.github.io/jonathan-verdun-portfolio/quality',
+      },
       {
         label: 'Coverage Report',
         url: 'https://github.com/gesttaltt/jonathan-verdun-portfolio/actions',

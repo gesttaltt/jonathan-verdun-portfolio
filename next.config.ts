@@ -26,7 +26,7 @@ import type { NextConfig } from 'next'
 //   [ ] Add server-side rate limiting on form submissions
 
 // BASE_PATH is set by the GitHub Actions configure-pages step.
-// Empty string = custom domain (jonathanverdun.com) or local dev.
+// Empty string = local dev.
 // /repo-name = GitHub project page (e.g. gesttaltt.github.io/jonathan-verdun-portfolio).
 const basePath = process.env.BASE_PATH ?? ''
 

@@ -1,17 +1,19 @@
 import pkg from '../../package.json'
 
+// Matches the basePath Next.js itself resolves in next.config.ts (empty for
+// local dev, /jonathan-verdun-portfolio when configure-pages sets BASE_PATH
+// during the GitHub Pages deploy). Derived once so url and basePath can
+// never disagree about which path segment is actually being served.
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || process.env.BASE_PATH || ''
+
 export const siteConfig = {
   name: 'Jonathan Verdun',
   title: 'Jonathan Verdun | QA Automation Engineer',
   description:
     'Portfolio of Jonathan Verdun — QA Automation Engineer specializing in Test Architecture, Playwright, and Reliability.',
-  url:
-    process.env.NEXT_PUBLIC_SITE_URL ||
-    (process.env.BASE_PATH || process.env.NEXT_PUBLIC_BASE_PATH
-      ? `https://gesttaltt.github.io${process.env.BASE_PATH || process.env.NEXT_PUBLIC_BASE_PATH}`
-      : 'https://jonathanverdun.com'),
+  url: process.env.NEXT_PUBLIC_SITE_URL || `https://gesttaltt.github.io${basePath}`,
   locale: 'en',
-  basePath: process.env.NEXT_PUBLIC_BASE_PATH || process.env.BASE_PATH || '',
+  basePath,
 
   socialLinks: {
     github: {
