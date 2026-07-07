@@ -7,6 +7,7 @@ import {
   DEFAULT_STAGGER,
   SCROLL_VIEWPORT,
 } from '@/lib/animations'
+import type { TargetAndTransition } from 'framer-motion'
 
 describe('animations', () => {
   describe('fadeUpVariants', () => {
@@ -17,14 +18,14 @@ describe('animations', () => {
 
     it('uses delay=0 by default', () => {
       const v = fadeUpVariants()
-      expect(typeof (v.visible as any).transition?.delay).toBe('number')
-      expect((v.visible as any).transition?.delay).toBe(0)
+      expect(typeof (v.visible as TargetAndTransition).transition?.delay).toBe('number')
+      expect((v.visible as TargetAndTransition).transition?.delay).toBe(0)
     })
 
     it('uses the provided delay', () => {
       const v = fadeUpVariants(0.3)
-      expect(typeof (v.visible as any).transition?.delay).toBe('number')
-      expect((v.visible as any).transition?.delay).toBe(0.3)
+      expect(typeof (v.visible as TargetAndTransition).transition?.delay).toBe('number')
+      expect((v.visible as TargetAndTransition).transition?.delay).toBe(0.3)
     })
   })
 
@@ -42,14 +43,14 @@ describe('animations', () => {
 
     it('uses DEFAULT_STAGGER by default', () => {
       const v = containerVariants()
-      expect(typeof (v.visible as any).transition?.staggerChildren).toBe('number')
-      expect((v.visible as any).transition?.staggerChildren).toBe(DEFAULT_STAGGER)
+      expect(typeof (v.visible as TargetAndTransition).transition?.staggerChildren).toBe('number')
+      expect((v.visible as TargetAndTransition).transition?.staggerChildren).toBe(DEFAULT_STAGGER)
     })
 
     it('uses the provided stagger value', () => {
       const v = containerVariants(0.25)
-      expect(typeof (v.visible as any).transition?.staggerChildren).toBe('number')
-      expect((v.visible as any).transition?.staggerChildren).toBe(0.25)
+      expect(typeof (v.visible as TargetAndTransition).transition?.staggerChildren).toBe('number')
+      expect((v.visible as TargetAndTransition).transition?.staggerChildren).toBe(0.25)
     })
   })
 
@@ -61,14 +62,14 @@ describe('animations', () => {
 
     it('uses delay=0 by default', () => {
       const v = staggerItemVariants()
-      expect(typeof (v.visible as any).transition?.delay).toBe('number')
-      expect((v.visible as any).transition?.delay).toBe(0)
+      expect(typeof (v.visible as TargetAndTransition).transition?.delay).toBe('number')
+      expect((v.visible as TargetAndTransition).transition?.delay).toBe(0)
     })
 
     it('uses the provided delay', () => {
       const v = staggerItemVariants(0.5)
-      expect(typeof (v.visible as any).transition?.delay).toBe('number')
-      expect((v.visible as any).transition?.delay).toBe(0.5)
+      expect(typeof (v.visible as TargetAndTransition).transition?.delay).toBe('number')
+      expect((v.visible as TargetAndTransition).transition?.delay).toBe(0.5)
     })
   })
 
@@ -78,8 +79,8 @@ describe('animations', () => {
     })
 
     it('returns correct visible state', () => {
-      expect(typeof (slideDownVariants.visible as any).opacity).toBe('number')
-      expect((slideDownVariants.visible as any).opacity).toBe(1)
+      expect(typeof (slideDownVariants.visible as TargetAndTransition).opacity).toBe('number')
+      expect((slideDownVariants.visible as TargetAndTransition).opacity).toBe(1)
     })
   })
 
