@@ -16,7 +16,7 @@ export const PROJECT_DATA: ProjectSpec[] = [
     ],
     highlights: [
       'Achieved 100% requirement coverage across 4 user stories with traceable ADO test plans',
-      'Reduced manual regression effort by 72% through mobile automation with Appium',
+      'Reduced manual regression effort through mobile automation with Appium',
       'Implemented severity-classified defect workflow with full reproduction steps in Azure DevOps',
       'Established CI gate that blocks merges on automation regression failures',
     ],
@@ -57,7 +57,7 @@ export const PROJECT_DATA: ProjectSpec[] = [
     id: 'proj-06',
     title: 'Transcription Engine QA',
     description:
-      '230+ tests across unit (Jest), integration, and E2E Playwright layers for a headless YouTube transcript extraction service. Stealth mode A/B campaign — 100 automated runs, 89.4% success rate across edge cases; leveraged Root Cause Analysis (RCA) to categorize failure patterns and drive stability improvements. Focused on non-functional stability and regression testing.',
+      '230+ tests across unit (Jest), integration, and E2E Playwright layers for a headless YouTube transcript extraction service. Ran a 100-run resilience testing campaign across edge cases, leveraging Root Cause Analysis (RCA) to categorize failure patterns and drive stability improvements. Focused on non-functional stability and regression testing.',
     techStack: ['Playwright', 'Jest', 'CI/CD', 'RCA'],
     link: 'https://github.com/gesttaltt/yt-transcript-api',
     status: 'Deployed',
@@ -67,13 +67,13 @@ export const PROJECT_DATA: ProjectSpec[] = [
       { label: 'Layers', value: '3' },
     ],
     highlights: [
-      '89.4% success rate across 100 automated A/B campaign runs with full RCA categorization',
+      'High success rate across 100 automated resilience-campaign runs with full RCA categorization',
       'Three-layer test architecture (unit → integration → E2E) catches regressions at the cheapest stage',
-      'RCA-driven improvements increased stability by 12 percentage points over 6 iterations',
+      'RCA-driven improvements steadily increased stability across iterations',
       'Headless Playwright suite validates extraction across 50+ real YouTube URLs per run',
     ],
     architecture:
-      'Multi-layer test pyramid: Jest for isolated extraction logic, integration tests for API middleware, Playwright E2E for full browser-context flows. RCA taxonomy tags each failure by category (network, parsing, rate-limit, timeout) enabling trend analysis. Stealth campaign mode runs tests against production traffic without user impact.',
+      'Multi-layer test pyramid: Jest for isolated extraction logic, integration tests for API middleware, Playwright E2E for full browser-context flows. RCA taxonomy tags each failure by category (network, parsing, rate-limit, timeout) enabling trend analysis. Resilience campaign mode runs tests against production traffic without user impact.',
     links: [
       { label: 'RCA Dashboard', url: 'https://github.com/gesttaltt/yt-transcript-api' },
       {
@@ -119,17 +119,17 @@ export const PROJECT_DATA: ProjectSpec[] = [
     id: 'proj-02',
     title: 'Variant Analysis Pipeline',
     description:
-      'Data engineering pipeline for genomic variant analysis — ~120× VCF throughput via NumPy vectorization over native Python. Integrates LOEUF evolutionary constraints and Gene Ontology annotations against gnomAD at scale. Pipeline outputs validated against known gnomAD reference sets via parameterized regression tests.',
+      'Data engineering pipeline for genomic variant analysis — faster VCF throughput via NumPy vectorization over naive Python iteration. Integrates LOEUF evolutionary constraints and Gene Ontology annotations against gnomAD at scale. Pipeline outputs validated against known gnomAD reference sets via parameterized regression tests.',
     techStack: ['Python', 'NumPy', 'GnomAD', 'Genomics'],
     link: 'https://github.com/gesttaltt/variant-analysis-pipeline',
     status: 'Research',
     specLink: '/quality/specs/ARCHITECTURE',
     stats: [
-      { label: 'vs Native Python', value: '~120×' },
+      { label: 'vs Native Python', value: 'NumPy' },
       { label: 'Functionomes', value: 'Yes' },
     ],
     highlights: [
-      '~120× VCF throughput improvement via NumPy vectorization over naive Python iteration',
+      'Faster VCF throughput via NumPy vectorization over naive Python iteration',
       'Parameterized regression tests cross-validate outputs against known gnomAD reference sets',
       'LOEUF constraint integration enables evolutionary-aware variant prioritization',
       'Pipeline designed for batch processing of population-scale (100K+ samples) VCF files',
@@ -167,18 +167,18 @@ export const PROJECT_DATA: ProjectSpec[] = [
     id: 'proj-03',
     title: 'Gene Functional Pipeline',
     description:
-      'Multi-implementation pipeline engineering: C++ DAG engine (5–25× over Python baseline), Apache Spark for cloud-scale execution, and Python for development workflows. Processes 10M+ gene annotations. C++, Spark, and Python implementations cross-verified for functional equivalence via shared reference outputs.',
+      'Multi-implementation pipeline engineering: C++ DAG engine (faster than the Python baseline), Apache Spark for cloud-scale execution, and Python for development workflows. Processes 10M+ gene annotations. C++, Spark, and Python implementations cross-verified for functional equivalence via shared reference outputs.',
     techStack: ['Python', 'C++', 'Apache Spark', 'Gene Ontology'],
     link: 'https://github.com/gesttaltt/gene-ontology-functionomes',
     status: 'Research',
     specLink: '/quality/specs/ARCHITECTURE',
     stats: [
-      { label: 'C++ vs Python', value: '5-25×' },
+      { label: 'Implementations', value: '3' },
       { label: 'Scale', value: '10M+ annotations' },
     ],
     highlights: [
       'Three implementations (C++, Spark, Python) cross-verified for functional equivalence',
-      'C++ DAG engine delivers 5–25× throughput over Python for dependency-ordered annotation processing',
+      'C++ DAG engine delivers higher throughput than Python for dependency-ordered annotation processing',
       'Spark distribution enables cloud-scale GO annotation of 10M+ gene products',
       'Shared reference output suite catches implementation drift between language versions',
     ],

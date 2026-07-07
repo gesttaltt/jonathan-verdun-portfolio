@@ -93,14 +93,12 @@ describe('useTranslation (fallback)', () => {
   })
 
   it('en translations match expected tagline', () => {
-    expect(en.tagline).toBe(
-      'Architecting Resilient Quality Gates · Engineering Deterministic Automation'
-    )
+    expect(en.tagline).toBe('QA Automation Engineer · Test Architecture & Reliability')
   })
 
   it('es translations match expected tagline', () => {
     expect(es.tagline).toBe(
-      'Arquitecto de Gates de Calidad Resilientes · Ingeniería de Automatización Determinista'
+      'Ingeniero de Automatización QA · Arquitectura de Pruebas y Confiabilidad'
     )
   })
 

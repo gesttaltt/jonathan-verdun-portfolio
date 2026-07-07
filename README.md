@@ -71,19 +71,13 @@ The `out/` artifact produced by the `build (22.x)` run is shared with `lhci` to 
 
 ---
 
-## Technical Hardening (Deep Resilience)
+## Resilience features
 
-Every architectural decision is optimized for **Deterministic Future-Proofing**:
-
-- **Offline Autonomy:** Custom Service Worker (PWA) handles asset caching for functional offline viewing.
-- **Fail-Safe UX:** Deterministic 3s timeout for WebGL with a high-fidelity CSS gradient fallback.
-- **Security Gates:** `npm audit --audit-level=high` integrated into CI to block vulnerable dependencies.
-- **Config Resilience:** Build-time environment validation script prevents misconfigured deployments.
-- **Semantic SEO:** Full JSON-LD implementation (Person, WebSite, BreadcrumbList) for lead-gen discovery.
-
----
-
-## Tech stack
+- **Offline support:** Custom Service Worker (PWA) handles asset caching for functional offline viewing.
+- **WebGL fallback:** 3s timeout with a CSS gradient fallback if the WebGL context fails to load.
+- **Security gates:** `npm audit --audit-level=high` integrated into CI to block vulnerable dependencies.
+- **Env validation:** Build-time environment validation script prevents misconfigured deployments.
+- **Structured SEO:** JSON-LD implementation (Person, WebSite, BreadcrumbList).
 
 Deployments to GitHub Pages are triggered separately via `deploy.yml`, which also generates TypeDoc into `out/docs/api/`.
 

@@ -18,7 +18,8 @@ function buildVfsNode(dirPath, name = '/') {
     node.children = {}
     const items = fs.readdirSync(dirPath)
     for (const item of items) {
-      if (item.startsWith('.') || item === 'api' || item === 'content-audit.md') continue
+      if (item.startsWith('.') || item === 'api' || item === 'internal' || item === 'content-audit.md')
+        continue
       const fullPath = path.join(dirPath, item)
       node.children[item] = buildVfsNode(fullPath, item)
     }

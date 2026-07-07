@@ -2,9 +2,9 @@ import pkg from '../../package.json'
 
 export const siteConfig = {
   name: 'Jonathan Verdun',
-  title: 'Jonathan Verdun | Architecting Resilient Quality Gates',
+  title: 'Jonathan Verdun | QA Automation Engineer',
   description:
-    'Architecting resilient quality gates and engineering deterministic automation. Portfolio of Jonathan Verdun — QA Automation Engineer specializing in Test Architecture, Playwright, and Reliability.',
+    'Portfolio of Jonathan Verdun — QA Automation Engineer specializing in Test Architecture, Playwright, and Reliability.',
   url:
     process.env.NEXT_PUBLIC_SITE_URL ||
     (process.env.BASE_PATH || process.env.NEXT_PUBLIC_BASE_PATH
@@ -51,7 +51,7 @@ export const siteConfig = {
     ctaLabel: 'Get in Touch',
   },
 
-  tagline: 'Architecting Resilient Quality Gates · Engineering Deterministic Automation',
+  tagline: 'QA Automation Engineer · Test Architecture & Reliability',
   jobTitle: 'QA Automation Engineer',
   techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Three.js'],
   expertise: [
@@ -81,7 +81,11 @@ export const siteConfig = {
 
   versions: {
     portfolio: pkg.version,
-    nextjs: /* istanbul ignore next */ (pkg.dependencies as Record<string, string>).next?.replace(/^\^/, '') ?? '?',
+    nextjs:
+      /* istanbul ignore next */ (pkg.dependencies as Record<string, string>).next?.replace(
+        /^\^/,
+        ''
+      ) ?? '?',
   },
 
   certification: {

@@ -42,7 +42,7 @@ describe('buildMetadata', () => {
     const m = buildMetadata('es')
 
     it('title is Spanish', () => {
-      expect(m.title).toContain('Gates de Calidad')
+      expect(m.title).toContain('Ingeniero de Automatización QA')
     })
 
     it('description is Spanish', () => {

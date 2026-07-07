@@ -70,7 +70,7 @@ const ES_PROJECT_OVERRIDES: Record<
     statLabels: ['Automatizados', 'Casos Manuales'],
     highlights: [
       'Se alcanzó 100% de cobertura de requerimientos en 4 user stories con planes de prueba trazables en ADO',
-      'Reducción del 72% en esfuerzo de regresión manual mediante automatización móvil con Appium',
+      'Reducción del esfuerzo de regresión manual mediante automatización móvil con Appium',
       'Flujo de defectos clasificado por severidad con pasos de reproducción completos en Azure DevOps',
       'Gate de CI que bloquea merges ante fallos de regresión automatizada',
     ],
@@ -92,12 +92,12 @@ const ES_PROJECT_OVERRIDES: Record<
   },
   'proj-06': {
     description:
-      'Más de 230 pruebas en capas de unit (Jest), integración y E2E con Playwright para un servicio headless de extracción de transcripciones. Campaña A/B en modo stealth — 100 ejecuciones automatizadas, tasa de éxito del 89.4% en casos de borde; aprovechamiento del Análisis de Causa Raíz (RCA) para categorizar patrones de fallo e impulsar mejoras de estabilidad. Enfocado en estabilidad no funcional y pruebas de regresión.',
+      'Más de 230 pruebas en capas de unit (Jest), integración y E2E con Playwright para un servicio headless de extracción de transcripciones. Campaña de pruebas de resiliencia — 100 ejecuciones automatizadas en casos de borde; aprovechamiento del Análisis de Causa Raíz (RCA) para categorizar patrones de fallo e impulsar mejoras de estabilidad. Enfocado en estabilidad no funcional y pruebas de regresión.',
     statLabels: ['Pruebas', 'Capas'],
     highlights: [
-      '89.4% de tasa de éxito en 100 ejecuciones de campaña A/B con categorización RCA completa',
+      'Alta tasa de éxito en 100 ejecuciones automatizadas de la campaña de resiliencia, con categorización RCA completa',
       'Arquitectura de pruebas en tres capas atrapa regresiones en la etapa más económica',
-      'Mejoras impulsadas por RCA aumentaron la estabilidad en 12 puntos porcentuales en 6 iteraciones',
+      'Mejoras impulsadas por RCA aumentaron la estabilidad de forma sostenida a lo largo de las iteraciones',
       'Suite headless de Playwright valida extracción en más de 50 URLs reales de YouTube por ejecución',
     ],
     architecture:
@@ -118,7 +118,7 @@ const ES_PROJECT_OVERRIDES: Record<
   },
   'proj-02': {
     description:
-      'Pipeline de ingeniería de datos para análisis genómico — rendimiento ~120× vía vectorización NumPy. Integra restricciones evolutivas LOEUF y anotaciones Gene Ontology. Salidas del pipeline validadas contra conjuntos de referencia conocidos mediante pruebas de regresión parametrizadas.',
+      'Pipeline de ingeniería de datos para análisis genómico — mayor rendimiento vía vectorización NumPy sobre iteración nativa en Python. Integra restricciones evolutivas LOEUF y anotaciones Gene Ontology. Salidas del pipeline validadas contra conjuntos de referencia conocidos mediante pruebas de regresión parametrizadas.',
     statLabels: ['vs Python Nativo', 'Funcionomas'],
   },
   'proj-04': {
@@ -128,8 +128,8 @@ const ES_PROJECT_OVERRIDES: Record<
   },
   'proj-03': {
     description:
-      'Ingeniería de pipeline multi-implementación: motor DAG en C++ (5–25× sobre Python), Apache Spark y Python. Implementaciones verificadas cruzadamente para equivalencia funcional mediante salidas de referencia compartidas.',
-    statLabels: ['C++ vs Python', 'Escala'],
+      'Ingeniería de pipeline multi-implementación: motor DAG en C++ (más rápido que la referencia en Python), Apache Spark y Python. Implementaciones verificadas cruzadamente para equivalencia funcional mediante salidas de referencia compartidas.',
+    statLabels: ['Implementaciones', 'Escala'],
   },
 }
 
@@ -230,10 +230,10 @@ const esQaPhilosophy = {
 export const es: Translations = {
   lang: 'es',
   skipToContent: 'Saltar al contenido',
-  title: 'Jonathan Verdun | Arquitecto de Gates de Calidad Resilientes',
-  tagline: 'Arquitecto de Gates de Calidad Resilientes · Ingeniería de Automatización Determinista',
+  title: 'Jonathan Verdun | Ingeniero de Automatización QA',
+  tagline: 'Ingeniero de Automatización QA · Arquitectura de Pruebas y Confiabilidad',
   description:
-    'Arquitecto de gates de calidad resilientes e ingeniería de automatización determinista. Portafolio de Jonathan Verdun — Ingeniero de Automatización QA especializado en Arquitectura de Pruebas, Playwright y Confiabilidad.',
+    'Portafolio de Jonathan Verdun — Ingeniero de Automatización QA especializado en Arquitectura de Pruebas, Playwright y Confiabilidad.',
   workHistoryLabel: 'Experiencia',
   workHistoryDescriptions: esWorkHistoryDescriptions,
   workHistoryRoles: esWorkHistoryRoles,

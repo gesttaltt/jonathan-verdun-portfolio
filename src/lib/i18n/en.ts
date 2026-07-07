@@ -8,10 +8,10 @@ import { BioinformaticsService } from '@/lib/contracts/BioinformaticsContract'
 export const en: Translations = {
   lang: 'en',
   skipToContent: 'Skip to content',
-  title: 'Jonathan Verdun | Architecting Resilient Quality Gates',
-  tagline: 'Architecting Resilient Quality Gates · Engineering Deterministic Automation',
+  title: 'Jonathan Verdun | QA Automation Engineer',
+  tagline: 'QA Automation Engineer · Test Architecture & Reliability',
   description:
-    'Architecting resilient quality gates and engineering deterministic automation. Portfolio of Jonathan Verdun — QA Automation Engineer specializing in Test Architecture, Playwright, and Reliability.',
+    'Portfolio of Jonathan Verdun — QA Automation Engineer specializing in Test Architecture, Playwright, and Reliability.',
   workHistoryLabel: 'Work History',
   workHistoryDescriptions: {
     'Ai-Whisperers':

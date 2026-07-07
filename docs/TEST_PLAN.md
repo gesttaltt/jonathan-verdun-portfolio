@@ -75,4 +75,4 @@ This Master Test Plan (MTP) defines the strategic approach to quality assurance 
 
 ---
 
-_Authorized by Jonathan Verdun — Quality Architect_
+_Jonathan Verdun — QA Automation Engineer_
