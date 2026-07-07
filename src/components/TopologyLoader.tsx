@@ -25,8 +25,7 @@ export function loadTopology(
       }
     }, 3000)
 
-    // Defer loading to prioritize LCP
-    setTimeout(() => {
+    const startImport = () => {
       importFn()
         .then((m) => {
           resolved = true
@@ -37,7 +36,18 @@ export function loadTopology(
           console.error('[TopologyLoader] Failed to load WebGL module:', err)
           resolve(() => null)
         })
-    }, 500)
+    }
+
+    // Defer loading until the main thread is actually idle rather than an
+    // optimistic fixed delay — on a slow/constrained CPU a flat 500ms timer
+    // can still land mid-hydration and compete with LCP paint. Fall back to
+    // the original 500ms timer where requestIdleCallback isn't available
+    // (Safari, and jsdom in tests).
+    if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
+      window.requestIdleCallback(startImport, { timeout: 2000 })
+    } else {
+      setTimeout(startImport, 500)
+    }
   })
 }
 
