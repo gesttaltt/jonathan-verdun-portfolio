@@ -1,5 +1,6 @@
 import { render, waitFor } from '@testing-library/react'
 import { ServiceWorkerRegister } from '@/components/ServiceWorkerRegister'
+import { siteConfig } from '@/lib/siteConfig'
 
 function mockCookie(value: string) {
   Object.defineProperty(document, 'cookie', { get: () => value, configurable: true })
@@ -36,7 +37,7 @@ describe('ServiceWorkerRegister', () => {
   it('registers via isE2E path when hostname is localhost and e2e cookie is set', () => {
     mockCookie('e2e=true')
     render(<ServiceWorkerRegister />)
-    expect(mockRegister).toHaveBeenCalledWith('/sw.js')
+    expect(mockRegister).toHaveBeenCalledWith(`${siteConfig.basePath}/sw.js`)
   })
 
   it('adds a load event listener when readyState is not complete', () => {

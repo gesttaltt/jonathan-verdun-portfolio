@@ -93,7 +93,9 @@ describe('sitemap — audit slug URL safety', () => {
     // encodeURIComponent preserves the full slug in the path:
     for (const slug of ['audit#section', 'audit?v=2']) {
       const safeUrl = `${siteConfig.url}/quality/${encodeURIComponent(slug)}/`
-      expect(new URL(safeUrl).pathname).toBe(`/quality/${encodeURIComponent(slug)}/`)
+      expect(new URL(safeUrl).pathname).toBe(
+        `${siteConfig.basePath}/quality/${encodeURIComponent(slug)}/`
+      )
     }
   })
 
