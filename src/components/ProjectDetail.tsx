@@ -66,9 +66,9 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ projectId }) => {
           >
             {project.status}
           </span>
-          {project.techStack.slice(0, 3).map((tech) => (
+          {project.techStack.slice(0, 3).map((tech, index) => (
             <span
-              key={tech}
+              key={`${tech}-${index}`}
               className="bg-bg-badge text-text-tertiary rounded border border-white/5 px-2 py-0.5 text-[10px] font-bold sm:text-xs"
             >
               {tech}
@@ -102,9 +102,9 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ projectId }) => {
               {t.lang === 'es' ? 'Tecnologías' : 'Tech Stack'}
             </h2>
             <div className="flex flex-wrap gap-2">
-              {project.techStack.map((tech) => (
+              {project.techStack.map((tech, index) => (
                 <span
-                  key={tech}
+                  key={`${tech}-${index}`}
                   className="bg-bg-badge text-text-secondary border-border-subtle rounded-lg border px-3 py-1.5 text-sm font-bold"
                 >
                   {tech}
@@ -150,9 +150,9 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ projectId }) => {
                 {t.lang === 'es' ? 'Enlaces Relacionados' : 'Related Links'}
               </h2>
               <div className="flex flex-wrap gap-2">
-                {project.links.map((link) => (
+                {project.links.map((link, index) => (
                   <a
-                    key={link.label}
+                    key={`${link.label}-${index}`}
                     href={link.url}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -175,8 +175,8 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ projectId }) => {
                 {t.lang === 'es' ? 'Métricas' : 'Metrics'}
               </h3>
               <div className="space-y-3">
-                {project.stats.map((stat) => (
-                  <div key={stat.label}>
+                {project.stats.map((stat, index) => (
+                  <div key={`${stat.label}-${index}`}>
                     <div className="text-text-muted text-[11px] font-black uppercase">
                       {stat.label}
                     </div>

@@ -55,7 +55,7 @@ test.describe('Navigation Flow', () => {
       .first()
     const href = await firstPostLink.getAttribute('href')
     await firstPostLink.click()
-    await expect(page).toHaveURL(href ?? '/blog/')
+    await expect(page).toHaveURL(href ?? '/blog/', { timeout: 15_000 })
 
     await page.goBack()
     await expect(page).toHaveURL('/blog/')

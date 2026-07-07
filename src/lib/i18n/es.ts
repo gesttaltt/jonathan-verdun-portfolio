@@ -105,7 +105,7 @@ const ES_PROJECT_OVERRIDES: Record<
   },
   'proj-07': {
     description:
-      'Implementación de referencia QA con 100% de cobertura lógica y gates automatizados de cumplimiento WCAG 2.1 AA. Incluye 239 pruebas Jest y 14 pruebas E2E con Playwright. Cada afirmación en la sección de Filosofía QA está respaldada por un gate en CI, demostrando un diseño de pruebas estructural y automatizado.',
+      'Implementación de referencia QA con 100% de cobertura lógica y gates automatizados de cumplimiento WCAG 2.1 AA. Incluye 570+ pruebas Jest y 66 pruebas E2E con Playwright. Cada afirmación en la sección de Filosofía QA está respaldada por un gate en CI, demostrando un diseño de pruebas estructural y automatizado.',
     statLabels: ['Pruebas', 'Cobertura'],
     highlights: [
       '100% de cobertura en statements/branches/functions/lines exigido como gate de CI',

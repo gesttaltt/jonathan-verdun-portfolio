@@ -1,8 +1,13 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 
+jest.mock('next/dynamic', () => ({
+  __esModule: true,
+  default: () => () => null,
+}))
+
 jest.mock('@react-three/fiber', () => ({
-  Canvas: ({ children, ...props }: React.PropsWithChildren<Record<string, unknown>>) => (
+  Canvas: ({ children, onCreated, ...props }: React.PropsWithChildren<Record<string, unknown>>) => (
     <div data-testid="r3f-canvas" {...props}>
       {children}
     </div>
@@ -13,10 +18,6 @@ jest.mock('@react-three/postprocessing', () => ({
   EffectComposer: ({ children }: React.PropsWithChildren) => <>{children}</>,
   Bloom: () => null,
   Vignette: () => null,
-}))
-
-jest.mock('@/components/TopologyMesh', () => ({
-  TopologyMesh: () => <div data-testid="topology-mesh" />,
 }))
 
 import { InteractiveTopology } from '@/components/InteractiveTopology'

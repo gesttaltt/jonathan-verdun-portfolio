@@ -88,8 +88,8 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
       <div className="space-y-4">
         {project.stats && (
           <div className="light:border-border-subtle flex gap-4 border-t border-white/10 pt-4">
-            {project.stats.map((stat) => (
-              <div key={stat.label}>
+            {project.stats.map((stat, index) => (
+              <div key={`${stat.label}-${index}`}>
                 <div className="text-text-muted text-[11px] font-black uppercase sm:text-xs">
                   {stat.label}
                 </div>
@@ -100,9 +100,9 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
         )}
 
         <div className="flex flex-wrap gap-2 pt-2">
-          {project.techStack.map((tech) => (
+          {project.techStack.map((tech, index) => (
             <span
-              key={tech}
+              key={`${tech}-${index}`}
               className="light:border-border-subtle light:bg-bg-card-hover text-text-tertiary light:group-hover:border-blue-200 light:group-hover:text-blue-800 bg-bg-badge rounded border border-white/5 px-2 py-1 text-[11px] font-bold transition-colors group-hover:border-blue-500/20 group-hover:text-blue-200 sm:text-xs"
             >
               {tech}

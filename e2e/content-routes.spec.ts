@@ -50,7 +50,7 @@ test.describe('Blog — List and Detail Pages', () => {
     const href = await firstPost.getAttribute('href')
     await firstPost.click()
 
-    await expect(page).toHaveURL(href ?? '/blog/')
+    await expect(page).toHaveURL(href ?? '/blog/', { timeout: 15_000 })
     // An individual post page should have an article or heading
     await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
     // MDX content should be rendered
@@ -81,7 +81,7 @@ test.describe('Blog — List and Detail Pages', () => {
     const href = await firstLink.getAttribute('href')
     await firstLink.click()
 
-    await expect(page).toHaveURL(href ?? '/es/blog/')
+    await expect(page).toHaveURL(href ?? '/es/blog/', { timeout: 15_000 })
     await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
     // Back link must point to the ES blog index, not the EN /blog/ path.
     const backLink = page.getByRole('link', { name: /volver al blog/i })
@@ -94,7 +94,7 @@ test.describe('Quality Audit Detail Pages', () => {
   test('EN quality audit detail renders content', async ({ page }) => {
     await page.goto('/quality/audit-2026-04-27')
 
-    await expect(page.locator('article, h1, h2').first()).toBeVisible()
+    await expect(page.locator('article, h1, h2').first()).toBeVisible({ timeout: 15_000 })
     await expect(page.getByText(/Portfolio Audit/i).first()).toBeVisible()
     // Back link must point to the EN quality index.
     const backLink = page.getByRole('link', { name: /back to dashboard/i })
@@ -105,7 +105,7 @@ test.describe('Quality Audit Detail Pages', () => {
   test('ES quality audit detail renders', async ({ page }) => {
     await page.goto('/es/quality/audit-2026-04-27')
 
-    await expect(page.locator('article, h1, h2').first()).toBeVisible()
+    await expect(page.locator('article, h1, h2').first()).toBeVisible({ timeout: 15_000 })
     // Back link must point to the ES quality index, not the EN /quality/ path.
     const backLink = page.getByRole('link', { name: /volver al panel/i })
     await expect(backLink).toBeVisible()

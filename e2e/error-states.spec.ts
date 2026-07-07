@@ -47,10 +47,10 @@ test.describe('ContactForm — Network Error State', () => {
     await page.goto('/?formspree=test')
 
     // Fill in valid form fields
-    const nameInput = page.getByLabel('Name')
-    const emailInput = page.getByLabel('Email')
-    const subjectInput = page.getByLabel('Subject')
-    const messageInput = page.getByLabel('Message')
+    const nameInput = page.locator('#cf-name')
+    const emailInput = page.locator('#cf-email')
+    const subjectInput = page.locator('#cf-subject')
+    const messageInput = page.locator('#cf-message')
 
     // If form is disabled (no Formspree), skip this test
     const disabledMsg = page.getByText(/contact form is not configured/i)
@@ -68,7 +68,7 @@ test.describe('ContactForm — Network Error State', () => {
     await page.getByRole('button', { name: /send message/i }).click()
 
     // Wait for the error alert to appear
-    await expect(page.getByRole('alert').filter({ hasText: /something went wrong/i })).toBeVisible({
+    await expect(page.getByRole('alert').filter({ hasText: /could not send/i })).toBeVisible({
       timeout: 10_000,
     })
   })
@@ -76,6 +76,9 @@ test.describe('ContactForm — Network Error State', () => {
 
 test.describe('WebGL Fallback — Topology Load Timeout', () => {
   test('site renders without WebGL topology (CSS fallback)', async () => {
-    test.skip(true, 'Topology container presence is environment-dependent in headless mode; skipped to avoid false negatives')
+    test.skip(
+      true,
+      'Topology container presence is environment-dependent in headless mode; skipped to avoid false negatives'
+    )
   })
 })

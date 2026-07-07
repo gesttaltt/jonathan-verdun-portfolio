@@ -86,13 +86,13 @@ export const PROJECT_DATA: ProjectSpec[] = [
     id: 'proj-07',
     title: 'Portfolio QA Hardened',
     description:
-      'QA reference implementation featuring 100% logic coverage and automated WCAG 2.1 AA compliance gates. Includes 239 Jest tests (unit, integration, property-based via fast-check) and 14 Playwright E2E tests. Every quality claim in the QA Philosophy section is backed by a CI gate. Demonstrates structural test design and automated quality gates.',
+      'QA reference implementation featuring 100% logic coverage and automated WCAG 2.1 AA compliance gates. Includes 570+ Jest tests (unit, integration, property-based via fast-check) and 66 Playwright E2E tests. Every quality claim in the QA Philosophy section is backed by a CI gate. Demonstrates structural test design and automated quality gates.',
     techStack: ['Next.js', 'Playwright', 'Jest', 'fast-check'],
     link: 'https://github.com/gesttaltt/jonathan-verdun-portfolio',
     status: 'QA',
     specLink: '/quality/specs/TESTING',
     stats: [
-      { label: 'Tests', value: '239' },
+      { label: 'Tests', value: '570+' },
       { label: 'Coverage', value: '100%' },
     ],
     highlights: [

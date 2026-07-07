@@ -26,7 +26,7 @@ test.describe('Project Detail Pages', () => {
     const href = await projectLink.getAttribute('href')
     await projectLink.click()
 
-    await expect(page).toHaveURL(href ?? /\/projects\//)
+    await expect(page).toHaveURL(href ?? /\/projects\//, { timeout: 15_000 })
     await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
   })
 

@@ -1,4 +1,10 @@
 import { render, screen } from '@testing-library/react'
+
+jest.mock('framer-motion', () => ({
+  LazyMotion: ({ children }: { children: React.ReactNode }) => <>{children}</>,
+  MotionConfig: ({ children }: { children: React.ReactNode }) => <>{children}</>,
+}))
+
 import { MotionProvider } from '@/components/MotionProvider'
 
 describe('MotionProvider', () => {
