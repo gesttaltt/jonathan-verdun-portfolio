@@ -2,7 +2,8 @@
 
 [![CI](https://github.com/gesttaltt/jonathan-verdun-portfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/gesttaltt/jonathan-verdun-portfolio/actions/workflows/ci.yml)
 [![Deploy](https://github.com/gesttaltt/jonathan-verdun-portfolio/actions/workflows/deploy.yml/badge.svg)](https://github.com/gesttaltt/jonathan-verdun-portfolio/actions/workflows/deploy.yml)
-[![Coverage](https://img.shields.io/badge/Coverage-100%25-brightgreen.svg?style=flat-square)](https://github.com/gesttaltt/jonathan-verdun-portfolio/actions/workflows/ci.yml)
+[![Tests](https://img.shields.io/endpoint?url=https://gesttaltt.github.io/jonathan-verdun-portfolio/badge-tests.json&style=flat-square)](https://github.com/gesttaltt/jonathan-verdun-portfolio/actions/workflows/ci.yml)
+[![Coverage](https://img.shields.io/endpoint?url=https://gesttaltt.github.io/jonathan-verdun-portfolio/badge-coverage.json&style=flat-square)](https://github.com/gesttaltt/jonathan-verdun-portfolio/actions/workflows/ci.yml)
 ![Lighthouse](https://img.shields.io/badge/Lighthouse-100%2F100-brightgreen.svg?style=flat-square&logo=lighthouse)
 ![Accessibility: WCAG AA](https://img.shields.io/badge/Accessibility-WCAG%20AA-blueviolet.svg?style=flat-square)
 [![Code Style: Prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)

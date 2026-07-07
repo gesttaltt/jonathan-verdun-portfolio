@@ -1,7 +1,17 @@
 import { render, screen } from '@testing-library/react'
 
 jest.mock('framer-motion', () => ({
-  LazyMotion: ({ children }: { children: React.ReactNode }) => <>{children}</>,
+  LazyMotion: ({
+    children,
+    features,
+  }: {
+    children: React.ReactNode
+    features: () => Promise<unknown>
+  }) => {
+    // Call features() to cover the loadFeatures function without triggering state-based act warnings
+    features()
+    return <>{children}</>
+  },
   MotionConfig: ({ children }: { children: React.ReactNode }) => <>{children}</>,
 }))
 

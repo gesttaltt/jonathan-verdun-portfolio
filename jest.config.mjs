@@ -46,6 +46,7 @@ const config = {
     // Shared test helper — not application code
     '!src/test-utils.tsx',
   ],
+  coverageReporters: ['json', 'lcov', 'text', 'clover', 'json-summary'],
   coverageThreshold: {
     global: {
       lines: 99,
