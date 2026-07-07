@@ -24,7 +24,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
         document.documentElement.classList.toggle('light', savedTheme === 'light')
       })
     } else {
-      // Default to Dark theme regardless of system preference for elite aesthetic
+      // Default to dark regardless of system preference — matches the design's brand default
       queueMicrotask(() => {
         setTheme('dark')
         document.documentElement.classList.remove('light')
