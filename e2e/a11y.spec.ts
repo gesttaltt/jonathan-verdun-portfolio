@@ -35,6 +35,14 @@ test.describe('Accessibility — Quality route (/quality/)', () => {
     // heading confirm all dynamic content has mounted before scanning.
     await expect(page.getByText(/Live Verification Evidence/i)).toBeVisible({ timeout: 10_000 })
     await expect(page.getByPlaceholder(/Search/i)).toBeVisible({ timeout: 5_000 })
+    // The dashboard's top FadeInSection sits above the fold, so its
+    // whileInView opacity transition (TIMING.standard = 600ms in
+    // lib/animations.ts) starts firing as soon as the page loads rather than
+    // staying at a clean, axe-excluded opacity:0 like below-the-fold
+    // sections. Scanning mid-transition catches text blended toward the
+    // background and axe reports a false color-contrast violation — wait
+    // for the fade to finish before scanning.
+    await page.waitForTimeout(700)
     const results = await new AxeBuilder({ page })
       .withTags(['wcag2a', 'wcag2aa', 'wcag21aa'])
       .analyze()
