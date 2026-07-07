@@ -7,7 +7,7 @@ jest.mock('@/lib/siteConfig', () => ({
   siteConfig: {
     performanceMetrics: {
       unitCoverage: '100%',
-      automationRate: '95%',
+      automationRate: '72%',
       securityStatus: 'Passed',
     },
     repo: {
@@ -64,7 +64,7 @@ describe('Sidebar', () => {
   it('renders all quality gates with correct values', async () => {
     renderSidebar()
     expect(await screen.findByText('100%')).toBeInTheDocument()
-    expect(screen.getByText('95%')).toBeInTheDocument()
+    expect(screen.getByText('72%')).toBeInTheDocument()
     expect(screen.getByText('Passed')).toBeInTheDocument()
   })
 

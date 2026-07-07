@@ -22,7 +22,7 @@ const GATES = [
     value: siteConfig.performanceMetrics.automationRate,
     color: 'cyan',
     icon: Zap,
-    link: '/quality/specs/ARCHITECTURE',
+    link: '/projects/qa-arxiv-mobile',
   },
   {
     key: 'securityScanLabel',

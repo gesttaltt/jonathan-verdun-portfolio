@@ -77,7 +77,9 @@ export const siteConfig = {
 
   performanceMetrics: {
     unitCoverage: '100%',
-    automationRate: '95%',
+    // 26 automated / 10 manual test cases on QA Arxiv Mobile (proj-01) — the
+    // one case study with an explicit automated/manual split. See ProjectContract.ts.
+    automationRate: '72%',
     securityStatus: 'Passed',
   },
 
