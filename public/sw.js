@@ -50,6 +50,26 @@ self.addEventListener('fetch', (event) => {
     return
   }
 
+  // Page navigations: network-first (so users get fresh content when online),
+  // caching each visited document dynamically and falling back to that cache
+  // — or the cached app shell — when the network is unavailable. Without this,
+  // a failed fetch() rejects the respondWith() promise and the browser shows
+  // its own offline interstitial instead of the cached page.
+  if (request.mode === 'navigate') {
+    event.respondWith(
+      fetch(request)
+        .then((networkResponse) => {
+          if (networkResponse.status === 200) {
+            const responseToCache = networkResponse.clone()
+            caches.open(CACHE_NAME).then((cache) => cache.put(request, responseToCache))
+          }
+          return networkResponse
+        })
+        .catch(() => caches.match(request).then((cached) => cached || caches.match('./')))
+    )
+    return
+  }
+
   event.respondWith(
     caches.match(request).then((cachedResponse) => {
       if (cachedResponse) {
