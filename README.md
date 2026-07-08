@@ -63,7 +63,7 @@ The runner stage is `nginx:alpine` serving the static export. `nginx.conf` sets 
 | Job     | What it does                                                                             |
 | :------ | :--------------------------------------------------------------------------------------- |
 | `build` | Format · lint · security audit · types · Jest (570+ tests, 100% coverage) · Node 22 & 24 |
-| `e2e`   | Playwright suite (66 tests) + WCAG 2.1 AA axe scans (full coverage)                      |
+| `e2e`   | Playwright suite (66 cases × 2 browser projects, 162 runs) + WCAG 2.1 AA axe scans       |
 | `lhci`  | Lighthouse CI gate: a11y ≥ 95, best-practices ≥ 90, SEO ≥ 90                             |
 
 The `out/` artifact produced by the `build (22.x)` run is shared with `lhci` to avoid a duplicate build. Build caching is implemented to optimize performance.
