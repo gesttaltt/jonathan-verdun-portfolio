@@ -46,6 +46,9 @@ jobs:
           BASE_PATH: ${{ steps.pages.outputs.base_path }}
           NEXT_PUBLIC_BASE_PATH: ${{ steps.pages.outputs.base_path }}
           NEXT_PUBLIC_SITE_URL: ${{ steps.pages.outputs.origin }}${{ steps.pages.outputs.base_path }}
+          # Formspree form ID for ContactForm — set as a repo secret. Empty/unset
+          # renders the form in its disabled state (see ContactForm.tsx).
+          NEXT_PUBLIC_FORMSPREE_ID: ${{ secrets.NEXT_PUBLIC_FORMSPREE_ID }}
           # Suppress Next.js telemetry in CI.
           NEXT_TELEMETRY_DISABLED: 1
 
