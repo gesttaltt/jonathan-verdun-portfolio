@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
-import EnBlogPage from '@/app/(en)/blog/page'
-import EsBlogPage from '@/app/(es)/es/blog/page'
+import EnBlogPage, { metadata as enBlogMetadata } from '@/app/(en)/blog/page'
+import EsBlogPage, { metadata as esBlogMetadata } from '@/app/(es)/es/blog/page'
 import EnBlogPostPage, {
   generateMetadata as generateEnMetadata,
   generateStaticParams as generateEnStaticParams,
@@ -13,6 +13,7 @@ import EsBlogPostPage, {
 import { BlogService } from '@/lib/services/BlogService'
 import { compileMDX } from 'next-mdx-remote/rsc'
 import { notFound } from 'next/navigation'
+import { siteConfig } from '@/lib/siteConfig'
 
 jest.mock('@/lib/services/BlogService', () => ({
   BlogService: {
@@ -105,6 +106,16 @@ describe('Blog route wrappers', () => {
     render(<EsBlogPage />)
     expect(BlogService.getAllPosts).toHaveBeenCalled()
     expect(screen.getByTestId('blog-list')).toHaveTextContent('qa-article,automation-article')
+  })
+
+  it('EN blog listing metadata references the site name', () => {
+    expect(enBlogMetadata.title).toBe(`Blog — ${siteConfig.name}`)
+    expect(String(enBlogMetadata.description)).toContain(siteConfig.name)
+  })
+
+  it('ES blog listing metadata references the site name', () => {
+    expect(esBlogMetadata.title).toBe(`Blog — ${siteConfig.name}`)
+    expect(String(esBlogMetadata.description)).toContain(siteConfig.name)
   })
 
   it('generates static params for EN slug route', () => {

@@ -4,7 +4,7 @@
 [![Deploy](https://github.com/gesttaltt/jonathan-verdun-portfolio/actions/workflows/deploy.yml/badge.svg)](https://github.com/gesttaltt/jonathan-verdun-portfolio/actions/workflows/deploy.yml)
 [![Tests](https://img.shields.io/endpoint?url=https://gesttaltt.github.io/jonathan-verdun-portfolio/badge-tests.json&style=flat-square)](https://github.com/gesttaltt/jonathan-verdun-portfolio/actions/workflows/ci.yml)
 [![Coverage](https://img.shields.io/endpoint?url=https://gesttaltt.github.io/jonathan-verdun-portfolio/badge-coverage.json&style=flat-square)](https://github.com/gesttaltt/jonathan-verdun-portfolio/actions/workflows/ci.yml)
-![Lighthouse](https://img.shields.io/badge/Lighthouse-100%2F100-brightgreen.svg?style=flat-square&logo=lighthouse)
+[![Lighthouse CI](https://img.shields.io/badge/Lighthouse_CI-gated-brightgreen.svg?style=flat-square&logo=lighthouse)](https://github.com/gesttaltt/jonathan-verdun-portfolio/actions/workflows/ci.yml)
 ![Accessibility: WCAG AA](https://img.shields.io/badge/Accessibility-WCAG%20AA-blueviolet.svg?style=flat-square)
 [![Code Style: Prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
@@ -64,7 +64,7 @@ The runner stage is `nginx:alpine` serving the static export. `nginx.conf` sets 
 | :------ | :--------------------------------------------------------------------------------------- |
 | `build` | Format · lint · security audit · types · Jest (570+ tests, 100% coverage) · Node 22 & 24 |
 | `e2e`   | Playwright suite (66 cases × 2 browser projects, 162 runs) + WCAG 2.1 AA axe scans       |
-| `lhci`  | Lighthouse CI gate: a11y ≥ 95, best-practices ≥ 90, SEO ≥ 90                             |
+| `lhci`  | Lighthouse CI gate: a11y ≥ 90, best-practices ≥ 95, SEO ≥ 95, performance ≥ 50           |
 
 The `out/` artifact produced by the `build (22.x)` run is shared with `lhci` to avoid a duplicate build. Build caching is implemented to optimize performance.
 
