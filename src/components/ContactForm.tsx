@@ -180,7 +180,7 @@ export const ContactForm: React.FC = () => {
 
   if (!getFormEndpoint()) {
     return (
-      <div className="light:border-border-subtle rounded-xl border border-dashed border-white/10 p-4 text-center">
+      <div className="light:border-border-subtle rounded-xl border border-dashed border-white/10 p-4">
         <p className="text-text-muted text-xs font-medium">{ct.formDisabled}</p>
       </div>
     )
