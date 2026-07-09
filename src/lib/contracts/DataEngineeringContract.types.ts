@@ -1,7 +1,6 @@
-export interface SystemSpec {
-  id: string
-  focus: 'Automated Reporting' | 'Predictive Capacity Control'
-  methodology: 'ETL' | 'Additive Modeling'
-  invariants: string[]
-  link?: string
-}
+import type { SpecEntry } from './SpecEntry.types'
+
+export type SystemSpec = SpecEntry<
+  'Automated Reporting' | 'Predictive Capacity Control',
+  'ETL' | 'Additive Modeling'
+>

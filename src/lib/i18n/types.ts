@@ -1,4 +1,5 @@
 import type { ProjectSpec } from '@/lib/contracts/ProjectContract.types'
+import type { SpecEntry } from '@/lib/contracts/SpecEntry.types'
 
 export type Lang = 'en' | 'es'
 
@@ -8,21 +9,10 @@ export interface I18nQASpec {
   status: string
 }
 
-export interface I18nSystemSpec {
-  id: string
-  focus: string
-  methodology: string
-  invariants: string[]
-  link?: string
-}
-
-export interface I18nResearchSpec {
-  id: string
-  focus: string
-  methodology: string
-  invariants: string[]
-  link?: string
-}
+// Translated specs relax focus/methodology to plain strings — the literal
+// unions from SystemSpec/ResearchSpec only make sense pre-translation.
+export type I18nSystemSpec = SpecEntry
+export type I18nResearchSpec = SpecEntry
 
 export interface Translations {
   lang: Lang
