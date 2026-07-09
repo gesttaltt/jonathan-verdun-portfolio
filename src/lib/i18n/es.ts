@@ -66,70 +66,94 @@ const ES_PROJECT_OVERRIDES: Record<
 > = {
   'proj-01': {
     description:
-      '26 pruebas automatizadas con pytest + Appium y 10 casos de prueba manuales en 4 Historias de Usuario (Búsqueda, Favoritos, PDF, Red), vinculados a ADO Test Plans para trazabilidad completa. Reportes de defectos registrados como work items en Azure DevOps con clasificación de severidad y pasos de reproducción. Validación de API, flujos de smoke móvil y verificación de integridad de datos — todo gestionado vía GitHub Actions CI. Valida las restricciones de test-first y quality-gate descritas en la sección de Filosofía QA.',
+      '26 pruebas automatizadas con pytest + Appium y 10 casos manuales en 4 user stories, trazados a ADO Test Plans. Flujo de defectos, validación de API y smoke móvil — todo gateado en GitHub Actions CI.',
     statLabels: ['Automatizados', 'Casos Manuales'],
     highlights: [
-      'Se alcanzó 100% de cobertura de requerimientos en 4 user stories con planes de prueba trazables en ADO',
-      'Reducción del esfuerzo de regresión manual mediante automatización móvil con Appium',
-      'Flujo de defectos clasificado por severidad con pasos de reproducción completos en Azure DevOps',
-      'Gate de CI que bloquea merges ante fallos de regresión automatizada',
+      '100% de cobertura de requerimientos en 4 user stories, trazado a ADO test plans',
+      'Menor esfuerzo de regresión manual vía automatización móvil con Appium',
+      'Flujo de defectos clasificado por severidad con pasos de reproducción en Azure DevOps',
+      'Gate de CI bloquea merges ante fallos de regresión automatizada',
     ],
     architecture:
-      'Patrón Page Object Model con fixtures de pytest para aislamiento de pruebas. Gestión de sesiones Appium vía conftest.py personalizado con abstracción de dispositivo. Integración con API de ADO para sincronización bidireccional de resultados. Ejecución paralela dividida por límite de user story.',
+      'Page Object Model con fixtures de pytest para aislamiento de pruebas. conftest.py personalizado maneja sesiones Appium y abstracción de dispositivo. La API de ADO sincroniza resultados bidireccionalmente; las pruebas corren en paralelo, divididas por user story.',
   },
   'proj-05': {
     description:
-      'Suite de 96 pruebas que cubre todos los endpoints REST vía FastAPI TestClient and async httpx — rutas de codificación, clustering y visualización. El CI gate requiere lint, type-check, análisis de seguridad (bandit + pip-audit), smoke test de Docker y cobertura antes de hacer merge. Implementa técnicas de prueba funcional de caja negra para asegurar el cumplimiento del contrato de la API.',
+      'Suite de 96 pruebas que cubre todos los endpoints REST vía FastAPI TestClient y async httpx. El CI gate requiere lint, type-check, escaneo de seguridad (bandit + pip-audit), smoke test de Docker y cobertura antes de mergear.',
     statLabels: ['Pruebas', 'Endpoints'],
     highlights: [
-      'Suite de 96 pruebas de caja negra cubre todos los endpoints REST con casos de borde',
-      'Gate de CI multicapa: lint → type-check → seguridad (bandit + pip-audit) → Docker smoke → cobertura',
-      'Se descubrieron 3 violaciones de contrato de API durante pruebas de integración antes del despliegue',
-      'Cliente httpx asíncrono permite verificación concurrente de endpoints en menos de 30s',
+      'Suite de 96 pruebas de caja negra cubre todos los endpoints con casos de borde',
+      'Gate de CI multicapa: lint → type-check → seguridad → Docker smoke → cobertura',
+      'Se encontraron 3 violaciones de contrato de API en pruebas de integración, antes del despliegue',
+      'Cliente httpx asíncrono verifica todos los endpoints concurrentemente en menos de 30s',
     ],
     architecture:
-      'Pruebas de caja negra sobre FastAPI TestClient para velocidad a nivel unitario, con pruebas de integración httpx complementarias contra un contenedor Docker activo. Escaneo de seguridad ejecutado en paralelo con pruebas funcionales. Datos de prueba generados programáticamente.',
+      'Pruebas de caja negra sobre FastAPI TestClient por velocidad, más pruebas de integración httpx contra un contenedor Docker activo. El escaneo de seguridad corre en paralelo con las pruebas funcionales; los datos de prueba se generan programáticamente.',
   },
   'proj-06': {
     description:
-      'Más de 230 pruebas en capas de unit (Jest), integración y E2E con Playwright para un servicio headless de extracción de transcripciones. Campaña de pruebas de resiliencia — 100 ejecuciones automatizadas en casos de borde; aprovechamiento del Análisis de Causa Raíz (RCA) para categorizar patrones de fallo e impulsar mejoras de estabilidad. Enfocado en estabilidad no funcional y pruebas de regresión.',
+      'Más de 230 pruebas en capas unit (Jest), integración y E2E (Playwright) para un servicio headless de extracción de transcripciones. Una campaña de 100 ejecuciones de resiliencia usó Análisis de Causa Raíz para categorizar fallos e impulsar mejoras de estabilidad.',
     statLabels: ['Pruebas', 'Capas'],
     highlights: [
-      'Alta tasa de éxito en 100 ejecuciones automatizadas de la campaña de resiliencia, con categorización RCA completa',
+      'Alta tasa de éxito en 100 ejecuciones de la campaña de resiliencia, con categorización RCA completa',
       'Arquitectura de pruebas en tres capas atrapa regresiones en la etapa más económica',
-      'Mejoras impulsadas por RCA aumentaron la estabilidad de forma sostenida a lo largo de las iteraciones',
-      'Suite headless de Playwright valida extracción en más de 50 URLs reales de YouTube por ejecución',
+      'Mejoras impulsadas por RCA aumentaron la estabilidad de forma sostenida',
+      'Suite headless valida extracción en más de 50 URLs reales de YouTube por ejecución',
     ],
     architecture:
-      'Pirámide de pruebas multicapa: Jest para lógica de extracción aislada, integración para middleware de API, Playwright E2E para flujos completos en contexto de navegador. Taxonomía RCA etiqueta cada fallo por categoría (red, parsing, rate-limit, timeout) para análisis de tendencias.',
+      'Pirámide de pruebas: Jest para lógica de extracción, integración para middleware de API, Playwright E2E para flujos completos de navegador. La taxonomía RCA etiqueta cada fallo (red, parsing, rate-limit, timeout) para análisis de tendencias.',
   },
   'proj-07': {
     description:
-      'Implementación de referencia QA con 100% de cobertura lógica y gates automatizados de cumplimiento WCAG 2.1 AA. Incluye 570+ pruebas Jest y 66 pruebas E2E con Playwright. Cada afirmación en la sección de Filosofía QA está respaldada por un gate en CI, demostrando un diseño de pruebas estructural y automatizado.',
+      'Implementación de referencia QA: 100% de cobertura lógica, gates automatizados de WCAG 2.1 AA, 570+ pruebas Jest y 66 pruebas E2E con Playwright. Cada afirmación en la Filosofía QA está respaldada por un gate en CI.',
     statLabels: ['Pruebas', 'Cobertura'],
     highlights: [
       '100% de cobertura en statements/branches/functions/lines exigido como gate de CI',
-      'Escaneos WCAG 2.1 AA automatizados vía axe-core en cada ejecución E2E — cero violaciones en producción',
-      'Pruebas basadas en propiedades con fast-check detectan desviaciones de i18n y casos de borde de terminal',
-      'Tres trabajos de CI (build, e2e, lhci) completan en menos de 10 minutos con matriz Node 22 y 24',
+      'Escaneos WCAG 2.1 AA automatizados en cada ejecución E2E — cero violaciones en producción',
+      'Pruebas basadas en propiedades (fast-check) detectan desviaciones de i18n y casos de borde',
+      'Tres jobs de CI terminan en menos de 10 minutos con matriz Node 22/24',
     ],
     architecture:
-      'Exportación estática con Next.js 16 App Router. Separación SOLID: contratos poseen datos, servicios poseen lógica, componentes poseen presentación. Tres capas de prueba: Jest para unit/integración/propiedades, Playwright para E2E + a11y, Lighthouse CI para presupuestos de rendimiento.',
+      'Exportación estática en Next.js 16 App Router. Separación SOLID: contratos poseen datos, servicios poseen lógica, componentes poseen presentación. Tres capas de prueba — Jest, Playwright, Lighthouse CI. WebGL tiene failover de 3s a gradiente CSS.',
   },
   'proj-02': {
     description:
-      'Pipeline de ingeniería de datos para análisis genómico — mayor rendimiento vía vectorización NumPy sobre iteración nativa en Python. Integra restricciones evolutivas LOEUF y anotaciones Gene Ontology. Salidas del pipeline validadas contra conjuntos de referencia conocidos mediante pruebas de regresión parametrizadas.',
+      'Pipeline de análisis de variantes genómicas — mayor rendimiento vía vectorización NumPy sobre Python nativo. Integra restricciones LOEUF y anotaciones Gene Ontology, validado contra conjuntos de referencia gnomAD.',
     statLabels: ['vs Python Nativo', 'Funcionomas'],
+    highlights: [
+      'Mayor rendimiento de VCF vía vectorización NumPy sobre Python nativo',
+      'Pruebas de regresión parametrizadas validan salidas contra referencias gnomAD',
+      'La integración LOEUF permite priorización de variantes con contexto evolutivo',
+      'Diseñado para procesamiento por lotes de archivos VCF a escala poblacional (100K+ muestras)',
+    ],
+    architecture:
+      'Parser de VCF vectorizado con NumPy, con I/O en chunks para datasets grandes. Los scores LOEUF se combinan vía interval tree join con los tracks de restricción de gnomAD; las anotaciones GO se cachean en SQLite. Las pruebas de regresión comparan distribuciones de salida contra estadísticas publicadas de gnomAD.',
   },
   'proj-04': {
     description:
-      'Ingeniería de pipeline ML con suite de 280 pruebas que cubre la correctitud del VAE e invariantes geométricos. VAEs duales en geometría de bola de Poincaré — jerarquía impuesta por valuación 3-ádica. Se enfoca en la verificación de invariantes matemáticos en arquitecturas neuronales.',
+      'Pipeline de ML con suite de 280 pruebas que cubre la correctitud del VAE e invariantes geométricos (ARI 0.844). VAEs duales en geometría de bola de Poincaré, con jerarquía impuesta por valuación 3-ádica — no memorización.',
     statLabels: ['Pruebas', 'ARI'],
+    highlights: [
+      'La suite de 280 pruebas verifica matemáticamente la correctitud del VAE, no solo su precisión',
+      'Un Adjusted Rand Index de 0.844 confirma clustering biológicamente significativo',
+      'La valuación 3-ádica impone estructura jerárquica sin supervisión',
+      'La arquitectura dual VAE permite validación cruzada entre secuencia y estructura',
+    ],
+    architecture:
+      'Autoencoders Variacionales duales en geometría de bola de Poincaré. La jerarquía se impone por valuación 3-ádica — secuencias más cercanas en distancia p-ádica mapean a puntos latentes más cercanos. Las pruebas cubren invariantes geométricos (preservación de distancia, desigualdad triangular, comportamiento de frontera) y estabilidad de clustering entre semillas.',
   },
   'proj-03': {
     description:
-      'Ingeniería de pipeline multi-implementación: motor DAG en C++ (más rápido que la referencia en Python), Apache Spark y Python. Implementaciones verificadas cruzadamente para equivalencia funcional mediante salidas de referencia compartidas.',
+      'Pipeline multi-implementación: un motor DAG en C++, Apache Spark y Python, verificados cruzadamente por equivalencia funcional contra 10M+ anotaciones génicas.',
     statLabels: ['Implementaciones', 'Escala'],
+    highlights: [
+      'Tres implementaciones (C++, Spark, Python) verificadas cruzadamente por equivalencia funcional',
+      'El motor DAG en C++ supera a Python en procesamiento de anotaciones con dependencias ordenadas',
+      'La distribución en Spark permite anotación GO a escala cloud de 10M+ productos génicos',
+      'Las salidas de referencia compartidas detectan drift de implementación entre versiones',
+    ],
+    architecture:
+      'Motor de ejecución DAG con tres backends de lenguaje, cada uno procesando el mismo grafo de dependencias contra un dataset de referencia compartido. C++ usa DAG de lista de adyacencia con orden topológico; Spark usa DataFrame lineage; Python usa NetworkX para prototipado rápido.',
   },
 }
 
@@ -357,7 +381,7 @@ export const es: Translations = {
     interactive: {
       ayuda: ES_HELP_OUTPUT,
       sobre:
-        'Soy Jonathan, un ingeniero de QA enfocado en construir gates de calidad deterministas. Desde pruebas basadas en propiedades hasta pipelines de automatización complejos, trato la calidad como un requisito estructural, no como algo secundario. He endurecido sistemas en Ai-Whisperers y sigo cursando la certificación ISTQB.',
+        'Soy Jonathan, ingeniero de QA construyendo gates de calidad deterministas — desde pruebas basadas en propiedades hasta pipelines de automatización. Endurecí sistemas en Ai-Whisperers; sigo cursando la certificación ISTQB.',
       proyectos: 'Ver la sección de Proyectos abajo, o escribe "ls proyectos" para ver la lista.',
       contacto: 'Contáctame por LinkedIn o GitHub enlazados arriba.',
       habilidades:

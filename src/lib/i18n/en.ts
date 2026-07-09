@@ -137,7 +137,7 @@ export const en: Translations = {
     interactive: {
       ...INTERACTIVE_COMMANDS,
       about:
-        "I'm Jonathan, a QA Engineer focused on building deterministic quality gates. From property-based testing to complex automation pipelines, I treat quality as a structural requirement, not an afterthought. Hardened systems at Ai-Whisperers and pursuing ISTQB certification.",
+        "I'm Jonathan, a QA Engineer building deterministic quality gates — from property-based testing to automation pipelines. Hardened systems at Ai-Whisperers; pursuing ISTQB certification.",
     },
   },
 }
