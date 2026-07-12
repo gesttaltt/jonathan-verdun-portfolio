@@ -1,6 +1,9 @@
 import * as fc from 'fast-check'
 import sitemap from '@/app/sitemap'
 import { AuditRepository } from '@/lib/services/AuditRepository'
+import { BlogService } from '@/lib/services/BlogService'
+import { PROJECT_DATA } from '@/lib/contracts/ProjectContract'
+import { slugify } from '@/lib/projectSlugify'
 import { siteConfig } from '@/lib/siteConfig'
 import type { AuditEntry } from '@/lib/services/AuditRepository'
 
@@ -8,8 +11,16 @@ jest.mock('@/lib/services/AuditRepository', () => ({
   AuditRepository: { getAudits: jest.fn() },
 }))
 
+jest.mock('@/lib/services/BlogService', () => ({
+  BlogService: { getAllPosts: jest.fn() },
+}))
+
 const mockGetAudits = AuditRepository.getAudits as jest.MockedFunction<
   typeof AuditRepository.getAudits
+>
+
+const mockGetAllPosts = BlogService.getAllPosts as jest.MockedFunction<
+  typeof BlogService.getAllPosts
 >
 
 const makeAudit = (slug: string): AuditEntry => ({
@@ -25,6 +36,7 @@ const makeAudit = (slug: string): AuditEntry => ({
 beforeEach(() => {
   jest.clearAllMocks()
   mockGetAudits.mockResolvedValue([])
+  mockGetAllPosts.mockReturnValue([])
   process.env.SITE_LAST_MODIFIED = '2026-01-01'
 })
 
@@ -40,13 +52,41 @@ describe('sitemap — static routes', () => {
     }
   })
 
-  it('includes EN and ES home, quality, and resume routes', async () => {
+  it('includes EN and ES home, quality, blog, and resume routes', async () => {
     const entries = await sitemap()
     const urls = entries.map((e) => e.url)
     expect(urls).toContain(siteConfig.url)
     expect(urls).toContain(`${siteConfig.url}/es/`)
     expect(urls).toContain(`${siteConfig.url}/quality/`)
     expect(urls).toContain(`${siteConfig.url}/es/quality/`)
+    expect(urls).toContain(`${siteConfig.url}/blog/`)
+    expect(urls).toContain(`${siteConfig.url}/es/blog/`)
+    expect(urls).toContain(`${siteConfig.url}/resume/`)
+    expect(urls).toContain(`${siteConfig.url}/es/resume/`)
+  })
+})
+
+describe('sitemap — blog and project routes', () => {
+  it('includes an EN and ES URL for every blog post', async () => {
+    mockGetAllPosts.mockReturnValue([
+      { slug: 'test-post', title: 'Test', date: '2026-01-01', tags: [], description: '' },
+    ])
+
+    const entries = await sitemap()
+    const urls = entries.map((e) => e.url)
+    expect(urls).toContain(`${siteConfig.url}/blog/test-post/`)
+    expect(urls).toContain(`${siteConfig.url}/es/blog/test-post/`)
+  })
+
+  it('includes an EN and ES URL for every project, matching the slug used by the case-study route', async () => {
+    const entries = await sitemap()
+    const urls = entries.map((e) => e.url)
+
+    for (const project of PROJECT_DATA) {
+      const slug = slugify(project.title)
+      expect(urls).toContain(`${siteConfig.url}/projects/${slug}/`)
+      expect(urls).toContain(`${siteConfig.url}/es/projects/${slug}/`)
+    }
   })
 })
 

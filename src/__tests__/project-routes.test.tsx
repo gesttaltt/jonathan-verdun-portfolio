@@ -8,6 +8,7 @@ import EsProjectPage, {
   generateStaticParams as generateEsStaticParams,
 } from '@/app/(es)/es/projects/[slug]/page'
 import { PROJECT_DATA } from '@/lib/contracts/ProjectContract'
+import { es } from '@/lib/i18n/es'
 import { notFound } from 'next/navigation'
 
 jest.mock('next/navigation', () => {
@@ -71,15 +72,18 @@ describe('Project slug route wrappers', () => {
     expect(metadata).toEqual({})
   })
 
-  it('generates metadata for ES project route when slug exists', async () => {
+  it('generates metadata for ES project route when slug exists, using the Spanish translation', async () => {
     const params = generateEsStaticParams()
     const metadata = await generateEsMetadata({
       params: Promise.resolve({ slug: requireFirstSlug(params) }),
     })
+    const firstEs = es.projects.find((p) => p.id === first.id)
     expect(metadata).toMatchObject({
       title: expect.stringContaining(first.title),
-      description: first.description,
+      description: firstEs?.description,
     })
+    // Guards against the fix silently regressing to the (identical) EN copy.
+    expect(metadata.description).not.toBe(first.description)
   })
 
   it('returns empty metadata for ES project route when slug is missing', async () => {

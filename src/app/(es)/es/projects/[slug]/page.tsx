@@ -2,6 +2,7 @@ import { PROJECT_DATA } from '@/lib/contracts/ProjectContract'
 import { ProjectDetail } from '@/components/ProjectDetail'
 import { notFound } from 'next/navigation'
 import { siteConfig } from '@/lib/siteConfig'
+import { es } from '@/lib/i18n/es'
 import type { Metadata } from 'next'
 import { slugify, slugToId } from '@/lib/projectSlugify'
 
@@ -16,7 +17,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params
   const projectId = slugToId.get(slug)
-  const project = PROJECT_DATA.find((p) => p.id === projectId)
+  const project = es.projects.find((p) => p.id === projectId)
   if (!project) return {}
   return {
     title: `${project.title} — ${siteConfig.name}`,
