@@ -37,7 +37,7 @@ Downloads the `next-out` artifact, runs `npm run lhci` (Lighthouse CI against th
 
 ## GitHub Actions — Deploy (`.github/workflows/deploy.yml`)
 
-Triggers on `push` to `main`, a daily cron (`0 0 * * *`), and manual `workflow_dispatch`. Concurrency group `pages`, doesn't cancel in-progress runs.
+Triggers when the CI workflow completes successfully on `main` (via `workflow_run`), a daily cron (`0 0 * * *`), and manual `workflow_dispatch`. Gated on `workflow_run` so a commit that fails CI is never deployed — `main` has no branch protection, so an ungated `push` trigger here would race CI instead of waiting on it. Concurrency group `pages`, doesn't cancel in-progress runs.
 
 ```
 build: checkout → setup-node 22 → configure-pages

@@ -1,8 +1,13 @@
 name: Deploy to GitHub Pages
 
+# Gated on CI (not `push`) so a commit that fails tests/lint/build never reaches
+# production: main has no branch protection, and an ungated `push` trigger here
+# would deploy in parallel with — and possibly before — CI reports a failure.
 on:
-  push:
+  workflow_run:
+    workflows: ['CI']
     branches: ['main']
+    types: [completed]
   schedule:
     - cron: '0 0 * * *' # Every day at midnight
   workflow_dispatch:
@@ -20,8 +25,13 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    # schedule/workflow_dispatch have no workflow_run context and always proceed;
+    # a workflow_run-triggered run only proceeds if CI concluded successfully.
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     steps:
       - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v6
