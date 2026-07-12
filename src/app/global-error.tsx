@@ -1,7 +1,8 @@
 'use client'
 
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
+import { useIsSpanishRoute } from '@/lib/i18n/useIsSpanishRoute'
 
 interface GlobalErrorProps {
   error: Error & { digest?: string }
@@ -9,20 +10,11 @@ interface GlobalErrorProps {
 }
 
 export default function GlobalError({ error, reset }: GlobalErrorProps) {
-  const [lang] = useState(() => {
-    /* istanbul ignore else — window is always defined in jsdom; else branch is SSR-only */
-    if (typeof window !== 'undefined' && window.location?.pathname) {
-      return window.location.pathname.startsWith('/es') ? 'es' : 'en'
-    }
-    /* istanbul ignore next */
-    return 'en'
-  })
+  const isEs = useIsSpanishRoute()
 
   useEffect(() => {
     console.error(error)
   }, [error])
-
-  const isEs = lang === 'es'
 
   return (
     <html>

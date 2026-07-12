@@ -14,17 +14,10 @@ import {
   Link2,
 } from 'lucide-react'
 import Link from 'next/link'
-import { ProjectSpec } from '@/lib/contracts/ProjectContract.types'
+import { PROJECT_STATUS_STYLES } from '@/lib/contracts/ProjectContract'
 import { containerVariants, staggerItemVariants } from '@/lib/animations'
 import { useTranslation } from '@/lib/i18n/context'
-
-const STATUS_STYLES: Record<ProjectSpec['status'], string> = {
-  Deployed: 'bg-green-500/20 text-green-400 light:text-green-800 light:bg-green-500/10',
-  QA: 'bg-blue-500/20 text-blue-400 light:text-blue-800 light:bg-blue-500/10',
-  Research: 'bg-purple-500/20 text-purple-400 light:text-purple-800 light:bg-purple-500/10',
-  Prototype: 'bg-amber-500/20 text-amber-400 light:text-amber-800 light:bg-amber-500/10',
-  Archived: 'bg-zinc-500/20 text-zinc-300 light:text-zinc-800 light:bg-zinc-500/10',
-}
+import { localizedHref } from '@/lib/i18n/localizedHref'
 
 interface ProjectDetailProps {
   projectId: string
@@ -48,7 +41,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ projectId }) => {
     >
       <m.div variants={staggerItemVariants()}>
         <Link
-          href={`/${t.lang === 'es' ? 'es/' : ''}#projects-section-title`}
+          href={localizedHref(t.lang, '/#projects-section-title')}
           className="group mb-8 flex items-center gap-2 text-xs font-bold tracking-widest text-zinc-400 uppercase transition-colors hover:text-white"
         >
           <ArrowLeft className="h-3 w-3 transition-transform group-hover:-translate-x-1" />
@@ -62,7 +55,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ projectId }) => {
       >
         <div className="flex flex-wrap items-center gap-3">
           <span
-            className={`rounded px-3 py-1 text-[11px] font-black tracking-wider uppercase sm:text-xs ${STATUS_STYLES[project.status] ?? /* istanbul ignore next — all known statuses in STYLES */ 'bg-zinc-500/20 text-zinc-300'}`}
+            className={`rounded px-3 py-1 text-[11px] font-black tracking-wider uppercase sm:text-xs ${PROJECT_STATUS_STYLES[project.status] ?? /* istanbul ignore next — all known statuses in STYLES */ 'bg-zinc-500/20 text-zinc-300'}`}
           >
             {project.status}
           </span>

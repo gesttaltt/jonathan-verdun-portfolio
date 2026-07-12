@@ -7,6 +7,7 @@ import { GithubIcon, LinkedinIcon } from '@/components/BrandIcons'
 import { m } from 'framer-motion'
 import { siteConfig } from '@/lib/siteConfig'
 import { useTranslation } from '@/lib/i18n/context'
+import { localizedHref } from '@/lib/i18n/localizedHref'
 import { fadeUpVariants, SCROLL_VIEWPORT } from '@/lib/animations'
 
 const CURRENT_YEAR = new Date().getFullYear()
@@ -83,7 +84,7 @@ export const SiteFooter: React.FC = () => {
             </a>
             <span className="text-border-subtle text-white/20">·</span>
             <Link
-              href={t.lang === 'es' ? '/es/quality/' : '/quality/'}
+              href={localizedHref(t.lang, '/quality/')}
               className="text-text-tertiary light:hover:text-text-primary rounded text-xs transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none"
             >
               {t.sections.quality}

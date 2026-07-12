@@ -6,6 +6,7 @@ import { Briefcase, Code2, Award, Download, BookOpen, ExternalLink } from 'lucid
 import Link from 'next/link'
 import { siteConfig } from '@/lib/siteConfig'
 import { useTranslation } from '@/lib/i18n/context'
+import { localizedHref } from '@/lib/i18n/localizedHref'
 import { containerVariants, staggerItemVariants } from '@/lib/animations'
 
 const SectionTitle: React.FC<{ icon: React.ReactNode; title: string }> = ({ icon, title }) => (
@@ -171,7 +172,7 @@ export const ResumeTimeline: React.FC<ResumeTimelineProps> = ({ hasResumePdf = f
 
           <div className="mt-8">
             <Link
-              href={`/${t.lang === 'es' ? 'es/' : ''}`}
+              href={localizedHref(t.lang, '/')}
               className="text-text-tertiary hover:text-text-primary flex items-center gap-2 text-xs font-bold tracking-wider uppercase transition-colors"
             >
               &larr; {t.lang === 'es' ? 'Volver al inicio' : 'Back to home'}

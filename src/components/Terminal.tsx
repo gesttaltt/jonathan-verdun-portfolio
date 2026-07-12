@@ -17,14 +17,19 @@ interface TerminalProps {
 export const Terminal: React.FC<TerminalProps> = ({
   commands,
   className = '',
-  processor = new DefaultCommandProcessor(),
+  processor,
   title = 'bash — interactive',
   prompt = TERMINAL_PROMPT,
   hintCmd = 'help',
 }) => {
+  // Lazy-init once per mount — a default *value* here (`processor = new X()`) would be
+  // re-evaluated on every render, silently resetting the VFS's `cd` state each keystroke.
+  const [fallbackProcessor] = useState<ICommandProcessor>(() => new DefaultCommandProcessor())
+  const activeProcessor = processor ?? fallbackProcessor
+
   const { history, isBooting, execute, navigateHistory, currentPath } = useTerminal(
     commands,
-    processor
+    activeProcessor
   )
   const [inputVal, setInputVal] = useState('')
   const scrollRef = useRef<HTMLDivElement>(null)

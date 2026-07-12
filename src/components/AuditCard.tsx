@@ -6,6 +6,7 @@ import { FileText, Calendar, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import { staggerItemVariants } from '@/lib/animations'
 import { useTranslation } from '@/lib/i18n/context'
+import { localizedHref } from '@/lib/i18n/localizedHref'
 import type { AuditEntry } from '@/lib/services/AuditRepository'
 
 interface AuditCardProps {
@@ -14,7 +15,7 @@ interface AuditCardProps {
 
 export const AuditCard: React.FC<AuditCardProps> = ({ audit }) => {
   const t = useTranslation()
-  const detailHref = t.lang === 'es' ? `/es/quality/${audit.slug}` : `/quality/${audit.slug}`
+  const detailHref = localizedHref(t.lang, `/quality/${audit.slug}`)
 
   return (
     <m.div

@@ -1,5 +1,14 @@
 import { ProjectSpec } from './ProjectContract.types'
 
+// Shared by ProjectCard and ProjectDetail — both render the same status badge.
+export const PROJECT_STATUS_STYLES: Record<ProjectSpec['status'], string> = {
+  Deployed: 'bg-green-500/20 text-green-400 light:text-green-800 light:bg-green-500/10',
+  QA: 'bg-blue-500/20 text-blue-400 light:text-blue-800 light:bg-blue-500/10',
+  Research: 'bg-purple-500/20 text-purple-400 light:text-purple-800 light:bg-purple-500/10',
+  Prototype: 'bg-amber-500/20 text-amber-400 light:text-amber-800 light:bg-amber-500/10',
+  Archived: 'bg-zinc-500/20 text-zinc-300 light:text-zinc-800 light:bg-zinc-500/10',
+}
+
 export const PROJECT_DATA: ProjectSpec[] = [
   {
     id: 'proj-01',

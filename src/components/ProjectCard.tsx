@@ -5,16 +5,9 @@ import { m } from 'framer-motion'
 import { ExternalLink, Terminal, ShieldCheck, BookOpen } from 'lucide-react'
 import Link from 'next/link'
 import { ProjectSpec } from '@/lib/contracts/ProjectContract.types'
+import { PROJECT_STATUS_STYLES } from '@/lib/contracts/ProjectContract'
 import { fadeUpVariants } from '@/lib/animations'
 import { slugify } from '@/lib/projectSlugify'
-
-const PROJECT_STATUS_STYLES: Record<ProjectSpec['status'], string> = {
-  Deployed: 'bg-green-500/20 text-green-400 light:text-green-800 light:bg-green-500/10',
-  QA: 'bg-blue-500/20 text-blue-400 light:text-blue-800 light:bg-blue-500/10',
-  Research: 'bg-purple-500/20 text-purple-400 light:text-purple-800 light:bg-purple-500/10',
-  Prototype: 'bg-amber-500/20 text-amber-400 light:text-amber-800 light:bg-amber-500/10',
-  Archived: 'bg-zinc-500/20 text-zinc-300 light:text-zinc-800 light:bg-zinc-500/10',
-}
 
 interface ProjectCardProps {
   project: ProjectSpec

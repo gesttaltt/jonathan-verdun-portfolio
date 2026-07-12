@@ -1,12 +1,10 @@
 'use client'
 
 import Link from 'next/link'
-import { useState } from 'react'
+import { useIsSpanishRoute } from '@/lib/i18n/useIsSpanishRoute'
 
 export default function NotFound() {
-  const [isEs] = useState(
-    () => typeof window !== 'undefined' && window.location?.pathname.startsWith('/es')
-  )
+  const isEs = useIsSpanishRoute()
 
   return (
     <html lang={isEs ? 'es' : 'en'}>
