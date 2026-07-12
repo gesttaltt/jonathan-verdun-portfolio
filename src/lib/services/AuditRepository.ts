@@ -46,7 +46,15 @@ export class AuditRepository {
     const fileContent = fs.readFileSync(filePath, 'utf8')
     const { data, content } = matter(fileContent)
 
-    const title = data.title || content.split('\n')[0]?.replace('# ', '') || titleFallback
+    // A leading "# Heading" line doubles as the title (frontmatter fallback)
+    // and, if left in, as a second <h1> once DetailArticleLayout renders its
+    // own header title above the body — strip it from the body either way.
+    /* istanbul ignore next -- String.split('\n') always returns at least one element */
+    const firstLine = content.split('\n')[0] ?? ''
+    const leadingHeading = firstLine.match(/^#\s+(.*)/)
+    const body = leadingHeading ? content.slice(firstLine.length).replace(/^\n+/, '') : content
+
+    const title = data.title || leadingHeading?.[1] || titleFallback
     const date = data.date || slug.match(/\d{4}-\d{2}-\d{2}/)?.[0] || '2026-05-01'
 
     return {
@@ -54,8 +62,8 @@ export class AuditRepository {
       slug,
       title,
       date,
-      content: sanitizeHtml(marked.parse(content) as string, SANITIZE_OPTIONS),
-      excerpt: content.slice(0, 150).replace(/[#*`]/g, '') + '...',
+      content: sanitizeHtml(marked.parse(body) as string, SANITIZE_OPTIONS),
+      excerpt: body.slice(0, 150).replace(/[#*`]/g, '') + '...',
       category,
     }
   }

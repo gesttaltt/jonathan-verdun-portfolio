@@ -44,7 +44,7 @@ describe('AuditRepository', () => {
         title: 'Test Audit',
         date: '2026-05-11',
         content: '<p>Some content</p>',
-        excerpt: ' Test Audit\nSome content...',
+        excerpt: 'Some content...',
         category: 'audit',
       })
     })
@@ -68,7 +68,7 @@ describe('AuditRepository', () => {
         title: 'Test Spec',
         date: '2026-05-01',
         content: '<p>Some content</p>',
-        excerpt: ' Test Spec\nSome content...',
+        excerpt: 'Some content...',
         category: 'spec',
       })
     })
@@ -89,13 +89,46 @@ describe('AuditRepository', () => {
       expect(audits[0]!.date).toBe('2026-05-10')
     })
 
+    it('strips the leading "# Title" line from the rendered body — DetailArticleLayout already renders it as the page header, so leaving it in would duplicate it as a second <h1>', async () => {
+      ;(fs.existsSync as jest.Mock).mockImplementation((p) => p === mockDocsPath)
+      ;(fs.readdirSync as jest.Mock).mockReturnValue(['audit1.md'])
+      ;(fs.readFileSync as jest.Mock).mockReturnValue('content')
+      ;(matter as unknown as jest.Mock).mockReturnValue({
+        data: {},
+        content: '# Test Audit\n\nSome content',
+      })
+      ;(marked.parse as unknown as jest.Mock).mockReturnValue('<p>rendered</p>')
+
+      const audits = await AuditRepository.getAudits()
+
+      expect(audits[0]!.title).toBe('Test Audit')
+      // The heading line — and its trailing blank line — must not reach marked.
+      expect(marked.parse).toHaveBeenCalledWith('Some content')
+      expect(audits[0]!.excerpt).toBe('Some content...')
+    })
+
+    it('leaves body content untouched when the first line is not a level-1 heading', async () => {
+      ;(fs.existsSync as jest.Mock).mockImplementation((p) => p === mockDocsPath)
+      ;(fs.readdirSync as jest.Mock).mockReturnValue(['audit1.md'])
+      ;(fs.readFileSync as jest.Mock).mockReturnValue('content')
+      ;(matter as unknown as jest.Mock).mockReturnValue({
+        data: { title: 'Explicit Title' },
+        content: '## Subheading\nSome content',
+      })
+      ;(marked.parse as unknown as jest.Mock).mockReturnValue('<p>rendered</p>')
+
+      await AuditRepository.getAudits()
+
+      expect(marked.parse).toHaveBeenCalledWith('## Subheading\nSome content')
+    })
+
     it('falls back to filename for spec title when frontmatter and first content line are absent', async () => {
       ;(fs.existsSync as jest.Mock).mockImplementation((p) => p === mockSpecsPath)
       ;(fs.readdirSync as jest.Mock).mockReturnValue(['my-spec.md'])
       ;(fs.readFileSync as jest.Mock).mockReturnValue('content')
       ;(matter as unknown as jest.Mock).mockReturnValue({
-        data: {},     // no title in frontmatter
-        content: '',  // empty — first line is '' which is falsy after replace
+        data: {}, // no title in frontmatter
+        content: '', // empty — first line is '' which is falsy after replace
       })
       ;(marked.parse as unknown as jest.Mock).mockReturnValue('')
 
@@ -151,8 +184,7 @@ describe('AuditRepository', () => {
       ;(matter as unknown as jest.Mock).mockReturnValue({
         data: { title: 'XSS Test', date: '2026-05-11' },
         // Raw HTML blocks are passed through verbatim by marked
-        content:
-          'Safe content\n\n<script>alert(1)</script>\n\n<img src="x" onerror="alert(2)">',
+        content: 'Safe content\n\n<script>alert(1)</script>\n\n<img src="x" onerror="alert(2)">',
       })
 
       const audits = await AuditRepository.getAudits()
