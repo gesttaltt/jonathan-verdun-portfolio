@@ -50,6 +50,26 @@ test.describe('Visual Regression — Design Stability @visual', () => {
     })
   })
 
+  test('Quality Spec Detail (EN) — Desktop Viewport — prose typography', async ({ page }) => {
+    // Regression guard for the missing @tailwindcss/typography plugin: the
+    // `prose` classes on DetailArticleLayout silently produced zero CSS
+    // (verified against the compiled stylesheet) until the plugin was
+    // registered, so every audit/spec/blog article body rendered as
+    // unstyled raw HTML. Unlike the Jest suite, this actually applies real
+    // CSS, so it's the one place that class of regression is visible.
+    await page.goto('/quality/specs/DEVOPS/')
+    // Two <h1>s exist on this page: DetailArticleLayout's own header title,
+    // plus the markdown body's leading `# ...` line rendered inside the
+    // prose article — .first() just confirms the page rendered.
+    await expect(page.getByRole('heading', { level: 1 }).first()).toBeVisible()
+    await page.waitForTimeout(500)
+
+    await expect(page).toHaveScreenshot('quality-spec-devops-en-desktop.png', {
+      fullPage: true,
+      timeout: 30_000,
+    })
+  })
+
   test('Portfolio Home — Mobile Viewport', async ({ page, isMobile }) => {
     test.skip(!isMobile, 'Skipping desktop projects for mobile-specific test')
 
