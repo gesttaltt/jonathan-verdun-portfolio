@@ -6,7 +6,11 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 1 : 0,
   workers: process.env.CI ? 2 : undefined,
-  reporter: process.env.CI ? 'github' : 'html',
+  // The github reporter alone never writes to playwright-report/, so a CI
+  // failure had nothing for the "Upload Playwright report" step to find —
+  // failures were undebuggable without re-running locally. html runs
+  // alongside it now so failed runs produce a downloadable report/actuals.
+  reporter: process.env.CI ? [['github'], ['html', { open: 'never' }]] : 'html',
   use: {
     baseURL: 'http://localhost:3000',
     trace: 'on-first-retry',
