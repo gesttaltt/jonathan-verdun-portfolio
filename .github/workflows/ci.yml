@@ -64,6 +64,13 @@ jobs:
         run: npm run build:ci
         env:
           NEXT_TELEMETRY_DISABLED: 1
+          # NEXT_PUBLIC_* vars are inlined at build time, not read at runtime —
+          # this artifact is later just served statically by the e2e job (MOCK_CI=true),
+          # so it must already have a truthy Formspree ID baked in or the
+          # ContactForm honeypot/network-error e2e tests skip every run instead
+          # of exercising the code they're meant to cover. Same synthetic value
+          # playwright.config.ts falls back to for local `next dev` runs.
+          NEXT_PUBLIC_FORMSPREE_ID: e2e-test-form
 
       - name: Check bundle size budget
         if: matrix.node-version == '22.x'
