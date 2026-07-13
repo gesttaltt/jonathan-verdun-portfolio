@@ -104,6 +104,10 @@ export class VirtualFileSystem {
   }
 
   cd(path: string): string | null {
+    if (path === '.') {
+      return null
+    }
+
     if (path === '..') {
       if (this.currentPath.length > 0) {
         this.currentPath.pop()
@@ -137,7 +141,11 @@ export class VirtualFileSystem {
             }
           }
 
-          if (node.children && Object.hasOwn(node.children, part) && node.children[part]!.type === 'dir') {
+          if (
+            node.children &&
+            Object.hasOwn(node.children, part) &&
+            node.children[part]!.type === 'dir'
+          ) {
             tempPath.push(part)
           } else {
             return `cd: no such file or directory: ${path}`

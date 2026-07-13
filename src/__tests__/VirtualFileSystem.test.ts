@@ -13,6 +13,14 @@ describe('path traversal resilience', () => {
     }
   })
 
+  it('cd(".") is a no-op, not an error', () => {
+    const vfs = new VirtualFileSystem()
+    vfs.cd('docs')
+    const result = vfs.cd('.')
+    expect(result).toBeNull()
+    expect(vfs.pwd()).toBe('/docs')
+  })
+
   it('cd("/docs/../../../etc") does not escape root', () => {
     const vfs = new VirtualFileSystem()
     const result = vfs.cd('/docs/../../../etc')

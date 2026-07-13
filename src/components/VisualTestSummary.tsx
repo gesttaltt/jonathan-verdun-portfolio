@@ -13,12 +13,16 @@ export const VisualTestSummary: React.FC = () => {
   const { numPassedTests, numTotalTests, numFailedTests, startTime, success } = coverageData
 
   const passRate = numTotalTests > 0 ? ((numPassedTests / numTotalTests) * 100).toFixed(1) : '0.0'
+  // timeZone is pinned to UTC so this static-exported page renders the same
+  // date at build time (CI) and at hydration time (visitor's browser),
+  // regardless of either machine's local timezone.
   const date = new Date(startTime).toLocaleDateString(t.lang === 'es' ? 'es-ES' : 'en-US', {
     month: 'short',
     day: 'numeric',
     year: 'numeric',
     hour: '2-digit',
     minute: '2-digit',
+    timeZone: 'UTC',
   })
 
   return (
