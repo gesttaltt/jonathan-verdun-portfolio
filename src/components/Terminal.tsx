@@ -14,6 +14,16 @@ interface TerminalProps {
   hintCmd?: string
 }
 
+function PromptLabel({ prompt, currentPath }: { prompt: string; currentPath: string }) {
+  return (
+    <span className="light:text-blue-600 shrink-0 font-bold text-blue-400">
+      <span className="hidden sm:inline">{prompt}</span>
+      <span className="text-text-tertiary">{currentPath !== '/' ? `:${currentPath}` : ''}</span>
+      ~$
+    </span>
+  )
+}
+
 export const Terminal: React.FC<TerminalProps> = ({
   commands,
   className = '',
@@ -101,13 +111,7 @@ export const Terminal: React.FC<TerminalProps> = ({
           {history.map((entry, index) => (
             <div key={entry.id ?? index} className="space-y-2 break-words">
               <div className="flex gap-2">
-                <span className="light:text-blue-600 shrink-0 font-bold text-blue-400">
-                  <span className="hidden sm:inline">{prompt}</span>
-                  <span className="text-text-tertiary">
-                    {currentPath !== '/' ? `:${currentPath}` : ''}
-                  </span>
-                  ~$
-                </span>
+                <PromptLabel prompt={prompt} currentPath={currentPath} />
                 <span className="light:text-text-primary text-text-primary min-w-0">
                   {entry.text}
                 </span>
@@ -124,13 +128,7 @@ export const Terminal: React.FC<TerminalProps> = ({
         <div
           className={`flex items-center gap-2 pt-2 transition-opacity duration-300 ${isBooting ? 'pointer-events-none opacity-0' : 'opacity-100'}`}
         >
-          <span className="light:text-blue-600 shrink-0 font-bold text-blue-400">
-            <span className="hidden sm:inline">{prompt}</span>
-            <span className="text-text-tertiary">
-              {currentPath !== '/' ? `:${currentPath}` : ''}
-            </span>
-            ~$
-          </span>
+          <PromptLabel prompt={prompt} currentPath={currentPath} />
           <div className="relative min-w-0 flex-grow">
             <input
               ref={inputRef}

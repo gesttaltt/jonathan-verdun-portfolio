@@ -69,6 +69,17 @@ export interface Translations {
       tags: string
       noPosts: string
     }
+    projectDetail: {
+      backToProjects: string
+      overview: string
+      techStack: string
+      keyResults: string
+      architecture: string
+      relatedLinks: string
+      metrics: string
+      viewOnGithub: string
+      viewQaSpecs: string
+    }
     contactForm: {
       nameLabel: string
       namePlaceholder: string

@@ -72,6 +72,17 @@ export const en: Translations = {
       tags: 'Tags',
       noPosts: 'No posts yet.',
     },
+    projectDetail: {
+      backToProjects: 'Back to Projects',
+      overview: 'Project Overview',
+      techStack: 'Tech Stack',
+      keyResults: 'Key Results',
+      architecture: 'Architecture',
+      relatedLinks: 'Related Links',
+      metrics: 'Metrics',
+      viewOnGithub: 'View on GitHub',
+      viewQaSpecs: 'View QA Specifications',
+    },
     contactForm: {
       nameLabel: 'Name',
       namePlaceholder: 'Your name',

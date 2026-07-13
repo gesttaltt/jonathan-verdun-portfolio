@@ -5,7 +5,10 @@ import { m } from 'framer-motion'
 import { ExternalLink, Terminal, ShieldCheck, BookOpen } from 'lucide-react'
 import Link from 'next/link'
 import { ProjectSpec } from '@/lib/contracts/ProjectContract.types'
-import { PROJECT_STATUS_STYLES } from '@/lib/contracts/ProjectContract'
+import {
+  PROJECT_STATUS_STYLES,
+  PROJECT_STATUS_STYLE_FALLBACK,
+} from '@/lib/contracts/ProjectContract'
 import { fadeUpVariants } from '@/lib/animations'
 import { slugify } from '@/lib/projectSlugify'
 
@@ -30,7 +33,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
           <div className="flex items-center gap-2">
             <Terminal className="light:text-blue-600 h-5 w-5 text-blue-500" />
             <span
-              className={`rounded px-2 py-0.5 text-[11px] font-black tracking-wider uppercase sm:text-xs ${PROJECT_STATUS_STYLES[project.status] ?? 'text-text-primary bg-zinc-500/20'}`}
+              className={`rounded px-2 py-0.5 text-[11px] font-black tracking-wider uppercase sm:text-xs ${PROJECT_STATUS_STYLES[project.status] ?? PROJECT_STATUS_STYLE_FALLBACK}`}
             >
               {project.status}
             </span>

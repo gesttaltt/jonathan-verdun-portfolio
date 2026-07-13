@@ -7,6 +7,7 @@ import Link from 'next/link'
 import type { BlogPostMeta } from '@/lib/services/BlogService'
 import { containerVariants, staggerItemVariants } from '@/lib/animations'
 import { useTranslation } from '@/lib/i18n/context'
+import { localizedHref } from '@/lib/i18n/localizedHref'
 
 interface BlogListProps {
   posts: BlogPostMeta[]
@@ -14,7 +15,6 @@ interface BlogListProps {
 
 export const BlogList: React.FC<BlogListProps> = ({ posts }) => {
   const t = useTranslation()
-  const prefix = t.lang === 'es' ? '/es' : ''
 
   return (
     <m.main
@@ -45,7 +45,7 @@ export const BlogList: React.FC<BlogListProps> = ({ posts }) => {
               className="bg-bg-card hover:bg-bg-card-hover border-border-subtle group relative rounded-2xl border border-white/10 p-6 transition-all hover:border-blue-500/30 sm:p-8"
             >
               <Link
-                href={`${prefix}/blog/${post.slug}`}
+                href={localizedHref(t.lang, `/blog/${post.slug}`)}
                 className="focus-visible:ring-offset-background block rounded-sm focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none"
               >
                 <div className="text-text-muted mb-3 flex items-center gap-2 text-[11px] font-bold tracking-wider uppercase">
@@ -82,7 +82,7 @@ export const BlogList: React.FC<BlogListProps> = ({ posts }) => {
 
       <div className="mt-12">
         <Link
-          href={`${prefix}/`}
+          href={localizedHref(t.lang, '/')}
           className="text-text-tertiary hover:text-text-primary flex items-center gap-2 text-xs font-bold tracking-wider uppercase transition-colors"
         >
           &larr; {t.sections.blog.backToHome}

@@ -9,6 +9,9 @@ export const PROJECT_STATUS_STYLES: Record<ProjectSpec['status'], string> = {
   Archived: 'bg-zinc-500/20 text-zinc-300 light:text-zinc-800 light:bg-zinc-500/10',
 }
 
+// Fallback for any status not covered above, shared by ProjectCard and ProjectDetail.
+export const PROJECT_STATUS_STYLE_FALLBACK = 'bg-zinc-500/20 text-zinc-300'
+
 export const PROJECT_DATA: ProjectSpec[] = [
   {
     id: 'proj-01',

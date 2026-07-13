@@ -311,6 +311,17 @@ export const es: Translations = {
       tags: 'Etiquetas',
       noPosts: 'Aún no hay artículos.',
     },
+    projectDetail: {
+      backToProjects: 'Volver a Proyectos',
+      overview: 'Resumen del Proyecto',
+      techStack: 'Tecnologías',
+      keyResults: 'Resultados Clave',
+      architecture: 'Arquitectura',
+      relatedLinks: 'Enlaces Relacionados',
+      metrics: 'Métricas',
+      viewOnGithub: 'Ver en GitHub',
+      viewQaSpecs: 'Ver Especificaciones QA',
+    },
     contactForm: {
       nameLabel: 'Nombre',
       namePlaceholder: 'Tu nombre',

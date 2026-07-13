@@ -14,7 +14,10 @@ import {
   Link2,
 } from 'lucide-react'
 import Link from 'next/link'
-import { PROJECT_STATUS_STYLES } from '@/lib/contracts/ProjectContract'
+import {
+  PROJECT_STATUS_STYLES,
+  PROJECT_STATUS_STYLE_FALLBACK,
+} from '@/lib/contracts/ProjectContract'
 import { containerVariants, staggerItemVariants } from '@/lib/animations'
 import { useTranslation } from '@/lib/i18n/context'
 import { localizedHref } from '@/lib/i18n/localizedHref'
@@ -42,10 +45,10 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ projectId }) => {
       <m.div variants={staggerItemVariants()}>
         <Link
           href={localizedHref(t.lang, '/#projects-section-title')}
-          className="group mb-8 flex items-center gap-2 text-xs font-bold tracking-widest text-zinc-400 uppercase transition-colors hover:text-white"
+          className="text-text-muted hover:text-text-primary group mb-8 flex items-center gap-2 text-xs font-bold tracking-widest uppercase transition-colors"
         >
           <ArrowLeft className="h-3 w-3 transition-transform group-hover:-translate-x-1" />
-          {t.lang === 'es' ? 'Volver a Proyectos' : 'Back to Projects'}
+          {t.sections.projectDetail.backToProjects}
         </Link>
       </m.div>
 
@@ -55,7 +58,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ projectId }) => {
       >
         <div className="flex flex-wrap items-center gap-3">
           <span
-            className={`rounded px-3 py-1 text-[11px] font-black tracking-wider uppercase sm:text-xs ${PROJECT_STATUS_STYLES[project.status] ?? /* istanbul ignore next — all known statuses in STYLES */ 'bg-zinc-500/20 text-zinc-300'}`}
+            className={`rounded px-3 py-1 text-[11px] font-black tracking-wider uppercase sm:text-xs ${PROJECT_STATUS_STYLES[project.status] ?? /* istanbul ignore next — all known statuses in STYLES */ PROJECT_STATUS_STYLE_FALLBACK}`}
           >
             {project.status}
           </span>
@@ -84,7 +87,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ projectId }) => {
           <div className="space-y-4">
             <h2 className="text-text-primary flex items-center gap-2 text-lg font-bold">
               <Code2 className="h-5 w-5 text-blue-400" />
-              {t.lang === 'es' ? 'Resumen del Proyecto' : 'Project Overview'}
+              {t.sections.projectDetail.overview}
             </h2>
             <p className="text-text-tertiary text-sm leading-relaxed">{project.description}</p>
           </div>
@@ -92,7 +95,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ projectId }) => {
           <div className="space-y-4">
             <h2 className="text-text-primary flex items-center gap-2 text-lg font-bold">
               <BarChart3 className="h-5 w-5 text-cyan-400" />
-              {t.lang === 'es' ? 'Tecnologías' : 'Tech Stack'}
+              {t.sections.projectDetail.techStack}
             </h2>
             <div className="flex flex-wrap gap-2">
               {project.techStack.map((tech, index) => (
@@ -110,7 +113,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ projectId }) => {
             <div className="space-y-4">
               <h2 className="text-text-primary flex items-center gap-2 text-lg font-bold">
                 <Lightbulb className="h-5 w-5 text-amber-400" />
-                {t.lang === 'es' ? 'Resultados Clave' : 'Key Results'}
+                {t.sections.projectDetail.keyResults}
               </h2>
               <ul className="space-y-2">
                 {project.highlights.map((h, i) => (
@@ -130,7 +133,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ projectId }) => {
             <div className="space-y-4">
               <h2 className="text-text-primary flex items-center gap-2 text-lg font-bold">
                 <Workflow className="h-5 w-5 text-violet-400" />
-                {t.lang === 'es' ? 'Arquitectura' : 'Architecture'}
+                {t.sections.projectDetail.architecture}
               </h2>
               <p className="text-text-tertiary text-sm leading-relaxed">{project.architecture}</p>
             </div>
@@ -140,7 +143,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ projectId }) => {
             <div className="space-y-4">
               <h2 className="text-text-primary flex items-center gap-2 text-lg font-bold">
                 <Link2 className="h-5 w-5 text-emerald-400" />
-                {t.lang === 'es' ? 'Enlaces Relacionados' : 'Related Links'}
+                {t.sections.projectDetail.relatedLinks}
               </h2>
               <div className="flex flex-wrap gap-2">
                 {project.links.map((link, index) => (
@@ -165,7 +168,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ projectId }) => {
             <div className="bg-bg-card border-border-subtle space-y-4 rounded-2xl border border-white/10 p-5">
               <h3 className="text-text-secondary flex items-center gap-2 text-xs font-bold tracking-wider uppercase">
                 <Terminal className="h-4 w-4" />
-                {t.lang === 'es' ? 'Métricas' : 'Metrics'}
+                {t.sections.projectDetail.metrics}
               </h3>
               <div className="space-y-3">
                 {project.stats.map((stat, index) => (
@@ -191,7 +194,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ projectId }) => {
                 className="light:bg-zinc-950 light:hover:bg-black light:text-white focus-visible:ring-offset-background group flex items-center gap-2 rounded-xl bg-white px-4 py-2.5 text-sm font-bold text-black transition-all hover:scale-[1.03] focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none active:scale-95"
               >
                 <ExternalLink className="h-4 w-4" />
-                {t.lang === 'es' ? 'Ver en GitHub' : 'View on GitHub'}
+                {t.sections.projectDetail.viewOnGithub}
               </a>
             )}
             {project.specLink && (
@@ -200,7 +203,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ projectId }) => {
                 className="text-text-tertiary hover:text-text-primary group flex items-center gap-2 rounded-xl border border-white/10 px-4 py-2.5 text-sm font-bold transition-all hover:border-blue-500/30"
               >
                 <ShieldCheck className="h-4 w-4 text-blue-400" />
-                {t.lang === 'es' ? 'Ver Especificaciones QA' : 'View QA Specifications'}
+                {t.sections.projectDetail.viewQaSpecs}
               </Link>
             )}
           </div>
