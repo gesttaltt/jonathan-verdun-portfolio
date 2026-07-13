@@ -1,6 +1,6 @@
 'use client'
 
-import dynamic from 'next/dynamic'
+import { useEffect, useState } from 'react'
 import { TopologyWrapper } from './TopologyWrapper'
 
 type TopologyComponent = React.ComponentType<{ mode?: 'p-adic' | 'hyperbolic'; quality?: number }>
@@ -51,7 +51,32 @@ export function loadTopology(
   })
 }
 
-export const TopologyLoader = dynamic(() => loadTopology(), {
-  ssr: false,
-  loading: () => <TopologyWrapper />,
-})
+interface TopologyLoaderProps {
+  mode?: 'p-adic' | 'hyperbolic'
+  quality?: number
+}
+
+// Deliberately not built on next/dynamic(): that API caches the resolved
+// component for the lifetime of the module, so if the 3s WebGL fallback in
+// loadTopology() ever won the race once (a transient CPU/network hiccup),
+// every future mount — e.g. navigating away and back in this SPA — would be
+// stuck rendering the null fallback forever. Loading fresh on every mount
+// lets a later mount recover from an earlier timeout.
+export function TopologyLoader(props: TopologyLoaderProps) {
+  const [Component, setComponent] = useState<TopologyComponent | null>(null)
+
+  useEffect(() => {
+    let cancelled = false
+    loadTopology().then((C) => {
+      /* istanbul ignore else -- unmount-before-resolve is exercised via the cancelled flag, not a distinct branch to cover */
+      if (!cancelled) setComponent(() => C)
+    })
+    return () => {
+      cancelled = true
+    }
+  }, [])
+
+  if (!Component) return <TopologyWrapper />
+
+  return <Component {...props} />
+}

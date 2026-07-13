@@ -1,16 +1,10 @@
 import React from 'react'
-import { render } from '@testing-library/react'
+import { render, screen, waitFor } from '@testing-library/react'
 
-// next/dynamic is mocked to return the loading component synchronously so we can
-// assert skeleton behaviour in isolation. The factory logic is tested separately
-// via the exported loadTopology function below.
-jest.mock('next/dynamic', () => ({
-  __esModule: true,
-  default: (_importFn: unknown, options: { loading?: () => React.JSX.Element }) => {
-    return options?.loading ?? (() => null)
-  },
-}))
-
+// TopologyLoader renders its loading skeleton (TopologyWrapper) synchronously
+// on first render, before the load-topology effect resolves — so the
+// skeleton tests below need no special mocking. The factory logic is tested
+// separately via the exported loadTopology function.
 jest.mock('@/components/InteractiveTopology', () => ({
   InteractiveTopology: () => React.createElement('div', { 'data-testid': 'topology' }),
 }))
@@ -34,6 +28,22 @@ describe('TopologyLoader — loading skeleton', () => {
   it('loading skeleton contains the scan-line indicator', () => {
     const { container } = render(<TopologyLoader />)
     expect(container.querySelector('.scanline')).toBeInTheDocument()
+  })
+})
+
+describe('TopologyLoader — mount independence', () => {
+  // Regression test: TopologyLoader used to wrap loadTopology() in next/dynamic,
+  // which resolves and caches the loaded component once for the module's
+  // lifetime. If an earlier mount lost the race to the 3s WebGL fallback, every
+  // later mount (e.g. navigating away and back) was stuck rendering the null
+  // fallback forever. It must instead attempt a fresh load on every mount.
+  it('loads the real component again on a second mount', async () => {
+    const { unmount } = render(<TopologyLoader />)
+    await waitFor(() => expect(screen.getByTestId('topology')).toBeInTheDocument())
+    unmount()
+
+    render(<TopologyLoader />)
+    await waitFor(() => expect(screen.getByTestId('topology')).toBeInTheDocument())
   })
 })
 
