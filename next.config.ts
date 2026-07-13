@@ -7,8 +7,12 @@ import type { NextConfig } from 'next'
 //
 // 1. HEADERS — CSP is delivered via a <meta> tag injected in the layouts.
 //    Browsers ignore `frame-ancestors` in meta-tag CSP; clickjacking protection
-//    requires X-Frame-Options / CSP via HTTP headers at the CDN layer.
-//    See public/_headers (Netlify/CF Pages) and next.config.ts comments below.
+//    requires X-Frame-Options / CSP via HTTP headers, which the current host
+//    (GitHub Pages, see deploy.yml) has no mechanism to set. public/_headers
+//    is NOT read by GitHub Pages — that format only activates on Netlify/CF
+//    Pages — so today it's inert and X-Frame-Options is not actually enforced
+//    in production. It's kept in sync for if the site ever moves to a host
+//    that honors it; don't rely on it as a mitigation on the current host.
 //
 // 2. PATH TRAVERSAL — BlogService.getPost and AuditRepository.getAuditBySlug
 //    receive slug params pre-enumerated at build time by generateStaticParams,

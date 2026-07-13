@@ -1,6 +1,15 @@
+# NOTE: this file is inert on the current deployment target (GitHub Pages —
+# see .github/workflows/deploy.yml). GitHub Pages does not read `_headers`;
+# this format is only honored by Netlify and Cloudflare Pages. It's kept here
+# so these headers activate automatically if the site is ever migrated to
+# one of those hosts. Until then, the only CSP actually enforced in
+# production is the <meta http-equiv="Content-Security-Policy"> tag in
+# src/app/(en)/layout.tsx and src/app/(es)/layout.tsx — keep this file's CSP
+# in sync with that one (browsers ignore frame-ancestors in a meta tag, so
+# it's added here instead, where it can actually take effect).
 /*
   X-Frame-Options: DENY
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob:; worker-src 'self' blob:; connect-src 'self' https://api.github.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob:; worker-src 'self' blob:; connect-src 'self' https://api.github.com https://formspree.io; frame-ancestors 'none'; base-uri 'self'; form-action 'self'

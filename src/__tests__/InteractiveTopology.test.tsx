@@ -7,6 +7,7 @@ jest.mock('next/dynamic', () => ({
 }))
 
 jest.mock('@react-three/fiber', () => ({
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- destructured only to omit it from ...props below
   Canvas: ({ children, onCreated, ...props }: React.PropsWithChildren<Record<string, unknown>>) => (
     <div data-testid="r3f-canvas" {...props}>
       {children}
