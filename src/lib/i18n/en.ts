@@ -62,6 +62,7 @@ export const en: Translations = {
       expertiseTitle: 'Core Expertise',
       certificationsTitle: 'Certifications',
       downloadLabel: 'Download PDF',
+      backToHome: 'Back to home',
     },
     blog: {
       title: 'Blog',
@@ -71,6 +72,11 @@ export const en: Translations = {
       publishedOn: 'Published on',
       tags: 'Tags',
       noPosts: 'No posts yet.',
+    },
+    projectCard: {
+      caseStudyLabel: 'Case Study',
+      viewSpecAriaLabel: 'View {title} specification',
+      viewGithubAriaLabel: 'View {title} on GitHub (opens in new tab)',
     },
     projectDetail: {
       backToProjects: 'Back to Projects',

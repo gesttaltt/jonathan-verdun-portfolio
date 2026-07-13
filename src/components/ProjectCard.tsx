@@ -11,12 +11,17 @@ import {
 } from '@/lib/contracts/ProjectContract'
 import { fadeUpVariants } from '@/lib/animations'
 import { slugify } from '@/lib/projectSlugify'
+import { useTranslation } from '@/lib/i18n/context'
+import { localizedHref } from '@/lib/i18n/localizedHref'
 
 interface ProjectCardProps {
   project: ProjectSpec
 }
 
 export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
+  const t = useTranslation()
+  const projectHref = localizedHref(t.lang, `/projects/${slugify(project.title)}`)
+
   return (
     <m.div
       variants={fadeUpVariants()}
@@ -42,7 +47,10 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
             {project.specLink && (
               <Link
                 href={project.specLink}
-                aria-label={`View ${project.title} specification`}
+                aria-label={t.sections.projectCard.viewSpecAriaLabel.replace(
+                  '{title}',
+                  project.title
+                )}
                 className="focus-visible:ring-offset-background light:bg-bg-badge light:text-text-tertiary light:hover:bg-purple-100 light:hover:text-purple-800 bg-bg-badge text-text-tertiary flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full p-2.5 transition-colors hover:bg-purple-500/20 hover:text-white focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2 focus-visible:outline-none"
               >
                 <ShieldCheck className="h-4 w-4" />
@@ -53,7 +61,10 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
                 href={project.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={`View ${project.title} on GitHub (opens in new tab)`}
+                aria-label={t.sections.projectCard.viewGithubAriaLabel.replace(
+                  '{title}',
+                  project.title
+                )}
                 className="focus-visible:ring-offset-background light:bg-bg-badge light:text-text-tertiary light:hover:bg-blue-100 light:hover:text-blue-800 bg-bg-badge text-text-tertiary flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full p-2.5 transition-colors hover:bg-blue-500/20 hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none"
               >
                 <ExternalLink className="h-4 w-4" />
@@ -63,7 +74,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
         </div>
 
         <Link
-          href={`/projects/${slugify(project.title)}`}
+          href={projectHref}
           className="focus-visible:ring-offset-background block rounded-sm focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none"
         >
           <h3 className="light:group-hover:text-blue-700 text-text-primary mb-2 text-base font-bold transition-colors group-hover:text-cyan-400">
@@ -101,11 +112,11 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
         </div>
 
         <Link
-          href={`/projects/${slugify(project.title)}`}
+          href={projectHref}
           className="text-text-muted hover:text-text-primary group/link mt-1 flex items-center gap-1.5 text-[11px] font-bold tracking-wider uppercase transition-colors sm:text-xs"
         >
           <BookOpen className="h-3 w-3" />
-          Case Study
+          {t.sections.projectCard.caseStudyLabel}
           <span className="inline-block transition-transform group-hover/link:translate-x-0.5">
             →
           </span>

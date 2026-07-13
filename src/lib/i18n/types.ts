@@ -59,6 +59,7 @@ export interface Translations {
       expertiseTitle: string
       certificationsTitle: string
       downloadLabel: string
+      backToHome: string
     }
     blog: {
       title: string
@@ -68,6 +69,11 @@ export interface Translations {
       publishedOn: string
       tags: string
       noPosts: string
+    }
+    projectCard: {
+      caseStudyLabel: string
+      viewSpecAriaLabel: string
+      viewGithubAriaLabel: string
     }
     projectDetail: {
       backToProjects: string

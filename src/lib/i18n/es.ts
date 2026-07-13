@@ -301,6 +301,7 @@ export const es: Translations = {
       expertiseTitle: 'Áreas de Especialización',
       certificationsTitle: 'Certificaciones',
       downloadLabel: 'Descargar PDF',
+      backToHome: 'Volver al inicio',
     },
     blog: {
       title: 'Blog',
@@ -310,6 +311,11 @@ export const es: Translations = {
       publishedOn: 'Publicado el',
       tags: 'Etiquetas',
       noPosts: 'Aún no hay artículos.',
+    },
+    projectCard: {
+      caseStudyLabel: 'Caso de Estudio',
+      viewSpecAriaLabel: 'Ver especificación de {title}',
+      viewGithubAriaLabel: 'Ver {title} en GitHub (se abre en una pestaña nueva)',
     },
     projectDetail: {
       backToProjects: 'Volver a Proyectos',

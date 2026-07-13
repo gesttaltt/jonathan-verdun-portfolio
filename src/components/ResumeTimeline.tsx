@@ -175,7 +175,7 @@ export const ResumeTimeline: React.FC<ResumeTimelineProps> = ({ hasResumePdf = f
               href={localizedHref(t.lang, '/')}
               className="text-text-tertiary hover:text-text-primary flex items-center gap-2 text-xs font-bold tracking-wider uppercase transition-colors"
             >
-              &larr; {t.lang === 'es' ? 'Volver al inicio' : 'Back to home'}
+              &larr; {t.sections.resume.backToHome}
             </Link>
           </div>
         </m.section>

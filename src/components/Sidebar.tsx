@@ -6,6 +6,7 @@ import { m, AnimatePresence } from 'framer-motion'
 import { useState, useEffect } from 'react'
 import { FadeInSection } from '@/components/FadeInSection'
 import { useTranslation } from '@/lib/i18n/context'
+import { localizedHref } from '@/lib/i18n/localizedHref'
 import { siteConfig } from '@/lib/siteConfig'
 import { staggerItemVariants } from '@/lib/animations'
 
@@ -170,7 +171,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ repo = siteConfig.repo }) => {
                 return (
                   <m.div key={gate.key} variants={staggerItemVariants()} className="space-y-2">
                     <Link
-                      href={gate.link}
+                      href={localizedHref(t.lang, gate.link)}
                       className="group/item flex items-center justify-between transition-opacity hover:opacity-80"
                     >
                       <div className="flex items-center gap-3">
