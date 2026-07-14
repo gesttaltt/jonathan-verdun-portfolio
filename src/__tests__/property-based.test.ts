@@ -250,16 +250,6 @@ describe('BioinformaticsService — property-based', () => {
     )
   })
 
-  it('bridge is a non-empty string with appropriate length', () => {
-    fc.assert(
-      fc.property(fc.integer({ min: 1, max: 5 }), () => {
-        const research = BioinformaticsService.getResearch()
-        expect(typeof research.bridge).toBe('string')
-        expect(research.bridge.length).toBeGreaterThan(20)
-      })
-    )
-  })
-
   it('every research spec satisfies invariant constraints', () => {
     const specs = BioinformaticsService.getResearchSpecs()
     specs.forEach((spec) => {
@@ -291,24 +281,6 @@ describe('i18n completeness — property-based', () => {
       fc.property(fc.constantFrom(...entries), ([cmd, response]) => {
         expect(cmd.length).toBeGreaterThan(0)
         expect(response.length).toBeGreaterThan(0)
-      })
-    )
-  })
-
-  it('manifesto is present and non-empty in both locales', () => {
-    fc.assert(
-      fc.property(fc.constantFrom(en, es), (loc) => {
-        expect(typeof loc.qa.manifesto).toBe('string')
-        expect(loc.qa.manifesto.length).toBeGreaterThan(50)
-      })
-    )
-  })
-
-  it('bridge is present and non-empty in both locales', () => {
-    fc.assert(
-      fc.property(fc.constantFrom(en, es), (loc) => {
-        expect(typeof loc.bioinformatics.bridge).toBe('string')
-        expect(loc.bioinformatics.bridge.length).toBeGreaterThan(20)
       })
     )
   })

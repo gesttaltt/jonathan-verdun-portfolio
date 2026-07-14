@@ -9,8 +9,7 @@ import { ResearchSpec, BioinformaticsResearch } from './BioinformaticsContract.t
 export class BioinformaticsService {
   static getResearch(): BioinformaticsResearch {
     return {
-      bridge:
-        'Applying the same mathematical rigor used in genomic sequence analysis to software verification and invariant testing.',
+      bridge: '',
       specs: [],
     }
   }

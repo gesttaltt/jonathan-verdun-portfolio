@@ -193,8 +193,7 @@ const esBioSpecs = BioinformaticsService.getResearchSpecs().map((s) => {
 })
 
 const esQaPhilosophy = {
-  manifesto:
-    'Veo la calidad como un invariante estructural. Mi misión es construir software que sea correcto por construcción mediante el compromiso shift-left y gates de verificación automatizados.',
+  manifesto: '',
   constraints: ES_QA_CONSTRAINTS,
   specifications: QA_PHILOSOPHY.specifications.map((spec) => ({
     ...spec,
@@ -321,8 +320,7 @@ export const es: Translations = {
     specs: esArchSpecs,
   },
   bioinformatics: {
-    bridge:
-      'Aplicando el mismo rigor matemático utilizado en el análisis de secuencias genómicas a la verificación de software y pruebas de invariantes.',
+    bridge: '',
     methodologyLabel: 'Metodología',
     invariantsLabel: 'Invariantes',
     graphicLabel: 'Análisis de Datos: [Pipeline de Descubrimiento de Epítopos]',

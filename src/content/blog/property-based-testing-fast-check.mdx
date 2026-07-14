@@ -58,7 +58,7 @@ it('EN and ES translations have identical key structures', () => {
 })
 ```
 
-This caught three drift incidents during development — keys added to one locale but not the other. Without the property test, those would have shipped as missing translations.
+Without this property test, a key added to one locale but not the other would ship silently — the page would just render a missing string. The property test turns that into a build failure instead.
 
 ### 2. Terminal command routing
 
@@ -75,7 +75,7 @@ it('every registered command produces non-empty output', () => {
 })
 ```
 
-This caught a command that was registered in the help menu but had no handler — it would have returned undefined at runtime.
+This is the kind of gap example-based tests tend to miss: a command that's registered in the help menu but has no handler would otherwise return `undefined` at runtime, and nothing would flag it until a user actually typed that command.
 
 ### 3. Stateless service functions
 
@@ -109,7 +109,7 @@ This isn't a property in the strict sense (it's deterministic), but it codifies 
 - Async integration flows
 - Snapshot or visual regression
 
-On this portfolio, I use it for about 15% of the test suite. The remaining 85% is conventional Jest + React Testing Library. The property tests are concentrated on the domain logic and contracts — the parts where edge cases actually matter.
+On this portfolio, property-based tests are a small fraction of the suite — well under 10% of test cases. The rest is conventional Jest + React Testing Library. The property tests are concentrated on the domain logic and contracts — the parts where edge cases actually matter.
 
 ## Getting started
 
@@ -134,4 +134,4 @@ it('the parser never produces NaN from valid input', () => {
 
 One property test, hundreds of random inputs, zero manual test cases to write.
 
-The portfolio test suite runs 476 tests in under 10 seconds. The property-based tests add negligible overhead (fast-check is fast) and have caught bugs that example-based tests missed on three separate occasions. That alone justifies the approach.
+The portfolio test suite runs several hundred tests in under 20 seconds. The property-based tests add negligible overhead — fast-check is fast — and they cover the kind of input space a handful of hand-picked examples never will. That's the actual case for the approach: not that it caught a specific bug once, but that it removes a whole category of "we didn't think of that input" from the equation.

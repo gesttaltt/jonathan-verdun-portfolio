@@ -1,8 +1,8 @@
 ---
-title: 'How I enforce 100% test coverage in CI with Jest + GitHub Actions'
+title: 'How I enforce coverage gates in CI with Jest + GitHub Actions'
 date: '2026-05-10'
 tags: ['testing', 'CI/CD', 'Jest', 'GitHub Actions']
-description: 'A practical guide to setting up automated coverage gates that prevent merging code below 100% — without driving your team crazy.'
+description: 'A practical guide to setting up automated coverage gates that fail the build when coverage drops — without driving your team crazy.'
 ---
 
 ## The problem with coverage gates
@@ -20,15 +20,17 @@ The key insight is that coverage thresholds should be **enforced mechanically**,
   "jest": {
     "coverageThreshold": {
       "global": {
-        "branches": 100,
-        "functions": 100,
-        "lines": 100,
-        "statements": 100
+        "branches": 97,
+        "functions": 99,
+        "lines": 99,
+        "statements": 99
       }
     }
   }
 }
 ```
+
+Branches sit a couple points below the rest — some UI branches (WebGL fallback paths, third-party error boundaries) aren't worth contorting a component to hit 100% on. The gate is set close to what's actually achievable, not at a round number for its own sake.
 
 ### Step 2: GitHub Actions workflow
 
@@ -46,8 +48,8 @@ The key insight is that coverage thresholds should be **enforced mechanically**,
 
 ### Step 3: Handle edge cases
 
-Not every branch is easily testable. For genuine edge cases (error boundaries, third-party API failures), use `/* istanbul ignore next */` sparingly — and audit it weekly.
+Not every branch is easily testable. For genuine edge cases (error boundaries, third-party API failures), use `/* istanbul ignore next */` sparingly, and revisit those ignores periodically instead of letting them accumulate silently.
 
 ## Results
 
-On this portfolio, this gate has held 100% coverage through every merge since it was introduced. The value isn't the number itself — it's the forcing function for testable architecture: if something is hard to test, redesign it rather than lower the threshold.
+On this portfolio, coverage currently sits at 99%+ on statements, functions, and lines, with branches close behind. The value isn't the exact number — it's the forcing function for testable architecture: if something is hard to test, redesign it rather than lower the threshold.
