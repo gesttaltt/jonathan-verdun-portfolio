@@ -262,15 +262,13 @@ describe('BioinformaticsService — property-based', () => {
 
   it('every research spec satisfies invariant constraints', () => {
     const specs = BioinformaticsService.getResearchSpecs()
-    fc.assert(
-      fc.property(fc.constantFrom(...specs), (spec) => {
-        expect(spec.invariants.length).toBeGreaterThan(0)
-        spec.invariants.forEach((inv) => {
-          expect(typeof inv).toBe('string')
-          expect(inv.length).toBeGreaterThan(0)
-        })
+    specs.forEach((spec) => {
+      expect(spec.invariants.length).toBeGreaterThan(0)
+      spec.invariants.forEach((inv) => {
+        expect(typeof inv).toBe('string')
+        expect(inv.length).toBeGreaterThan(0)
       })
-    )
+    })
   })
 })
 

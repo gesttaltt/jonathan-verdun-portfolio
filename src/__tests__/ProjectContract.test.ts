@@ -57,9 +57,9 @@ describe('ProjectService', () => {
     expect(ProjectService.getProjects()).toEqual(PROJECT_DATA)
   })
 
-  it('should have at least 3 QA-ready projects (QA or Deployed status)', () => {
+  it('should have at least 2 QA-ready projects (QA or Deployed status)', () => {
     const qaReady = projects.filter((p) => p.status === 'QA' || p.status === 'Deployed')
-    expect(qaReady.length).toBeGreaterThanOrEqual(3)
+    expect(qaReady.length).toBeGreaterThanOrEqual(2)
   })
 
   it('all QA-ready projects should have stats with at least one entry', () => {

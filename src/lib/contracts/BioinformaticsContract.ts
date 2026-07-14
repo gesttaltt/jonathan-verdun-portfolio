@@ -11,22 +11,7 @@ export class BioinformaticsService {
     return {
       bridge:
         'Applying the same mathematical rigor used in genomic sequence analysis to software verification and invariant testing.',
-      specs: [
-        {
-          id: 'spec-01',
-          focus: 'HIV',
-          methodology: 'p-adic',
-          invariants: ['Numerical Stability', 'Representation Leakage Prevention'],
-          link: 'https://github.com/Ai-Whisperers/hiv-antigen-ai',
-        },
-        {
-          id: 'spec-02',
-          focus: 'Codon Encoding',
-          methodology: 'Hyperbolic VAE',
-          invariants: ['Embedding Determinism', 'Amino Acid Consistency'],
-          link: 'https://github.com/Ai-Whisperers/codon-encoder-api',
-        },
-      ],
+      specs: [],
     }
   }
 

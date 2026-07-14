@@ -1,7 +1,14 @@
 import { render, screen } from '@testing-library/react'
-import { I18nProvider } from '@/lib/i18n/context'
+import { useTranslation } from '@/lib/i18n/context'
+import { en } from '@/lib/i18n/en'
 import { BioinformaticsResearchCard } from '@/components/BioinformaticsResearchCard'
 import type { I18nResearchSpec } from '@/lib/i18n/types'
+
+jest.mock('@/lib/i18n/context', () => ({
+  useTranslation: jest.fn(),
+}))
+
+const mockUseTranslation = useTranslation as jest.Mock
 
 const knownSpec: I18nResearchSpec = {
   id: 'spec-01',
@@ -18,14 +25,26 @@ const unknownSpec: I18nResearchSpec = {
   invariants: ['Invariant A'],
 }
 
-const wrap = (spec: I18nResearchSpec) =>
-  render(
-    <I18nProvider>
-      <BioinformaticsResearchCard spec={spec} />
-    </I18nProvider>
-  )
+const wrap = (spec: I18nResearchSpec) => render(<BioinformaticsResearchCard spec={spec} />)
 
 describe('BioinformaticsResearchCard — known focus key', () => {
+  // The card's label/description lookup is exercised here with a mocked focus key,
+  // since production translations no longer carry any bioinformatics focus entries.
+  beforeEach(() => {
+    mockUseTranslation.mockReturnValue({
+      ...en,
+      bioinformatics: {
+        ...en.bioinformatics,
+        focusLabels: { HIV: 'HIV Antigen AI' },
+        focusDescriptions: { HIV: 'Antigen candidate screening using p-adic metric spaces.' },
+      },
+    })
+  })
+
+  afterEach(() => {
+    jest.resetAllMocks()
+  })
+
   it('renders the translated label', () => {
     wrap(knownSpec)
     expect(screen.getByText('HIV Antigen AI')).toBeInTheDocument()
@@ -49,6 +68,14 @@ describe('BioinformaticsResearchCard — known focus key', () => {
 })
 
 describe('BioinformaticsResearchCard — unknown focus key (fallback branches)', () => {
+  beforeEach(() => {
+    mockUseTranslation.mockReturnValue(en)
+  })
+
+  afterEach(() => {
+    jest.resetAllMocks()
+  })
+
   it('falls back to spec.focus as the label', () => {
     wrap(unknownSpec)
     expect(screen.getByRole('heading', { name: /UnknownFocusKey/i })).toBeInTheDocument()

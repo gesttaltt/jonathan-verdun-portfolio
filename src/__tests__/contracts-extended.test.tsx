@@ -7,13 +7,6 @@ describe('BioinformaticsService - High-Dimensional Modeling', () => {
     expect(specs1).toEqual(specs2)
   })
 
-  it('should have determinism invariants for Codon Encoding research', () => {
-    const codonSpec = BioinformaticsService.getResearchSpecs().find(
-      (s) => s.focus === 'Codon Encoding'
-    )
-    expect(codonSpec?.invariants).toContain('Embedding Determinism')
-  })
-
   it('should verify invariants for all research specs', () => {
     const specs = BioinformaticsService.getResearchSpecs()
     specs.forEach((spec) => {

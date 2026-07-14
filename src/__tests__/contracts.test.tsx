@@ -20,10 +20,10 @@ describe('DataEngineeringService', () => {
 })
 
 describe('BioinformaticsService', () => {
-  it('returns valid research specs', () => {
+  it('returns an array of research specs', () => {
     const specs = BioinformaticsService.getResearchSpecs()
-    expect(specs.length).toBeGreaterThan(0)
-    expect(specs[0]!.id).toBeDefined()
+    expect(Array.isArray(specs)).toBe(true)
+    specs.forEach((spec) => expect(spec.id).toBeDefined())
   })
 })
 

@@ -15,7 +15,7 @@ export const en: Translations = {
   workHistoryLabel: 'Work History',
   workHistoryDescriptions: {
     'Ai-Whisperers':
-      'Led the QA strategy as Co-Founder & QA Lead, implementing 350+ automated tests across Web, Mobile, and API layers. Established full-lifecycle defect management in Azure DevOps and hardened CI/CD pipelines with 100% coverage gates.',
+      'Co-Founder & QA Lead, building automated test coverage across Web, Mobile, and API layers. Established full-lifecycle defect management in Azure DevOps and hardened CI/CD pipelines with coverage gates.',
   },
   workHistoryRoles: {
     'Ai-Whisperers': 'Co-Founder & QA Lead',
@@ -134,15 +134,8 @@ export const en: Translations = {
     methodologyLabel: 'Methodology',
     invariantsLabel: 'Invariants',
     graphicLabel: 'Data Analysis: [Epitope Discovery Pipeline]',
-    focusLabels: {
-      HIV: 'HIV Antigen AI',
-      'Codon Encoding': 'Codon Encoder API',
-    },
-    focusDescriptions: {
-      HIV: 'Antigen candidate screening using p-adic metric spaces for numerical stability in viral sequence analysis.',
-      'Codon Encoding':
-        'DNA codon embedding in hyperbolic space via Variational Autoencoder for deterministic amino acid representation.',
-    },
+    focusLabels: {},
+    focusDescriptions: {},
     specs: BioinformaticsService.getResearchSpecs(),
   },
   projects: PROJECT_DATA,

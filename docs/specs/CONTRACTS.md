@@ -39,17 +39,14 @@ interface ProjectSpec {
 
 ### Data (`ProjectContract.ts`)
 
-`PROJECT_DATA: ProjectSpec[]` — 7 entries. `ProjectService.getProjects()` returns the static array; nothing else consumes `PROJECT_DATA` directly (see `services/ProjectRepository.ts` below).
+`PROJECT_DATA: ProjectSpec[]` — 4 entries. `ProjectService.getProjects()` returns the static array; nothing else consumes `PROJECT_DATA` directly (see `services/ProjectRepository.ts` below).
 
-| ID        | Title                     | Status   |
-| --------- | ------------------------- | -------- |
-| `proj-01` | QA Arxiv Mobile           | QA       |
-| `proj-05` | Functional Genome API     | Deployed |
-| `proj-06` | Transcription Engine QA   | Deployed |
-| `proj-07` | Portfolio QA Hardened     | QA       |
-| `proj-02` | Variant Analysis Pipeline | Research |
-| `proj-04` | 3-Adic ML Engine          | Research |
-| `proj-03` | Gene Functional Pipeline  | Research |
+| ID        | Title                    | Status   |
+| --------- | ------------------------ | -------- |
+| `proj-01` | QA Arxiv Mobile          | QA       |
+| `proj-07` | Portfolio QA Hardened    | QA       |
+| `proj-04` | 3-Adic ML Engine         | Research |
+| `proj-03` | Gene Functional Pipeline | Research |
 
 ---
 
@@ -130,7 +127,7 @@ interface BioinformaticsResearch {
 
 ### Service (`BioinformaticsContract.ts`)
 
-`BioinformaticsService.getResearch()` returns the bridge statement + 2 specs (HIV / p-adic, Codon Encoding / Hyperbolic VAE). `BioinformaticsService.getResearchSpecs()` returns just the specs array. Both specs link to real GitHub repos under the Ai-Whisperers org.
+`BioinformaticsService.getResearch()` returns the bridge statement + an empty `specs` array (the HIV and Codon Encoding entries were removed — their linked repos no longer exist under the `Ai-Whisperers` org). `BioinformaticsService.getResearchSpecs()` returns just the specs array.
 
 ---
 

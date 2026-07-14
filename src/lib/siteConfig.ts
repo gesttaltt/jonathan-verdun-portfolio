@@ -81,9 +81,9 @@ export const siteConfig = {
     // scripts/generate-badge-data.mjs, regenerated from the Jest coverage report
     // on every build. Not hand-maintained: if coverage ever dips, this does too.
     unitCoverage: COVERAGE_STATS.unitCoverage,
-    // 26 automated / 10 manual test cases on QA Arxiv Mobile (proj-01) — the
+    // 57 automated / 11 manual test cases on QA Arxiv Mobile (proj-01) — the
     // one case study with an explicit automated/manual split. See ProjectContract.ts.
-    automationRate: '72%',
+    automationRate: '84%',
     securityStatus: 'Passed',
   },
 

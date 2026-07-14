@@ -16,7 +16,7 @@ const ES_WORK_OVERRIDES: Record<string, { role?: string; period?: string; descri
       role: 'Cofundador y Líder de QA',
       period: 'Sep 2025 – Abril 2026',
       description:
-        'Lideré la estrategia de QA como Cofundador y Líder de QA, implementando más de 350 pruebas automatizadas en capas Web, Mobile y API. Establecí la gestión de defectos del ciclo completo en Azure DevOps y endurecí los pipelines de CI/CD con gates de cobertura al 100%.',
+        'Cofundador y Líder de QA, construyendo cobertura de pruebas automatizadas en capas Web, Mobile y API. Establecí la gestión de defectos del ciclo completo en Azure DevOps y endurecí los pipelines de CI/CD con gates de cobertura.',
     },
   }
 
@@ -66,10 +66,10 @@ const ES_PROJECT_OVERRIDES: Record<
 > = {
   'proj-01': {
     description:
-      '26 pruebas automatizadas con pytest + Appium y 10 casos manuales en 4 user stories, trazados a ADO Test Plans. Flujo de defectos, validación de API y smoke móvil — todo gateado en GitHub Actions CI.',
+      '57 pruebas automatizadas con pytest y 11 casos manuales en formato ADO, trazados a ADO Test Plans. Flujo de defectos, validación de API y smoke móvil — todo gateado en GitHub Actions CI.',
     statLabels: ['Automatizados', 'Casos Manuales'],
     highlights: [
-      '100% de cobertura de requerimientos en 4 user stories, trazado a ADO test plans',
+      'Casos manuales trazados a user stories y ADO test plans',
       'Menor esfuerzo de regresión manual vía automatización móvil con Appium',
       'Flujo de defectos clasificado por severidad con pasos de reproducción en Azure DevOps',
       'Gate de CI bloquea merges ante fallos de regresión automatizada',
@@ -77,35 +77,9 @@ const ES_PROJECT_OVERRIDES: Record<
     architecture:
       'Page Object Model con fixtures de pytest para aislamiento de pruebas. conftest.py personalizado maneja sesiones Appium y abstracción de dispositivo. La API de ADO sincroniza resultados bidireccionalmente; las pruebas corren en paralelo, divididas por user story.',
   },
-  'proj-05': {
-    description:
-      'Suite de 96 pruebas que cubre todos los endpoints REST vía FastAPI TestClient y async httpx. El CI gate requiere lint, type-check, escaneo de seguridad (bandit + pip-audit), smoke test de Docker y cobertura antes de mergear.',
-    statLabels: ['Pruebas', 'Endpoints'],
-    highlights: [
-      'Suite de 96 pruebas de caja negra cubre todos los endpoints con casos de borde',
-      'Gate de CI multicapa: lint → type-check → seguridad → Docker smoke → cobertura',
-      'Se encontraron 3 violaciones de contrato de API en pruebas de integración, antes del despliegue',
-      'Cliente httpx asíncrono verifica todos los endpoints concurrentemente en menos de 30s',
-    ],
-    architecture:
-      'Pruebas de caja negra sobre FastAPI TestClient por velocidad, más pruebas de integración httpx contra un contenedor Docker activo. El escaneo de seguridad corre en paralelo con las pruebas funcionales; los datos de prueba se generan programáticamente.',
-  },
-  'proj-06': {
-    description:
-      'Más de 230 pruebas en capas unit (Jest), integración y E2E (Playwright) para un servicio headless de extracción de transcripciones. Una campaña de 100 ejecuciones de resiliencia usó Análisis de Causa Raíz para categorizar fallos e impulsar mejoras de estabilidad.',
-    statLabels: ['Pruebas', 'Capas'],
-    highlights: [
-      'Alta tasa de éxito en 100 ejecuciones de la campaña de resiliencia, con categorización RCA completa',
-      'Arquitectura de pruebas en tres capas atrapa regresiones en la etapa más económica',
-      'Mejoras impulsadas por RCA aumentaron la estabilidad de forma sostenida',
-      'Suite headless valida extracción en más de 50 URLs reales de YouTube por ejecución',
-    ],
-    architecture:
-      'Pirámide de pruebas: Jest para lógica de extracción, integración para middleware de API, Playwright E2E para flujos completos de navegador. La taxonomía RCA etiqueta cada fallo (red, parsing, rate-limit, timeout) para análisis de tendencias.',
-  },
   'proj-07': {
     description:
-      'Implementación de referencia QA: 100% de cobertura lógica, gates automatizados de WCAG 2.1 AA, 570+ pruebas Jest y 66 pruebas E2E con Playwright. Cada afirmación en la Filosofía QA está respaldada por un gate en CI.',
+      'Implementación de referencia QA: 100% de cobertura lógica, gates automatizados de WCAG 2.1 AA, 570+ pruebas Jest y 67 pruebas E2E con Playwright. Cada afirmación en la Filosofía QA está respaldada por un gate en CI.',
     statLabels: ['Pruebas', 'Cobertura'],
     highlights: [
       '100% de cobertura en statements/branches/functions/lines exigido como gate de CI',
@@ -115,19 +89,6 @@ const ES_PROJECT_OVERRIDES: Record<
     ],
     architecture:
       'Exportación estática en Next.js 16 App Router. Separación SOLID: contratos poseen datos, servicios poseen lógica, componentes poseen presentación. Tres capas de prueba — Jest, Playwright, Lighthouse CI. WebGL tiene failover de 3s a gradiente CSS.',
-  },
-  'proj-02': {
-    description:
-      'Pipeline de análisis de variantes genómicas — mayor rendimiento vía vectorización NumPy sobre Python nativo. Integra restricciones LOEUF y anotaciones Gene Ontology, validado contra conjuntos de referencia gnomAD.',
-    statLabels: ['vs Python Nativo', 'Funcionomas'],
-    highlights: [
-      'Mayor rendimiento de VCF vía vectorización NumPy sobre Python nativo',
-      'Pruebas de regresión parametrizadas validan salidas contra referencias gnomAD',
-      'La integración LOEUF permite priorización de variantes con contexto evolutivo',
-      'Diseñado para procesamiento por lotes de archivos VCF a escala poblacional (100K+ muestras)',
-    ],
-    architecture:
-      'Parser de VCF vectorizado con NumPy, con I/O en chunks para datasets grandes. Los scores LOEUF se combinan vía interval tree join con los tracks de restricción de gnomAD; las anotaciones GO se cachean en SQLite. Las pruebas de regresión comparan distribuciones de salida contra estadísticas publicadas de gnomAD.',
   },
   'proj-04': {
     description:
@@ -180,16 +141,7 @@ const ES_ARCH_OVERRIDES: Record<
 }
 
 // ── Overrides for Bioinformatics Specs ────────────────────────────────────────
-const ES_BIO_OVERRIDES: Record<string, { methodology: string; invariants: string[] }> = {
-  'spec-01': {
-    methodology: 'p-ádico',
-    invariants: ['Estabilidad Numérica', 'Prevención de Fuga de Representación'],
-  },
-  'spec-02': {
-    methodology: 'VAE Hiperbólico',
-    invariants: ['Determinismo de Incrustación', 'Consistencia de Aminoácidos'],
-  },
-}
+const ES_BIO_OVERRIDES: Record<string, { methodology: string; invariants: string[] }> = {}
 
 const projects = PROJECT_DATA.map((p) => {
   const override = ES_PROJECT_OVERRIDES[p.id]
@@ -374,15 +326,8 @@ export const es: Translations = {
     methodologyLabel: 'Metodología',
     invariantsLabel: 'Invariantes',
     graphicLabel: 'Análisis de Datos: [Pipeline de Descubrimiento de Epítopos]',
-    focusLabels: {
-      HIV: 'IA para Antígenos VIH',
-      'Codon Encoding': 'API de Codificación de Codones',
-    },
-    focusDescriptions: {
-      HIV: 'Detección de candidatos antigénicos usando espacios métricos p-ádicos para estabilidad numérica en análisis de secuencias virales.',
-      'Codon Encoding':
-        'Incrustación de codones de ADN en espacio hiperbólico mediante Autoencoder Variacional para representación determinista de aminoácidos.',
-    },
+    focusLabels: {},
+    focusDescriptions: {},
     specs: esBioSpecs,
   },
   projects,
