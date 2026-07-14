@@ -1,4 +1,5 @@
 import { ProjectSpec } from './ProjectContract.types'
+import { COVERAGE_STATS } from '../generated/coverageStats'
 
 // Shared by ProjectCard and ProjectDetail — both render the same status badge.
 export const PROJECT_STATUS_STYLES: Record<ProjectSpec['status'], string> = {
@@ -42,19 +43,18 @@ export const PROJECT_DATA: ProjectSpec[] = [
   {
     id: 'proj-07',
     title: 'Portfolio QA Hardened',
-    description:
-      'QA reference implementation: 100% logic coverage, automated WCAG 2.1 AA gates, 570+ Jest tests, and 67 Playwright E2E tests. Every claim in the QA Philosophy section is backed by a CI gate.',
+    description: `QA reference implementation: ${COVERAGE_STATS.unitCoverage} logic coverage, automated WCAG 2.1 AA gates, 570+ Jest tests, and 67 Playwright E2E tests. The measurable claims in the QA Philosophy section are backed by a CI gate.`,
     techStack: ['Next.js', 'Playwright', 'Jest', 'fast-check'],
     link: 'https://github.com/gesttaltt/jonathan-verdun-portfolio',
     status: 'QA',
     specLink: '/quality/specs/TESTING',
     stats: [
       { label: 'Tests', value: '570+' },
-      { label: 'Coverage', value: '100%' },
+      { label: 'Coverage', value: COVERAGE_STATS.unitCoverage },
     ],
     highlights: [
-      '100% statement/branch/function/line coverage enforced as a CI gate',
-      'Automated WCAG 2.1 AA scans on every E2E run — zero violations in production',
+      'Coverage thresholds (97–99% across statements/branches/functions/lines) enforced as a CI gate',
+      'Automated WCAG 2.1 AA scans on every E2E run — zero violations on the routes covered',
       'Property-based tests (fast-check) catch i18n drift and terminal edge cases',
       'Three CI jobs finish in under 10 minutes across a Node 22/24 matrix',
     ],

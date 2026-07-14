@@ -61,7 +61,7 @@ This Master Test Plan (MTP) defines the strategic approach to quality assurance 
 
 ### 5.2 Exit Criteria (Quality Gates)
 
-- **Coverage:** 100% Statements / 100% Branches.
+- **Coverage:** 100% statements/branches/functions/lines on core domain logic (`lib/contracts`, `lib/services`); ≥97% global (CI-enforced thresholds).
 - **Accessibility:** 0 detectable WCAG 2.1 AA violations.
 - **CI Status:** Fully green GitHub Actions pipeline.
 - **Security:** 0 high-severity vulnerabilities.

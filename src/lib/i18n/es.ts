@@ -5,6 +5,7 @@ import { BioinformaticsService } from '@/lib/contracts/BioinformaticsContract'
 import { PROJECT_DATA } from '@/lib/contracts/ProjectContract'
 import { QA_PHILOSOPHY } from '@/lib/contracts/QAContract'
 import { siteConfig } from '@/lib/siteConfig'
+import { COVERAGE_STATS } from '@/lib/generated/coverageStats'
 
 const ES_HELP_OUTPUT =
   'Comandos disponibles: ayuda, sobre, proyectos, contacto, habilidades, version, quiensoy, limpiar, ls, cd, cat, pwd'
@@ -78,12 +79,11 @@ const ES_PROJECT_OVERRIDES: Record<
       'Page Object Model con fixtures de pytest para aislamiento de pruebas. conftest.py personalizado maneja sesiones Appium y abstracción de dispositivo. La API de ADO sincroniza resultados bidireccionalmente; las pruebas corren en paralelo, divididas por user story.',
   },
   'proj-07': {
-    description:
-      'Implementación de referencia QA: 100% de cobertura lógica, gates automatizados de WCAG 2.1 AA, 570+ pruebas Jest y 67 pruebas E2E con Playwright. Cada afirmación en la Filosofía QA está respaldada por un gate en CI.',
+    description: `Implementación de referencia QA: ${COVERAGE_STATS.unitCoverage} de cobertura lógica, gates automatizados de WCAG 2.1 AA, 570+ pruebas Jest y 67 pruebas E2E con Playwright. Las afirmaciones medibles de la Filosofía QA están respaldadas por un gate en CI.`,
     statLabels: ['Pruebas', 'Cobertura'],
     highlights: [
-      '100% de cobertura en statements/branches/functions/lines exigido como gate de CI',
-      'Escaneos WCAG 2.1 AA automatizados en cada ejecución E2E — cero violaciones en producción',
+      'Umbrales de cobertura (97–99% en statements/branches/functions/lines) exigidos como gate de CI',
+      'Escaneos WCAG 2.1 AA automatizados en cada ejecución E2E — cero violaciones en las rutas cubiertas',
       'Pruebas basadas en propiedades (fast-check) detectan desviaciones de i18n y casos de borde',
       'Tres jobs de CI terminan en menos de 10 minutos con matriz Node 22/24',
     ],
