@@ -1,7 +1,14 @@
 import { test, expect } from '@playwright/test'
 
 test.describe('Visual Regression — Design Stability @visual', () => {
-  test.beforeEach(async ({ page }) => {
+  test.beforeEach(async ({ page, context }) => {
+    // The Sidebar's CI status badge fetches api.github.com live on mount —
+    // MOCK_CI is a server-side env var and never reaches this client bundle
+    // (it's not NEXT_PUBLIC_-prefixed), so without this cookie the fetch
+    // depends on GitHub API latency/availability at screenshot time, which
+    // previously produced different page heights locally vs. in CI.
+    await context.addCookies([{ name: 'mock-ci', value: 'true', domain: 'localhost', path: '/' }])
+
     // Wait for the page to be fully loaded and animations to settle
     await page.goto('/')
     await expect(page.getByText('jonathan.verdun — QA Automation Engineer')).toBeVisible({

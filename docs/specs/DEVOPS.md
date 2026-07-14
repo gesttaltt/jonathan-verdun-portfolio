@@ -27,7 +27,7 @@ checkout → setup-node (npm cache) → npm ci
 
 ### `e2e` job (needs `build`)
 
-Downloads the `next-out` artifact, installs Playwright browsers, runs `npm run e2e` with `MOCK_CI=true` (serves the static export via `serve` instead of hitting real external services), uploads the Playwright report on failure.
+Downloads the `next-out` artifact, installs Playwright browsers, runs `npm run e2e` with `MOCK_CI=true` (serves the static export via `serve` instead of running a dev server), uploads the Playwright report on failure. `MOCK_CI` doesn't stop the app itself from making real network calls — see the `mock-ci` cookie note in `TESTING.md` for how the tests that need a deterministic Sidebar CI-status badge handle that.
 
 ### `lhci` job (needs `build`)
 

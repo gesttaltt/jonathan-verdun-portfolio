@@ -75,7 +75,9 @@ The R3F canvas and WebGL context aren't available in jsdom. These components are
 
 ## E2E (Playwright)
 
-`playwright.config.ts`: `testDir: './e2e'`, two projects only — `chromium` (Desktop Chrome) and `mobile-chrome` (Pixel 5) — `fullyParallel: true`, CI retries once. `webServer` serves the static `out/` export via `serve` when `MOCK_CI=true` (used in CI, avoiding a full `npm run dev` and any real external network calls), otherwise runs `npm run dev`. The default per-test timeout is intentionally shorter under `MOCK_CI` (30s vs 120s) to keep CI fast — tests with long, deliberate waits (e.g. the offline/PWA test) override it explicitly via `test.setTimeout()`.
+`playwright.config.ts`: `testDir: './e2e'`, two projects only — `chromium` (Desktop Chrome) and `mobile-chrome` (Pixel 5) — `fullyParallel: true`, CI retries once. `webServer` serves the static `out/` export via `serve` when `MOCK_CI=true` (used in CI, avoiding a full `npm run dev`), otherwise runs `npm run dev`. The default per-test timeout is intentionally shorter under `MOCK_CI` (30s vs 120s) to keep CI fast — tests with long, deliberate waits (e.g. the offline/PWA test) override it explicitly via `test.setTimeout()`.
+
+`MOCK_CI` only controls which command starts the web server — it's a shell env var read by `playwright.config.ts` itself, not something that reaches the built client bundle (it isn't `NEXT_PUBLIC_`-prefixed or listed in `next.config.ts`'s `env`). The Sidebar's live CI-status badge (`fetch('api.github.com/...')`) still fires a real network request regardless of `MOCK_CI`. `verification.spec.ts` and `visual.spec.ts` set a `mock-ci=true` cookie via `context.addCookies()` before navigating (which the component checks explicitly) so that specific fetch is deterministic; other specs that touch the Sidebar don't currently need to, since they don't assert on or screenshot its CI-status text.
 
 Spec files: `a11y`, `comprehensive`, `content-routes`, `error-states`, `infrastructure`, `layout`, `navigation`, `project-routes`, `smoke`, `verification`, `visual` (visual regression, with committed baseline screenshots in `visual.spec.ts-snapshots/`).
 
