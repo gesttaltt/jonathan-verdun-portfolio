@@ -34,7 +34,7 @@ export const QualityDashboard: React.FC<QualityDashboardProps> = ({ audits }) =>
   }, [chronologicalAudits, searchQuery])
 
   return (
-    <div className="space-y-16">
+    <main id="main-content" className="space-y-16">
       <FadeInSection>
         <div className="space-y-12">
           <SectionHeader
@@ -138,6 +138,6 @@ export const QualityDashboard: React.FC<QualityDashboardProps> = ({ audits }) =>
           </m.div>
         )}
       </section>
-    </div>
+    </main>
   )
 }

@@ -30,7 +30,7 @@ export function DetailArticleLayout({
   html,
 }: DetailArticleLayoutProps) {
   return (
-    <main className="mx-auto max-w-4xl px-4 py-10 sm:px-6 sm:py-16 lg:py-24">
+    <main id="main-content" className="mx-auto max-w-4xl px-4 py-10 sm:px-6 sm:py-16 lg:py-24">
       <Link
         href={backHref}
         className="text-text-muted hover:text-text-primary group mb-8 flex items-center gap-2 text-xs font-bold tracking-widest uppercase transition-colors"

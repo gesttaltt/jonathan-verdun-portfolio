@@ -37,6 +37,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ projectId }) => {
 
   return (
     <m.main
+      id="main-content"
       variants={containerVariants()}
       initial="hidden"
       animate="visible"

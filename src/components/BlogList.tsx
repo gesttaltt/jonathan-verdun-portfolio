@@ -18,6 +18,7 @@ export const BlogList: React.FC<BlogListProps> = ({ posts }) => {
 
   return (
     <m.main
+      id="main-content"
       variants={containerVariants()}
       initial="hidden"
       animate="visible"
