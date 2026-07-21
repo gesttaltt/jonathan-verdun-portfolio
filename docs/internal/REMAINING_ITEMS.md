@@ -51,11 +51,27 @@ Neither blocks CI or affects functionality; both are platform constraints, not g
 
 ### 2. Dependency status
 
-| Package      | Current | Latest | Note                                                                          |
-| ------------ | ------- | ------ | ----------------------------------------------------------------------------- |
-| `typescript` | 6.0.3   | 7.0.2  | Major bump, out of `^6.0.3` range — needs deliberate eval, not a routine bump |
+| Package      | Current | Latest | Note                                                   |
+| ------------ | ------- | ------ | ------------------------------------------------------ |
+| `typescript` | 6.0.3   | 7.0.2  | Major bump, out of `^6.0.3` range — blocked, see below |
 
 All other dependencies are on latest within their declared semver ranges as of 2026-07-21.
+
+**TypeScript 7.0 evaluated 2026-07-21 — blocked, do not upgrade yet.** TS 7.0 (Project Corsa,
+`tsgo`) is a full compiler rewrite in Go that drops the old programmatic ("Strada") API.
+Verified by installing `typescript@7.0.2` locally (not committed) and running this repo's
+actual checks:
+
+| Check                                          | Result under TS 7.0.2                                                              |
+| ---------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `tsc --noEmit`                                 | ✅ Passes clean                                                                    |
+| `npm run lint` (ESLint)                        | ❌ Hard fails — `typescript-eslint does not support TS 7.0`                        |
+| `npm run docs` (TypeDoc, used in `deploy.yml`) | ❌ Crashes — `Cannot read properties of undefined (reading 'PropertyDeclaration')` |
+
+Root cause for both: `typescript-eslint` and `TypeDoc` depend on the Strada API, which
+Microsoft has said won't be stable again until TypeScript 7.1. `typescript-eslint` tracks
+support at [typescript-eslint/typescript-eslint#10940](https://github.com/typescript-eslint/typescript-eslint/issues/10940).
+Re-evaluate once that lands — don't retry with just `tsc` green as the bar.
 
 ### 3. npm audit — 4 pre-existing devDependency vulnerabilities
 
@@ -75,4 +91,4 @@ _are already resolved; see Recently Resolved.)_
 
 ## Low Priority
 
-- Evaluate `typescript` 7.0.2 major upgrade (see above) once there's time to check for breaking changes.
+- Retry the `typescript` 7.x upgrade once `typescript-eslint` ships TS 7.1 support (see above).

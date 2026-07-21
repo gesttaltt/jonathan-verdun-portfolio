@@ -60,11 +60,11 @@ The runner stage is `nginx:alpine` serving the static export. `nginx.conf` sets 
 
 ## CI pipeline
 
-| Job     | What it does                                                                             |
-| :------ | :--------------------------------------------------------------------------------------- |
-| `build` | Format · lint · security audit · types · Jest (570+ tests, 100% coverage) · Node 22 & 24 |
-| `e2e`   | Playwright suite (66 cases × 2 browser projects, 162 runs) + WCAG 2.1 AA axe scans       |
-| `lhci`  | Lighthouse CI gate: a11y ≥ 90, best-practices ≥ 95, SEO ≥ 95, performance ≥ 50           |
+| Job     | What it does                                                                                                                     |
+| :------ | :------------------------------------------------------------------------------------------------------------------------------- |
+| `build` | Format · lint · security audit · types · Jest (unit/integration/property-based) · Node 22 & 24 — live counts on the badges above |
+| `e2e`   | Playwright suite (chromium + mobile-chrome) + WCAG 2.1 AA axe scans                                                              |
+| `lhci`  | Lighthouse CI gate: a11y ≥ 90, best-practices ≥ 95, SEO ≥ 95, performance ≥ 50                                                   |
 
 The `out/` artifact produced by the `build (22.x)` run is shared with `lhci` to avoid a duplicate build. Build caching is implemented to optimize performance.
 
@@ -85,7 +85,7 @@ Deployments to GitHub Pages are triggered separately via `deploy.yml`, which als
 ## Tech stack
 
 - **Next.js 16** — App Router, static export (`output: 'export'`)
-- **React 19 / TypeScript 5** — strict mode, zero `any`
+- **React 19 / TypeScript 6** — strict mode, zero `any`
 - **Tailwind CSS v4** — OKLCH colour space, CSS-variable tokens
 - **Framer Motion 12** — centralised animation variants
 - **Three.js / React Three Fiber** — WebGL topology visualisation
