@@ -13,11 +13,13 @@ test.describe('Audit Search Validation', () => {
     const searchInput = page.getByPlaceholder('Search audits...')
     await expect(searchInput).toBeVisible()
 
-    // Type a specific query (e.g., "Styling")
-    await searchInput.fill('Styling')
+    // Type a specific query (e.g., "Design System")
+    await searchInput.fill('Design System')
 
     // Check filtered results
-    await expect(page.getByRole('heading', { name: 'Styling Audit — 2026-05-01' })).toBeVisible()
+    await expect(
+      page.getByRole('heading', { name: 'Internationalization & Design System Audit — May 2026' })
+    ).toBeVisible()
 
     // Other audits should be hidden (we use popLayout AnimatePresence)
     // We check that the count of visible cards has decreased
@@ -36,7 +38,7 @@ test.describe('Audit Search Validation', () => {
 
   test('clear button resets search results', async ({ page }) => {
     const searchInput = page.getByPlaceholder('Search audits...')
-    await searchInput.fill('Styling')
+    await searchInput.fill('Design System')
 
     // Click the X button specifically
     const clearButton = page.locator('button').filter({ has: page.locator('svg.lucide-x') })
@@ -52,8 +54,10 @@ test.describe('Audit Search Validation', () => {
     const searchInput = page.getByPlaceholder('Buscar auditorías...')
     await expect(searchInput).toBeVisible()
 
-    await searchInput.fill('Styling')
-    await expect(page.getByRole('heading', { name: 'Styling Audit — 2026-05-01' })).toBeVisible()
+    await searchInput.fill('Design System')
+    await expect(
+      page.getByRole('heading', { name: 'Internationalization & Design System Audit — May 2026' })
+    ).toBeVisible()
   })
 })
 

@@ -38,7 +38,7 @@ test.describe('Navigation Flow', () => {
     await page.goto('/quality/')
     await expect(page).toHaveURL('/quality/')
 
-    await page.goto('/quality/audit-2026-04-27')
+    await page.goto('/quality/audit-2026-04-28-architecture-performance')
     await expect(page.locator('article, h1, h2').first()).toBeVisible()
 
     await page.goBack()

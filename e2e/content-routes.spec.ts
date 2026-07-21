@@ -92,10 +92,10 @@ test.describe('Blog — List and Detail Pages', () => {
 
 test.describe('Quality Audit Detail Pages', () => {
   test('EN quality audit detail renders content', async ({ page }) => {
-    await page.goto('/quality/audit-2026-04-27')
+    await page.goto('/quality/audit-2026-04-28-architecture-performance')
 
     await expect(page.locator('article, h1, h2').first()).toBeVisible({ timeout: 15_000 })
-    await expect(page.getByText(/Portfolio Audit/i).first()).toBeVisible()
+    await expect(page.getByText(/Architecture & Performance/i).first()).toBeVisible()
     // Back link must point to the EN quality index.
     const backLink = page.getByRole('link', { name: /back to dashboard/i })
     await expect(backLink).toBeVisible()
@@ -103,7 +103,7 @@ test.describe('Quality Audit Detail Pages', () => {
   })
 
   test('ES quality audit detail renders', async ({ page }) => {
-    await page.goto('/es/quality/audit-2026-04-27')
+    await page.goto('/es/quality/audit-2026-04-28-architecture-performance')
 
     await expect(page.locator('article, h1, h2').first()).toBeVisible({ timeout: 15_000 })
     // Back link must point to the ES quality index, not the EN /quality/ path.
