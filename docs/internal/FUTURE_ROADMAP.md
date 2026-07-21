@@ -1,6 +1,6 @@
 # Implementation Log — Jonathan Verdun Portfolio
 
-> **Last updated:** 2026-05-18
+> **Last updated:** 2026-07-21
 > **Status:** All roadmap items implemented. File retained as a changelog reference.
 
 ---
@@ -26,9 +26,9 @@
 
 ## Remaining Opportunities
 
-| Item                         | Effort | Reason to do                                      |
-| ---------------------------- | ------ | ------------------------------------------------- |
-| Write more blog posts        | Medium | Thought leadership, SEO                           |
-| Tighten LHCI gates           | Low    | Push a11y/BP/SEO thresholds up                    |
-| Real content in case studies | High   | The 7 case studies exist but need richer writeups |
-| Verify CI on latest          | Low    | Ensure all pipelines still green                  |
+| Item                           | Effort | Reason to do                                                                                                                                                  |
+| ------------------------------ | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Write more blog posts          | Medium | Still 4 posts; thought leadership, SEO                                                                                                                        |
+| Tighten LHCI gates             | Low    | `categories:performance` gate is still `minScore: 0.5` — loose relative to a11y/BP/SEO at 0.9-0.95                                                            |
+| Add more verified case studies | High   | Project count dropped from 7 to 4 in the 2026-06/07 credibility pass (unverifiable projects/metrics removed) — room to add more with real, checkable writeups |
+| Verify CI on latest            | Low    | Ongoing — CI is currently green (lint/types/584 tests/build/bundle); Node matrix already split 22.x full / 24.x compat-only                                   |
