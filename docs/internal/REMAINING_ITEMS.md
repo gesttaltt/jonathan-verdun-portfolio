@@ -4,27 +4,28 @@ Last updated: 2026-07-21
 
 ## Recently Resolved
 
-| Item                                                                                          | Status | Notes                                                                    |
-| --------------------------------------------------------------------------------------------- | ------ | ------------------------------------------------------------------------ |
-| Content credibility pass — removed unverifiable projects/rhetoric/metrics                     | ✅     | `10bc991`, `4a3a85c`, `23cf13f`, resume PDF genericized `33b5341`        |
-| Manifesto/bridge sections removed from homepage                                               | ✅     | `4c99c49`                                                                |
-| E2E visual baselines de-flaked (no live GitHub API dependency)                                | ✅     | `bcfaecb`, `a18ce48`, `d550134`, `04b7131`                               |
-| Skip-nav target — `id` added to every page `<main>`                                           | ✅     | `051ccc4`                                                                |
-| Formspree ID baked into e2e build artifact                                                    | ✅     | `60ff96b`                                                                |
-| CI Node matrix split (22.x full suite / 24.x compat-only check)                               | ✅     | Already in `ci.yml` — halves redundant work vs. running everything twice |
-| TypeDoc generation isolated to `deploy.yml` only, not in `ci.yml`                             | ✅     | Confirmed current `ci.yml` has no `docs` step                            |
-| Dependency bumps: eslint/prettier/fast-check/lucide-react/marked                              | ✅     | `9bc4236`                                                                |
-| Dependency bumps: tailwindcss/lucide-react/marked/prettier/lint-staged                        | ✅     | `2bc8417`                                                                |
-| Silent failure audit (6 fixes)                                                                | ✅     | `a0fc33d`                                                                |
-| Animation timing polish                                                                       | ✅     | `300dc11`                                                                |
-| Size-limit budgets                                                                            | ✅     | `352ae41`                                                                |
-| EN/ES page dedup (blog, quality, projects)                                                    | ✅     | `0fd5e01`, `c86893f`, `e2d1def`                                          |
-| JSON-LD dedup                                                                                 | ✅     | `832dfd2`                                                                |
-| **lint-staged** → **17.1.0**, **typescript** 5.9.3 → **6.0.3**, **lucide-react** → **1.25.0** | ✅     | `5b8580a`, `2bc8417`                                                     |
-| **eslint 9 → 10** (currently 10.7.0, compatible with eslint-config-next 16)                   | ✅     | Lint clean                                                               |
-| **@types/node** pin caught up (was 22.x, latest available at the time)                        | ✅     | Bumped to `^25`, then `26.1.1` — no longer lagging                       |
-| Bundle chunk — lazy-loaded Three.js                                                           | ✅     | Within size budget                                                       |
-| npm audit — prod dependencies clean                                                           | ✅     | `npm audit --omit=dev` → 0 vulnerabilities                               |
+| Item                                                                                          | Status | Notes                                                                     |
+| --------------------------------------------------------------------------------------------- | ------ | ------------------------------------------------------------------------- |
+| 8 stale dated audit docs in `docs/internal/` consolidated into one archive                    | ✅     | See `AUDIT_HISTORY.md` — public `/quality` audits under `docs/` untouched |
+| Content credibility pass — removed unverifiable projects/rhetoric/metrics                     | ✅     | `10bc991`, `4a3a85c`, `23cf13f`, resume PDF genericized `33b5341`         |
+| Manifesto/bridge sections removed from homepage                                               | ✅     | `4c99c49`                                                                 |
+| E2E visual baselines de-flaked (no live GitHub API dependency)                                | ✅     | `bcfaecb`, `a18ce48`, `d550134`, `04b7131`                                |
+| Skip-nav target — `id` added to every page `<main>`                                           | ✅     | `051ccc4`                                                                 |
+| Formspree ID baked into e2e build artifact                                                    | ✅     | `60ff96b`                                                                 |
+| CI Node matrix split (22.x full suite / 24.x compat-only check)                               | ✅     | Already in `ci.yml` — halves redundant work vs. running everything twice  |
+| TypeDoc generation isolated to `deploy.yml` only, not in `ci.yml`                             | ✅     | Confirmed current `ci.yml` has no `docs` step                             |
+| Dependency bumps: eslint/prettier/fast-check/lucide-react/marked                              | ✅     | `9bc4236`                                                                 |
+| Dependency bumps: tailwindcss/lucide-react/marked/prettier/lint-staged                        | ✅     | `2bc8417`                                                                 |
+| Silent failure audit (6 fixes)                                                                | ✅     | `a0fc33d`                                                                 |
+| Animation timing polish                                                                       | ✅     | `300dc11`                                                                 |
+| Size-limit budgets                                                                            | ✅     | `352ae41`                                                                 |
+| EN/ES page dedup (blog, quality, projects)                                                    | ✅     | `0fd5e01`, `c86893f`, `e2d1def`                                           |
+| JSON-LD dedup                                                                                 | ✅     | `832dfd2`                                                                 |
+| **lint-staged** → **17.1.0**, **typescript** 5.9.3 → **6.0.3**, **lucide-react** → **1.25.0** | ✅     | `5b8580a`, `2bc8417`                                                      |
+| **eslint 9 → 10** (currently 10.7.0, compatible with eslint-config-next 16)                   | ✅     | Lint clean                                                                |
+| **@types/node** pin caught up (was 22.x, latest available at the time)                        | ✅     | Bumped to `^25`, then `26.1.1` — no longer lagging                        |
+| Bundle chunk — lazy-loaded Three.js                                                           | ✅     | Within size budget                                                        |
+| npm audit — prod dependencies clean                                                           | ✅     | `npm audit --omit=dev` → 0 vulnerabilities                                |
 
 ## High Priority
 
