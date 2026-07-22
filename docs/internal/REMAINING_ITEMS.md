@@ -90,8 +90,21 @@ All are dev-tooling-only, never shipped to production:
 
 ## Medium Priority
 
-_(none currently tracked — the two items previously here, TypeDoc-in-CI and the Node matrix,_
-_are already resolved; see Recently Resolved.)_
+### 1. JS bundle budget headroom — 715 kB / 800 kB (~89% used, ~85 kB free)
+
+Reviewed 2026-07-22. Breakdown of the largest chunks (gzip):
+
+| Chunk                        | Size (gzip)                 | What it is                                                                                                                                                                                                                |
+| ---------------------------- | --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Three.js / react-three-fiber | ~231 kB                     | WebGL topology background — lazy-loaded via `TopologyLoader`, not in any route's initial HTML                                                                                                                             |
+| Two near-identical chunks    | ~50 kB each (~100 kB total) | Both contain the exact same components — `QualityDashboard`, `ResumeTimeline`, `BlogList`, `ProjectDetail`, `AuditDetailContent`, `SectionHeader`, etc. — duplicated rather than shared between the EN and ES route trees |
+
+The duplicate pair is the actionable finding: Turbopack appears to be emitting a separate copy
+of shared page components per locale route tree instead of one common chunk. Deduplicating
+would reclaim ~50 kB (headroom 85 kB → ~135 kB) but requires digging into Turbopack/Next.js
+static-export chunk-splitting behavior — not a quick fix, and not yet investigated. Not urgent
+at current headroom; revisit if a future dependency addition pushes the budget closer to the
+800 kB ceiling.
 
 ## Low Priority
 
