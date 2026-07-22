@@ -33,23 +33,19 @@ export const INTERACTIVE_COMMANDS: Record<string, string> = {
 export interface BootCommand {
   text: string
   output: string
-  delay?: number
 }
 
 export const BOOT_COMMANDS: readonly BootCommand[] = [
   {
     text: 'whoami',
     output: 'jonathan.verdun — QA Automation Engineer',
-    delay: 500,
   },
   {
     text: 'ls projects',
     output: LS_PROJECTS_OUTPUT,
-    delay: 700,
   },
   {
     text: 'help',
     output: INTERACTIVE_COMMANDS.help!,
-    delay: 600,
   },
 ]

@@ -11,7 +11,6 @@ jest.mock('@/components/hooks/useTerminal', () => ({
       { text: 'boot', output: 'ready' },
       { text: 'ls', output: 'file.txt' },
     ],
-    isBooting: false,
     execute: jest.fn(),
     navigateHistory: jest.fn((_, input: string) => input),
   })),
