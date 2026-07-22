@@ -4,7 +4,7 @@ import { Terminal } from '@/components/Terminal'
 
 describe('Terminal', () => {
   it('renders boot commands in the output log', async () => {
-    render(<Terminal commands={[{ text: 'whoami', output: 'Jonathan Verdun' }]} />)
+    render(<Terminal commands={[{ text: 'whoami', output: 'Jonathan Verdun', delay: 10 }]} />)
     expect(await screen.findByText('whoami')).toBeInTheDocument()
     expect(await screen.findByText('Jonathan Verdun')).toBeInTheDocument()
   })
@@ -14,10 +14,28 @@ describe('Terminal', () => {
     expect(screen.getByRole('log')).toHaveAttribute('aria-label', 'Terminal output')
   })
 
-  it('input is enabled immediately, with no boot delay gating it', () => {
-    render(<Terminal commands={[{ text: 'whoami', output: 'gestalt' }]} />)
+  it('shows the input field only after boot completes', async () => {
+    render(<Terminal commands={[]} />)
+    // Input is absent while isBooting — it appears once the 500ms finish timer fires
+    const input = await screen.findByRole('textbox', { name: /terminal command input/i })
+    expect(input).toBeInTheDocument()
+  })
+
+  it('ignores keyboard input while booting', async () => {
+    const mockProcessor = { process: jest.fn(() => ({ output: '' })) }
+    // Use a long delay so it stays in booting state during the test
+    render(
+      <Terminal
+        commands={[{ text: 'whoami', output: 'gestalt', delay: 1000 }]}
+        processor={mockProcessor}
+      />
+    )
     const input = screen.getByRole('textbox', { name: /terminal command input/i })
-    expect(input).not.toBeDisabled()
+
+    // Manually trigger Enter key on the input
+    fireEvent.keyDown(input, { key: 'Enter', code: 'Enter', charCode: 13 })
+
+    expect(mockProcessor.process).not.toHaveBeenCalled()
   })
 
   it('submitting a command via Enter appends it to history with processor output', async () => {
@@ -33,7 +51,7 @@ describe('Terminal', () => {
 
   it('typing "clear" resets history — prior boot output disappears', async () => {
     const user = userEvent.setup({ delay: null })
-    render(<Terminal commands={[{ text: 'whoami', output: 'gestalt' }]} />)
+    render(<Terminal commands={[{ text: 'whoami', output: 'gestalt', delay: 10 }]} />)
     const input = await screen.findByRole('textbox', { name: /terminal command input/i })
     await waitFor(() => expect(input).not.toBeDisabled())
     await user.type(input, 'clear{Enter}')
@@ -42,7 +60,7 @@ describe('Terminal', () => {
   })
 
   it('Ctrl+L keyboard shortcut clears history', async () => {
-    render(<Terminal commands={[{ text: 'whoami', output: 'gestalt' }]} />)
+    render(<Terminal commands={[{ text: 'whoami', output: 'gestalt', delay: 10 }]} />)
     const input = await screen.findByRole('textbox', { name: /terminal command input/i })
     await waitFor(() => expect(input).not.toBeDisabled())
 

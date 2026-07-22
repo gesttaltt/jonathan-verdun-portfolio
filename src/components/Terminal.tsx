@@ -37,7 +37,10 @@ export const Terminal: React.FC<TerminalProps> = ({
   const [fallbackProcessor] = useState<ICommandProcessor>(() => new DefaultCommandProcessor())
   const activeProcessor = processor ?? fallbackProcessor
 
-  const { history, execute, navigateHistory, currentPath } = useTerminal(commands, activeProcessor)
+  const { history, isBooting, execute, navigateHistory, currentPath } = useTerminal(
+    commands,
+    activeProcessor
+  )
   const [inputVal, setInputVal] = useState('')
   const scrollRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
@@ -47,9 +50,11 @@ export const Terminal: React.FC<TerminalProps> = ({
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight
     }
-  }, [history])
+  }, [history, isBooting])
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (isBooting) return
+
     if (e.key === 'Enter') {
       execute(inputVal)
       setInputVal('')
@@ -70,7 +75,7 @@ export const Terminal: React.FC<TerminalProps> = ({
       role="group"
       data-testid="terminal-bash"
       className={`border-border-subtle light:bg-bg-card light:text-text-primary flex w-full max-w-full flex-col overflow-hidden rounded-2xl border bg-black/80 font-mono text-xs shadow-2xl backdrop-blur-lg md:text-sm lg:text-base ${className}`}
-      onClick={() => inputRef.current?.focus()}
+      onClick={() => !isBooting && inputRef.current?.focus()}
     >
       <div className="border-border-subtle light:bg-bg-badge flex shrink-0 items-center justify-between border-b bg-white/5 px-4 py-2">
         <div className="flex gap-1.5">
@@ -82,7 +87,9 @@ export const Terminal: React.FC<TerminalProps> = ({
           {title}
           <div className="relative flex h-2 w-2">
             <div className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-500/40 opacity-75"></div>
-            <div className="relative inline-flex h-2 w-2 rounded-full bg-green-500/80"></div>
+            <div
+              className={`relative inline-flex h-2 w-2 rounded-full ${isBooting ? 'bg-amber-500/80' : 'bg-green-500/80'}`}
+            ></div>
           </div>
         </div>
         <div className="w-12"></div>
@@ -96,6 +103,7 @@ export const Terminal: React.FC<TerminalProps> = ({
         role="log"
         aria-label="Terminal output"
         aria-live="polite"
+        aria-busy={isBooting}
         tabIndex={0}
         className="custom-scrollbar relative h-[240px] w-full overflow-x-hidden overflow-y-auto p-4 focus:outline-none sm:h-[280px] md:h-[400px] md:p-6"
       >
@@ -117,17 +125,20 @@ export const Terminal: React.FC<TerminalProps> = ({
           ))}
         </div>
 
-        <div className="flex items-center gap-2 pt-2">
+        <div
+          className={`flex items-center gap-2 pt-2 transition-opacity duration-300 ${isBooting ? 'pointer-events-none opacity-0' : 'opacity-100'}`}
+        >
           <PromptLabel prompt={prompt} currentPath={currentPath} />
           <div className="relative min-w-0 flex-grow">
             <input
               ref={inputRef}
               type="text"
               value={inputVal}
+              disabled={isBooting}
               onChange={(e) => setInputVal(e.target.value)}
               onKeyDown={handleKeyDown}
               /* font-size ≥ 16px on mobile prevents iOS Safari from zooming the viewport on focus */
-              className="light:text-text-primary text-text-primary placeholder:text-text-muted w-full bg-transparent text-base outline-none sm:text-xs md:text-sm lg:text-base"
+              className="light:text-text-primary text-text-primary placeholder:text-text-muted w-full bg-transparent text-base outline-none disabled:cursor-not-allowed sm:text-xs md:text-sm lg:text-base"
               aria-label="Terminal command input"
               aria-describedby="terminal-hint"
               inputMode="text"

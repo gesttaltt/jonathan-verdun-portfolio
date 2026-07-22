@@ -334,9 +334,9 @@ export const es: Translations = {
     prompt: 'gestalt@portafolio:',
     helpCmd: 'ayuda',
     boot: [
-      { text: 'whoami', output: 'jonathan.verdun — Ingeniero de Automatización QA' },
-      { text: 'ls proyectos', output: esLsOutput },
-      { text: 'ayuda', output: ES_HELP_OUTPUT },
+      { text: 'whoami', output: 'jonathan.verdun — Ingeniero de Automatización QA', delay: 500 },
+      { text: 'ls proyectos', output: esLsOutput, delay: 700 },
+      { text: 'ayuda', output: ES_HELP_OUTPUT, delay: 600 },
     ],
     interactive: {
       ayuda: ES_HELP_OUTPUT,

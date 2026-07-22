@@ -15,21 +15,45 @@ describe('useTerminal', () => {
   beforeEach(() => jest.useFakeTimers())
   afterEach(() => jest.useRealTimers())
 
-  it('starts with history already populated from initialCommands (no boot delay)', () => {
+  it('starts in booting state with empty history', () => {
+    const { result } = renderHook(() => useTerminal([], makeProcessor()))
+    expect(result.current.isBooting).toBe(true)
+    expect(result.current.history).toHaveLength(0)
+  })
+
+  it('replays boot commands sequentially using accumulated delays', () => {
     const commands = [
-      { text: 'whoami', output: 'gestalt' },
-      { text: 'ls', output: 'file.txt' },
+      { text: 'whoami', output: 'gestalt', delay: 100 },
+      { text: 'ls', output: 'file.txt', delay: 200 },
     ]
     const { result } = renderHook(() => useTerminal(commands, makeProcessor()))
 
-    expect(result.current.history).toHaveLength(2)
+    act(() => {
+      jest.advanceTimersByTime(100)
+    })
+    expect(result.current.history).toHaveLength(1)
     expect(result.current.history[0]!.text).toBe('whoami')
+
+    act(() => {
+      jest.advanceTimersByTime(200)
+    })
+    expect(result.current.history).toHaveLength(2)
     expect(result.current.history[1]!.text).toBe('ls')
   })
 
-  it('starts with empty history when initialCommands is empty', () => {
-    const { result } = renderHook(() => useTerminal([], makeProcessor()))
-    expect(result.current.history).toHaveLength(0)
+  it('marks isBooting false 500ms after the last command fires', () => {
+    const commands = [{ text: 'boot', output: 'ok', delay: 100 }]
+    const { result } = renderHook(() => useTerminal(commands, makeProcessor()))
+
+    act(() => {
+      jest.advanceTimersByTime(100 + 499)
+    })
+    expect(result.current.isBooting).toBe(true)
+
+    act(() => {
+      jest.advanceTimersByTime(1)
+    })
+    expect(result.current.isBooting).toBe(false)
   })
 
   it('execute() appends a user entry with processor output', () => {
@@ -92,16 +116,30 @@ describe('useTerminal', () => {
     expect(result.current.currentPath).toBe('/docs')
   })
 
-  it('execute("clear") empties a history pre-populated from initialCommands', () => {
+  it('stops boot sequence and clears timeouts when execute("clear") is called during boot', () => {
     const commands = [
-      { text: 'cmd1', output: 'out1' },
-      { text: 'cmd2', output: 'out2' },
+      { text: 'cmd1', output: 'out1', delay: 100 },
+      { text: 'cmd2', output: 'out2', delay: 100 },
     ]
     const { result } = renderHook(() => useTerminal(commands, makeProcessor()))
-    expect(result.current.history).toHaveLength(2)
 
+    // Advance to first command
+    act(() => {
+      jest.advanceTimersByTime(100)
+    })
+    expect(result.current.history).toHaveLength(1)
+    expect(result.current.isBooting).toBe(true)
+
+    // Clear during boot
     act(() => {
       result.current.execute('clear')
+    })
+    expect(result.current.history).toHaveLength(0)
+    expect(result.current.isBooting).toBe(false)
+
+    // Advance time further — no more boot commands should appear
+    act(() => {
+      jest.advanceTimersByTime(500)
     })
     expect(result.current.history).toHaveLength(0)
   })
@@ -136,6 +174,45 @@ describe('useTerminal', () => {
 
     expect(result.current.history).toHaveLength(0)
     expect(processor.process).not.toHaveBeenCalled()
+  })
+
+  it('uses the 800ms fallback when a command has no delay (undefined)', () => {
+    // delay ?? 800: undefined triggers the fallback; 0 does not.
+    const commands = [{ text: 'boot', output: 'ok' }]
+    const { result } = renderHook(() => useTerminal(commands, makeProcessor()))
+
+    act(() => {
+      jest.advanceTimersByTime(799)
+    })
+    expect(result.current.history).toHaveLength(0)
+
+    act(() => {
+      jest.advanceTimersByTime(1)
+    })
+    expect(result.current.history).toHaveLength(1)
+    expect(result.current.history[0]!.text).toBe('boot')
+  })
+
+  it('fires immediately when a command has delay: 0', () => {
+    // delay ?? 800: 0 is a valid delay — command fires at position 0ms in the sequence.
+    const commands = [{ text: 'instant', output: 'ok', delay: 0 }]
+    const { result } = renderHook(() => useTerminal(commands, makeProcessor()))
+
+    act(() => {
+      jest.advanceTimersByTime(0)
+    })
+    expect(result.current.history).toHaveLength(1)
+    expect(result.current.history[0]!.text).toBe('instant')
+  })
+
+  it('clears all pending timeouts on unmount', () => {
+    const spy = jest.spyOn(global, 'clearTimeout')
+    const commands = [{ text: 'cmd', output: 'out', delay: 500 }]
+    const { unmount } = renderHook(() => useTerminal(commands, makeProcessor()))
+
+    unmount()
+    expect(spy).toHaveBeenCalled()
+    spy.mockRestore()
   })
 
   it('updates currentPath on vfs_update signal', () => {
@@ -278,7 +355,7 @@ describe('useTerminal — command history navigation', () => {
       result.current.execute('second')
     })
     // Navigate to newest
-    result.current.navigateHistory('up', '') // → 'second'
+    result.current.navigateHistory('up', '')        // → 'second'
     // Navigate to oldest
     result.current.navigateHistory('up', 'second') // → 'first'
     // Press ArrowUp again — should clamp at 'first', not wrap

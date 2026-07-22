@@ -143,7 +143,7 @@ export interface Translations {
     title: string
     prompt: string
     helpCmd: string
-    boot: readonly { text: string; output: string }[]
+    boot: readonly { text: string; output: string; delay?: number }[]
     interactive: Record<string, string>
   }
 }

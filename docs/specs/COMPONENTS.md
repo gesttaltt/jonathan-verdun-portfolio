@@ -95,7 +95,7 @@ export const useProjects = () => {
 | `prompt`    | `string`                                    | `TERMINAL_PROMPT`               |
 | `hintCmd`   | `string`                                    | `'help'`                        |
 
-**Hook:** `useTerminal(initialCommands, processor)` returns `{ history, execute, navigateHistory, currentPath }`. `history: CommandEntry[]` is seeded synchronously from `initialCommands` (present on first render, including the static-export HTML — no boot-typing delay competing with LCP); `execute(input)` routes to `processor.process(cmd)`; `navigateHistory('up' | 'down', currentInput)` implements arrow-key command recall.
+**Hook:** `useTerminal(initialCommands, processor)` returns `{ history, isBooting, execute, navigateHistory, currentPath }`. `history: CommandEntry[]`; `execute(input)` routes to `processor.process(cmd)`; `navigateHistory('up' | 'down', currentInput)` implements arrow-key command recall.
 
 Terminal itself has no knowledge of which commands exist — that lookup lives entirely in the injected `processor`.
 

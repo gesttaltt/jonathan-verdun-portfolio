@@ -1,10 +1,11 @@
-import { useState, useCallback, useRef } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { ICommandProcessor } from '@/lib/services/CommandProcessor'
 
 export interface CommandEntry {
   id?: string
   text: string
   output: string
+  delay?: number
   isUser?: boolean
 }
 
@@ -12,22 +13,53 @@ export const useTerminal = (
   initialCommands: readonly CommandEntry[] | CommandEntry[],
   processor: ICommandProcessor
 ) => {
-  // Boot commands are seeded into history synchronously (not via a post-mount
-  // effect + timers) so they're part of the very first render — including the
-  // static-export HTML — instead of appearing only after client JS hydrates.
-  // A prior version typed them in progressively; that made the hero terminal's
-  // text the LCP element wait on client-side timers, adding seconds to LCP.
-  const [history, setHistory] = useState<CommandEntry[]>(() =>
-    initialCommands.map((cmd, index) => ({ ...cmd, id: String(index), isUser: false }))
-  )
+  const [history, setHistory] = useState<CommandEntry[]>([])
+  const [isBooting, setIsBooting] = useState(true)
   const [currentPath, setCurrentPath] = useState('/')
-  const idCounter = useRef(initialCommands.length)
+  // Capture commands once at mount so the boot sequence never re-runs on re-renders.
+  const initialRef = useRef(initialCommands)
+  const idCounter = useRef(0)
   const nextId = () => String(idCounter.current++)
+  const bootTimeoutsRef = useRef<NodeJS.Timeout[]>([])
 
   // Command history for Up/Down navigation — refs to avoid triggering re-renders.
   const commandHistoryRef = useRef<string[]>([])
   const historyIndexRef = useRef(-1) // -1 = at the live prompt, ≥0 = browsing history
   const draftRef = useRef('') // input saved before first ArrowUp press
+
+  const stopBooting = useCallback(() => {
+    bootTimeoutsRef.current.forEach(clearTimeout)
+    bootTimeoutsRef.current = []
+    setIsBooting(false)
+  }, [])
+
+  useEffect(() => {
+    const commands = initialRef.current
+    let currentDelay = 0
+
+    const boot = () => {
+      for (const cmd of commands) {
+        const delay = cmd.delay ?? 800
+        currentDelay += delay
+        const id = nextId()
+        const timeout = setTimeout(() => {
+          setHistory((prev) => [...prev, { ...cmd, id, isUser: false }])
+        }, currentDelay)
+        bootTimeoutsRef.current.push(timeout)
+      }
+
+      const finishTimeout = setTimeout(() => {
+        setIsBooting(false)
+      }, currentDelay + 500)
+      bootTimeoutsRef.current.push(finishTimeout)
+    }
+
+    boot()
+    return () => {
+      bootTimeoutsRef.current.forEach(clearTimeout)
+      bootTimeoutsRef.current = []
+    }
+  }, [])
 
   // Returns the new input value after moving through history; caller owns setInputVal.
   const navigateHistory = useCallback((direction: 'up' | 'down', currentInput: string): string => {
@@ -62,6 +94,7 @@ export const useTerminal = (
       const response = processor.process(cmd)
 
       if (response.signal === 'clear') {
+        stopBooting()
         setHistory([])
         return
       }
@@ -84,8 +117,8 @@ export const useTerminal = (
 
       setHistory((prev) => [...prev, newEntry])
     },
-    [processor]
+    [processor, stopBooting]
   )
 
-  return { history, execute, navigateHistory, currentPath }
+  return { history, isBooting, execute, navigateHistory, currentPath }
 }
