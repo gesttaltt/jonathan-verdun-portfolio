@@ -10,7 +10,7 @@ const config = {
   testPathIgnorePatterns: ['/node_modules/', '<rootDir>/e2e/'],
   testEnvironment: 'jest-environment-jsdom',
   transformIgnorePatterns: [
-    '/node_modules/(?!(marked|@react-three/postprocessing|postprocessing|maath|n8ao)/)',
+    '/node_modules/(?!(marked|@react-three/postprocessing|postprocessing|maath|n8ao|sanitize-html|htmlparser2|domelementtype|domhandler|dom-serializer|domutils|entities|escape-string-regexp)/)',
   ],
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',

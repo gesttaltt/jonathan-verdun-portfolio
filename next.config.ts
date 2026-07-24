@@ -39,6 +39,19 @@ const nextConfig: NextConfig = {
   trailingSlash: true,
   basePath,
   reactCompiler: true,
+  // sanitize-html@2.17.6 nests an ESM-only htmlparser2 build; without this,
+  // both webpack/Turbopack and next/jest's derived transformIgnorePatterns
+  // treat it as untranspiled node_modules and choke on the bare `import`.
+  transpilePackages: [
+    'sanitize-html',
+    'htmlparser2',
+    'domelementtype',
+    'domhandler',
+    'dom-serializer',
+    'domutils',
+    'entities',
+    'escape-string-regexp',
+  ],
   experimental: {
     optimizePackageImports: ['lucide-react', 'framer-motion', 'three', '@react-three/fiber'],
   },
