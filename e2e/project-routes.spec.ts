@@ -34,7 +34,7 @@ test.describe('Project Detail Pages', () => {
     await page.goto('/')
     await expect(page.getByRole('heading', { level: 1 })).toContainText('Jonathan Verdun')
 
-    await page.goto('/projects/functionome-atlas')
+    await page.goto('/projects/gene-functional-pipeline')
     await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
 
     await page.goBack()
