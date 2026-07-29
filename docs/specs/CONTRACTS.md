@@ -39,14 +39,15 @@ interface ProjectSpec {
 
 ### Data (`ProjectContract.ts`)
 
-`PROJECT_DATA: ProjectSpec[]` — 4 entries. `ProjectService.getProjects()` returns the static array; nothing else consumes `PROJECT_DATA` directly (see `services/ProjectRepository.ts` below).
+`PROJECT_DATA: ProjectSpec[]` — 5 entries. `ProjectService.getProjects()` returns the static array; nothing else consumes `PROJECT_DATA` directly (see `services/ProjectRepository.ts` below).
 
-| ID        | Title                    | Status   |
-| --------- | ------------------------ | -------- |
-| `proj-01` | QA Arxiv Mobile          | QA       |
-| `proj-07` | Portfolio QA Hardened    | QA       |
-| `proj-04` | 3-Adic ML Engine         | Research |
-| `proj-03` | Gene Functional Pipeline | Research |
+| ID        | Title                     | Status   |
+| --------- | ------------------------- | -------- |
+| `proj-01` | QA Arxiv Mobile           | QA       |
+| `proj-07` | Portfolio QA Hardened     | QA       |
+| `proj-08` | QA API & Contract Testing | QA       |
+| `proj-04` | 3-Adic ML Engine          | Research |
+| `proj-03` | Gene Functional Pipeline  | Research |
 
 ---
 

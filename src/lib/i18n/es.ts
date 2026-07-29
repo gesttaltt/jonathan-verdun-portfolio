@@ -90,6 +90,19 @@ const ES_PROJECT_OVERRIDES: Record<
     architecture:
       'Exportación estática en Next.js 16 App Router. Separación SOLID: contratos poseen datos, servicios poseen lógica, componentes poseen presentación. Tres capas de prueba — Jest, Playwright, Lighthouse CI. WebGL tiene failover de 3s a gradiente CSS.',
   },
+  'proj-08': {
+    description:
+      '19 pruebas de API con Playwright contra una API REST de terceros en vivo (restful-booker), con cada respuesta validada contra un schema de zod en vez de un par de campos verificados al voleo. Documenta 6 rarezas reales de la API — códigos de estado incorrectos, corrupción silenciosa de tipos, sin validación del lado del servidor — como tests explícitos en vez de ocultarlas.',
+    statLabels: ['Pruebas', 'Rarezas Documentadas'],
+    highlights: [
+      'Cada respuesta validada contra un schema de zod — no solo campos verificados al voleo',
+      'El test de contrato muestrea datos ya existentes en el servidor, no solo fixtures propias, para detectar drift real',
+      'Ciclo de vida CRUD completo (crear/leer/PUT/PATCH/eliminar, con verificación de 404 posterior) verificado de punta a punta',
+      'Seis rarezas de la API documentadas — códigos de estado inconsistentes, corrupción silenciosa de datos, validación de reglas de negocio ausente — asertadas directamente, no ocultadas',
+    ],
+    architecture:
+      'Testing de API con el contexto request de Playwright (sin browser) y una capa de contrato con zod. Un patrón "API Object" (BookingClient, AuthClient) espeja los Page Objects del suite de UI complementario. Todo test de escritura que crea datos los limpia después — la limpieza misma se assertea, no es fire-and-forget, porque apunta a una API pública compartida.',
+  },
   'proj-04': {
     description:
       'Pipeline de ML con suite de 280 pruebas que cubre la correctitud del VAE e invariantes geométricos (ARI 0.844). VAEs duales en geometría de bola de Poincaré, con jerarquía impuesta por valuación 3-ádica — no memorización.',

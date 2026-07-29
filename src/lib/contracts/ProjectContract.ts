@@ -76,6 +76,29 @@ export const PROJECT_DATA: ProjectSpec[] = [
     ],
   },
   {
+    id: 'proj-08',
+    title: 'QA API & Contract Testing',
+    description:
+      '19 Playwright API tests against a live third-party REST API (restful-booker), every response validated against a zod schema instead of a couple of spot-checked fields. Documents 6 real API quirks — wrong status codes, silent type corruption, no server-side validation — as explicit tests instead of hiding them.',
+    techStack: ['Playwright', 'TypeScript', 'zod', 'GitHub Actions'],
+    link: 'https://github.com/gesttaltt/qa-api-testing',
+    status: 'QA',
+    specLink: '/quality/specs/TESTING',
+    stats: [
+      { label: 'Tests', value: '19' },
+      { label: 'Documented Quirks', value: '6' },
+    ],
+    highlights: [
+      'Every response validated against a zod schema — not just spot-checked fields',
+      "Contract test samples the server's own pre-existing data, not just self-created fixtures, to catch real drift",
+      'Full CRUD lifecycle (create/read/PUT/PATCH/delete, then a follow-up 404 check) verified end-to-end',
+      'Six documented API quirks — inconsistent status codes, silent data corruption, missing business-rule validation — asserted directly, not hidden',
+    ],
+    architecture:
+      'Playwright request-context API testing (no browser) with a zod-schema contract layer. An "API Object" pattern (BookingClient, AuthClient) mirrors the Page Objects from the companion UI suite. Every write test that creates data cleans it up afterward — the cleanup call itself is asserted, not fire-and-forgotten, since it targets a shared public demo API.',
+    links: [{ label: 'CI Pipeline', url: 'https://github.com/gesttaltt/qa-api-testing/actions' }],
+  },
+  {
     id: 'proj-04',
     title: '3-Adic ML Engine',
     description:
