@@ -48,7 +48,14 @@ jobs:
 
       - name: Security audit
         if: matrix.node-version == '22.x'
-        run: npm audit --audit-level=high
+        # --omit=dev: this is a static export (output: 'export'), so
+        # devDependencies (jest, eslint-config-next, @lhci/cli, ...) never ship
+        # to the deployed site. A plain `npm audit` flags every advisory in
+        # those build/test-only trees too, which breaks CI on new CVEs in
+        # tooling with zero production exposure — not a code regression, just
+        # noise. Dependabot (dependabot.yml + repo vulnerability alerts) still
+        # tracks and proposes fixes for the dev-only tree independently.
+        run: npm audit --omit=dev --audit-level=high
 
       - name: Type checking
         run: npm run check-types
