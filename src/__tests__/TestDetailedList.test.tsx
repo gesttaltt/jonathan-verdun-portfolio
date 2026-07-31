@@ -1,5 +1,7 @@
 import { render, screen } from '@testing-library/react'
+import { I18nProvider } from '@/lib/i18n/context'
 import { TestDetailedList } from '@/components/TestDetailedList'
+import { setMockPathname } from '../../jest.setup'
 
 // Mock coverage.json
 const mockCoverageData = {
@@ -65,5 +67,17 @@ describe('TestDetailedList', () => {
     render(<TestDetailedList />)
 
     expect(screen.getByText('unknown')).toBeInTheDocument()
+  })
+
+  it('renders translated Spanish title and assertions label under /es', () => {
+    setMockPathname('/es/quality')
+    render(
+      <I18nProvider>
+        <TestDetailedList />
+      </I18nProvider>
+    )
+
+    expect(screen.getByText('Módulos y Componentes Verificados')).toBeInTheDocument()
+    expect(screen.getByText('2 aserciones')).toBeInTheDocument()
   })
 })

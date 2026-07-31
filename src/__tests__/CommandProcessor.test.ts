@@ -48,6 +48,20 @@ describe('DefaultCommandProcessor', () => {
     expect(response.payload).toContain('mailto:')
   })
 
+  it('uses the Spanish translation for "contacto" instead of the English default', () => {
+    const esCommands: Record<string, string> = {
+      contacto: 'Contáctame por LinkedIn o GitHub enlazados arriba.',
+      emailClientOpening: 'Abriendo cliente de correo...',
+    }
+    const esProcessor = new DefaultCommandProcessor(esCommands, 'ayuda')
+    const response = esProcessor.process('contacto')
+    expect(response.output).toBe(
+      'Abriendo cliente de correo... Contáctame por LinkedIn o GitHub enlazados arriba.'
+    )
+    expect(response.signal).toBe('redirect')
+    expect(response.payload).toContain('mailto:')
+  })
+
   it('help output lists core commands', () => {
     const help = processor.process('help').output
     expect(help).toContain('projects')
@@ -74,9 +88,7 @@ describe('DefaultCommandProcessor', () => {
   })
 
   it('initializes project directories in the VFS from the projects list', () => {
-    const custom = new DefaultCommandProcessor(undefined, 'help', [
-      { title: 'Test Proj' },
-    ])
+    const custom = new DefaultCommandProcessor(undefined, 'help', [{ title: 'Test Proj' }])
     expect(custom.process('ls /projects').output).toContain('test-proj')
   })
 

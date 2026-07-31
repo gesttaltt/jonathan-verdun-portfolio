@@ -52,14 +52,14 @@ export const QualityDashboard: React.FC<QualityDashboardProps> = ({ audits }) =>
               <SearchIcon className="light:text-amber-800 mx-auto mb-2 h-5 w-5 text-amber-400" />
               <p className="text-text-primary text-xl font-bold">{chronologicalAudits.length}</p>
               <p className="text-text-tertiary text-[11px] font-black uppercase sm:text-xs">
-                Audits Published
+                {t.sections.qualityDashboard.auditsPublished}
               </p>
             </div>
             <div className="light:border-border-subtle light:bg-bg-badge/50 rounded-xl border border-white/5 bg-white/5 p-4 text-center">
               <ShieldCheck className="light:text-blue-800 mx-auto mb-2 h-5 w-5 text-blue-400" />
               <p className="text-text-primary text-xl font-bold">{handbookSpecs.length}</p>
               <p className="text-text-tertiary text-[11px] font-black uppercase sm:text-xs">
-                Architecture Specs
+                {t.sections.qualityDashboard.architectureSpecs}
               </p>
             </div>
           </div>
@@ -70,7 +70,7 @@ export const QualityDashboard: React.FC<QualityDashboardProps> = ({ audits }) =>
       {!searchQuery.trim() && (
         <section className="space-y-6">
           <h3 className="text-text-tertiary text-[11px] font-black tracking-widest uppercase sm:text-xs">
-            The QA Handbook — Architectural Specifications
+            {t.sections.qualityDashboard.handbookTitle}
           </h3>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {handbookSpecs.map((spec) => (
@@ -83,7 +83,7 @@ export const QualityDashboard: React.FC<QualityDashboardProps> = ({ audits }) =>
       <section className="space-y-8">
         <div className="light:border-border-subtle flex flex-col justify-between gap-4 border-b border-white/10 pb-6 sm:flex-row sm:items-end">
           <h3 className="text-text-tertiary text-[11px] font-black tracking-widest uppercase sm:text-xs">
-            Chronological Audit History
+            {t.sections.qualityDashboard.auditHistoryTitle}
           </h3>
 
           <div className="relative w-full max-w-sm">
@@ -99,7 +99,7 @@ export const QualityDashboard: React.FC<QualityDashboardProps> = ({ audits }) =>
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery('')}
-                aria-label={t.sections.searchPlaceholder + ' — clear'}
+                aria-label={`${t.sections.searchPlaceholder} — ${t.sections.qualityDashboard.clearSearchLabel}`}
                 className="text-text-tertiary absolute top-1/2 right-3 -translate-y-1/2 hover:text-white"
               >
                 <X className="h-4 w-4" />

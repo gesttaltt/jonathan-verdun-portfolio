@@ -1,7 +1,9 @@
 import { render, screen } from '@testing-library/react'
 import { domAnimation, LazyMotion, MotionConfig } from 'framer-motion'
+import { I18nProvider } from '@/lib/i18n/context'
 import { ProjectCard } from '@/components/ProjectCard'
 import type { ProjectSpec } from '@/lib/contracts/ProjectContract.types'
+import { setMockPathname } from '../../jest.setup'
 
 const baseProject: ProjectSpec = {
   id: 'proj-test',
@@ -116,5 +118,22 @@ describe('ProjectCard', () => {
   it('renders correct testid', () => {
     wrap({ ...baseProject, id: 'my-project' })
     expect(screen.getByTestId('project-card-my-project')).toBeInTheDocument()
+  })
+
+  it('locale-prefixes the QA spec link under /es so it stays in the Spanish route tree', () => {
+    setMockPathname('/es')
+    render(
+      <I18nProvider>
+        <LazyMotion features={domAnimation}>
+          <MotionConfig reducedMotion="always">
+            <ProjectCard project={{ ...baseProject, specLink: '/quality/specs/TESTING' }} />
+          </MotionConfig>
+        </LazyMotion>
+      </I18nProvider>
+    )
+    expect(screen.getByLabelText(/Ver especificación/i)).toHaveAttribute(
+      'href',
+      '/es/quality/specs/TESTING'
+    )
   })
 })

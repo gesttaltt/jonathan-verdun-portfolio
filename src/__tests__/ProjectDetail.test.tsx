@@ -74,6 +74,21 @@ describe('ProjectDetail', () => {
     expect(screen.getByText('Architecture')).toBeInTheDocument()
   })
 
+  it('locale-prefixes the QA spec link under /es so it stays in the Spanish route tree', () => {
+    setMockPathname('/es/projects/test')
+    render(
+      <I18nProvider>
+        <ProjectDetail projectId={existingProjectId} />
+      </I18nProvider>
+    )
+
+    const specLink = screen.getByRole('link', { name: /ver especificaciones qa/i })
+    expect(specLink).toHaveAttribute(
+      'href',
+      `/es${en.projects.find((p) => p.id === existingProjectId)?.specLink}`
+    )
+  })
+
   it('renders related links section when project has extra links', () => {
     render(
       <I18nProvider>

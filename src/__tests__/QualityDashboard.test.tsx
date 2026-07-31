@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event'
 import { QualityDashboard } from '@/components/QualityDashboard'
 import { I18nProvider } from '@/lib/i18n/context'
 import type { AuditEntry } from '@/lib/services/AuditRepository'
+import { setMockPathname } from '../../jest.setup'
 
 const mockAudits: AuditEntry[] = [
   {
@@ -114,4 +115,20 @@ describe('QualityDashboard', () => {
     expect(screen.getByText('1')).toBeInTheDocument()
     expect(screen.getByText('Architecture Specs')).toBeInTheDocument()
   })
+
+  it('renders fully translated Spanish labels under /es (no stray English strings)', async () => {
+    const user = userEvent.setup()
+    setMockPathname('/es/quality')
+    renderDashboard()
+
+    expect(screen.getByText('Auditorías Publicadas')).toBeInTheDocument()
+    expect(screen.getByText('Especificaciones de Arquitectura')).toBeInTheDocument()
+    expect(screen.getByText(/El Manual de QA/)).toBeInTheDocument()
+    expect(screen.getByText('Historial Cronológico de Auditorías')).toBeInTheDocument()
+
+    await user.type(screen.getByPlaceholderText('Buscar auditorías...'), 'x')
+    expect(
+      screen.getByLabelText('Buscar auditorías... — limpiar', { selector: 'button' })
+    ).toBeInTheDocument()
+  }, 3000)
 })

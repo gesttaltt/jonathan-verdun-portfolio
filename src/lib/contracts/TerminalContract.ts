@@ -22,6 +22,9 @@ export const INTERACTIVE_COMMANDS: Record<string, string> = {
     'Jonathan Verdun. QA engineer and test architect. Test plans, traceability matrices, property-based testing, and automation pipelines — quality gates enforced via pre-commit hooks, GitHub Actions CI, and coverage thresholds. Pursuing ISTQB Foundation certification.',
   projects: 'Check out the Projects section below, or type "ls projects" to see a list.',
   contact: 'Reach out via LinkedIn or GitHub linked above.',
+  // Not a real command — prefix text CommandProcessor prepends to the contact/email/contacto
+  // response, kept in this locale-aware map so it can be translated per language too.
+  emailClientOpening: 'Opening email client...',
   skills:
     'Primary stack: Next.js, TypeScript, Tailwind CSS, Three.js. Testing: pytest, Playwright, Appium, Jest, fast-check.',
   version: `v${siteConfig.versions.portfolio}-audit-hardened (Next.js ${siteConfig.versions.nextjs})`,

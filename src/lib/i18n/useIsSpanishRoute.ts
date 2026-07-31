@@ -1,4 +1,5 @@
 import { useSyncExternalStore } from 'react'
+import { siteConfig } from '../siteConfig'
 
 function subscribe() {
   // The pathname of a static error page never changes without a full
@@ -7,7 +8,8 @@ function subscribe() {
 }
 
 function getSnapshot() {
-  return window.location.pathname.startsWith('/es')
+  const pathname = window.location.pathname.slice(siteConfig.basePath.length)
+  return pathname.startsWith('/es')
 }
 
 function getServerSnapshot() {

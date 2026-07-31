@@ -77,7 +77,7 @@ export const SiteFooter: React.FC = () => {
           {/* Middle row: quick links */}
           <div className="border-border-subtle flex items-center gap-4 border-b py-5">
             <a
-              href="/docs/api/"
+              href={`${siteConfig.basePath}/docs/api/`}
               className="text-text-tertiary light:hover:text-text-primary rounded text-xs transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none"
             >
               API Docs
@@ -100,7 +100,7 @@ export const SiteFooter: React.FC = () => {
             </a>
             <span className="text-border-subtle text-white/20">·</span>
             <a
-              href="/sitemap.xml"
+              href={`${siteConfig.basePath}/sitemap.xml`}
               className="text-text-tertiary light:hover:text-text-primary rounded text-xs transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none"
             >
               Sitemap

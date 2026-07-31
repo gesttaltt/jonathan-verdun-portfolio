@@ -43,7 +43,7 @@ export const ResumeTimeline: React.FC<ResumeTimelineProps> = ({ hasResumePdf = f
         <div className="flex flex-wrap gap-3">
           {hasResumePdf && (
             <a
-              href="/resume-jonathan-verdun.pdf"
+              href={`${siteConfig.basePath}/resume-jonathan-verdun.pdf`}
               download
               className="light:bg-zinc-950 light:hover:bg-black light:text-white focus-visible:ring-offset-background group flex items-center gap-2 rounded-xl bg-white px-5 py-2.5 text-sm font-bold text-black transition-all hover:scale-[1.04] focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none active:scale-95"
             >

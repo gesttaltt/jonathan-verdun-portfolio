@@ -46,7 +46,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
           <div className="flex gap-2">
             {project.specLink && (
               <Link
-                href={project.specLink}
+                href={localizedHref(t.lang, project.specLink)}
                 aria-label={t.sections.projectCard.viewSpecAriaLabel.replace(
                   '{title}',
                   project.title

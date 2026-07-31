@@ -33,6 +33,15 @@ export const en: Translations = {
     traceabilityMatrix: 'Traceability Matrix',
     searchPlaceholder: 'Search audits...',
     noResults: 'No audits match your search query.',
+    qualityDashboard: {
+      auditsPublished: 'Audits Published',
+      architectureSpecs: 'Architecture Specs',
+      handbookTitle: 'The QA Handbook — Architectural Specifications',
+      auditHistoryTitle: 'Chronological Audit History',
+      clearSearchLabel: 'clear',
+      verifiedModulesTitle: 'Verified Modules & Components',
+      assertionsLabel: 'assertions',
+    },
     sidebar: {
       qualityGatesTitle: 'Engineering Quality Gates',
       constraintsTitle: 'Engineering Constraints',

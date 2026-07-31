@@ -200,7 +200,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ projectId }) => {
             )}
             {project.specLink && (
               <Link
-                href={project.specLink}
+                href={localizedHref(t.lang, project.specLink)}
                 className="text-text-tertiary hover:text-text-primary group flex items-center gap-2 rounded-xl border border-white/10 px-4 py-2.5 text-sm font-bold transition-all hover:border-blue-500/30"
               >
                 <ShieldCheck className="h-4 w-4 text-blue-400" />

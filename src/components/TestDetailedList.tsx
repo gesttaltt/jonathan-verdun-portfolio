@@ -3,8 +3,10 @@
 import React, { useMemo } from 'react'
 import { CheckCircle2, XCircle, Clock, FileCode } from 'lucide-react'
 import coverageData from '../../coverage.json'
+import { useTranslation } from '@/lib/i18n/context'
 
 export const TestDetailedList: React.FC = () => {
+  const t = useTranslation()
   const suites = useMemo(() => {
     return coverageData.testResults
       .map((suite) => {
@@ -28,7 +30,7 @@ export const TestDetailedList: React.FC = () => {
   return (
     <div className="space-y-4">
       <h3 className="text-text-tertiary text-sm font-bold tracking-widest uppercase">
-        Verified Modules & Components
+        {t.sections.qualityDashboard.verifiedModulesTitle}
       </h3>
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {suites.map((suite) => (
@@ -55,7 +57,9 @@ export const TestDetailedList: React.FC = () => {
                 <Clock className="h-3 w-3" />
                 {suite.duration.toFixed(2)}s
               </div>
-              <div>{suite.assertions} assertions</div>
+              <div>
+                {suite.assertions} {t.sections.qualityDashboard.assertionsLabel}
+              </div>
             </div>
           </div>
         ))}

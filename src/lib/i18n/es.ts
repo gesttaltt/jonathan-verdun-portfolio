@@ -236,6 +236,15 @@ export const es: Translations = {
     traceabilityMatrix: 'Matriz de Trazabilidad',
     searchPlaceholder: 'Buscar auditorías...',
     noResults: 'No se encontraron auditorías que coincidan con su búsqueda.',
+    qualityDashboard: {
+      auditsPublished: 'Auditorías Publicadas',
+      architectureSpecs: 'Especificaciones de Arquitectura',
+      handbookTitle: 'El Manual de QA — Especificaciones Arquitectónicas',
+      auditHistoryTitle: 'Historial Cronológico de Auditorías',
+      clearSearchLabel: 'limpiar',
+      verifiedModulesTitle: 'Módulos y Componentes Verificados',
+      assertionsLabel: 'aserciones',
+    },
     sidebar: {
       qualityGatesTitle: 'Garantía de Calidad',
       constraintsTitle: 'Restricciones de Ingeniería',
@@ -357,6 +366,7 @@ export const es: Translations = {
         'Soy Jonathan, ingeniero de QA construyendo gates de calidad deterministas — desde pruebas basadas en propiedades hasta pipelines de automatización. Endurecí sistemas en Ai-Whisperers; sigo cursando la certificación ISTQB.',
       proyectos: 'Ver la sección de Proyectos abajo, o escribe "ls proyectos" para ver la lista.',
       contacto: 'Contáctame por LinkedIn o GitHub enlazados arriba.',
+      emailClientOpening: 'Abriendo cliente de correo...',
       habilidades:
         'Stack principal: Next.js, TypeScript, Tailwind CSS, Three.js. Pruebas: pytest, Playwright, Appium, Jest, fast-check.',
       version: `v${siteConfig.versions.portfolio}-audit-hardened (Next.js ${siteConfig.versions.nextjs})`,

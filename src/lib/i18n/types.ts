@@ -34,6 +34,15 @@ export interface Translations {
     traceabilityMatrix: string
     searchPlaceholder: string
     noResults: string
+    qualityDashboard: {
+      auditsPublished: string
+      architectureSpecs: string
+      handbookTitle: string
+      auditHistoryTitle: string
+      clearSearchLabel: string
+      verifiedModulesTitle: string
+      assertionsLabel: string
+    }
     sidebar: {
       qualityGatesTitle: string
       constraintsTitle: string

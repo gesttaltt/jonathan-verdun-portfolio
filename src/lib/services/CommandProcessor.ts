@@ -86,8 +86,17 @@ export class DefaultCommandProcessor implements ICommandProcessor {
     }
 
     if (mainCmd === 'contacto' || mainCmd === 'email' || mainCmd === 'contact') {
+      // Locale-aware: this.commands is the caller's translated command map (en/es), so
+      // reading through it here (instead of a hardcoded English string) means the
+      // 'contacto'/'contact' translation actually gets used instead of being shadowed.
+      const contactText =
+        this.commands[mainCmd] ??
+        this.commands['contact'] ??
+        this.commands['contacto'] ??
+        'Reach out via LinkedIn or GitHub linked above.'
+      const prefix = this.commands['emailClientOpening'] ?? 'Opening email client...'
       return {
-        output: 'Opening email client... Reach out via LinkedIn or GitHub linked above.',
+        output: `${prefix} ${contactText}`,
         signal: 'redirect',
         payload: `mailto:jonathan.verdun707@gmail.com`,
       }
