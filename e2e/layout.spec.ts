@@ -32,20 +32,14 @@ test.describe('Layout Integrity & Viewports', () => {
         expect(isOverflowing, 'Page should not have horizontal scrollbar').toBe(false)
       })
 
-      test('sidebar should follow responsive visibility constraints', async ({ page }) => {
+      test('sidebar is always visible, stacked below the main column below the lg breakpoint', async ({
+        page,
+      }) => {
+        // PortfolioPage.tsx's grid is `grid-cols-1 ... lg:grid-cols-12` with no `hidden`
+        // class anywhere on the sidebar or its wrapper — below 1024px it isn't hidden,
+        // it's just reflowed into the single-column stack. True at every viewport here.
         const sidebar = page.locator('aside')
-
-        if (viewport.width < 1024) {
-          // On smaller screens, the sidebar should either be hidden or stacked
-          // (Current design stacks it or hides specific sub-elements)
-          // Adjust this assertion based on the specific implementation (e.g., hidden via CSS)
-          if (viewport.width < 768) {
-            // If fully hidden on mobile:
-            // await expect(sidebar).not.toBeVisible()
-          }
-        } else {
-          await expect(sidebar).toBeVisible()
-        }
+        await expect(sidebar).toBeVisible()
       })
 
       test('portfolio grid should maintain structural integrity', async ({ page }) => {

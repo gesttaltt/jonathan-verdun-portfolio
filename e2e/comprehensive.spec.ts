@@ -27,20 +27,18 @@ test.describe('Comprehensive Metadata & Interaction Audit', () => {
     await expect(canonical).toHaveAttribute('href', 'https://gesttaltt.github.io/es/')
   })
 
-  test('verifies terminal boot state and interruption', async ({ page }) => {
+  test('verifies terminal input is disabled during boot and enabled once boot completes', async ({
+    page,
+  }) => {
     await page.goto('/')
     const input = page.getByRole('textbox', { name: /terminal command input/i })
 
     // Should be disabled initially
     await expect(input).toBeDisabled()
 
-    // Typing 'clear' during boot should work and enable the input
-    // We use keyboard.type because the input is disabled, but our code-level guard
-    // is on handleKeyDown. Wait, if it's 'disabled' in HTML, user.type might fail.
-    // But we want to test that it handles 'clear' specifically.
-    // In our implementation, we enable it once booting is stopped.
-
-    // Let's wait for boot to finish normally first to verify 'enabled'
+    // Input stays disabled for the whole boot sequence — Terminal.tsx's handleKeyDown
+    // guards on isBooting, there's no way to interrupt it early — so this just waits
+    // for boot to finish normally and confirms the input becomes usable.
     await expect(input).toBeEnabled({ timeout: 15_000 })
 
     await input.fill('help')

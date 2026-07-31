@@ -21,10 +21,15 @@ test.describe('Audit Search Validation', () => {
       page.getByRole('heading', { name: 'Internationalization & Design System Audit — May 2026' })
     ).toBeVisible()
 
-    // Other audits should be hidden (we use popLayout AnimatePresence)
-    // We check that the count of visible cards has decreased
-    const filteredCards = await page.locator('.group.relative').count()
-    expect(filteredCards).toBeLessThan(initialCards)
+    // An unrelated audit must be filtered OUT. A raw card-count comparison here would
+    // be vacuous: QualityDashboard unconditionally unmounts the whole "handbook specs"
+    // section the moment the query is non-empty, so the count always drops regardless
+    // of whether the actual title/excerpt filter predicate does anything at all —
+    // asserting a specific non-matching title is absent is what actually proves the
+    // search filter, not just the handbook section, is doing its job.
+    await expect(
+      page.getByRole('heading', { name: 'QA Credibility & Positioning Audit — May 2026' })
+    ).not.toBeVisible()
   })
 
   test('shows "No results" message for unmatched query', async ({ page }) => {
@@ -105,10 +110,10 @@ test.describe('Offline Resilience (PWA)', () => {
       return 'timeout'
     })
 
-    if (swStatus !== 'ready') {
-      console.warn('Service Worker not ready, skipping offline check')
-      return
-    }
+    // A plain early `return` here would report this test as a green PASS having
+    // exercised zero of the offline assertions below — masking a real SW
+    // registration regression as success. Fail loudly with the actual status instead.
+    expect(swStatus, 'Service Worker did not reach "active" within the retry window').toBe('ready')
 
     // Warm up cache
     await page.goto('/es/')

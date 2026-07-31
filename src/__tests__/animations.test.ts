@@ -2,7 +2,6 @@ import {
   fadeUpVariants,
   fadeInVariants,
   containerVariants,
-  slideDownVariants,
   staggerItemVariants,
   DEFAULT_STAGGER,
   SCROLL_VIEWPORT,
@@ -70,17 +69,6 @@ describe('animations', () => {
       const v = staggerItemVariants(0.5)
       expect(typeof (v.visible as TargetAndTransition).transition?.delay).toBe('number')
       expect((v.visible as TargetAndTransition).transition?.delay).toBe(0.5)
-    })
-  })
-
-  describe('slideDownVariants', () => {
-    it('returns correct hidden state', () => {
-      expect(slideDownVariants.hidden).toEqual({ opacity: 0, y: -20 })
-    })
-
-    it('returns correct visible state', () => {
-      expect(typeof (slideDownVariants.visible as TargetAndTransition).opacity).toBe('number')
-      expect((slideDownVariants.visible as TargetAndTransition).opacity).toBe(1)
     })
   })
 

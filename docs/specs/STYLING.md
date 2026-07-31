@@ -59,10 +59,12 @@ Every Framer Motion variant used in the app is centralized here:
 | `fadeUpVariants(delay)`      | `Variants`                        | Fade + translate-Y up                                   |
 | `fadeInVariants`             | alias                             | Identical to `fadeUpVariants` — same function reference |
 | `containerVariants(stagger)` | `Variants`                        | Parent container, staggers children                     |
-| `slideDownVariants`          | `Variants`                        | Slide from top — used by the hero                       |
 | `staggerItemVariants(delay)` | `Variants`                        | Individual staggered child item                         |
 
-`staggerContainerVariants`, `staggerChildVariants`, and `floatVariants` do **not** exist — they were removed as unused dead code in an earlier cleanup pass; don't re-add them without a real call site.
+`staggerContainerVariants`, `staggerChildVariants`, `floatVariants`, and `slideDownVariants` do
+**not** exist — they were removed as unused dead code in cleanup passes (`slideDownVariants` had
+no real call site despite a stale comment claiming the hero used it); don't re-add them without
+a real call site.
 
 ---
 
