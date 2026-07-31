@@ -32,7 +32,10 @@ import type { NextConfig } from 'next'
 // BASE_PATH is set by the GitHub Actions configure-pages step.
 // Empty string = local dev.
 // /repo-name = GitHub project page (e.g. gesttaltt.github.io/jonathan-verdun-portfolio).
-const basePath = process.env.BASE_PATH ?? ''
+// Same NEXT_PUBLIC_BASE_PATH-first precedence as siteConfig.ts's derivation — kept in
+// sync deliberately so this config and every component reading siteConfig.basePath can
+// never resolve to different basePaths from the same environment.
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || process.env.BASE_PATH || ''
 
 const nextConfig: NextConfig = {
   output: 'export',

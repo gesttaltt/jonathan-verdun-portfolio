@@ -14,8 +14,9 @@ const STATIC_ASSETS = [
   './fonts/JetBrainsMono-Bold.ttf',
 ]
 
-// Patterns to exclude from dynamic caching (e.g., telemetry, external scripts)
-const EXCLUDE_PATTERNS = [/google-analytics\.com/, /clarity\.ms/]
+// Patterns to exclude from dynamic caching (e.g., telemetry, external scripts).
+// Kept in sync with RootShell.tsx's analytics script (currently Plausible).
+const EXCLUDE_PATTERNS = [/plausible\.io/]
 
 self.addEventListener('install', (event) => {
   event.waitUntil(

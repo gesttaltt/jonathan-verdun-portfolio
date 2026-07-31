@@ -14,7 +14,12 @@ const OUT_FILE = join(process.cwd(), 'public/feed.xml')
 function generate() {
   if (!existsSync(BLOG_DIR)) {
     console.warn('[generate-feed] Blog directory not found at', BLOG_DIR)
-    writeFileSync(OUT_FILE, '')
+    // Still write valid (if empty) RSS rather than a 0-byte file — the site links
+    // to /feed.xml unconditionally, and an empty file isn't parseable XML.
+    writeFileSync(
+      OUT_FILE,
+      `<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0"><channel><title>Jonathan Verdun — Blog</title></channel></rss>`
+    )
     return
   }
 
@@ -28,10 +33,13 @@ function generate() {
       if (!data.title || !data.date) return null
 
       const description = data.description || ''
-      // Strip JSX/imports for a clean RSS description
+      // Strip JSX/imports for a clean RSS description. The tag pattern excludes
+      // newlines so an unclosed '<' in prose (e.g. a generic type like
+      // `Promise<Response>` in body text) can't gobble everything up to the next
+      // literal '>' anywhere later in the post — including whole headings/paragraphs.
       const snippet = content
         .replace(/^import\s+.*$/gm, '')
-        .replace(/<[^>]+>/g, '')
+        .replace(/<[^\n>]+>/g, '')
         .replace(/\n{3,}/g, '\n\n')
         .trim()
         .slice(0, 500)

@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useState, useCallback, useRef } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import dynamic from 'next/dynamic'
 import { Canvas } from '@react-three/fiber'
 import * as THREE from 'three'
@@ -31,16 +31,6 @@ export const InteractiveTopology: React.FC<{
   // Incrementing this key forces a full Canvas remount after context restoration,
   // which re-initialises the R3F renderer against the fresh GL context.
   const [canvasKey, setCanvasKey] = useState(0)
-  // Holds the explicit cleanup for whichever canvas is currently mounted.
-  const cleanupRef = useRef<(() => void) | null>(null)
-
-  // Remove listeners from the previous canvas before R3F mounts the new one.
-  useEffect(() => {
-    return () => {
-      cleanupRef.current?.()
-      cleanupRef.current = null
-    }
-  }, [canvasKey])
 
   useEffect(() => {
     if (typeof window === 'undefined') return
@@ -81,12 +71,17 @@ export const InteractiveTopology: React.FC<{
       setCtxLost(false)
     }
 
+    // No explicit removeEventListener on unmount: remounting <Canvas key={canvasKey}>
+    // (below) replaces this canvas element entirely on restoration, so the old
+    // element — and its listeners with it — becomes garbage once nothing else
+    // references it. (A previous version routed cleanup through a ref shared
+    // across canvas instances; since R3F's onCreated fires in a layout effect
+    // that runs before this component's own passive-effect cleanup, the shared
+    // ref got overwritten by the new canvas before the old canvas's cleanup ran,
+    // silently stripping the listeners off the *new* canvas instead — so a second
+    // context loss had nothing to handle it and never recovered.)
     canvas.addEventListener('webglcontextlost', onLost)
     canvas.addEventListener('webglcontextrestored', onRestored)
-    cleanupRef.current = () => {
-      canvas.removeEventListener('webglcontextlost', onLost)
-      canvas.removeEventListener('webglcontextrestored', onRestored)
-    }
   }, [])
 
   return (
