@@ -44,7 +44,7 @@ describe('AuditRepository', () => {
         title: 'Test Audit',
         date: '2026-05-11',
         content: '<p>Some content</p>',
-        excerpt: 'Some content...',
+        excerpt: 'Some content',
         category: 'audit',
       })
     })
@@ -68,7 +68,7 @@ describe('AuditRepository', () => {
         title: 'Test Spec',
         date: '2026-05-01',
         content: '<p>Some content</p>',
-        excerpt: 'Some content...',
+        excerpt: 'Some content',
         category: 'spec',
       })
     })
@@ -104,7 +104,7 @@ describe('AuditRepository', () => {
       expect(audits[0]!.title).toBe('Test Audit')
       // The heading line — and its trailing blank line — must not reach marked.
       expect(marked.parse).toHaveBeenCalledWith('Some content')
-      expect(audits[0]!.excerpt).toBe('Some content...')
+      expect(audits[0]!.excerpt).toBe('Some content')
     })
 
     it('leaves body content untouched when the first line is not a level-1 heading', async () => {
@@ -120,6 +120,22 @@ describe('AuditRepository', () => {
       await AuditRepository.getAudits()
 
       expect(marked.parse).toHaveBeenCalledWith('## Subheading\nSome content')
+    })
+
+    it('appends an ellipsis to the excerpt only when the body is actually longer than 150 chars', async () => {
+      const longBody = 'x'.repeat(200)
+      ;(fs.existsSync as jest.Mock).mockImplementation((p) => p === mockDocsPath)
+      ;(fs.readdirSync as jest.Mock).mockReturnValue(['audit1.md'])
+      ;(fs.readFileSync as jest.Mock).mockReturnValue('content')
+      ;(matter as unknown as jest.Mock).mockReturnValue({
+        data: { title: 'Long Audit' },
+        content: longBody,
+      })
+      ;(marked.parse as unknown as jest.Mock).mockReturnValue('<p>rendered</p>')
+
+      const audits = await AuditRepository.getAudits()
+
+      expect(audits[0]!.excerpt).toBe('x'.repeat(150) + '...')
     })
 
     it('falls back to filename for spec title when frontmatter and first content line are absent', async () => {

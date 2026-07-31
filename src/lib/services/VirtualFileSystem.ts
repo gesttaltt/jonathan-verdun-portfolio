@@ -83,8 +83,15 @@ export class VirtualFileSystem {
     return this.formatNodeList(node)
   }
 
-  /* istanbul ignore next */
   private formatNodeList(node: VFSNode): string {
+    // Mirrors real `ls <file>`: print the file's own entry rather than trying to
+    // list children it doesn't have (previously silently returned '').
+    if (node.type === 'file') {
+      /* istanbul ignore next -- real VFS file nodes always set permissions explicitly */
+      const perms = node.permissions || '-rw-r--r--'
+      return `${perms} 1 gestalt staff ${node.name}`
+    }
+    /* istanbul ignore next */
     if (!node.children) return ''
     return Object.values(node.children)
       .map((n) => {

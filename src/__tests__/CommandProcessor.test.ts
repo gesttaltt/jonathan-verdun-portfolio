@@ -62,6 +62,23 @@ describe('DefaultCommandProcessor', () => {
     expect(response.payload).toContain('mailto:')
   })
 
+  it('falls back to this.commands.contact when "email" is typed and only "contact" is defined', () => {
+    const p = new DefaultCommandProcessor({ contact: 'Contact text.' })
+    expect(p.process('email').output).toBe('Opening email client... Contact text.')
+  })
+
+  it('falls back to this.commands.contacto when "email" is typed and only "contacto" is defined', () => {
+    const p = new DefaultCommandProcessor({ contacto: 'Contacto text.' })
+    expect(p.process('email').output).toBe('Opening email client... Contacto text.')
+  })
+
+  it('falls back to the built-in default text and prefix when none of contact/contacto/email are defined', () => {
+    const p = new DefaultCommandProcessor({})
+    expect(p.process('email').output).toBe(
+      'Opening email client... Reach out via LinkedIn or GitHub linked above.'
+    )
+  })
+
   it('help output lists core commands', () => {
     const help = processor.process('help').output
     expect(help).toContain('projects')
@@ -225,9 +242,8 @@ describe('DefaultCommandProcessor', () => {
       expect(processor.process('cd ..').output).toBe('Already at root')
     })
 
-    it('handles "ls" on a file', () => {
-      // ls on a file should return empty or some info, currently returns formatNodeList which returns ''
-      expect(processor.process('ls README.md').output).toBe('')
+    it('handles "ls" on a file by printing its own entry, like real ls', () => {
+      expect(processor.process('ls README.md').output).toBe('-rw-r--r-- 1 gestalt staff README.md')
     })
   })
 

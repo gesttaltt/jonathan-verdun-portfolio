@@ -16,8 +16,15 @@ function subscribe() {
 }
 
 // Default to dark regardless of system preference — matches the design's brand default.
+// Guarded like ThemeScript's identical read: storage access can throw (Safari private
+// browsing, sandboxed/partitioned iframes), and this runs on every render via
+// useSyncExternalStore, above any ErrorBoundary in the tree.
 function getSnapshot(): Theme {
-  return localStorage.getItem('theme') === 'light' ? 'light' : 'dark'
+  try {
+    return localStorage.getItem('theme') === 'light' ? 'light' : 'dark'
+  } catch {
+    return 'dark'
+  }
 }
 
 function getServerSnapshot(): Theme {
@@ -37,7 +44,12 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const toggleTheme = () => {
     const newTheme = theme === 'dark' ? 'light' : 'dark'
     setOverride(newTheme)
-    localStorage.setItem('theme', newTheme)
+    try {
+      localStorage.setItem('theme', newTheme)
+    } catch {
+      // Storage unavailable (private browsing, sandboxed iframe) — the in-memory
+      // override above still switches the theme for this session.
+    }
     document.documentElement.classList.toggle('light', newTheme === 'light')
   }
 

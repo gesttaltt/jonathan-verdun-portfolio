@@ -57,13 +57,15 @@ export class AuditRepository {
     const title = data.title || leadingHeading?.[1] || titleFallback
     const date = data.date || slug.match(/\d{4}-\d{2}-\d{2}/)?.[0] || '2026-05-01'
 
+    const isTruncated = body.length > 150
+
     return {
       id: slug,
       slug,
       title,
       date,
       content: sanitizeHtml(marked.parse(body) as string, SANITIZE_OPTIONS),
-      excerpt: body.slice(0, 150).replace(/[#*`]/g, '') + '...',
+      excerpt: body.slice(0, 150).replace(/[#*`]/g, '') + (isTruncated ? '...' : ''),
       category,
     }
   }

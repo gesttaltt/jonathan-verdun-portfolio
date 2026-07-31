@@ -106,6 +106,48 @@ describe('ThemeProvider', () => {
     expect(window.localStorage.setItem).toHaveBeenCalledWith('theme', 'dark')
   })
 
+  it('falls back to dark theme when localStorage.getItem throws (e.g. Safari private mode)', async () => {
+    Object.defineProperty(window, 'localStorage', {
+      value: {
+        getItem: jest.fn(() => {
+          throw new Error('SecurityError: storage access denied')
+        }),
+        setItem: jest.fn(),
+      },
+      writable: true,
+    })
+
+    render(
+      <ThemeProvider>
+        <TestComponent />
+      </ThemeProvider>
+    )
+    expect(await screen.findByText('dark')).toBeInTheDocument()
+  })
+
+  it('does not throw when localStorage.setItem throws on toggle', async () => {
+    Object.defineProperty(window, 'localStorage', {
+      value: {
+        getItem: jest.fn(() => null),
+        setItem: jest.fn(() => {
+          throw new Error('QuotaExceededError')
+        }),
+      },
+      writable: true,
+    })
+
+    render(
+      <ThemeProvider>
+        <TestComponent />
+      </ThemeProvider>
+    )
+    await screen.findByText('dark')
+
+    const button = screen.getByText('Toggle')
+    expect(() => act(() => button.click())).not.toThrow()
+    expect(await screen.findByText('light')).toBeInTheDocument()
+  })
+
   it('provides useTheme hook and throws if used outside provider', () => {
     // Suppress console.error for this test
     const consoleSpy = jest.spyOn(console, 'error').mockImplementation(() => {})
