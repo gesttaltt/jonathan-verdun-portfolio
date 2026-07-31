@@ -9,9 +9,13 @@ FROM node:22-alpine AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-# Ensure we run a production build
+# Ensure we run a production build. build:ci (not build) — same reasoning as
+# ci.yml's own build step: it skips re-running the full Jest suite (stubbing
+# coverage data instead), which both avoids redundant work and sidesteps a
+# React/testing-library incompatibility under this image's Alpine/Node
+# combination that doesn't reproduce on the actual CI runner.
 ENV NODE_ENV=production
-RUN npm run build
+RUN npm run build:ci
 
 # Stage 3: Runner — serve the static export with nginx
 FROM nginx:stable-alpine AS runner

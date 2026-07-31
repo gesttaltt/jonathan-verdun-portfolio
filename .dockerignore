@@ -6,7 +6,6 @@ build
 *.log
 docker-compose.yml
 .env.local
-docs/
 coverage/
 playwright-report/
 test-results/

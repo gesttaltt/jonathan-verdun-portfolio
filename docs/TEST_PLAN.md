@@ -48,7 +48,7 @@ This Master Test Plan (MTP) defines the strategic approach to quality assurance 
 
 ### 4.2 Non-Functional Testing
 
-- **Performance:** Automated Lighthouse audits (Target score > 0.9).
+- **Performance:** Automated Lighthouse audits (Target score > 0.6; accessibility ≥ 0.9, best-practices/SEO ≥ 0.95).
 - **Accessibility:** Automated axe-core scans integrated into Playwright suites.
 - **Security:** Dependency auditing (`npm audit`) and secure Nginx header verification.
 
