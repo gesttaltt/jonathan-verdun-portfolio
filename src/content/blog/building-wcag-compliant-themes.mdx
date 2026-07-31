@@ -1,57 +1,76 @@
 ---
-title: 'Building a WCAG-compliant theme system with OKLCH and Tailwind v4'
+title: 'Building a WCAG-compliant dark/light theme system with Tailwind v4'
 date: '2026-05-08'
 tags: ['accessibility', 'CSS', 'Tailwind', 'theming']
-description: 'How I built a dark + light theme system that passes WCAG AA contrast requirements using OKLCH color space and Tailwind CSS v4 CSS-variable tokens.'
+description: 'How I built a dark + light theme system that passes WCAG AA contrast requirements using Tailwind CSS v4 CSS-variable tokens and manually-verified contrast ratios.'
 ---
 
-## Why OKLCH?
+## The goal: predictable contrast, not a fancy color space
 
-OKLCH is a color space designed for **perceptual uniformity** — a 10% change in any channel produces a roughly equal perceptual difference. This makes it ideal for generating accessible color palettes.
+Perceptually-uniform color spaces like OKLCH are appealing for generating accessible palettes
+programmatically — a fixed lightness value there tracks perceived brightness much more reliably
+than the same lightness value in hex or RGB, where two colors can look very different in
+brightness despite "matching" numerically. I looked at building this portfolio's theme system
+around OKLCH for exactly that reason.
 
-### The problem with hex and RGB
-
-Hex and RGB are device-oriented, not human-oriented. Two colors with the same lightness value in hex can have dramatically different perceived brightness. This makes contrast prediction unreliable.
-
-OKLCH fixes this by separating lightness (L), chroma (C), and hue (H) into independent channels.
+I didn't end up needing it. Tailwind's built-in Zinc grayscale already gives a set of
+pre-verified, perceptually-reasonable steps, and for a two-theme (dark/light) system with a
+fixed, small token set, hand-checking each pair against a contrast calculator and writing the
+ratio down as a comment next to the token was simpler than adding a color-space conversion step
+to the build. That's the system actually shipped here — plain hex/rgba CSS custom properties,
+not OKLCH.
 
 ## Implementation
 
-### CSS variable tokens
+### CSS variable tokens (`src/app/globals.css`)
+
+No `tailwind.config.ts` — Tailwind v4 is CSS-first, so the token definitions live directly in
+`globals.css`. Two blocks: `:root` (dark, the default) and `.light` (opt-in via a class on
+`<html>`, toggled by `ThemeProvider`):
 
 ```css
 :root {
-  --bg-primary: oklch(0.15 0.01 260);
-  --bg-card: oklch(0.18 0.015 260);
-  --text-primary: oklch(0.95 0.01 260);
-  --text-secondary: oklch(0.7 0.02 260);
+  --background: #0a0a0a;
+  --text-primary: #ffffff;
+  --text-secondary: #e4e4e7; /* zinc-200 */
+  --text-tertiary: #a1a1aa; /* zinc-400 */
+  --text-muted: #8a8a92; /* ~zinc-500 — 5.4:1 on bg-card, 7.5:1 on background */
 }
-```
 
-### Light theme overrides
-
-```css
 .light {
-  --bg-primary: oklch(0.99 0.005 85);
-  --bg-card: oklch(0.97 0.01 85);
-  --text-primary: oklch(0.15 0.02 85);
+  --background: #fafafa; /* zinc-50 */
+  --text-primary: #18181b; /* zinc-900 — 15.7:1 on white */
+  --text-secondary: #3f3f46; /* zinc-700 — 7.8:1 on white */
+  --text-tertiary: #71717a; /* zinc-500 — 4.5:1 on white (AA) */
+  --text-muted: #636366; /* ~zinc-525 — 6.07:1 on white (AA) */
 }
 ```
 
-### Verifying contrast programmatically
+Each text token follows a perceptual hierarchy — primary → secondary → tertiary → muted — so
+contrast stays predictable across both themes without needing every token to hit the same ratio;
+`text-muted` is deliberately the tightest, and still clears AA's 4.5:1 body-text minimum in both
+themes.
 
-```typescript
-function relativeLuminance(oklch: [number, number, number]): number {
-  // Convert OKLCH → linear sRGB → relative luminance
-  // WCAG formula: (L1 + 0.05) / (L2 + 0.05) ≥ 4.5 for AA
-}
-```
+### Wiring themes without a flash of the wrong one
+
+`ThemeScript.tsx` runs an inline `<script>` before hydration that reads `localStorage` and
+adds/removes the `.light` class synchronously, so the very first paint already has the right
+theme — no flash of unstyled/wrong-themed content. `ThemeProvider` (`lib/theme/context.tsx`)
+then keeps React state in sync via `useSyncExternalStore`, and defaults to dark regardless of
+the OS `prefers-color-scheme` setting (a deliberate brand choice, not an accessibility one).
 
 ## Key takeaways
 
-1. **Set text contrast first**, then build the palette around it
-2. **Test every gray pair** — grays are where contrast failures hide
-3. **Different themes need different muted values** — don't share them
-4. **OKLCH makes palette generation predictable** — no more guessing
+1. **Set text contrast first**, then build the rest of the palette around it
+2. **Test every gray pair** — grays are where contrast failures hide, and they're the easiest
+   pairing to gloss over since nothing else about them looks alarming
+3. **Different themes need different muted values** — don't share a single "muted" token across
+   light and dark; a ratio that clears AA on a dark background can fail on a light one
+4. **Write the ratio down next to the token.** A comment like `4.5:1 on white (AA)` costs nothing
+   and turns "did we check this" into "read the file"
 
-This portfolio uses this exact system. Automated axe-core scans run in CI against the home and quality-dashboard routes in both languages and gate the build on zero WCAG 2.1 AA violations.
+This portfolio's real system is the plain hex/rgba tokens above, not a generated palette.
+Automated axe-core scans still run in CI (`e2e/a11y.spec.ts`) against the home page (both
+`/` and `/es/`) and the quality dashboard (`/quality/`), gating the build on zero WCAG 2.1 AA
+violations — that part's exactly as strict as it sounds, just built on manually-verified tokens
+rather than an automated color-space pipeline.

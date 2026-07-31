@@ -360,6 +360,29 @@ The closest related work is `ternary-vaes-analysis` ("Analysis of the architectu
 
 Scope expanded beyond content to cover accessibility, SEO, performance, security, test coverage, dead code, type safety, architecture, configuration, and missing standard files.
 
+> **Status note (2026-07-31):** this section is a point-in-time snapshot from 2026-04-24 and
+> was never given its own Resolution Log the way the sections above it were — several items
+> below are now stale and were confirmed resolved during a later bug-hunt pass, not re-verified
+> item by item:
+>
+> - **M1–M4 (Missing Standard Files)** — all four now exist: `not-found.tsx`, `error.tsx`,
+>   `loading.tsx` (per-route, e.g. `blog/loading.tsx`, `projects/[slug]/loading.tsx`), and
+>   `app/manifest.ts` (the modern App Router convention, superseding the static
+>   `manifest.json` this item originally asked for).
+> - **P2** references `src/components/PAdicBackground.tsx:82-115` — that file doesn't exist;
+>   it was removed as dead code once `InteractiveTopology`/`TopologyMesh` replaced it (see
+>   `COMPONENTS.md`).
+> - **D1, TS2** reference `staggerContainerVariants`/`staggerChildVariants`/`floatVariants` in
+>   `lib/animations.ts` — none of the three exist; removed as unused dead code (see
+>   `STYLING.md`'s "removed as dead code" list, which as of this pass also covers a fourth,
+>   `slideDownVariants`, found and removed the same way).
+> - **D2** claims `TerminalContract.ts`'s `INTERACTIVE_COMMANDS` has no UI consumer — it does:
+>   `CommandProcessor.ts` imports it directly as the default locale-command map.
+>
+> The remaining items (accessibility, SEO, performance, security, and the rest of test
+> coverage/type-safety) were not re-checked in this pass — treat them as unverified, not as
+> confirmed-still-open.
+
 ---
 
 ### ACCESSIBILITY

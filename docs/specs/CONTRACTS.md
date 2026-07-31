@@ -161,12 +161,18 @@ Consumed via `components/hooks/useProjects.tsx`: `ProjectProvider` puts a `Stati
 ### CommandProcessor (`services/CommandProcessor.ts`)
 
 ```typescript
+interface CommandResponse {
+  output: string
+  signal?: 'clear' | 'redirect' | 'vfs_update'
+  payload?: string
+}
+
 interface ICommandProcessor {
-  process(cmd: string): string
+  process(cmd: string): CommandResponse
 }
 ```
 
-`DefaultCommandProcessor` looks up the command in `INTERACTIVE_COMMANDS`, returning a not-found message for unknowns. `Terminal.tsx` accepts an optional `processor` prop (defaults to `new DefaultCommandProcessor()`), enabling test doubles.
+`DefaultCommandProcessor` looks up the command in a locale-aware commands map (`INTERACTIVE_COMMANDS` by default, or a translated map injected via the constructor — `t.terminal.interactive` for the active locale), returning a not-found message for unknowns. Beyond plain text lookups it also wires up: the `VirtualFileSystem` for `ls`/`cd`/`cat`/`pwd`; the `contact`/`contacto`/`email` aliases, which read the locale map first (falling back through `contact`/`contacto`/a built-in default, so a translation never gets shadowed by hardcoded English) and return a `redirect` signal with a `mailto:` payload; and an optional `customHandlers` map of `(arg?) => CommandResponse | undefined` functions for app-specific commands. `Terminal.tsx` accepts an optional `processor` prop (defaults to `new DefaultCommandProcessor()`), enabling test doubles.
 
 ### AuditRepository (`services/AuditRepository.ts`)
 

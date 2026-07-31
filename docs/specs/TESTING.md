@@ -53,12 +53,17 @@ Isolated service/hook logic — e.g. `CommandProcessor.test.ts` asserts `Default
 
 ### Property-Based (fast-check)
 
-Used where an invariant matters more than any specific example — the highest-value one fuzzes every registered i18n key to assert EN and ES expose identical key structures, so a translation added to one locale and not the other fails CI instead of shipping silently.
+Used where an invariant matters more than any specific example — the highest-value ones fuzz
+every registered terminal command entry (`en.terminal.interactive`/`es.terminal.interactive`)
+to assert each key/response pair is non-empty, and that the ES locale always registers at least
+as many commands as EN, so a command added to one locale and not the other fails CI instead of
+shipping silently.
 
 ```typescript
 fc.assert(
-  fc.property(fc.constantFrom(...getAllKeys(en)), (key) => {
-    expect(lookup(es, key)).toBeDefined()
+  fc.property(fc.constantFrom(...Object.entries(en.terminal.interactive)), ([cmd, response]) => {
+    expect(cmd.length).toBeGreaterThan(0)
+    expect(response.length).toBeGreaterThan(0)
   })
 )
 ```

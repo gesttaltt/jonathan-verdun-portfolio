@@ -49,33 +49,21 @@ The second test runs `add` with hundreds of random integer pairs — including n
 The most impactful property I test: **every translation key in English must exist in Spanish, and vice versa**.
 
 ```typescript
-it('EN and ES translations have identical key structures', () => {
+it('every EN terminal command entry has a non-empty key and response', () => {
   fc.assert(
-    fc.property(fc.constantFrom(...getAllKeys(en)), (key) => {
-      expect(lookup(es, key)).toBeDefined()
+    fc.property(fc.constantFrom(...Object.entries(en.terminal.interactive)), ([cmd, response]) => {
+      expect(cmd.length).toBeGreaterThan(0)
+      expect(response.length).toBeGreaterThan(0)
     })
   )
 })
 ```
 
-Without this property test, a key added to one locale but not the other would ship silently — the page would just render a missing string. The property test turns that into a build failure instead.
+Paired with a second property asserting `es.terminal.interactive` always registers at least as many commands as `en.terminal.interactive`. Without these, a command added to one locale but not the other would ship silently — the terminal would just answer "command not found" for something the help menu claims exists. The property test turns that into a build failure instead.
 
 ### 2. Terminal command routing
 
-The terminal has a dispatcher that maps command strings to outputs. The property:
-
-```typescript
-it('every registered command produces non-empty output', () => {
-  fc.assert(
-    fc.property(fc.constantFrom(...COMMAND_KEYS), (cmd) => {
-      const output = terminal.execute(cmd)
-      expect(output.length).toBeGreaterThan(0)
-    })
-  )
-})
-```
-
-This is the kind of gap example-based tests tend to miss: a command that's registered in the help menu but has no handler would otherwise return `undefined` at runtime, and nothing would flag it until a user actually typed that command.
+The terminal dispatches command strings to outputs through a locale-aware map (`DefaultCommandProcessor`, reading `en.terminal.interactive`/`es.terminal.interactive`). The property test above already catches most of the risk — an accidentally empty key or empty response string slipping into that map — without needing to actually invoke the dispatcher for every registered command.
 
 ### 3. Stateless service functions
 

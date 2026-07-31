@@ -28,7 +28,7 @@ describe('InteractiveTopology', () => {
     const { getByTestId } = render(<InteractiveTopology />)
     const canvas = getByTestId('r3f-canvas')
     expect(canvas).toHaveAttribute('aria-hidden', 'false')
-    expect(canvas).toHaveAttribute('aria-label')
+    expect(canvas).toHaveAttribute('aria-label', 'Interactive p-adic bio-simulation background')
     expect(canvas).toHaveAttribute('tabIndex', '-1')
   })
 

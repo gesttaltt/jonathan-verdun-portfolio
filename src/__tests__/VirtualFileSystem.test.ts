@@ -5,12 +5,12 @@ describe('path traversal resilience', () => {
   it('cd("../../etc") from root does not escape root', () => {
     const vfs = new VirtualFileSystem()
     const result = vfs.cd('../../etc')
-    // Either returns an error or stays at root — must not escape to a path above '/'
-    if (result !== null) {
-      expect(typeof result).toBe('string')
-    } else {
-      expect(vfs.pwd()).toBe('/')
-    }
+    // cd() only mutates currentPath on the null (success) branch, so a non-null
+    // result guarantees pwd() is unchanged — assert both explicitly rather than
+    // just the result's type, which would pass even if cd silently succeeded
+    // into a bogus path.
+    expect(result).toBe('cd: no such file or directory: ../../etc')
+    expect(vfs.pwd()).toBe('/')
   })
 
   it('cd(".") is a no-op, not an error', () => {
@@ -24,13 +24,12 @@ describe('path traversal resilience', () => {
   it('cd("/docs/../../../etc") does not escape root', () => {
     const vfs = new VirtualFileSystem()
     const result = vfs.cd('/docs/../../../etc')
-    // Should return an error (etc doesn't exist) or stay within root
-    if (result !== null) {
-      expect(typeof result).toBe('string')
-    } else {
-      expect(vfs.pwd()).not.toContain('../')
-      expect(vfs.pwd().startsWith('/')).toBe(true)
-    }
+    // The three '..'s pop back past root (each no-ops once tempPath is empty,
+    // per cd()'s own guard) before 'etc' is checked against the real root
+    // children, where it doesn't exist — assert the actual error and that pwd()
+    // truly never left root, not just that *some* string came back.
+    expect(result).toBe('cd: no such file or directory: /docs/../../../etc')
+    expect(vfs.pwd()).toBe('/')
   })
 
   it('ls("../../etc") returns an error string, not crash', () => {

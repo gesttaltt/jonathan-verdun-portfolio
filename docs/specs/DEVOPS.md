@@ -17,7 +17,7 @@ checkout → setup-node (npm cache) → npm ci
 → cache .next/cache
 → [22.x only] Check formatting (prettier --check)
 → [22.x only] Linting (eslint)
-→ [22.x only] Security audit (npm audit --audit-level=high)
+→ [22.x only] Security audit (npm audit --omit=dev --audit-level=high)
 → Type checking (tsc --noEmit)
 → Run Tests (jest --ci --coverage --json --outputFile=coverage.json)
 → [22.x only] Build (npm run build:ci)
