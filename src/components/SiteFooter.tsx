@@ -80,7 +80,7 @@ export const SiteFooter: React.FC = () => {
               href={`${siteConfig.basePath}/docs/api/`}
               className="text-text-tertiary light:hover:text-text-primary rounded text-xs transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none"
             >
-              API Docs
+              {t.sections.siteFooter.apiDocsLabel}
             </a>
             <span className="text-border-subtle text-white/20">·</span>
             <Link
@@ -96,14 +96,14 @@ export const SiteFooter: React.FC = () => {
               rel="noopener noreferrer"
               className="text-text-tertiary light:hover:text-text-primary rounded text-xs transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none"
             >
-              Source
+              {t.sections.siteFooter.sourceLabel}
             </a>
             <span className="text-border-subtle text-white/20">·</span>
             <a
               href={`${siteConfig.basePath}/sitemap.xml`}
               className="text-text-tertiary light:hover:text-text-primary rounded text-xs transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none"
             >
-              Sitemap
+              {t.sections.siteFooter.sitemapLabel}
             </a>
           </div>
 
@@ -124,10 +124,10 @@ export const SiteFooter: React.FC = () => {
             <div className="flex flex-wrap items-center gap-3">
               <div
                 className="light:border-green-200 light:bg-green-100 light:text-green-700 flex items-center gap-1.5 rounded-full border border-green-500/20 bg-green-500/10 px-2 py-0.5 text-[10px] font-bold tracking-tighter text-green-400 uppercase"
-                title="PWA Hardened: Available Offline"
+                title={t.sections.siteFooter.offlineReadyTooltip}
               >
                 <ShieldCheck className="h-3 w-3" />
-                Offline Ready
+                {t.sections.siteFooter.offlineReadyLabel}
               </div>
               <p className="text-text-tertiary text-xs">{siteConfig.techStack.join(' · ')}</p>
             </div>

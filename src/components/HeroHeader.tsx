@@ -28,7 +28,7 @@ export function HeroHeader() {
             href={siteConfig.socialLinks.github.url}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="GitHub profile (opens in new tab)"
+            aria-label={t.sections.heroHeader.githubAriaLabel}
             className="group focus-visible:ring-offset-background text-text-tertiary light:hover:text-text-primary flex min-h-[44px] items-center gap-2 rounded transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none dark:hover:text-white"
           >
             <GithubIcon className="h-5 w-5 shrink-0 transition-transform group-hover:-translate-y-0.5" />
@@ -38,7 +38,7 @@ export function HeroHeader() {
             href={siteConfig.socialLinks.linkedin.url}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="LinkedIn profile (opens in new tab)"
+            aria-label={t.sections.heroHeader.linkedinAriaLabel}
             className="group focus-visible:ring-offset-background text-text-tertiary light:hover:text-text-primary flex min-h-[44px] items-center gap-2 rounded transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none dark:hover:text-white"
           >
             <LinkedinIcon className="h-5 w-5 shrink-0 transition-transform group-hover:-translate-y-0.5" />
@@ -65,7 +65,10 @@ export function HeroHeader() {
                 href={entry.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={`${entry.organization} (opens in new tab)`}
+                aria-label={t.sections.heroHeader.workHistoryLinkAriaLabel.replace(
+                  '{organization}',
+                  entry.organization
+                )}
                 className="focus-visible:ring-offset-background text-text-primary light:hover:text-blue-800 flex items-center gap-2 rounded text-lg font-bold transition-colors hover:text-cyan-400 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none dark:hover:text-cyan-400"
               >
                 {entry.organization} <ExternalLinkIcon className="h-4 w-4" />

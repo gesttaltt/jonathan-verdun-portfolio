@@ -41,6 +41,7 @@ export const en: Translations = {
       clearSearchLabel: 'clear',
       verifiedModulesTitle: 'Verified Modules & Components',
       assertionsLabel: 'assertions',
+      readFullAuditLabel: 'Read Full Audit',
     },
     sidebar: {
       qualityGatesTitle: 'Engineering Quality Gates',
@@ -58,6 +59,27 @@ export const en: Translations = {
       ciStatusFailure: 'FAILING',
       ciStatusLoading: 'Checking CI status...',
       ciStatusError: 'Status unavailable',
+      ciPipelineAriaLabel: 'CI pipeline status (opens in new tab)',
+    },
+    errorBoundary: {
+      title: 'Component Error',
+      description: 'A rendering error occurred.',
+      retryLabel: 'Retry',
+    },
+    heroHeader: {
+      githubAriaLabel: 'GitHub profile (opens in new tab)',
+      linkedinAriaLabel: 'LinkedIn profile (opens in new tab)',
+      workHistoryLinkAriaLabel: '{organization} (opens in new tab)',
+    },
+    specCard: {
+      viewGithubAriaLabel: 'View {repo} on GitHub (opens in new tab)',
+    },
+    siteFooter: {
+      apiDocsLabel: 'API Docs',
+      sourceLabel: 'Source',
+      sitemapLabel: 'Sitemap',
+      offlineReadyLabel: 'Offline Ready',
+      offlineReadyTooltip: 'PWA Hardened: Available Offline',
     },
     qaContact: {
       title: 'Open to work',

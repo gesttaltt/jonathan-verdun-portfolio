@@ -1,5 +1,6 @@
 import { BlogService } from '@/lib/services/BlogService'
 import { siteConfig } from '@/lib/siteConfig'
+import { buildPageMetadata } from '@/lib/metadata'
 import type { Metadata } from 'next'
 import { BlogDetailContent } from '@/components/BlogDetailContent'
 import { notFound } from 'next/navigation'
@@ -17,10 +18,10 @@ export async function generateMetadata({
   const { slug } = await params
   const post = BlogService.getPost(slug)
   if (!post) return {}
-  return {
+  return buildPageMetadata('en', `/blog/${slug}/`, {
     title: `${post.meta.title} — ${siteConfig.name}`,
     description: post.meta.description,
-  }
+  })
 }
 
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {

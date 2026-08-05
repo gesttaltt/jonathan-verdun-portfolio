@@ -42,6 +42,7 @@ export interface Translations {
       clearSearchLabel: string
       verifiedModulesTitle: string
       assertionsLabel: string
+      readFullAuditLabel: string
     }
     sidebar: {
       qualityGatesTitle: string
@@ -59,6 +60,29 @@ export interface Translations {
       ciStatusFailure: string
       ciStatusLoading: string
       ciStatusError: string
+      ciPipelineAriaLabel: string
+    }
+    errorBoundary: {
+      title: string
+      description: string
+      retryLabel: string
+    }
+    heroHeader: {
+      githubAriaLabel: string
+      linkedinAriaLabel: string
+      // Template — replace '{organization}' with the work-history entry name.
+      workHistoryLinkAriaLabel: string
+    }
+    specCard: {
+      // Template — replace '{repo}' with the "owner/repo" path.
+      viewGithubAriaLabel: string
+    }
+    siteFooter: {
+      apiDocsLabel: string
+      sourceLabel: string
+      sitemapLabel: string
+      offlineReadyLabel: string
+      offlineReadyTooltip: string
     }
     qaContact: { title: string; description: string; ctaLabel: string }
     resume: {

@@ -47,6 +47,11 @@ interface SpecCardProps {
   invariantsLabel: string
   invariants: string[]
   link?: string
+  // Pre-resolved (caller replaces the '{repo}' placeholder in
+  // t.sections.specCard.viewGithubAriaLabel) — SpecCard is presentational and
+  // has no useTranslation() access of its own, matching methodologyLabel/
+  // invariantsLabel's existing convention.
+  githubAriaLabel?: string
 }
 
 // Shared presentational card for a "spec" entry (methodology + invariants +
@@ -63,6 +68,7 @@ export const SpecCard: React.FC<SpecCardProps> = ({
   invariantsLabel,
   invariants,
   link,
+  githubAriaLabel,
 }) => {
   return (
     <m.div variants={staggerItemVariants()} tabIndex={0} className={CARD_CLASSES[color]}>
@@ -96,7 +102,10 @@ export const SpecCard: React.FC<SpecCardProps> = ({
               href={link}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label={`View ${link.replace('https://github.com/', '')} on GitHub (opens in new tab)`}
+              aria-label={
+                githubAriaLabel ??
+                `View ${link.replace('https://github.com/', '')} on GitHub (opens in new tab)`
+              }
               className={LINK_CLASSES[color]}
             >
               <ExternalLink className="h-4 w-4" />

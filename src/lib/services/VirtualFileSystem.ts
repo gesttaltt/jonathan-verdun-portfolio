@@ -69,14 +69,43 @@ export class VirtualFileSystem {
       return this.formatNodeList(node)
     }
 
-    // Temporary traversal for ls [path]
-    let node = this.root
+    // Resolve relative to the current working directory — matching cd()'s
+    // resolution rules below — rather than always starting from root.
+    // `ls <relative-path>` after cd-ing into a subdirectory must resolve
+    // against cwd, and `..`/`.` segments must be handled the same way cd()
+    // handles them, or a relative `ls` silently (and wrongly) falls back to
+    // root-relative resolution instead of erroring or resolving correctly.
+    const tempPath = path.startsWith('/') ? [] : [...this.currentPath]
     const parts = path === '/' ? [] : path.split('/').filter(Boolean)
+
     for (const part of parts) {
+      if (part === '..') {
+        if (tempPath.length > 0) tempPath.pop()
+        continue
+      }
+      if (part === '.') continue
+
+      // Validate the part by traversing from root using tempPath so far.
+      let node = this.root
+      for (const p of tempPath) {
+        /* istanbul ignore next */
+        if (node.children && Object.hasOwn(node.children, p)) {
+          node = node.children[p]!
+        }
+      }
+
       if (node.children && Object.hasOwn(node.children, part)) {
-        node = node.children[part]!
+        tempPath.push(part)
       } else {
         return `ls: cannot access '${path}': No such file or directory`
+      }
+    }
+
+    let node = this.root
+    for (const p of tempPath) {
+      /* istanbul ignore next */
+      if (node.children && Object.hasOwn(node.children, p)) {
+        node = node.children[p]!
       }
     }
 

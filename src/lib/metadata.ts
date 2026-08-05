@@ -60,3 +60,58 @@ export function buildMetadata(lang: 'en' | 'es'): Metadata {
     },
   }
 }
+
+/**
+ * Per-route metadata for every non-homepage page (blog listing/post, resume,
+ * quality listing/detail, project detail).
+ *
+ * Next.js metadata resolution REPLACES whole top-level keys rather than deep-
+ * merging them, so a page that only sets `title`/`description` silently
+ * inherits `alternates`/`openGraph`/`twitter` verbatim from the locale
+ * layout's buildMetadata() — which describes the homepage, not the current
+ * route. This fully re-derives every one of those keys per-route so canonical
+ * URLs, hreflang alternates, and social-share previews are always correct for
+ * the actual page being served, not the locale root.
+ *
+ * `routePath` is the locale-agnostic path (e.g. '/blog/', '/projects/foo/')
+ * — both locales share the same route structure, only the '/es' prefix
+ * differs, so callers never need to special-case it.
+ */
+export function buildPageMetadata(
+  lang: 'en' | 'es',
+  routePath: string,
+  page: { title: string; description: string }
+): Metadata {
+  const isEs = lang === 'es'
+  const canonical = `${siteConfig.url}${isEs ? '/es' : ''}${routePath}`
+  const locale = isEs ? 'es_ES' : siteConfig.locale
+  const ogImageUrl = `${siteConfig.url}${isEs ? '/es' : ''}/opengraph-image`
+
+  return {
+    title: page.title,
+    description: page.description,
+    alternates: {
+      canonical,
+      languages: {
+        en: `${siteConfig.url}${routePath}`,
+        es: `${siteConfig.url}/es${routePath}`,
+      },
+    },
+    openGraph: {
+      type: 'website',
+      url: canonical,
+      title: page.title,
+      description: page.description,
+      siteName: siteConfig.name,
+      locale,
+      images: [{ url: ogImageUrl, width: 1200, height: 630, alt: page.description }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: page.title,
+      description: page.description,
+      creator: siteConfig.socialLinks.twitter.handle,
+      images: [{ url: ogImageUrl, alt: page.description }],
+    },
+  }
+}

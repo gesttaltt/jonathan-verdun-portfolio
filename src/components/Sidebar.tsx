@@ -217,7 +217,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ repo = siteConfig.repo }) => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group/ci text-text-tertiary light:hover:text-text-primary mt-3 flex items-center gap-2 text-xs font-medium transition-colors hover:text-white"
-                  aria-label="CI pipeline status (opens in new tab)"
+                  aria-label={t.sections.sidebar.ciPipelineAriaLabel}
                 >
                   <Activity className="light:text-blue-600 h-4 w-4 text-blue-400" />
                   <span>GitHub Actions</span>

@@ -3,6 +3,7 @@ import { ProjectDetail } from '@/components/ProjectDetail'
 import { notFound } from 'next/navigation'
 import { siteConfig } from '@/lib/siteConfig'
 import { en } from '@/lib/i18n/en'
+import { buildPageMetadata } from '@/lib/metadata'
 import type { Metadata } from 'next'
 import { slugify, slugToId } from '@/lib/projectSlugify'
 
@@ -19,10 +20,10 @@ export async function generateMetadata({
   const projectId = slugToId.get(slug)
   const project = en.projects.find((p) => p.id === projectId)
   if (!project) return {}
-  return {
+  return buildPageMetadata('en', `/projects/${slug}/`, {
     title: `${project.title} — ${siteConfig.name}`,
     description: project.description,
-  }
+  })
 }
 
 export default async function ProjectCaseStudyPage({

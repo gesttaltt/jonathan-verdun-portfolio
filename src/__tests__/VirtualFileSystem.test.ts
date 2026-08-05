@@ -57,6 +57,55 @@ describe('path traversal resilience', () => {
   })
 })
 
+describe('ls() cwd-relative resolution (regression)', () => {
+  // ls() used to always traverse from root regardless of currentPath,
+  // unlike cd()/cat() — so a relative `ls <path>` typed after `cd`-ing into a
+  // subdirectory silently resolved against root instead of cwd.
+  it('resolves a relative path against cwd, not root', () => {
+    const vfs = new VirtualFileSystem({
+      name: '/',
+      type: 'dir',
+      children: {
+        docs: {
+          name: 'docs',
+          type: 'dir',
+          children: {
+            specs: {
+              name: 'specs',
+              type: 'dir',
+              children: {
+                'a.md': { name: 'a.md', type: 'file', content: 'A' },
+              },
+            },
+          },
+        },
+      },
+    })
+    vfs.cd('docs')
+    expect(vfs.ls('specs')).toContain('a.md')
+  })
+
+  it('ls("..") from a subdirectory lists the parent directory', () => {
+    const vfs = new VirtualFileSystem()
+    vfs.cd('docs')
+    expect(vfs.ls('..')).toContain('README.md')
+  })
+
+  it('ignores "." path segments mid-path, matching cd()', () => {
+    const vfs = new VirtualFileSystem()
+    // './docs' from root and 'docs' from root must resolve identically.
+    expect(vfs.ls('./docs')).toBe(vfs.ls('docs'))
+  })
+
+  it('does not leak a same-named root-level file into a subdirectory listing', () => {
+    const vfs = new VirtualFileSystem()
+    vfs.cd('docs')
+    // Root has README.md; /docs does not — resolving against root instead of
+    // cwd would incorrectly find and print root's copy.
+    expect(vfs.ls('README.md')).toBe("ls: cannot access 'README.md': No such file or directory")
+  })
+})
+
 describe('VirtualFileSystem', () => {
   it('initializes with default root if none provided', () => {
     const vfs = new VirtualFileSystem()

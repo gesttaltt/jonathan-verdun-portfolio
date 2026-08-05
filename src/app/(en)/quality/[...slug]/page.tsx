@@ -1,10 +1,28 @@
 import { AuditRepository } from '@/lib/services/AuditRepository'
 import { AuditDetailContent } from '@/components/AuditDetailContent'
 import { notFound } from 'next/navigation'
+import { siteConfig } from '@/lib/siteConfig'
+import { buildPageMetadata } from '@/lib/metadata'
+import type { Metadata } from 'next'
 
 export async function generateStaticParams() {
   const audits = await AuditRepository.getAudits()
   return audits.map((a) => ({ slug: a.slug.split('/') }))
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string[] }>
+}): Promise<Metadata> {
+  const { slug } = await params
+  const joinedSlug = slug.join('/')
+  const audit = await AuditRepository.getAuditBySlug(joinedSlug)
+  if (!audit) return {}
+  return buildPageMetadata('en', `/quality/${joinedSlug}/`, {
+    title: `${audit.title} — ${siteConfig.name}`,
+    description: audit.excerpt,
+  })
 }
 
 export default async function AuditDetailPage({ params }: { params: Promise<{ slug: string[] }> }) {

@@ -26,6 +26,14 @@ export const SystemSpecCard: React.FC<SystemSpecCardProps> = ({ spec }) => {
       invariantsLabel={t.architecture.invariantsLabel}
       invariants={spec.invariants}
       link={spec.link}
+      githubAriaLabel={
+        spec.link
+          ? t.sections.specCard.viewGithubAriaLabel.replace(
+              '{repo}',
+              spec.link.replace('https://github.com/', '')
+            )
+          : undefined
+      }
     />
   )
 }

@@ -1,13 +1,14 @@
 import { ResumeTimeline } from '@/components/ResumeTimeline'
 import { siteConfig } from '@/lib/siteConfig'
+import { buildPageMetadata } from '@/lib/metadata'
 import type { Metadata } from 'next'
 import fs from 'fs'
 import path from 'path'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata('es', '/resume/', {
   title: `Currículum — ${siteConfig.name}`,
   description: `Currículum profesional y línea de tiempo profesional de ${siteConfig.name} — ${siteConfig.jobTitle}.`,
-}
+})
 
 const RESUME_PDF_PATH = path.join(process.cwd(), 'public', 'resume-jonathan-verdun.pdf')
 

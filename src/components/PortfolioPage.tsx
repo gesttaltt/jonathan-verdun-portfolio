@@ -54,7 +54,11 @@ export const PortfolioPage: React.FC = () => {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(buildBreadcrumbJsonLd(t.lang)) }}
       />
       <div className="bg-background text-text-secondary min-h-screen font-mono selection:bg-blue-500/30">
-        <ErrorBoundary>
+        <ErrorBoundary
+          title={t.sections.errorBoundary.title}
+          description={t.sections.errorBoundary.description}
+          retryLabel={t.sections.errorBoundary.retryLabel}
+        >
           <TopologyLoader mode={simMode} quality={0.85} />
         </ErrorBoundary>
 

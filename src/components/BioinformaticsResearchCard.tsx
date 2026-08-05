@@ -26,6 +26,14 @@ export const BioinformaticsResearchCard: React.FC<BioinformaticsResearchCardProp
       invariantsLabel={t.bioinformatics.invariantsLabel}
       invariants={spec.invariants}
       link={spec.link}
+      githubAriaLabel={
+        spec.link
+          ? t.sections.specCard.viewGithubAriaLabel.replace(
+              '{repo}',
+              spec.link.replace('https://github.com/', '')
+            )
+          : undefined
+      }
     />
   )
 }

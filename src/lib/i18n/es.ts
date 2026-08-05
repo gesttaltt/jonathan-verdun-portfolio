@@ -244,6 +244,7 @@ export const es: Translations = {
       clearSearchLabel: 'limpiar',
       verifiedModulesTitle: 'Módulos y Componentes Verificados',
       assertionsLabel: 'aserciones',
+      readFullAuditLabel: 'Leer Auditoría Completa',
     },
     sidebar: {
       qualityGatesTitle: 'Garantía de Calidad',
@@ -261,6 +262,27 @@ export const es: Translations = {
       ciStatusFailure: 'FALLANDO',
       ciStatusLoading: 'Verificando CI...',
       ciStatusError: 'Estado no disponible',
+      ciPipelineAriaLabel: 'Estado del pipeline de CI (se abre en una pestaña nueva)',
+    },
+    errorBoundary: {
+      title: 'Error de Componente',
+      description: 'Ocurrió un error de renderizado.',
+      retryLabel: 'Reintentar',
+    },
+    heroHeader: {
+      githubAriaLabel: 'Perfil de GitHub (se abre en una pestaña nueva)',
+      linkedinAriaLabel: 'Perfil de LinkedIn (se abre en una pestaña nueva)',
+      workHistoryLinkAriaLabel: '{organization} (se abre en una pestaña nueva)',
+    },
+    specCard: {
+      viewGithubAriaLabel: 'Ver {repo} en GitHub (se abre en una pestaña nueva)',
+    },
+    siteFooter: {
+      apiDocsLabel: 'Documentación API',
+      sourceLabel: 'Código Fuente',
+      sitemapLabel: 'Mapa del Sitio',
+      offlineReadyLabel: 'Disponible sin Conexión',
+      offlineReadyTooltip: 'PWA Reforzada: Disponible sin Conexión',
     },
     qaContact: {
       title: 'Disponible',

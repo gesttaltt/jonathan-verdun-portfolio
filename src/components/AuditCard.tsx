@@ -44,7 +44,7 @@ export const AuditCard: React.FC<AuditCardProps> = ({ audit }) => {
         href={detailHref}
         className="light:text-amber-700 light:hover:text-amber-800 flex items-center gap-2 text-xs font-bold tracking-widest text-amber-500 uppercase transition-colors hover:text-amber-400"
       >
-        Read Full Audit{' '}
+        {t.sections.qualityDashboard.readFullAuditLabel}{' '}
         <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
       </Link>
     </m.div>
