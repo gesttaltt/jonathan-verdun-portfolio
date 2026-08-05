@@ -85,6 +85,19 @@ describe('ls() cwd-relative resolution (regression)', () => {
     expect(vfs.ls('specs')).toContain('a.md')
   })
 
+  it('resolves an absolute path from root, ignoring a non-root cwd', () => {
+    // tempPath must start empty for an absolute path even when currentPath is
+    // non-root — the leading '/' must always win over cwd, not be appended
+    // to it (which would look for the nonexistent '/docs/projects').
+    const atRoot = new VirtualFileSystem()
+    const referenceListing = atRoot.ls('projects')
+
+    const vfs = new VirtualFileSystem()
+    vfs.cd('docs')
+    expect(vfs.pwd()).toBe('/docs')
+    expect(vfs.ls('/projects')).toBe(referenceListing)
+  })
+
   it('ls("..") from a subdirectory lists the parent directory', () => {
     const vfs = new VirtualFileSystem()
     vfs.cd('docs')

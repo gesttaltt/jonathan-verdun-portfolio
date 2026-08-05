@@ -283,6 +283,9 @@ export const es: Translations = {
       sitemapLabel: 'Mapa del Sitio',
       offlineReadyLabel: 'Disponible sin Conexión',
       offlineReadyTooltip: 'PWA Reforzada: Disponible sin Conexión',
+      footerAriaLabel: 'Pie de página del sitio',
+      emailAriaLabel: 'Correo electrónico',
+      copyrightSuffix: 'en GitHub.',
     },
     qaContact: {
       title: 'Disponible',

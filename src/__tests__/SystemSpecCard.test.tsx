@@ -39,6 +39,15 @@ describe('SystemSpecCard', () => {
     expect(screen.getByText('gesttaltt/some-repo')).toBeInTheDocument()
   })
 
+  it('repo link aria-label is the localized, {repo}-substituted string', () => {
+    render(
+      <SystemSpecCard spec={{ ...baseSpec, link: 'https://github.com/gesttaltt/some-repo' }} />
+    )
+    expect(
+      screen.getByRole('link', { name: 'View gesttaltt/some-repo on GitHub (opens in new tab)' })
+    ).toBeInTheDocument()
+  })
+
   it('repo link has rel="noopener noreferrer" and target="_blank"', () => {
     render(
       <SystemSpecCard spec={{ ...baseSpec, link: 'https://github.com/gesttaltt/some-repo' }} />

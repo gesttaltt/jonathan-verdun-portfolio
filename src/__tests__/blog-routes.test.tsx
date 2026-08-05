@@ -113,6 +113,23 @@ describe('Blog route wrappers', () => {
     expect(String(enBlogMetadata.description)).toContain(siteConfig.name)
   })
 
+  // Regression guard for the sixth bug-hunt pass: this route's canonical/
+  // openGraph.url used to leak the homepage's because the route's own
+  // metadata export only set title/description, and Next.js metadata
+  // resolution replaces (not merges) unset top-level keys. Asserting on the
+  // real exported `metadata` object here — not just buildPageMetadata()'s
+  // unit tests — catches a regression at the call site too, e.g. if a future
+  // edit reverts this export back to a plain `{ title, description }` literal.
+  it('EN blog listing metadata canonical points to /blog/, not the homepage', () => {
+    const alternates = enBlogMetadata.alternates as { canonical: string } | undefined
+    expect(alternates?.canonical).toBe(`${siteConfig.url}/blog/`)
+  })
+
+  it('ES blog listing metadata canonical points to /es/blog/, not the ES homepage', () => {
+    const alternates = esBlogMetadata.alternates as { canonical: string } | undefined
+    expect(alternates?.canonical).toBe(`${siteConfig.url}/es/blog/`)
+  })
+
   it('ES blog listing metadata references the site name', () => {
     expect(esBlogMetadata.title).toBe(`Blog — ${siteConfig.name}`)
     expect(String(esBlogMetadata.description)).toContain(siteConfig.name)

@@ -1,4 +1,4 @@
-import { buildMetadata, SHARED_VIEWPORT } from '@/lib/metadata'
+import { buildMetadata, buildPageMetadata, SHARED_VIEWPORT } from '@/lib/metadata'
 import { siteConfig } from '@/lib/siteConfig'
 
 describe('buildMetadata', () => {
@@ -62,6 +62,85 @@ describe('buildMetadata', () => {
       expect(langs.en).toBe(siteConfig.url)
       expect(langs.es).toBe(`${siteConfig.url}/es/`)
     })
+  })
+})
+
+describe('buildPageMetadata', () => {
+  // Regression coverage for the sixth bug-hunt pass: every non-homepage route
+  // used to leak the homepage's canonical/openGraph/alternates because
+  // Next.js metadata resolution replaces whole top-level keys rather than
+  // deep-merging. These assertions target exactly the fields that leaked —
+  // not just title/description, which were never the broken part.
+  const page = { title: 'Blog — Jonathan Verdun', description: 'Articles on QA engineering.' }
+
+  describe('EN', () => {
+    const m = buildPageMetadata('en', '/blog/', page)
+
+    it('passes through title and description unchanged', () => {
+      expect(m.title).toBe(page.title)
+      expect(m.description).toBe(page.description)
+    })
+
+    it('canonical points to the route, not the homepage', () => {
+      expect((m.alternates as { canonical: string }).canonical).toBe(`${siteConfig.url}/blog/`)
+    })
+
+    it('hreflang alternates point to the route in both locales', () => {
+      const langs = (m.alternates as { languages: Record<string, string> }).languages
+      expect(langs.en).toBe(`${siteConfig.url}/blog/`)
+      expect(langs.es).toBe(`${siteConfig.url}/es/blog/`)
+    })
+
+    it('openGraph.url matches canonical, not the homepage', () => {
+      expect((m.openGraph as { url: string }).url).toBe(`${siteConfig.url}/blog/`)
+    })
+
+    it('openGraph title/description match the page, not siteConfig', () => {
+      const og = m.openGraph as { title: string; description: string }
+      expect(og.title).toBe(page.title)
+      expect(og.description).toBe(page.description)
+      expect(og.title).not.toBe(siteConfig.title)
+    })
+
+    it('openGraph locale is siteConfig.locale', () => {
+      expect((m.openGraph as { locale: string }).locale).toBe(siteConfig.locale)
+    })
+
+    it('twitter title/description match the page', () => {
+      const tw = m.twitter as { title: string; description: string }
+      expect(tw.title).toBe(page.title)
+      expect(tw.description).toBe(page.description)
+    })
+  })
+
+  describe('ES', () => {
+    const m = buildPageMetadata('es', '/blog/', page)
+
+    it('canonical points to the ES route, not the ES homepage', () => {
+      expect((m.alternates as { canonical: string }).canonical).toBe(`${siteConfig.url}/es/blog/`)
+    })
+
+    it('openGraph.url matches the ES canonical', () => {
+      expect((m.openGraph as { url: string }).url).toBe(`${siteConfig.url}/es/blog/`)
+    })
+
+    it('openGraph locale is es_ES', () => {
+      expect((m.openGraph as { locale: string }).locale).toBe('es_ES')
+    })
+  })
+
+  it('a nested routePath produces a nested canonical (quality/[...slug] case)', () => {
+    const m = buildPageMetadata('en', '/quality/specs/CONTRACTS/', page)
+    expect((m.alternates as { canonical: string }).canonical).toBe(
+      `${siteConfig.url}/quality/specs/CONTRACTS/`
+    )
+  })
+
+  it('URL-encodes a routePath segment without touching the "/" separators', () => {
+    const m = buildPageMetadata('en', '/blog/a slug/', page)
+    expect((m.alternates as { canonical: string }).canonical).toBe(
+      `${siteConfig.url}/blog/a%20slug/`
+    )
   })
 })
 

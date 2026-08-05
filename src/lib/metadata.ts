@@ -70,8 +70,13 @@ export function buildMetadata(lang: 'en' | 'es'): Metadata {
  * inherits `alternates`/`openGraph`/`twitter` verbatim from the locale
  * layout's buildMetadata() — which describes the homepage, not the current
  * route. This fully re-derives every one of those keys per-route so canonical
- * URLs, hreflang alternates, and social-share previews are always correct for
- * the actual page being served, not the locale root.
+ * URLs, hreflang alternates, and OG/twitter title+description are always
+ * correct for the actual page being served, not the locale root.
+ *
+ * Note: the OG *image* itself is NOT per-route — there's no per-page
+ * opengraph-image route, so every page within a locale shares that locale's
+ * single static OG image. Only the surrounding title/description/url are
+ * page-accurate.
  *
  * `routePath` is the locale-agnostic path (e.g. '/blog/', '/projects/foo/')
  * — both locales share the same route structure, only the '/es' prefix
@@ -83,7 +88,16 @@ export function buildPageMetadata(
   page: { title: string; description: string }
 ): Metadata {
   const isEs = lang === 'es'
-  const canonical = `${siteConfig.url}${isEs ? '/es' : ''}${routePath}`
+  // Defensive: every real slug feeding routePath today is an ASCII
+  // kebab-case filename, so this is currently a no-op — but routePath is
+  // partly built from filesystem-derived audit/blog/project slugs, and
+  // encoding each segment (never the '/' separators) keeps a future slug
+  // with a space or non-ASCII character from producing an invalid URL.
+  const encodedRoutePath = routePath
+    .split('/')
+    .map((segment) => (segment ? encodeURIComponent(segment) : segment))
+    .join('/')
+  const canonical = `${siteConfig.url}${isEs ? '/es' : ''}${encodedRoutePath}`
   const locale = isEs ? 'es_ES' : siteConfig.locale
   const ogImageUrl = `${siteConfig.url}${isEs ? '/es' : ''}/opengraph-image`
 
@@ -93,8 +107,8 @@ export function buildPageMetadata(
     alternates: {
       canonical,
       languages: {
-        en: `${siteConfig.url}${routePath}`,
-        es: `${siteConfig.url}/es${routePath}`,
+        en: `${siteConfig.url}${encodedRoutePath}`,
+        es: `${siteConfig.url}/es${encodedRoutePath}`,
       },
     },
     openGraph: {

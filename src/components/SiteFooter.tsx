@@ -39,7 +39,7 @@ export const SiteFooter: React.FC = () => {
       initial="hidden"
       whileInView="visible"
       viewport={SCROLL_VIEWPORT}
-      aria-label="Site footer"
+      aria-label={t.sections.siteFooter.footerAriaLabel}
       className="mt-14 sm:mt-24"
     >
       <div className="border-border-subtle light:bg-bg-card relative overflow-hidden rounded-2xl border bg-white/8 backdrop-blur-md">
@@ -65,7 +65,9 @@ export const SiteFooter: React.FC = () => {
                   href={href}
                   target={href.startsWith('mailto') ? undefined : '_blank'}
                   rel={href.startsWith('mailto') ? undefined : 'noopener noreferrer'}
-                  aria-label={label}
+                  aria-label={
+                    href.startsWith('mailto') ? t.sections.siteFooter.emailAriaLabel : label
+                  }
                   className="light:border-border-subtle light:bg-bg-badge text-text-tertiary light:hover:border-blue-400 light:hover:text-blue-700 bg-bg-badge flex h-10 w-10 items-center justify-center rounded-lg border border-white/5 transition-all hover:border-blue-500/30 hover:bg-blue-500/10 hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none"
                 >
                   <Icon className="h-4 w-4" />
@@ -119,7 +121,7 @@ export const SiteFooter: React.FC = () => {
               >
                 @gesttaltt
               </a>{' '}
-              on GitHub.
+              {t.sections.siteFooter.copyrightSuffix}
             </p>
             <div className="flex flex-wrap items-center gap-3">
               <div

@@ -83,6 +83,11 @@ export interface Translations {
       sitemapLabel: string
       offlineReadyLabel: string
       offlineReadyTooltip: string
+      footerAriaLabel: string
+      emailAriaLabel: string
+      // Trailing text after the "@handle" link in the copyright line —
+      // e.g. "on GitHub." / "en GitHub."
+      copyrightSuffix: string
     }
     qaContact: { title: string; description: string; ctaLabel: string }
     resume: {

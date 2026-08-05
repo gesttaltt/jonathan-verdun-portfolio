@@ -65,6 +65,13 @@ describe('BioinformaticsResearchCard — known focus key', () => {
     const link = screen.getByRole('link')
     expect(link).toHaveAttribute('href', knownSpec.link)
   })
+
+  it('GitHub link aria-label is the localized, {repo}-substituted string', () => {
+    wrap(knownSpec)
+    expect(
+      screen.getByRole('link', { name: 'View example/repo on GitHub (opens in new tab)' })
+    ).toBeInTheDocument()
+  })
 })
 
 describe('BioinformaticsResearchCard — unknown focus key (fallback branches)', () => {

@@ -80,6 +80,9 @@ export const en: Translations = {
       sitemapLabel: 'Sitemap',
       offlineReadyLabel: 'Offline Ready',
       offlineReadyTooltip: 'PWA Hardened: Available Offline',
+      footerAriaLabel: 'Site footer',
+      emailAriaLabel: 'Email',
+      copyrightSuffix: 'on GitHub.',
     },
     qaContact: {
       title: 'Open to work',
