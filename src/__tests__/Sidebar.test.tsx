@@ -85,13 +85,36 @@ describe('Sidebar', () => {
     })
 
     expect(mockWriteText).toHaveBeenCalledWith('test@example.com')
-    expect(await screen.findByText(/Copied!/i)).toBeInTheDocument()
+    // Two elements now legitimately say "Copied!": the visible button text
+    // and the screen-reader-only aria-live announcement (see the dedicated
+    // live-region test above) — wait for both rather than asserting a single
+    // unique match.
+    expect(await screen.findAllByText(/Copied!/i)).toHaveLength(2)
 
     await act(async () => {
       jest.advanceTimersByTime(2000)
     })
 
     expect(await screen.findByText(/Copy Email/i)).toBeInTheDocument()
+  })
+
+  it('announces the copy confirmation via a live region for screen readers', async () => {
+    mockWriteText.mockResolvedValue(undefined)
+    renderSidebar()
+
+    const copyButton = await screen.findByRole('button', { name: 'Copy Email' })
+
+    await act(async () => {
+      fireEvent.click(copyButton)
+    })
+
+    // The visible "Copied!" text swap (AnimatePresence) isn't reliably
+    // announced on its own — assert the dedicated aria-live region actually
+    // carries the confirmation, and that the button's own accessible name
+    // updates too.
+    expect(await screen.findByRole('button', { name: 'Copied!' })).toBeInTheDocument()
+    const liveRegion = document.querySelector('[aria-live="polite"]')
+    expect(liveRegion).toHaveTextContent('Copied!')
   })
 
   it('handles clipboard write failure without crashing', async () => {

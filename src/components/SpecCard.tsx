@@ -11,9 +11,9 @@ export type SpecCardColor = 'cyan' | 'purple'
 // Full literal class strings per color — Tailwind's JIT scanner needs static
 // strings in source, so these can't be built by interpolating a color token.
 const CARD_CLASSES: Record<SpecCardColor, string> = {
-  cyan: 'group bg-bg-card hover:bg-bg-card-hover border-border-subtle hover:border-border-strong light:border-zinc-200 light:hover:shadow-2xl light:hover:shadow-cyan-500/15 focus-visible:ring-offset-background relative overflow-hidden rounded-2xl border p-6 transition-all duration-300 hover:shadow-[0_0_24px_var(--glow-cyan)] focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 focus-visible:outline-none sm:p-8',
+  cyan: 'group bg-bg-card hover:bg-bg-card-hover border-border-subtle hover:border-border-strong light:border-zinc-200 light:hover:shadow-2xl light:hover:shadow-cyan-500/15 relative overflow-hidden rounded-2xl border p-6 transition-all duration-300 hover:shadow-[0_0_24px_var(--glow-cyan)] sm:p-8',
   purple:
-    'group bg-bg-card hover:bg-bg-card-hover border-border-subtle hover:border-border-strong light:border-zinc-200 light:hover:shadow-2xl light:hover:shadow-purple-500/10 focus-visible:ring-offset-background relative overflow-hidden rounded-2xl border p-6 transition-all duration-300 hover:shadow-[0_0_24px_var(--glow-purple)] focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2 focus-visible:outline-none sm:p-8',
+    'group bg-bg-card hover:bg-bg-card-hover border-border-subtle hover:border-border-strong light:border-zinc-200 light:hover:shadow-2xl light:hover:shadow-purple-500/10 relative overflow-hidden rounded-2xl border p-6 transition-all duration-300 hover:shadow-[0_0_24px_var(--glow-purple)] sm:p-8',
 }
 
 const TITLE_CLASSES: Record<SpecCardColor, string> = {
@@ -71,7 +71,7 @@ export const SpecCard: React.FC<SpecCardProps> = ({
   githubAriaLabel,
 }) => {
   return (
-    <m.div variants={staggerItemVariants()} tabIndex={0} className={CARD_CLASSES[color]}>
+    <m.div variants={staggerItemVariants()} className={CARD_CLASSES[color]}>
       <div className="mb-6 flex items-center justify-between">
         <h3 className={TITLE_CLASSES[color]}>
           {icon} {title}

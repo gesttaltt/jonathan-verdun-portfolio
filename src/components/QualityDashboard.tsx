@@ -137,6 +137,17 @@ export const QualityDashboard: React.FC<QualityDashboardProps> = ({ audits }) =>
             <p className="text-text-tertiary">{t.sections.noResults}</p>
           </m.div>
         )}
+
+        {/* Persistent (always-mounted) live region: a screen-reader user
+            typing a search that matches nothing gets no other signal that
+            anything happened — the grid above just silently empties. Kept
+            separate from the visual block above (rather than making that
+            block itself the live region) because a live region needs to
+            already exist in the DOM before its content changes for some
+            screen readers to reliably announce it. */}
+        <div aria-live="polite" className="sr-only">
+          {searchQuery.trim() && filteredAudits.length === 0 ? t.sections.noResults : ''}
+        </div>
       </section>
     </main>
   )

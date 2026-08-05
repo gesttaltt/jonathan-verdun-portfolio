@@ -86,8 +86,26 @@ describe('QualityDashboard', () => {
 
     await user.type(input, 'nonexistent')
 
-    expect(screen.getByText(/no audits match your search query/i)).toBeInTheDocument()
+    // Two elements now legitimately carry this text: the visible message and
+    // the screen-reader-only aria-live announcement (see the dedicated
+    // live-region test below) — assert on the visible one specifically.
+    const matches = screen.getAllByText(/no audits match your search query/i)
+    expect(matches.length).toBeGreaterThanOrEqual(1)
     expect(screen.queryByText('General Audit')).not.toBeInTheDocument()
+  }, 3000)
+
+  it('announces "no results" via a live region for screen readers', async () => {
+    const user = userEvent.setup()
+    renderDashboard()
+    const input = screen.getByPlaceholderText(/search audits/i)
+
+    const liveRegion = document.querySelector('[aria-live="polite"]')
+    expect(liveRegion).toBeInTheDocument()
+    expect(liveRegion).toHaveTextContent('')
+
+    await user.type(input, 'nonexistent')
+
+    expect(liveRegion).toHaveTextContent(/no audits match your search query/i)
   }, 3000)
 
   it('clears search results when clicking the clear button', async () => {
