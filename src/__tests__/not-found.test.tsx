@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import NotFound from '@/app/not-found'
+import { siteConfig } from '@/lib/siteConfig'
 
 let consoleErrorSpy: jest.SpyInstance
 beforeAll(() => {
@@ -33,7 +34,13 @@ describe('NotFound page', () => {
   })
 
   it('renders Spanish content when pathname starts with /es', () => {
-    window.history.pushState({}, '', '/es/some-path')
+    // useIsSpanishRoute strips siteConfig.basePath off window.location.pathname
+    // before checking for the /es prefix, matching how a real browser's
+    // pathname always includes the deployed basePath. This repo's CI build
+    // (empty basePath) never catches a mismatch here, but deploy.yml's real
+    // build (BASE_PATH=/jonathan-verdun-portfolio) does — the pushState URL
+    // must include the same prefix or the slice() removes the whole path.
+    window.history.pushState({}, '', `${siteConfig.basePath}/es/some-path`)
 
     render(<NotFound />)
 

@@ -61,7 +61,13 @@ describe('ResumeTimeline', () => {
     renderTimeline(true)
 
     const downloadLink = screen.getByRole('link', { name: /download pdf/i })
-    expect(downloadLink).toHaveAttribute('href', '/resume-jonathan-verdun.pdf')
+    // The component prefixes with siteConfig.basePath (empty locally/in CI,
+    // real under deploy.yml's actual GitHub Pages build) — match that
+    // instead of hardcoding an empty-basePath-only literal.
+    expect(downloadLink).toHaveAttribute(
+      'href',
+      `${siteConfig.basePath}/resume-jonathan-verdun.pdf`
+    )
     expect(downloadLink).toHaveAttribute('download')
   })
 

@@ -1,5 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import GlobalError from '@/app/global-error'
+import { siteConfig } from '@/lib/siteConfig'
 
 let consoleErrorSpy: jest.SpyInstance
 beforeAll(() => {
@@ -53,7 +54,11 @@ describe('GlobalError', () => {
     const originalPathname = window.location.pathname
 
     beforeEach(() => {
-      window.history.pushState({}, '', '/es/some-path')
+      // See not-found.test.tsx's identical comment: useIsSpanishRoute strips
+      // siteConfig.basePath off the real pathname, so the pushState URL must
+      // include it too or the check silently breaks under a real basePath
+      // (only exercised by deploy.yml's build, not ci.yml's).
+      window.history.pushState({}, '', `${siteConfig.basePath}/es/some-path`)
     })
 
     afterEach(() => {
