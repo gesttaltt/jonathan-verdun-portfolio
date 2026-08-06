@@ -108,6 +108,6 @@
     "size-limit": "^13.0.3",
     "tailwindcss": "^4",
     "typedoc": "^0.28.20",
-    "typescript": "^6.0.3"
+    "typescript": "^7.0.2"
   }
 }
