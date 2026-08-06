@@ -36,7 +36,11 @@ test.describe('Audit Search Validation', () => {
     const searchInput = page.getByPlaceholder('Search audits...')
     await searchInput.fill('xyz123nonexistent')
 
-    await expect(page.getByText('No audits match your search query.')).toBeVisible()
+    // Two elements now legitimately carry this text: the visible <p> and a
+    // screen-reader-only aria-live announcement rendered right after it (see
+    // QualityDashboard.tsx) — a strict-mode locator match on the bare text
+    // resolves both, so scope to the visible paragraph specifically.
+    await expect(page.locator('p', { hasText: 'No audits match your search query.' })).toBeVisible()
     // Both general and core artifacts should be hidden
     await expect(page.locator('.group.relative')).toHaveCount(0)
   })

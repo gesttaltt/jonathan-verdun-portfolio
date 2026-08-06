@@ -89,6 +89,15 @@ test.describe('Keyboard Accessibility', () => {
   test('tabbing through the homepage never lands on a non-interactive dead stop', async ({
     page,
   }) => {
+    // 40 iterations × (1 keyboard press + up to 2 evaluate round-trips) was
+    // slow enough on CI's shared runner (though not locally) to exceed the
+    // MOCK_CI 30s default test timeout — merged into one evaluate per
+    // iteration, and given an explicit longer timeout as a second margin,
+    // matching this file's own documented pattern (see e2e's other
+    // deliberately-long tests) for tests that legitimately need more than
+    // the default budget.
+    test.setTimeout(60_000)
+
     await page.goto('/')
     await expect(page.getByText('jonathan.verdun — QA Automation Engineer')).toBeVisible({
       timeout: 10_000,
@@ -106,6 +115,7 @@ test.describe('Keyboard Accessibility', () => {
           tag: el.tagName,
           tabIndex: el.getAttribute('tabindex'),
           contentEditable: (el as HTMLElement).isContentEditable,
+          role: el.getAttribute('role'),
         }
       })
       if (!info) continue
@@ -113,15 +123,13 @@ test.describe('Keyboard Accessibility', () => {
       // ARIA interactive role, OR (Terminal's hidden command input) be
       // contentEditable/an input. tabIndex="0" alone on a plain <div>/<span>
       // with no such role is exactly the dead-stop bug class.
-
-      const role = await page.evaluate(() => document.activeElement?.getAttribute('role'))
       const isRealInteractive =
         INTERACTIVE_TAGS.has(info.tag) ||
         info.contentEditable ||
-        (role !== null && role !== 'listitem')
+        (info.role !== null && info.role !== 'listitem')
       expect(
         isRealInteractive,
-        `Tab stop #${i} focused a non-interactive <${info.tag}> (tabindex=${info.tabIndex}, role=${role}) — a dead tab stop`
+        `Tab stop #${i} focused a non-interactive <${info.tag}> (tabindex=${info.tabIndex}, role=${info.role}) — a dead tab stop`
       ).toBe(true)
     }
   })
