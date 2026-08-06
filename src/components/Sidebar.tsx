@@ -1,6 +1,16 @@
 'use client'
 
-import { Server, ShieldCheck, Zap, Lock, Copy, Check, Activity, ExternalLink } from 'lucide-react'
+import {
+  Server,
+  ShieldCheck,
+  Zap,
+  Lock,
+  Bug,
+  Copy,
+  Check,
+  Activity,
+  ExternalLink,
+} from 'lucide-react'
 import Link from 'next/link'
 import { m, AnimatePresence } from 'framer-motion'
 import { useState, useEffect } from 'react'
@@ -31,6 +41,13 @@ const GATES = [
     color: 'green',
     icon: Lock,
     link: '/quality/specs/DEVOPS',
+  },
+  {
+    key: 'mutationScoreLabel',
+    value: siteConfig.performanceMetrics.mutationScore,
+    color: 'purple',
+    icon: Bug,
+    link: '/quality/specs/TESTING',
   },
 ] as const
 
@@ -160,12 +177,14 @@ export const Sidebar: React.FC<SidebarProps> = ({ repo = siteConfig.repo }) => {
                   blue: 'text-blue-400 light:text-blue-800',
                   cyan: 'text-cyan-400 light:text-cyan-800',
                   green: 'text-green-400 light:text-green-800',
+                  purple: 'text-purple-400 light:text-purple-800',
                 }[gate.color]
 
                 const bgColors = {
                   blue: 'bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.6)] light:bg-blue-700',
                   cyan: 'bg-cyan-500 shadow-[0_0_8px_rgba(34,211,238,0.6)] light:bg-cyan-700',
                   green: 'bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)] light:bg-green-700',
+                  purple: 'bg-purple-500 shadow-[0_0_8px_rgba(168,85,247,0.6)] light:bg-purple-700',
                 }[gate.color]
 
                 return (

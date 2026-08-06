@@ -47,6 +47,7 @@ export const en: Translations = {
       qualityGatesTitle: 'Engineering Quality Gates',
       constraintsTitle: 'Engineering Constraints',
       unitCoverageLabel: 'Logic Coverage',
+      mutationScoreLabel: 'Mutation Score',
       automationRateLabel: 'Mobile QA Automation',
       securityScanLabel: 'Security Audit',
       livePipelineLabel: 'Live CI Pipeline',

@@ -1,5 +1,6 @@
 import pkg from '../../package.json'
 import { COVERAGE_STATS } from './generated/coverageStats'
+import { MUTATION_STATS } from './generated/mutationStats'
 
 // Matches the basePath Next.js itself resolves in next.config.ts (empty for
 // local dev, /jonathan-verdun-portfolio when configure-pages sets BASE_PATH
@@ -85,6 +86,12 @@ export const siteConfig = {
     // one case study with an explicit automated/manual split. See ProjectContract.ts.
     automationRate: '84%',
     securityStatus: 'Passed',
+    // % of Stryker-injected mutants the test suite actually kills — see
+    // scripts/generate-mutation-badge.mjs and docs/specs/TESTING.md. Unlike
+    // unitCoverage, this is refreshed manually/periodically (`npm run
+    // mutation && npm run mutation:badge`), not on every build — mutation
+    // testing reruns the suite once per mutant and is too slow for that.
+    mutationScore: MUTATION_STATS.mutationScore,
   },
 
   versions: {

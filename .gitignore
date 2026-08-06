@@ -13,6 +13,8 @@
 # testing
 /coverage
 /coverage.json
+/.stryker-tmp
+/reports/mutation
 
 # next.js
 /.next/

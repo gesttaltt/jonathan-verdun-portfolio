@@ -48,6 +48,7 @@ export interface Translations {
       qualityGatesTitle: string
       constraintsTitle: string
       unitCoverageLabel: string
+      mutationScoreLabel: string
       automationRateLabel: string
       securityScanLabel: string
       livePipelineLabel: string

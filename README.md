@@ -4,11 +4,12 @@
 [![Deploy](https://github.com/gesttaltt/jonathan-verdun-portfolio/actions/workflows/deploy.yml/badge.svg)](https://github.com/gesttaltt/jonathan-verdun-portfolio/actions/workflows/deploy.yml)
 [![Tests](https://img.shields.io/endpoint?url=https://gesttaltt.github.io/jonathan-verdun-portfolio/badge-tests.json&style=flat-square)](https://github.com/gesttaltt/jonathan-verdun-portfolio/actions/workflows/ci.yml)
 [![Coverage](https://img.shields.io/endpoint?url=https://gesttaltt.github.io/jonathan-verdun-portfolio/badge-coverage.json&style=flat-square)](https://github.com/gesttaltt/jonathan-verdun-portfolio/actions/workflows/ci.yml)
+[![Mutation Score](https://img.shields.io/endpoint?url=https://gesttaltt.github.io/jonathan-verdun-portfolio/badge-mutation.json&style=flat-square)](https://gesttaltt.github.io/jonathan-verdun-portfolio/quality/specs/TESTING)
 [![Lighthouse CI](https://img.shields.io/badge/Lighthouse_CI-gated-brightgreen.svg?style=flat-square&logo=lighthouse)](https://github.com/gesttaltt/jonathan-verdun-portfolio/actions/workflows/ci.yml)
 ![Accessibility: WCAG AA](https://img.shields.io/badge/Accessibility-WCAG%20AA-blueviolet.svg?style=flat-square)
 [![Code Style: Prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
-QA Automation Engineer portfolio. Built with Next.js 16 static export, Three.js, and a strict TDD architecture. Every quality claim on the site is backed by a gate running in CI.
+QA Automation Engineer portfolio. Built with Next.js 16 static export, Three.js, and a strict TDD architecture. Every quality claim on the site is backed by a real, verifiable check — most run in CI on every push; the one exception is the mutation score, which is refreshed manually/periodically rather than on every commit (see `docs/specs/TESTING.md` for why).
 
 **Live:** [gesttaltt.github.io/jonathan-verdun-portfolio](https://gesttaltt.github.io/jonathan-verdun-portfolio/) · **API Docs:** [.../docs/api](https://gesttaltt.github.io/jonathan-verdun-portfolio/docs/api/)
 

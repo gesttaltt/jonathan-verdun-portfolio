@@ -250,6 +250,7 @@ export const es: Translations = {
       qualityGatesTitle: 'Garantía de Calidad',
       constraintsTitle: 'Restricciones de Ingeniería',
       unitCoverageLabel: 'Cobertura Lógica',
+      mutationScoreLabel: 'Score de Mutación',
       automationRateLabel: 'Automatización QA Móvil',
       securityScanLabel: 'Auditoría de Seguridad',
       livePipelineLabel: 'Pipeline de CI en Vivo',

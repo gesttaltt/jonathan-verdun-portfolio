@@ -16,6 +16,49 @@ Reference for the testing strategy, tooling, and CI integration.
 | ts-jest 29                     | TypeScript transform (where needed)     |
 | Playwright                     | E2E — chromium + mobile-chrome projects |
 | Lighthouse CI                  | Performance/accessibility/SEO budgets   |
+| Stryker Mutator 9              | Mutation testing                        |
+
+---
+
+## Mutation Testing
+
+Line/statement/branch/function coverage (the 99%+ number quoted elsewhere on this site)
+proves that a test _executed_ a piece of code. It does not prove that any test would
+actually notice if that code's logic were wrong — a test with no assertions, or one
+asserting the wrong thing, still counts as "covered." Mutation testing closes that gap:
+[Stryker Mutator](https://stryker-mutator.io/) injects small, deliberate logic bugs
+("mutants" — flipping a `&&` to `||`, a `<` to `<=`, deleting a function call, etc.) into
+the real source, one at a time, and reruns the test suite against each one. A mutant is
+**killed** if some test fails because of it, **survived** if the entire suite still passes
+despite the injected bug. The **mutation score** is the percentage of mutants killed — a
+much stronger signal than line coverage that the test suite would actually catch a real
+regression.
+
+**Scope**: mutation testing only targets files with genuine branching/decision logic that
+already has strong, targeted Jest coverage — `src/lib/services/**`, `src/lib/i18n/localizedHref.ts`,
+`src/lib/i18n/useIsSpanishRoute.ts`, `src/lib/theme/context.tsx`, `src/lib/metadata.ts`,
+`src/lib/jsonLd.ts`, `src/lib/projectSlugify.ts`, and `src/components/hooks/*.ts` (see
+`stryker.config.mjs`'s `mutate` glob). This deliberately excludes `.tsx` UI components (JSX
+render-branch mutants are typically low-signal and much slower to test), WebGL/shader code
+(already excluded from Jest coverage as untestable in jsdom), OG-image generation, and
+`lib/contracts/**` (mostly literal project/spec data, not decision logic) — mirroring
+`jest.config.mjs`'s own `collectCoverageFrom` exclusion philosophy.
+
+**Current mutation score: 73.57%** (577 killed, 198 survived, 2 timed out, 10 not covered by
+any test, out of 787 valid mutants), computed 2026-08-06. Notably lower than the site's 99%+
+line-coverage figure — that gap is the entire point: plenty of code executes under test
+without any assertion actually depending on its exact behavior. `AuditRepository.ts`,
+`BlogService.ts`, `theme/context.tsx`, and the i18n helpers score in the 80-100% range;
+`metadata.ts` (the route-metadata builder added in a recent bug-hunt pass) scores
+noticeably lower, a concrete signal that its tests check the right shape of the output more
+than every field's exact value — a real, honest finding this metric was built to surface,
+not smoothed over.
+
+**Refresh cadence**: unlike line coverage (recomputed on every `npm run build`), mutation
+testing reruns the entire test suite once per mutant and is too slow to run on every push.
+It is run manually/periodically (`npm run mutation && npm run mutation:badge`), the same
+way the site's other generated stats are refreshed — **not** live, **not** CI-gated. The
+score above reflects the last time it was actually run, not the current instant.
 
 ---
 
