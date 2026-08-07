@@ -70,6 +70,25 @@ jobs:
         env:
           NEXT_TELEMETRY_DISABLED: 1
 
+      - name: Run Tests with a real basePath (regression guard)
+        if: matrix.node-version == '22.x'
+        # deploy.yml's actual build sets BASE_PATH/NEXT_PUBLIC_BASE_PATH from
+        # actions/configure-pages (resolves to /jonathan-verdun-portfolio for
+        # this repo) — this job never has, so any test that implicitly
+        # assumes an empty basePath (e.g. constructing an expected pathname/
+        # href without siteConfig.basePath) passes here clean and only fails
+        # once it reaches the nightly/post-merge deploy build. That's exactly
+        # what happened 2026-08-06: 3 tests broke deploy.yml for 6 days
+        # without ever failing here. The specific value below doesn't need to
+        # match the real one — any non-empty, non-trivial-length basePath
+        # exercises the same class of bug; kept synthetic rather than
+        # hardcoding the real path (or depending on configure-pages, an extra
+        # external action call) here too.
+        run: npm test -- --ci
+        env:
+          NEXT_TELEMETRY_DISABLED: 1
+          NEXT_PUBLIC_BASE_PATH: /ci-basepath-check
+
       - name: Build
         if: matrix.node-version == '22.x'
         # Use build:ci to avoid re-running tests (already done in the step above)
